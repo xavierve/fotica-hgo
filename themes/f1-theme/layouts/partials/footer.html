@@ -1,37 +1,66 @@
 {{ $siteData := hugo.Data.site | default dict }}
+{{ $brand := $siteData.brand | default dict }}
 {{ $footer := $siteData.footer | default dict }}
-{{ $brand := $footer.brand | default dict }}
-{{ $legal := $footer.legal | default dict }}
+{{ $footerBrand := $footer.brand | default dict }}
+{{ $contact := $siteData.contact | default dict }}
+{{ $navigation := $siteData.navigation | default dict }}
+{{ $legal := or $footer.legal $navigation.legal (slice
+  (dict "text" "Aviso Legal" "url" "/aviso-legal/")
+  (dict "text" "Política de Privacidad" "url" "/politica-privacidad/")
+) }}
+{{ $footerNav := or $footer.navigation $navigation.footer $navigation.main }}
+{{ $social := or $footer.social $siteData.social }}
+{{ $locations := $siteData.locations | default slice }}
+{{ $brandLogo := or $footerBrand.logo $brand.logo }}
+{{ $brandLogoAlt := or $footerBrand.logoAlt $brand.logoAlt $brand.name site.Title }}
+{{ $brandTitle := or $footerBrand.title $brand.title $brand.name site.Title }}
+{{ $brandDescription := or $footerBrand.description $brand.description }}
+{{ $copyright := or $footer.copyright $brand.name site.Title }}
 <footer class="site-footer">
   <div class="container footer-grid">
     <section>
-      {{ with $brand.logo }}<img class="footer-logo" src="{{ . }}" alt="{{ $brand.logoAlt | default site.Title }}">{{ end }}
-      <h2>{{ $brand.title | default site.Title }}</h2>
-      {{ with $brand.description }}<p>{{ . }}</p>{{ end }}
+      {{ with $brandLogo }}<img class="footer-logo" src="{{ . }}" alt="{{ $brandLogoAlt }}">{{ end }}
+      <h2>{{ $brandTitle }}</h2>
+      {{ with $brandDescription }}<p>{{ . }}</p>{{ end }}
     </section>
     <section>
       <h2>Navegación</h2>
       <nav aria-label="Navegación secundaria">
-        {{ range $footer.navigation }}<a href="{{ .url | safeURL }}">{{ .text }}</a>{{ end }}
+        {{ range $footerNav }}<a href="{{ .url | safeURL }}">{{ .text }}</a>{{ end }}
       </nav>
+      {{ with $social }}
       <div class="social-links">
-        {{ range $footer.social }}<a href="{{ .url | safeURL }}" aria-label="{{ .platform }}">{{ .platform }}</a>{{ end }}
+        {{ range . }}<a href="{{ .url | safeURL }}" aria-label="{{ .platform | default .text }}">{{ .text | default .platform }}</a>{{ end }}
       </div>
+      {{ end }}
     </section>
     <section>
       <h2>Contacto</h2>
-      {{ range $siteData.locations }}
+      {{ range $locations }}
+      {{ $location := . }}
       <address>
         <strong>{{ .name }}</strong><br>
-        {{ .address }}<br>
-        <a href="{{ printf "tel:%s" .phone | safeURL }}">{{ .phoneLabel }}</a> · <a href="{{ printf "https://wa.me/%s" (replace .whatsapp "+" "") | safeURL }}">WhatsApp</a> · <a href="{{ .mapUrl | safeURL }}">Cómo llegar</a>
+        {{ with .address }}{{ . }}<br>{{ end }}
+        {{ with .location }}{{ . }}<br>{{ end }}
+        {{ with .phone }}<a href="{{ printf "tel:%s" . | safeURL }}">{{ $location.phoneLabel | default . }}</a>{{ end }}
+        {{ with .whatsapp }} · <a href="{{ printf "https://wa.me/%s" (replace . "+" "") | safeURL }}">WhatsApp</a>{{ end }}
+        {{ with .email }} · <a href="{{ printf "mailto:%s" . | safeURL }}">{{ . }}</a>{{ end }}
+        {{ with .mapUrl }} · <a href="{{ . | safeURL }}">Ubicación</a>{{ end }}
+      </address>
+      {{ else }}
+      <address>
+        {{ with $contact.phone }}<a href="{{ printf "tel:%s" . | safeURL }}">{{ $contact.phoneLabel | default . }}</a>{{ end }}
+        {{ with $contact.whatsapp }} · <a href="{{ printf "https://wa.me/%s" (replace . "+" "") | safeURL }}">WhatsApp</a>{{ end }}
+        {{ with $contact.email }} · <a href="{{ printf "mailto:%s" . | safeURL }}">{{ . }}</a>{{ end }}
+        {{ with $contact.location }}<br>{{ . }}{{ end }}
+        {{ with $contact.mapUrl }}<br><a href="{{ . | safeURL }}">Ubicación</a>{{ end }}
       </address>
       {{ end }}
     </section>
   </div>
   <div class="container footer-bottom">
     {{ with $footer.trust.text }}<p>{{ . }}</p>{{ end }}
-    <p>© 1982–{{ now.Year }} {{ $legal.copyright | default site.Title }}. Todos los derechos reservados.</p>
-    <nav aria-label="Legal">{{ range $legal.links }}<a href="{{ .url | safeURL }}">{{ .text }}</a>{{ end }}</nav>
+    <p>© 1982–{{ now.Year }} {{ $copyright }}. Todos los derechos reservados.</p>
+    <nav aria-label="Legal">{{ range $legal }}<a href="{{ .url | safeURL }}">{{ .text }}</a>{{ end }}</nav>
   </div>
 </footer>

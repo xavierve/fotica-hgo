@@ -1,0 +1,8 @@
+# Ignorar la carpeta llamada "imagenes" y todo lo que tenga dentro
+imagenes/
+
+# Otro ejemplo común: ignorar carpetas de configuración locales
+public/
+docs/
+resources/_gen/
+.hugo_build.lock

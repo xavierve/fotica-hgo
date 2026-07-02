@@ -1,23 +1,32 @@
 {{ $siteData := hugo.Data.site | default dict }}
+{{ $brand := $siteData.brand | default dict }}
 {{ $header := $siteData.header | default dict }}
-{{ $nav := $header.nav | default (slice
+{{ $contact := $siteData.contact | default dict }}
+{{ $navigation := $siteData.navigation | default dict }}
+{{ $nav := or $header.nav $navigation.main (slice
   (dict "text" "Inicio" "url" "/")
   (dict "text" "Visión" "url" "/vision/")
   (dict "text" "Audición" "url" "/audicion/")
   (dict "text" "Nosotros" "url" "/nosotros/")
   (dict "text" "Contacto" "url" "/contacto/")
 ) }}
+{{ $logo := or $header.logo $brand.logo }}
+{{ $logoAlt := or $header.logoAlt $brand.logoAlt $brand.name site.Title }}
+{{ $brandName := or $header.brand $brand.name $brand.title site.Title }}
+{{ $phone := or $header.phone $contact.phone }}
+{{ $phoneLabel := or $header.phoneLabel $contact.phoneLabel $phone }}
+{{ $whatsapp := or $header.whatsapp $contact.whatsapp $phone }}
 <header class="site-header" role="banner">
   <div class="container header-inner">
     <a class="site-logo" href="/" aria-label="Inicio">
-      {{ with $header.logo }}<img src="{{ . }}" alt="{{ $header.logoAlt | default site.Title }}">{{ else }}<span>{{ site.Title }}</span>{{ end }}
+      {{ with $logo }}<img src="{{ . }}" alt="{{ $logoAlt }}">{{ else }}<span>{{ $brandName }}</span>{{ end }}
     </a>
     <nav class="site-nav" aria-label="Navegación principal">
       {{ range $nav }}<a href="{{ .url | safeURL }}">{{ .text }}</a>{{ end }}
     </nav>
     <div class="header-actions">
-      {{ with $header.phone }}<a class="btn btn-small" href="{{ printf "tel:%s" . | safeURL }}">Llamar</a>{{ end }}
-      {{ with $header.whatsapp }}<a class="btn btn-small btn-outline" href="{{ printf "https://wa.me/%s" (replace . "+" "") | safeURL }}">WhatsApp</a>{{ end }}
+      {{ with $phone }}<a class="btn btn-small" href="{{ printf "tel:%s" . | safeURL }}">{{ $phoneLabel }}</a>{{ end }}
+      {{ with $whatsapp }}<a class="btn btn-small btn-outline" href="{{ printf "https://wa.me/%s" (replace . "+" "") | safeURL }}">WhatsApp</a>{{ end }}
     </div>
   </div>
 </header>

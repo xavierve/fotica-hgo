@@ -1,1 +1,35 @@
-# Site data
+brand:
+  name: "Ópticas Fausto"
+  title: "Ópticas Fausto"
+  description: "Más de 44 años cuidando la visión y la audición en Torre del Mar."
+
+contact:
+  phone: "+34952540964"
+  phoneLabel: "952 54 09 64"
+  whatsapp: "+34952540964"
+
+navigation:
+  main:
+    - text: "Inicio"
+      url: "/"
+    - text: "Visión"
+      url: "/vision/"
+    - text: "Audición"
+      url: "/audicion/"
+    - text: "Nosotros"
+      url: "/nosotros/"
+    - text: "Contacto"
+      url: "/contacto/"
+  legal:
+    - text: "Aviso Legal"
+      url: "/aviso-legal/"
+    - text: "Política de Privacidad"
+      url: "/politica-privacidad/"
+
+locations:
+  - name: "Ópticas Fausto"
+    location: "Torre del Mar"
+    phone: "+34952540964"
+    phoneLabel: "952 54 09 64"
+    whatsapp: "+34952540964"
+    mapUrl: "https://www.google.com/maps/search/?api=1&query=Ópticas%20Fausto%20Torre%20del%20Mar"
