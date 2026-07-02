@@ -1,6 +1,12 @@
 {{ $schema := .Params.schema }}
 {{ $siteData := hugo.Data.site | default dict }}
 {{ $business := $siteData.business | default dict }}
+{{ $faqItems := slice }}
+{{ range .Params.sections }}
+  {{ if eq .type "faq" }}
+    {{ range .items }}{{ $faqItems = $faqItems | append . }}{{ end }}
+  {{ end }}
+{{ end }}
 {{ if or .IsHome $schema }}
 <script type="application/ld+json">
 {
@@ -14,13 +20,13 @@
 }
 </script>
 {{ end }}
-{{ if .Params.faq }}
+{{ if $faqItems }}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    {{ range $i, $item := .Params.faq }}{{ if $i }},{{ end }}
+    {{ range $i, $item := $faqItems }}{{ if $i }},{{ end }}
     {
       "@type": "Question",
       "name": {{ $item.question | jsonify | safeJS }},

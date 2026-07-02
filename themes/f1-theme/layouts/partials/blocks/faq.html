@@ -1,0 +1,10 @@
+{{ with .items }}
+<section class="section faq">
+  <div class="container">
+    <h2>{{ $.title | default "Preguntas frecuentes" }}</h2>
+    <div class="faq-list">
+      {{ range . }}<details><summary>{{ .question }}</summary><div class="prose">{{ .answer | markdownify }}</div></details>{{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}

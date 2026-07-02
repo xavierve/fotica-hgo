@@ -29,5 +29,4 @@ hero:
     text: "WhatsApp"
     url: "https://wa.me/34952540964"
 sections: []
-faq: []
 ---

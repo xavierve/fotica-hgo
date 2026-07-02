@@ -1,0 +1,21 @@
+{{ with .cards }}
+<section class="section cards-section">
+  <div class="container">
+    {{ with $.title }}<h2>{{ . }}</h2>{{ end }}
+    {{ with $.subtitle }}<p class="section-subtitle">{{ . }}</p>{{ end }}
+    <div class="cards-grid">
+      {{ range . }}
+      {{ $card := . }}
+      <article class="card">
+        {{ with .image }}<img src="{{ . }}" alt="{{ $card.imageAlt }}">{{ end }}
+        <div class="card-body">
+          {{ with .title }}<h3>{{ . }}</h3>{{ end }}
+          {{ with .description }}<p>{{ . }}</p>{{ end }}
+          {{ with .link }}<a class="card-link" href="{{ . | safeURL }}">{{ $card.linkText | default $.linkText | default "Ver más" }}</a>{{ end }}
+        </div>
+      </article>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}

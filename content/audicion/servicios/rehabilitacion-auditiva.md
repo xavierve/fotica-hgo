@@ -29,5 +29,4 @@ hero:
     text: "Llamar"
     url: "tel:+34952540964"
 sections: []
-faq: []
 ---

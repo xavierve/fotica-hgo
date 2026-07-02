@@ -1,6 +1,6 @@
-# F1 Theme · Front Matter
+# F1 Theme - Front Matter
 
-Estructura base recomendada:
+Estructura base recomendada para F1 Theme v0.1 Alpha:
 
 ```yaml
 ---
@@ -42,13 +42,48 @@ hero:
     text: ""
     url: ""
 
-sections: []
-
-faq:
-  - question: ""
-    answer: ""
+sections:
+  - type: counter
+    items:
+      - number: ""
+        label: ""
+  - type: trustbar
+    items:
+      - icon: ""
+        text: ""
+  - type: image_text
+    title: ""
+    text: ""
+    image: ""
+    imageAlt: ""
+    reverse: false
+  - type: cards
+    title: ""
+    subtitle: ""
+    cards: []
+  - type: cta_banner
+    title: ""
+    subtitle: ""
+    button1:
+      text: ""
+      url: ""
+    button2:
+      text: ""
+      url: ""
+  - type: faq
+    title: "Preguntas frecuentes"
+    items:
+      - question: ""
+        answer: ""
 ---
 ```
+
+## Reglas
+
+- `hero` permanece independiente y no forma parte de `sections`.
+- Todos los demás bloques visuales se declaran dentro de `sections`.
+- `faq:` en raíz no existe en v0.1 Alpha; FAQ solo se declara como `type: faq`.
+- `section-renderer.html` es el único partial que renderiza bloques.
 
 ## page_type
 

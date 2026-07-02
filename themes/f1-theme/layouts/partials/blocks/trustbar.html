@@ -1,0 +1,12 @@
+{{ with .items }}
+<section class="trustbar" aria-label="Datos de confianza">
+  <div class="container trustbar-inner">
+    {{ range . }}
+    <span>
+      {{ with .icon }}<span aria-hidden="true">{{ . }}</span>{{ end }}
+      {{ .text }}
+    </span>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

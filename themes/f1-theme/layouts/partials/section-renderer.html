@@ -1,16 +1,8 @@
 {{ range .Params.sections }}
-  {{ $type := .type }}
-  {{ if eq $type "counter" }}{{ partial "counter.html" . }}
-  {{ else if eq $type "trustbar" }}{{ partial "trustbar.html" . }}
-  {{ else if eq $type "image_text" }}{{ partial "image-text.html" . }}
-  {{ else if eq $type "cards" }}{{ partial "cards.html" . }}
-  {{ else if eq $type "cta_banner" }}{{ partial "cta-banner.html" . }}
-  {{ else if and (eq $type "faq") .items }}{{ partial "faq.html" (dict "title" .title "items" .items) }}
-  {{ else if eq $type "testimonials" }}{{ partial "testimonials.html" . }}
-  {{ else if eq $type "brands_logos" }}{{ partial "brands-logos.html" . }}
-  {{ else if eq $type "gallery" }}{{ partial "gallery.html" . }}
-  {{ else if eq $type "slider" }}{{ partial "slider.html" . }}
-  {{ else if eq $type "timeline" }}{{ partial "timeline.html" . }}
-  {{ else if eq $type "team" }}{{ partial "team.html" . }}
+  {{ $type := .type | default "" }}
+  {{ $block := replace $type "_" "-" }}
+  {{ $partial := printf "blocks/%s.html" $block }}
+  {{ if and $type (templates.Exists (printf "partials/%s" $partial)) }}
+    {{ partial $partial . }}
   {{ end }}
 {{ end }}

@@ -10,8 +10,4 @@
   {{ end }}
 
   {{ partial "section-renderer.html" . }}
-
-  {{ with .Params.faq }}
-    {{ partial "faq.html" (dict "title" "Preguntas frecuentes" "items" .) }}
-  {{ end }}
 {{ end }}

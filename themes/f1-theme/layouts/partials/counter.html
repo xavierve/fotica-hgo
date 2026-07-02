@@ -1,8 +1,0 @@
-<section class="section counter"{{ with .imageBackground }} style="--section-bg: url('{{ . }}');"{{ end }}>
-  <div class="container">
-    <div class="counter-grid">
-      {{ range .items }}<div class="counter-item"><strong>{{ .number }}</strong><span>{{ .label }}</span></div>{{ end }}
-    </div>
-    {{ with .text }}<p class="section-note">{{ . }}</p>{{ end }}
-  </div>
-</section>
