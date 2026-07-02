@@ -1,0 +1,4 @@
+baseURL = 'https://opticasfausto.com/'
+locale = 'es-es'
+title = 'Opticas Fausto - Centro Auditívo y Visión en Torre del Mar'
+theme = "f1-theme"
