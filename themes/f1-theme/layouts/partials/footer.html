@@ -1,33 +1,37 @@
+{{ $siteData := hugo.Data.site | default dict }}
+{{ $footer := $siteData.footer | default dict }}
+{{ $brand := $footer.brand | default dict }}
+{{ $legal := $footer.legal | default dict }}
 <footer class="site-footer">
   <div class="container footer-grid">
     <section>
-      {{ with site.Data.site.footer.brand.logo }}<img class="footer-logo" src="{{ . }}" alt="{{ site.Data.site.footer.brand.logoAlt | default site.Title }}">{{ end }}
-      <h2>{{ site.Data.site.footer.brand.title }}</h2>
-      <p>{{ site.Data.site.footer.brand.description }}</p>
+      {{ with $brand.logo }}<img class="footer-logo" src="{{ . }}" alt="{{ $brand.logoAlt | default site.Title }}">{{ end }}
+      <h2>{{ $brand.title | default site.Title }}</h2>
+      {{ with $brand.description }}<p>{{ . }}</p>{{ end }}
     </section>
     <section>
       <h2>Navegación</h2>
       <nav aria-label="Navegación secundaria">
-        {{ range site.Data.site.footer.navigation }}<a href="{{ .url }}">{{ .text }}</a>{{ end }}
+        {{ range $footer.navigation }}<a href="{{ .url | safeURL }}">{{ .text }}</a>{{ end }}
       </nav>
       <div class="social-links">
-        {{ range site.Data.site.footer.social }}<a href="{{ .url }}" aria-label="{{ .platform }}">{{ .platform }}</a>{{ end }}
+        {{ range $footer.social }}<a href="{{ .url | safeURL }}" aria-label="{{ .platform }}">{{ .platform }}</a>{{ end }}
       </div>
     </section>
     <section>
       <h2>Contacto</h2>
-      {{ range site.Data.site.locations }}
+      {{ range $siteData.locations }}
       <address>
         <strong>{{ .name }}</strong><br>
         {{ .address }}<br>
-        <a href="tel:{{ .phone }}">{{ .phoneLabel }}</a> · <a href="https://wa.me/{{ replace .whatsapp "+" "" }}">WhatsApp</a> · <a href="{{ .mapUrl }}">Cómo llegar</a>
+        <a href="{{ printf "tel:%s" .phone | safeURL }}">{{ .phoneLabel }}</a> · <a href="{{ printf "https://wa.me/%s" (replace .whatsapp "+" "") | safeURL }}">WhatsApp</a> · <a href="{{ .mapUrl | safeURL }}">Cómo llegar</a>
       </address>
       {{ end }}
     </section>
   </div>
   <div class="container footer-bottom">
-    <p>{{ site.Data.site.footer.trust.text }}</p>
-    <p>© 1982–{{ now.Year }} {{ site.Data.site.footer.legal.copyright }}. Todos los derechos reservados.</p>
-    <nav aria-label="Legal">{{ range site.Data.site.footer.legal.links }}<a href="{{ .url }}">{{ .text }}</a>{{ end }}</nav>
+    {{ with $footer.trust.text }}<p>{{ . }}</p>{{ end }}
+    <p>© 1982–{{ now.Year }} {{ $legal.copyright | default site.Title }}. Todos los derechos reservados.</p>
+    <nav aria-label="Legal">{{ range $legal.links }}<a href="{{ .url | safeURL }}">{{ .text }}</a>{{ end }}</nav>
   </div>
 </footer>

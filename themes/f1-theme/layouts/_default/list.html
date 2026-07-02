@@ -1,7 +1,16 @@
 {{ define "main" }}
-  {{ partial "breadcrumb.html" . }}
   {{ partial "hero.html" . }}
-  {{ with .Content }}<section class="section content"><div class="container prose">{{ . }}</div></section>{{ end }}
+  {{ with .Content }}
+    <section class="section content">
+      <div class="container prose">
+        {{ . }}
+      </div>
+    </section>
+  {{ end }}
+
   {{ partial "section-renderer.html" . }}
-  {{ partial "faq.html" . }}
+
+  {{ with .Params.faq }}
+    {{ partial "faq.html" (dict "title" "Preguntas frecuentes" "items" .) }}
+  {{ end }}
 {{ end }}

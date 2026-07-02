@@ -7,8 +7,8 @@
       {{ with .subtitle }}<p class="hero-subtitle">{{ . }}</p>{{ end }}
       {{ if or .primaryCTA .secondaryCTA }}
       <div class="cta-row">
-        {{ with .primaryCTA }}<a class="btn" href="{{ .url }}">{{ .text }}</a>{{ end }}
-        {{ with .secondaryCTA }}<a class="btn btn-outline" href="{{ .url }}">{{ .text }}</a>{{ end }}
+        {{ with .primaryCTA }}<a class="btn" href="{{ .url | safeURL }}">{{ .text }}</a>{{ end }}
+        {{ with .secondaryCTA }}<a class="btn btn-outline" href="{{ .url | safeURL }}">{{ .text }}</a>{{ end }}
       </div>
       {{ end }}
     </div>

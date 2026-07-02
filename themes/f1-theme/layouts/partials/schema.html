@@ -1,14 +1,16 @@
 {{ $schema := .Params.schema }}
+{{ $siteData := hugo.Data.site | default dict }}
+{{ $business := $siteData.business | default dict }}
 {{ if or .IsHome $schema }}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "{{ or $schema.type (cond .IsHome "LocalBusiness" "WebPage") }}",
-  "name": {{ or .Params.title .Title site.Title | jsonify }},
-  "description": {{ or .Params.description .Params.seo.description site.Data.site.business.description | jsonify }},
-  "url": {{ .Permalink | jsonify }}{{ with site.Data.site.business.phone }},
-  "telephone": {{ . | jsonify }}{{ end }}{{ with site.Data.site.business.email }},
-  "email": {{ . | jsonify }}{{ end }}
+  "name": {{ or .Params.title .Title site.Title | jsonify | safeJS }},
+  "description": {{ or .Params.description .Params.seo.description $business.description | jsonify | safeJS }},
+  "url": {{ .Permalink | jsonify | safeJS }}{{ with $business.phone }},
+  "telephone": {{ . | jsonify | safeJS }}{{ end }}{{ with $business.email }},
+  "email": {{ . | jsonify | safeJS }}{{ end }}
 }
 </script>
 {{ end }}
@@ -21,8 +23,8 @@
     {{ range $i, $item := .Params.faq }}{{ if $i }},{{ end }}
     {
       "@type": "Question",
-      "name": {{ $item.question | jsonify }},
-      "acceptedAnswer": {"@type": "Answer", "text": {{ $item.answer | plainify | jsonify }}}
+      "name": {{ $item.question | jsonify | safeJS }},
+      "acceptedAnswer": {"@type": "Answer", "text": {{ $item.answer | plainify | jsonify | safeJS }}}
     }
     {{ end }}
   ]
