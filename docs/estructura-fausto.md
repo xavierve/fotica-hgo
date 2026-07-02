@@ -1,4 +1,6 @@
-# Estructura del proyecto OpticaFausto.com
+PROYECTO OpticaFausto.com
+
+# Estructura
 
 0.0 Inicio
 1.0 Nosotros
