@@ -1,0 +1,18 @@
+{{ with .Params.hero }}
+<section class="hero{{ if .imageBackground }} hero-bg{{ end }}"{{ with .imageBackground }} style="--hero-bg: url('{{ . }}');"{{ end }}>
+  <div class="container hero-inner">
+    <div class="hero-copy">
+      {{ with .eyebrow }}<p class="eyebrow">{{ . }}</p>{{ end }}
+      {{ with .title }}<h1>{{ . }}</h1>{{ end }}
+      {{ with .subtitle }}<p class="hero-subtitle">{{ . }}</p>{{ end }}
+      {{ if or .primaryCTA .secondaryCTA }}
+      <div class="cta-row">
+        {{ with .primaryCTA }}<a class="btn" href="{{ .url }}">{{ .text }}</a>{{ end }}
+        {{ with .secondaryCTA }}<a class="btn btn-outline" href="{{ .url }}">{{ .text }}</a>{{ end }}
+      </div>
+      {{ end }}
+    </div>
+    {{ if .image }}<figure class="hero-media"><img src="{{ .image }}" alt="{{ .imageAlt }}"></figure>{{ end }}
+  </div>
+</section>
+{{ end }}

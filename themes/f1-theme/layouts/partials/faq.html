@@ -1,0 +1,11 @@
+{{ $items := .Params.faq }}{{ if .items }}{{ $items = .items }}{{ end }}
+{{ if $items }}
+<section class="section faq">
+  <div class="container">
+    <h2>{{ .Title | default "Preguntas frecuentes" }}</h2>
+    <div class="faq-list">
+      {{ range $items }}<details><summary>{{ .question }}</summary><div class="prose">{{ .answer | markdownify }}</div></details>{{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}

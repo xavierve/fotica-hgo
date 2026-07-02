@@ -1,0 +1,10 @@
+<section class="section cta-banner"{{ with .imageBackground }} style="--section-bg: url('{{ . }}');"{{ end }}>
+  <div class="container cta-banner-inner">
+    {{ with .title }}<h2>{{ . }}</h2>{{ end }}
+    {{ with .subtitle }}<p>{{ . }}</p>{{ end }}
+    <div class="cta-row">
+      {{ with .button1 }}<a class="btn" href="{{ .url }}">{{ .text }}</a>{{ end }}
+      {{ with .button2 }}<a class="btn btn-outline" href="{{ .url }}">{{ .text }}</a>{{ end }}
+    </div>
+  </div>
+</section>

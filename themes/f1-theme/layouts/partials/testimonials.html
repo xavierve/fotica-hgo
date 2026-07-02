@@ -1,0 +1,8 @@
+<section class="section testimonials">
+  <div class="container">
+    {{ with .title }}<h2>{{ . }}</h2>{{ end }}
+    <div class="cards-grid">
+      {{ range .items }}<blockquote class="testimonial"><p>“{{ .text }}”</p><footer>{{ with .image }}<img src="{{ . }}" alt="{{ .name }}">{{ end }}<strong>{{ .name }}</strong>{{ with .rating }}<span>{{ . }}/5</span>{{ end }}</footer></blockquote>{{ end }}
+    </div>
+  </div>
+</section>

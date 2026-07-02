@@ -1,0 +1,14 @@
+<header class="site-header" role="banner">
+  <div class="container header-inner">
+    <a class="site-logo" href="/" aria-label="Inicio">
+      {{ with site.Data.site.header.logo }}<img src="{{ . }}" alt="{{ site.Data.site.header.logoAlt | default site.Title }}">{{ else }}<span>{{ site.Title }}</span>{{ end }}
+    </a>
+    <nav class="site-nav" aria-label="Navegación principal">
+      {{ range site.Data.site.header.nav }}<a href="{{ .url }}">{{ .text }}</a>{{ end }}
+    </nav>
+    <div class="header-actions">
+      {{ with site.Data.site.header.phone }}<a class="btn btn-small" href="tel:{{ . }}">Llamar</a>{{ end }}
+      {{ with site.Data.site.header.whatsapp }}<a class="btn btn-small btn-outline" href="https://wa.me/{{ replace . "+" "" }}">WhatsApp</a>{{ end }}
+    </div>
+  </div>
+</header>

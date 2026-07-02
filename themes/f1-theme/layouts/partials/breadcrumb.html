@@ -1,0 +1,19 @@
+{{ if not .IsHome }}
+  {{ $items := slice }}
+  {{ $items = $items | append (dict "title" "Inicio" "url" "/") }}
+  {{ range .Ancestors.Reverse }}
+    {{ if and (ne .Title "Servicios") (ne .Title "Productos") }}
+      {{ $items = $items | append (dict "title" .Title "url" .RelPermalink) }}
+    {{ end }}
+  {{ end }}
+  {{ $items = $items | append (dict "title" .Title "url" .RelPermalink) }}
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <div class="container">
+      <ol>
+        {{ range $i, $item := $items }}
+          <li>{{ if lt (add $i 1) (len $items) }}<a href="{{ $item.url }}">{{ $item.title }}</a>{{ else }}<span aria-current="page">{{ $item.title }}</span>{{ end }}</li>
+        {{ end }}
+      </ol>
+    </div>
+  </nav>
+{{ end }}

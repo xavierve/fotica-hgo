@@ -1,0 +1,13 @@
+{{ $title := or .Params.og.title .Params.seo.title .Params.title .Title site.Title }}
+{{ $description := or .Params.og.description .Params.seo.description .Params.description }}
+{{ $image := or .Params.og.image site.Params.defaultOgImage }}
+{{ $type := or .Params.og.type (cond .IsHome "website" "article") }}
+<meta property="og:title" content="{{ $title }}">
+{{ with $description }}<meta property="og:description" content="{{ . }}">{{ end }}
+<meta property="og:type" content="{{ $type }}">
+<meta property="og:url" content="{{ .Permalink }}">
+{{ with $image }}<meta property="og:image" content="{{ absURL . }}">{{ end }}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ $title }}">
+{{ with $description }}<meta name="twitter:description" content="{{ . }}">{{ end }}
+{{ with $image }}<meta name="twitter:image" content="{{ absURL . }}">{{ end }}
