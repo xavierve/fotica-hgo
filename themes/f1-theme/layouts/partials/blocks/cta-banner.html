@@ -1,4 +1,5 @@
-<section class="section cta-banner"{{ with .imageBackground }} style="--section-bg: url('{{ . }}');"{{ end }}>
+{{ $tone := .tone | default "neutral" }}
+<section class="{{ partial "block-classes.html" (dict "name" "cta-banner" "context" . "extra" (slice (printf "cta-tone-%s" $tone))) }}"{{ with .imageBackground }} style="--section-bg: url('{{ . }}');"{{ end }}>
   <div class="container cta-banner-inner">
     {{ with .title }}<h2>{{ . }}</h2>{{ end }}
     {{ with .subtitle }}<p>{{ . }}</p>{{ end }}

@@ -43,25 +43,24 @@ hero:
     url: ""
 
 sections:
-  - type: counter
-    items:
-      - number: ""
-        label: ""
-  - type: trustbar
-    items:
-      - icon: ""
-        text: ""
   - type: image_text
+    width: wide
+    variant: soft
+    textSize: large
+    align: left
+    class: home-human
     title: ""
     text: ""
     image: ""
     imageAlt: ""
     reverse: false
   - type: cards
+    columns: 3
     title: ""
     subtitle: ""
     cards: []
   - type: cta_banner
+    tone: neutral
     title: ""
     subtitle: ""
     button1:
@@ -70,13 +69,18 @@ sections:
     button2:
       text: ""
       url: ""
-  - type: faq
-    title: "Preguntas frecuentes"
-    items:
-      - question: ""
-        answer: ""
 ---
 ```
+
+## Campos Comunes de Bloque
+
+Todos los bloques de `sections` aceptan:
+
+- `width`: `default`, `wide`, `full`
+- `variant`: `default`, `soft`, `featured`, `contrast`
+- `textSize`: `small`, `default`, `large`, `xl`
+- `align`: `left`, `center`, `right`
+- `class`: string opcional
 
 ## Reglas
 

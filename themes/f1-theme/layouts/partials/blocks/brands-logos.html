@@ -1,1 +1,8 @@
-<section class="section brands-logos"><div class="container">{{ with .title }}<h2>{{ . }}</h2>{{ end }}<div class="logo-grid">{{ range .items }}<figure><img src="{{ .image }}" alt="{{ .imageAlt }}">{{ with .text }}<figcaption>{{ . }}</figcaption>{{ end }}</figure>{{ end }}</div></div></section>
+<section class="{{ partial "block-classes.html" (dict "name" "brands-logos" "context" .) }}">
+  <div class="container">
+    {{ with .title }}<h2>{{ . }}</h2>{{ end }}
+    <div class="logo-grid">
+      {{ range .items }}<figure><img src="{{ .image }}" alt="{{ .imageAlt }}">{{ with .text }}<figcaption>{{ . }}</figcaption>{{ end }}</figure>{{ end }}
+    </div>
+  </div>
+</section>

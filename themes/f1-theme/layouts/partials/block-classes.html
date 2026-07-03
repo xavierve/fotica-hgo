@@ -1,0 +1,16 @@
+{{ $ctx := .context }}
+{{ $classes := slice
+  "block"
+  (printf "block-%s" .name)
+  (printf "block-width-%s" ($ctx.width | default "default"))
+  (printf "block-variant-%s" ($ctx.variant | default "default"))
+  (printf "block-text-%s" ($ctx.textSize | default "default"))
+  (printf "block-align-%s" ($ctx.align | default "left"))
+}}
+{{ range (.extra | default slice) }}
+  {{ $classes = $classes | append . }}
+{{ end }}
+{{ with $ctx.class }}
+  {{ $classes = $classes | append . }}
+{{ end }}
+{{ return (delimit $classes " ") }}

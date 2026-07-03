@@ -1,5 +1,5 @@
 {{ with .items }}
-<section class="section faq">
+<section class="{{ partial "block-classes.html" (dict "name" "faq" "context" $) }}">
   <div class="container">
     <h2>{{ $.title | default "Preguntas frecuentes" }}</h2>
     <div class="faq-list">

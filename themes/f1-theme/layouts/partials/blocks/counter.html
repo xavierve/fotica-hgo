@@ -1,5 +1,7 @@
 {{ with .items }}
-<section class="section counter"{{ with $.imageBackground }} style="--section-bg: url('{{ . }}');"{{ end }}>
+{{ $extra := slice }}
+{{ if $.animated }}{{ $extra = $extra | append "is-animated" }}{{ end }}
+<section class="{{ partial "block-classes.html" (dict "name" "counter" "context" $ "extra" $extra) }}"{{ with $.imageBackground }} style="--section-bg: url('{{ . }}');"{{ end }}>
   <div class="container">
     <div class="counter-grid">
       {{ range . }}

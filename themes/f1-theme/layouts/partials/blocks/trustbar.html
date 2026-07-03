@@ -1,5 +1,5 @@
 {{ with .items }}
-<section class="trustbar" aria-label="Datos de confianza">
+<section class="{{ partial "block-classes.html" (dict "name" "trustbar" "context" $) }}" aria-label="Datos de confianza">
   <div class="container trustbar-inner">
     {{ range . }}
     <span>

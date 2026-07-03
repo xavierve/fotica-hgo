@@ -1,1 +1,8 @@
-<section class="section slider"><div class="container">{{ with .title }}<h2>{{ . }}</h2>{{ end }}<div class="slider-track">{{ range .items }}<article class="slide">{{ with .image }}<img src="{{ . }}" alt="{{ .imageAlt }}">{{ end }}{{ with .title }}<h3>{{ . }}</h3>{{ end }}{{ with .text }}<p>{{ . }}</p>{{ end }}{{ with .legend }}<small>{{ . }}</small>{{ end }}</article>{{ end }}</div></div></section>
+<section class="{{ partial "block-classes.html" (dict "name" "slider" "context" .) }}">
+  <div class="container">
+    {{ with .title }}<h2>{{ . }}</h2>{{ end }}
+    <div class="slider-track">
+      {{ range .items }}<article class="slide">{{ with .image }}<img src="{{ . }}" alt="{{ .imageAlt }}">{{ end }}{{ with .title }}<h3>{{ . }}</h3>{{ end }}{{ with .text }}<p>{{ . }}</p>{{ end }}{{ with .legend }}<small>{{ . }}</small>{{ end }}</article>{{ end }}
+    </div>
+  </div>
+</section>

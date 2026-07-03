@@ -1,4 +1,6 @@
-<section class="section image-text{{ if .reverse }} is-reverse{{ end }}">
+{{ $extra := slice }}
+{{ if .reverse }}{{ $extra = $extra | append "is-reverse" }}{{ end }}
+<section class="{{ partial "block-classes.html" (dict "name" "image-text" "context" . "extra" $extra) }}">
   <div class="container image-text-inner">
     <div class="image-text-copy">
       {{ with .title }}<h2>{{ . }}</h2>{{ end }}
