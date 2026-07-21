@@ -1,0 +1,24 @@
+{{ with .items }}
+{{ $extra := slice }}
+{{ if $.animated }}{{ $extra = $extra | append "is-animated" }}{{ end }}
+{{ if $.bg }}{{ $extra = $extra | append "has-bg-image" }}{{ end }}
+{{ if $.bgColor }}{{ $extra = $extra | append "has-bg-color" }}{{ end }}
+<section class="{{ partial "block-classes.html" (dict "name" "counter" "context" $ "extra" $extra) }}"
+  {{- $styles := slice -}}
+  {{- with $.bg }}{{ $styles = $styles | append (printf "--section-bg:url('%s')" .) }}{{ end -}}
+  {{- with $.bgMobile }}{{ $styles = $styles | append (printf "--section-bg-mobile:url('%s')" .) }}{{ end -}}
+  {{- with $.bgColor }}{{ $styles = $styles | append (printf "--section-bg-color:%s" .) }}{{ end -}}
+  {{- with $styles }} style="{{ delimit . ";" | safeCSS }}"{{ end }}>
+  <div class="container">
+    <div class="counter-grid">
+      {{ range . }}
+      <div class="counter-item"{{ with .plusOne }} data-plus-one="{{ . }}"{{ end }}>
+        <strong>{{ .number }}</strong>
+        <span>{{ .label }}</span>
+      </div>
+      {{ end }}
+    </div>
+    {{ with $.text }}<p class="section-note">{{ . }}</p>{{ end }}
+  </div>
+</section>
+{{ end }}

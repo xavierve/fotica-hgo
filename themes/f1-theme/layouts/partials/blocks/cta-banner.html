@@ -1,0 +1,59 @@
+{{- /*
+  blocks/cta-banner.html — v2
+  Compatibilidad: button1/button2 ({url,text}) siguen funcionando.
+  Nuevo:
+    bg / bgMobile   → imagen de fondo responsive (desktop / móvil)
+    bgColor         → color de fondo plano, o tinte del overlay si hay imagen
+    preset: contact → par de botones Llamar + WhatsApp desde data/site.yaml
+    buttons: [...]  → lista de botones {text, url, icon}
+    microcopy       → línea pequeña bajo los botones
+    tone/variant/class/textSize/align/width → modificadores estándar de bloque
+*/ -}}
+{{ $tone := .tone | default "neutral" }}
+{{ $bg := .bg }}
+{{ $extra := slice (printf "cta-tone-%s" $tone) }}
+{{ if $bg }}{{ $extra = $extra | append "has-bg-image" }}{{ end }}
+{{ if .bgColor }}{{ $extra = $extra | append "has-bg-color" }}{{ end }}
+{{ with .layout }}{{ $extra = $extra | append (printf "cta-layout-%s" .) }}{{ end }}
+
+{{/* Botones: preset contact | lista buttons | button1/button2 (compat) */}}
+{{ $siteData := hugo.Data.site | default dict }}
+{{ $contact := $siteData.contact | default dict }}
+{{ $buttons := slice }}
+{{ if eq .preset "contact" }}
+  {{ $wa := replace ($contact.whatsapp | default "") "+" "" }}
+  {{ $buttons = slice
+      (dict "text" (.labelCall | default (i18n "call")) "url" (printf "tel:%s" $contact.phone) "icon" "phone")
+      (dict "text" (.labelWhatsapp | default (i18n "whatsapp")) "url" (printf "https://wa.me/%s" $wa) "icon" "whatsapp")
+  }}
+{{ else if .buttons }}
+  {{ $buttons = .buttons }}
+{{ else }}
+  {{ with .button1 }}{{ $buttons = $buttons | append . }}{{ end }}
+  {{ with .button2 }}{{ $buttons = $buttons | append . }}{{ end }}
+{{ end }}
+
+<section class="{{ partial "block-classes.html" (dict "name" "cta-banner" "context" . "extra" $extra) }}"
+  {{- $styles := slice -}}
+  {{- with $bg }}{{ $styles = $styles | append (printf "--section-bg:url('%s')" .) }}{{ end -}}
+  {{- with .bgMobile }}{{ $styles = $styles | append (printf "--section-bg-mobile:url('%s')" .) }}{{ end -}}
+  {{- with .bgColor }}{{ $styles = $styles | append (printf "--section-bg-color:%s" .) }}{{ end -}}
+  {{- with $styles }} style="{{ delimit . ";" | safeCSS }}"{{ end }}>
+  <div class="container cta-banner-inner">
+    <div class="cta-text">
+      {{ with .eyebrow }}<p class="eyebrow cta-eyebrow">{{ . }}</p>{{ end }}
+      {{ with .title }}<h2>{{ . }}</h2>{{ end }}
+      {{ with .subtitle }}<p class="cta-subtitle">{{ . | markdownify }}</p>{{ end }}
+    </div>
+    {{ with $buttons }}
+    <div class="cta-actions">
+      <div class="cta-row">
+        {{ range $i, $b := . }}
+        <a class="btn{{ if gt $i 0 }} btn-outline{{ end }}" href="{{ $b.url | safeURL }}">{{ with $b.icon }}{{ partial "icons.html" . }}{{ end }}{{ $b.text }}</a>
+        {{ end }}
+      </div>
+      {{ with $.microcopy }}<p class="cta-microcopy">{{ . }}</p>{{ end }}
+    </div>
+    {{ end }}
+  </div>
+</section>

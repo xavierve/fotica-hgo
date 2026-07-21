@@ -1,0 +1,16 @@
+# f1-theme · cadenas de UI en español (idioma por defecto).
+# Para otro proyecto/idioma: copiar como en.yaml, de.yaml… y traducir valores.
+home: { other: "Inicio" }
+mainNav: { other: "Navegación principal" }
+secondaryNav: { other: "Navegación secundaria" }
+readMore: { other: "Ver más" }
+call: { other: "Llamar" }
+whatsapp: { other: "WhatsApp" }
+faqTitle: { other: "Preguntas frecuentes" }
+trustbarLabel: { other: "Datos de confianza" }
+prev: { other: "Anterior" }
+next: { other: "Siguiente" }
+close: { other: "Cerrar" }
+enlargeImage: { other: "Ampliar imagen" }
+carousel: { other: "Carrusel" }
+allRightsReserved: { other: "Todos los derechos reservados" }

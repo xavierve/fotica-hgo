@@ -1,1 +1,84 @@
-# Site data
+# data/site.yaml — Ópticas Fausto
+# v02 — Locations completas (Avenida + Duque), teléfonos corregidos.
+# PENDIENTE validación cliente: horarios definitivos y variaciones de temporada
+# (deben coincidir exactamente con los dos Google Business Profiles).
+
+brand:
+  name: "Ópticas Fausto"
+  logo: "/images/logo-fausto.svg"                 # versión estática plana — schema.Organization.logo, OG, fallback
+  logoAlt: "Ópticas Fausto — Centro Óptico y Auditivo en Torre del Mar"
+  logoInline: "images/logo-fausto-animado.svg"   # SVG animado inline en header (ruta en assets/)
+
+# Override específico de footer (footer.html ya soporta este patrón: footer.brand.* > brand.*)
+footer:
+  brand:
+    logo: "/images/logo-fausto-claro.svg"          # variante clara, para el fondo oscuro del footer
+    logoAlt: "Ópticas Fausto — Centro Óptico y Auditivo en Torre del Mar"
+  title: "Ópticas Fausto"
+  description: "Más de 44 años cuidando la visión y la audición en Torre del Mar."
+
+# Datos de negocio para schema.org (el tema es neutro: todo sale de aquí)
+business:
+  locationType: "Optician"        # tipo schema.org de cada sede (subtipo de LocalBusiness)
+  foundingDate: "1982"
+  addressLocality: "Torre del Mar"
+  postalCode: "29740"
+  addressRegion: "Málaga"
+  addressCountry: "ES"
+  areaServed: "Torre del Mar, Vélez-Málaga, Málaga"
+  offerCatalogs:
+    - { name: "Visión", url: "/vision/" }
+    - { name: "Audición", url: "/audicion/" }
+
+# Contacto común a ambos centros.
+# El móvil es el único número con WhatsApp. Los fijos NO tienen WhatsApp.
+contact:
+  phone: "+34717770090"          # móvil común — clic-para-llamar por defecto en header/sticky
+  phoneLabel: "717 77 00 90"
+  whatsapp: "+34717770090"       # CORREGIDO: antes apuntaba al fijo de Avenida
+  email: "info@opticafausto.com"
+  hours:
+    - "Lunes a viernes: 10:00–13:30 y 17:00–20:30"   # PENDIENTE validar sábados/temporada
+
+navigation:
+  main:
+    - text: "Inicio"
+      url: "/"
+    - text: "Visión"
+      url: "/vision/"
+    - text: "Audición"
+      url: "/audicion/"
+    - text: "Nosotros"
+      url: "/nosotros/"
+    - text: "Contacto"
+      url: "/contacto/"
+  legal:
+    - text: "Aviso Legal · Privacidad · Cookies"
+      url: "/aviso-legal/"
+
+# Dos centros. Claves compatibles con footer.html:
+# name, address, location, phone, phoneLabel, email, mapUrl
+# El whatsapp NO se declara por location (es común, ya está en contact:)
+# para evitar triplicar el enlace en el footer.
+locations:
+  - id: "avenida"
+    name: "Centro Fausto Avenida"
+    address: "Av. Andalucía, 84 B"
+    location: "29740 Torre del Mar (Málaga)"
+    phone: "+34952540964"
+    phoneLabel: "952 54 09 64"
+    mapUrl: "https://share.google/lt3s0XecMBnpr3exH"
+  - id: "duque"
+    name: "Centro Fausto Duque"
+    address: "C/ Duque de Ahumada, 1C"
+    location: "29740 Torre del Mar (Málaga)"
+    phone: "+34952547090"
+    phoneLabel: "952 54 70 90"
+    mapUrl: "https://share.google/uotnWlZFT0nfpuVoP"
+
+# Formato lista con platform/url: es el que consume footer.html
+social:
+  - platform: "Facebook"
+    url: "https://www.facebook.com/OpticaFaustoTorreDelMar/"
+  - platform: "Instagram"
+    url: "https://www.instagram.com/opticasfausto/"

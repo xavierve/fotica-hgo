@@ -1,0 +1,44 @@
+{{- /*
+  {{< cards section="/vision/servicios" title="..." columns="3" >}}
+  Genera automáticamente las cards de las páginas hijas de una sección,
+  leyendo del front matter de cada hija:
+    card.image / card.imageAlt   → imagen de la card
+    card.description             → texto breve (fallback: description)
+    linkTitle                    → título corto (fallback: title)
+    card.weight / weight         → orden
+  Delega el render en blocks/cards.html → paridad total con sections.
+
+  Parámetros: section (obligatorio), title, subtitle, columns, linkText,
+              variant, class, textSize, align
+*/ -}}
+{{- $sectionPath := .Get "section" -}}
+{{- $section := site.GetPage $sectionPath -}}
+{{- if not $section -}}
+  {{- errorf "shortcode cards: sección %q no encontrada (página %s)" $sectionPath .Page.Path -}}
+{{- else -}}
+  {{- $cards := slice -}}
+  {{- range $section.RegularPages.ByWeight -}}
+    {{- $c := .Params.card | default dict -}}
+    {{- $cards = $cards | append (dict
+          "title" .LinkTitle
+          "description" ($c.description | default .Description)
+          "image" $c.image
+          "imageAlt" ($c.imageAlt | default .LinkTitle)
+          "link" .RelPermalink
+    ) -}}
+  {{- end -}}
+  {{- $ctx := dict
+        "cards" $cards
+        "title" (.Get "title")
+        "subtitle" (.Get "subtitle")
+        "columns" (.Get "columns" | default 3)
+        "linkText" (.Get "linkText" | default (i18n "readMore"))
+        "variant" (.Get "variant")
+        "class" (.Get "class")
+        "textSize" (.Get "textSize")
+        "align" (.Get "align")
+        "width" (.Get "width")
+        "pad" (.Get "pad")
+  -}}
+  {{ partial "blocks/cards.html" $ctx }}
+{{- end -}}

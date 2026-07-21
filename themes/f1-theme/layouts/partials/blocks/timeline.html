@@ -1,0 +1,8 @@
+<section class="{{ partial "block-classes.html" (dict "name" "timeline" "context" .) }}">
+  <div class="container">
+    {{ with .title }}<h2>{{ . }}</h2>{{ end }}
+    <ol class="timeline-list">
+      {{ range .items }}<li><strong>{{ .number }}</strong><h3>{{ .event_title }}</h3><p>{{ .event_text }}</p></li>{{ end }}
+    </ol>
+  </div>
+</section>

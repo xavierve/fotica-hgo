@@ -1,0 +1,9 @@
+{{ $title := or .Params.seo.title .Params.title .Title site.Title }}
+{{ $description := or .Params.seo.description .Params.description site.Params.description }}
+{{ $canonical := or .Params.seo.canonical .Params.canonical .Permalink }}
+{{ $robots := or .Params.seo.robots .Params.robots "index, follow" }}
+<title>{{ $title }}</title>
+{{ with $description }}<meta name="description" content="{{ . }}">{{ end }}
+<meta name="robots" content="{{ $robots }}">
+<link rel="canonical" href="{{ $canonical }}">
+<meta charset="utf-8">

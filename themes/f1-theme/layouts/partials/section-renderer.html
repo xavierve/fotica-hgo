@@ -1,0 +1,8 @@
+{{ range .Params.sections }}
+  {{ $type := .type | default "" }}
+  {{ $block := replace $type "_" "-" }}
+  {{ $partial := printf "blocks/%s.html" $block }}
+  {{ if and $type (templates.Exists (printf "partials/%s" $partial)) }}
+    {{ partial $partial . }}
+  {{ end }}
+{{ end }}

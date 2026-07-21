@@ -1,0 +1,9 @@
+{{/* spacer — espaciado vertical puntual dentro del prose.
+     size: s | m | l  (por defecto m). Fluido móvil→desktop vía tokens --space-*.
+     Uso deliberadamente escaso: el espaciado normal lo dan padding y margin de los
+     bloques; el spacer es para el ajuste fino ocasional que el sistema no cubre.
+     No es contenido (aria-hidden): no debe anunciarse a lectores de pantalla. */}}
+{{- $size := .Get "size" | default "m" -}}
+{{- $map := dict "s" "s" "m" "" "l" "l" -}}
+{{- $suffix := index $map $size | default "" -}}
+<div class="spacer{{ with $suffix }} spacer-{{ . }}{{ end }}" aria-hidden="true"></div>

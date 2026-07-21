@@ -1,0 +1,67 @@
+{{ $siteData := hugo.Data.site | default dict }}
+{{ $brand := $siteData.brand | default dict }}
+{{ $footer := $siteData.footer | default dict }}
+{{ $footerBrand := $footer.brand | default dict }}
+{{ $contact := $siteData.contact | default dict }}
+{{ $navigation := $siteData.navigation | default dict }}
+{{ $legal := or $footer.legal $navigation.legal (slice
+  (dict "text" "Aviso Legal" "url" "/aviso-legal/")
+  (dict "text" "Política de Privacidad" "url" "/politica-privacidad/")
+) }}
+{{ $footerNav := or $footer.navigation $navigation.footer $navigation.main }}
+{{ $social := or $footer.social $siteData.social }}
+{{ $locations := $siteData.locations | default slice }}
+{{ $brandLogo := or $footerBrand.logo $brand.logo }}
+{{ $brandLogoAlt := or $footerBrand.logoAlt $brand.logoAlt $brand.name site.Title }}
+{{ $brandTitle := or $footerBrand.title $brand.title $brand.name site.Title }}
+{{ $brandDescription := or $footerBrand.description $brand.description }}
+{{ $copyright := or $footer.copyright $brand.name site.Title }}
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <section>
+      {{ with $brandLogo }}<img class="footer-logo" src="{{ . }}" alt="{{ $brandLogoAlt }}" width="245" height="54" loading="lazy">{{ end }}
+      <h2>{{ $brandTitle }}</h2>
+      {{ with $brandDescription }}<p>{{ . }}</p>{{ end }}
+    </section>
+    <section>
+      <h2>{{ i18n "secondaryNav" }}</h2>
+      <nav aria-label="{{ i18n "secondaryNav" }}">
+        {{ range $footerNav }}<a href="{{ .url | safeURL }}">{{ .text }}</a>{{ end }}
+      </nav>
+      {{ with $social }}
+      <div class="social-links">
+        {{ range . }}<a href="{{ .url | safeURL }}" aria-label="{{ .platform | default .text }}">{{ .text | default .platform }}</a>{{ end }}
+      </div>
+      {{ end }}
+    </section>
+    <section>
+      <h2>Contacto</h2>
+      {{ range $locations }}
+      {{ $location := . }}
+      <address>
+        <strong>{{ .name }}</strong><br>
+        {{ with .address }}{{ . }}<br>{{ end }}
+        {{ with .location }}{{ . }}<br>{{ end }}
+        {{ with .phone }}<a href="{{ printf "tel:%s" . | safeURL }}">{{ $location.phoneLabel | default . }}</a>{{ end }}
+        {{ with .whatsapp }} · <a href="{{ printf "https://wa.me/%s" (replace . "+" "") | safeURL }}">WhatsApp</a>{{ end }}
+        {{ with .email }} · <a href="{{ printf "mailto:%s" . | safeURL }}">{{ . }}</a>{{ end }}
+        {{ with .mapUrl }} · <a href="{{ . | safeURL }}">Ubicación</a>{{ end }}
+      </address>
+      {{ else }}
+      <address>
+        {{ with $contact.phone }}<a href="{{ printf "tel:%s" . | safeURL }}">{{ $contact.phoneLabel | default . }}</a>{{ end }}
+        {{ with $contact.whatsapp }} · <a href="{{ printf "https://wa.me/%s" (replace . "+" "") | safeURL }}">WhatsApp</a>{{ end }}
+        {{ with $contact.email }} · <a href="{{ printf "mailto:%s" . | safeURL }}">{{ . }}</a>{{ end }}
+        {{ with $contact.location }}<br>{{ . }}{{ end }}
+        {{ with $contact.mapUrl }}<br><a href="{{ . | safeURL }}">Ubicación</a>{{ end }}
+      </address>
+      {{ end }}
+    </section>
+  </div>
+  <div class="container footer-bottom">
+    {{ with $footer.trust.text }}<p>{{ . }}</p>{{ end }}
+    {{ $founded := ($siteData.business | default dict).foundingDate }}
+    <p>© {{ with $founded }}{{ . }}–{{ end }}{{ now.Year }} {{ $copyright }}. {{ i18n "allRightsReserved" }}</p>
+    <nav aria-label="Legal">{{ range $legal }}<a href="{{ .url | safeURL }}">{{ .text }}</a>{{ end }}</nav>
+  </div>
+</footer>

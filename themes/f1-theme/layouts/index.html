@@ -1,0 +1,13 @@
+{{ define "main" }}
+  {{ partial "hero.html" . }}
+
+  {{ with .Content }}
+    <section class="section content">
+      <div class="container prose">
+        {{ . }}
+      </div>
+    </section>
+  {{ end }}
+
+  {{ partial "section-renderer.html" . }}
+{{ end }}

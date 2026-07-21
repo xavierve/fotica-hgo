@@ -1,0 +1,7 @@
+{{ partial "seo.html" . }}
+{{ partial "og.html" . }}
+{{ partial "schema.html" . }}
+{{ $critical := resources.Get "css/critical.css" }}{{ if $critical }}<style>{{ $critical.Content | safeCSS }}</style>{{ end }}
+{{ $css := resources.Get "css/main.css" }}{{ if $css }}<link rel="stylesheet" href="{{ $css.RelPermalink }}">{{ end }}
+<link rel="icon" href="/favicon/favicon.ico">
+<meta name="viewport" content="width=device-width, initial-scale=1">

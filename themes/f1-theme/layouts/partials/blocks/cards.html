@@ -1,0 +1,22 @@
+{{ with .cards }}
+{{ $columns := $.columns | default 3 }}
+<section class="{{ partial "block-classes.html" (dict "name" "cards" "context" $ "extra" (slice (printf "cards-columns-%v" $columns))) }}">
+  <div class="container">
+    {{ with $.title }}<h2>{{ . }}</h2>{{ end }}
+    {{ with $.subtitle }}<p class="section-subtitle">{{ . }}</p>{{ end }}
+    <div class="cards-grid">
+      {{ range . }}
+      {{ $card := . }}
+      <article class="card">
+        {{ with .image }}<img src="{{ . }}" alt="{{ $card.imageAlt }}">{{ end }}
+        <div class="card-body">
+          {{ with .title }}<h3>{{ . }}</h3>{{ end }}
+          {{ with .description }}<p>{{ . }}</p>{{ end }}
+          {{ with .link }}<a class="card-link" href="{{ . | safeURL }}">{{ $card.linkText | default $.linkText | default (i18n "readMore") }} {{ partial "icons.html" "arrow-right" }}</a>{{ end }}
+        </div>
+      </article>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}

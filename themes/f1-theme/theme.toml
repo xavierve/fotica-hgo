@@ -1,1 +1,9 @@
-name="F1 Theme"
+name = "F1 Theme"
+license = "Private"
+description = "Lightweight Hugo theme for local service businesses and health websites."
+tags = ["hugo", "seo", "local-business", "medical", "static-site"]
+features = ["seo", "schema", "blocks", "responsive"]
+min_version = "0.120.0"
+
+[author]
+  name = "F1 Theme"

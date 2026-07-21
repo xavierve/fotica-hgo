@@ -1,0 +1,9 @@
+<section class="{{ partial "block-classes.html" (dict "name" "team" "context" .) }}">
+  <div class="container">
+    {{ with .title }}<h2>{{ . }}</h2>{{ end }}
+    {{ with .subtitle }}<p class="section-subtitle">{{ . }}</p>{{ end }}
+    <div class="cards-grid">
+      {{ range .items }}<article class="team-card"><img src="{{ .image }}" alt="{{ .imageAlt }}"><h3>{{ .name }}</h3><p>{{ .role }}</p></article>{{ end }}
+    </div>
+  </div>
+</section>
