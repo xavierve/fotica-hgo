@@ -1,14 +1,21 @@
 {{ $ctx := .context }}
+{{/* Alias de talla (s/m/l/xl) → nombres canónicos, para pad y textSize */}}
+{{ $padAlias := dict "s" "compact" "m" "" "l" "spacious" }}
+{{ $sizeAlias := dict "s" "small" "m" "default" "l" "large" }}
 {{ $classes := slice
   "block"
   (printf "block-%s" .name)
   (printf "block-width-%s" ($ctx.width | default "default"))
   (printf "block-variant-%s" ($ctx.variant | default "default"))
-  (printf "block-text-%s" ($ctx.textSize | default "default"))
+  (printf "block-text-%s" (index $sizeAlias ($ctx.textSize | default "") | default ($ctx.textSize | default "default")))
   (printf "block-align-%s" ($ctx.align | default "left"))
 }}
 {{ range (.extra | default slice) }}
   {{ $classes = $classes | append . }}
+{{ end }}
+{{ with $ctx.pad }}
+  {{ $p := index $padAlias . | default . }}
+  {{ with $p }}{{ $classes = $classes | append (printf "block-pad-%s" .) }}{{ end }}
 {{ end }}
 {{ with $ctx.class }}
   {{ $classes = $classes | append . }}

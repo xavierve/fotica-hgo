@@ -1,14 +1,28 @@
 {{ with .Params.hero }}
-<section class="hero{{ if .imageBackground }} hero-bg{{ end }}"{{ with .imageBackground }} style="--hero-bg: url('{{ . }}');"{{ end }}>
-  <div class="container hero-inner">
+{{/* Fondos: sistema unificado hero/CTA/counter — clases has-bg-* y vars --section-bg* */}}
+{{ $bg := .bg }}
+<section class="hero{{ if $bg }} has-bg-image{{ end }}{{ if .bgColor }} has-bg-color{{ end }}{{ with .class }} {{ . }}{{ end }}"
+  {{- $styles := slice -}}
+  {{- with $bg }}{{ $styles = $styles | append (printf "--section-bg:url('%s')" .) }}{{ end -}}
+  {{- with .bgMobile }}{{ $styles = $styles | append (printf "--section-bg-mobile:url('%s')" .) }}{{ end -}}
+  {{- with .bgColor }}{{ $styles = $styles | append (printf "--section-bg-color:%s" .) }}{{ end -}}
+  {{- with $styles }} style="{{ delimit . ";" | safeCSS }}"{{ end }}>
+  <div class="container hero-inner{{ if not .image }} no-media{{ end }}">
     <div class="hero-copy">
       {{ with .eyebrow }}<p class="eyebrow">{{ . }}</p>{{ end }}
       {{ with .title }}<h1>{{ . }}</h1>{{ end }}
-      {{ with .subtitle }}<p class="hero-subtitle">{{ . }}</p>{{ end }}
-      {{ if or .primaryCTA .secondaryCTA }}
+      {{ with .subtitle }}<p class="hero-subtitle">{{ . | markdownify }}</p>{{ end }}
+      {{ if eq .ctaPreset "contact" }}
+      {{ $contact := (hugo.Data.site | default dict).contact | default dict }}
+      {{ $wa := replace ($contact.whatsapp | default "") "+" "" }}
       <div class="cta-row">
-        {{ with .primaryCTA }}<a class="btn" href="{{ .url | safeURL }}">{{ .text }}</a>{{ end }}
-        {{ with .secondaryCTA }}<a class="btn btn-outline" href="{{ .url | safeURL }}">{{ .text }}</a>{{ end }}
+        <a class="btn" href="{{ printf "tel:%s" $contact.phone | safeURL }}">{{ partial "icons.html" "phone" }}{{ .labelCall | default (i18n "call") }}</a>
+        <a class="btn btn-outline" href="https://wa.me/{{ $wa }}">{{ partial "icons.html" "whatsapp" }}{{ .labelWhatsapp | default (i18n "whatsapp") }}</a>
+      </div>
+      {{ else if or .primaryCTA .secondaryCTA }}
+      <div class="cta-row">
+        {{ with .primaryCTA }}<a class="btn" href="{{ .url | safeURL }}">{{ with .icon }}{{ partial "icons.html" . }}{{ end }}{{ .text }}</a>{{ end }}
+        {{ with .secondaryCTA }}<a class="btn btn-outline" href="{{ .url | safeURL }}">{{ with .icon }}{{ partial "icons.html" . }}{{ end }}{{ .text }}</a>{{ end }}
       </div>
       {{ end }}
     </div>

@@ -1,12 +1,13 @@
 {{ if not .IsHome }}
   {{ $items := slice }}
-  {{ $items = $items | append (dict "title" "Inicio" "url" "/") }}
+  {{ $items = $items | append (dict "title" (i18n "home") "url" "/") }}
   {{ range .Ancestors.Reverse }}
-    {{ if and (ne .Title "Servicios") (ne .Title "Productos") }}
-      {{ $items = $items | append (dict "title" .Title "url" .RelPermalink) }}
+    {{/* Carpetas organizadoras (servicios/productos) usan build.render:never → sin URL → no son crumbs */}}
+    {{ if and (not .IsHome) .RelPermalink }}
+      {{ $items = $items | append (dict "title" (or .Params.breadcrumbTitle .LinkTitle .Title) "url" .RelPermalink) }}
     {{ end }}
   {{ end }}
-  {{ $items = $items | append (dict "title" .Title "url" .RelPermalink) }}
+  {{ $items = $items | append (dict "title" (or .Params.breadcrumbTitle .LinkTitle .Title) "url" .RelPermalink) }}
   <nav class="breadcrumb" aria-label="Breadcrumb">
     <div class="container">
       <ol>

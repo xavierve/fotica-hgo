@@ -1,0 +1,14 @@
+home: { other: "Home" }
+mainNav: { other: "Main navigation" }
+secondaryNav: { other: "Secondary navigation" }
+readMore: { other: "Read more" }
+call: { other: "Call" }
+whatsapp: { other: "WhatsApp" }
+faqTitle: { other: "Frequently asked questions" }
+trustbarLabel: { other: "Trust highlights" }
+prev: { other: "Previous" }
+next: { other: "Next" }
+close: { other: "Close" }
+enlargeImage: { other: "Enlarge image" }
+carousel: { other: "Carousel" }
+allRightsReserved: { other: "All rights reserved" }

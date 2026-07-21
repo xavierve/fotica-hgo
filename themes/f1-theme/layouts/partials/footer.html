@@ -19,13 +19,13 @@
 <footer class="site-footer">
   <div class="container footer-grid">
     <section>
-      {{ with $brandLogo }}<img class="footer-logo" src="{{ . }}" alt="{{ $brandLogoAlt }}">{{ end }}
+      {{ with $brandLogo }}<img class="footer-logo" src="{{ . }}" alt="{{ $brandLogoAlt }}" width="245" height="54" loading="lazy">{{ end }}
       <h2>{{ $brandTitle }}</h2>
       {{ with $brandDescription }}<p>{{ . }}</p>{{ end }}
     </section>
     <section>
-      <h2>Navegación</h2>
-      <nav aria-label="Navegación secundaria">
+      <h2>{{ i18n "secondaryNav" }}</h2>
+      <nav aria-label="{{ i18n "secondaryNav" }}">
         {{ range $footerNav }}<a href="{{ .url | safeURL }}">{{ .text }}</a>{{ end }}
       </nav>
       {{ with $social }}
@@ -60,7 +60,8 @@
   </div>
   <div class="container footer-bottom">
     {{ with $footer.trust.text }}<p>{{ . }}</p>{{ end }}
-    <p>© 1982–{{ now.Year }} {{ $copyright }}. Todos los derechos reservados.</p>
+    {{ $founded := ($siteData.business | default dict).foundingDate }}
+    <p>© {{ with $founded }}{{ . }}–{{ end }}{{ now.Year }} {{ $copyright }}. {{ i18n "allRightsReserved" }}</p>
     <nav aria-label="Legal">{{ range $legal }}<a href="{{ .url | safeURL }}">{{ .text }}</a>{{ end }}</nav>
   </div>
 </footer>

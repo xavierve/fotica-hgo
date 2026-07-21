@@ -1,39 +1,153 @@
-{{ $schema := .Params.schema }}
-{{ $siteData := hugo.Data.site | default dict }}
-{{ $business := $siteData.business | default dict }}
-{{ $faqItems := slice }}
-{{ range .Params.sections }}
-  {{ if eq .type "faq" }}
-    {{ range .items }}{{ $faqItems = $faqItems | append . }}{{ end }}
-  {{ end }}
-{{ end }}
-{{ if or .IsHome $schema }}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "{{ or $schema.type (cond .IsHome "LocalBusiness" "WebPage") }}",
-  "name": {{ or .Params.title .Title site.Title | jsonify | safeJS }},
-  "description": {{ or .Params.description .Params.seo.description $business.description | jsonify | safeJS }},
-  "url": {{ .Permalink | jsonify | safeJS }}{{ with $business.phone }},
-  "telephone": {{ . | jsonify | safeJS }}{{ end }}{{ with $business.email }},
-  "email": {{ . | jsonify | safeJS }}{{ end }}
-}
-</script>
-{{ end }}
-{{ if $faqItems }}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {{ range $i, $item := $faqItems }}{{ if $i }},{{ end }}
-    {
-      "@type": "Question",
-      "name": {{ $item.question | jsonify | safeJS }},
-      "acceptedAnswer": {"@type": "Answer", "text": {{ $item.answer | plainify | jsonify | safeJS }}}
-    }
-    {{ end }}
-  ]
-}
-</script>
-{{ end }}
+{{/*
+  schema.html — v02
+  Emite un único JSON-LD con @graph:
+    1. Organization (la marca)           → @id …#organization
+    2. Un nodo por sede (business.locationType, p.ej. Optician/Dentist/Store)
+       → @id …#optician-{id}, vinculados vía parentOrganization
+    3. WebSite                            → @id …#website
+    4. Nodo de página (Service, WebPage, ContactPage, AboutPage… según schema.type)
+    5. BreadcrumbList (si schema.includeBreadcrumb y no es home)
+    6. FAQPage (desde sections type:faq, salvo schema.includeFAQ: false)
+  Sin tipos médicos (no MedicalBusiness / MedicalClinic / medicalSpecialty) para evitar
+  errores en Search Console. Usar un subtipo de LocalBusiness en business.locationType.
+  Los datos de negocio se leen de data/site.yaml (v03+: claves postalCode/addressLocality opcionales).
+  El @graph se construye como dicts de Hugo y se serializa con jsonify → JSON siempre válido.
+*/}}
+{{- $schema := .Params.schema | default dict -}}
+{{- $siteData := hugo.Data.site | default dict -}}
+{{- $brand := $siteData.brand | default dict -}}
+{{- $contact := $siteData.contact | default dict -}}
+{{- $social := $siteData.social | default slice -}}
+{{- $locations := $siteData.locations | default slice -}}
+{{- $base := site.BaseURL -}}
+{{- $orgId := printf "%s#organization" $base -}}
+{{- $websiteId := printf "%s#website" $base -}}
+{{- $graph := slice -}}
+
+{{/* ---------- 1. Organization (marca) ---------- */}}
+{{- $sameAs := slice -}}
+{{- range $social }}{{ with .url }}{{ $sameAs = $sameAs | append . }}{{ end }}{{ end -}}
+{{- $org := dict
+      "@type" "Organization"
+      "@id" $orgId
+      "name" ($brand.name | default site.Title)
+      "url" $base
+-}}
+{{- with $siteData.business.foundingDate }}{{ $org = merge $org (dict "foundingDate" (string .)) }}{{ end -}}
+{{- with $brand.description }}{{ $org = merge $org (dict "description" .) }}{{ end -}}
+{{- with $brand.logo }}{{ $org = merge $org (dict "logo" (. | absURL)) }}{{ end -}}
+{{- with $contact.phone }}{{ $org = merge $org (dict "telephone" .) }}{{ end -}}
+{{- with $contact.email }}{{ $org = merge $org (dict "email" .) }}{{ end -}}
+{{- if $sameAs }}{{ $org = merge $org (dict "sameAs" $sameAs) }}{{ end -}}
+{{- $graph = $graph | append $org -}}
+
+{{/* ---------- 2. Local (business.locationType) por cada sede ---------- */}}
+{{- $catalogs := slice -}}
+{{- range $siteData.business.offerCatalogs }}{{ $catalogs = $catalogs | append (dict "@type" "OfferCatalog" "name" .name "url" (absURL .url)) }}{{ end -}}
+{{- range $loc := $locations -}}
+  {{- $locId := printf "%s#optician-%s" $base ($loc.id | default (anchorize $loc.name)) -}}
+  {{- $address := dict
+        "@type" "PostalAddress"
+        "streetAddress" ($loc.streetAddress | default $loc.address)
+        "addressLocality" ($loc.addressLocality | default $siteData.business.addressLocality)
+        "postalCode" ($loc.postalCode | default $siteData.business.postalCode)
+        "addressRegion" ($loc.addressRegion | default $siteData.business.addressRegion)
+        "addressCountry" ($siteData.business.addressCountry | default "ES")
+  -}}
+  {{- $optician := dict
+        "@type" ($siteData.business.locationType | default "LocalBusiness")
+        "@id" $locId
+        "name" $loc.name
+        "address" $address
+        "parentOrganization" (dict "@id" $orgId)
+        -}}
+  {{- if $catalogs }}{{ $optician = merge $optician (dict "hasOfferCatalog" $catalogs) }}{{ end -}}
+  {{- with $loc.phone }}{{ $optician = merge $optician (dict "telephone" .) }}{{ end -}}
+  {{- with $loc.mapUrl }}{{ $optician = merge $optician (dict "hasMap" .) }}{{ end -}}
+  {{- with $loc.image }}{{ $optician = merge $optician (dict "image" (. | absURL)) }}{{ end -}}
+  {{/* openingHoursSpecification: pendiente de validación del cliente.
+       Cuando se confirme, añadir en site.yaml por location:
+       hoursSpec: [{days: [Monday,…], opens: "10:00", closes: "13:30"}, …] */}}
+  {{- with $loc.hoursSpec -}}
+    {{- $spec := slice -}}
+    {{- range . -}}
+      {{- $spec = $spec | append (dict "@type" "OpeningHoursSpecification" "dayOfWeek" .days "opens" .opens "closes" .closes) -}}
+    {{- end -}}
+    {{- $optician = merge $optician (dict "openingHoursSpecification" $spec) -}}
+  {{- end -}}
+  {{- $graph = $graph | append $optician -}}
+{{- end -}}
+
+{{/* ---------- 3. WebSite ---------- */}}
+{{- $graph = $graph | append (dict
+      "@type" "WebSite"
+      "@id" $websiteId
+      "url" $base
+      "name" site.Title
+      "inLanguage" "es-ES"
+      "publisher" (dict "@id" $orgId)
+) -}}
+
+{{/* ---------- 4. Nodo de la página actual ---------- */}}
+{{- $pageType := $schema.type | default (cond .IsHome "WebPage" "WebPage") -}}
+{{- $pageId := printf "%s#%s" .Permalink (lower $pageType) -}}
+{{- $page := dict
+      "@type" $pageType
+      "@id" $pageId
+      "name" (or .Params.seo.title .Params.title .Title)
+      "url" .Permalink
+      "inLanguage" "es-ES"
+-}}
+{{- with or .Params.seo.description .Params.description }}{{ $page = merge $page (dict "description" .) }}{{ end -}}
+{{- if eq $pageType "Service" -}}
+  {{- $page = merge $page (dict
+        "provider" (dict "@id" $orgId)
+        "areaServed" (dict "@type" "Place" "name" ($siteData.business.areaServed | default site.Title))
+  ) -}}
+  {{- with .Params.schema.serviceType }}{{ $page = merge $page (dict "serviceType" .) }}{{ end -}}
+{{- else -}}
+  {{- $page = merge $page (dict "isPartOf" (dict "@id" $websiteId)) -}}
+{{- end -}}
+{{- $graph = $graph | append $page -}}
+
+{{/* ---------- 5. BreadcrumbList (misma lógica que breadcrumb.html) ---------- */}}
+{{- if and $schema.includeBreadcrumb (not .IsHome) -}}
+  {{- $crumbs := slice (dict "name" "Inicio" "item" $base) -}}
+  {{- range .Ancestors.Reverse -}}
+    {{/* Las carpetas servicios/productos usan build.render:never → sin URL → no son crumbs */}}
+    {{- if and (not .IsHome) .RelPermalink -}}
+      {{- $crumbs = $crumbs | append (dict "name" (or .Params.breadcrumbTitle .LinkTitle .Title) "item" .Permalink) -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $crumbs = $crumbs | append (dict "name" (or .Params.breadcrumbTitle .LinkTitle .Title) "item" .Permalink) -}}
+  {{- $listItems := slice -}}
+  {{- range $i, $c := $crumbs -}}
+    {{- $listItems = $listItems | append (dict "@type" "ListItem" "position" (add $i 1) "name" $c.name "item" $c.item) -}}
+  {{- end -}}
+  {{- $graph = $graph | append (dict "@type" "BreadcrumbList" "itemListElement" $listItems) -}}
+{{- end -}}
+
+{{/* ---------- 6. FAQPage (desde sections type:faq) ---------- */}}
+{{- $includeFAQ := true -}}
+{{- if isset $schema "includeFAQ" }}{{ $includeFAQ = $schema.includeFAQ }}{{ end -}}
+{{- if $includeFAQ -}}
+  {{- $faqItems := slice -}}
+  {{- range .Params.sections -}}
+    {{- if eq .type "faq" -}}
+      {{- range .items }}{{ $faqItems = $faqItems | append . }}{{ end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if $faqItems -}}
+    {{- $questions := slice -}}
+    {{- range $faqItems -}}
+      {{- $questions = $questions | append (dict
+            "@type" "Question"
+            "name" .question
+            "acceptedAnswer" (dict "@type" "Answer" "text" (.answer | markdownify | plainify))
+      ) -}}
+    {{- end -}}
+    {{- $graph = $graph | append (dict "@type" "FAQPage" "mainEntity" $questions) -}}
+  {{- end -}}
+{{- end -}}
+
+<script type="application/ld+json">{{ dict "@context" "https://schema.org" "@graph" $graph | jsonify (dict "indent" "  ") | safeJS }}</script>

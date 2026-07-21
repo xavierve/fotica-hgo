@@ -1,7 +1,7 @@
 {{ with .items }}
 <section class="{{ partial "block-classes.html" (dict "name" "faq" "context" $) }}">
   <div class="container">
-    <h2>{{ $.title | default "Preguntas frecuentes" }}</h2>
+    <h2>{{ $.title | default (i18n "faqTitle") }}</h2>
     <div class="faq-list">
       {{ range . }}<details><summary>{{ .question }}</summary><div class="prose">{{ .answer | markdownify }}</div></details>{{ end }}
     </div>

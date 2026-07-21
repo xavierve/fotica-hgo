@@ -1,9 +1,9 @@
 {{ with .items }}
-<section class="{{ partial "block-classes.html" (dict "name" "trustbar" "context" $) }}" aria-label="Datos de confianza">
+<section class="{{ partial "block-classes.html" (dict "name" "trustbar" "context" $) }}" aria-label="{{ i18n "trustbarLabel" }}">
   <div class="container trustbar-inner">
     {{ range . }}
     <span>
-      {{ with .icon }}<span aria-hidden="true">{{ . }}</span>{{ end }}
+      {{ with .icon }}{{ with partial "icons.html" . }}<span class="trustbar-icon" aria-hidden="true">{{ . }}</span>{{ end }}{{ end }}
       {{ .text }}
     </span>
     {{ end }}

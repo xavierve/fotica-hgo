@@ -10,6 +10,9 @@ disableKinds = ['taxonomy', 'term']
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+    [markup.goldmark.parser.attribute]
+      title = true
+      block = true
 
 [params]
   siteName = 'Ópticas Fausto'

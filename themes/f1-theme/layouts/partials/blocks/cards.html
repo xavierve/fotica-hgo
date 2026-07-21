@@ -12,7 +12,7 @@
         <div class="card-body">
           {{ with .title }}<h3>{{ . }}</h3>{{ end }}
           {{ with .description }}<p>{{ . }}</p>{{ end }}
-          {{ with .link }}<a class="card-link" href="{{ . | safeURL }}">{{ $card.linkText | default $.linkText | default "Ver más" }}</a>{{ end }}
+          {{ with .link }}<a class="card-link" href="{{ . | safeURL }}">{{ $card.linkText | default $.linkText | default (i18n "readMore") }} {{ partial "icons.html" "arrow-right" }}</a>{{ end }}
         </div>
       </article>
       {{ end }}

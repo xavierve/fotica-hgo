@@ -1,0 +1,33 @@
+{{ define "main" }}
+{{/*
+  404 personalizada — spec o1:
+  · HTTP 404 real: Cloudflare Pages sirve /404.html con estado 404 automáticamente.
+  · noindex (abajo, vía .Store para header-meta o meta directa).
+  · Sin breadcrumb. Header y footer completos (los aporta baseof).
+  · Sin redirección automática (decisión: desorienta al público 75+).
+*/}}
+<meta name="robots" content="noindex">
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-copy">
+      <h1>Vaya, esta página se nos ha perdido de vista</h1>
+      <p class="hero-subtitle">No te preocupes: no es culpa tuya. Puede que el enlace sea antiguo o que la página se haya movido de sitio. Lo importante es que tú sí estás en el lugar correcto — y desde aquí llegas a todo:</p>
+      <div class="cta-row">
+        <a class="btn" href="{{ "/" | relURL }}">Ir a Inicio</a>
+        <a class="btn btn-outline" href="{{ "/vision/" | relURL }}">Visión</a>
+        <a class="btn btn-outline" href="{{ "/audicion/" | relURL }}">Audición</a>
+        <a class="btn btn-outline" href="{{ "/contacto/" | relURL }}">Contacto</a>
+      </div>
+    </div>
+  </div>
+</section>
+{{ $contact := (hugo.Data.site | default dict).contact | default dict }}
+{{ $wa := replace ($contact.whatsapp | default "") "+" "" }}
+{{ partial "blocks/cta-banner.html" (dict
+    "title" "¿Buscabas algo concreto y no lo encuentras?"
+    "subtitle" "Pregúntanos directamente — es más rápido, y así funcionamos mejor nosotros también."
+    "preset" "contact"
+    "microcopy" "Te atendemos en horario de tienda: 10:00–13:30 y 17:00–20:30"
+    "align" "center"
+) }}
+{{ end }}

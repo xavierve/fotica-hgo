@@ -52,7 +52,7 @@ sections:
       - number: "44+"
         label: "años de experiencia"
     text:
-    imageBackground:
+    bg:            # + bgMobile, bgColor (sistema unificado de fondos)
 ```
 
 Si `animated: true`, añade `is-animated`.

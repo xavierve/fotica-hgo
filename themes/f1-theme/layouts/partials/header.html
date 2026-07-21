@@ -3,13 +3,11 @@
 {{ $header := $siteData.header | default dict }}
 {{ $contact := $siteData.contact | default dict }}
 {{ $navigation := $siteData.navigation | default dict }}
-{{ $nav := or $header.nav $navigation.main (slice
-  (dict "text" "Inicio" "url" "/")
-  (dict "text" "Visión" "url" "/vision/")
-  (dict "text" "Audición" "url" "/audicion/")
-  (dict "text" "Nosotros" "url" "/nosotros/")
-  (dict "text" "Contacto" "url" "/contacto/")
-) }}
+{{/* Fuente única de navegación: data/site.yaml (navigation.main), con override
+     opcional header.nav. Sin fallback hardcodeado: si faltara el dato, mejor un
+     aviso ruidoso en el build que un menú viejo renderizado en silencio. */}}
+{{ $nav := or $header.nav $navigation.main }}
+{{ if not $nav }}{{ warnf "header.html: falta navigation.main en data/site.yaml — el menú no se renderizará" }}{{ end }}
 {{ $logo := or $header.logo $brand.logo }}
 {{ $logoAlt := or $header.logoAlt $brand.logoAlt $brand.name site.Title }}
 {{ $brandName := or $header.brand $brand.name $brand.title site.Title }}
@@ -18,10 +16,19 @@
 {{ $whatsapp := or $header.whatsapp $contact.whatsapp $phone }}
 <header class="site-header" role="banner">
   <div class="container header-inner">
-    <a class="site-logo" href="/" aria-label="Inicio">
-      {{ with $logo }}<img src="{{ . }}" alt="{{ $logoAlt }}">{{ else }}<span>{{ $brandName }}</span>{{ end }}
+    <a class="site-logo" href="/" aria-label="{{ i18n "home" }}">
+      {{/* Inline (no <img>): permite animación CSS propia del SVG sin petición HTTP extra.
+           El archivo ya trae su propio <title> + role="img" (accesible por sí mismo). */}}
+      {{ $logoInline := "" }}{{ with $brand.logoInline }}{{ $logoInline = resources.Get . }}{{ end }}
+      {{ if $logoInline }}
+        {{/* El prólogo <?xml ...?> es inválido dentro de HTML (los navegadores lo
+             degradan a comentario, pero mejor no depender de eso): se recorta. */}}
+        {{ $svg := replaceRE `^<\?xml[^>]*\?>\s*` "" $logoInline.Content }}
+        {{ $svg | safeHTML }}
+      {{ else if $logo }}<img src="{{ $logo }}" alt="{{ $logoAlt }}">
+      {{ else }}<span>{{ $brandName }}</span>{{ end }}
     </a>
-    <nav class="site-nav" aria-label="Navegación principal">
+    <nav class="site-nav" aria-label="{{ i18n "mainNav" }}">
       {{ range $nav }}<a href="{{ .url | safeURL }}">{{ .text }}</a>{{ end }}
     </nav>
     <div class="header-actions">

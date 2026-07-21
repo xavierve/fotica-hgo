@@ -2,7 +2,14 @@
   <div class="container">
     {{ with .title }}<h2>{{ . }}</h2>{{ end }}
     <div class="gallery-grid">
-      {{ range .items }}<figure><img src="{{ .image }}" alt="{{ .imageAlt }}">{{ with .legend }}<figcaption>{{ . }}</figcaption>{{ end }}</figure>{{ end }}
+      {{ range $i, $item := .items }}<figure><button type="button" class="gallery-open" data-gallery-index="{{ $i }}" aria-label="{{ i18n "enlargeImage" }}{{ with $item.legend }}: {{ . }}{{ end }}"><img src="{{ $item.image }}" alt="{{ $item.imageAlt }}" loading="lazy"></button>{{ with $item.legend }}<figcaption>{{ . }}</figcaption>{{ end }}</figure>{{ end }}
     </div>
+    <dialog class="gallery-lightbox">
+      <button type="button" class="lightbox-close" data-lightbox-close aria-label="{{ i18n "close" }}">&times;</button>
+      <button type="button" class="lightbox-nav lightbox-prev" data-lightbox-prev aria-label="{{ i18n "prev" }}">{{ partial "icons.html" "arrow-right" }}</button>
+      <figure><img src="" alt=""><figcaption></figcaption></figure>
+      <button type="button" class="lightbox-nav lightbox-next" data-lightbox-next aria-label="{{ i18n "next" }}">{{ partial "icons.html" "arrow-right" }}</button>
+      <script type="application/json">{{ .items | jsonify | safeJS }}</script>
+    </dialog>
   </div>
 </section>

@@ -1,8 +1,12 @@
 <section class="{{ partial "block-classes.html" (dict "name" "slider" "context" .) }}">
   <div class="container">
     {{ with .title }}<h2>{{ . }}</h2>{{ end }}
-    <div class="slider-track">
-      {{ range .items }}<article class="slide">{{ with .image }}<img src="{{ . }}" alt="{{ .imageAlt }}">{{ end }}{{ with .title }}<h3>{{ . }}</h3>{{ end }}{{ with .text }}<p>{{ . }}</p>{{ end }}{{ with .legend }}<small>{{ . }}</small>{{ end }}</article>{{ end }}
+    <div class="slider-nav">
+      <button type="button" class="slider-btn" data-slider-prev aria-label="{{ i18n "prev" }}">{{ partial "icons.html" "arrow-right" }}</button>
+      <button type="button" class="slider-btn" data-slider-next aria-label="{{ i18n "next" }}">{{ partial "icons.html" "arrow-right" }}</button>
+    </div>
+    <div class="slider-track" tabindex="0" aria-label="{{ .title | default (i18n "carousel") }}">
+      {{ range .items }}{{ $item := . }}<article class="slide">{{ with $item.image }}<img src="{{ . }}" alt="{{ $item.imageAlt }}">{{ end }}{{ with $item.title }}<h3>{{ . }}</h3>{{ end }}{{ with $item.text }}<p>{{ . }}</p>{{ end }}{{ with $item.legend }}<small>{{ . }}</small>{{ end }}</article>{{ end }}
     </div>
   </div>
 </section>

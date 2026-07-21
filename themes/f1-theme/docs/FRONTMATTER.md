@@ -34,7 +34,9 @@ hero:
   subtitle: ""
   image: ""
   imageAlt: ""
-  imageBackground: ""
+  bg: ""
+  bgMobile: ""
+  bgColor: ""
   primaryCTA:
     text: ""
     url: ""
@@ -106,3 +108,48 @@ Todos los bloques de `sections` aceptan:
 - `product`
 - `contact`
 - `legal`
+
+
+## Iconos disponibles (partials/icons.html)
+
+Uso en bloques/botones: `icon: "nombre"`. SVG inline, heredan color del texto (`currentColor`).
+
+`phone` · `whatsapp` · `location` · `mail` (alias `email`) · `clock` · `user` · `star` · `family` · `hearing` · `cog` · `language` · `follow-up` · `arrow-down` · `arrow-up` · `arrow-right` · `info`
+
+Nombre desconocido → no se renderiza nada (degrada a solo texto). Para añadir iconos, mantener el mismo estilo (viewBox 24, path fill=currentColor) en icons.html.
+
+## Neutralidad del tema (framework reutilizable)
+
+El tema NO contiene datos de ningún proyecto. Todo lo específico vive fuera:
+
+- **data/site.yaml** → marca (`brand`, incl. `logoInline` para SVG animado en header),
+  contacto, navegación, sedes (`locations`), y `business` (tipo schema.org de sede,
+  foundingDate, localidad/CP/región por defecto, areaServed, offerCatalogs).
+- **i18n/es.yaml, en.yaml…** → todas las cadenas de UI (botones, aria-labels, títulos
+  por defecto). Nuevo idioma = nuevo archivo.
+- **CSS custom properties** (`:root` de critical.css) → toda la piel: colores
+  (`--color-*`), superficies (`--surface`, `--control-bg`, `--control-border`),
+  overlays (`--overlay-base`, `--backdrop`), tipografía, `--container`, `--radius`.
+  Re-tematizar = redefinir variables, sin tocar reglas.
+
+Regla para PRs al tema: ningún literal de proyecto (nombres, teléfonos, fechas,
+localidades, rutas de assets con nombre propio) en layouts/, assets/ ni i18n/ del tema.
+
+## Modificador `pad` (padding vertical del bloque)
+
+`pad: compact | spacious` (sin declarar = normal). Los tres escalones son fluidos
+(clamp móvil→desktop) vía tokens `--block-pad*` en :root. Criterio: `compact` para
+CTAs de una frase o bloques encadenados; `spacious` para el bloque protagonista.
+Nunca usar alturas fijas: la altura correcta es contenido + padding.
+
+## Alias de talla (s/m/l/xl)
+
+`pad` y `textSize` aceptan tallas cortas además de sus nombres largos:
+`pad: s|m|l` ≡ compact|normal|spacious · `textSize: s|m|l|xl` ≡ small|default|large|xl.
+Una sola regla que recordar. Los nombres largos siguen siendo válidos.
+
+## Shortcode `spacer`
+
+`{{</* spacer size="s|m|l" */>}}` — espaciado vertical puntual en el prose (fluido,
+tokens `--space-*`). Úsalo como excepción: el ritmo normal lo dan el padding de los
+bloques y el `margin-block` de los bloques en prose. Es `aria-hidden` (no es contenido).

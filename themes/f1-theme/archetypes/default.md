@@ -29,7 +29,9 @@ hero:
   subtitle: ""
   image: ""
   imageAlt: ""
-  imageBackground: ""
+  bg: ""            # imagen de fondo desktop (opcional)
+  bgMobile: ""      # variante móvil (opcional)
+  bgColor: ""       # color plano o tinte del overlay (opcional)
   primaryCTA:
     text: ""
     url: ""

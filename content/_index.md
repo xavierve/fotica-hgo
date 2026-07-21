@@ -22,21 +22,18 @@ hero:
   eyebrow: "Desde 1982 en Torre del Mar"
   title: "Más de 44 años cuidando tu visión y tu audición"
   subtitle: "En Ópticas Fausto te atendemos con la cercanía de quien conoce a sus clientes y el compromiso de seguir acompañándote después de cada revisión, cada gafa y cada audífono."
-  primaryCTA:
-    text: "Llamar ahora"
-    url: "tel:+34952540964"
-  secondaryCTA:
-    text: "WhatsApp"
-    url: "https://wa.me/34952540964"
+  ctaPreset: contact
+  image: "/images/hero-inicio.jpg"
+  imageAlt: "El equipo de Ópticas Fausto en su tienda de Torre del Mar"
 sections:
   - type: counter
+    animated: true
     items:
       - number: "44"
         label: "años cuidando de ti"
       - number: "+27.000"
         label: "personas atendidas"
-      - number: "+1"
-        label: "la próxima historia puede ser la tuya"
+        plusOne: "cuando vengas tú"
       - number: "2"
         label: "centros en Torre del Mar"
     text: "Cada día seguimos sumando una historia más de confianza."
@@ -48,6 +45,8 @@ sections:
         text: "Dos centros en Torre del Mar"
       - icon: "hearing"
         text: "Centro Auditivo Homologado"
+      - icon: "cog"
+        text: "Servicio Técnico Multimarca de audífonos"
       - icon: "language"
         text: "Atención en español, inglés y alemán"
       - icon: "follow-up"
@@ -98,13 +97,17 @@ sections:
       - question: "¿Necesito cita previa?"
         answer: "No es imprescindible, aunque recomendamos pedir cita para evitar esperas, especialmente en revisiones visuales o estudios auditivos."
       - question: "¿Dónde están las ópticas Fausto?"
-        answer: "Tenemos dos centros en Torre del Mar: uno en Avenida de Andalucía, 84 B, y otro en Calle Duque de Ahumada, 1C."
+        answer: "Tenemos dos centros en Torre del Mar: Fausto Avenida (Avenida de Andalucía, 84 B) y Fausto Duque (en Calle Duque de Ahumada, 1C)."
       - question: "¿Hacéis revisiones visuales?"
         answer: "Sí. Realizamos revisiones visuales y optométricas para valorar tu graduación, detectar molestias visuales y recomendarte la solución más adecuada."
       - question: "¿Sois también centro auditivo?"
         answer: "Sí. Somos Centro Auditivo Homologado y realizamos estudios auditivos, adaptación de audífonos y mantenimiento."
-      - question: "¿Atendéis a turistas o personas que están de paso?"
+      - question: "Soy turista de paso ¿Hacéis reparaciones de urgencia?"
         answer: "Sí. Atendemos también a visitantes y turistas, especialmente si necesitan ayuda urgente con sus gafas, lentillas o audífonos durante su estancia en Torre del Mar."
+      - question: "¿Cuánto tarda una revisión visual?"
+        answer: "Una revisión completa suele durar entre 20 y 30 minutos, dependiendo de las pruebas necesarias. Te damos el resultado en el momento."
+      - question: "¿Cuánto dura la prueba de audición?"
+        answer: "La primera valoración auditiva dura unos 30–40 minutos. Después, la prueba del audífono se hace sin compromiso: te lo llevas a casa y decides con calma."
       - question: "¿Atendéis en otros idiomas?"
         answer: "Sí. Podemos atender en español, inglés y alemán."
 ---
