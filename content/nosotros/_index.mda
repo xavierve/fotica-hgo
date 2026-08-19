@@ -31,14 +31,15 @@ hero:
   class: "bg-top"
 
 sections:
-  # ============  — declaración de intenciones antes del grid individual ============
-  - type: cta_banner
-    bgColor: "#C9A84C"
+  # ============ FOTO DE GRUPO — declaración de intenciones antes del grid individual ============
+  - type: image_text
     variant: featured
     width: full
     title: "El equipo que te conoce"
-    subtitle: "No es un eslogan: es literal. Cuando entras en cualquiera de los dos centros, te atiende alguien que probablemente te atendió la última vez — y la anterior. Estas son las personas detrás de ese \"nos conocemos de toda la vida\"."
-    
+    text: "No es un eslogan: es literal. Cuando entras en cualquiera de los dos centros, te atiende alguien que probablemente te atendió la última vez — y la anterior. Estas son las personas detrás de ese \"nos conocemos de toda la vida\"."
+    image: "/images/100-equipo_fausto_completo.webp"
+    imageAlt: "Equipo completo de Ópticas Fausto en el centro de Torre del Mar"
+
   # ============ TEAM — grid individual, 7 personas reales ============
   - type: team
     title: "Cada rostro, una historia con Fausto"
@@ -126,16 +127,15 @@ sections:
 
 ## Desde 1982 en Torre del Mar. Y aquí seguimos.
 
-{{< image-text image="/images/100-equipo_fausto_completo.webp" imageAlt="Equipo completo de Ópticas Fausto en el centro de Torre del Mar" width="full" >}}
+{{< image-text image="/images/100-equipo_fausto_completo.webp" imageAlt="Equipo completo de Ópticas Fausto en el centro de Torre del Mar" >}}
 En 1982, Fausto abrió las puertas del primer Centro Óptico Auditivo en Torre del Mar. No venía con un manual de franquicia ni con una central que le dijera cómo hacer las cosas: venía con vocación, con conocimiento y con la intención de quedarse. Y se quedó.
 
 Hoy, cuatro décadas después, sus hijas **Leonor y Anabel** llevan los dos centros — y Juan, hijo de Leonor, ya representa la **tercera generación** de la familia en la profesión. Tres generaciones. El mismo pueblo. El mismo compromiso.
 
-Muchas de las familias que vinieron con Fausto siguen viniendo hoy con sus hijos y sus nietos. Esa continuidad no se compra con publicidad: se construye visita a visita, año tras año, siendo el sitio al que merece la pena volver.
-{{< /image-text >}}
+Muchas de las familias que vinieron con Fausto siguen viniendo hoy con sus hijos y sus nietos. Esa continuidad no se compra con publicidad: se construye visita a visita, año tras año, siendo el sitio al que merece la pena volver.{{< /image-text >}}
 
-{{< image-text image="/images/100-equipo_fausto_completo_informal.webp" imageAlt="Equipo completo de Ópticas Fausto en el centro de Torre del Mar" width="full" reverse="true" >}}
 ## Lo que una franquicia no puede ofrecerte
+
 Las grandes cadenas ópticas tienen locales más grandes y más publicidad. Lo que no tienen es continuidad: el personal rota, los protocolos vienen dictados desde fuera y cada visita puede tocarte una persona distinta que no te conoce de nada.
 
 En Fausto pasa lo contrario:
@@ -144,22 +144,8 @@ En Fausto pasa lo contrario:
 - **Seguimiento real.** No desaparecemos después de la venta. Si algo no te funciona, vuelves y lo resolvemos, sin que tengas que explicar tu caso desde el principio.
 - **Decisiones tomadas aquí, no en una central.** Cuando hace falta una solución poco habitual, decidimos nosotros, en la tienda, pensando en ti — no seguimos un guion.
 - **Sin presión de ventas.** Te asesoramos con honestidad, aunque eso signifique recomendarte la opción más sencilla en lugar de la más cara.
-{{< /image-text >}}
 
 {{< banner >}}«Si trabajas bien y eres buena gente, entras en la familia de Fausto.»{{< /banner >}}
-{{< cta 
-    title= "El equipo que te conoce"
-    subtitle= "No es un eslogan: es literal. Cuando entras en cualquiera de los dos centros, te atiende alguien que probablemente te atendió la última vez — y la anterior. Estas son las personas detrás de ese \"nos conocemos de toda la vida\"."
-    bgColor= "#C9A84C"
-    width= "full"
-	 >}}
-{{< cta title="cta_banner · bgColor claro + class: on-light (texto oscuro)"
-        subtitle="Para fondos de color claros, on-light mantiene el texto oscuro."
-        bgColor="#C9A84C"
-        class="on-light" >}}	
-CREAR UN 2 COLUMNAS FLEX
-1- EL EQAUIPO Q 5TE conoce
-2- NO ES UN SLOGTAN
 
 Lo dice el propio equipo directivo, y no es una frase para la web: es la razón por la que María José lleva 30 años aquí, por la que Melania lleva 25, y por la que Victoria, después de una temporada en Alemania, volvió a Torre del Mar y a Fausto sin pensárselo. Y también es la razón por la que, con quienes en algún momento dejaron de trabajar aquí, la relación sigue siendo buena. Lo primero es ser personas, respetarnos y valorarnos mutuamente — con el cliente, con el proveedor, con quien trabaja hoy y con quien trabajó ayer.
 

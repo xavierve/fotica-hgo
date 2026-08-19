@@ -1,13 +1,14 @@
 {{- /*
-  {{< cta >}} — CTA intercalado en el body. Delega en blocks/cta-banner.html:
+  {{< cta >}} - CTA intercalado en el body. Delega en blocks/cta-banner.html:
   mismo HTML, mismo CSS, paridad total con las sections.
 
-  Parámetros (todos opcionales):
-    title, subtitle, microcopy
+  Parametros (todos opcionales):
+    title, subtitle, microcopy, eyebrow
     bg, bgMobile, bgColor
-    tone, variant, class, textSize, align
-    b1text/b1url/b1icon y b2text/b2url/b2icon → botones personalizados
-  Sin botones personalizados → preset contact (Llamar + WhatsApp desde site.yaml).
+    tone, variant, class, textSize, align, width, pad, layout
+    labelCall, labelWhatsapp -> renombran los botones del preset contact
+    b1text/b1url/b1icon ... b4text/b4url/b4icon -> botones personalizados (hasta 4)
+  Sin botones personalizados -> preset contact (Llamar + WhatsApp desde site.yaml).
 */ -}}
 {{- $ctx := dict
     "title" (.Get "title")
@@ -26,13 +27,21 @@
     "layout" (.Get "layout")
     "eyebrow" (.Get "eyebrow")
 -}}
-{{- if .Get "b1text" -}}
-  {{- $buttons := slice (dict "text" (.Get "b1text") "url" (.Get "b1url") "icon" (.Get "b1icon")) -}}
-  {{- if .Get "b2text" -}}
-    {{- $buttons = $buttons | append (dict "text" (.Get "b2text") "url" (.Get "b2url") "icon" (.Get "b2icon")) -}}
+{{- $buttons := slice -}}
+{{- range $i := seq 1 4 -}}
+  {{- with $.Get (printf "b%dtext" $i) -}}
+    {{- $buttons = $buttons | append (dict
+        "text" .
+        "url"  ($.Get (printf "b%durl" $i))
+        "icon" ($.Get (printf "b%dicon" $i))) -}}
   {{- end -}}
+{{- end -}}
+{{- if $buttons -}}
   {{- $ctx = merge $ctx (dict "buttons" $buttons) -}}
 {{- else -}}
-  {{- $ctx = merge $ctx (dict "preset" "contact") -}}
+  {{- $ctx = merge $ctx (dict
+      "preset" "contact"
+      "labelCall" (.Get "labelCall")
+      "labelWhatsapp" (.Get "labelWhatsapp")) -}}
 {{- end -}}
 {{ partial "blocks/cta-banner.html" $ctx }}

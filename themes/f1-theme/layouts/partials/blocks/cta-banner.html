@@ -1,13 +1,13 @@
 {{- /*
-  blocks/cta-banner.html — v2
+  blocks/cta-banner.html - v2
   Compatibilidad: button1/button2 ({url,text}) siguen funcionando.
   Nuevo:
-    bg / bgMobile   → imagen de fondo responsive (desktop / móvil)
-    bgColor         → color de fondo plano, o tinte del overlay si hay imagen
-    preset: contact → par de botones Llamar + WhatsApp desde data/site.yaml
-    buttons: [...]  → lista de botones {text, url, icon}
-    microcopy       → línea pequeña bajo los botones
-    tone/variant/class/textSize/align/width → modificadores estándar de bloque
+    bg / bgMobile   -> imagen de fondo responsive (desktop / movil)
+    bgColor         -> color de fondo plano, o tinte del overlay si hay imagen
+    preset: contact -> par de botones Llamar + WhatsApp desde data/site.yaml
+    buttons: [...]  -> lista de botones {text, url, icon}
+    microcopy       -> linea pequena bajo los botones
+    tone/variant/class/textSize/align/width -> modificadores estandar de bloque
 */ -}}
 {{ $tone := .tone | default "neutral" }}
 {{ $bg := .bg }}
@@ -39,7 +39,7 @@
   {{- with .bgMobile }}{{ $styles = $styles | append (printf "--section-bg-mobile:url('%s')" .) }}{{ end -}}
   {{- with .bgColor }}{{ $styles = $styles | append (printf "--section-bg-color:%s" .) }}{{ end -}}
   {{- with $styles }} style="{{ delimit . ";" | safeCSS }}"{{ end }}>
-  <div class="container cta-banner-inner">
+    <div class="container cta-banner-inner{{ if eq .layout "split" }} has-cols{{ end }}"><div class="container cta-banner-inner{{ if eq .layout "split" }} has-cols{{ end }}">
     <div class="cta-text">
       {{ with .eyebrow }}<p class="eyebrow cta-eyebrow">{{ . }}</p>{{ end }}
       {{ with .title }}<h2>{{ . }}</h2>{{ end }}

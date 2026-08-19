@@ -1,0 +1,53 @@
+{{- /*
+  {{< image-text >}} — image-text intercalado en el body markdown.
+  Delega en blocks/image-text.html: mismo HTML, mismo CSS, paridad total con
+  las sections declaradas en front matter.
+
+  CONFIRMADO contra layouts/partials/blocks/image-text.html (antes era borrador
+  sin verificar). Dos correcciones respecto a la primera versión:
+    1. Path del partial es "blocks/image-text.html" (guion), no "image_text.html"
+       — section-renderer.html convierte "_" a "-" al resolver el nombre del
+       block a partir de `type:`, pero un shortcode invoca el partial directo,
+       así que aquí hay que escribir el nombre real del archivo.
+    2. .text llega como STRING de markdown sin procesar. El propio block hace
+       `{{ . | markdownify }}` — si aquí se pre-renderiza con RenderString,
+       el block lo vuelve a procesar y se rompe (doble markdownify sobre HTML
+       ya renderizado). .Inner ya da el markdown fuente tal cual: es lo que
+       hace falta, sin tocarlo.
+
+  Uso:
+    {{< image-text image="/images/100-equipo_fausto_completo.webp"
+                    imageAlt="Equipo completo de Ópticas Fausto" >}}
+    Texto o **markdown** normal. Se renderiza igual que el resto del body.
+    {{< /image-text >}}
+
+  Parámetros con nombre (todos opcionales salvo image):
+    image     — ruta de la imagen (obligatorio)
+    imageAlt  — alt text
+    title     — título opcional sobre el copy
+    variant   — default | soft | featured | contrast
+    width     — default | wide | full
+    reverse   — "true" → imagen a la izquierda / copy a la derecha (añade is-reverse)
+    class, pad, textSize, align — mismos modificadores genéricos que cualquier block
+*/ -}}
+
+{{- $image := .Get "image" -}}
+{{- if not $image -}}
+  {{- errorf "El shortcode image-text requiere el parámetro image en %s" .Position -}}
+{{- end -}}
+
+{{- $ctx := dict
+    "title"    (.Get "title")
+    "text"     .Inner
+    "image"    $image
+    "imageAlt" (.Get "imageAlt")
+    "variant"  (.Get "variant")
+    "width"    (.Get "width")
+    "reverse"  (eq (.Get "reverse") "true")
+    "class"    (.Get "class")
+    "pad"      (.Get "pad")
+    "textSize" (.Get "textSize")
+    "align"    (.Get "align")
+-}}
+
+{{ partial "blocks/image-text.html" $ctx }}

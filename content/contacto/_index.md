@@ -2,12 +2,12 @@
 # 4.0 — Contacto
 title: "Contacto: dos centros en Torre del Mar | Ópticas Fausto"
 linkTitle: "Contacto"
-description: "Llámanos, escríbenos por WhatsApp o ven sin cita a cualquiera de nuestros dos centros en Torre del Mar. Horario: 10:00–13:30 y 17:00–20:30. Atención en inglés y alemán."
+description: "Llámanos, escríbenos por WhatsApp o ven sin cita a cualquiera de nuestros dos centros en Torre del Mar. Horario: 10:00–13:30 y 17:30–21:00. Atención en inglés y alemán."
 page_id: "4.0"
 
 og:
   title: "Estamos a una llamada, un mensaje o una visita — Ópticas Fausto"
-  description: "Dos centros en Torre del Mar, horario de 10:00–13:30 y 17:00–20:30. Atención también en inglés y alemán."
+  description: "Dos centros en Torre del Mar, horario de 10:00–13:30 y 17:30–21:00. Atención también en inglés y alemán."
   image: "/images/og/contacto.jpg"
   type: "website"
 
@@ -55,7 +55,7 @@ Teléfono: [(+34) 952 54 70 90](tel:+34952547090)
 **Común a ambos centros**
 WhatsApp / Móvil: [+34 717 77 00 90](https://wa.me/34717770090)
 Email: [info@opticafausto.com](mailto:info@opticafausto.com)
-Horario: **lunes a viernes, 10:00–13:30 y 17:00–20:30**
+Horario: **lunes a viernes, 10:00–13:30 y 17:30–21:00 · sábados, 10:00–13:30**
 
 <!-- PENDIENTE cliente: confirmar sábados y variaciones de temporada;
      el horario debe coincidir exactamente con Google Business Profile. -->

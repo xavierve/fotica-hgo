@@ -21,6 +21,22 @@ hero:
   ctaPreset: contact
 
 sections:
+  - type: faq
+    title: "Preguntas frecuentes sobre visión"
+    items:
+      - question: "¿Con qué necesidad vengo a visión y con cuál a audición?"
+        answer: "Si tu consulta es sobre la vista — ver peor, gafas, lentillas, fatiga visual, problemas de un hijo — estás en el sitio correcto. Si es sobre el oído — zumbidos, oír peor, audífonos — pasa a nuestra sección de [Audición](/audicion/). Si tienes dudas de los dos, cuéntanoslo en la visita: llevamos 44 años mirando por ti en los dos frentes."
+      - question: "¿Hace falta que vaya al oftalmólogo antes de venir?"
+        answer: "No. Para una revisión de graduación, para pedir gafas o lentillas, o para detectar si algo ha cambiado, puedes venir directamente. Si durante el examen detectamos algo que necesite atención médica, te derivamos al oftalmólogo sin rodeos."
+      - question: "¿Cuánto tarda una revisión visual completa?"
+        answer: "Entre 20 y 30 minutos. Te damos el resultado en el momento, explicado con calma — sin prisas y sin que nadie te espere en la puerta."
+      - question: "¿La revisión me obliga a comprar algo?"
+        answer: "No. La revisión es una revisión: te decimos cómo está tu visión y qué opciones tienes. La decisión siempre es tuya, sin presión. A veces la recomendación es que no necesitas nada — y eso también te lo decimos."
+      - question: "¿Atendéis tanto a adultos como a niños?"
+        answer: "Sí. Hacemos revisiones desde los 3 años. La visión infantil tiene sus propias particularidades y merece atención temprana — un problema detectado a tiempo se resuelve mucho mejor que uno detectado tarde."
+      - question: "¿Trabajáis con seguros médicos o mutuas?"
+        answer: "No. Trabajamos exclusivamente de forma particular, sin convenios con aseguradoras. Nuestros precios son directos, sin intermediarios."
+
   - type: cta_banner
     preset: contact
     title: "Tu graduación no la guardamos en un servidor. La recordamos."

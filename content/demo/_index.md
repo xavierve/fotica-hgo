@@ -5,7 +5,7 @@
 draft: true
 title: "Demo de bloques — f1-theme"
 linkTitle: "Demo"
-description: "Página inte	rna de referencia visual: todos los bloques con sus variaciones."
+description: "Página interna de referencia visual: todos los bloques con sus variaciones."
 url: "/demo/"
 
 seo:
@@ -273,9 +273,9 @@ Todo lo que sigue es **body markdown** dentro del contenedor `prose`: títulos, 
 
 ## Un H2 normal, para comparar
 
-## Un H2 con `{.fs-s}` — más discreto {.fs-s} 
+## Un H2 con {.fs-s} — más discreto {.fs-s}
 
-## Un H2 con `{.fs-xs}` — el mínimo (solo titulares) {.fs-xs}
+## Un H2 con {.fs-xs} — el mínimo (solo titulares) {.fs-xs}
 
 Un párrafo con clase `{.fs-l}` aplicada al bloque completo, para destacar una entradilla o un párrafo clave sin recurrir a un bloque de sección.
 {.fs-l}

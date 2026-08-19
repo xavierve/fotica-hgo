@@ -1,7 +1,7 @@
 {{ $extra := slice }}
 {{ if .reverse }}{{ $extra = $extra | append "is-reverse" }}{{ end }}
 <section class="{{ partial "block-classes.html" (dict "name" "image-text" "context" . "extra" $extra) }}">
-  <div class="container image-text-inner">
+  <div class="container image-text-inner has-cols">
     <div class="image-text-copy">
       {{ with .title }}<h2>{{ . }}</h2>{{ end }}
       {{ with .text }}<div class="prose">{{ . | markdownify }}</div>{{ end }}

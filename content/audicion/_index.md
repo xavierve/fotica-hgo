@@ -21,6 +21,22 @@ hero:
   ctaPreset: contact
 
 sections:
+  - type: faq
+    title: "Preguntas frecuentes sobre audición"
+    items:
+      - question: "¿Cómo sé si tengo pérdida auditiva?"
+        answer: "Las señales más habituales: pones el volumen de la tele más alto de lo que antes necesitabas, pides que te repitan las cosas con frecuencia, te cuesta seguir conversaciones en grupo o en ambientes ruidosos, o notas que oyes pero no entiendes bien. Si reconoces dos o más, merece la pena hacerse una revisión — es rápida, no duele y no te compromete a nada."
+      - question: "¿Necesito ir primero al médico o al otorrino?"
+        answer: "No. Puedes venir directamente a hacerte un estudio auditivo. Si el resultado sugiere una causa médica que debe tratar un especialista, te lo decimos con claridad y te orientamos. No hace falta derivación previa."
+      - question: "¿La prueba auditiva tiene coste?"
+        answer: "La primera valoración auditiva es gratuita y sin compromiso. Te explicamos el resultado con calma antes de hablar de cualquier solución."
+      - question: "¿Y si resulta que necesito audífono? ¿Me lo van a «vender» ese mismo día?"
+        answer: "No. Si un audífono puede ayudarte, te lo proponemos — y te lo llevas a casa para probarlo en tu vida real antes de decidir nada. Sin presión, sin plazos. Llevamos 44 años aquí: no necesitamos cerrar una venta el primer día."
+      - question: "¿Atendéis audífonos de otras marcas o comprados en otro sitio?"
+        answer: "Sí. Hacemos revisiones, limpiezas y ajustes de audífonos de cualquier marca, aunque no los hayas comprado aquí. Si estás de vacaciones y tienes un problema técnico urgente, también te atendemos."
+      - question: "¿Trabajáis con seguros médicos o mutuas?"
+        answer: "No. Trabajamos exclusivamente de forma particular, sin convenios con aseguradoras. Nuestros precios son directos, sin intermediarios."
+
   - type: cta_banner
     preset: contact
     title: "Puedes venir solo a preguntar. De verdad."

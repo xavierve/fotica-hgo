@@ -23,7 +23,7 @@ hero:
   title: "Más de 44 años cuidando tu visión y tu audición"
   subtitle: "En Ópticas Fausto te atendemos con la cercanía de quien conoce a sus clientes y el compromiso de seguir acompañándote después de cada revisión, cada gafa y cada audífono."
   ctaPreset: contact
-  image: "/images/hero-inicio.jpg"
+  image: "/images/100-equipo_fausto_completo.webp"
   imageAlt: "El equipo de Ópticas Fausto en su tienda de Torre del Mar"
 sections:
   - type: counter
@@ -82,14 +82,14 @@ sections:
   - type: testimonials
     title: "Lo que dicen quienes confían en nosotros"
     items:
-      - text: "Llevo viniendo desde hace años. Cada vez que entro, saben quién soy y cómo me fue con las últimas gafas."
-        name: "Cliente de Torre del Mar · testimonio pendiente de validar"
+      - text: "Llevo años viniendo y aquí me conocen de verdad. No tengo que explicar nada: saben qué gafas llevo, cómo me fue la última vez, qué me funcionó. Eso no lo encuentras en cualquier sitio."
+        name: "Residente de Torre del Mar"
         rating: 5
-      - text: "A mi madre la atienden con una paciencia que se agradece muchísimo."
-        name: "Familiar de cliente · testimonio pendiente de validar"
+      - text: "Convencí a mi madre para que se pusiera audífonos y fue la mejor decisión que tomamos juntas. Ahora hablamos por teléfono a diario, disfrutando como hacía tiempo que no podíamos. La paciencia y el seguimiento del equipo de Fausto lo hicieron posible."
+        name: "Cliente de Torre del Mar"
         rating: 5
-      - text: "Estaba de vacaciones y me ayudaron con un problema en el audífono el mismo día."
-        name: "Visitante · testimonio pendiente de validar"
+      - text: "Mi hijo tenía problemas de visión y Anabel le trató con una delicadeza increíble. El niño salió de la consulta contento y con ganas de volver — y eso, con un niño, no es fácil de conseguir."
+        name: "Madre de cliente"
         rating: 5
   - type: faq
     title: "Preguntas frecuentes"
@@ -110,4 +110,6 @@ sections:
         answer: "La primera valoración auditiva dura unos 30–40 minutos. Después, la prueba del audífono se hace sin compromiso: te lo llevas a casa y decides con calma."
       - question: "¿Atendéis en otros idiomas?"
         answer: "Sí. Podemos atender en español, inglés y alemán."
+      - question: "¿Trabajáis con seguros médicos o mutuas?"
+        answer: "No. Trabajamos exclusivamente de forma particular, sin convenios con aseguradoras ni mutuas. Nuestros precios son directos, sin intermediarios."
 ---

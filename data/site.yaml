@@ -1,25 +1,23 @@
 # data/site.yaml — Ópticas Fausto
-# v02 — Locations completas (Avenida + Duque), teléfonos corregidos.
-# PENDIENTE validación cliente: horarios definitivos y variaciones de temporada
-# (deben coincidir exactamente con los dos Google Business Profiles).
+# v04 — Horarios validados por cliente. Fuente única: contact.hours (footer/contacto)
+#        y location.hoursSpec (schema.org). Cambiar aquí → se actualiza en todo el sitio.
+# NOTA: actualizar también los dos Google Business Profiles cuando cambie el horario.
 
 brand:
   name: "Ópticas Fausto"
-  logo: "/images/logo-fausto.svg"                 # versión estática plana — schema.Organization.logo, OG, fallback
+  logo: "/images/logo-fausto.svg"
   logoAlt: "Ópticas Fausto — Centro Óptico y Auditivo en Torre del Mar"
-  logoInline: "images/logo-fausto-animado.svg"   # SVG animado inline en header (ruta en assets/)
+  logoInline: "images/logo-fausto-animado.svg"
 
-# Override específico de footer (footer.html ya soporta este patrón: footer.brand.* > brand.*)
 footer:
   brand:
-    logo: "/images/logo-fausto-claro.svg"          # variante clara, para el fondo oscuro del footer
+    logo: "/images/logo-fausto-claro.svg"
     logoAlt: "Ópticas Fausto — Centro Óptico y Auditivo en Torre del Mar"
   title: "Ópticas Fausto"
   description: "Más de 44 años cuidando la visión y la audición en Torre del Mar."
 
-# Datos de negocio para schema.org (el tema es neutro: todo sale de aquí)
 business:
-  locationType: "Optician"        # tipo schema.org de cada sede (subtipo de LocalBusiness)
+  locationType: "Optician"
   foundingDate: "1982"
   addressLocality: "Torre del Mar"
   postalCode: "29740"
@@ -30,16 +28,36 @@ business:
     - { name: "Visión", url: "/vision/" }
     - { name: "Audición", url: "/audicion/" }
 
-# Contacto común a ambos centros.
+# ─── CONTACTO ────────────────────────────────────────────────────────────────
 # El móvil es el único número con WhatsApp. Los fijos NO tienen WhatsApp.
 contact:
-  phone: "+34717770090"          # móvil común — clic-para-llamar por defecto en header/sticky
+  phone: "+34717770090"
   phoneLabel: "717 77 00 90"
-  whatsapp: "+34717770090"       # CORREGIDO: antes apuntaba al fijo de Avenida
+  whatsapp: "+34717770090"
   email: "info@opticafausto.com"
-  hours:
-    - "Lunes a viernes: 10:00–13:30 y 17:00–20:30"   # PENDIENTE validar sábados/temporada
 
+  # HORARIOS — fuente única para footer, página de contacto y schema.org.
+  # Temporada invierno (oct–may): 17:30–21:00 · Temporada verano (jun–sep): revisar con cliente.
+  # Formato legible → consumed by footer.html y contacto shortcode/partial
+  hours:
+    weekdays: "Lunes a viernes: 10:00–13:30 y 17:30–21:00"
+    saturday: "Sábados: 10:00–13:30"
+    sunday: ""   # vacío = cerrado, footer no lo muestra
+
+  # Formato schema.org → consumed by schema.html vía location.hoursSpec
+  # (cada location lo hereda; si en el futuro difieren por sede, sobreescribir en la location)
+  hoursSpec:
+    - dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday"]
+      opens: "10:00"
+      closes: "13:30"
+    - dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday"]
+      opens: "17:30"
+      closes: "21:00"
+    - dayOfWeek: ["Saturday"]
+      opens: "10:00"
+      closes: "13:30"
+
+# ─── NAVEGACIÓN ──────────────────────────────────────────────────────────────
 navigation:
   main:
     - text: "Inicio"
@@ -56,10 +74,9 @@ navigation:
     - text: "Aviso Legal · Privacidad · Cookies"
       url: "/aviso-legal/"
 
-# Dos centros. Claves compatibles con footer.html:
-# name, address, location, phone, phoneLabel, email, mapUrl
-# El whatsapp NO se declara por location (es común, ya está en contact:)
-# para evitar triplicar el enlace en el footer.
+# ─── SEDES ───────────────────────────────────────────────────────────────────
+# hoursSpec se hereda de contact.hoursSpec en schema.html (mismos horarios ambas sedes).
+# Si en el futuro una sede tuviera horario distinto, añadir hoursSpec aquí para sobreescribir.
 locations:
   - id: "avenida"
     name: "Centro Fausto Avenida"
@@ -76,7 +93,7 @@ locations:
     phoneLabel: "952 54 70 90"
     mapUrl: "https://share.google/uotnWlZFT0nfpuVoP"
 
-# Formato lista con platform/url: es el que consume footer.html
+# ─── SOCIAL ──────────────────────────────────────────────────────────────────
 social:
   - platform: "Facebook"
     url: "https://www.facebook.com/OpticaFaustoTorreDelMar/"
