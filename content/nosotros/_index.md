@@ -98,19 +98,6 @@ sections:
         imageAlt: "Interior de Centro Fausto Duque, techo abovedado de ladrillo visto"
         legend: "Centro Fausto Duque — interior"
 
-  - type: testimonials
-    title: "Nos conocemos de toda la vida. Y eso se nota."
-    items:
-      - text: "Llevo años viniendo y aquí me conocen de verdad. No tengo que explicar nada: saben qué gafas llevo, cómo me fue la última vez, qué me funcionó. Eso no lo encuentras en cualquier sitio."
-        name: "Residente de Torre del Mar"
-        rating: 5
-      - text: "Convencí a mi madre para que se pusiera audífonos y fue la mejor decisión que tomamos juntas. Ahora hablamos por teléfono a diario, disfrutando como hacía tiempo que no podíamos. La paciencia y el seguimiento del equipo de Fausto lo hicieron posible."
-        name: "Cliente de Torre del Mar"
-        rating: 5
-      - text: "Mi hijo tenía problemas de visión y Anabel le trató con una delicadeza increíble. El niño salió de la consulta contento y con ganas de volver — y eso, con un niño, no es fácil de conseguir."
-        name: "Madre de cliente"
-        rating: 5
-
   - type: cta_banner
     preset: contact
     title: "Ven a conocernos"
@@ -139,6 +126,20 @@ Esa continuidad de la que hablamos tiene nombre y cara. En Fausto no te atiende 
 
 Es la diferencia entre el protocolo de una franquicia y una relación real — y esa diferencia no se compra con publicidad. Se construye con el mismo equipo, año tras año.
 {{< /image-text >}}
+
+{{< testimonials title="Nos conocemos de toda la vida. Y eso se nota." >}}
+{{< testimonial-item name="Residente de Torre del Mar" rating="5" >}}
+Llevo años viniendo y aquí me conocen de verdad. No tengo que explicar nada: saben qué gafas llevo, cómo me fue la última vez, qué me funcionó. Eso no lo encuentras en cualquier sitio.
+{{< /testimonial-item >}}
+
+{{< testimonial-item name="Cliente de Torre del Mar" rating="5" >}}
+Convencí a mi madre para que se pusiera audífonos y fue la mejor decisión que tomamos juntas. Ahora hablamos por teléfono a diario, disfrutando como hacía tiempo que no podíamos. La paciencia y el seguimiento del equipo de Fausto lo hicieron posible.
+{{< /testimonial-item >}}
+
+{{< testimonial-item name="Madre de cliente" rating="5" >}}
+Mi hijo tenía problemas de visión y Anabel le trató con una delicadeza increíble. El niño salió de la consulta contento y con ganas de volver — y eso, con un niño, no es fácil de conseguir.
+{{< /testimonial-item >}}
+{{< /testimonials >}}
 
 {{< banner >}}«Si trabajas bien y eres buena gente, entras en la familia de Fausto.»{{< /banner >}}
 

@@ -1,0 +1,39 @@
+{{- /*
+  {{< testimonial name="Cliente de Torre del Mar" rating="5" >}}
+  Texto de la cita, admite **markdown**.
+  {{< /testimonial >}}
+
+  Cita puntual intercalada en el prose. Reutiliza la clase .testimonial
+  (tarjeta con borde+sombra) ya definida en main.css y usada por
+  partials/blocks/testimonials.html — misma pinta que el grid de Inicio,
+  aquí en singular para narrativa dentro del body markdown.
+
+  Parámetros:
+    name    (opcional) — autoría de la cita, ej. "Residente de Torre del Mar"
+    rating  (opcional) — número 1-5
+    class, variant, bgColor, textSize, align, width, pad — igual que banner
+*/ -}}
+{{- $rating := .Get "rating" -}}
+{{- $extra := slice -}}
+{{- if .Get "bgColor" }}{{ $extra = $extra | append "has-bg-color" }}{{ end -}}
+<aside class="{{ partial "block-classes.html" (dict "name" "testimonial-single" "context" (dict
+      "variant" (.Get "variant")
+      "class" (.Get "class")
+      "textSize" (.Get "textSize")
+      "align" (.Get "align" | default "center")
+      "width" (.Get "width")
+      "pad" (.Get "pad")
+    ) "extra" $extra) }}"
+  {{- with .Get "bgColor" }} style="--section-bg-color:{{ . | safeCSS }}"{{ end }}>
+  <div class="container">
+    <blockquote class="testimonial">
+      {{ .Inner | markdownify }}
+      {{- if or (.Get "name") $rating }}
+      <footer>
+        {{- with .Get "name" }}<strong>{{ . }}</strong>{{ end -}}
+        {{- with $rating }}<span>{{ . }}/5</span>{{ end -}}
+      </footer>
+      {{- end }}
+    </blockquote>
+  </div>
+</aside>

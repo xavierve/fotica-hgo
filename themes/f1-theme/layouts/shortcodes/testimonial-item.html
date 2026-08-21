@@ -1,0 +1,17 @@
+{{- /*
+  Uso EXCLUSIVO anidado dentro de {{< testimonials >}}...{{< /testimonials >}}.
+  Para una cita suelta en prose, usar {{< testimonial >}} (singular, con su propio wrapper).
+
+  {{< testimonial-item name="..." rating="5" >}}Texto, admite **markdown**.{{< /testimonial-item >}}
+*/ -}}
+{{- $rating := .Get "rating" -}}
+{{- $text := trim .Inner "\n" -}}
+<blockquote class="testimonial">
+  {{ (printf "“%s”" $text) | markdownify }}
+  {{- if or (.Get "name") $rating }}
+  <footer>
+    {{- with .Get "name" }}<strong>{{ . }}</strong>{{ end -}}
+    {{- with $rating }}<span>{{ . }}/5</span>{{ end -}}
+  </footer>
+  {{- end }}
+</blockquote>

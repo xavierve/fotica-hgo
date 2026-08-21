@@ -1,0 +1,32 @@
+{{- /*
+  {{< testimonials title="..." subtitle="..." >}}
+  {{< testimonial-item name="..." rating="5" >}}Texto{{< /testimonial-item >}}
+  {{< testimonial-item name="..." rating="5" >}}Texto{{< /testimonial-item >}}
+  {{< testimonial-item name="..." rating="5" >}}Texto{{< /testimonial-item >}}
+  {{< /testimonials >}}
+
+  Wrapper de grid para citas intercaladas en el body markdown — mismo patrón
+  visual que el bloque `type: testimonials` de sections: (misma clase
+  block-testimonials + cards-grid, mismo CSS, sin duplicar reglas).
+  No hay auto-discovery de páginas (a diferencia de `cards`, aquí no hay
+  contenido-por-testimonio): el "array" son las llamadas anidadas a
+  testimonial-item, en el orden en que las escribas.
+
+  Parámetros: title, subtitle, class, variant, textSize, align, width, pad
+*/ -}}
+<section class="{{ partial "block-classes.html" (dict "name" "testimonials" "context" (dict
+      "variant" (.Get "variant")
+      "class" (.Get "class")
+      "textSize" (.Get "textSize")
+      "align" (.Get "align")
+      "width" (.Get "width")
+      "pad" (.Get "pad")
+    )) }}">
+  <div class="container">
+    {{ with .Get "title" }}<h2>{{ . }}</h2>{{ end }}
+    {{ with .Get "subtitle" }}<p class="section-subtitle">{{ . }}</p>{{ end }}
+    <div class="cards-grid">
+      {{ .Inner }}
+    </div>
+  </div>
+</section>
