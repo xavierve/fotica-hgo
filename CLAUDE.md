@@ -26,6 +26,15 @@ Objetivo: SEO local (Torre del Mar / Axarquía) + conversión a llamada/WhatsApp
 - Marca: "44 años, desde 1982". La frase «Nos conocemos de toda la vida. Y eso se nota.» solo aparece literal en home y Nosotros.
 - Fase 1 sin cookies de terceros: NO añadir analítica, píxeles ni banner de consentimiento.
 
+## Convenciones de Git
+
+- **Nunca commitear ni hacer push directo a `main`.** `main` es siempre la última versión que Foco aprueba para desplegar.
+- **Una rama por tarea**, con prefijo `claude/` (ej. `claude/footer-hours`, `claude/text-split`). Esto deja rastro claro de qué cambios vinieron de una sesión de Claude Code frente a los commits manuales de Foco.
+- **Confirmar antes de hacer push a remoto** — no asumir permiso implícito para `git push` salvo que se pida explícitamente en la tarea.
+- **Commits descriptivos**, en español, resumiendo el qué y el porqué del cambio (no hace falta Conventional Commits salvo que se indique lo contrario).
+- Al terminar una tarea: dejar la rama lista para que Foco revise el diff y decida si mergea a `main` — no mergear de forma autónoma.
+- Si una tarea toca `themes/f1-theme/docs/FRONTMATTER.md` (nuevo bloque o parámetro), el commit debe incluir esa actualización de docs, no dejarla para después.
+
 ## Estado actual (verificado con build)
 
 Hecho y validado: `schema.html` v02 (@graph completo, BreadcrumbList, FAQPage — 127 preguntas en el sitio), `breadcrumb.html` corregido, `site.yaml` v03 (legal unificada), 30 páginas de contenido migradas, shortcodes + iconos + `cta-banner` v2 (bg/bgMobile/bgColor/preset/microcopy), `404.html`, attributes de Goldmark activados, CSS de utilidades (`fs-xs/s/l`, `has-bg-image/color`, banner).
