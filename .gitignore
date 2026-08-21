@@ -1,8 +1,23 @@
-# Ignorar la carpeta llamada "imagenes" y todo lo que tenga dentro
+# Ignorar la carpeta llamada "imagenes" (originales sin seleccionar y no finalizadas) y todo lo que tenga dentro
 imagenes/
 
-# Otro ejemplo común: ignorar carpetas de configuración locales
+# web producida
 public/
+# documentos del proyecto que no quiero que se publiquen en github
 docs/
+
+# sys files
 resources/_gen/
 .hugo_build.lock
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Node (si usas npm para Tailwind, PostCSS, etc. en este tema)
+node_modules/
+
+# Estadísticas de Hugo (si usas hugo_stats.json para Tailwind JIT)
+hugo_stats.json

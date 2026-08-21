@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="svg51" width="59.568" height="52.878" viewBox="0 0 59.568 52.878">
+  <style>
+    .c-green  { stroke: #34830b; }
+    .c-dark   { fill: #1a1a1a; }
+    @media (prefers-color-scheme: dark) {
+      .c-green  { stroke: #B2F07F; }
+      .c-dark   { fill: #ffffff; }
+    }
+  </style>
+  <g id="g71" style="display:inline;opacity:1" transform="translate(3.52 -2.63)scale(.76667)">
+    <g id="g70" style="display:inline;opacity:1" transform="translate(10.976 3.512)">
+      <path id="path66" d="m25.495 16.139.33-13.72v0M13.86 17.126 9.8 7.796" class="c-green" style="fill:none;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"/>
+      <path id="path67" d="m36.91 18.882 7.244-11.414" class="c-green" style="fill:none;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"/>
+      <path id="path68" d="m47.666 24.81 7.683-5.488" class="c-green" style="fill:none;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"/>
+      <path id="path69" d="m2.007 23.602-8.342-5.488" class="c-green" style="fill:none;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"/>
+      <path id="path65" d="M70.606 42.37S40.913-8.677-2.092 44.735c0 0 29.563 53.394 70.173 4.661" class="c-green" style="display:inline;opacity:1;fill:none;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill" transform="translate(-10.976 -3.512)"/>
+    </g>
+    <path id="path2-0-0" class="c-dark" fill-rule="evenodd" d="M27.89 35.107c3.29-2.555 7.11 5.447 3.283 4.247-.884-.277-.803-.737-1.347-1.407-.983-1.212-2.154-.969-1.935-2.84M16.488 43.06c-.763-1.89.671-4.74 1.817-6.011.946-1.048 2.12-2.312 4.112-2.452 1.767 2.034-1.139 1.73-2.85 3.716-2.19 2.543-.835 4.469-2.01 4.903-1.462.539-.983-.117-1.069-.156m7.107-11.709c-1.695.25-2.844.696-4.213 1.525-10.971 6.638-5.578 23.117 7.03 21.161 5.712-.885 10.46-6.353 9.912-13.085-.527-6.476-5.797-10.621-12.729-9.6" style="display:inline;opacity:1;stroke-width:.666629" transform="translate(1.397 -10.429)scale(1.30434)"/>
+  </g>
+</svg>

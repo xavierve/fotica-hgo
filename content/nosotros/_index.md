@@ -32,13 +32,7 @@ hero:
 
 sections:
   # ============  — declaración de intenciones antes del grid individual ============
-  - type: cta_banner
-    bgColor: "#C9A84C"
-    variant: featured
-    width: full
-    title: "El equipo que te conoce"
-    subtitle: "No es un eslogan: es literal. Cuando entras en cualquiera de los dos centros, te atiende alguien que probablemente te atendió la última vez — y la anterior. Estas son las personas detrás de ese \"nos conocemos de toda la vida\"."
-    
+  
   # ============ TEAM — grid individual, 7 personas reales ============
   - type: team
     title: "Cada rostro, una historia con Fausto"
@@ -134,40 +128,29 @@ Hoy, cuatro décadas después, sus hijas **Leonor y Anabel** llevan los dos cent
 Muchas de las familias que vinieron con Fausto siguen viniendo hoy con sus hijos y sus nietos. Esa continuidad no se compra con publicidad: se construye visita a visita, año tras año, siendo el sitio al que merece la pena volver.
 {{< /image-text >}}
 
-{{< image-text image="/images/100-equipo_fausto_completo_informal.webp" imageAlt="Equipo completo de Ópticas Fausto en el centro de Torre del Mar" width="full" reverse="true" >}}
-## Lo que una franquicia no puede ofrecerte
-Las grandes cadenas ópticas tienen locales más grandes y más publicidad. Lo que no tienen es continuidad: el personal rota, los protocolos vienen dictados desde fuera y cada visita puede tocarte una persona distinta que no te conoce de nada.
+{{< image-text image="/images/100-equipo_fausto_completo_informal.webp" imageAlt="Equipo completo de Ópticas Fausto en el centro Duque de Torre del Mar" width="full" reverse="true" >}}
+## El equipo que te conoce — y te trata como persona antes que cliente
+Esa continuidad de la que hablamos tiene nombre y cara. En Fausto no te atiende un protocolo: te atiende alguien que lleva años mirando por tu vista y tu oído, y que se acuerda de ti sin necesidad de mirar la ficha.
 
-En Fausto pasa lo contrario:
+- **Te conocemos de verdad.** Sabemos qué gafas llevas, qué te costó adaptar la última vez y cuándo te toca la próxima revisión — no hace falta que nos lo recuerdes.
+- **Seguimos aquí después de la venta.** Si algo no te funciona, vuelves y lo resolvemos juntos, sin explicar tu caso desde cero.
+- **Decidimos aquí, pensando en ti.** No seguimos un guion escrito en una oficina central: cuando hace falta una solución distinta, la buscamos nosotros, en la tienda.
+- **Te asesoramos con honestidad**, aunque eso signifique recomendarte la opción más sencilla en lugar de la más cara.
 
-- **Mismo equipo, año tras año.** Las personas que te atienden hoy son las mismas que te atendieron la última vez — y probablemente te atiendan dentro de cinco años.
-- **Seguimiento real.** No desaparecemos después de la venta. Si algo no te funciona, vuelves y lo resolvemos, sin que tengas que explicar tu caso desde el principio.
-- **Decisiones tomadas aquí, no en una central.** Cuando hace falta una solución poco habitual, decidimos nosotros, en la tienda, pensando en ti — no seguimos un guion.
-- **Sin presión de ventas.** Te asesoramos con honestidad, aunque eso signifique recomendarte la opción más sencilla en lugar de la más cara.
+Es la diferencia entre el protocolo de una franquicia y una relación real — y esa diferencia no se compra con publicidad. Se construye con el mismo equipo, año tras año.
 {{< /image-text >}}
 
 {{< banner >}}«Si trabajas bien y eres buena gente, entras en la familia de Fausto.»{{< /banner >}}
-{{< cta 
-    title= "El equipo que te conoce"
-    subtitle= "No es un eslogan: es literal. Cuando entras en cualquiera de los dos centros, te atiende alguien que probablemente te atendió la última vez — y la anterior. Estas son las personas detrás de ese \"nos conocemos de toda la vida\"."
-    bgColor= "#C9A84C"
-    width= "full"
-	 >}}
-{{< cta title="cta_banner · bgColor claro + class: on-light (texto oscuro)"
-        subtitle="Para fondos de color claros, on-light mantiene el texto oscuro."
-        bgColor="#C9A84C"
-        class="on-light" >}}	
-CREAR UN 2 COLUMNAS FLEX
-1- EL EQAUIPO Q 5TE conoce
-2- NO ES UN SLOGTAN
 
 Lo dice el propio equipo directivo, y no es una frase para la web: es la razón por la que María José lleva 30 años aquí, por la que Melania lleva 25, y por la que Victoria, después de una temporada en Alemania, volvió a Torre del Mar y a Fausto sin pensárselo. Y también es la razón por la que, con quienes en algún momento dejaron de trabajar aquí, la relación sigue siendo buena. Lo primero es ser personas, respetarnos y valorarnos mutuamente — con el cliente, con el proveedor, con quien trabaja hoy y con quien trabajó ayer.
 
-## Dos centros en Torre del Mar, un mismo equipo
+<!-- ## Dos centros en Torre del Mar, un mismo equipo -->
 
 <!-- PLACEHOLDER HORARIO: aquí (o en el CTA de abajo) puede ir { { < hours >}} en cuanto
      el shortcode exista en el tema. Hasta entonces, no hardcodear horario en este
      archivo — cambia cada verano/invierno y su única fuente debe ser site.yaml.
      Ver TODO completo en la memoria del proyecto: "Arquitectura de horarios". -->
 
-{{< cta title="Cómo llegar y horarios de cada centro" subtitle="Direcciones, teléfonos y horario de Avenida y Duque." b1text="Ver ubicaciones" b1url="/contacto/" b1icon="location" >}}
+<!-- {{< cta title="Cómo llegar y horarios de cada centro" subtitle="Direcciones, teléfonos y horario de Avenida y Duque." b1text="Ver ubicaciones" b1url="/contacto/" b1icon="location" >}}
+-->
+
