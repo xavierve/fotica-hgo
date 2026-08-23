@@ -1,0 +1,34 @@
+{{- /*
+  {{< text-split title="..." subtitle="..." >}}
+  {{< text-split-item size="lg" >}}Contenido libre, texto/markdown{{< /text-split-item >}}
+  {{< text-split-item >}}Contenido libre, texto/markdown{{< /text-split-item >}}
+  {{< /text-split >}}
+
+  Grid simétrico de 2 columnas (misma mecánica que image-text: 1fr → 1fr 1fr en
+  desktop), pero con AMBOS slots de contenido libre en vez de imagen+copy fijos.
+  El orden de los text-split-item en el markdown ES el orden visual — no hay
+  parámetro "reverse", el autor decide el orden escribiéndolo.
+
+  Cada item admite markdown (headers, listas, negritas) vía markdownify, y
+  HTML sin escapar (Goldmark unsafe=true en hugo.toml) — por eso admite
+  incrustar <video>/<iframe> en un futuro sin tocar esta plantilla.
+
+  Parámetros wrapper: title, subtitle, class, variant, textSize, align, width, pad
+  Parámetros item: size="lg" (texto grande, tipo cita destacada) — opcional
+*/ -}}
+<section class="{{ partial "block-classes.html" (dict "name" "text-split" "context" (dict
+      "variant" (.Get "variant")
+      "class" (.Get "class")
+      "textSize" (.Get "textSize")
+      "align" (.Get "align")
+      "width" (.Get "width")
+      "pad" (.Get "pad")
+    )) }}">
+  <div class="container">
+    {{ with .Get "title" }}<h2>{{ . }}</h2>{{ end }}
+    {{ with .Get "subtitle" }}<p class="section-subtitle">{{ . }}</p>{{ end }}
+    <div class="text-split-inner">
+      {{ .Inner }}
+    </div>
+  </div>
+</section>

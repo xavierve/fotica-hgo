@@ -1,0 +1,35 @@
+{{- /*
+  Uso EXCLUSIVO anidado dentro de {{< text-split >}}...{{< /text-split >}}.
+
+  {{< text-split-item textSize="xl" align="center" pad="m" margin="0 0 1rem 0" >}}
+  Contenido, admite **markdown**.
+  {{< /text-split-item >}}
+
+  Todos los parámetros son opcionales — sin ninguno, el item hereda el
+  tamaño/alineación por defecto del tema.
+
+  textSize — s|small, m|default, l|large, xl → reutiliza block-text-* (mismas
+             clases que banner/cards, mismo CSS, sin duplicar reglas)
+  align    — left | center | right → reutiliza block-align-* (idem)
+  pad      — s | m | l → padding interno del item (tokens propios de item,
+             más pequeños que el pad de sección: --space-s/m/l)
+  margin   — valor CSS libre, ej. "0 0 1rem 0" (como bgColor, sin validar
+             contra una lista cerrada — para casos puntuales de ajuste fino)
+
+  Nota: si el resultado final es un único párrafo, Hugo elimina el <p> que lo
+  envuelve (comportamiento estándar de markdownify, no un bug de este
+  shortcode) — el texto queda como nodo directo dentro del div, sin problema
+  visual porque los modificadores apuntan al div, no al <p>.
+*/ -}}
+{{- $sizeAlias := dict "s" "small" "m" "default" "l" "large" -}}
+{{- $textSize := .Get "textSize" -}}
+{{- $align := .Get "align" -}}
+{{- $pad := .Get "pad" -}}
+{{- $margin := .Get "margin" -}}
+{{- $classes := slice "text-split-col" -}}
+{{- with $textSize }}{{ $classes = $classes | append (printf "block-text-%s" (index $sizeAlias . | default .)) }}{{ end -}}
+{{- with $align }}{{ $classes = $classes | append (printf "block-align-%s" .) }}{{ end -}}
+{{- with $pad }}{{ $classes = $classes | append (printf "has-pad-%s" .) }}{{ end -}}
+<div class="{{ delimit $classes " " }}"{{ with $margin }} style="margin:{{ . | safeCSS }}"{{ end }}>
+  {{ .Inner | markdownify }}
+</div>
