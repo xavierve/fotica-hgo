@@ -1,0 +1,25 @@
+{{- /*
+  Equivalente shortcode del bloque `type: text`, para usar dentro del body
+  markdown en vez de sections: — mismo resultado, mismo .container.prose.
+
+  {{< text title="..." subtitle="..." textSize="large" align="center" pad="s" bgColor="#f5efe5" >}}
+  Contenido, admite **markdown** completo (headers, listas, blockquotes...).
+  {{< /text >}}
+*/ -}}
+{{- $extra := slice -}}
+{{- if .Get "bgColor" }}{{ $extra = $extra | append "has-bg-color" }}{{ end -}}
+<section class="{{ partial "block-classes.html" (dict "name" "text" "context" (dict
+      "variant" (.Get "variant")
+      "class" (.Get "class")
+      "textSize" (.Get "textSize")
+      "align" (.Get "align")
+      "width" (.Get "width")
+      "pad" (.Get "pad")
+    ) "extra" $extra) }}"
+  {{- with .Get "bgColor" }} style="--section-bg-color:{{ . | safeCSS }}"{{ end }}>
+  <div class="container prose">
+    {{ with .Get "title" }}<h2>{{ . }}</h2>{{ end }}
+    {{ with .Get "subtitle" }}<p class="section-subtitle">{{ . }}</p>{{ end }}
+    {{ .Inner | markdownify }}
+  </div>
+</section>

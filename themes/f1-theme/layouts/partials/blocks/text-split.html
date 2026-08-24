@@ -1,0 +1,39 @@
+{{- /*
+  Version bloque de text-split (equivalente YAML del shortcode del mismo nombre
+  usado en body markdown). Grid simetrico 2 columnas, contenido libre por item.
+
+  sections:
+    - type: text-split
+      width: wide
+      title:
+      subtitle:
+      items:
+        - text: "**«Si trabajas bien y eres buena gente, entras en la familia de Fausto.»**"
+          textSize: xl
+          align: center
+        - text: "Lo dice el propio equipo directivo..."
+          pad: m
+          margin: "0 0 1rem 0"
+
+  Cada item admite: text (markdown), textSize (s|m|l|xl), align (left|center|right),
+  pad (s|m|l), margin (valor CSS libre). Mismos alias que el shortcode.
+*/ -}}
+{{- $sizeAlias := dict "s" "small" "m" "default" "l" "large" -}}
+<section class="{{ partial "block-classes.html" (dict "name" "text-split" "context" .) }}">
+  <div class="container">
+    {{ with .title }}<h2>{{ . }}</h2>{{ end }}
+    {{ with .subtitle }}<p class="section-subtitle">{{ . }}</p>{{ end }}
+    <div class="text-split-inner">
+      {{ range .items }}
+        {{- $item := . -}}
+        {{- $classes := slice "text-split-col" -}}
+        {{- with $item.textSize }}{{ $classes = $classes | append (printf "block-text-%s" (index $sizeAlias . | default .)) }}{{ end -}}
+        {{- with $item.align }}{{ $classes = $classes | append (printf "block-align-%s" .) }}{{ end -}}
+        {{- with $item.pad }}{{ $classes = $classes | append (printf "has-pad-%s" .) }}{{ end -}}
+        <div class="{{ delimit $classes " " }}"{{ with $item.margin }} style="margin:{{ . | safeCSS }}"{{ end }}>
+          {{ $item.text | markdownify }}
+        </div>
+      {{ end }}
+    </div>
+  </div>
+</section>

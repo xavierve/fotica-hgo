@@ -1,0 +1,31 @@
+{{- /*
+  Bloque de texto libre (headers, listas, negritas, blockquotes) para
+  sections: — reutiliza exactamente el mismo .container.prose que ya usa el
+  body markdown en single.html, así que el ancho de lectura, el tipo y el
+  espaciado entre elementos son IDENTICOS a cualquier prosa existente en el
+  sitio, sin reglas CSS nuevas.
+
+  sections:
+    - type: text
+      width: default     # default | wide | full
+      variant: default    # default | soft | featured | contrast
+      textSize: default   # small | default | large | xl
+      align: left          # left | center | right
+      pad:                 # compact | default | spacious (o s/m/l)
+      bgColor:             # color CSS libre, ej. "#f5efe5"
+      title:
+      subtitle:
+      text: |
+        ## Encabezado opcional
+        Párrafo con **negrita**, *cursiva*, listas, blockquotes... markdown completo.
+*/ -}}
+{{- $extra := slice -}}
+{{- if .bgColor }}{{ $extra = $extra | append "has-bg-color" }}{{ end -}}
+<section class="{{ partial "block-classes.html" (dict "name" "text" "context" . "extra" $extra) }}"
+  {{- with .bgColor }} style="--section-bg-color:{{ . | safeCSS }}"{{ end }}>
+  <div class="container prose">
+    {{ with .title }}<h2>{{ . }}</h2>{{ end }}
+    {{ with .subtitle }}<p class="section-subtitle">{{ . }}</p>{{ end }}
+    {{ .text | markdownify }}
+  </div>
+</section>
