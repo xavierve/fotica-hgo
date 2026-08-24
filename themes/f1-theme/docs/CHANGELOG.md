@@ -1,6 +1,6 @@
 # F1 Theme · Changelog
 
-## v0.1 borrador funcional
+## v0.1 borrador +
 
 - Añadida documentación mínima funcional del theme.
 - Añadido `header-meta.html` para diferenciar metadatos de `header.html` visual.
