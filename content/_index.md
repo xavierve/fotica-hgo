@@ -51,10 +51,10 @@ sections:
         text: "Atención en español, inglés y alemán"
       - icon: "follow-up"
         text: "Seguimiento después de la compra"
-  - type: image_text
+  - type: image-text
     title: "Nos conocemos de toda la vida. Y eso se nota."
     text: "Ópticas Fausto no es solo una óptica ni solo un centro auditivo. Es un lugar al que muchas personas vuelven porque se sienten conocidas, escuchadas y acompañadas. La continuidad del equipo nos permite saber quién vuelve por la puerta, qué necesita y cómo le fue con su última revisión, sus gafas o sus audífonos. Esa confianza se construye con años de cercanía real y con la tranquilidad de no empezar de cero en cada visita."
-  - type: image_text
+  - type: image-text
     title: "Atención humana, seguimiento real"
     text: "La relación no termina cuando alguien compra unas gafas o un audífono. Seguimos acompañando en la adaptación, resolvemos dudas, ajustamos, revisamos y estamos pendientes de la evolución de cada persona. Preferimos asesorar con honestidad, recomendar lo que realmente encaja y atender sin prisas, porque cuidar la visión y la audición también significa estar cerca después de la compra."
     reverse: true
@@ -76,7 +76,7 @@ sections:
     button2:
       text: "Llamar ahora"
       url: "tel:+34952540964"
-  - type: image_text
+  - type: image-text
     title: "Dos centros en Torre del Mar para estar siempre cerca"
     text: "Contamos con dos centros en Torre del Mar, pensados para atender tanto a residentes como a visitantes. También atendemos en inglés y alemán para turistas o personas extranjeras que necesiten ayuda con gafas, lentillas o audífonos durante su estancia."
   - type: testimonials

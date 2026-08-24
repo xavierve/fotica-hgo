@@ -31,5 +31,5 @@
 {{- with $align }}{{ $classes = $classes | append (printf "block-align-%s" .) }}{{ end -}}
 {{- with $pad }}{{ $classes = $classes | append (printf "has-pad-%s" .) }}{{ end -}}
 <div class="{{ delimit $classes " " }}"{{ with $margin }} style="margin:{{ . | safeCSS }}"{{ end }}>
-  {{ .Inner | markdownify }}
+  {{ .Inner | $.Page.RenderString (dict "display" "block") }}
 </div>

@@ -16,7 +16,7 @@ Bloques habituales:
 hero
 sections:
   - type: counter
-  - type: image_text
+  - type: image-text
   - type: cards
   - type: cta
 faq

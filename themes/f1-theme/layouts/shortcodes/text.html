@@ -20,6 +20,6 @@
   <div class="container prose">
     {{ with .Get "title" }}<h2>{{ . }}</h2>{{ end }}
     {{ with .Get "subtitle" }}<p class="section-subtitle">{{ . }}</p>{{ end }}
-    {{ .Inner | markdownify }}
+    {{ .Inner | $.Page.RenderString (dict "display" "block") }}
   </div>
 </section>

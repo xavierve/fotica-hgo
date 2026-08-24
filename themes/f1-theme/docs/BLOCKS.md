@@ -26,6 +26,18 @@ themes/f1-theme/layouts/partials/blocks/
 
 El resto de bloques se renderizan desde `sections`. `section-renderer.html` normaliza guiones bajos a guiones y resuelve dinámicamente `blocks/{type}.html`.
 
+## Nomenclatura
+
+El `type` de un bloque en `sections:` y el nombre de su shortcode equivalente
+en body markdown deben coincidir siempre (`type: text` ↔ `{{< text >}}`,
+`type: cta` ↔ `{{< cta >}}`, `type: text-split` ↔ `{{< text-split >}}`). Un
+mismo componente con dos nombres distintos según el sistema genera confusión
+sobre cuál usar dónde — ver CHANGELOG.md, rename `cta-banner` → `cta`.
+
+Todos los `type:` usan guión alto, nunca guión bajo (`image-text`, no
+`image_text`) — coincide con el nombre real del archivo del partial
+(`blocks/image-text.html`) sin necesidad de ninguna normalización.
+
 ## Campos Comunes
 
 Todos los bloques aceptan:
@@ -71,7 +83,7 @@ sections:
 
 ```yaml
 sections:
-  - type: image_text
+  - type: image-text
     width: wide
     variant: soft
     textSize: large

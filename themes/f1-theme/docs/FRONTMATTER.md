@@ -45,7 +45,7 @@ hero:
     url: ""
 
 sections:
-  - type: image_text
+  - type: image-text
     width: wide
     variant: soft
     textSize: large

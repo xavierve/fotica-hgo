@@ -7,7 +7,7 @@
 {{- $rating := .Get "rating" -}}
 {{- $text := trim .Inner "\n" -}}
 <blockquote class="testimonial">
-  {{ (printf "“%s”" $text) | markdownify }}
+  {{ (printf "“%s”" $text) | $.Page.RenderString (dict "display" "block") }}
   {{- if or (.Get "name") $rating }}
   <footer>
     {{- with .Get "name" }}<strong>{{ . }}</strong>{{ end -}}

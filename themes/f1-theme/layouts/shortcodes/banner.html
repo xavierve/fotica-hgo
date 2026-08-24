@@ -15,6 +15,6 @@
     ) "extra" $extra) }}"
   {{- with .Get "bgColor" }} style="--section-bg-color:{{ . | safeCSS }}"{{ end }}>
   <div class="container banner-inner">
-    {{ .Inner | markdownify }}
+    {{ .Inner | $.Page.RenderString (dict "display" "block") }}
   </div>
 </aside>

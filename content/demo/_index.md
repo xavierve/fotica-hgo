@@ -54,25 +54,25 @@ sections:
       - { icon: "info", text: "info" }
 
   # ============ IMAGE_TEXT — las 4 variants ============
-  - type: image_text
+  - type: image-text
     title: "image_text · variant: default"
     text: "Bloque base, imagen a la derecha. El campo `text` admite **markdown**."
     image: "https://picsum.photos/seed/it1/640/420"
     imageAlt: "Demo"
-  - type: image_text
+  - type: image-text
     variant: soft
     reverse: true
     title: "image_text · variant: soft + reverse"
     text: "Fondo suave e imagen a la izquierda (`reverse: true`)."
     image: "https://picsum.photos/seed/it2/640/420"
     imageAlt: "Demo"
-  - type: image_text
+  - type: image-text
     variant: featured
     title: "image_text · variant: featured"
     text: "Variante destacada, para el bloque protagonista de una página."
     image: "https://picsum.photos/seed/it3/640/420"
     imageAlt: "Demo"
-  - type: image_text
+  - type: image-text
     variant: contrast
     title: "image_text · variant: contrast"
     text: "Variante de contraste (fondo oscuro)."
@@ -80,14 +80,14 @@ sections:
     imageAlt: "Demo"
 
   # ============ IMAGE_TEXT — widths y textSize ============
-  - type: image_text
+  - type: image-text
     width: wide
     textSize: large
     title: "width: wide · textSize: large"
     text: "Contenedor ancho y tipografía grande."
     image: "https://picsum.photos/seed/it5/640/420"
     imageAlt: "Demo"
-  - type: image_text
+  - type: image-text
     width: full
     textSize: xl
     align: center
@@ -95,7 +95,7 @@ sections:
     text: "Ancho completo, la escala tipográfica máxima y alineado centrado."
     image: "https://picsum.photos/seed/it6/640/420"
     imageAlt: "Demo"
-  - type: image_text
+  - type: image-text
     textSize: small
     align: right
     title: "textSize: small · align: right"
@@ -167,7 +167,7 @@ sections:
       - { number: "2026", event_title: "Nueva web", event_text: "La que estás viendo." }
 
   # ============ BRANDS-LOGOS ============
-  - type: brands_logos
+  - type: brands-logos
     title: "brands_logos"
     items:
       - { image: "https://picsum.photos/seed/b1/240/120", imageAlt: "Demo", text: "Marca A" }

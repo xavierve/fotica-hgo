@@ -27,7 +27,7 @@
   {{- with .Get "bgColor" }} style="--section-bg-color:{{ . | safeCSS }}"{{ end }}>
   <div class="container">
     <blockquote class="testimonial">
-      {{ .Inner | markdownify }}
+      {{ .Inner | $.Page.RenderString (dict "display" "block") }}
       {{- if or (.Get "name") $rating }}
       <footer>
         {{- with .Get "name" }}<strong>{{ . }}</strong>{{ end -}}
