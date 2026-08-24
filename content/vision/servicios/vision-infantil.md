@@ -42,7 +42,7 @@ sections:
       - question: "¿Y si necesita gafas y no quiere llevarlas?"
         answer: "Contamos con monturas infantiles resistentes, cómodas y con diseños que les gustan. [Mira nuestras gafas infantiles →](/vision/productos/gafas-infantiles/)"
 
-  - type: cta_banner
+  - type: cta
     preset: contact
     title: "Hemos visto crecer a media Torre del Mar. Literalmente."
     subtitle: "Muchos de los padres que hoy traen a sus hijos vinieron ellos mismos de niños, de la mano de sus padres. Conocemos la vista de tres generaciones de las mismas familias — y esa continuidad es la mejor herramienta para seguir el desarrollo visual de un niño año a año."

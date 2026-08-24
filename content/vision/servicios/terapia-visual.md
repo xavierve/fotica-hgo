@@ -42,7 +42,7 @@ sections:
       - question: "¿Los ejercicios de casa son complicados?"
         answer: "No: son pautas sencillas y breves, explicadas para que el niño (y la familia) puedan hacerlas sin agobio. En cada revisión las ajustamos según el progreso."
 
-  - type: cta_banner
+  - type: cta
     preset: contact
     title: "Un entrenamiento solo funciona si alguien sigue tu progreso"
     subtitle: "La terapia visual es un proceso de semanas con revisiones periódicas. Aquí cada revisión la hace la misma persona que diseñó tu programa — que recuerda dónde empezaste, qué ejercicio te costaba y qué objetivo toca ahora. Sin volver a explicarlo todo cada vez."

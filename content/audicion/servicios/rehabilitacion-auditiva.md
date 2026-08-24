@@ -42,7 +42,7 @@ sections:
       - question: "¿Tiene coste adicional?"
         answer: "Para nuestros clientes, la rehabilitación forma parte del seguimiento incluido en la adaptación. Si vienes de fuera, te informamos de las condiciones en la valoración inicial, antes de empezar nada."
 
-  - type: cta_banner
+  - type: cta
     preset: contact
     title: "Volver a oír bien lleva semanas. Nosotros no nos vamos a ninguna parte."
     subtitle: "Un proceso de rehabilitación solo funciona si al otro lado hay alguien constante: la misma persona que midió tu punto de partida, que sabe qué ejercicio te costó y qué logro toca celebrar hoy. Llevamos 44 años en Torre del Mar — la constancia es lo nuestro."

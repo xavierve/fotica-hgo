@@ -47,7 +47,7 @@ sections:
       - question: "¿El 2×1 incluye lentes de calidad?"
         answer: "En nuestro caso, sí — y te lo demostramos: te decimos la gama exacta de cada lente y te entregamos el certificado del fabricante de las dos unidades. Si en otro sitio no te lo dan, pregunta por qué."
 
-  - type: cta_banner
+  - type: cta
     preset: contact
     title: "Tu adaptación no termina cuando sales por la puerta"
     subtitle: "Es en la primera semana de uso cuando surgen las dudas de verdad — y es entonces cuando más importa poder volver y que te atienda la misma persona que te graduó, te midió y montó tus lentes. En Fausto, esa persona sigue aquí. Esta semana, y dentro de cinco años."

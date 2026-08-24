@@ -277,5 +277,7 @@
 .text-split-col.has-pad-s{padding:var(--space-s)}
 .text-split-col.has-pad-m{padding:var(--space-m)}
 .text-split-col.has-pad-l{padding:var(--space-l)}
-@media(min-width:821px){.text-split-inner{grid-template-columns:1fr 1fr}
-.text-split-col.block-text-xl,.text-split-col.block-text-large{max-width:35ch;margin-inline:auto}}
+@media(min-width:821px){
+	.text-split-inner{grid-template-columns:1fr 1fr}
+	.text-split-col.block-text-xl,.text-split-col.block-text-large{max-width:35ch;margin-inline:auto}
+	}

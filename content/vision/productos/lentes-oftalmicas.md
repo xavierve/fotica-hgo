@@ -39,7 +39,7 @@ sections:
       - question: "¿Qué pasa si no me adapto a mis lentes nuevas?"
         answer: "Vuelves, y lo resolvemos: revisamos graduación, centrado y ajuste hasta dar con el problema. El seguimiento posterior a la compra es parte del servicio, no un extra."
 
-  - type: cta_banner
+  - type: cta
     preset: contact
     title: "Te explicamos el presupuesto línea a línea. Y lo que puedes ahorrarte, también."
     subtitle: "Después de 44 años montando gafas en Torre del Mar, sabemos que la mejor lente no es la más cara: es la que encaja con tu graduación, tu uso y tu bolsillo. Si un tratamiento no te aporta nada, te lo decimos — aunque eso reste un renglón al presupuesto."

@@ -58,7 +58,7 @@ sections:
     title: "Atención humana, seguimiento real"
     text: "La relación no termina cuando alguien compra unas gafas o un audífono. Seguimos acompañando en la adaptación, resolvemos dudas, ajustamos, revisamos y estamos pendientes de la evolución de cada persona. Preferimos asesorar con honestidad, recomendar lo que realmente encaja y atender sin prisas, porque cuidar la visión y la audición también significa estar cerca después de la compra."
     reverse: true
-  - type: cta_banner
+  - type: cta
     title: "¿Hace tiempo que no revisas tu vista?"
     subtitle: "Una revisión visual puede ayudarte a detectar cambios de graduación, fatiga visual o molestias que quizá llevas tiempo normalizando. Ven a vernos y te asesoraremos personalmente."
     button1:
@@ -67,7 +67,7 @@ sections:
     button2:
       text: "Pedir cita"
       url: "tel:+34952540964"
-  - type: cta_banner
+  - type: cta
     title: "¿Notas que oyes peor en conversaciones?"
     subtitle: "Si subes más la televisión, te cuesta seguir una charla o pides que te repitan las cosas, podemos ayudarte con un estudio auditivo y un asesoramiento claro, sin compromiso."
     button1:

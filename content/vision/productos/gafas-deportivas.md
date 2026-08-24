@@ -39,7 +39,7 @@ sections:
       - question: "¿Hay gafas de natación graduadas para niños?"
         answer: "Sí — y merecen la pena: un niño que no ve en la piscina disfruta menos y aprende peor. Disponibles en tallas y graduaciones infantiles."
 
-  - type: cta_banner
+  - type: cta
     preset: contact
     title: "Dinos qué juegas, y te diremos qué llevar"
     subtitle: "No es lo mismo el pádel de tarde que la travesía a nado de la mañana, ni la salida en bici por la Axarquía que la clase de natación de tu hijo. Cuéntanos tu deporte, tus horarios y tu graduación, y te proponemos la solución exacta — probada por deportistas de aquí, en las condiciones de aquí."

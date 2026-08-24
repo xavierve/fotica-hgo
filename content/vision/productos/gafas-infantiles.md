@@ -41,7 +41,7 @@ sections:
       - question: "¿Hacen deporte con las gafas puestas?"
         answer: "Para deporte habitual, mejor una montura resistente bien ajustada; para deportes de contacto o intensos, existen [gafas deportivas homologadas](/vision/productos/gafas-deportivas/) o [lentillas para niños y jóvenes](/vision/productos/lentes-de-contacto/)."
 
-  - type: cta_banner
+  - type: cta
     preset: contact
     title: "Sus gafas crecen con él. Y nosotros vamos ajustándolas por el camino."
     subtitle: "Los niños crecen, aprietan, doblan y estiran. Por eso las gafas infantiles necesitan más visitas que las de un adulto — ajustes, apretar tornillos, revisar que siguen centradas. Aquí esas visitas son bienvenidas, rápidas y las atiende quien ya conoce a tu hijo por su nombre. Pásate cuando quieras: para eso estamos a la vuelta de la esquina."

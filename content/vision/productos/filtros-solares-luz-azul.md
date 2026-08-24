@@ -41,7 +41,7 @@ sections:
       - question: "¿Las gafas de sol baratas protegen igual?"
         answer: "Una lente oscura sin filtro UV certificado es peor que no llevar nada: la pupila se dilata por la oscuridad y entra más radiación. Toda gafa de sol debe garantizar protección UV — en las nuestras, siempre está certificada."
 
-  - type: cta_banner
+  - type: cta
     preset: contact
     title: "Sabemos cuánto sol hace aquí. Llevamos 44 años viéndolo por el escaparate."
     subtitle: "Asesorar sobre protección solar en Torre del Mar no es teoría de catálogo: es conocer el deslumbramiento del paseo marítimo a las cinco de la tarde y lo que sufren los ojos de quien trabaja al aire libre en julio. Cuéntanos tu día a día y te decimos qué filtro lo resuelve."

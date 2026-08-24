@@ -39,7 +39,7 @@ sections:
       - question: "¿Tenéis pilas de mi audífono?"
         answer: "Trabajamos pilas de Zinc-Aire de todos los tamaños estándar, compatibles con la mayoría de los audífonos del mercado. Trae la referencia o el propio audífono y salimos de dudas al momento — y si el aparato necesita algo más que pilas, nuestro [Servicio Técnico Multimarca](/audicion/servicios/mantenimiento-audifonos/) lo atiende sea cual sea su marca."
 
-  - type: cta_banner
+  - type: cta
     preset: contact
     title: "Nos tomamos tan en serio una pila como un audífono"
     subtitle: "Aquí ninguna consulta es demasiado pequeña: vienes a por pilas y te comprobamos de paso el audífono; preguntas por un despertador y te ayudamos a pensar si es eso lo que hace falta — o si toca [revisar el oído](/audicion/servicios/audiometria/). Es lo que tiene atender a las mismas personas durante años: nos importa que todo funcione, no solo lo que se vende hoy."

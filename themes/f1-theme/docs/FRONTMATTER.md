@@ -61,7 +61,7 @@ sections:
     title: ""
     subtitle: ""
     cards: []
-  - type: cta_banner
+  - type: cta
     tone: neutral
     title: ""
     subtitle: ""

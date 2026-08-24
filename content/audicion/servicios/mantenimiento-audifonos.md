@@ -42,7 +42,7 @@ sections:
       - question: "¿El mantenimiento es caro?"
         answer: "Las operaciones rutinarias (limpieza, filtros, olivas, secado) tienen un coste muy contenido — y alargan años la vida de un aparato que sí fue una inversión. Te informamos del coste de cada cosa antes de hacerla, siempre."
 
-  - type: cta_banner
+  - type: cta
     preset: contact
     title: "El día que falle, no querrás un ticket de soporte. Querrás una cara conocida al otro lado del mostrador."
     subtitle: "Un audífono es de las pocas cosas que usas todas las horas del día, todos los días. Cuando algo va mal, aquí no hay centralita ni «su caso ha sido registrado»: está la misma persona que te lo adaptó, que conoce tu aparato y tu oído, y que te lo resuelve mirándote a la cara."

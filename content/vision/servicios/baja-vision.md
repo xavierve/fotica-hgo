@@ -43,7 +43,7 @@ sections:
       - question: "¿Atendéis a personas de fuera de Torre del Mar?"
         answer: "Sí — recibimos pacientes de toda la Axarquía y la provincia de Málaga. Somos especialistas en baja visión, miembros de la Sociedad Española de Baja Visión."
 
-  - type: cta_banner
+  - type: cta
     preset: contact
     title: "No te vamos a vender una lupa. Vamos a acompañarte a recuperar tu lectura."
     subtitle: "La baja visión no se resuelve en una compra: requiere probar, ajustar y volver a probar hasta dar con lo que funciona para ti. Ese acompañamiento a lo largo del tiempo — con las mismas personas, que ya conocen tu caso — es exactamente lo que llevamos 44 años haciendo en Torre del Mar."

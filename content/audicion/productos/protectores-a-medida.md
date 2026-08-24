@@ -41,7 +41,7 @@ sections:
       - question: "¿Puedo elegir cuánto aíslan?"
         answer: "En los antirruido, sí: el filtro se elige según tu necesidad (dormir, trabajo, música), reduciendo los decibelios justos para cada uso."
 
-  - type: cta_banner
+  - type: cta
     preset: contact
     title: "Si el molde no queda perfecto, se repite. Aquí no sales con un «ya se amoldará»."
     subtitle: "Un protector a medida solo tiene sentido si la medida es exacta: por eso comprobamos el ajuste contigo, y si algo no encaja del todo, se rehace — sin discusión y sin prisas. Es la ventaja de encargárselo a quien vas a tener delante también el mes que viene."

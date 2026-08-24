@@ -192,28 +192,28 @@ sections:
       - question: "¿Y salen en el schema FAQPage?"
         answer: "En esta página no (`includeFAQ: false` para no ensuciar el schema con contenido demo). En páginas reales, sí, automáticamente."
 
-  # ============ CTA_BANNER — todas las variaciones ============
-  - type: cta_banner
-    title: "cta_banner · sin fondo · preset: contact"
+  # ============ cta — todas las variaciones ============
+  - type: cta
+    title: "cta · sin fondo · preset: contact"
     subtitle: "El par Llamar + WhatsApp sale de data/site.yaml."
     preset: contact
     microcopy: "Con microcopy bajo los botones"
-  - type: cta_banner
-    title: "cta_banner · bgColor plano"
+  - type: cta
+    title: "cta · bgColor plano"
     bgColor: "#1B3A5C"
     preset: contact
-  - type: cta_banner
-    title: "cta_banner · bgColor claro + class: on-light (texto oscuro)"
+  - type: cta
+    title: "cta · bgColor claro + class: on-light (texto oscuro)"
     subtitle: "Para fondos de color claros, on-light mantiene el texto oscuro."
     bgColor: "#C9A84C"
     class: "on-light"
     preset: contact
-  - type: cta_banner
-    title: "cta_banner · bg imagen (overlay neutro)"
+  - type: cta
+    title: "cta · bg imagen (overlay neutro)"
     bg: "https://picsum.photos/seed/cta1/1600/500"
     preset: contact
-  - type: cta_banner
-    title: "cta_banner · bg + bgMobile + bgColor (overlay tintado)"
+  - type: cta
+    title: "cta · bg + bgMobile + bgColor (overlay tintado)"
     subtitle: "Reduce la ventana para ver la imagen móvil."
     bg: "https://picsum.photos/seed/cta2/1600/500"
     bgMobile: "https://picsum.photos/seed/cta2m/700/800"
@@ -221,45 +221,45 @@ sections:
     preset: contact
     labelCall: "Llamar ahora"
     labelWhatsapp: "Escríbenos"
-  - type: cta_banner
-    title: "cta_banner · botones personalizados con iconos"
+  - type: cta
+    title: "cta · botones personalizados con iconos"
     align: center
     buttons:
       - { text: "Cómo llegar", url: "/contacto/", icon: "location" }
       - { text: "Horario", url: "/contacto/", icon: "clock" }
       - { text: "Escríbenos", url: "mailto:info@opticafausto.com", icon: "email" }
-  - type: cta_banner
-    title: "cta_banner · bg + class: scrim (degradado direccional)"
+  - type: cta
+    title: "cta · bg + class: scrim (degradado direccional)"
     subtitle: "El texto queda sobre la zona oscurecida; la foto respira a la derecha."
     bg: "https://picsum.photos/seed/cta3/1600/500"
     class: "scrim"
     align: left
     preset: contact
-  - type: cta_banner
-    title: "cta_banner · bg + class: overlay-strong (velo denso)"
+  - type: cta
+    title: "cta · bg + class: overlay-strong (velo denso)"
     subtitle: "Para fotos claras o con mucho detalle."
     bg: "https://picsum.photos/seed/cta4/1600/500"
     class: "overlay-strong"
     preset: contact
-  - type: cta_banner
-    title: "cta_banner · bg + class: panel (caja tras el texto)"
+  - type: cta
+    title: "cta · bg + class: panel (caja tras el texto)"
     subtitle: "La opción más segura cuando no controlas la foto."
     bg: "https://picsum.photos/seed/cta5/1600/500"
     class: "panel"
     preset: contact
-  - type: cta_banner
+  - type: cta
     layout: split
     eyebrow: "Presupuesto claro, línea a línea"
-    title: "cta_banner · layout: split con eyebrow (antetítulo)"
+    title: "cta · layout: split con eyebrow (antetítulo)"
     subtitle: "La promesa de marca va arriba como antetítulo; el microcopy junto a los botones se reserva para quitar objeciones («sin compromiso»)."
     preset: contact
     microcopy: "Sin compromiso"
-  - type: cta_banner
-    title: "cta_banner · tone: vision"
+  - type: cta
+    title: "cta · tone: vision"
     tone: vision
     preset: contact
-  - type: cta_banner
-    title: "cta_banner · tone: hearing · textSize: large"
+  - type: cta
+    title: "cta · tone: hearing · textSize: large"
     tone: hearing
     textSize: large
     preset: contact

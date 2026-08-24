@@ -42,7 +42,7 @@ sections:
       - question: "¿Trabajáis con todos los presupuestos?"
         answer: "Sí — hay opciones desde lo más sencillo a lo más avanzado, y te recomendamos según tu pérdida y tu vida, no según el precio. → [Ver tipos de audífonos](/audicion/productos/audifonos/)"
 
-  - type: cta_banner
+  - type: cta
     preset: contact
     title: "La decisión no se toma en la tienda. Se toma en tu sobremesa."
     subtitle: "Un audífono se demuestra donde vives: en la conversación con tus nietos, en el bar con ruido, delante de la televisión. Por eso te lo llevas y lo compruebas allí — y cuando vuelvas a contarnos, te estará esperando la misma persona que te lo adaptó, lista para afinarlo con lo que le cuentes."

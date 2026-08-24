@@ -33,7 +33,7 @@ sections:
       - question: "¿Atendéis por WhatsApp?"
         answer: "Sí — para dudas rápidas, citas o consultas es la vía más cómoda: +34 717 77 00 90. Te respondemos dentro del horario de tienda."
 
-  - type: cta_banner
+  - type: cta
     preset: contact
     title: "Al otro lado del teléfono no hay una centralita. Hay quien te va a atender."
     subtitle: "Cuando llamas o escribes a Fausto, te responde la misma persona que te recibirá en la tienda: la que puede mirar ahora mismo si tus gafas están listas o buscarte un hueco esta tarde. Sin menús de opciones, sin «su llamada es importante para nosotros». Aquí lo es de verdad."

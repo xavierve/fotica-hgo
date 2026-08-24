@@ -37,7 +37,7 @@ sections:
       - question: "¿Trabajáis con seguros médicos o mutuas?"
         answer: "No. Trabajamos exclusivamente de forma particular, sin convenios con aseguradoras. Nuestros precios son directos, sin intermediarios."
 
-  - type: cta_banner
+  - type: cta
     preset: contact
     title: "Puedes venir solo a preguntar. De verdad."
     subtitle: "Sabemos que este paso se pospone durante años — a veces por orgullo, a veces por miedo a que «te vendan algo». Aquí la primera visita es una conversación, no una venta: te escuchamos, medimos, te explicamos el resultado y te vas a casa a pensarlo el tiempo que necesites. Llevamos [44 años aquí](/nosotros/); no tenemos ninguna prisa."

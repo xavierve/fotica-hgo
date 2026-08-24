@@ -42,7 +42,7 @@ sections:
       - question: "¿Reviséis también a niños?"
         answer: "Sí — la visión infantil tiene sus propias particularidades. [Consulta nuestro servicio de Visión Infantil →](/vision/servicios/vision-infantil/)"
 
-  - type: cta_banner
+  - type: cta
     preset: contact
     title: "Aquí tu ficha no la abre un desconocido"
     subtitle: "En cada revisión comparamos con tus resultados anteriores, porque quien te atiende ya conoce tu historia. Así distinguimos un cambio real de una simple mala tarde — algo que solo se puede hacer cuando llevas 44 años atendiendo a las mismas familias."

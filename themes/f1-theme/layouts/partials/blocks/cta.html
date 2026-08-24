@@ -1,5 +1,5 @@
 {{- /*
-  blocks/cta-banner.html - v2
+  blocks/cta.html - v2
   Compatibilidad: button1/button2 ({url,text}) siguen funcionando.
   Nuevo:
     bg / bgMobile   -> imagen de fondo responsive (desktop / movil)
@@ -33,13 +33,13 @@
   {{ with .button2 }}{{ $buttons = $buttons | append . }}{{ end }}
 {{ end }}
 
-<section class="{{ partial "block-classes.html" (dict "name" "cta-banner" "context" . "extra" $extra) }}"
+<section class="{{ partial "block-classes.html" (dict "name" "cta" "context" . "extra" $extra) }}"
   {{- $styles := slice -}}
   {{- with $bg }}{{ $styles = $styles | append (printf "--section-bg:url('%s')" .) }}{{ end -}}
   {{- with .bgMobile }}{{ $styles = $styles | append (printf "--section-bg-mobile:url('%s')" .) }}{{ end -}}
   {{- with .bgColor }}{{ $styles = $styles | append (printf "--section-bg-color:%s" .) }}{{ end -}}
   {{- with $styles }} style="{{ delimit . ";" | safeCSS }}"{{ end }}>
-    <div class="container cta-banner-inner{{ if eq .layout "split" }} has-cols{{ end }}"><div class="container cta-banner-inner{{ if eq .layout "split" }} has-cols{{ end }}">
+    <div class="container cta-inner{{ if eq .layout "split" }} has-cols{{ end }}"><div class="container cta-inner{{ if eq .layout "split" }} has-cols{{ end }}">
     <div class="cta-text">
       {{ with .eyebrow }}<p class="eyebrow cta-eyebrow">{{ . }}</p>{{ end }}
       {{ with .title }}<h2>{{ . }}</h2>{{ end }}

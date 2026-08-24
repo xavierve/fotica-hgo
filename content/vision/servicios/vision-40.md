@@ -42,7 +42,7 @@ sections:
       - question: "¿Cuánto se tarda en adaptarse a unas progresivas?"
         answer: "Con los diseños actuales, la mayoría de las personas se adapta en pocos días. Y si algo no va bien, seguimos ajustando hasta que funcione — el seguimiento está incluido."
 
-  - type: cta_banner
+  - type: cta
     preset: contact
     title: "A nosotros también nos ha pasado. Por eso sabemos acompañarte."
     subtitle: "En un equipo que lleva 44 años en esto, más de uno ha estrenado ya sus propias progresivas. Sabemos lo que es resistirse, lo que es el primer día y lo que es olvidarse de que las llevas. Ven, cuéntanos cómo lo notas tú, y busquemos la solución con calma."

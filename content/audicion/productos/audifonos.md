@@ -41,7 +41,7 @@ sections:
       - question: "¿Y si después de comprarlo no me acostumbro?"
         answer: "No debería llegarse ahí: para eso están la prueba previa en tu día a día, el ajuste fino con tu feedback y la [rehabilitación auditiva](/audicion/servicios/rehabilitacion-auditiva/) como parte del seguimiento. No te dejamos solo con el aparato."
 
-  - type: cta_banner
+  - type: cta
     preset: contact
     title: "Tu audífono guardará tus ajustes. Nosotros guardamos el porqué de cada uno."
     subtitle: "Cada audífono bien adaptado esconde decenas de pequeñas decisiones: por qué esta ganancia en estas frecuencias, por qué este programa para el bar y este otro para casa. Quien te lo adaptó aquí seguirá aquí — y en cada revisión no partirá del manual, sino de tu historia."

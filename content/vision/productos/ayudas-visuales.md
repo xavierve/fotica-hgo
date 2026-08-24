@@ -39,7 +39,7 @@ sections:
       - question: "¿Trabajáis con personas de fuera de Torre del Mar?"
         answer: "Sí — atendemos a pacientes de toda la Axarquía y la provincia de Málaga."
 
-  - type: cta_banner
+  - type: cta
     preset: contact
     title: "La ayuda correcta no se elige en un catálogo. Se prueba, con calma, las veces que haga falta."
     subtitle: "En nuestra consulta pruebas las ayudas con tus propios textos y tus propias tareas, comparas y decides sin prisa. Y si con el tiempo tu visión cambia, aquí seguiremos — las mismas personas, que ya conocen tu caso — para reajustar lo que haga falta."

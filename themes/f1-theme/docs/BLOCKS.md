@@ -186,7 +186,7 @@ sections:
 
 ```yaml
 sections:
-  - type: cta_banner
+  - type: cta
     tone: vision
     title:
     subtitle:

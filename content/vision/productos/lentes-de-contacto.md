@@ -63,7 +63,7 @@ sections:
       - question: "¿Puedo usar gafas de sol con lentillas?"
         answer: "Claro, y es buena idea. Solo recuerda: si llevas lentillas, las gafas de sol no deben estar graduadas."
 
-  - type: cta_banner
+  - type: cta
     preset: contact
     title: "Tus primeras lentillas dan un poco de respeto. Por eso no te soltamos de la mano."
     subtitle: "El primer día que te tocas el ojo, quieres tener delante a alguien con paciencia — y volver a la semana siguiente y que sea la misma persona, que ya sabe cómo te fue. Llevamos 44 años enseñando a media Torre del Mar a ponerse lentillas: sabemos exactamente dónde se atasca cada uno."

@@ -18,7 +18,7 @@ sections:
   - type: counter
   - type: image_text
   - type: cards
-  - type: cta_banner
+  - type: cta
 faq
 ```
 

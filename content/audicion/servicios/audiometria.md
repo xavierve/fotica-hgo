@@ -42,7 +42,7 @@ sections:
       - question: "¿Cada cuánto conviene repetirla?"
         answer: "Como referencia general, una revisión anual a partir de los 50–55 años, o antes si notas cambios. Si ya usas audífono, las revisiones forman parte del seguimiento."
 
-  - type: cta_banner
+  - type: cta
     preset: contact
     title: "Tu audición cambia despacio. Nosotros llevamos aquí lo bastante como para notarlo."
     subtitle: "Una pérdida auditiva se ve comparando tu audiometría de hoy con la tuya de hace años — no con una tabla genérica. En Fausto conservamos y recordamos tu historial, y quien te hace la prueba de hoy es quien te hizo la anterior: sabe qué te dijimos entonces y qué mirar ahora."

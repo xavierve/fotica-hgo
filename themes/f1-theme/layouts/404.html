@@ -23,7 +23,7 @@
 </section>
 {{ $contact := (hugo.Data.site | default dict).contact | default dict }}
 {{ $wa := replace ($contact.whatsapp | default "") "+" "" }}
-{{ partial "blocks/cta-banner.html" (dict
+{{ partial "blocks/cta.html" (dict
     "title" "¿Buscabas algo concreto y no lo encuentras?"
     "subtitle" "Pregúntanos directamente — es más rápido, y así funcionamos mejor nosotros también."
     "preset" "contact"

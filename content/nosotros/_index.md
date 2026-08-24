@@ -98,7 +98,7 @@ sections:
         imageAlt: "Interior de Centro Fausto Duque, techo abovedado de ladrillo visto"
         legend: "Centro Fausto Duque — interior"
 
-  - type: cta_banner
+  - type: cta
     preset: contact
     title: "Ven a conocernos"
     subtitle: "No hace falta que traigas nada, ni siquiera cita. Pásate por cualquiera de los dos centros, o llámanos y te contamos cómo podemos ayudarte. [Cómo llegar →](/contacto/)"

@@ -42,7 +42,7 @@ sections:
       - question: "¿Y si mi hijo ya lleva gafas?"
         answer: "No es ningún problema: el estudio parte de su graduación y su historia actual. De hecho, si su miopía ha subido en las últimas revisiones, es el candidato típico para valorar un tratamiento de control."
 
-  - type: cta_banner
+  - type: cta
     preset: contact
     title: "El avance de una miopía no se nota en una visita. Se ve comparando muchas."
     subtitle: "El control de miopía es, por definición, un tratamiento de seguimiento: lo que importa es la curva a lo largo de los años, no la foto de un día. Nosotros seguiremos aquí en cada revisión — las mismas personas, midiendo con el mismo criterio, comparando con los mismos datos."

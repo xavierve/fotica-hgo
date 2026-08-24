@@ -1,5 +1,5 @@
 {{- /*
-  {{< cta >}} - CTA intercalado en el body. Delega en blocks/cta-banner.html:
+  {{< cta >}} - CTA intercalado en el body. Delega en blocks/cta.html:
   mismo HTML, mismo CSS, paridad total con las sections.
 
   Parametros (todos opcionales):
@@ -44,4 +44,4 @@
       "labelCall" (.Get "labelCall")
       "labelWhatsapp" (.Get "labelWhatsapp")) -}}
 {{- end -}}
-{{ partial "blocks/cta-banner.html" $ctx }}
+{{ partial "blocks/cta.html" $ctx }}

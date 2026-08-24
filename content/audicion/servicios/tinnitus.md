@@ -42,7 +42,7 @@ sections:
       - question: "¿Cuánto dura el tratamiento?"
         answer: "Depende de cada caso; la habituación es un proceso de meses, con revisiones de seguimiento. Lo importante: la mejoría suele notarse de forma progresiva, no hay que esperar al final para vivir mejor."
 
-  - type: cta_banner
+  - type: cta
     preset: contact
     title: "El tinnitus no sale en ninguna prueba de imagen. Por eso lo primero que hacemos es creerte."
     subtitle: "Quien convive con un acúfeno suele haber oído demasiadas veces «no será para tanto». Aquí no: te escuchamos con el tiempo que haga falta, medimos lo que sí se puede medir y trazamos un plan a tu medida — con la misma persona acompañándote en cada revisión del proceso."
