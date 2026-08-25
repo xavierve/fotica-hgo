@@ -17,9 +17,9 @@
       "pad" (.Get "pad")
     ) "extra" $extra) }}"
   {{- with .Get "bgColor" }} style="--section-bg-color:{{ . | safeCSS }}"{{ end }}>
-  <div class="container prose">
+  <div class="container">
     {{ with .Get "title" }}<h2>{{ . }}</h2>{{ end }}
     {{ with .Get "subtitle" }}<p class="section-subtitle">{{ . }}</p>{{ end }}
-    {{ .Inner | $.Page.RenderString (dict "display" "block") }}
+    <div class="prose">{{ .Inner | $.Page.RenderString (dict "display" "block") }}</div>
   </div>
 </section>

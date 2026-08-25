@@ -183,6 +183,46 @@ sections:
       - { text: "Solo texto y nombre.", name: "Cliente B" }
       - { text: "Con rating, sin imagen.", name: "Cliente C", rating: 4 }
 
+  # ============ TEXT — bloque de prosa libre en sections: ============
+  - type: text
+    title: "text · width: default"
+    text: |
+      ## Un H2 dentro del bloque
+      Párrafo con **negrita**, *cursiva* y una [lista](/vision/) — markdown completo, igual que el prose. Reutiliza `.container.prose`: mismo ancho de lectura que el body markdown, sin CSS nuevo.
+
+      - Item de lista
+      - Otro item
+  - type: text
+    width: wide
+    variant: soft
+    textSize: large
+    align: center
+    pad: compact
+    title: "text · width: wide · variant: soft · textSize: large · align: center · pad: compact"
+    text: "Un párrafo simple, sin headers ni listas, para comparar cómo escala `textSize` un bloque de texto normal."
+  - type: text
+    bgColor: "#C9A84C"
+    class: "on-light"
+    title: "text · bgColor + class: on-light"
+    text: "Igual que cualquier otro bloque, admite `bgColor` plano con `on-light` para mantener el texto oscuro sobre fondos claros."
+
+  # ============ TEXT-SPLIT — grid simétrico 2 columnas, ambos slots libres ============
+  - type: text-split
+    title: "text-split · items con textSize/align/pad/margin distintos"
+    items:
+      - text: "**«Una cita grande, centrada»**"
+        textSize: xl
+        align: center
+      - text: "Un párrafo normal al lado, con su propio `pad: m` y `margin` de ajuste fino. El grid es 1fr en móvil, 1fr 1fr desde 821px — reduce la ventana para comprobarlo."
+        pad: m
+        margin: "0 0 1rem 0"
+  - type: text-split
+    width: wide
+    items:
+      - text: "Columna izquierda sin modificadores — hereda el tamaño de texto por defecto del tema."
+      - text: "Columna derecha, `textSize: small` — para notas al margen o texto secundario junto al principal."
+        textSize: small
+
   # ============ FAQ ============
   - type: faq
     title: "faq"
@@ -365,6 +405,60 @@ Comparativa de `width` — mismo CTA, tres anchos, dentro del prose (72ch):
 {{< cta title="width: wide — hasta 1320px, rompe el prose" width="wide" bgColor="#34855B" >}}
 
 {{< cta title="width: full — ancho completo de viewport" width="full" bgColor="#1B3A5C" >}}
+
+### Shortcode {{</* image-text */>}}
+
+{{< image-text image="https://picsum.photos/seed/its1/640/420" imageAlt="Demo" title="image-text en el prose" >}}
+Mismo bloque que el `type: image-text` de `sections:`, pero intercalado en el body markdown — útil cuando el resto de la página ya es prosa (como Nosotros) y solo hace falta un tramo con imagen.
+{{< /image-text >}}
+
+{{< image-text image="https://picsum.photos/seed/its2/640/420" imageAlt="Demo" reverse="true" variant="soft" title="Con reverse + variant: soft" >}}
+`reverse="true"` pasa la imagen a la izquierda. Admite los mismos modificadores que el bloque: `variant`, `width`, `textSize`, `align`, `pad`, `class`.
+{{< /image-text >}}
+
+### Shortcode {{</* text */>}}
+
+**Solo tiene sentido con un modificador que lo distinga del prose circundante** — sin `bgColor`/`width`/`pad`/`textSize` sería un `.prose` anidado dentro de otro `.prose`, sin ninguna diferencia visual. Ejemplo real: una caja de aviso destacada en medio de un texto normal.
+
+Un párrafo de prose normal, antes de la caja destacada.
+
+{{< text bgColor="#f5efe5" pad="compact" title="Aviso destacado" >}}
+Esto **sí** se distingue del resto: fondo propio y padding distinto, para una nota o aviso puntual dentro de un tramo largo de texto.
+{{< /text >}}
+
+Y otro párrafo de prose normal, después de la caja.
+
+{{< text width="wide" bgColor="#1B3A5C" class="on-light" align="center" >}}
+O un tramo que rompe el ancho de lectura (`width="wide"`) para un párrafo que quieres que respire más — con fondo oscuro y texto centrado.
+{{< /text >}}
+
+### Shortcode {{</* text-split */>}}
+
+{{< text-split >}}
+{{< text-split-item textSize="xl" align="center" >}}
+**«Una cita destacada»**
+{{< /text-split-item >}}
+{{< text-split-item textSize="s" >}}
+Y el texto de acompañamiento al lado, en la columna derecha — `text-split-item` solo funciona anidado dentro de `text-split`.
+{{< /text-split-item >}}
+{{< /text-split >}}
+
+### Shortcode {{</* testimonial */>}} (cita suelta)
+
+{{< testimonial name="Cliente de ejemplo" rating="5" >}}
+Una única cita, con su propio wrapper — para intercalar en el prose sin montar un grid completo. Distinto del bloque `type: testimonials` (grid) que ya viste arriba.
+{{< /testimonial >}}
+
+### Shortcode {{</* testimonials */>}} + {{</* testimonial-item */>}} (grid en el prose)
+
+{{< testimonials title="testimonials en el prose — mismo grid que el bloque YAML" >}}
+{{< testimonial-item name="Cliente A" rating="5" >}}
+Primera cita del grid, escrita como shortcode anidado en vez de item de YAML.
+{{< /testimonial-item >}}
+{{< testimonial-item name="Cliente B" rating="4" >}}
+Segunda cita — mismo `.cards-grid` que usa el bloque de sections, mismo CSS.
+{{< /testimonial-item >}}
+{{< /testimonials >}}
 
 ### Shortcode {{</* cards */>}} — generación automática
 

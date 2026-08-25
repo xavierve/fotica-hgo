@@ -142,17 +142,13 @@ Mi hijo tenía problemas de visión y Anabel le trató con una delicadeza incre�
 {{< /testimonials >}}
 
 {{< text-split width="wide" >}}
-{{< text-split-item textSize="xl" align="center" >}}
-**«Si trabajas bien y eres buena gente, entras en la familia de Fausto.»**
+{{< text-split-item align="center" >}}
+## «Si trabajas bien y eres buena gente, entras en la familia de Fausto.»**
 {{< /text-split-item >}}
-{{< text-split-item textSize="s" pad="m" margin="0 0 1rem 0" >}}
+{{< text-split-item textSize="l" pad="m" margin="0 0 1rem 0" >}}
 Lo dice el propio equipo directivo, y no es una frase para la web: es la razón por la que María José lleva 30 años aquí, por la que Melania lleva 25, y por la que Victoria, después de una temporada en Alemania, volvió a Torre del Mar y a Fausto sin pensárselo. Y también es la razón por la que, con quienes en algún momento dejaron de trabajar aquí, la relación sigue siendo buena. Lo primero es ser personas, respetarnos y valorarnos mutuamente — con el cliente, con el proveedor, con quien trabaja hoy y con quien trabajó ayer.
 {{< /text-split-item >}}
 {{< /text-split >}}
-
-{{< banner >}}«Si trabajas bien y eres buena gente, entras en la familia de Fausto.»{{< /banner >}}
-
-Lo dice el propio equipo directivo, y no es una frase para la web: es la razón por la que María José lleva 30 años aquí, por la que Melania lleva 25, y por la que Victoria, después de una temporada en Alemania, volvió a Torre del Mar y a Fausto sin pensárselo. Y también es la razón por la que, con quienes en algún momento dejaron de trabajar aquí, la relación sigue siendo buena. Lo primero es ser personas, respetarnos y valorarnos mutuamente — con el cliente, con el proveedor, con quien trabaja hoy y con quien trabajó ayer.
 
 <!-- ## Dos centros en Torre del Mar, un mismo equipo -->
 

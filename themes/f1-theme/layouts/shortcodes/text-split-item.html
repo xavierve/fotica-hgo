@@ -2,19 +2,27 @@
   Uso EXCLUSIVO anidado dentro de {{< text-split >}}...{{< /text-split >}}.
 
   {{< text-split-item textSize="xl" align="center" pad="m" margin="0 0 1rem 0" >}}
-  Contenido, admite **markdown**.
+  ## «Una cita o frase corta»
   {{< /text-split-item >}}
 
   Todos los parámetros son opcionales — sin ninguno, el item hereda el
   tamaño/alineación por defecto del tema.
 
   textSize — s|small, m|default, l|large, xl → reutiliza block-text-* (mismas
-             clases que banner/cards, mismo CSS, sin duplicar reglas)
+             clases que banner/cards, mismo CSS, sin duplicar reglas). Afecta
+             SOLO al tamaño de fuente — no limita el ancho por sí solo.
   align    — left | center | right → reutiliza block-align-* (idem)
   pad      — s | m | l → padding interno del item (tokens propios de item,
              más pequeños que el pad de sección: --space-s/m/l)
   margin   — valor CSS libre, ej. "0 0 1rem 0" (como bgColor, sin validar
              contra una lista cerrada — para casos puntuales de ajuste fino)
+
+  El ancho limitado (36ch, centrado) va atado a si el contenido ES un
+  encabezado real (## / ###, produce <h2>/<h3>), NO al textSize elegido — así
+  un párrafo largo con textSize="l" no se estrecha por error. Para una cita
+  corta tipo titular, escríbela como "## texto" en vez de "**texto**": con
+  negrita queda como <p> normal (ancho completo de la columna); con ## queda
+  como <h2> (36ch, centrado, tamaño fijo en rem — no escala con textSize).
 
   Nota: si el resultado final es un único párrafo, Hugo elimina el <p> que lo
   envuelve (comportamiento estándar de markdownify, no un bug de este

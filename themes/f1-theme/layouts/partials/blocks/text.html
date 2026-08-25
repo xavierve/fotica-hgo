@@ -23,9 +23,9 @@
 {{- if .bgColor }}{{ $extra = $extra | append "has-bg-color" }}{{ end -}}
 <section class="{{ partial "block-classes.html" (dict "name" "text" "context" . "extra" $extra) }}"
   {{- with .bgColor }} style="--section-bg-color:{{ . | safeCSS }}"{{ end }}>
-  <div class="container prose">
+  <div class="container">
     {{ with .title }}<h2>{{ . }}</h2>{{ end }}
     {{ with .subtitle }}<p class="section-subtitle">{{ . }}</p>{{ end }}
-    {{ .text | markdownify }}
+    <div class="prose">{{ .text | markdownify }}</div>
   </div>
 </section>
