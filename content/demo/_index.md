@@ -23,7 +23,7 @@ hero:
   subtitle: "Redimensiona la ventana: por debajo de 820px carga la imagen bgMobile. El overlay toma el tinte de bgColor vía color-mix."
   bg: "https://picsum.photos/seed/fausto-hero/1600/700"
   bgMobile: "https://picsum.photos/seed/fausto-hero-m/700/900"
-  bgColor: "#1B3A5C"
+  bgColor: "var(--bg-color2)"
   ctaPreset: contact
   labelCall: "Llamar ahora"
   class: "scrim"           # activo aquí — comparar con los 3 CTA de abajo (scrim/overlay-strong/panel)
@@ -32,8 +32,9 @@ sections:
   # ============ TRUSTBAR usada como CATÁLOGO DE ICONOS ============
   # Cada item muestra el icono y, como texto, su nombre exacto de invocación:
   # se usan con `icon: "nombre"` en bloques/botones. Set completo (16).
+  # xxx el Title no aparece
   - type: trustbar
-    title: "Catálogo de iconos — icon: \"nombre\""
+    title: "1- Catálogo de iconos — icon: \"nombre\""
     class: "demo-note"
     items:
       - { icon: "phone", text: "phone" }
@@ -55,26 +56,26 @@ sections:
 
   # ============ IMAGE_TEXT — las 4 variants ============
   - type: image-text
-    title: "image_text · variant: default"
+    title: "2- image_text · variant: default"
     text: "Bloque base, imagen a la derecha. El campo `text` admite **markdown**."
     image: "https://picsum.photos/seed/it1/640/420"
     imageAlt: "Demo"
   - type: image-text
     variant: soft
     reverse: true
-    title: "image_text · variant: soft + reverse"
+    title: "3- image_text · variant: soft + reverse"
     text: "Fondo suave e imagen a la izquierda (`reverse: true`)."
     image: "https://picsum.photos/seed/it2/640/420"
     imageAlt: "Demo"
   - type: image-text
     variant: featured
-    title: "image_text · variant: featured"
+    title: "4- image_text · variant: featured"
     text: "Variante destacada, para el bloque protagonista de una página."
     image: "https://picsum.photos/seed/it3/640/420"
     imageAlt: "Demo"
   - type: image-text
     variant: contrast
-    title: "image_text · variant: contrast"
+    title: "5- image_text · variant: contrast"
     text: "Variante de contraste (fondo oscuro)."
     image: "https://picsum.photos/seed/it4/640/420"
     imageAlt: "Demo"
@@ -83,7 +84,7 @@ sections:
   - type: image-text
     width: wide
     textSize: large
-    title: "width: wide · textSize: large"
+    title: "6- width: wide · textSize: large"
     text: "Contenedor ancho y tipografía grande."
     image: "https://picsum.photos/seed/it5/640/420"
     imageAlt: "Demo"
@@ -91,21 +92,21 @@ sections:
     width: full
     textSize: xl
     align: center
-    title: "width: full · textSize: xl · align: center"
+    title: "7- width: full · textSize: xl · align: center"
     text: "Ancho completo, la escala tipográfica máxima y alineado centrado."
     image: "https://picsum.photos/seed/it6/640/420"
     imageAlt: "Demo"
   - type: image-text
     textSize: small
     align: right
-    title: "textSize: small · align: right"
+    title: "8- textSize: small · align: right"
     text: "La escala mínima de bloque y alineación derecha. Para letra pequeña editorial."
     image: "https://picsum.photos/seed/it7/640/420"
     imageAlt: "Demo"
 
   # ============ COUNTER — con y sin fondo ============
   - type: counter
-    text: "counter · sin fondo · animated: true"
+    text: "9- counter · sin fondo · animated: true"
     animated: true
     items:
       - { number: "44", label: "años de experiencia" }
@@ -113,9 +114,9 @@ sections:
       - { number: "2", label: "centros en Torre del Mar" }
       - { number: "1982", label: "año de apertura" }
   - type: counter
-    text: "counter · bg + bgColor (overlay tintado)"
+    text: "10- counter · bg + bgColor (overlay tintado)"
     bg: "https://picsum.photos/seed/counter/1600/500"
-    bgColor: "#34855B"
+    bgColor: "var(--bg-color3)"
     items:
       - { number: "14", label: "iconos en el set" }
       - { number: "12", label: "bloques disponibles" }
@@ -123,7 +124,7 @@ sections:
 
   # ============ CARDS (items manuales; la versión automática va como shortcode en el prose) ============
   - type: cards
-    title: "cards · columns: 3 · items manuales"
+    title: "11- cards · columns: 3 · items manuales"
     subtitle: "El shortcode {{</* cards */>}} del prose las genera automáticamente desde una sección."
     columns: 3
     linkText: "Ver más"
@@ -134,7 +135,7 @@ sections:
 
   # ============ SLIDER ============
   - type: slider
-    title: "slider"
+    title: "12- slider"
     items:
       - { image: "https://picsum.photos/seed/s1/800/450", imageAlt: "Demo", title: "Slide 1", text: "Título, texto y leyenda.", legend: "leyenda opcional" }
       - { image: "https://picsum.photos/seed/s2/800/450", imageAlt: "Demo", title: "Slide 2", text: "Segundo slide." }
@@ -142,7 +143,7 @@ sections:
 
   # ============ GALLERY ============
   - type: gallery
-    title: "gallery"
+    title: "13- gallery"
     items:
       - { image: "https://picsum.photos/seed/g1/600/400", imageAlt: "Demo", legend: "Con leyenda" }
       - { image: "https://picsum.photos/seed/g2/600/400", imageAlt: "Demo" }
@@ -151,7 +152,7 @@ sections:
 
   # ============ TEAM ============
   - type: team
-    title: "team"
+    title: "14- team"
     subtitle: "Campos: image, imageAlt, name, role"
     items:
       - { image: "https://picsum.photos/seed/t1/400/400", imageAlt: "Demo", name: "Nombre Uno", role: "Óptico-optometrista" }
@@ -160,7 +161,7 @@ sections:
 
   # ============ TIMELINE ============
   - type: timeline
-    title: "timeline"
+    title: "15- timeline"
     items:
       - { number: "1982", event_title: "Apertura", event_text: "Primer centro en Torre del Mar." }
       - { number: "2004", event_title: "Segundo centro", event_text: "Campos: number, event_title, event_text." }
@@ -168,7 +169,7 @@ sections:
 
   # ============ BRANDS-LOGOS ============
   - type: brands-logos
-    title: "brands_logos"
+    title: "16- brands_logos"
     items:
       - { image: "https://picsum.photos/seed/b1/240/120", imageAlt: "Demo", text: "Marca A" }
       - { image: "https://picsum.photos/seed/b2/240/120", imageAlt: "Demo", text: "Marca B" }
@@ -177,7 +178,7 @@ sections:
 
   # ============ TESTIMONIALS ============
   - type: testimonials
-    title: "testimonials (text, name, rating, image opcional)"
+    title: "17- testimonials (text, name, rating, image opcional)"
     items:
       - { text: "Con rating e imagen.", name: "Cliente A", rating: 5, image: "https://picsum.photos/seed/p1/80/80" }
       - { text: "Solo texto y nombre.", name: "Cliente B" }
@@ -185,7 +186,7 @@ sections:
 
   # ============ TEXT — bloque de prosa libre en sections: ============
   - type: text
-    title: "text · width: default"
+    title: "18- text · width: default"
     text: |
       ## Un H2 dentro del bloque
       Párrafo con **negrita**, *cursiva* y una [lista](/vision/) — markdown completo, igual que el prose. Reutiliza `.container.prose`: mismo ancho de lectura que el body markdown, sin CSS nuevo.
@@ -198,19 +199,19 @@ sections:
     textSize: large
     align: center
     pad: compact
-    title: "text · width: wide · variant: soft · textSize: large · align: center · pad: compact"
+    title: "19- text · width: wide · variant: soft · textSize: large · align: center · pad: compact"
     text: "Un párrafo simple, sin headers ni listas, para comparar cómo escala `textSize` un bloque de texto normal."
   - type: text
-    bgColor: "#C9A84C"
+    bgColor: "var(--bg-color4)"
     class: "on-light"
-    title: "text · bgColor + class: on-light"
+    title: "20- text · bgColor + class: on-light"
     text: "Igual que cualquier otro bloque, admite `bgColor` plano con `on-light` para mantener el texto oscuro sobre fondos claros."
 
   # ============ TEXT-SPLIT — grid simétrico 2 columnas, ambos slots libres ============
   - type: text-split
-    title: "text-split · items con textSize/align/pad/margin distintos"
+    title: "21- text-split · items con textSize/align/pad/margin distintos"
     items:
-      - text: "**«Una cita grande, centrada»**"
+      - text: "## «H2 Una cita grande, centrada»"
         textSize: xl
         align: center
       - text: "Un párrafo normal al lado, con su propio `pad: m` y `margin` de ajuste fino. El grid es 1fr en móvil, 1fr 1fr desde 821px — reduce la ventana para comprobarlo."
@@ -218,14 +219,15 @@ sections:
         margin: "0 0 1rem 0"
   - type: text-split
     width: wide
+    bgColor: "var(--bg-color2)"
     items:
-      - text: "Columna izquierda sin modificadores — hereda el tamaño de texto por defecto del tema."
-      - text: "Columna derecha, `textSize: small` — para notas al margen o texto secundario junto al principal."
-        textSize: small
+      - text: "22- Columna izquierda sin modificadores — hereda el tamaño de texto por defecto del tema."
+      - text: "Columna derecha, `textSize: large` — para texto destacado."
+        textSize: large
 
   # ============ FAQ ============
   - type: faq
-    title: "faq"
+    title: "23- faq"
     items:
       - question: "¿Las respuestas admiten markdown?"
         answer: "Sí — **negritas**, *cursivas* y [enlaces](/contacto/)."
@@ -234,55 +236,55 @@ sections:
 
   # ============ cta — todas las variaciones ============
   - type: cta
-    title: "cta · sin fondo · preset: contact"
+    title: "24- cta · fondo bg-color1· preset: contact"
     subtitle: "El par Llamar + WhatsApp sale de data/site.yaml."
     preset: contact
     microcopy: "Con microcopy bajo los botones"
   - type: cta
-    title: "cta · bgColor plano"
-    bgColor: "#1B3A5C"
+    title: "25- h2 cta · bgColor2 plano"
+    bgColor: "var(--bg-color2)"
     preset: contact
   - type: cta
-    title: "cta · bgColor claro + class: on-light (texto oscuro)"
+    title: "26- cta · bgColor4 claro + class: on-light (texto oscuro)"
     subtitle: "Para fondos de color claros, on-light mantiene el texto oscuro."
-    bgColor: "#C9A84C"
+    bgColor: "var(--bg-color4)"
     class: "on-light"
     preset: contact
   - type: cta
-    title: "cta · bg imagen (overlay neutro)"
+    title: "26- cta · bg imagen (overlay neutro)"
     bg: "https://picsum.photos/seed/cta1/1600/500"
     preset: contact
   - type: cta
-    title: "cta · bg + bgMobile + bgColor (overlay tintado)"
+    title: "27- cta · bg + bgMobile + bgColor3 (overlay tintado)"
     subtitle: "Reduce la ventana para ver la imagen móvil."
     bg: "https://picsum.photos/seed/cta2/1600/500"
     bgMobile: "https://picsum.photos/seed/cta2m/700/800"
-    bgColor: "#34855B"
+    bgColor: "var(--bg-color3)"
     preset: contact
     labelCall: "Llamar ahora"
     labelWhatsapp: "Escríbenos"
   - type: cta
-    title: "cta · botones personalizados con iconos"
+    title: "28- cta · botones personalizados con iconos"
     align: center
     buttons:
       - { text: "Cómo llegar", url: "/contacto/", icon: "location" }
       - { text: "Horario", url: "/contacto/", icon: "clock" }
       - { text: "Escríbenos", url: "mailto:info@opticafausto.com", icon: "email" }
   - type: cta
-    title: "cta · bg + class: scrim (degradado direccional)"
+    title: "29- cta · bg + class: scrim (degradado direccional)"
     subtitle: "El texto queda sobre la zona oscurecida; la foto respira a la derecha."
     bg: "https://picsum.photos/seed/cta3/1600/500"
     class: "scrim"
     align: left
     preset: contact
   - type: cta
-    title: "cta · bg + class: overlay-strong (velo denso)"
+    title: "30- cta · bg + class: overlay-strong (velo denso)"
     subtitle: "Para fotos claras o con mucho detalle."
     bg: "https://picsum.photos/seed/cta4/1600/500"
     class: "overlay-strong"
     preset: contact
   - type: cta
-    title: "cta · bg + class: panel (caja tras el texto)"
+    title: "31- cta · bg + class: panel (caja tras el texto)"
     subtitle: "La opción más segura cuando no controlas la foto."
     bg: "https://picsum.photos/seed/cta5/1600/500"
     class: "panel"
@@ -290,22 +292,24 @@ sections:
   - type: cta
     layout: split
     eyebrow: "Presupuesto claro, línea a línea"
-    title: "cta · layout: split con eyebrow (antetítulo)"
+    title: "32- cta · layout: split con eyebrow (antetítulo)"
     subtitle: "La promesa de marca va arriba como antetítulo; el microcopy junto a los botones se reserva para quitar objeciones («sin compromiso»)."
     preset: contact
     microcopy: "Sin compromiso"
   - type: cta
-    title: "cta · tone: vision"
+    title: "33- cta · tone: vision"
     tone: vision
     preset: contact
   - type: cta
-    title: "cta · tone: hearing · textSize: large"
+    title: "34- cta · tone: hearing · textSize: large"
     tone: hearing
     textSize: large
     preset: contact
 ---
 
-## El prose: body markdown {.demo}
+## P1- El prose: body markdown {.demo}
+
+> Esta página es `draft: true`: se ve con `hugo server -D` y nunca se publica.
 
 Todo lo que sigue es **body markdown** dentro del contenedor `prose`: títulos, listas, tablas, imágenes y shortcodes intercalados.
 
@@ -338,11 +342,11 @@ Texto con **negrita**, *cursiva*, un [enlace interno](/vision/) y `código inlin
 | Las tablas | también funcionan |
 | en el prose | del body |
 
-### Imagen en el prose
+### p2- Imagen en el prose
 
 ![Imagen demo insertada con markdown estándar](https://picsum.photos/seed/prose/900/400)
 
-### Shortcode {{</* spacer */>}}
+### p3- Shortcode {{</* spacer */>}}
 
 Espaciado puntual entre dos párrafos. Debajo va un `spacer size="l"`:
 
@@ -352,23 +356,23 @@ Primer párrafo, justo encima del espaciador.
 
 Segundo párrafo, tras un espacio grande. (`s`, `m`, `l` disponibles.)
 
-### Shortcode {{</* banner */>}}
+### p4- Shortcode {{</* banner */>}}
 
-{{< banner >}}Banner por defecto: frase destacada **con markdown**, centrada.{{< /banner >}}
+{{< banner >}} p4.1- Banner por defecto: frase destacada **con markdown**, centrada.{{< /banner >}}
 
-{{< banner bgColor="#C9A84C" textSize="large" >}}Banner con `bgColor` y `textSize: large`.{{< /banner >}}
+{{< banner bgColor="var(--bg-color4)" textSize="large" class="on-light" >}}p4.2- Banner con `bgColor4` y `textSize: large`.{{< /banner >}}
 
-{{< banner class="fs-s" align="left" >}}Banner con utilidad `fs-s` vía class y alineado a la izquierda.{{< /banner >}}
+{{< banner class="fs-s" align="left" >}}p4.3- Banner con utilidad `fs-s` vía class y alineado a la izquierda.{{< /banner >}}
 
-### Shortcode {{</* cta */>}}
+### p5- Shortcode {{</* cta */>}}
 
 Sin parámetros de botones → preset contact automático:
 
-{{< cta title="CTA por defecto en mitad del prose" microcopy="Llamar + WhatsApp desde site.yaml" >}}
+{{< cta title="p5.1- CTA por defecto en mitad del prose" microcopy="Llamar + WhatsApp desde site.yaml" >}}
 
 Con fondo y botones personalizados:
 
-{{< cta title="CTA con bg + bgColor y botones propios" bg="https://picsum.photos/seed/ctas/1600/500" bgColor="#1B3A5C" b1text="Ver Visión" b1url="/vision/" b1icon="arrow-down" b2text="Ver Audición" b2url="/audicion/" b2icon="hearing" >}}
+{{< cta title="p5.2- CTA con bg + bgColor y botones propios" bg="https://picsum.photos/seed/ctas/1600/500" bgColor="var(--bg-color2)" b1text="Ver Visión" b1url="/vision/" b1icon="arrow-down" b2text="Ver Audición" b2url="/audicion/" b2icon="hearing" >}}
 
 ### Decisión: pad de los CTA intermedios — comparativa en contexto
 
@@ -376,7 +380,7 @@ Así se ve un CTA intermedio con **pad normal** entre párrafos de una página r
 
 Una revisión periódica permite actuar a tiempo y prevenir alteraciones en el sistema visual, el cual evoluciona a lo largo de nuestra vida y se ve afectado, entre otros factores, por nuestros hábitos diarios.
 
-{{< cta title="Pide tu revisión visual" subtitle="En 20–30 minutos sales de dudas." >}}
+{{< cta title="p5.3- Pide tu revisión visual" subtitle="En 20–30 minutos sales de dudas." >}}
 
 Si reconoces dos o más señales, no lo dejes pasar: el examen de salud ocular permite detectar signos de posibles patologías, y ante cualquier sospecha te derivamos al oftalmólogo.
 
@@ -384,7 +388,7 @@ Y el mismo CTA con **pad: compact** — mismo contenido, menos ceremonia:
 
 Una revisión periódica permite actuar a tiempo y prevenir alteraciones en el sistema visual, el cual evoluciona a lo largo de nuestra vida y se ve afectado, entre otros factores, por nuestros hábitos diarios.
 
-{{< cta title="Pide tu revisión visual" subtitle="En 20–30 minutos sales de dudas." pad="compact" >}}
+{{< cta title="p5.4- Pide tu revisión visual" subtitle="En 20–30 minutos sales de dudas." pad="compact" >}}
 
 Si reconoces dos o más señales, no lo dejes pasar: el examen de salud ocular permite detectar signos de posibles patologías, y ante cualquier sospecha te derivamos al oftalmólogo.
 
@@ -392,64 +396,64 @@ Si reconoces dos o más señales, no lo dejes pasar: el examen de salud ocular p
 
 Comparativa de `pad` — mismo CTA aislado, tres escalones de padding vertical:
 
-{{< cta title="pad: s (alias de compact)" pad="s" bgColor="#34855B" >}}
+{{< cta title="p5.5- pad: s (alias de compact)" pad="s" bgColor="var(--bg-color3)" >}}
 
-{{< cta title="pad normal (sin declarar)" bgColor="#1B3A5C" >}}
+{{< cta title="p5.6- pad normal (sin declarar)" bgColor="var(--bg-color3)" >}}
 
-{{< cta title="pad: l (alias de spacious)" pad="l" bgColor="#34855B" >}}
+{{< cta title="p5.7- pad: l (alias de spacious)" pad="l" bgColor="var(--bg-color3)" >}}
 
 Comparativa de `width` — mismo CTA, tres anchos, dentro del prose (72ch):
 
-{{< cta title="width: default (implícito) — recortado a la medida de lectura" >}}
+{{< cta title="p5.8- width: default (implícito) — recortado a la medida de lectura" >}}
 
-{{< cta title="width: wide — hasta 1320px, rompe el prose" width="wide" bgColor="#34855B" >}}
+{{< cta title="p5.9- width: wide — hasta 1320px, rompe el prose" width="wide" bgColor="var(--bg-color1)" >}}
+xxx ver color comparado con p5.8
+{{< cta title="p5.10 width: full — ancho completo de viewport" width="full" bgColor="var(--bg-color1)" >}}
 
-{{< cta title="width: full — ancho completo de viewport" width="full" bgColor="#1B3A5C" >}}
+### p6- Shortcode {{</* image-text */>}}
 
-### Shortcode {{</* image-text */>}}
-
-{{< image-text image="https://picsum.photos/seed/its1/640/420" imageAlt="Demo" title="image-text en el prose" >}}
+{{< image-text image="https://picsum.photos/seed/its1/640/420" imageAlt="Demo" title="p6.1- image-text en el prose" >}}
 Mismo bloque que el `type: image-text` de `sections:`, pero intercalado en el body markdown — útil cuando el resto de la página ya es prosa (como Nosotros) y solo hace falta un tramo con imagen.
 {{< /image-text >}}
 
-{{< image-text image="https://picsum.photos/seed/its2/640/420" imageAlt="Demo" reverse="true" variant="soft" title="Con reverse + variant: soft" >}}
+{{< image-text image="https://picsum.photos/seed/its2/640/420" imageAlt="Demo" reverse="true" variant="soft" title="p6.2- Con reverse + variant: soft" >}}
 `reverse="true"` pasa la imagen a la izquierda. Admite los mismos modificadores que el bloque: `variant`, `width`, `textSize`, `align`, `pad`, `class`.
 {{< /image-text >}}
 
-### Shortcode {{</* text */>}}
+### p7- Shortcode {{</* text */>}}
 
 **Solo tiene sentido con un modificador que lo distinga del prose circundante** — sin `bgColor`/`width`/`pad`/`textSize` sería un `.prose` anidado dentro de otro `.prose`, sin ninguna diferencia visual. Ejemplo real: una caja de aviso destacada en medio de un texto normal.
 
 Un párrafo de prose normal, antes de la caja destacada.
 
-{{< text bgColor="#f5efe5" pad="compact" title="Aviso destacado" >}}
+{{< text bgColor="var(--bg-color1)" pad="compact" title="p7.1- Aviso destacado" class="on-light" >}}
 Esto **sí** se distingue del resto: fondo propio y padding distinto, para una nota o aviso puntual dentro de un tramo largo de texto.
 {{< /text >}}
 
 Y otro párrafo de prose normal, después de la caja.
 
-{{< text width="wide" bgColor="#1B3A5C" class="on-light" align="center" >}}
-O un tramo que rompe el ancho de lectura (`width="wide"`) para un párrafo que quieres que respire más — con fondo oscuro y texto centrado.
+{{< text width="wide" bgColor="var(--bg-color2)" align="center" textSize="l">}}
+p7.2- texto bg-color2 que rompe el ancho de lectura (`width="wide"`) para un párrafo que quieres que respire más — con fondo oscuro y texto `textSize="l"`centrado.
 {{< /text >}}
 
-### Shortcode {{</* text-split */>}}
+### p8- Shortcode {{</* text-split */>}}
 
 {{< text-split >}}
 {{< text-split-item textSize="xl" align="center" >}}
-**«Una cita destacada»**
+## p8.1- H2 Una cita destacada»
 {{< /text-split-item >}}
 {{< text-split-item textSize="s" >}}
 Y el texto de acompañamiento al lado, en la columna derecha — `text-split-item` solo funciona anidado dentro de `text-split`.
 {{< /text-split-item >}}
 {{< /text-split >}}
 
-### Shortcode {{</* testimonial */>}} (cita suelta)
+### p9- Shortcode {{</* testimonial */>}} (cita suelta)
 
 {{< testimonial name="Cliente de ejemplo" rating="5" >}}
 Una única cita, con su propio wrapper — para intercalar en el prose sin montar un grid completo. Distinto del bloque `type: testimonials` (grid) que ya viste arriba.
 {{< /testimonial >}}
 
-### Shortcode {{</* testimonials */>}} + {{</* testimonial-item */>}} (grid en el prose)
+### p10- Shortcode {{</* testimonials */>}} + {{</* testimonial-item */>}} (grid en el prose)
 
 {{< testimonials title="testimonials en el prose — mismo grid que el bloque YAML" >}}
 {{< testimonial-item name="Cliente A" rating="5" >}}
@@ -460,7 +464,7 @@ Segunda cita — mismo `.cards-grid` que usa el bloque de sections, mismo CSS.
 {{< /testimonial-item >}}
 {{< /testimonials >}}
 
-### Shortcode {{</* cards */>}} — generación automática
+### p11- Shortcode {{</* cards */>}} — generación automática
 
 Las cards siguientes **no están escritas aquí**: se autodescubren de `/vision/servicios/` leyendo `linkTitle`, `card.description`, `card.image` y `weight` de cada página hija:
 
@@ -468,4 +472,4 @@ Las cards siguientes **no están escritas aquí**: se autodescubren de `/vision/
 
 ---
 
-Fin de la demo. Esta página es `draft: true`: se ve con `hugo server -D` y nunca se publica.
+**Fin del `PROSE` de la demo. AHORA SE PROCESAN LAS SECTIONS**
