@@ -8,13 +8,13 @@ weight: 40
 
 card:
   description: "Cuando las gafas no bastan, hay ayudas que devuelven autonomía."
-  image: "/images/cards/baja-vision.jpg"
+  image: "/images/cards/214-baja_vision-hero.webp"
   imageAlt: "Evaluación de baja visión en Ópticas Fausto, Torre del Mar"
 
 og:
   title: "Baja visión: aprovechar al máximo la visión que queda"
   description: "Especialistas en baja visión en Torre del Mar. Ayudas ópticas, no ópticas y electrónicas para recuperar actividades y autonomía."
-  image: "/images/og/baja-vision.jpg"
+  image: "/images/214-baja_vision-hero.webp"
   type: "article"
 
 schema:
@@ -27,6 +27,7 @@ hero:
   subtitle: "Hay pérdidas de visión que no se corrigen con gafas, lentillas, medicamentos ni cirugía. Leer, coser, ver la televisión o reconocer una cara se vuelven cuesta arriba — y es fácil rendirse y abandonar actividades que daban sentido al día a día. **No hace falta rendirse.** El objetivo de la baja visión es aprovechar al máximo el resto visual que se conserva, con ayudas concretas para cada actividad."
   ctaPreset: contact
   labelCall: "Cuéntanos tu caso"
+  bg: "/images/214-baja_vision-hero.webp"
 
 sections:
   - type: faq

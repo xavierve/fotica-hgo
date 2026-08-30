@@ -8,7 +8,7 @@ page_id: "3.0"
 og:
   title: "Vuelve a oír bien y a conectar — Audición en Ópticas Fausto"
   description: "Estudio auditivo en cabina insonorizada y audífonos con prueba gratuita en casa. Centro Auditivo Homologado en Torre del Mar desde 1982."
-  image: "/images/og/audicion.jpg"
+  image: "/images/300-audicion_hero.webp"
   type: "website"
 
 schema:
@@ -19,6 +19,7 @@ hero:
   title: "Vuelve a oír bien y a conectar"
   subtitle: "Hay conversaciones que no queremos perdernos: la risa de un nieto, una charla de sobremesa, una canción que trae recuerdos. Cuando el oído empieza a fallar, no solo perdemos sonido — perdemos trozos de esos momentos sin darnos cuenta, porque la pérdida auditiva suele llegar poco a poco. Dar el paso de hacerse una revisión auditiva no es fácil. Pero es solo eso: una revisión, sin compromiso de nada más. En Ópticas Fausto somos **Centro Auditivo Homologado** y llevamos 44 años, desde 1982, acompañando a las familias de Torre del Mar en este camino — sin prisas y sin presión."
   ctaPreset: contact
+  bg: "/images/300-audicion_hero.webp"
 
 sections:
   - type: faq

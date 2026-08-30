@@ -8,13 +8,13 @@ weight: 30
 
 card:
   description: "Zumbidos y pitidos: qué son y cómo los tratamos con terapia TRT."
-  image: "/images/cards/tinnitus.jpg"
+  image: "/images/cards/313-tinnitus_hero.webp"
   imageAlt: "Tratamiento de tinnitus en Ópticas Fausto"
 
 og:
   title: "Ese pitido que solo oyes tú tiene nombre. Y tiene tratamiento."
   description: "Expertos en Terapia de Reentrenamiento de Tinnitus (TRT) y en audífonos para pérdidas auditivas con acúfenos. Torre del Mar."
-  image: "/images/og/tinnitus.jpg"
+  image: "/images/313-tinnitus_hero.webp"
   type: "article"
 
 schema:
@@ -26,6 +26,7 @@ hero:
   title: "Ese pitido que solo oyes tú tiene nombre. Y tiene tratamiento."
   subtitle: "Un silbido, un zumbido, una palpitación que nadie más percibe — y que está ahí al acostarte, en el silencio, a veces todo el día. Se llama **tinnitus** (o acúfeno), es mucho más común de lo que crees, y lo más importante: **no tienes por qué resignarte a vivir con él tal como está.** En Fausto somos expertos en **Terapia de Reentrenamiento de Tinnitus (TRT)** y en la adaptación de audífonos para pérdidas auditivas con tinnitus."
   ctaPreset: contact
+  bg: "/images/313-tinnitus_hero.webp"
 
 sections:
   - type: faq

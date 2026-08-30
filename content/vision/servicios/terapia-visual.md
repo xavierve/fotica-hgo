@@ -8,13 +8,13 @@ weight: 60
 
 card:
   description: "El gimnasio de tus ojos: entrena habilidades visuales."
-  image: "/images/cards/terapia-visual.jpg"
+  image: "/images/cards/216_baja_vision_juan_hero.webp"
   imageAlt: "Sesión de terapia visual en Ópticas Fausto, Torre del Mar"
 
 og:
   title: "El gimnasio de tus ojos — Terapia visual"
   description: "Programa de entrenamiento visual individualizado, en consulta y en casa, con revisiones que miden el progreso de forma objetiva."
-  image: "/images/og/terapia-visual.jpg"
+  image: "/images/216_baja_vision_juan_hero.webp"
   type: "article"
 
 schema:
@@ -26,6 +26,7 @@ hero:
   title: "El gimnasio de tus ojos"
   subtitle: "Ver bien no es solo «tener buena vista». Es enfocar rápido al pasar de la pizarra al cuaderno, coordinar los dos ojos para leer sin perderse de línea, mantener la atención sin agotarse. Cuando alguna de esas habilidades falla, las gafas no siempre bastan — y ahí es donde entra la **terapia visual**: un programa de entrenamiento personalizado para desarrollar las habilidades que la visión necesita."
   ctaPreset: contact
+  bg: "/images/216_baja_vision_juan_hero.webp"
 
 sections:
   - type: faq

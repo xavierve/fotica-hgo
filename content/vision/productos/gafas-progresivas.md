@@ -8,13 +8,13 @@ weight: 20
 
 card:
   description: "Una sola gafa para todas las distancias. Adaptación garantizada."
-  image: "/images/cards/gafas-progresivas.jpg"
+  image: "/images/cards/222-progresivas_hero.webp"
   imageAlt: "Gafas progresivas en Ópticas Fausto, Torre del Mar"
 
 og:
   title: "Una sola gafa para toda tu vida diaria — Gafas progresivas"
   description: "2×1 en lentes progresivas con certificado del fabricante y adaptación garantizada. Asesoramiento honesto en Torre del Mar."
-  image: "/images/og/gafas-progresivas.jpg"
+  image: "/images/222-progresivas_hero.webp"
   type: "article"
 
 schema:
@@ -25,6 +25,7 @@ hero:
   title: "Una sola gafa para toda tu vida diaria"
   subtitle: "Leer el móvil, mirar el ordenador, conducir, saludar a alguien al otro lado de la calle — sin cambiar de gafas y sin pensar en ello. Eso es una **lente progresiva** bien elegida y bien adaptada: el todoterreno de la visión a partir de los 40."
   ctaPreset: contact
+  bg: "/images/222-progresivas_hero.webp"
 
 sections:
   - type: faq

@@ -8,13 +8,13 @@ weight: 20
 
 card:
   description: "Un tercio del fracaso escolar tiene origen visual. Revisa a tiempo."
-  image: "/images/cards/vision-infantil.jpg"
+  image: "/images/cards/212-vision_infantil_hero.webp"
   imageAlt: "Revisión visual infantil en Ópticas Fausto, Torre del Mar"
 
 og:
   title: "La importancia de actuar a tiempo — Visión infantil"
   description: "Señales de alerta, anomalías más frecuentes y consejos de higiene visual para niños. Revisión desde los 3 años."
-  image: "/images/og/vision-infantil.jpg"
+  image: "/images/212-vision_infantil_hero.webp"
   type: "article"
 
 schema:
@@ -26,6 +26,7 @@ hero:
   title: "Los niños no saben que ven mal. Los adultos sí podemos saberlo."
   subtitle: "Un niño que ve borroso no se queja: para él, el mundo siempre se ha visto así. Por eso los problemas visuales infantiles pasan desapercibidos hasta que aparecen en forma de malas notas, dolores de cabeza o falta de atención. **Las anomalías visuales están detrás de al menos una tercera parte del fracaso escolar** — y la mayoría tienen solución si se detectan a tiempo."
   ctaPreset: contact
+  bg: "/images/212-vision_infantil_hero.webp"
 
 sections:
   - type: faq

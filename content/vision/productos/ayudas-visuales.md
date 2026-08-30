@@ -8,13 +8,13 @@ weight: 50
 
 card:
   description: "Lupas, telescopios y filtros para aprovechar tu resto visual."
-  image: "/images/cards/ayudas-visuales.jpg"
+  image: "/images/cards/225-ayudas_visuales_hero.webp"
   imageAlt: "Ayudas visuales para baja visión en Ópticas Fausto"
 
 og:
   title: "Una pequeña ayuda para lograr un gran cambio — Ayudas visuales"
   description: "Ayudas ópticas, electrónicas y no ópticas para baja visión, con evaluación personalizada y prueba en consulta. Torre del Mar."
-  image: "/images/og/ayudas-visuales.jpg"
+  image: "/images/225-ayudas_visuales_hero.webp"
   type: "article"
 
 schema:
@@ -25,6 +25,7 @@ hero:
   title: "Una pequeña ayuda para lograr un gran cambio"
   subtitle: "Volver a leer el periódico. Ver la televisión sin adivinar. Enhebrar una aguja. Cuando una patología visual limita el día a día, la ayuda adecuada puede devolver actividades que parecían perdidas. En Ópticas Fausto contamos con **especialistas en Baja Visión, miembros de la Sociedad Española de Baja Visión**, que evalúan tu caso y te acompañan hasta dar con la solución que funciona."
   ctaPreset: contact
+  bg: "/images/225-ayudas_visuales_hero.webp"
 
 sections:
   - type: faq

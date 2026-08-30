@@ -8,13 +8,13 @@ weight: 70
 
 card:
   description: "Protección homologada para deporte, natación y buceo."
-  image: "/images/cards/gafas-deportivas.jpg"
+  image: "/images/cards/227-gafas_proteccion_y_deportivas_hero.webp"
   imageAlt: "Gafas deportivas graduadas en Ópticas Fausto"
 
 og:
   title: "Ver bien mientras haces deporte no es un lujo. Es seguridad."
   description: "Gafas de protección homologadas, soluciones para aire libre y natación graduada. Con y sin graduación, adultos y niños."
-  image: "/images/og/gafas-deportivas.jpg"
+  image: "/images/227-gafas_proteccion_y_deportivas_hero.webp"
   type: "article"
 
 schema:
@@ -25,6 +25,7 @@ hero:
   title: "Ver bien mientras haces deporte no es un lujo. Es seguridad."
   subtitle: "Un balonazo, una pala que se escapa, el reflejo del sol en el agua: el deporte pone a prueba tus ojos de formas que la vida diaria no. Y jugar sin tu graduación — o con tus gafas de diario, que no están hechas para eso — resta rendimiento y suma riesgo. Hay solución específica para cada deporte, con y sin graduación."
   ctaPreset: contact
+  bg: "/images/227-gafas_proteccion_y_deportivas_hero.webp"
 
 sections:
   - type: faq

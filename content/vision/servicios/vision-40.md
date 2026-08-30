@@ -8,13 +8,13 @@ weight: 50
 
 card:
   description: "La vista cansada tiene solución. Cuanto antes, más fácil."
-  image: "/images/cards/vision-40.jpg"
+  image: "/images/cards/215_vision_40_hero.webp"
   imageAlt: "Revisión de vista cansada en Ópticas Fausto, Torre del Mar"
 
 og:
   title: "No te quedes atrás: que tu vista siga siendo de lince"
   description: "La presbicia le llega a casi todo el mundo a partir de los 40 — y cuanto antes se aborda, más fácil es adaptarse. Revisión y soluciones en Torre del Mar."
-  image: "/images/og/vision-40.jpg"
+  image: "/images/215_vision_40_hero.webp"
   type: "article"
 
 schema:
@@ -26,6 +26,7 @@ hero:
   title: "No te quedes atrás: que tu vista siga siendo de lince"
   subtitle: "A los 40 y algo empieza a pasar, y casi nadie quiere reconocerlo: el WhatsApp se aleja un poco más del brazo, la carta del restaurante de repente «está mal iluminada», las letras pequeñas del periódico se amontonan. No es que tus ojos fallen — es la **vista cansada**, y le pasa prácticamente a todo el mundo a partir de esta edad. La buena noticia: tiene solución, y **cuanto antes la abordes, menos te costará adaptarte.**"
   ctaPreset: contact
+  bg: "/images/215_vision_40_hero.webp"
 
 sections:
   - type: faq

@@ -8,13 +8,13 @@ weight: 10
 
 card:
   description: "Tipos, diferencias y cómo elegimos el tuyo. Con prueba gratuita en casa."
-  image: "/images/cards/audifonos.jpg"
+  image: "/images/cards/321-audifonos_hero.webp"
   imageAlt: "Audífonos en Ópticas Fausto, Centro Auditivo Homologado"
 
 og:
   title: "Un paso adelante para volver a conectar con quienes más quieres"
   description: "Audífonos para todos los presupuestos, con estudio completo y prueba gratuita en tu vida diaria antes de decidir. Torre del Mar."
-  image: "/images/og/audifonos.jpg"
+  image: "/images/321-audifonos_hero.webp"
   type: "article"
 
 schema:
@@ -25,6 +25,7 @@ hero:
   title: "Un paso adelante para volver a conectar con quienes más quieres"
   subtitle: "Tenemos la solución para tu pérdida auditiva: una amplia gama de audífonos, **desde el más económico hasta el más sofisticado tecnológicamente**. Nuestro equipo especializado en audioprótesis — somos **Centro Auditivo Homologado** — evalúa tu pérdida y te recomienda el audífono que mejor se adapta a tus necesidades funcionales y estéticas. Y queremos que estés totalmente convencido: **lo usas y lo pruebas en tu vida diaria antes de comprarlo, sin ningún compromiso.**"
   ctaPreset: contact
+  bg: "/images/321-audifonos_hero.webp"
 
 sections:
   - type: faq

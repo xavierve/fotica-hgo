@@ -8,13 +8,13 @@ weight: 30
 
 card:
   description: "Frena el avance de la miopía en niños y jóvenes."
-  image: "/images/cards/control-miopia.jpg"
+  image: "/images/cards/213-optometria_D3A0075.webp"
   imageAlt: "Estudio de control de miopía con topógrafo corneal en Ópticas Fausto"
 
 og:
   title: "Frenar la miopía es posible — Control de miopía y Orto-K"
   description: "Lentes nocturnas que corrigen la visión mientras duermes y frenan el avance de la miopía. Estudio personalizado con topógrafo corneal."
-  image: "/images/og/control-miopia.jpg"
+  image: "/images/213-optometria_D3A0075.webp"
   type: "article"
 
 schema:
@@ -26,6 +26,7 @@ hero:
   title: "La miopía de tu hijo no tiene por qué seguir subiendo"
   subtitle: "Cada revisión, media dioptría más. Si esa frase te suena, no estás solo: la miopía se ha convertido en un problema creciente en Europa, especialmente entre niños y adolescentes. La buena noticia es que hoy **es posible frenar su avance** — y una de las técnicas más eficaces trabaja mientras tu hijo duerme."
   ctaPreset: contact
+  bg: "/images/213-optometria_D3A0075.webp"
 
 sections:
   - type: faq

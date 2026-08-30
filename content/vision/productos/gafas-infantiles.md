@@ -8,13 +8,13 @@ weight: 60
 
 card:
   description: "Chulas e irrompibles, para que las usen y duren."
-  image: "/images/cards/gafas-infantiles.jpg"
+  image: "/images/cards/226-infantil_hero.webp"
   imageAlt: "Gafas infantiles resistentes en Ópticas Fausto"
 
 og:
   title: "Gafas chulas e irrompibles — con revisión visual gratuita"
   description: "Monturas infantiles resistentes, adaptadas a su edad y su cara, con revisión visual completa gratis. Torre del Mar, desde 1982."
-  image: "/images/og/gafas-infantiles.jpg"
+  image: "/images/226-infantil_hero.webp"
   type: "article"
 
 schema:
@@ -25,6 +25,7 @@ hero:
   title: "Gafas chulas e irrompibles"
   subtitle: "**Para que las usen — y para que duren.** Unas gafas infantiles tienen dos exámenes que aprobar: que a tu hijo le gusten lo suficiente como para no querer quitárselas, y que sobrevivan al patio, al deporte y a la mochila. En Ópticas Fausto encontrarás monturas y gafas de sol infantiles de todos los materiales y tamaños, adaptadas a su defecto visual, su edad y su forma facial — sin limitar ni su actividad diaria ni su deporte."
   ctaPreset: contact
+  bg: "/images/226-infantil_hero.webp"
 
 sections:
   - type: faq

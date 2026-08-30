@@ -8,13 +8,13 @@ weight: 30
 
 card:
   description: "Libertad de movimiento y visión completa, para casi cualquier caso."
-  image: "/images/cards/lentes-de-contacto.jpg"
+  image: "/images/cards/223-lentillas_hero.webp"
   imageAlt: "Adaptación de lentes de contacto en Ópticas Fausto"
 
 og:
   title: "Lentillas: el superpoder oculto — Ópticas Fausto"
   description: "Adaptación personalizada de todo tipo de lentes de contacto en Torre del Mar: estudio de córnea, prueba y seguimiento incluidos."
-  image: "/images/og/lentes-de-contacto.jpg"
+  image: "/images/223-lentillas_hero.webp"
   type: "article"
 
 schema:
@@ -25,6 +25,7 @@ hero:
   title: "Lentillas: el superpoder oculto"
   subtitle: "Millones de personas ven perfectamente y nadie sabe que es gracias a sus lentes de contacto. Campo de visión completo, libertad de movimiento, cualquier gafa de sol que te guste — y hoy, con los materiales actuales, casi cualquier persona puede llevarlas, sea cual sea su graduación o su edad."
   ctaPreset: contact
+  bg: "/images/223-lentillas_hero.webp"
 
 sections:
   - type: faq
