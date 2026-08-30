@@ -406,9 +406,9 @@ Comparativa de `width` — mismo CTA, tres anchos, dentro del prose (72ch):
 
 {{< cta title="p5.8- width: default (implícito) — recortado a la medida de lectura" >}}
 
-{{< cta title="p5.9- width: wide — hasta 1320px, rompe el prose" width="wide" bgColor="var(--bg-color1)" >}}
-xxx ver color comparado con p5.8
-{{< cta title="p5.10 width: full — ancho completo de viewport" width="full" bgColor="var(--bg-color1)" >}}
+{{< cta title="p5.9- width: wide — hasta 1320px, rompe el prose" width="wide" >}}
+
+{{< cta title="p5.10 width: full — ancho completo de viewport" width="full" >}}
 
 ### p6- Shortcode {{</* image-text */>}}
 
