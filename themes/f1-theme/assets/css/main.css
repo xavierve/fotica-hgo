@@ -48,16 +48,20 @@
   width: min(var(--container-wide), calc(100% - 2rem));
   max-width: none;
 }
-.block-width-full>.container{width:100%;max-width:none;padding-inline:clamp(1rem,4vw,5rem)}.block-text-small{font-size:.875em}.block-text-default{font-size:1em}.block-text-large{font-size:1.15em}.block-text-xl{font-size:1.3em}.block-align-left{text-align:left}.block-align-center{text-align:center}.block-align-right{text-align:right}.block-variant-default{background:var(--color-bg)}.block-variant-soft{background:var(--bg-color1)}.block-variant-featured{background:var(--surface)}.block-variant-contrast{background:var(--color-dark);color:#fff}.block-variant-contrast .btn-outline{color:#fff}.block-counter{background:var(--color-dark);color:#fff}.block-trustbar{background:var(--bg-color1);padding:1rem 0}.block-image-text.is-reverse .image-text-copy{order:0}.block-cards.cards-columns-2 .cards-grid,.block-cards.cards-columns-3 .cards-grid,.block-cards.cards-columns-4 .cards-grid{grid-template-columns:1fr}.block-cta{text-align:center}.cta-tone-neutral{background:var(--bg-color1)}.cta-tone-vision{background:#eef7f4}.cta-tone-hearing{background:#f4f1fb}.block-faq details{background:var(--surface);border:1px solid rgba(0,0,0,.08);border-radius:12px;padding:1rem;margin:.75rem 0}.block-faq summary{cursor:pointer;font-weight:800}@media(min-width:821px){.image-text-inner{grid-template-columns:1fr 1fr}.footer-grid{grid-template-columns:1fr 1fr 1.35fr}.block-cards.cards-columns-2 .cards-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.block-cards.cards-columns-3 .cards-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.block-cards.cards-columns-4 .cards-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.block-image-text.is-reverse .image-text-copy{order:2}}
+.block-width-full>.container{width:100%;max-width:none;padding-inline:clamp(1rem,4vw,5rem)}.block-text-small{font-size:.875em}.block-text-default{font-size:1em}.block-text-large{font-size:1.15em}.block-text-xl{font-size:1.3em}.block-align-left{text-align:left}.block-align-center{text-align:center}.block-align-right{text-align:right}.block-variant-default{background:var(--color-bg)}.block-variant-soft{background:var(--bg-color1)}.block-variant-featured{background:var(--surface)}.block-variant-contrast{background:var(--color-dark);color:#fff}.block-variant-contrast .btn-outline{color:#fff}.block-counter{background:var(--color-dark);color:#fff}.block-trustbar{background:var(--bg-color1);padding:1rem 0}.block-image-text.is-reverse .image-text-copy{order:0}.block-cards.cards-columns-2 .cards-grid,.block-cards.cards-columns-3 .cards-grid,.block-cards.cards-columns-4 .cards-grid{grid-template-columns:1fr}.block-cta{text-align:center}.block-faq details{background:var(--surface);border:1px solid rgba(0,0,0,.08);border-radius:12px;padding:1rem;margin:.75rem 0}.block-faq summary{cursor:pointer;font-weight:800}@media(min-width:821px){.image-text-inner{grid-template-columns:1fr 1fr}.footer-grid{grid-template-columns:1fr 1fr 1.35fr}.block-cards.cards-columns-2 .cards-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.block-cards.cards-columns-3 .cards-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.block-cards.cards-columns-4 .cards-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.block-image-text.is-reverse .image-text-copy{order:2}}
 
 /* === v02: utilidades fs, iconos btn, fondos CTA responsive, banner === */
 .fs-xs{font-size:.75em}.fs-s{font-size:.875em}.fs-l{font-size:1.25em}.btn .icon{width:1.1em;height:1.1em;vertical-align:-.18em;margin-right:.45em}.has-bg-color{background:var(--section-bg-color)}.has-bg-image{background-image:var(--section-bg-mobile,var(--section-bg));background-size:cover;background-position:center;position:relative;color:#fff}.has-bg-image>.container{position:relative;z-index:1}.has-bg-image{--overlay-color:rgba(var(--overlay-base),.55)}
 .has-bg-image::before{content:"";position:absolute;inset:0;background:var(--overlay-color)}.has-bg-image.has-bg-color{background-color:transparent}.has-bg-image.has-bg-color{--overlay-color:color-mix(in srgb,var(--section-bg-color) 60%,transparent)}.has-bg-image .btn-outline,
-.has-bg-color:not(.on-light) .btn-outline{color:#fff;border-color:#fff}
+.has-bg-color:not(.bg-claro) .btn-outline,
+.bg-color2 .btn-outline,
+.bg-color3 .btn-outline{color:#fff;border-color:#fff}
 /* Botón primario sobre fondo oscuro: borde fino blanco que lo separa del fondo
    (el dorado sobre verde/navy apenas contrasta como FORMA aunque su texto sí lo haga) */
 .has-bg-image .btn:not(.btn-outline),
-.has-bg-color:not(.on-light) .btn:not(.btn-outline){
+.has-bg-color:not(.bg-claro) .btn:not(.btn-outline),
+.bg-color2 .btn:not(.btn-outline),
+.bg-color3 .btn:not(.btn-outline){
   box-shadow:inset 0 0 0 1px rgba(255,255,255,.85);
 }@media(min-width:821px){.has-bg-image{background-image:var(--section-bg)}}.cta-microcopy{margin-top:.9rem;font-size:.875em;opacity:.85}.block-banner{padding:clamp(2rem,4vw,3rem) 0}.block-banner .banner-inner{font-size:clamp(1.15rem,2.6vw,1.5rem);font-weight:700;max-width:52ch;margin:0 auto}.block-banner .banner-inner p{margin:0}
 .trustbar-icon .icon{width:1.15em;height:1.15em;vertical-align:-.2em;margin-right:.35em}
@@ -68,15 +72,22 @@
    declara color propio (el h1). Solución: esos colores pasan a variable y se re-declaran
    aquí dentro del contexto de imagen. Un solo sitio, sirve para hero, CTA y counter. */
 .has-bg-image,
-.has-bg-color:not(.has-bg-image):not(.on-light){
-  color:#fff;
+.has-bg-color:not(.has-bg-image):not(.bg-claro){
+  color:var(--section-text-color,#fff);
   --subtitle-color:rgba(255,255,255,.94);
   --eyebrow-color:#ffffff;
   --color-muted:rgba(255,255,255,.90);   /* por si algún bloque usa muted dentro */
 }
 /* Escotilla para bgColor CLAROS (dorado, crema…): texto oscuro normal.
-   Uso: class: "on-light" junto a bgColor. */
-.has-bg-color.on-light{ color:var(--color-text); }
+   Uso: class: "bg-claro" junto a bgColor. */
+.has-bg-color.bg-claro{ color:var(--color-text); }
+
+/* Clases de paleta: fondo + texto emparejados, listas para usar en class:
+   No dependen de bgColor/has-bg-color/bg-claro — se bastan solas. */
+.bg-color1{ background:var(--bg-color1); color:var(--text-color1); }
+.bg-color2{ background:var(--bg-color2); color:var(--text-color2); --subtitle-color:rgba(255,255,255,.94); --eyebrow-color:#ffffff; }
+.bg-color3{ background:var(--bg-color3); color:var(--text-color3); --subtitle-color:rgba(255,255,255,.94); --eyebrow-color:#ffffff; }
+.bg-color4{ background:var(--bg-color4); color:var(--text-color4); }
 .has-bg-image .hero-copy,
 .has-bg-image .cta-inner{ text-shadow:0 1px 3px rgba(0,0,0,.38); }
 .has-bg-image .eyebrow{ text-shadow:0 1px 3px rgba(0,0,0,.55); }
@@ -219,14 +230,18 @@
 }
 /* sobre fondo oscuro, el primario conserva su filete blanco al elevarse */
 .has-bg-image .btn:not(.btn-outline):hover,
-.has-bg-color:not(.on-light) .btn:not(.btn-outline):hover{
+.has-bg-color:not(.bg-claro) .btn:not(.btn-outline):hover,
+.bg-color2 .btn:not(.btn-outline):hover,
+.bg-color3 .btn:not(.btn-outline):hover{
   box-shadow:inset 0 0 0 1px rgba(255,255,255,.85),0 6px 16px rgba(0,0,0,.3);
 }
 @media (prefers-reduced-motion:reduce){
   .btn{transition:background-color .2s ease}
   .btn:hover,.btn:focus-visible,.btn-outline:hover{transform:none;box-shadow:none}
   .has-bg-image .btn:not(.btn-outline):hover,
-  .has-bg-color:not(.on-light) .btn:not(.btn-outline):hover{box-shadow:inset 0 0 0 1px rgba(255,255,255,.85)}
+  .has-bg-color:not(.bg-claro) .btn:not(.btn-outline):hover,
+  .bg-color2 .btn:not(.btn-outline):hover,
+  .bg-color3 .btn:not(.btn-outline):hover{box-shadow:inset 0 0 0 1px rgba(255,255,255,.85)}
 }
 
 /* Bloques insertados en el prose: aire respecto al texto circundante.
@@ -259,7 +274,7 @@
 .cta-layout-split .cta-microcopy{margin:.6rem 0 0}
 /* sobre fondo oscuro, el subtítulo hereda el color claro del sistema de contraste */
 .cta-layout-split.has-bg-image .cta-subtitle,
-.cta-layout-split.has-bg-color:not(.on-light) .cta-subtitle{color:var(--subtitle-color)}
+.cta-layout-split.has-bg-color:not(.bg-claro) .cta-subtitle{color:var(--subtitle-color)}
 @media(min-width:641px){
   .cta-layout-split .cta-inner{flex-direction:row;align-items:center}
   .cta-layout-split .cta-actions{text-align:right}

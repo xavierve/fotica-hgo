@@ -8,6 +8,7 @@
   {{- with $.bg }}{{ $styles = $styles | append (printf "--section-bg:url('%s')" .) }}{{ end -}}
   {{- with $.bgMobile }}{{ $styles = $styles | append (printf "--section-bg-mobile:url('%s')" .) }}{{ end -}}
   {{- with $.bgColor }}{{ $styles = $styles | append (printf "--section-bg-color:%s" .) }}{{ end -}}
+  {{- with $.textColor }}{{ $styles = $styles | append (printf "--section-text-color:%s" .) }}{{ end -}}
   {{- with $styles }} style="{{ delimit . ";" | safeCSS }}"{{ end }}>
   <div class="container">
     <div class="counter-grid">

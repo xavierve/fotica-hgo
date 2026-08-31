@@ -202,10 +202,9 @@ sections:
     title: "19- text · width: wide · variant: soft · textSize: large · align: center · pad: compact"
     text: "Un párrafo simple, sin headers ni listas, para comparar cómo escala `textSize` un bloque de texto normal."
   - type: text
-    bgColor: "var(--bg-color4)"
-    class: "on-light"
-    title: "20- text · bgColor + class: on-light"
-    text: "Igual que cualquier otro bloque, admite `bgColor` plano con `on-light` para mantener el texto oscuro sobre fondos claros."
+    class: "bg-color4"
+    title: "20- text · class: bg-color4 (fondo + texto resueltos solos)"
+    text: "Las clases de paleta (`bg-color1`..`bg-color4`) ya traen el color de texto correcto emparejado — no hace falta `bgColor` ni ningún interruptor aparte."
 
   # ============ TEXT-SPLIT — grid simétrico 2 columnas, ambos slots libres ============
   - type: text-split
@@ -219,7 +218,7 @@ sections:
         margin: "0 0 1rem 0"
   - type: text-split
     width: wide
-    bgColor: "var(--bg-color2)"
+    class: "bg-color2"
     items:
       - text: "22- Columna izquierda sin modificadores — hereda el tamaño de texto por defecto del tema."
       - text: "Columna derecha, `textSize: large` — para texto destacado."
@@ -241,14 +240,13 @@ sections:
     preset: contact
     microcopy: "Con microcopy bajo los botones"
   - type: cta
-    title: "25- h2 cta · bgColor2 plano"
-    bgColor: "var(--bg-color2)"
+    title: "25- h2 cta · class: bg-color2"
+    class: "bg-color2"
     preset: contact
   - type: cta
-    title: "26- cta · bgColor4 claro + class: on-light (texto oscuro)"
-    subtitle: "Para fondos de color claros, on-light mantiene el texto oscuro."
-    bgColor: "var(--bg-color4)"
-    class: "on-light"
+    title: "26- cta · class: bg-color4 (claro, texto oscuro ya resuelto)"
+    subtitle: "Las clases de paleta ya traen el color de texto correcto — no hace falta ningún interruptor aparte."
+    class: "bg-color4"
     preset: contact
   - type: cta
     title: "26- cta · bg imagen (overlay neutro)"
@@ -297,12 +295,16 @@ sections:
     preset: contact
     microcopy: "Sin compromiso"
   - type: cta
-    title: "33- cta · tone: vision"
-    tone: vision
+    title: "33- cta · bgColor puntual claro + textColor + class: bg-claro"
+    subtitle: "Para un color suelto que no está en la paleta: bgColor + textColor a juego + class: bg-claro (avisa a los botones de que el fondo es claro)."
+    bgColor: "#eef7f4"
+    textColor: "#1c1a17"
+    class: "bg-claro"
     preset: contact
   - type: cta
-    title: "34- cta · tone: hearing · textSize: large"
-    tone: hearing
+    title: "34- cta · bgColor puntual oscuro · textSize: large"
+    subtitle: "Un color suelto oscuro no necesita textColor ni bg-claro: el texto blanco es el valor por defecto."
+    bgColor: "#4a2f6b"
     textSize: large
     preset: contact
 ---
@@ -360,7 +362,7 @@ Segundo párrafo, tras un espacio grande. (`s`, `m`, `l` disponibles.)
 
 {{< banner >}} p4.1- Banner por defecto: frase destacada **con markdown**, centrada.{{< /banner >}}
 
-{{< banner bgColor="var(--bg-color4)" textSize="large" class="on-light" >}}p4.2- Banner con `bgColor4` y `textSize: large`.{{< /banner >}}
+{{< banner class="bg-color4" textSize="large" >}}p4.2- Banner con `class: bg-color4` y `textSize: large`.{{< /banner >}}
 
 {{< banner class="fs-s" align="left" >}}p4.3- Banner con utilidad `fs-s` vía class y alineado a la izquierda.{{< /banner >}}
 
@@ -396,11 +398,11 @@ Si reconoces dos o más señales, no lo dejes pasar: el examen de salud ocular p
 
 Comparativa de `pad` — mismo CTA aislado, tres escalones de padding vertical:
 
-{{< cta title="p5.5- pad: s (alias de compact)" pad="s" bgColor="var(--bg-color3)" >}}
+{{< cta title="p5.5- pad: s (alias de compact)" pad="s" class="bg-color3" >}}
 
-{{< cta title="p5.6- pad normal (sin declarar)" bgColor="var(--bg-color3)" >}}
+{{< cta title="p5.6- pad normal (sin declarar)" class="bg-color3" >}}
 
-{{< cta title="p5.7- pad: l (alias de spacious)" pad="l" bgColor="var(--bg-color3)" >}}
+{{< cta title="p5.7- pad: l (alias de spacious)" pad="l" class="bg-color3" >}}
 
 Comparativa de `width` — mismo CTA, tres anchos, dentro del prose (72ch):
 
@@ -426,13 +428,13 @@ Mismo bloque que el `type: image-text` de `sections:`, pero intercalado en el bo
 
 Un párrafo de prose normal, antes de la caja destacada.
 
-{{< text bgColor="var(--bg-color1)" pad="compact" title="p7.1- Aviso destacado" class="on-light" >}}
+{{< text class="bg-color1" pad="compact" title="p7.1- Aviso destacado" >}}
 Esto **sí** se distingue del resto: fondo propio y padding distinto, para una nota o aviso puntual dentro de un tramo largo de texto.
 {{< /text >}}
 
 Y otro párrafo de prose normal, después de la caja.
 
-{{< text width="wide" bgColor="var(--bg-color2)" align="center" textSize="l">}}
+{{< text width="wide" class="bg-color2" align="center" textSize="l">}}
 p7.2- texto bg-color2 que rompe el ancho de lectura (`width="wide"`) para un párrafo que quieres que respire más — con fondo oscuro y texto `textSize="l"`centrado.
 {{< /text >}}
 

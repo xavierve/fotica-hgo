@@ -2,7 +2,7 @@
   Equivalente shortcode del bloque `type: text`, para usar dentro del body
   markdown en vez de sections: — mismo resultado, mismo .container.prose.
 
-  {{< text title="..." subtitle="..." textSize="large" align="center" pad="s" bgColor="#f5efe5" >}}
+  {{< text title="..." subtitle="..." textSize="large" align="center" pad="s" bgColor="#f5efe5" textColor="#1c1a17" >}}
   Contenido, admite **markdown** completo (headers, listas, blockquotes...).
   {{< /text >}}
 */ -}}
@@ -16,7 +16,10 @@
       "width" (.Get "width")
       "pad" (.Get "pad")
     ) "extra" $extra) }}"
-  {{- with .Get "bgColor" }} style="--section-bg-color:{{ . | safeCSS }}"{{ end }}>
+  {{- $styles := slice -}}
+  {{- with .Get "bgColor" }}{{ $styles = $styles | append (printf "--section-bg-color:%s" .) }}{{ end -}}
+  {{- with .Get "textColor" }}{{ $styles = $styles | append (printf "--section-text-color:%s" .) }}{{ end -}}
+  {{- with $styles }} style="{{ delimit . ";" | safeCSS }}"{{ end }}>
   <div class="container">
     {{ with .Get "title" }}<h2>{{ . }}</h2>{{ end }}
     {{ with .Get "subtitle" }}<p class="section-subtitle">{{ . }}</p>{{ end }}

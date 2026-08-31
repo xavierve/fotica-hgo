@@ -11,7 +11,7 @@
   Parámetros:
     name    (opcional) — autoría de la cita, ej. "Residente de Torre del Mar"
     rating  (opcional) — número 1-5
-    class, variant, bgColor, textSize, align, width, pad — igual que banner
+    class, variant, bgColor, textColor, textSize, align, width, pad — igual que banner
 */ -}}
 {{- $rating := .Get "rating" -}}
 {{- $extra := slice -}}
@@ -24,7 +24,10 @@
       "width" (.Get "width")
       "pad" (.Get "pad")
     ) "extra" $extra) }}"
-  {{- with .Get "bgColor" }} style="--section-bg-color:{{ . | safeCSS }}"{{ end }}>
+  {{- $styles := slice -}}
+  {{- with .Get "bgColor" }}{{ $styles = $styles | append (printf "--section-bg-color:%s" .) }}{{ end -}}
+  {{- with .Get "textColor" }}{{ $styles = $styles | append (printf "--section-text-color:%s" .) }}{{ end -}}
+  {{- with $styles }} style="{{ delimit . ";" | safeCSS }}"{{ end }}>
   <div class="container">
     <blockquote class="testimonial">
       {{ .Inner | $.Page.RenderString (dict "display" "block") }}

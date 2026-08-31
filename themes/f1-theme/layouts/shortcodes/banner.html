@@ -1,7 +1,7 @@
 {{- /*
   {{< banner >}}Texto destacado con **markdown**{{< /banner >}}
   Frase destacada / guiño de confianza intercalado en el prose.
-  Parámetros opcionales: class, variant, bgColor, textSize, align
+  Parámetros opcionales: class, variant, bgColor, textColor, textSize, align
 */ -}}
 {{- $extra := slice -}}
 {{- if .Get "bgColor" }}{{ $extra = $extra | append "has-bg-color" }}{{ end -}}
@@ -13,7 +13,10 @@
       "width" (.Get "width")
       "pad" (.Get "pad")
     ) "extra" $extra) }}"
-  {{- with .Get "bgColor" }} style="--section-bg-color:{{ . | safeCSS }}"{{ end }}>
+  {{- $styles := slice -}}
+  {{- with .Get "bgColor" }}{{ $styles = $styles | append (printf "--section-bg-color:%s" .) }}{{ end -}}
+  {{- with .Get "textColor" }}{{ $styles = $styles | append (printf "--section-text-color:%s" .) }}{{ end -}}
+  {{- with $styles }} style="{{ delimit . ";" | safeCSS }}"{{ end }}>
   <div class="container banner-inner">
     {{ .Inner | $.Page.RenderString (dict "display" "block") }}
   </div>

@@ -3,15 +3,15 @@
   Compatibilidad: button1/button2 ({url,text}) siguen funcionando.
   Nuevo:
     bg / bgMobile   -> imagen de fondo responsive (desktop / movil)
-    bgColor         -> color de fondo plano, o tinte del overlay si hay imagen
+    bgColor         -> color de fondo plano puntual, o tinte del overlay si hay imagen (para la paleta, usar class: "bg-color1".."bg-color4")
+    textColor       -> color de texto puntual a juego con bgColor
     preset: contact -> par de botones Llamar + WhatsApp desde data/site.yaml
     buttons: [...]  -> lista de botones {text, url, icon}
     microcopy       -> linea pequena bajo los botones
-    tone/variant/class/textSize/align/width -> modificadores estandar de bloque
+    variant/class/textSize/align/width -> modificadores estandar de bloque
 */ -}}
-{{ $tone := .tone | default "neutral" }}
 {{ $bg := .bg }}
-{{ $extra := slice (printf "cta-tone-%s" $tone) }}
+{{ $extra := slice }}
 {{ if $bg }}{{ $extra = $extra | append "has-bg-image" }}{{ end }}
 {{ if .bgColor }}{{ $extra = $extra | append "has-bg-color" }}{{ end }}
 {{ with .layout }}{{ $extra = $extra | append (printf "cta-layout-%s" .) }}{{ end }}
@@ -38,6 +38,7 @@
   {{- with $bg }}{{ $styles = $styles | append (printf "--section-bg:url('%s')" .) }}{{ end -}}
   {{- with .bgMobile }}{{ $styles = $styles | append (printf "--section-bg-mobile:url('%s')" .) }}{{ end -}}
   {{- with .bgColor }}{{ $styles = $styles | append (printf "--section-bg-color:%s" .) }}{{ end -}}
+  {{- with .textColor }}{{ $styles = $styles | append (printf "--section-text-color:%s" .) }}{{ end -}}
   {{- with $styles }} style="{{ delimit . ";" | safeCSS }}"{{ end }}>
     <div class="container cta-inner{{ if eq .layout "split" }} has-cols{{ end }}">
     <div class="cta-text">

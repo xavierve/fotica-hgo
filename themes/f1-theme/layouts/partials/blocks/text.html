@@ -12,7 +12,8 @@
       textSize: default   # small | default | large | xl
       align: left          # left | center | right
       pad:                 # compact | default | spacious (o s/m/l)
-      bgColor:             # color CSS libre, ej. "#f5efe5"
+      bgColor:             # color CSS libre puntual, ej. "#f5efe5" (para la paleta, usar class: "bg-color1".."bg-color4")
+      textColor:           # color de texto puntual a juego con bgColor, ej. "#1c1a17"
       title:
       subtitle:
       text: |
@@ -22,7 +23,10 @@
 {{- $extra := slice -}}
 {{- if .bgColor }}{{ $extra = $extra | append "has-bg-color" }}{{ end -}}
 <section class="{{ partial "block-classes.html" (dict "name" "text" "context" . "extra" $extra) }}"
-  {{- with .bgColor }} style="--section-bg-color:{{ . | safeCSS }}"{{ end }}>
+  {{- $styles := slice -}}
+  {{- with .bgColor }}{{ $styles = $styles | append (printf "--section-bg-color:%s" .) }}{{ end -}}
+  {{- with .textColor }}{{ $styles = $styles | append (printf "--section-text-color:%s" .) }}{{ end -}}
+  {{- with $styles }} style="{{ delimit . ";" | safeCSS }}"{{ end }}>
   <div class="container">
     {{ with .title }}<h2>{{ . }}</h2>{{ end }}
     {{ with .subtitle }}<p class="section-subtitle">{{ . }}</p>{{ end }}
