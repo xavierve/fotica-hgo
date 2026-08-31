@@ -37,7 +37,7 @@ Objetivo: SEO local (Torre del Mar / Axarquía) + conversión a llamada/WhatsApp
 
 ## Estado actual (verificado con build)
 
-Hecho y validado: `schema.html` v02 (@graph completo, BreadcrumbList, FAQPage — 127 preguntas en el sitio), `breadcrumb.html` corregido, `site.yaml` v03 (legal unificada), 30 páginas de contenido migradas, shortcodes + iconos + `cta` v2 (bg/bgMobile/bgColor/preset/microcopy), `404.html`, attributes de Goldmark activados, CSS de utilidades (`fs-xs/s/l`, `has-bg-image/color`, banner).
+Hecho y validado: `schema.html` v02 (@graph completo, BreadcrumbList, FAQPage — 127 preguntas en el sitio), `breadcrumb.html` corregido, `site.yaml` v03 (legal unificada), 30 páginas de contenido migradas, shortcodes + iconos + `cta` v2 (bg/bgMobile/bgColor/preset/microcopy), `404.html`, attributes de Goldmark activados, CSS de utilidades (`fs-xs/s/l`, `has-bg-image/color`, banner). Hero con `bg`/`bgMobile` real en las 4 páginas principales (falta Contacto — no lleva hero). Las 21 páginas de servicio/producto tienen `card.image` apuntando a un archivo real existente (verificado, ninguna en fallback).
 
 Shortcodes añadidos (validados con `hugo build` real, sin warnings):
 - `testimonial` (cita suelta con wrapper propio), `testimonials` + `testimonial-item` (grid de citas anidadas, reutiliza `.cards-grid`/`.block-testimonials` — mismo CSS que el bloque `type: testimonials` de `sections:`).
@@ -56,13 +56,21 @@ Shortcodes añadidos (validados con `hugo build` real, sin warnings):
 5. **`hoursSpec` en site.yaml** cuando el cliente valide horarios (sábados/temporada): el soporte en `schema.html` ya existe (formato comentado en el propio partial). Debe coincidir EXACTAMENTE con los dos Google Business Profiles.
 6. **Redirecciones**: `_redirects` de Cloudflare Pages para el dominio viejo → nuevo (301), incluyendo los 4 subdominios landing (`audicion.`, `lentes-graduadas.` → `/vision/productos/gafas-progresivas/`, `lentillas.` → `/vision/productos/lentes-de-contacto/`, `vueltaalcole.` → `/vision/productos/gafas-infantiles/`) y el mapeo de URLs del WordPress antiguo. Revisar logs de 404 tras el lanzamiento: cada 404 recurrente es una 301 pendiente.
 7. **Espaciados internos de blocks en `em`** (no rem/px) para que `fs-s/fs-l` y `textSize` escalen el bloque completo, y revisar la escala tipográfica base hacia `clamp()`.
-8. **Hero con fondo responsive**: `hero.html` acepta `imageBackground` pero sin variante móvil ni regla CSS que la consuma — replicar el patrón `bg/bgMobile/bgColor` del cta.
+8. **Hero: pasar de `background-image` a `<img>` real, con layout apilado en móvil.** Base ya construida (`bg`/`bgMobile` con media query a 821px) — pendiente el salto de arquitectura: en móvil la imagen debe ir SOLA arriba (bloque propio, `<img>` en flujo normal) con el texto debajo sobre fondo de color — no overlay con texto encima (decisión ya tomada: opción "apilado", 768×400px, más segura para público 45-75+). En desktop se mantiene fondo con overlay y texto encima. Esto no es solo un cambio de recorte por breakpoint — son dos modos de layout distintos, por lo que `background-image` no puede resolverlo solo; hace falta `<picture>`/`<img>` con CSS que cambie de "capa de fondo" a "bloque en flujo" según el breakpoint. Añadir también `<link rel="preload" as="image">` no bloqueante para la imagen LCP del hero (evaluar `imagesrcset`/`imagesizes` si se usa `srcset`, sabiendo que Safari va por detrás en soporte).
+8b. **Imágenes responsive (`srcset`/`w`+`sizes`) en Text-Image, Gallery, Team** (y cualquier otro bloque con `<img>` propio — ver lista completa en `partials/blocks/`). Patrón acordado: convención de nombre `foto.webp` (1x) + `foto_hd.webp` (2x, densidad de píxeles), comprobación de existencia con `os.FileExists` sobre la ruta física (`static/images/...`, no la URL pública) — nunca dar error si falta la variante `_hd`, cae limpio al `<img>` normal. Usar descriptor `w` + `sizes` (no `x`) para que el navegador elija según el tamaño real de renderizado en cada bloque, no solo la densidad — cada bloque declara su propio `width`/`sizes` típico (hero a pantalla completa ≠ card en grid de 3 columnas). Partial compartido, no repetir la lógica en cada bloque.
 9. **Sticky footer móvil** con Llamada / WhatsApp / Ubicación (requisito ap8.1), usando `icons.html` y datos de site.yaml.
+
+## Flujo de imágenes candidatas
+
+`draft-images/` en la raíz del repo (hermana de `static/`, NO dentro de
+`static/images/`) — Hugo no la ve, cero riesgo de publicar candidatas sin
+elegir. Git trackea el historial de qué entra y sale. Al elegir una candidata,
+se mueve con `mv` a `static/images/` con su nombre final en convención — sin
+tocar configuración de Hugo.
 
 15. **Indicador de scroll + botón volver-arriba**: (a) en heros de landings (home, /vision/, /audicion/, progresivas, lentes-de-contacto, gafas-infantiles), indicador de scroll con `icon: arrow-down` (partial icons.html), animación sutil, dentro de `<a>`/`<button>` con `aria-label`; (b) botón global "volver arriba" con `arrow-up`, visible solo tras ~1.5 viewports de scroll, `aria-label="Volver arriba"`, desplazamiento suave vía CSS `scroll-behavior: smooth` (respeta `prefers-reduced-motion`). En móvil no debe solaparse con el sticky footer de contacto (tarea 9): coordinar posiciones.
 
 ### Prioridad baja / al recibir material
-10. Imágenes reales: cards (`/images/cards/*.jpg`) y OG (`/images/og/*.jpg`) referenciadas en front matter — crear las rutas al recibir la sesión fotográfica; mientras, fallbacks.
 11. `employee`/`Person` en schema Organization para los 7 miembros del equipo ya publicados en `/nosotros/` (el contenido ya está completo — esto es solo la parte de schema.org, pendiente).
 12. `memberOf` (Sociedad Española de Baja Visión) y `hasCredential` (Centro Auditivo Homologado, si hay denominación oficial) en Organization.
 13. CSS crítico inline en home; objetivo PageSpeed móvil >85.

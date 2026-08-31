@@ -37,7 +37,7 @@
 .card{position:relative;transition:box-shadow .2s ease,transform .2s ease}
 .card:hover{box-shadow:0 14px 34px rgba(0,0,0,.09);transform:translateY(-2px)}
 .card-link.stretched-link::after{content:"";position:absolute;inset:0}.card-body,.testimonial,.team-card{padding:1.25rem}.card-link{font-weight:800;color:var(--color-accent)}.cta{background:var(--bg-color1);text-align:center}.faq details{background:var(--surface);border:1px solid rgba(0,0,0,.08);border-radius:12px;padding:1rem;margin:.75rem 0}.faq summary{cursor:pointer;font-weight:800}.site-footer{background:var(--color-dark);color:#fff;padding:3rem 0 1.5rem}.footer-grid{display:grid;grid-template-columns:1fr;gap:2rem}.site-footer a{display:inline-block;color:#fff;text-decoration:none;margin:.25rem .5rem .25rem 0}.footer-logo{max-height:54px}.footer-bottom{border-top:1px solid rgba(255,255,255,.16);margin-top:2rem;padding-top:1rem;color:rgba(255,255,255,.82)}address{font-style:normal;margin:0 0 1rem}.slider-track{display:flex;gap:1rem;overflow:auto;scroll-snap-type:x mandatory}.slide{min-width:min(80vw,420px);scroll-snap-align:start;background:var(--surface);border-radius:var(--radius);padding:1rem}.timeline-list{list-style:none;padding:0}.timeline-list li{border-left:3px solid var(--color-accent);padding:0 0 1.5rem 1rem}.social-links{margin-top:1rem}
-.block{padding:var(--block-pad) 0}.block-pad-compact{padding:var(--block-pad-compact) 0}.block-pad-spacious{padding:var(--block-pad-spacious) 0}.block-width-default>.container{max-width:var(--container)}
+.block{padding:var(--block-pad) 0}.block-banner{padding:clamp(2rem,4vw,3rem) 0}.block-pad-compact{padding:var(--block-pad-compact) 0}.block-pad-spacious{padding:var(--block-pad-spacious) 0}.block-width-default>.container{max-width:var(--container)}
 /* ── width:wide ────────────────────────────────────────────────────────────
    El breakout de .prose ya ensancha la <section> hasta --container-wide, pero
    el .container interno seguía topado por su propio width:min(--container,…).
@@ -63,7 +63,7 @@
 .bg-color2 .btn:not(.btn-outline),
 .bg-color3 .btn:not(.btn-outline){
   box-shadow:inset 0 0 0 1px rgba(255,255,255,.85);
-}@media(min-width:821px){.has-bg-image{background-image:var(--section-bg)}}.cta-microcopy{margin-top:.9rem;font-size:.875em;opacity:.85}.block-banner{padding:clamp(2rem,4vw,3rem) 0}.block-banner .banner-inner{font-size:clamp(1.15rem,2.6vw,1.5rem);font-weight:700;max-width:52ch;margin:0 auto}.block-banner .banner-inner p{margin:0}
+}@media(min-width:821px){.has-bg-image{background-image:var(--section-bg)}}.cta-microcopy{margin-top:.9rem;font-size:.875em;opacity:.85}.block-banner .banner-inner{font-size:clamp(1.15rem,2.6vw,1.5rem);font-weight:700;max-width:52ch;margin:0 auto}.block-banner .banner-inner p{margin:0}
 .trustbar-icon .icon{width:1.15em;height:1.15em;vertical-align:-.2em;margin-right:.35em}
 
 /* === v03 · Contraste de texto sobre fondos con imagen ===
