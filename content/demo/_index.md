@@ -323,12 +323,22 @@ Todo lo que sigue es **body markdown** dentro del contenedor `prose`: títulos, 
 
 ## Un H2 con {.fs-xs} — el mínimo (solo titulares) {.fs-xs}
 
+Un párrafo normal, sin variaciones escrito en prose, con Marqdown. **abajo las variaciones**.
+
 Un párrafo con clase `{.fs-l}` aplicada al bloque completo, para destacar una entradilla o un párrafo clave sin recurrir a un bloque de sección.
 {.fs-l}
+
+Un párrafo con clase `{.fs-s}` aplicada al bloque completo, para destacar una entradilla o un párrafo clave sin recurrir a un bloque de sección.
+{.fs-s}
+
+Un párrafo con clase `{.fs-xs}` aplicada al bloque completo, para destacar una entradilla o un párrafo clave sin recurrir a un bloque de sección.
+{.fs-xs}
+
 
 ### Elementos estándar de markdown
 
 Texto con **negrita**, *cursiva*, un [enlace interno](/vision/) y `código inline`.
+
 
 - Lista sin ordenar
 - Con varios elementos

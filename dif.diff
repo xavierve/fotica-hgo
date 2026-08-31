@@ -1,273 +1,32 @@
 diff --git a/themes/f1-theme/assets/css/critical.css b/themes/f1-theme/assets/css/critical.css
-index 9d38636..b17da2e 100644
+index 3007c11..8733d85 100644
 --- a/themes/f1-theme/assets/css/critical.css
 +++ b/themes/f1-theme/assets/css/critical.css
-@@ -1 +1 @@
--:root{--font-base:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--color-text:#1c1a17;--color-muted:#625d55;--color-bg:#fffdf8;--bg-color1:#f5efe5;--bg-color2:#1B3A5C;--bg-color3:#34855B;--bg-color4:#C9A84C;--color-accent:#9a6a2f;--color-dark:#25211d;--container:1120px;--container-wide:1440px;--space-s:clamp(1rem,2vw,1.5rem);--space-m:clamp(2rem,4vw,3rem);--space-l:clamp(3rem,7vw,5rem);--block-pad:clamp(3rem,7vw,6rem);--block-pad-compact:clamp(1.75rem,4vw,3rem);--block-pad-spacious:clamp(4rem,9vw,8rem);--radius:18px;--space:clamp(1rem,2vw,2rem);--surface:#fff;--control-bg:var(--surface);--control-border:rgba(0,0,0,.15);--overlay-base:27,42,56;--backdrop:rgba(15,20,25,.85)}*{box-sizing:border-box}html{overflow-x:clip}body{margin:0;font-family:var(--font-base);color:var(--color-text);background:var(--color-bg);line-height:1.6}img{max-width:100%;height:auto}a{color:inherit}.container{width:min(var(--container),calc(100% - 2rem));margin-inline:auto}.section{padding:clamp(3rem,7vw,6rem) 0}.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.85rem 1.15rem;border-radius:999px;background:var(--color-accent);color:#fff;text-decoration:none;font-weight:700;transition:background-color .2s ease,transform .2s ease,box-shadow .2s ease}.btn-outline{background:transparent;color:var(--color-accent);border:1px solid currentColor}.site-header{position:sticky;top:0;z-index:10;background:rgba(255,253,248,.94);backdrop-filter:blur(10px);border-bottom:1px solid rgba(0,0,0,.06)}.header-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.8rem 0}.site-logo img,.site-logo svg{max-height:48px;width:auto;display:block}.site-nav{display:none;gap:1rem}.site-nav a{text-decoration:none;font-weight:600}.header-actions{display:flex;gap:.5rem}.hero{padding:clamp(4rem,8vw,7rem) 0;background:linear-gradient(135deg,var(--color-bg),var(--bg-color1))}.hero-inner{display:grid;grid-template-columns:1fr;gap:clamp(2rem,5vw,4rem);align-items:center}.hero-inner.no-media{grid-template-columns:1fr;max-width:78ch}.hero h1{font-size:clamp(2.25rem,5vw,4.75rem);line-height:1.05;margin:.2em 0}.hero-subtitle{font-size:clamp(1.1rem,2vw,1.35rem);color:var(--subtitle-color,var(--color-muted))}.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-weight:800;color:var(--eyebrow-color,var(--color-accent));font-size:.85rem}.cta-row{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.5rem}.header-actions .btn-outline{display:none}@media(min-width:821px){.hero-inner{grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr)}.site-nav{display:flex}.header-actions .btn-outline{display:inline-flex}}
-+:root{--font-base:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--color-text:#1c1a17;--color-muted:#625d55;--color-bg:#fffdf8;--bg-color1:#f5efe5;--bg-color2:#1B3A5C;--bg-color3:#34855B;--bg-color4:#C9A84C;--text-color1:#1c1a17;--text-color2:#ffffff;--text-color3:#ffffff;--text-color4:#1c1a17;--color-accent:#9a6a2f;--color-dark:#25211d;--container:1120px;--container-wide:1440px;--space-s:clamp(1rem,2vw,1.5rem);--space-m:clamp(2rem,4vw,3rem);--space-l:clamp(3rem,7vw,5rem);--block-pad:clamp(3rem,7vw,6rem);--block-pad-compact:clamp(1.75rem,4vw,3rem);--block-pad-spacious:clamp(4rem,9vw,8rem);--radius:18px;--space:clamp(1rem,2vw,2rem);--surface:#fff;--control-bg:var(--surface);--control-border:rgba(0,0,0,.15);--overlay-base:27,42,56;--backdrop:rgba(15,20,25,.85)}*{box-sizing:border-box}html{overflow-x:clip}body{margin:0;font-family:var(--font-base);color:var(--color-text);background:var(--color-bg);line-height:1.6}img{max-width:100%;height:auto}a{color:inherit}.container{width:min(var(--container),calc(100% - 2rem));margin-inline:auto}.section{padding:clamp(3rem,7vw,6rem) 0}.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.85rem 1.15rem;border-radius:999px;background:var(--color-accent);color:#fff;text-decoration:none;font-weight:700;transition:background-color .2s ease,transform .2s ease,box-shadow .2s ease}.btn-outline{background:transparent;color:var(--color-accent);border:1px solid currentColor}.site-header{position:sticky;top:0;z-index:10;background:rgba(255,253,248,.94);backdrop-filter:blur(10px);border-bottom:1px solid rgba(0,0,0,.06)}.header-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.8rem 0}.site-logo img,.site-logo svg{max-height:48px;width:auto;display:block}.site-nav{display:none;gap:1rem}.site-nav a{text-decoration:none;font-weight:600}.header-actions{display:flex;gap:.5rem}.hero{padding:clamp(4rem,8vw,7rem) 0;background:linear-gradient(135deg,var(--color-bg),var(--bg-color1))}.hero-inner{display:grid;grid-template-columns:1fr;gap:clamp(2rem,5vw,4rem);align-items:center}.hero-inner.no-media{grid-template-columns:1fr;max-width:78ch}.hero h1{font-size:clamp(2.25rem,5vw,4.75rem);line-height:1.05;margin:.2em 0}.hero-subtitle{font-size:clamp(1.1rem,2vw,1.35rem);color:var(--subtitle-color,var(--color-muted))}.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-weight:800;color:var(--eyebrow-color,var(--color-accent));font-size:.85rem}.cta-row{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.5rem}.header-actions .btn-outline{display:none}@media(min-width:821px){.hero-inner{grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr)}.site-nav{display:flex}.header-actions .btn-outline{display:inline-flex}}
+@@ -1 +1,4 @@
+-:root{--font-base:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--color-text:#1c1a17;--color-muted:#625d55;--color-bg:#fffdf8;--bg-color1:#f5efe5;--bg-color2:#1B3A5C;--bg-color3:#34855B;--bg-color4:#C9A84C;--text-color1:#1c1a17;--text-color2:#ffffff;--text-color3:#ffffff;--text-color4:#1c1a17;--color-accent:#9a6a2f;--color-dark:#25211d;--container:1120px;--container-wide:1440px;--space-s:clamp(1rem,2vw,1.5rem);--space-m:clamp(2rem,4vw,3rem);--space-l:clamp(3rem,7vw,5rem);--block-pad:clamp(3rem,7vw,6rem);--block-pad-compact:clamp(1.75rem,4vw,3rem);--block-pad-spacious:clamp(4rem,9vw,8rem);--radius:18px;--space:clamp(1rem,2vw,2rem);--surface:#fff;--control-bg:var(--surface);--control-border:rgba(0,0,0,.15);--overlay-base:27,42,56;--backdrop:rgba(15,20,25,.85)}*{box-sizing:border-box}html{overflow-x:clip}body{margin:0;font-family:var(--font-base);color:var(--color-text);background:var(--color-bg);line-height:1.6}img{max-width:100%;height:auto}a{color:inherit}.container{width:min(var(--container),calc(100% - 2rem));margin-inline:auto}.section{padding:clamp(3rem,7vw,6rem) 0}.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.85rem 1.15rem;border-radius:999px;background:var(--color-accent);color:#fff;text-decoration:none;font-weight:700;transition:background-color .2s ease,transform .2s ease,box-shadow .2s ease}.btn-outline{background:transparent;color:var(--color-accent);border:1px solid currentColor}.site-header{position:sticky;top:0;z-index:10;background:rgba(255,253,248,.94);backdrop-filter:blur(10px);border-bottom:1px solid rgba(0,0,0,.06)}.header-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.8rem 0}.site-logo img,.site-logo svg{max-height:48px;width:auto;display:block}.site-nav{display:none;gap:1rem}.site-nav a{text-decoration:none;font-weight:600}.header-actions{display:flex;gap:.5rem}.hero{padding:clamp(4rem,8vw,7rem) 0;background:linear-gradient(135deg,var(--color-bg),var(--bg-color1))}.hero-inner{display:grid;grid-template-columns:1fr;gap:clamp(2rem,5vw,4rem);align-items:center}.hero-inner.no-media{grid-template-columns:1fr;max-width:78ch}.hero h1{font-size:clamp(2.25rem,5vw,4.75rem);line-height:1.05;margin:.2em 0}.hero-subtitle{font-size:clamp(1.1rem,2vw,1.35rem);color:var(--subtitle-color,var(--color-muted))}.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-weight:800;color:var(--eyebrow-color,var(--color-accent));font-size:.85rem}.cta-row{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.5rem}.header-actions .btn-outline{display:none}@media(min-width:821px){.hero-inner{grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr)}.site-nav{display:flex}.header-actions .btn-outline{display:inline-flex}}
++:root{--font-base:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--color-text:#1c1a17;--color-muted:#625d55;--color-bg:#fffdf8;--bg-color1:#f5efe5;--bg-color2:#1B3A5C;--bg-color3:#34855B;--bg-color4:#C9A84C;--text-color1:#1c1a17;--text-color2:#ffffff;--text-color3:#ffffff;--text-color4:#1c1a17;--color-accent:#9a6a2f;--color-dark:#25211d;--container:1120px;--container-wide:1440px;--space-s:clamp(1rem,2vw,1.5rem);--space-m:clamp(2rem,4vw,3rem);--space-l:clamp(3rem,7vw,5rem);--block-pad:clamp(3rem,7vw,6rem);--block-pad-compact:clamp(1.75rem,4vw,3rem);--block-pad-spacious:clamp(4rem,9vw,8rem);--radius:18px;--space:clamp(1rem,2vw,2rem);--surface:#fff;--control-bg:var(--surface);--control-border:rgba(0,0,0,.15);--overlay-base:27,42,56;--backdrop:rgba(15,20,25,.85)}*{box-sizing:border-box}
++button,input,textarea,select{font:inherit;color:inherit}
++html{overflow-x:clip}
++body{margin:0;font-family:var(--font-base);font-size:clamp(18px, 0.25vw + 17.5px, 20px);color:var(--color-text);background:var(--color-bg);line-height:1.6}img{max-width:100%;height:auto}a{color:inherit}.container{width:min(var(--container),calc(100% - 2rem));margin-inline:auto}.section{padding:clamp(3rem,7vw,6rem) 0}.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.85rem 1.15rem;border-radius:999px;background:var(--color-accent);color:#fff;text-decoration:none;font-weight:700;transition:background-color .2s ease,transform .2s ease,box-shadow .2s ease}.btn-outline{background:transparent;color:var(--color-accent);border:1px solid currentColor}.site-header{position:sticky;top:0;z-index:10;background:rgba(255,253,248,.94);backdrop-filter:blur(10px);border-bottom:1px solid rgba(0,0,0,.06)}.header-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.8rem 0}.site-logo img,.site-logo svg{max-height:48px;width:auto;display:block}.site-nav{display:none;gap:1rem}.site-nav a{text-decoration:none;font-weight:600}.header-actions{display:flex;gap:.5rem}.hero{padding:clamp(4rem,8vw,7rem) 0;background:linear-gradient(135deg,var(--color-bg),var(--bg-color1))}.hero-inner{display:grid;grid-template-columns:1fr;gap:clamp(2rem,5vw,4rem);align-items:center}.hero-inner.no-media{grid-template-columns:1fr;max-width:78ch}.hero h1{font-size:clamp(2.25rem,5vw,4.75rem);line-height:1.05;margin:.2em 0}.hero-subtitle{font-size:clamp(1.1rem,2vw,1.35rem);color:var(--subtitle-color,var(--color-muted))}.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-weight:800;color:var(--eyebrow-color,var(--color-accent));font-size:.85rem}.cta-row{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.5rem}.header-actions .btn-outline{display:none}@media(min-width:821px){.hero-inner{grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr)}.site-nav{display:flex}.header-actions .btn-outline{display:inline-flex}}
 diff --git a/themes/f1-theme/assets/css/main.css b/themes/f1-theme/assets/css/main.css
-index 77f2161..8cad139 100644
+index 4f76177..b472d02 100644
 --- a/themes/f1-theme/assets/css/main.css
 +++ b/themes/f1-theme/assets/css/main.css
-@@ -48,16 +48,20 @@
-   width: min(var(--container-wide), calc(100% - 2rem));
-   max-width: none;
- }
--.block-width-full>.container{width:100%;max-width:none;padding-inline:clamp(1rem,4vw,5rem)}.block-text-small{font-size:.875em}.block-text-default{font-size:1em}.block-text-large{font-size:1.15em}.block-text-xl{font-size:1.3em}.block-align-left{text-align:left}.block-align-center{text-align:center}.block-align-right{text-align:right}.block-variant-default{background:var(--color-bg)}.block-variant-soft{background:var(--bg-color1)}.block-variant-featured{background:var(--surface)}.block-variant-contrast{background:var(--color-dark);color:#fff}.block-variant-contrast .btn-outline{color:#fff}.block-counter{background:var(--color-dark);color:#fff}.block-trustbar{background:var(--bg-color1);padding:1rem 0}.block-image-text.is-reverse .image-text-copy{order:0}.block-cards.cards-columns-2 .cards-grid,.block-cards.cards-columns-3 .cards-grid,.block-cards.cards-columns-4 .cards-grid{grid-template-columns:1fr}.block-cta{text-align:center}.cta-tone-neutral{background:var(--bg-color1)}.cta-tone-vision{background:#eef7f4}.cta-tone-hearing{background:#f4f1fb}.block-faq details{background:var(--surface);border:1px solid rgba(0,0,0,.08);border-radius:12px;padding:1rem;margin:.75rem 0}.block-faq summary{cursor:pointer;font-weight:800}@media(min-width:821px){.image-text-inner{grid-template-columns:1fr 1fr}.footer-grid{grid-template-columns:1fr 1fr 1.35fr}.block-cards.cards-columns-2 .cards-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.block-cards.cards-columns-3 .cards-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.block-cards.cards-columns-4 .cards-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.block-image-text.is-reverse .image-text-copy{order:2}}
-+.block-width-full>.container{width:100%;max-width:none;padding-inline:clamp(1rem,4vw,5rem)}.block-text-small{font-size:.875em}.block-text-default{font-size:1em}.block-text-large{font-size:1.15em}.block-text-xl{font-size:1.3em}.block-align-left{text-align:left}.block-align-center{text-align:center}.block-align-right{text-align:right}.block-variant-default{background:var(--color-bg)}.block-variant-soft{background:var(--bg-color1)}.block-variant-featured{background:var(--surface)}.block-variant-contrast{background:var(--color-dark);color:#fff}.block-variant-contrast .btn-outline{color:#fff}.block-counter{background:var(--color-dark);color:#fff}.block-trustbar{background:var(--bg-color1);padding:1rem 0}.block-image-text.is-reverse .image-text-copy{order:0}.block-cards.cards-columns-2 .cards-grid,.block-cards.cards-columns-3 .cards-grid,.block-cards.cards-columns-4 .cards-grid{grid-template-columns:1fr}.block-cta{text-align:center}.block-faq details{background:var(--surface);border:1px solid rgba(0,0,0,.08);border-radius:12px;padding:1rem;margin:.75rem 0}.block-faq summary{cursor:pointer;font-weight:800}@media(min-width:821px){.image-text-inner{grid-template-columns:1fr 1fr}.footer-grid{grid-template-columns:1fr 1fr 1.35fr}.block-cards.cards-columns-2 .cards-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.block-cards.cards-columns-3 .cards-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.block-cards.cards-columns-4 .cards-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.block-image-text.is-reverse .image-text-copy{order:2}}
+@@ -7,7 +7,7 @@
+    un H2 gigante), pero solo la cabecera de bloque se centra y limita en ancho.
+    image-text y cta quedan excluidos sin necesidad de :not() — su h2 vive dentro de
+    un div intermedio (.image-text-copy / .cta-text), nunca hijo directo de .container. */
+-.block .container>h2:first-child,.prose>:where(h2){font-size:1.75rem;line-height:1.2}
++:where(.block .container>h2:first-child),.prose>:where(h2){font-size:1.75rem;line-height:1.2}
+ .block .container>h3:first-child,.prose>:where(h3){font-size:1.35rem;line-height:1.25}
+ .prose>h4{font-size:1.15rem;line-height:1.3}
+ .block .container>h2:first-child{max-width:60ch;margin-inline:auto;text-align:center}
+@@ -51,7 +51,7 @@
+ .block-width-full>.container{width:100%;max-width:none;padding-inline:clamp(1rem,4vw,5rem)}.block-text-small{font-size:.875em}.block-text-default{font-size:1em}.block-text-large{font-size:1.15em}.block-text-xl{font-size:1.3em}.block-align-left{text-align:left}.block-align-center{text-align:center}.block-align-right{text-align:right}.block-variant-default{background:var(--color-bg)}.block-variant-soft{background:var(--bg-color1)}.block-variant-featured{background:var(--surface)}.block-variant-contrast{background:var(--color-dark);color:#fff}.block-variant-contrast .btn-outline{color:#fff}.block-counter{background:var(--color-dark);color:#fff}.block-trustbar{background:var(--bg-color1);padding:1rem 0}.block-image-text.is-reverse .image-text-copy{order:0}.block-cards.cards-columns-2 .cards-grid,.block-cards.cards-columns-3 .cards-grid,.block-cards.cards-columns-4 .cards-grid{grid-template-columns:1fr}.block-cta{text-align:center}.block-faq details{background:var(--surface);border:1px solid rgba(0,0,0,.08);border-radius:12px;padding:1rem;margin:.75rem 0}.block-faq summary{cursor:pointer;font-weight:800}@media(min-width:821px){.image-text-inner{grid-template-columns:1fr 1fr}.footer-grid{grid-template-columns:1fr 1fr 1.35fr}.block-cards.cards-columns-2 .cards-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.block-cards.cards-columns-3 .cards-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.block-cards.cards-columns-4 .cards-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.block-image-text.is-reverse .image-text-copy{order:2}}
  
  /* === v02: utilidades fs, iconos btn, fondos CTA responsive, banner === */
- .fs-xs{font-size:.75em}.fs-s{font-size:.875em}.fs-l{font-size:1.25em}.btn .icon{width:1.1em;height:1.1em;vertical-align:-.18em;margin-right:.45em}.has-bg-color{background:var(--section-bg-color)}.has-bg-image{background-image:var(--section-bg-mobile,var(--section-bg));background-size:cover;background-position:center;position:relative;color:#fff}.has-bg-image>.container{position:relative;z-index:1}.has-bg-image{--overlay-color:rgba(var(--overlay-base),.55)}
+-.fs-xs{font-size:.75em}.fs-s{font-size:.875em}.fs-l{font-size:1.25em}.btn .icon{width:1.1em;height:1.1em;vertical-align:-.18em;margin-right:.45em}.has-bg-color{background:var(--section-bg-color)}.has-bg-image{background-image:var(--section-bg-mobile,var(--section-bg));background-size:cover;background-position:center;position:relative;color:#fff}.has-bg-image>.container{position:relative;z-index:1}.has-bg-image{--overlay-color:rgba(var(--overlay-base),.55)}
++.fs-xs{font-size:.75em}.fs-s{font-size:.875em}.fs-l{font-size:1.25em}h2.fs-s{font-size:1.5rem}h2.fs-xs{font-size:1.25rem}.btn .icon{width:1.1em;height:1.1em;vertical-align:-.18em;margin-right:.45em}.has-bg-color{background:var(--section-bg-color)}.has-bg-image{background-image:var(--section-bg-mobile,var(--section-bg));background-size:cover;background-position:center;position:relative;color:#fff}.has-bg-image>.container{position:relative;z-index:1}.has-bg-image{--overlay-color:rgba(var(--overlay-base),.55)}
  .has-bg-image::before{content:"";position:absolute;inset:0;background:var(--overlay-color)}.has-bg-image.has-bg-color{background-color:transparent}.has-bg-image.has-bg-color{--overlay-color:color-mix(in srgb,var(--section-bg-color) 60%,transparent)}.has-bg-image .btn-outline,
--.has-bg-color:not(.on-light) .btn-outline{color:#fff;border-color:#fff}
-+.has-bg-color:not(.bg-claro) .btn-outline,
-+.bg-color2 .btn-outline,
-+.bg-color3 .btn-outline{color:#fff;border-color:#fff}
- /* Botón primario sobre fondo oscuro: borde fino blanco que lo separa del fondo
-    (el dorado sobre verde/navy apenas contrasta como FORMA aunque su texto sí lo haga) */
- .has-bg-image .btn:not(.btn-outline),
--.has-bg-color:not(.on-light) .btn:not(.btn-outline){
-+.has-bg-color:not(.bg-claro) .btn:not(.btn-outline),
-+.bg-color2 .btn:not(.btn-outline),
-+.bg-color3 .btn:not(.btn-outline){
-   box-shadow:inset 0 0 0 1px rgba(255,255,255,.85);
- }@media(min-width:821px){.has-bg-image{background-image:var(--section-bg)}}.cta-microcopy{margin-top:.9rem;font-size:.875em;opacity:.85}.block-banner{padding:clamp(2rem,4vw,3rem) 0}.block-banner .banner-inner{font-size:clamp(1.15rem,2.6vw,1.5rem);font-weight:700;max-width:52ch;margin:0 auto}.block-banner .banner-inner p{margin:0}
- .trustbar-icon .icon{width:1.15em;height:1.15em;vertical-align:-.2em;margin-right:.35em}
-@@ -68,15 +72,22 @@
-    declara color propio (el h1). Solución: esos colores pasan a variable y se re-declaran
-    aquí dentro del contexto de imagen. Un solo sitio, sirve para hero, CTA y counter. */
- .has-bg-image,
--.has-bg-color:not(.has-bg-image):not(.on-light){
--  color:#fff;
-+.has-bg-color:not(.has-bg-image):not(.bg-claro){
-+  color:var(--section-text-color,#fff);
-   --subtitle-color:rgba(255,255,255,.94);
-   --eyebrow-color:#ffffff;
-   --color-muted:rgba(255,255,255,.90);   /* por si algún bloque usa muted dentro */
- }
- /* Escotilla para bgColor CLAROS (dorado, crema…): texto oscuro normal.
--   Uso: class: "on-light" junto a bgColor. */
--.has-bg-color.on-light{ color:var(--color-text); }
-+   Uso: class: "bg-claro" junto a bgColor. */
-+.has-bg-color.bg-claro{ color:var(--color-text); }
-+
-+/* Clases de paleta: fondo + texto emparejados, listas para usar en class:
-+   No dependen de bgColor/has-bg-color/bg-claro — se bastan solas. */
-+.bg-color1{ background:var(--bg-color1); color:var(--text-color1); }
-+.bg-color2{ background:var(--bg-color2); color:var(--text-color2); --subtitle-color:rgba(255,255,255,.94); --eyebrow-color:#ffffff; }
-+.bg-color3{ background:var(--bg-color3); color:var(--text-color3); --subtitle-color:rgba(255,255,255,.94); --eyebrow-color:#ffffff; }
-+.bg-color4{ background:var(--bg-color4); color:var(--text-color4); }
- .has-bg-image .hero-copy,
- .has-bg-image .cta-inner{ text-shadow:0 1px 3px rgba(0,0,0,.38); }
- .has-bg-image .eyebrow{ text-shadow:0 1px 3px rgba(0,0,0,.55); }
-@@ -219,14 +230,18 @@
- }
- /* sobre fondo oscuro, el primario conserva su filete blanco al elevarse */
- .has-bg-image .btn:not(.btn-outline):hover,
--.has-bg-color:not(.on-light) .btn:not(.btn-outline):hover{
-+.has-bg-color:not(.bg-claro) .btn:not(.btn-outline):hover,
-+.bg-color2 .btn:not(.btn-outline):hover,
-+.bg-color3 .btn:not(.btn-outline):hover{
-   box-shadow:inset 0 0 0 1px rgba(255,255,255,.85),0 6px 16px rgba(0,0,0,.3);
- }
- @media (prefers-reduced-motion:reduce){
-   .btn{transition:background-color .2s ease}
-   .btn:hover,.btn:focus-visible,.btn-outline:hover{transform:none;box-shadow:none}
-   .has-bg-image .btn:not(.btn-outline):hover,
--  .has-bg-color:not(.on-light) .btn:not(.btn-outline):hover{box-shadow:inset 0 0 0 1px rgba(255,255,255,.85)}
-+  .has-bg-color:not(.bg-claro) .btn:not(.btn-outline):hover,
-+  .bg-color2 .btn:not(.btn-outline):hover,
-+  .bg-color3 .btn:not(.btn-outline):hover{box-shadow:inset 0 0 0 1px rgba(255,255,255,.85)}
- }
- 
- /* Bloques insertados en el prose: aire respecto al texto circundante.
-@@ -259,7 +274,7 @@
- .cta-layout-split .cta-microcopy{margin:.6rem 0 0}
- /* sobre fondo oscuro, el subtítulo hereda el color claro del sistema de contraste */
- .cta-layout-split.has-bg-image .cta-subtitle,
--.cta-layout-split.has-bg-color:not(.on-light) .cta-subtitle{color:var(--subtitle-color)}
-+.cta-layout-split.has-bg-color:not(.bg-claro) .cta-subtitle{color:var(--subtitle-color)}
- @media(min-width:641px){
-   .cta-layout-split .cta-inner{flex-direction:row;align-items:center}
-   .cta-layout-split .cta-actions{text-align:right}
-diff --git a/themes/f1-theme/layouts/partials/blocks/counter.html b/themes/f1-theme/layouts/partials/blocks/counter.html
-index d83af5a..fb74b91 100644
---- a/themes/f1-theme/layouts/partials/blocks/counter.html
-+++ b/themes/f1-theme/layouts/partials/blocks/counter.html
-@@ -8,6 +8,7 @@
-   {{- with $.bg }}{{ $styles = $styles | append (printf "--section-bg:url('%s')" .) }}{{ end -}}
-   {{- with $.bgMobile }}{{ $styles = $styles | append (printf "--section-bg-mobile:url('%s')" .) }}{{ end -}}
-   {{- with $.bgColor }}{{ $styles = $styles | append (printf "--section-bg-color:%s" .) }}{{ end -}}
-+  {{- with $.textColor }}{{ $styles = $styles | append (printf "--section-text-color:%s" .) }}{{ end -}}
-   {{- with $styles }} style="{{ delimit . ";" | safeCSS }}"{{ end }}>
-   <div class="container">
-     <div class="counter-grid">
-diff --git a/themes/f1-theme/layouts/partials/blocks/cta.html b/themes/f1-theme/layouts/partials/blocks/cta.html
-index b1ee2b9..0e4d92f 100644
---- a/themes/f1-theme/layouts/partials/blocks/cta.html
-+++ b/themes/f1-theme/layouts/partials/blocks/cta.html
-@@ -3,15 +3,15 @@
-   Compatibilidad: button1/button2 ({url,text}) siguen funcionando.
-   Nuevo:
-     bg / bgMobile   -> imagen de fondo responsive (desktop / movil)
--    bgColor         -> color de fondo plano, o tinte del overlay si hay imagen
-+    bgColor         -> color de fondo plano puntual, o tinte del overlay si hay imagen (para la paleta, usar class: "bg-color1".."bg-color4")
-+    textColor       -> color de texto puntual a juego con bgColor
-     preset: contact -> par de botones Llamar + WhatsApp desde data/site.yaml
-     buttons: [...]  -> lista de botones {text, url, icon}
-     microcopy       -> linea pequena bajo los botones
--    tone/variant/class/textSize/align/width -> modificadores estandar de bloque
-+    variant/class/textSize/align/width -> modificadores estandar de bloque
- */ -}}
--{{ $tone := .tone | default "neutral" }}
- {{ $bg := .bg }}
--{{ $extra := slice (printf "cta-tone-%s" $tone) }}
-+{{ $extra := slice }}
- {{ if $bg }}{{ $extra = $extra | append "has-bg-image" }}{{ end }}
- {{ if .bgColor }}{{ $extra = $extra | append "has-bg-color" }}{{ end }}
- {{ with .layout }}{{ $extra = $extra | append (printf "cta-layout-%s" .) }}{{ end }}
-@@ -38,6 +38,7 @@
-   {{- with $bg }}{{ $styles = $styles | append (printf "--section-bg:url('%s')" .) }}{{ end -}}
-   {{- with .bgMobile }}{{ $styles = $styles | append (printf "--section-bg-mobile:url('%s')" .) }}{{ end -}}
-   {{- with .bgColor }}{{ $styles = $styles | append (printf "--section-bg-color:%s" .) }}{{ end -}}
-+  {{- with .textColor }}{{ $styles = $styles | append (printf "--section-text-color:%s" .) }}{{ end -}}
-   {{- with $styles }} style="{{ delimit . ";" | safeCSS }}"{{ end }}>
-     <div class="container cta-inner{{ if eq .layout "split" }} has-cols{{ end }}">
-     <div class="cta-text">
-diff --git a/themes/f1-theme/layouts/partials/blocks/text.html b/themes/f1-theme/layouts/partials/blocks/text.html
-index b39203b..1085f41 100644
---- a/themes/f1-theme/layouts/partials/blocks/text.html
-+++ b/themes/f1-theme/layouts/partials/blocks/text.html
-@@ -12,7 +12,8 @@
-       textSize: default   # small | default | large | xl
-       align: left          # left | center | right
-       pad:                 # compact | default | spacious (o s/m/l)
--      bgColor:             # color CSS libre, ej. "#f5efe5"
-+      bgColor:             # color CSS libre puntual, ej. "#f5efe5" (para la paleta, usar class: "bg-color1".."bg-color4")
-+      textColor:           # color de texto puntual a juego con bgColor, ej. "#1c1a17"
-       title:
-       subtitle:
-       text: |
-@@ -22,7 +23,10 @@
- {{- $extra := slice -}}
- {{- if .bgColor }}{{ $extra = $extra | append "has-bg-color" }}{{ end -}}
- <section class="{{ partial "block-classes.html" (dict "name" "text" "context" . "extra" $extra) }}"
--  {{- with .bgColor }} style="--section-bg-color:{{ . | safeCSS }}"{{ end }}>
-+  {{- $styles := slice -}}
-+  {{- with .bgColor }}{{ $styles = $styles | append (printf "--section-bg-color:%s" .) }}{{ end -}}
-+  {{- with .textColor }}{{ $styles = $styles | append (printf "--section-text-color:%s" .) }}{{ end -}}
-+  {{- with $styles }} style="{{ delimit . ";" | safeCSS }}"{{ end }}>
-   <div class="container">
-     {{ with .title }}<h2>{{ . }}</h2>{{ end }}
-     {{ with .subtitle }}<p class="section-subtitle">{{ . }}</p>{{ end }}
-diff --git a/themes/f1-theme/layouts/partials/hero.html b/themes/f1-theme/layouts/partials/hero.html
-index 567bd44..a4a6555 100644
---- a/themes/f1-theme/layouts/partials/hero.html
-+++ b/themes/f1-theme/layouts/partials/hero.html
-@@ -6,6 +6,7 @@
-   {{- with $bg }}{{ $styles = $styles | append (printf "--section-bg:url('%s')" .) }}{{ end -}}
-   {{- with .bgMobile }}{{ $styles = $styles | append (printf "--section-bg-mobile:url('%s')" .) }}{{ end -}}
-   {{- with .bgColor }}{{ $styles = $styles | append (printf "--section-bg-color:%s" .) }}{{ end -}}
-+  {{- with .textColor }}{{ $styles = $styles | append (printf "--section-text-color:%s" .) }}{{ end -}}
-   {{- with $styles }} style="{{ delimit . ";" | safeCSS }}"{{ end }}>
-   <div class="container hero-inner{{ if not .image }} no-media{{ end }}">
-     <div class="hero-copy">
-diff --git a/themes/f1-theme/layouts/shortcodes/banner.html b/themes/f1-theme/layouts/shortcodes/banner.html
-index 5cc961e..70118e2 100644
---- a/themes/f1-theme/layouts/shortcodes/banner.html
-+++ b/themes/f1-theme/layouts/shortcodes/banner.html
-@@ -1,7 +1,7 @@
- {{- /*
-   {{< banner >}}Texto destacado con **markdown**{{< /banner >}}
-   Frase destacada / guiño de confianza intercalado en el prose.
--  Parámetros opcionales: class, variant, bgColor, textSize, align
-+  Parámetros opcionales: class, variant, bgColor, textColor, textSize, align
- */ -}}
- {{- $extra := slice -}}
- {{- if .Get "bgColor" }}{{ $extra = $extra | append "has-bg-color" }}{{ end -}}
-@@ -13,7 +13,10 @@
-       "width" (.Get "width")
-       "pad" (.Get "pad")
-     ) "extra" $extra) }}"
--  {{- with .Get "bgColor" }} style="--section-bg-color:{{ . | safeCSS }}"{{ end }}>
-+  {{- $styles := slice -}}
-+  {{- with .Get "bgColor" }}{{ $styles = $styles | append (printf "--section-bg-color:%s" .) }}{{ end -}}
-+  {{- with .Get "textColor" }}{{ $styles = $styles | append (printf "--section-text-color:%s" .) }}{{ end -}}
-+  {{- with $styles }} style="{{ delimit . ";" | safeCSS }}"{{ end }}>
-   <div class="container banner-inner">
-     {{ .Inner | $.Page.RenderString (dict "display" "block") }}
-   </div>
-diff --git a/themes/f1-theme/layouts/shortcodes/cta.html b/themes/f1-theme/layouts/shortcodes/cta.html
-index e303cc3..37fe5b9 100644
---- a/themes/f1-theme/layouts/shortcodes/cta.html
-+++ b/themes/f1-theme/layouts/shortcodes/cta.html
-@@ -4,8 +4,8 @@
- 
-   Parametros (todos opcionales):
-     title, subtitle, microcopy, eyebrow
--    bg, bgMobile, bgColor
--    tone, variant, class, textSize, align, width, pad, layout
-+    bg, bgMobile, bgColor, textColor
-+    variant, class, textSize, align, width, pad, layout
-     labelCall, labelWhatsapp -> renombran los botones del preset contact
-     b1text/b1url/b1icon ... b4text/b4url/b4icon -> botones personalizados (hasta 4)
-   Sin botones personalizados -> preset contact (Llamar + WhatsApp desde site.yaml).
-@@ -17,7 +17,7 @@
-     "bg" (.Get "bg")
-     "bgMobile" (.Get "bgMobile")
-     "bgColor" (.Get "bgColor")
--    "tone" (.Get "tone")
-+    "textColor" (.Get "textColor")
-     "variant" (.Get "variant")
-     "class" (.Get "class")
-     "textSize" (.Get "textSize")
-diff --git a/themes/f1-theme/layouts/shortcodes/testimonial.html b/themes/f1-theme/layouts/shortcodes/testimonial.html
-index 03ec712..d98f858 100644
---- a/themes/f1-theme/layouts/shortcodes/testimonial.html
-+++ b/themes/f1-theme/layouts/shortcodes/testimonial.html
-@@ -11,7 +11,7 @@
-   Parámetros:
-     name    (opcional) — autoría de la cita, ej. "Residente de Torre del Mar"
-     rating  (opcional) — número 1-5
--    class, variant, bgColor, textSize, align, width, pad — igual que banner
-+    class, variant, bgColor, textColor, textSize, align, width, pad — igual que banner
- */ -}}
- {{- $rating := .Get "rating" -}}
- {{- $extra := slice -}}
-@@ -24,7 +24,10 @@
-       "width" (.Get "width")
-       "pad" (.Get "pad")
-     ) "extra" $extra) }}"
--  {{- with .Get "bgColor" }} style="--section-bg-color:{{ . | safeCSS }}"{{ end }}>
-+  {{- $styles := slice -}}
-+  {{- with .Get "bgColor" }}{{ $styles = $styles | append (printf "--section-bg-color:%s" .) }}{{ end -}}
-+  {{- with .Get "textColor" }}{{ $styles = $styles | append (printf "--section-text-color:%s" .) }}{{ end -}}
-+  {{- with $styles }} style="{{ delimit . ";" | safeCSS }}"{{ end }}>
-   <div class="container">
-     <blockquote class="testimonial">
-       {{ .Inner | $.Page.RenderString (dict "display" "block") }}
-diff --git a/themes/f1-theme/layouts/shortcodes/text.html b/themes/f1-theme/layouts/shortcodes/text.html
-index cdb6056..c6fa5a5 100644
---- a/themes/f1-theme/layouts/shortcodes/text.html
-+++ b/themes/f1-theme/layouts/shortcodes/text.html
-@@ -2,7 +2,7 @@
-   Equivalente shortcode del bloque `type: text`, para usar dentro del body
-   markdown en vez de sections: — mismo resultado, mismo .container.prose.
- 
--  {{< text title="..." subtitle="..." textSize="large" align="center" pad="s" bgColor="#f5efe5" >}}
-+  {{< text title="..." subtitle="..." textSize="large" align="center" pad="s" bgColor="#f5efe5" textColor="#1c1a17" >}}
-   Contenido, admite **markdown** completo (headers, listas, blockquotes...).
-   {{< /text >}}
- */ -}}
-@@ -16,7 +16,10 @@
-       "width" (.Get "width")
-       "pad" (.Get "pad")
-     ) "extra" $extra) }}"
--  {{- with .Get "bgColor" }} style="--section-bg-color:{{ . | safeCSS }}"{{ end }}>
-+  {{- $styles := slice -}}
-+  {{- with .Get "bgColor" }}{{ $styles = $styles | append (printf "--section-bg-color:%s" .) }}{{ end -}}
-+  {{- with .Get "textColor" }}{{ $styles = $styles | append (printf "--section-text-color:%s" .) }}{{ end -}}
-+  {{- with $styles }} style="{{ delimit . ";" | safeCSS }}"{{ end }}>
-   <div class="container">
-     {{ with .Get "title" }}<h2>{{ . }}</h2>{{ end }}
-     {{ with .Get "subtitle" }}<p class="section-subtitle">{{ . }}</p>{{ end }}
+ .has-bg-color:not(.bg-claro) .btn-outline,
+ .bg-color2 .btn-outline,
