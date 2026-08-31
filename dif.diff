@@ -1,32 +1,39 @@
-diff --git a/themes/f1-theme/assets/css/critical.css b/themes/f1-theme/assets/css/critical.css
-index 3007c11..8733d85 100644
---- a/themes/f1-theme/assets/css/critical.css
-+++ b/themes/f1-theme/assets/css/critical.css
-@@ -1 +1,4 @@
--:root{--font-base:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--color-text:#1c1a17;--color-muted:#625d55;--color-bg:#fffdf8;--bg-color1:#f5efe5;--bg-color2:#1B3A5C;--bg-color3:#34855B;--bg-color4:#C9A84C;--text-color1:#1c1a17;--text-color2:#ffffff;--text-color3:#ffffff;--text-color4:#1c1a17;--color-accent:#9a6a2f;--color-dark:#25211d;--container:1120px;--container-wide:1440px;--space-s:clamp(1rem,2vw,1.5rem);--space-m:clamp(2rem,4vw,3rem);--space-l:clamp(3rem,7vw,5rem);--block-pad:clamp(3rem,7vw,6rem);--block-pad-compact:clamp(1.75rem,4vw,3rem);--block-pad-spacious:clamp(4rem,9vw,8rem);--radius:18px;--space:clamp(1rem,2vw,2rem);--surface:#fff;--control-bg:var(--surface);--control-border:rgba(0,0,0,.15);--overlay-base:27,42,56;--backdrop:rgba(15,20,25,.85)}*{box-sizing:border-box}html{overflow-x:clip}body{margin:0;font-family:var(--font-base);color:var(--color-text);background:var(--color-bg);line-height:1.6}img{max-width:100%;height:auto}a{color:inherit}.container{width:min(var(--container),calc(100% - 2rem));margin-inline:auto}.section{padding:clamp(3rem,7vw,6rem) 0}.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.85rem 1.15rem;border-radius:999px;background:var(--color-accent);color:#fff;text-decoration:none;font-weight:700;transition:background-color .2s ease,transform .2s ease,box-shadow .2s ease}.btn-outline{background:transparent;color:var(--color-accent);border:1px solid currentColor}.site-header{position:sticky;top:0;z-index:10;background:rgba(255,253,248,.94);backdrop-filter:blur(10px);border-bottom:1px solid rgba(0,0,0,.06)}.header-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.8rem 0}.site-logo img,.site-logo svg{max-height:48px;width:auto;display:block}.site-nav{display:none;gap:1rem}.site-nav a{text-decoration:none;font-weight:600}.header-actions{display:flex;gap:.5rem}.hero{padding:clamp(4rem,8vw,7rem) 0;background:linear-gradient(135deg,var(--color-bg),var(--bg-color1))}.hero-inner{display:grid;grid-template-columns:1fr;gap:clamp(2rem,5vw,4rem);align-items:center}.hero-inner.no-media{grid-template-columns:1fr;max-width:78ch}.hero h1{font-size:clamp(2.25rem,5vw,4.75rem);line-height:1.05;margin:.2em 0}.hero-subtitle{font-size:clamp(1.1rem,2vw,1.35rem);color:var(--subtitle-color,var(--color-muted))}.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-weight:800;color:var(--eyebrow-color,var(--color-accent));font-size:.85rem}.cta-row{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.5rem}.header-actions .btn-outline{display:none}@media(min-width:821px){.hero-inner{grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr)}.site-nav{display:flex}.header-actions .btn-outline{display:inline-flex}}
-+:root{--font-base:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--color-text:#1c1a17;--color-muted:#625d55;--color-bg:#fffdf8;--bg-color1:#f5efe5;--bg-color2:#1B3A5C;--bg-color3:#34855B;--bg-color4:#C9A84C;--text-color1:#1c1a17;--text-color2:#ffffff;--text-color3:#ffffff;--text-color4:#1c1a17;--color-accent:#9a6a2f;--color-dark:#25211d;--container:1120px;--container-wide:1440px;--space-s:clamp(1rem,2vw,1.5rem);--space-m:clamp(2rem,4vw,3rem);--space-l:clamp(3rem,7vw,5rem);--block-pad:clamp(3rem,7vw,6rem);--block-pad-compact:clamp(1.75rem,4vw,3rem);--block-pad-spacious:clamp(4rem,9vw,8rem);--radius:18px;--space:clamp(1rem,2vw,2rem);--surface:#fff;--control-bg:var(--surface);--control-border:rgba(0,0,0,.15);--overlay-base:27,42,56;--backdrop:rgba(15,20,25,.85)}*{box-sizing:border-box}
-+button,input,textarea,select{font:inherit;color:inherit}
-+html{overflow-x:clip}
-+body{margin:0;font-family:var(--font-base);font-size:clamp(18px, 0.25vw + 17.5px, 20px);color:var(--color-text);background:var(--color-bg);line-height:1.6}img{max-width:100%;height:auto}a{color:inherit}.container{width:min(var(--container),calc(100% - 2rem));margin-inline:auto}.section{padding:clamp(3rem,7vw,6rem) 0}.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.85rem 1.15rem;border-radius:999px;background:var(--color-accent);color:#fff;text-decoration:none;font-weight:700;transition:background-color .2s ease,transform .2s ease,box-shadow .2s ease}.btn-outline{background:transparent;color:var(--color-accent);border:1px solid currentColor}.site-header{position:sticky;top:0;z-index:10;background:rgba(255,253,248,.94);backdrop-filter:blur(10px);border-bottom:1px solid rgba(0,0,0,.06)}.header-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.8rem 0}.site-logo img,.site-logo svg{max-height:48px;width:auto;display:block}.site-nav{display:none;gap:1rem}.site-nav a{text-decoration:none;font-weight:600}.header-actions{display:flex;gap:.5rem}.hero{padding:clamp(4rem,8vw,7rem) 0;background:linear-gradient(135deg,var(--color-bg),var(--bg-color1))}.hero-inner{display:grid;grid-template-columns:1fr;gap:clamp(2rem,5vw,4rem);align-items:center}.hero-inner.no-media{grid-template-columns:1fr;max-width:78ch}.hero h1{font-size:clamp(2.25rem,5vw,4.75rem);line-height:1.05;margin:.2em 0}.hero-subtitle{font-size:clamp(1.1rem,2vw,1.35rem);color:var(--subtitle-color,var(--color-muted))}.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-weight:800;color:var(--eyebrow-color,var(--color-accent));font-size:.85rem}.cta-row{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.5rem}.header-actions .btn-outline{display:none}@media(min-width:821px){.hero-inner{grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr)}.site-nav{display:flex}.header-actions .btn-outline{display:inline-flex}}
-diff --git a/themes/f1-theme/assets/css/main.css b/themes/f1-theme/assets/css/main.css
-index 4f76177..b472d02 100644
---- a/themes/f1-theme/assets/css/main.css
-+++ b/themes/f1-theme/assets/css/main.css
-@@ -7,7 +7,7 @@
-    un H2 gigante), pero solo la cabecera de bloque se centra y limita en ancho.
-    image-text y cta quedan excluidos sin necesidad de :not() — su h2 vive dentro de
-    un div intermedio (.image-text-copy / .cta-text), nunca hijo directo de .container. */
--.block .container>h2:first-child,.prose>:where(h2){font-size:1.75rem;line-height:1.2}
-+:where(.block .container>h2:first-child),.prose>:where(h2){font-size:1.75rem;line-height:1.2}
- .block .container>h3:first-child,.prose>:where(h3){font-size:1.35rem;line-height:1.25}
- .prose>h4{font-size:1.15rem;line-height:1.3}
- .block .container>h2:first-child{max-width:60ch;margin-inline:auto;text-align:center}
-@@ -51,7 +51,7 @@
- .block-width-full>.container{width:100%;max-width:none;padding-inline:clamp(1rem,4vw,5rem)}.block-text-small{font-size:.875em}.block-text-default{font-size:1em}.block-text-large{font-size:1.15em}.block-text-xl{font-size:1.3em}.block-align-left{text-align:left}.block-align-center{text-align:center}.block-align-right{text-align:right}.block-variant-default{background:var(--color-bg)}.block-variant-soft{background:var(--bg-color1)}.block-variant-featured{background:var(--surface)}.block-variant-contrast{background:var(--color-dark);color:#fff}.block-variant-contrast .btn-outline{color:#fff}.block-counter{background:var(--color-dark);color:#fff}.block-trustbar{background:var(--bg-color1);padding:1rem 0}.block-image-text.is-reverse .image-text-copy{order:0}.block-cards.cards-columns-2 .cards-grid,.block-cards.cards-columns-3 .cards-grid,.block-cards.cards-columns-4 .cards-grid{grid-template-columns:1fr}.block-cta{text-align:center}.block-faq details{background:var(--surface);border:1px solid rgba(0,0,0,.08);border-radius:12px;padding:1rem;margin:.75rem 0}.block-faq summary{cursor:pointer;font-weight:800}@media(min-width:821px){.image-text-inner{grid-template-columns:1fr 1fr}.footer-grid{grid-template-columns:1fr 1fr 1.35fr}.block-cards.cards-columns-2 .cards-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.block-cards.cards-columns-3 .cards-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.block-cards.cards-columns-4 .cards-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.block-image-text.is-reverse .image-text-copy{order:2}}
+diff --git a/content/demo/_index.md b/content/demo/_index.md
+index 10c9cc5..c95ac7b 100644
+--- a/content/demo/_index.md
++++ b/content/demo/_index.md
+@@ -374,6 +374,8 @@ Segundo párrafo, tras un espacio grande. (`s`, `m`, `l` disponibles.)
  
- /* === v02: utilidades fs, iconos btn, fondos CTA responsive, banner === */
--.fs-xs{font-size:.75em}.fs-s{font-size:.875em}.fs-l{font-size:1.25em}.btn .icon{width:1.1em;height:1.1em;vertical-align:-.18em;margin-right:.45em}.has-bg-color{background:var(--section-bg-color)}.has-bg-image{background-image:var(--section-bg-mobile,var(--section-bg));background-size:cover;background-position:center;position:relative;color:#fff}.has-bg-image>.container{position:relative;z-index:1}.has-bg-image{--overlay-color:rgba(var(--overlay-base),.55)}
-+.fs-xs{font-size:.75em}.fs-s{font-size:.875em}.fs-l{font-size:1.25em}h2.fs-s{font-size:1.5rem}h2.fs-xs{font-size:1.25rem}.btn .icon{width:1.1em;height:1.1em;vertical-align:-.18em;margin-right:.45em}.has-bg-color{background:var(--section-bg-color)}.has-bg-image{background-image:var(--section-bg-mobile,var(--section-bg));background-size:cover;background-position:center;position:relative;color:#fff}.has-bg-image>.container{position:relative;z-index:1}.has-bg-image{--overlay-color:rgba(var(--overlay-base),.55)}
- .has-bg-image::before{content:"";position:absolute;inset:0;background:var(--overlay-color)}.has-bg-image.has-bg-color{background-color:transparent}.has-bg-image.has-bg-color{--overlay-color:color-mix(in srgb,var(--section-bg-color) 60%,transparent)}.has-bg-image .btn-outline,
- .has-bg-color:not(.bg-claro) .btn-outline,
- .bg-color2 .btn-outline,
+ {{< banner class="bg-color4" textSize="large" >}}p4.2- Banner con `class: bg-color4` y `textSize: large`.{{< /banner >}}
+ 
++{{< banner bg="/images/100-instalaciones_fausto_duque_fachada.webp" >}}p4.3- Banner con `bg` (imagen de fondo, nuevo).{{< /banner >}}
++
+ {{< banner class="fs-s" align="left" >}}p4.3- Banner con utilidad `fs-s` vía class y alineado a la izquierda.{{< /banner >}}
+ 
+ ### p5- Shortcode {{</* cta */>}}
+diff --git a/themes/f1-theme/layouts/shortcodes/banner.html b/themes/f1-theme/layouts/shortcodes/banner.html
+index 70118e2..5a57f1f 100644
+--- a/themes/f1-theme/layouts/shortcodes/banner.html
++++ b/themes/f1-theme/layouts/shortcodes/banner.html
+@@ -1,9 +1,11 @@
+ {{- /*
+   {{< banner >}}Texto destacado con **markdown**{{< /banner >}}
+   Frase destacada / guiño de confianza intercalado en el prose.
+-  Parámetros opcionales: class, variant, bgColor, textColor, textSize, align
++  Parámetros opcionales: class, variant, bg, bgMobile, bgColor, textColor, textSize, align
+ */ -}}
++{{- $bg := .Get "bg" -}}
+ {{- $extra := slice -}}
++{{- if $bg }}{{ $extra = $extra | append "has-bg-image" }}{{ end -}}
+ {{- if .Get "bgColor" }}{{ $extra = $extra | append "has-bg-color" }}{{ end -}}
+ <aside class="{{ partial "block-classes.html" (dict "name" "banner" "context" (dict
+       "variant" (.Get "variant")
+@@ -14,6 +16,8 @@
+       "pad" (.Get "pad")
+     ) "extra" $extra) }}"
+   {{- $styles := slice -}}
++  {{- with $bg }}{{ $styles = $styles | append (printf "--section-bg:url('%s')" .) }}{{ end -}}
++  {{- with .Get "bgMobile" }}{{ $styles = $styles | append (printf "--section-bg-mobile:url('%s')" .) }}{{ end -}}
+   {{- with .Get "bgColor" }}{{ $styles = $styles | append (printf "--section-bg-color:%s" .) }}{{ end -}}
+   {{- with .Get "textColor" }}{{ $styles = $styles | append (printf "--section-text-color:%s" .) }}{{ end -}}
+   {{- with $styles }} style="{{ delimit . ";" | safeCSS }}"{{ end }}>

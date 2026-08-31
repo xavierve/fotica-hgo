@@ -374,6 +374,8 @@ Segundo párrafo, tras un espacio grande. (`s`, `m`, `l` disponibles.)
 
 {{< banner class="bg-color4" textSize="large" >}}p4.2- Banner con `class: bg-color4` y `textSize: large`.{{< /banner >}}
 
+{{< banner bg="/images/100-instalaciones_fausto_duque_fachada.webp" >}}p4.3- Banner con `bg` (imagen de fondo, nuevo).{{< /banner >}}
+
 {{< banner class="fs-s" align="left" >}}p4.3- Banner con utilidad `fs-s` vía class y alineado a la izquierda.{{< /banner >}}
 
 ### p5- Shortcode {{</* cta */>}}

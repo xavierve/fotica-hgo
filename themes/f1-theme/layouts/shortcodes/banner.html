@@ -1,9 +1,11 @@
 {{- /*
   {{< banner >}}Texto destacado con **markdown**{{< /banner >}}
   Frase destacada / guiño de confianza intercalado en el prose.
-  Parámetros opcionales: class, variant, bgColor, textColor, textSize, align
+  Parámetros opcionales: class, variant, bg, bgMobile, bgColor, textColor, textSize, align
 */ -}}
+{{- $bg := .Get "bg" -}}
 {{- $extra := slice -}}
+{{- if $bg }}{{ $extra = $extra | append "has-bg-image" }}{{ end -}}
 {{- if .Get "bgColor" }}{{ $extra = $extra | append "has-bg-color" }}{{ end -}}
 <aside class="{{ partial "block-classes.html" (dict "name" "banner" "context" (dict
       "variant" (.Get "variant")
@@ -14,6 +16,8 @@
       "pad" (.Get "pad")
     ) "extra" $extra) }}"
   {{- $styles := slice -}}
+  {{- with $bg }}{{ $styles = $styles | append (printf "--section-bg:url('%s')" .) }}{{ end -}}
+  {{- with .Get "bgMobile" }}{{ $styles = $styles | append (printf "--section-bg-mobile:url('%s')" .) }}{{ end -}}
   {{- with .Get "bgColor" }}{{ $styles = $styles | append (printf "--section-bg-color:%s" .) }}{{ end -}}
   {{- with .Get "textColor" }}{{ $styles = $styles | append (printf "--section-text-color:%s" .) }}{{ end -}}
   {{- with $styles }} style="{{ delimit . ";" | safeCSS }}"{{ end }}>
