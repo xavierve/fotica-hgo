@@ -27,6 +27,7 @@ hero:
   subtitle: "Un niño que ve borroso no se queja: para él, el mundo siempre se ha visto así. Por eso los problemas visuales infantiles pasan desapercibidos hasta que aparecen en forma de malas notas, dolores de cabeza o falta de atención. **Las anomalías visuales están detrás de al menos una tercera parte del fracaso escolar** — y la mayoría tienen solución si se detectan a tiempo."
   ctaPreset: contact
   bg: "/images/212-vision_infantil_hero.webp"
+  bgMobile: "/images/212-vision_infantil_hero_m.webp"
 
 sections:
   - type: faq
@@ -62,6 +63,10 @@ sections:
 ## La prevención empieza a los 3 años
 
 Recomendamos una primera revisión completa **a partir de los 3 años** y controles **anuales** después — idealmente antes del inicio de cada curso escolar. Detectar a tiempo evita que un problema visual se convierta en un retraso en el desarrollo o en dificultades de aprendizaje.
+
+{{< image-text image="/images/212-vision_infantil_revision.webp" imageAlt="Revisión visual infantil en Ópticas Fausto, prueba con lentes de prueba adaptada a la edad del niño" reverse="true" >}}
+Pruebas adaptadas a la edad — sin necesidad de saber leer ni «colaborar como un adulto».
+{{< /image-text >}}
 
 {{< cta title="Pide su revisión antes del curso" microcopy="Revisión adaptada a la edad del niño · Resultado explicado con calma a los padres" >}}
 

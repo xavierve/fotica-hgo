@@ -57,12 +57,18 @@ La ortoqueratología (Orto-K) utiliza unas lentes especiales **que se llevan sol
 
 Es una técnica reversible y muy segura, pero **requiere conocimientos especializados y un topógrafo corneal**, el instrumento que permite mapear la córnea y adaptar la lente de forma correcta e individualizada a cada paciente. En Ópticas Fausto contamos con el equipo y la formación para hacerlo.
 
+{{< image-text image="/images/211-optometria_D3A7499.webp" imageAlt="Topógrafo corneal en Ópticas Fausto, mapa de curvatura de la córnea en pantalla" >}}
+El mapa de curvatura de tu córnea, en pantalla, antes de adaptar cualquier lente — no se improvisa.
+{{< /image-text >}}
+
 ### ¿Para quién está recomendada?
 
 - **Niños y adolescentes** con miopía en progresión — el grupo donde el control del avance es más importante. Suele detectarse en la [revisión visual infantil](/vision/servicios/vision-infantil/).
 - **Opositores** y profesiones que exigen buena visión sin corrección (cuerpos de seguridad, etc.).
 - **Deportistas** y personas activas que no quieren depender de gafas ni lentillas durante el día.
 - Quienes, por sus condiciones oculares, **no pueden o no quieren optar por la cirugía refractiva**.
+
+{{< banner bg="/images/213-miopia_ortok_sueno.webp" textSize="large" pad="l" >}}Corrige tu miopía mientras duermes.{{< /banner >}}
 
 ## Lentillas blandas de desenfoque periférico
 
@@ -71,5 +77,7 @@ Además de la Orto-K, la investigación actual en control de miopía se centra e
 Ambos tratamientos se basan en el mismo mecanismo: el modo en que las imágenes se enfocan en la retina central y periférica, que parece ser el principal responsable del crecimiento del ojo — y por tanto, del aumento de la miopía.
 
 En el estudio inicial valoramos qué opción encaja mejor con la edad, el estilo de vida y las características oculares de cada paciente.
+
+{{< banner bg="/images/213-miopia_hero.webp" textSize="large" pad="l" >}}Hay momentos que quieres recordar con nitidez.{{< /banner >}}
 
 {{< cta title="Pide tu estudio de control de miopía" microcopy="Estudio con topógrafo corneal · Valoración sin compromiso" >}}

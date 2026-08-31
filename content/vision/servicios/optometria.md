@@ -63,6 +63,10 @@ El sistema visual lo forman los ojos, las vías visuales y el sistema nervioso c
 
 Con el resultado, planteamos el tratamiento adecuado: gafas, [lentes de contacto](/vision/productos/lentes-de-contacto/), prismas, un [programa de terapia visual](/vision/servicios/terapia-visual/) — o simplemente la tranquilidad de saber que todo está bien.
 
+{{< image-text image="/images/211-optometria_D3A0068.webp" imageAlt="Juan de Dios, óptico-optometrista de Ópticas Fausto, realizando un examen refractivo con foróptero" >}}
+El examen refractivo es donde se afina la graduación exacta — el punto de partida de cualquier solución, ya sea en gafas o en lentes de contacto.
+{{< /image-text >}}
+
 ### ¿Cada cuánto conviene revisarse?
 
 La visión evoluciona a lo largo de la vida y se ve afectada por nuestros hábitos diarios (pantallas, lectura, conducción). Una revisión periódica —anual como referencia general— permite actuar a tiempo y prevenir alteraciones antes de que afecten a tu día a día.
@@ -81,5 +85,9 @@ La visión evoluciona a lo largo de la vida y se ve afectada por nuestros hábit
 - Sensación de que las letras «se mueven»
 
 Si reconoces dos o más, no lo dejes pasar: en 20–30 minutos sales de dudas.
+
+{{< image-text image="/images/211-galeria_atencion_D3A0053.webp" imageAlt="Interior de Ópticas Fausto durante un examen visual en Torre del Mar" reverse="true" >}}
+Contamos con equipo de medición óptica propio, sin depender de nadie externo — así el resultado lo tienes en el momento, no en una cita aparte.
+{{< /image-text >}}
 
 {{< cta title="Pide tu revisión visual" subtitle="En 20–30 minutos sales de dudas, con el resultado en el momento." >}}
