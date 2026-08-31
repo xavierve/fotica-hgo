@@ -194,23 +194,48 @@ sections:
 
 `columns` acepta `2`, `3` o `4` y genera `cards-columns-{columns}`.
 
-## CTA Banner
+## CTA
 
 ```yaml
 sections:
   - type: cta
-    tone: vision
     title:
     subtitle:
-    button1:
-      text:
-      url:
-    button2:
-      text:
-      url:
+    bg:                  # imagen de fondo (desktop)
+    bgMobile:              # imagen de fondo (movil), opcional
+    bgColor:                # color de fondo plano puntual, o tinte del overlay si hay bg
+                              # (para la paleta, usar class: "bg-color1".."bg-color4")
+    textColor:                # color de texto puntual a juego con bgColor
+    preset: contact             # botones Llamar + WhatsApp desde data/site.yaml
+    buttons:                     # alternativa a preset: lista de botones {text, url, icon}
+      - text:
+        url:
+        icon:
+    microcopy:                    # linea pequena bajo los botones
+    layout: split                  # opcional, columnas con eyebrow
 ```
 
-`tone` acepta `neutral`, `vision` o `hearing` y genera `cta-tone-{tone}`.
+`tone` ya no existe (eliminado — `bgColor`/`textColor`/`class` cubren cualquier
+combinación de color sin necesitar variantes con nombre fijo).
+
+## Banner
+
+Frase destacada / guiño de confianza, sin botones — para eso usa `cta`. Mismo
+mecanismo `bg`/`bgMobile`/`bgColor`/`textColor` que `cta`/`hero`. Existe como
+bloque (`type: banner`, sección de página completa) y como shortcode
+(`{{< banner >}}`, intercalado dentro del body markdown) — misma lógica en
+ambos.
+
+```yaml
+sections:
+  - type: banner
+    bg:
+    bgMobile:
+    bgColor:
+    textColor:
+    align: center   # left | center | right — center por defecto
+    text: "Frase destacada en **markdown**."
+```
 
 ## FAQ
 

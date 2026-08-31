@@ -206,6 +206,10 @@ sections:
     title: "20- text · class: bg-color4 (fondo + texto resueltos solos)"
     text: "Las clases de paleta (`bg-color1`..`bg-color4`) ya traen el color de texto correcto emparejado — no hace falta `bgColor` ni ningún interruptor aparte."
 
+  - type: banner
+    class: "bg-color2"
+    text: "**20b-** type: banner (bloque, nuevo) · class: bg-color2 — frase destacada como sección de página completa, sin botones, mismo mecanismo bg/bgColor que cta."
+
   # ============ TEXT-SPLIT — grid simétrico 2 columnas, ambos slots libres ============
   - type: text-split
     title: "21- text-split · items con textSize/align/pad/margin distintos"
@@ -374,7 +378,7 @@ Segundo párrafo, tras un espacio grande. (`s`, `m`, `l` disponibles.)
 
 {{< banner class="bg-color4" textSize="large" >}}p4.2- Banner con `class: bg-color4` y `textSize: large`.{{< /banner >}}
 
-{{< banner bg="/images/100-instalaciones_fausto_duque_fachada.webp" >}}p4.3- Banner con `bg` (imagen de fondo, nuevo).{{< /banner >}}
+{{< banner bg="/images/100-instalaciones_fausto_duque_fachada.webp" width="wide" pad="l" >}}p4.3- Banner con `bg` (imagen de fondo)  `width=wide` `pad=l`.{{< /banner >}}
 
 {{< banner class="fs-s" align="left" >}}p4.3- Banner con utilidad `fs-s` vía class y alineado a la izquierda.{{< /banner >}}
 

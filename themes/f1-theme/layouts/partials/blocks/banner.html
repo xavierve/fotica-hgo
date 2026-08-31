@@ -1,0 +1,40 @@
+{{- /*
+  Frase destacada / guiño de confianza como SECCION de pagina completa.
+  Equivalente en bloque del shortcode {{< banner >}} — misma logica de
+  bg/bgMobile/bgColor/textColor que cta/hero. Sin botones: para eso usa `cta`.
+
+  sections:
+    - type: banner
+      width: default       # default | wide | full
+      variant: default      # default | soft | featured | contrast
+      textSize: default     # small | default | large | xl
+      align: center          # left | center | right
+      pad:                   # compact | default | spacious (o s/m/l)
+      bg:                    # imagen de fondo (desktop)
+      bgMobile:               # imagen de fondo (movil), opcional
+      bgColor:                # color de fondo plano puntual, o tinte del overlay si hay bg (para la paleta, usar class: "bg-color1".."bg-color4")
+      textColor:               # color de texto puntual a juego con bgColor
+      text: "Frase destacada en **markdown**."
+*/ -}}
+{{- $bg := .bg -}}
+{{- $extra := slice -}}
+{{- if $bg }}{{ $extra = $extra | append "has-bg-image" }}{{ end -}}
+{{- if .bgColor }}{{ $extra = $extra | append "has-bg-color" }}{{ end -}}
+<aside class="{{ partial "block-classes.html" (dict "name" "banner" "context" (dict
+      "width" .width
+      "variant" .variant
+      "textSize" .textSize
+      "align" (.align | default "center")
+      "pad" .pad
+      "class" .class
+    ) "extra" $extra) }}"
+  {{- $styles := slice -}}
+  {{- with $bg }}{{ $styles = $styles | append (printf "--section-bg:url('%s')" .) }}{{ end -}}
+  {{- with .bgMobile }}{{ $styles = $styles | append (printf "--section-bg-mobile:url('%s')" .) }}{{ end -}}
+  {{- with .bgColor }}{{ $styles = $styles | append (printf "--section-bg-color:%s" .) }}{{ end -}}
+  {{- with .textColor }}{{ $styles = $styles | append (printf "--section-text-color:%s" .) }}{{ end -}}
+  {{- with $styles }} style="{{ delimit . ";" | safeCSS }}"{{ end }}>
+  <div class="container banner-inner">
+    {{ with .text }}{{ . | markdownify }}{{ end }}
+  </div>
+</aside>
