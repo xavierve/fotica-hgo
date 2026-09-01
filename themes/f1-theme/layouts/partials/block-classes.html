@@ -1,13 +1,14 @@
 {{ $ctx := .context }}
-{{/* Alias de talla (s/m/l/xl) → nombres canónicos, para pad y textSize */}}
+{{/* Alias de talla (s/m/l) → nombres canónicos, solo para pad. textSize ya NO tiene
+     alias: xs|s|m|l|xl es el nombre canónico directo de la clase block-text-*.
+     Ver "Talla de bloque vs talla de prosa" en docs/FRONTMATTER.md. */}}
 {{ $padAlias := dict "s" "compact" "m" "" "l" "spacious" }}
-{{ $sizeAlias := dict "s" "small" "m" "default" "l" "large" }}
 {{ $classes := slice
   "block"
   (printf "block-%s" .name)
   (printf "block-width-%s" ($ctx.width | default "default"))
   (printf "block-variant-%s" ($ctx.variant | default "default"))
-  (printf "block-text-%s" (index $sizeAlias ($ctx.textSize | default "") | default ($ctx.textSize | default "default")))
+  (printf "block-text-%s" ($ctx.textSize | default "m"))
   (printf "block-align-%s" ($ctx.align | default "left"))
 }}
 {{ range (.extra | default slice) }}

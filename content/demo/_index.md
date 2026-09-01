@@ -376,11 +376,11 @@ Segundo párrafo, tras un espacio grande. (`s`, `m`, `l` disponibles.)
 
 {{< banner >}} p4.1- Banner por defecto: frase destacada **con markdown**, centrada.{{< /banner >}}
 
-{{< banner class="bg-color4" textSize="large" >}}p4.2- Banner con `class: bg-color4` y `textSize: large`.{{< /banner >}}
+{{< banner class="bg-color4" textSize="l" >}}p4.2- Banner con `class: bg-color4` y `textSize: large`.{{< /banner >}}
 
 {{< banner bg="/images/100-instalaciones_fausto_duque_fachada.webp" width="wide" pad="l" >}}p4.3- Banner con `bg` (imagen de fondo)  `width=wide` `pad=l`.{{< /banner >}}
 
-{{< banner class="fs-s" align="left" >}}p4.3- Banner con utilidad `fs-s` vía class y alineado a la izquierda.{{< /banner >}}
+{{< banner textSize="xl" align="left" >}}p4.4- Banner con utilidad `fs-s` vía class y alineado a la izquierda.{{< /banner >}}
 
 ### p5- Shortcode {{</* cta */>}}
 
