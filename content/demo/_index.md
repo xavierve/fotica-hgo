@@ -329,6 +329,9 @@ Todo lo que sigue es **body markdown** dentro del contenedor `prose`: títulos, 
 
 Un párrafo normal, sin variaciones escrito en prose, con Marqdown. **abajo las variaciones**.
 
+Un párrafo con clase `{.fs-sl}` para destacar una cita al tamaño de H2 (clamp 28→34) , encabezando un párrafo sin relevancia semántica de un Header
+{.fs-xl}
+
 Un párrafo con clase `{.fs-l}` aplicada al bloque completo, para destacar una entradilla o un párrafo clave sin recurrir a un bloque de sección.
 {.fs-l}
 
@@ -374,7 +377,7 @@ Segundo párrafo, tras un espacio grande. (`s`, `m`, `l` disponibles.)
 
 ### p4- Shortcode {{</* banner */>}}
 
-{{< banner >}} p4.1- Banner por defecto: frase destacada **con markdown**, centrada.{{< /banner >}}
+{{< banner >}} p4.1- Banner por defecto: frase destacada **con markdown**, centrada. textSize = H2 {{< /banner >}}
 
 {{< banner class="bg-color4" textSize="l" >}}p4.2- Banner con `class: bg-color4` y `textSize: l`.{{< /banner >}}
 
