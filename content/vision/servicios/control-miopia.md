@@ -68,7 +68,7 @@ El mapa de curvatura de tu córnea, en pantalla, antes de adaptar cualquier lent
 - **Deportistas** y personas activas que no quieren depender de gafas ni lentillas durante el día.
 - Quienes, por sus condiciones oculares, **no pueden o no quieren optar por la cirugía refractiva**.
 
-{{< banner bg="/images/213-miopia_ortok_sueno.webp" textSize="sl" pad="l" >}}Corrige tu miopía mientras duermes.{{< /banner >}}
+{{< banner bg="/images/213-miopia_ortok_sueno.webp" textSize="xl" pad="l" >}}Corrige tu miopía mientras duermes.{{< /banner >}}
 
 ## Lentillas blandas de desenfoque periférico
 
@@ -78,6 +78,6 @@ Ambos tratamientos se basan en el mismo mecanismo: el modo en que las imágenes 
 
 En el estudio inicial valoramos qué opción encaja mejor con la edad, el estilo de vida y las características oculares de cada paciente.
 
-{{< banner bg="/images/213-miopia_hero.webp" textSize="xl" pad="l" >}}Hay momentos que quieres recordar con nitidez.{{< /banner >}}
+{{< banner bg="/images/213-miopia_hero.webp" pad="l" >}}## Hay momentos que quieres recordar con nitidez.{{< /banner >}}
 
 {{< cta title="Pide tu estudio de control de miopía" microcopy="Estudio con topógrafo corneal · Valoración sin compromiso" >}}

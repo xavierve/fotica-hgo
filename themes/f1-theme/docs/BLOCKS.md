@@ -44,7 +44,7 @@ Todos los bloques aceptan:
 
 - `width`: `default`, `wide`, `full`
 - `variant`: `default`, `soft`, `featured`, `contrast`
-- `textSize`: `small`, `default`, `large`, `xl`
+- `textSize`: `xs`, `s`, `m`, `l`, `xl` — ver "Talla de bloque vs talla de prosa" en FRONTMATTER.md
 - `align`: `left`, `center`, `right`
 - `class`: string opcional
 
@@ -86,7 +86,7 @@ sections:
   - type: image-text
     width: wide
     variant: soft
-    textSize: large
+    textSize: l
     align: left
     class: home-human
     title:
@@ -108,7 +108,7 @@ sections:
     subtitle:
     items:
       - text: "**«Cita o texto destacado»**"
-        textSize: xl      # s|small, m|default, l|large, xl
+        textSize: xl      # xs|s|m|l|xl
         align: center     # left | center | right
         pad:              # s | m | l — padding interno del item
         margin:           # valor CSS libre, ej. "0 0 1rem 0"
@@ -124,7 +124,7 @@ a futuro, texto+vídeo (Goldmark `unsafe: true` ya permite embeber
 `textSize`/`align` de cada item reutilizan `block-text-*`/`block-align-*` (los
 mismos que Campos Comunes) — no son clases nuevas. `pad` usa tokens propios
 del item (`--space-s/m/l`, más pequeños que el pad de sección). Si el texto
-usa `textSize: large` o `xl`, se limita automáticamente a `26ch` de ancho y se
+usa `textSize: l` o `xl`, se limita automáticamente a `26ch` de ancho y se
 centra — evita líneas demasiado largas en una cita grande.
 
 **Solo 2 items por bloque** — el grid no reflowea a más columnas si añades un
@@ -144,7 +144,7 @@ sections:
   - type: text
     width: default      # default | wide | full
     variant: default     # default | soft | featured | contrast
-    textSize: default    # small | default | large | xl
+    textSize: m          # xs | s | m | l | xl
     align: left           # left | center | right
     pad:                  # compact | default | spacious (o s/m/l)
     bgColor:               # color CSS libre
@@ -233,6 +233,7 @@ sections:
     bgMobile:
     bgColor:
     textColor:
+    textSize: m     # xs | s | m | l | xl — m por defecto
     align: center   # left | center | right — center por defecto
     text: "Frase destacada en **markdown**."
 ```

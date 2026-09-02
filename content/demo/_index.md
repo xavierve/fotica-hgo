@@ -83,8 +83,8 @@ sections:
   # ============ IMAGE_TEXT — widths y textSize ============
   - type: image-text
     width: wide
-    textSize: large
-    title: "6- width: wide · textSize: large"
+    textSize: l
+    title: "6- width: wide · textSize: l"
     text: "Contenedor ancho y tipografía grande."
     image: "https://picsum.photos/seed/it5/640/420"
     imageAlt: "Demo"
@@ -97,9 +97,9 @@ sections:
     image: "https://picsum.photos/seed/it6/640/420"
     imageAlt: "Demo"
   - type: image-text
-    textSize: small
+    textSize: s
     align: right
-    title: "8- textSize: small · align: right"
+    title: "8- textSize: s · align: right"
     text: "La escala mínima de bloque y alineación derecha. Para letra pequeña editorial."
     image: "https://picsum.photos/seed/it7/640/420"
     imageAlt: "Demo"
@@ -196,10 +196,10 @@ sections:
   - type: text
     width: wide
     variant: soft
-    textSize: large
+    textSize: l
     align: center
     pad: compact
-    title: "19- text · width: wide · variant: soft · textSize: large · align: center · pad: compact"
+    title: "19- text · width: wide · variant: soft · textSize: l · align: center · pad: compact"
     text: "Un párrafo simple, sin headers ni listas, para comparar cómo escala `textSize` un bloque de texto normal."
   - type: text
     class: "bg-color4"
@@ -225,8 +225,8 @@ sections:
     class: "bg-color2"
     items:
       - text: "22- Columna izquierda sin modificadores — hereda el tamaño de texto por defecto del tema."
-      - text: "Columna derecha, `textSize: large` — para texto destacado."
-        textSize: large
+      - text: "Columna derecha, `textSize: l` — para texto destacado."
+        textSize: l
 
   # ============ FAQ ============
   - type: faq
@@ -306,10 +306,10 @@ sections:
     class: "bg-claro"
     preset: contact
   - type: cta
-    title: "34- cta · bgColor puntual oscuro · textSize: large"
+    title: "34- cta · bgColor puntual oscuro · textSize: l"
     subtitle: "Un color suelto oscuro no necesita textColor ni bg-claro: el texto blanco es el valor por defecto."
     bgColor: "#4a2f6b"
-    textSize: large
+    textSize: l
     preset: contact
 ---
 
@@ -376,11 +376,11 @@ Segundo párrafo, tras un espacio grande. (`s`, `m`, `l` disponibles.)
 
 {{< banner >}} p4.1- Banner por defecto: frase destacada **con markdown**, centrada.{{< /banner >}}
 
-{{< banner class="bg-color4" textSize="l" >}}p4.2- Banner con `class: bg-color4` y `textSize: large`.{{< /banner >}}
+{{< banner class="bg-color4" textSize="l" >}}p4.2- Banner con `class: bg-color4` y `textSize: l`.{{< /banner >}}
 
 {{< banner bg="/images/100-instalaciones_fausto_duque_fachada.webp" width="wide" pad="l" >}}p4.3- Banner con `bg` (imagen de fondo)  `width=wide` `pad=l`.{{< /banner >}}
 
-{{< banner textSize="xl" align="left" >}}p4.4- Banner con utilidad `fs-s` vía class y alineado a la izquierda.{{< /banner >}}
+{{< banner textSize="xl" align="center" >}}p4.4- Banner con `textSize="xl"` y alineado al centro.{{< /banner >}}
 
 ### p5- Shortcode {{</* cta */>}}
 
