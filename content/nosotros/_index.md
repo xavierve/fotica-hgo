@@ -142,7 +142,7 @@ Mi hijo tenía problemas de visión y Anabel le trató con una delicadeza incre�
 {{< /testimonials >}}
 
 {{< text-split width="wide" >}}
-{{< text-split-item align="center" >}}
+{{< text-split-item align="center" quote="true" >}}
 «Si trabajas bien y eres buena gente, entras en la familia de Fausto.»
 {{< /text-split-item >}}
 {{< text-split-item textSize="l" pad="m" margin="0 0 1rem 0" >}}

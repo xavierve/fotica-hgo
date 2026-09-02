@@ -1,6 +1,6 @@
 {{- /*
   {{< text-split title="..." subtitle="..." >}}
-  {{< text-split-item size="lg" >}}Contenido libre, texto/markdown{{< /text-split-item >}}
+  {{< text-split-item quote="true" >}}Cita o frase corta{{< /text-split-item >}}
   {{< text-split-item >}}Contenido libre, texto/markdown{{< /text-split-item >}}
   {{< /text-split >}}
 
@@ -14,7 +14,8 @@
   incrustar <video>/<iframe> en un futuro sin tocar esta plantilla.
 
   Parámetros wrapper: title, subtitle, class, variant, textSize, align, width, pad
-  Parámetros item: textSize="l" (texto grande, tipo cita destacada) — opcional
+  Parámetros item: textSize, align, pad, margin, quote="true" (cita destacada:
+  36ch, centrado, negrita, --fs-highlight — ver text-split-item.html)
 */ -}}
 <section class="{{ partial "block-classes.html" (dict "name" "text-split" "context" (dict
       "variant" (.Get "variant")

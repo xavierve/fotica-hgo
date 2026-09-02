@@ -329,10 +329,6 @@
 .text-split-col.has-pad-s{padding:var(--space-s)}
 .text-split-col.has-pad-m{padding:var(--space-m)}
 .text-split-col.has-pad-l{padding:var(--space-l)}
-.text-split-inner{display:grid;grid-template-columns:1fr;gap:clamp(2rem,5vw,4rem);align-items:center}
-.text-split-col.has-pad-s{padding:var(--space-s)}
-.text-split-col.has-pad-m{padding:var(--space-m)}
-.text-split-col.has-pad-l{padding:var(--space-l)}
 /* h2/h3 en text-split-col no son hijo directo de .container, la regla global de h2/h3 no llega -- mismo tamaño que el resto del tema, SIN tratamiento de cita. Solo para cuando el item es de verdad un encabezado de seccion. */
 .text-split-col h2{font-size:var(--fs-highlight);line-height:1.2}
 .text-split-col h3{font-size:1.35rem;line-height:1.25}
@@ -340,6 +336,4 @@
 .text-split-col.is-quote{font-size:var(--fs-highlight);font-weight:700;max-width:36ch;margin-inline:auto;line-height:1.2}
 @media(min-width:821px){
 	.text-split-inner{grid-template-columns:1fr 1fr}
-	.text-split-col h2{font-size:1.75rem;line-height:1.2;max-width:36ch;margin-inline:auto}
-	.text-split-col h3{font-size:1.35rem;line-height:1.25;max-width:36ch;margin-inline:auto}
 	}
