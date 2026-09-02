@@ -6,6 +6,6 @@
       {{ with .title }}<h2>{{ . }}</h2>{{ end }}
       {{ with .text }}<div class="prose">{{ . | markdownify }}</div>{{ end }}
     </div>
-    {{ with .image }}<figure class="image-text-media"><img src="{{ . }}" alt="{{ $.imageAlt }}"></figure>{{ end }}
+    {{ with .image }}<figure class="image-text-media">{{ partial "responsive-img.html" (dict "src" . "alt" $.imageAlt "sizes" "(min-width:821px) 50vw, 100vw") }}</figure>{{ end }}
   </div>
 </section>

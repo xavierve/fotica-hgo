@@ -6,7 +6,7 @@
       <button type="button" class="slider-btn" data-slider-next aria-label="{{ i18n "next" }}">{{ partial "icons.html" "arrow-right" }}</button>
     </div>
     <div class="slider-track" tabindex="0" aria-label="{{ .title | default (i18n "carousel") }}">
-      {{ range .items }}{{ $item := . }}<article class="slide">{{ with $item.image }}<img src="{{ . }}" alt="{{ $item.imageAlt }}">{{ end }}{{ with $item.title }}<h3>{{ . }}</h3>{{ end }}{{ with $item.text }}<p>{{ . }}</p>{{ end }}{{ with $item.legend }}<small>{{ . }}</small>{{ end }}</article>{{ end }}
+      {{ range .items }}{{ $item := . }}<article class="slide">{{ with $item.image }}{{ partial "responsive-img.html" (dict "src" . "alt" $item.imageAlt "sizes" "min(80vw, 420px)") }}{{ end }}{{ with $item.title }}<h3>{{ . }}</h3>{{ end }}{{ with $item.text }}<p>{{ . }}</p>{{ end }}{{ with $item.legend }}<small>{{ . }}</small>{{ end }}</article>{{ end }}
     </div>
   </div>
 </section>

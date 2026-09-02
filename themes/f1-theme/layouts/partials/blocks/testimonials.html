@@ -2,7 +2,7 @@
   <div class="container">
     {{ with .title }}<h2>{{ . }}</h2>{{ end }}
     <div class="cards-grid">
-      {{ range .items }}{{ $item := . }}<blockquote class="testimonial"><p>“{{ $item.text }}”</p><footer>{{ with $item.image }}<img src="{{ . }}" alt="{{ $item.name }}">{{ end }}<strong>{{ $item.name }}</strong>{{ with $item.rating }}<span>{{ . }}/5</span>{{ end }}</footer></blockquote>{{ end }}
+      {{ range .items }}{{ $item := . }}<blockquote class="testimonial"><p>“{{ $item.text }}”</p><footer>{{ with $item.image }}{{ partial "responsive-img.html" (dict "src" . "alt" $item.name "sizes" "56px") }}{{ end }}<strong>{{ $item.name }}</strong>{{ with $item.rating }}<span>{{ . }}/5</span>{{ end }}</footer></blockquote>{{ end }}
     </div>
   </div>
 </section>

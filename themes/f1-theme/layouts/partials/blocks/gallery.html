@@ -2,7 +2,7 @@
   <div class="container">
     {{ with .title }}<h2>{{ . }}</h2>{{ end }}
     <div class="gallery-grid">
-      {{ range $i, $item := .items }}<figure><button type="button" class="gallery-open" data-gallery-index="{{ $i }}" aria-label="{{ i18n "enlargeImage" }}{{ with $item.legend }}: {{ . }}{{ end }}"><img src="{{ $item.image }}" alt="{{ $item.imageAlt }}" loading="lazy"></button>{{ with $item.legend }}<figcaption>{{ . }}</figcaption>{{ end }}</figure>{{ end }}
+      {{ range $i, $item := .items }}<figure><button type="button" class="gallery-open" data-gallery-index="{{ $i }}" aria-label="{{ i18n "enlargeImage" }}{{ with $item.legend }}: {{ . }}{{ end }}">{{ partial "responsive-img.html" (dict "src" $item.image "alt" $item.imageAlt "sizes" "(min-width:1100px) 33vw, (min-width:600px) 50vw, 100vw") }}</button>{{ with $item.legend }}<figcaption>{{ . }}</figcaption>{{ end }}</figure>{{ end }}
     </div>
     <dialog class="gallery-lightbox">
       <button type="button" class="lightbox-close" data-lightbox-close aria-label="{{ i18n "close" }}">&times;</button>

@@ -8,7 +8,7 @@
       {{ range . }}
       {{ $card := . }}
       <article class="card">
-        {{ with .image }}<img src="{{ . }}" alt="{{ $card.imageAlt }}">{{ end }}
+        {{ with .image }}{{ partial "responsive-img.html" (dict "src" . "alt" $card.imageAlt "sizes" "(min-width:1100px) 33vw, (min-width:600px) 50vw, 100vw") }}{{ end }}
         <div class="card-body">
           {{ with .title }}<h3>{{ . }}</h3>{{ end }}
           {{ with .description }}<p>{{ . }}</p>{{ end }}
