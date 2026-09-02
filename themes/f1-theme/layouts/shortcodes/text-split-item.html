@@ -1,29 +1,33 @@
 {{- /*
   Uso EXCLUSIVO anidado dentro de {{< text-split >}}...{{< /text-split >}}.
 
-  {{< text-split-item textSize="xl" align="center" pad="m" margin="0 0 1rem 0" >}}
-  ## «Una cita o frase corta»
+  {{< text-split-item quote="true" align="center" pad="m" margin="0 0 1rem 0" >}}
+  **«Una cita o frase corta»**
   {{< /text-split-item >}}
 
   Todos los parámetros son opcionales — sin ninguno, el item hereda el
   tamaño/alineación por defecto del tema.
 
+  quote    — "true" → tratamiento de "cita destacada": 36ch, centrado,
+             negrita, tamaño --fs-highlight (mismo que banner por defecto).
+             Aplica sobre CUALQUIER contenido — un párrafo en negrita, no un
+             heading. NO uses ## / ### para conseguir este efecto: producen
+             un <h2>/<h3> real, que aparece en la navegación por encabezados
+             de cualquier lector de pantalla como si fuera una sección de
+             verdad (el algoritmo de outline por sectioning nunca se
+             implementó y se eliminó de la spec en 2022 — el outline real es
+             la lista plana de headings, sin importar el contenedor). Reserva
+             ## / ### para cuando el item ES de verdad un encabezado de
+             sección — hereda entonces el h2/h3 normal, sin límite de ancho.
   textSize — xs|s|m|l|xl → reutiliza block-text-* (mismas clases que
              banner/cards, mismo CSS, sin duplicar reglas; sin alias, valor
-             literal). Afecta SOLO al tamaño de fuente — no limita el ancho
-             por sí solo.
+             literal). Se puede combinar con quote, pero no está pulido para
+             todas las combinaciones — pruébalo visualmente.
   align    — left | center | right → reutiliza block-align-* (idem)
   pad      — s | m | l → padding interno del item (tokens propios de item,
              más pequeños que el pad de sección: --space-s/m/l)
   margin   — valor CSS libre, ej. "0 0 1rem 0" (como bgColor, sin validar
              contra una lista cerrada — para casos puntuales de ajuste fino)
-
-  El ancho limitado (36ch, centrado) va atado a si el contenido ES un
-  encabezado real (## / ###, produce <h2>/<h3>), NO al textSize elegido — así
-  un párrafo largo con textSize="l" no se estrecha por error. Para una cita
-  corta tipo titular, escríbela como "## texto" en vez de "**texto**": con
-  negrita queda como <p> normal (ancho completo de la columna); con ## queda
-  como <h2> (36ch, centrado, tamaño fijo en rem — no escala con textSize).
 
   Nota: si el resultado final es un único párrafo, Hugo elimina el <p> que lo
   envuelve (comportamiento estándar de markdownify, no un bug de este
@@ -34,7 +38,9 @@
 {{- $align := .Get "align" -}}
 {{- $pad := .Get "pad" -}}
 {{- $margin := .Get "margin" -}}
+{{- $quote := eq (.Get "quote") "true" -}}
 {{- $classes := slice "text-split-col" -}}
+{{- if $quote }}{{ $classes = $classes | append "is-quote" }}{{ end -}}
 {{- with $textSize }}{{ $classes = $classes | append (printf "block-text-%s" .) }}{{ end -}}
 {{- with $align }}{{ $classes = $classes | append (printf "block-align-%s" .) }}{{ end -}}
 {{- with $pad }}{{ $classes = $classes | append (printf "has-pad-%s" .) }}{{ end -}}

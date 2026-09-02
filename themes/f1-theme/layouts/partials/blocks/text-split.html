@@ -9,15 +9,17 @@
       subtitle:
       items:
         - text: "**«Si trabajas bien y eres buena gente, entras en la familia de Fausto.»**"
-          textSize: xl
+          quote: true
           align: center
         - text: "Lo dice el propio equipo directivo..."
           pad: m
           margin: "0 0 1rem 0"
 
-  Cada item admite: text (markdown), textSize (xs|s|m|l|xl), align (left|center|right),
-  pad (s|m|l), margin (valor CSS libre). textSize sin alias, valor literal --
-  mismo nombre canónico que el shortcode text-split-item.
+  Cada item admite: text (markdown), quote (true/false — cita destacada: 36ch,
+  centrado, negrita, --fs-highlight; sobre cualquier texto, no requiere
+  ## / ###), textSize (xs|s|m|l|xl), align (left|center|right), pad (s|m|l),
+  margin (valor CSS libre). Usa ## / ### en text SOLO si el item es de verdad
+  un encabezado de sección — hereda el h2/h3 normal, sin tratamiento de cita.
 */ -}}
 <section class="{{ partial "block-classes.html" (dict "name" "text-split" "context" .) }}">
   <div class="container">
@@ -27,6 +29,7 @@
       {{ range .items }}
         {{- $item := . -}}
         {{- $classes := slice "text-split-col" -}}
+        {{- if $item.quote }}{{ $classes = $classes | append "is-quote" }}{{ end -}}
         {{- with $item.textSize }}{{ $classes = $classes | append (printf "block-text-%s" .) }}{{ end -}}
         {{- with $item.align }}{{ $classes = $classes | append (printf "block-align-%s" .) }}{{ end -}}
         {{- with $item.pad }}{{ $classes = $classes | append (printf "has-pad-%s" .) }}{{ end -}}

@@ -458,7 +458,7 @@ p7.2- texto bg-color2 que rompe el ancho de lectura (`width="wide"`) para un pá
 
 {{< text-split >}}
 {{< text-split-item textSize="xl" align="center" >}}
-## p8.1- H2 Una cita destacada»
+p8.1- H2 Una cita destacada
 {{< /text-split-item >}}
 {{< text-split-item textSize="s" >}}
 Y el texto de acompañamiento al lado, en la columna derecha — `text-split-item` solo funciona anidado dentro de `text-split`.
