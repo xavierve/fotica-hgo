@@ -56,7 +56,9 @@
 /* === v02: utilidades fs, iconos btn, fondos CTA responsive, banner === */
 /* fs-*: talla para TEXTO SUELTO EN PROSA (headings/parrafos via {.fs-s} en markdown body). NO usar en class: de un bloque/shortcode -- para eso esta textSize (ver block-text-*). */
 .fs-xs{font-size:.75em}.fs-s{font-size:.875em}.fs-l{font-size:1.25em}.fs-xl{font-size:1.5em}h2.fs-s{font-size:1.5rem}h2.fs-xs{font-size:1.25rem}
-.btn .icon{width:1.1em;height:1.1em;vertical-align:-.18em;margin-right:.45em}.has-bg-color{background:var(--section-bg-color)}.has-bg-image{background-image:var(--section-bg-mobile,var(--section-bg));background-size:cover;background-position:center;position:relative;color:#fff}.has-bg-image>.container{position:relative;z-index:1}.has-bg-image{--overlay-color:rgba(var(--overlay-base),.55)}
+.btn .icon{width:1.1em;height:1.1em;vertical-align:-.18em;margin-right:.45em}.has-bg-color{background:var(--section-bg-color)}.has-bg-image{background-image:var(--section-bg-mobile,var(--section-bg));background-size:cover;background-position:center;position:relative;color:#fff}
+@supports (background-image:image-set(url(a.png) 1x)){.has-bg-image{background-image:var(--section-bg-mobile-hd,var(--section-bg-hd,var(--section-bg-mobile,var(--section-bg))))}}
+.has-bg-image>.container{position:relative;z-index:1}.has-bg-image{--overlay-color:rgba(var(--overlay-base),.55)}
 .has-bg-image::before{content:"";position:absolute;inset:0;background:var(--overlay-color)}.has-bg-image.has-bg-color{background-color:transparent}.has-bg-image.has-bg-color{--overlay-color:color-mix(in srgb,var(--section-bg-color) 60%,transparent)}.has-bg-image .btn-outline,
 .has-bg-color:not(.bg-claro) .btn-outline,
 .bg-color2 .btn-outline,
@@ -70,7 +72,9 @@
   box-shadow:inset 0 0 0 1px rgba(255,255,255,.85);
 }
 @media(min-width:821px){
-.has-bg-image{background-image:var(--section-bg)}}
+.has-bg-image{background-image:var(--section-bg)}
+@supports (background-image:image-set(url(a.png) 1x)){.has-bg-image{background-image:var(--section-bg-hd,var(--section-bg))}}
+}
 .cta-microcopy{margin-top:.9rem;font-size:.875em;opacity:.85}
 .block-banner .banner-inner{font-weight:600;max-width:650px;margin:0 auto}
 .block-banner .banner-inner p{margin:0}

@@ -29,8 +29,8 @@
       "class" .class
     ) "extra" $extra) }}"
   {{- $styles := slice -}}
-  {{- with $bg }}{{ $styles = $styles | append (printf "--section-bg:url('%s')" .) }}{{ end -}}
-  {{- with .bgMobile }}{{ $styles = $styles | append (printf "--section-bg-mobile:url('%s')" .) }}{{ end -}}
+  {{- with $bg }}{{ $styles = $styles | append (partial "bg-image-style.html" (dict "src" . "varName" "section-bg")) }}{{ end -}}
+  {{- with .bgMobile }}{{ $styles = $styles | append (partial "bg-image-style.html" (dict "src" . "varName" "section-bg-mobile")) }}{{ end -}}
   {{- with .bgColor }}{{ $styles = $styles | append (printf "--section-bg-color:%s" .) }}{{ end -}}
   {{- with .textColor }}{{ $styles = $styles | append (printf "--section-text-color:%s" .) }}{{ end -}}
   {{- with $styles }} style="{{ delimit . ";" | safeCSS }}"{{ end }}>

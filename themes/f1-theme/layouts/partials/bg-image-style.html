@@ -1,0 +1,30 @@
+{{- /*
+  partials/bg-image-style.html
+
+  Dado un src de imagen de fondo y el nombre de variable CSS a rellenar,
+  devuelve el fragmento "--var:url(...)" listo para concatenar en un
+  style="", añadiendo ademas "--var-hd:image-set(...)" si existe la variante
+  "_hd" -- misma convencion que responsive-img.html (os.FileExists sobre la
+  ruta fisica, nunca error si falta, ignora URLs externas sin extension).
+
+  Uso (dentro de un bloque que ya construye $styles como slice):
+    {{- with .bg }}{{ $styles = $styles | append
+        (partial "bg-image-style.html" (dict "src" . "varName" "section-bg"))
+      }}{{ end -}}
+
+  Parametros (dict):
+    src      -> ruta publica de la imagen (obligatorio)
+    varName  -> nombre de la variable CSS sin "--", ej "section-bg" o
+                "section-bg-mobile" (obligatorio)
+*/ -}}
+{{- $src := .src -}}
+{{- $varName := .varName -}}
+{{- $ext := path.Ext $src -}}
+{{- $out := slice (printf "--%s:url('%s')" $varName $src) -}}
+{{- if and $ext (not (strings.HasPrefix $src "http")) -}}
+  {{- $hd := replace $src $ext (printf "_hd%s" $ext) 1 -}}
+  {{- if os.FileExists (printf "static%s" $hd) -}}
+    {{- $out = $out | append (printf "--%s-hd:image-set(url('%s') 1x,url('%s') 2x)" $varName $src $hd) -}}
+  {{- end -}}
+{{- end -}}
+{{- delimit $out ";" -}}
