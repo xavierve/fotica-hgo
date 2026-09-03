@@ -20,11 +20,11 @@
 {{- $src := .src -}}
 {{- $varName := .varName -}}
 {{- $ext := path.Ext $src -}}
-{{- $out := slice (printf "--%s:url('%s')" $varName $src) -}}
+{{- $out := slice (printf "--%s:url(%s)" $varName $src) -}}
 {{- if and $ext (not (strings.HasPrefix $src "http")) -}}
   {{- $hd := replace $src $ext (printf "_hd%s" $ext) 1 -}}
   {{- if os.FileExists (printf "static%s" $hd) -}}
-    {{- $out = $out | append (printf "--%s-hd:image-set(url('%s') 1x,url('%s') 2x)" $varName $src $hd) -}}
+    {{- $out = $out | append (printf "--%s-hd:image-set(url(%s) 1x,url(%s) 2x)" $varName $src $hd) -}}
   {{- end -}}
 {{- end -}}
 {{- delimit $out ";" -}}
