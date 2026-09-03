@@ -87,7 +87,7 @@
    declara color propio (el h1). Solución: esos colores pasan a variable y se re-declaran
    aquí dentro del contexto de imagen. Un solo sitio, sirve para hero, CTA y counter. */
 .has-bg-image,
-.has-bg-color:not(.has-bg-image):not(.bg-claro){
+.has-bg-color:not(.bg-claro){
   color:var(--section-text-color,#fff);
   --subtitle-color:rgba(255,255,255,.94);
   --eyebrow-color:#ffffff;
