@@ -33,10 +33,10 @@
   padding-inline-start:1em;
   margin-inline-start:1em;
 }
-.breadcrumb{font-size:.92rem;background:var(--surface);border-bottom:1px solid rgba(0,0,0,.06)}.breadcrumb ol{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:0;padding:.7rem 0}.breadcrumb li+li:before{content:"/";margin-right:.5rem;color:var(--color-muted)}.counter{background:var(--color-dark);color:#fff}.counter-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;text-align:center}.counter-item strong{display:block;font-size:clamp(2rem,5vw,4rem);line-height:1}.counter-item span{color:rgba(255,255,255,.82)}.section-note{text-align:center;font-size:1.1rem}.trustbar{background:var(--bg-color1);padding:1rem 0}.trustbar-inner{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;font-weight:700}.image-text-inner{display:grid;grid-template-columns:1fr;gap:clamp(2rem,5vw,4rem);align-items:center}.cards-grid,.gallery-grid,.logo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}.card,.testimonial,.team-card{background:var(--surface);border:1px solid rgba(0,0,0,.08);border-radius:var(--radius);overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.04)}.testimonial footer img{width:56px;height:56px;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.5rem}.logo-grid img{max-height:40px;width:auto;object-fit:contain}
+.breadcrumb{font-size:.92rem;background:var(--color-bg-over);border-bottom:1px solid rgba(0,0,0,.06)}.breadcrumb ol{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:0;padding:.7rem 0}.breadcrumb li+li:before{content:"/";margin-right:.5rem;color:var(--color-muted)}.counter{background:var(--color-dark);color:#fff}.counter-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;text-align:center}.counter-item strong{display:block;font-size:clamp(2rem,5vw,4rem);line-height:1}.counter-item span{color:rgba(255,255,255,.82)}.section-note{text-align:center;font-size:1.1rem}.trustbar{background:var(--bg-color1);padding:1rem 0}.trustbar-inner{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;font-weight:700}.image-text-inner{display:grid;grid-template-columns:1fr;gap:clamp(2rem,5vw,4rem);align-items:center}.cards-grid,.gallery-grid,.logo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}.card,.testimonial,.team-card{background:var(--color-bg-over);border:1px solid rgba(0,0,0,.08);border-radius:var(--radius);overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.04)}.testimonial footer img{width:56px;height:56px;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.5rem}.logo-grid img{max-height:40px;width:auto;object-fit:contain}
 .card{position:relative;transition:box-shadow .2s ease,transform .2s ease}
 .card:hover{box-shadow:0 14px 34px rgba(0,0,0,.09);transform:translateY(-2px)}
-.card-link.stretched-link::after{content:"";position:absolute;inset:0}.card-body,.testimonial,.team-card{padding:1.25rem}.card-link{font-weight:800;color:var(--color-accent)}.cta{background:var(--bg-color1);text-align:center}.faq details{background:var(--surface);border:1px solid rgba(0,0,0,.08);border-radius:12px;padding:1rem;margin:.75rem 0}.faq summary{cursor:pointer;font-weight:800}.site-footer{background:var(--color-dark);color:#fff;padding:3rem 0 1.5rem}.footer-grid{display:grid;grid-template-columns:1fr;gap:2rem}.site-footer a{display:inline-block;color:#fff;text-decoration:none;margin:.25rem .5rem .25rem 0}.footer-logo{max-height:54px}.footer-bottom{border-top:1px solid rgba(255,255,255,.16);margin-top:2rem;padding-top:1rem;color:rgba(255,255,255,.82)}address{font-style:normal;margin:0 0 1rem}.slider-track{display:flex;gap:1rem;overflow:auto;scroll-snap-type:x mandatory}.slide{min-width:min(80vw,420px);scroll-snap-align:start;background:var(--surface);border-radius:var(--radius);padding:1rem}.timeline-list{list-style:none;padding:0}.timeline-list li{border-left:3px solid var(--color-accent);padding:0 0 1.5rem 1rem}.social-links{margin-top:1rem}
+.card-link.stretched-link::after{content:"";position:absolute;inset:0}.card-body,.testimonial,.team-card{padding:1.25rem}.card-link{font-weight:800;color:var(--color-accent)}.cta{background:var(--bg-color1);text-align:center}.faq details{background:var(--color-bg-over);border:1px solid rgba(0,0,0,.08);border-radius:12px;padding:1rem;margin:.75rem 0}.faq summary{cursor:pointer;font-weight:800}.site-footer{background:var(--color-dark);color:#fff;padding:3rem 0 1.5rem}.footer-grid{display:grid;grid-template-columns:1fr;gap:2rem}.site-footer a{display:inline-block;color:#fff;text-decoration:none;margin:.25rem .5rem .25rem 0}.footer-logo{max-height:54px}.footer-bottom{border-top:1px solid rgba(255,255,255,.16);margin-top:2rem;padding-top:1rem;color:rgba(255,255,255,.82)}address{font-style:normal;margin:0 0 1rem}.slider-track{display:flex;gap:1rem;overflow:auto;scroll-snap-type:x mandatory}.slide{min-width:min(80vw,420px);scroll-snap-align:start;background:var(--color-bg-over);border-radius:var(--radius);padding:1rem}.timeline-list{list-style:none;padding:0}.timeline-list li{border-left:3px solid var(--color-accent);padding:0 0 1.5rem 1rem}.social-links{margin-top:1rem}
 .block{padding:var(--block-pad) 0}.block-banner{padding:clamp(2rem,4vw,3rem) 0}.block-pad-compact{padding:var(--block-pad-compact) 0}.block-pad-spacious{padding:var(--block-pad-spacious) 0}.block-width-default>.container{max-width:var(--container)}
 /* ── width:wide ────────────────────────────────────────────────────────────
    El breakout de .prose ya ensancha la <section> hasta --container-wide, pero
@@ -51,14 +51,14 @@
 .block-width-full>.container{width:100%;max-width:none;padding-inline:clamp(1rem,4vw,5rem)}
 /* block-text-*: talla de BLOQUE/shortcode-de-bloque, via textSize (xs|s|m|l|xl) en block-classes.html. Escala independiente de fs- -- mismas letras, valores distintos a proposito. */
 .block-text-xs{font-size:.8em}.block-text-s{font-size:.875em}.block-text-m{font-size:1em}.block-text-l{font-size:1.15em;line-height:1.45;font-weight:300}.block-text-xl{font-size:1.6em;line-height: 1.25;font-weight:700}
-.block-align-left{text-align:left}.block-align-center{text-align:center}.block-align-right{text-align:right}.block-variant-default{background:var(--color-bg)}.block-variant-soft{background:var(--bg-color1)}.block-variant-featured{background:var(--surface)}.block-variant-contrast{background:var(--color-dark);color:#fff}.block-variant-contrast .btn-outline{color:#fff}.block-counter{background:var(--color-dark);color:#fff}.block-trustbar{background:var(--bg-color1);padding:1rem 0}.block-image-text.is-reverse .image-text-copy{order:0}.block-cards.cards-columns-2 .cards-grid,.block-cards.cards-columns-3 .cards-grid,.block-cards.cards-columns-4 .cards-grid{grid-template-columns:1fr}.block-cta{text-align:center}.block-faq details{background:var(--surface);border:1px solid rgba(0,0,0,.08);border-radius:12px;padding:1rem;margin:.75rem 0}.block-faq summary{cursor:pointer;font-weight:800}@media(min-width:821px){.image-text-inner{grid-template-columns:1fr 1fr}.footer-grid{grid-template-columns:1fr 1fr 1.35fr}.block-cards.cards-columns-2 .cards-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.block-cards.cards-columns-3 .cards-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.block-cards.cards-columns-4 .cards-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.block-image-text.is-reverse .image-text-copy{order:2}}
+.block-align-left{text-align:left}.block-align-center{text-align:center}.block-align-right{text-align:right}.block-variant-default{background:var(--color-bg)}.block-variant-soft{background:var(--bg-color1)}.block-variant-featured{background:var(--color-bg-over)}.block-variant-contrast{background:var(--color-dark);color:#fff}.block-variant-contrast .btn-outline{color:var(--color-bg-over)}.block-counter{background:var(--color-dark);color:#fff}.block-trustbar{background:var(--bg-color1);padding:1rem 0}.block-image-text.is-reverse .image-text-copy{order:0}.block-cards.cards-columns-2 .cards-grid,.block-cards.cards-columns-3 .cards-grid,.block-cards.cards-columns-4 .cards-grid{grid-template-columns:1fr}.block-cta{text-align:center}.block-faq details{background:var(--color-bg-over);border:1px solid rgba(0,0,0,.08);border-radius:12px;padding:1rem;margin:.75rem 0}.block-faq summary{cursor:pointer;font-weight:800}@media(min-width:821px){.image-text-inner{grid-template-columns:1fr 1fr}.footer-grid{grid-template-columns:1fr 1fr 1.35fr}.block-cards.cards-columns-2 .cards-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.block-cards.cards-columns-3 .cards-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.block-cards.cards-columns-4 .cards-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.block-image-text.is-reverse .image-text-copy{order:2}}
 
 /* === v02: utilidades fs, iconos btn, fondos CTA responsive, banner === */
 /* fs-*: talla para TEXTO SUELTO EN PROSA (headings/parrafos via {.fs-s} en markdown body). NO usar en class: de un bloque/shortcode -- para eso esta textSize (ver block-text-*). */
 .fs-xs{font-size:.75em}.fs-s{font-size:.875em}.fs-l{font-size:1.25em}.fs-xl{font-size:1.5em}h2.fs-s{font-size:1.5rem}h2.fs-xs{font-size:1.25rem}
 .btn .icon{width:1.1em;height:1.1em;vertical-align:-.18em;margin-right:.45em}.has-bg-color{background:var(--section-bg-color)}.has-bg-image{background-image:var(--section-bg-mobile,var(--section-bg));background-size:cover;background-position:center;position:relative}
 @supports (background-image:image-set(url(a.png) 1x)){.has-bg-image{background-image:var(--section-bg-mobile-hd,var(--section-bg-hd,var(--section-bg-mobile,var(--section-bg))))}}
-.has-bg-image>.container{position:relative;z-index:1}.has-bg-image{--overlay-color:rgba(var(--overlay-base),.55)}
+.has-bg-image>.container{position:relative;z-index:1}.has-bg-image{--overlay-color:rgba(var(--color-overlay-base),.55)}
 .has-bg-image::before{content:"";position:absolute;inset:0;background:var(--overlay-color)}.has-bg-image.has-bg-color{background-color:transparent}.has-bg-image.has-bg-color{--overlay-color:color-mix(in srgb,var(--section-bg-color) 60%,transparent)}.has-bg-image .btn-outline,
 .has-bg-color:not(.bg-claro) .btn-outline,
 .bg-color2 .btn-outline,
@@ -81,8 +81,8 @@
 .block-banner.block-text-m{font-size:var(--fs-highlight)}
 .trustbar-icon .icon{width:1.15em;height:1.15em;vertical-align:-.2em;margin-right:.35em}
 
-   Causa del problema: .eyebrow y .hero-subtitle tienen color EXPLÍCITO (accent y muted).
 /* === v03 · Contraste de texto sobre fondos con imagen ===
+   Causa del problema: .eyebrow y .hero-subtitle tienen color EXPLÍCITO (accent y muted).
    El `color:#fff` que .has-bg-image aplica a la sección solo se hereda por quien no
    declara color propio (el h1). Solución: esos colores pasan a variable y se re-declaran
    aquí dentro del contexto de imagen. Un solo sitio, sirve para hero, CTA y counter. */
@@ -99,10 +99,10 @@
 
 /* Clases de paleta: fondo + texto emparejados, listas para usar en class:
    No dependen de bgColor/has-bg-color/bg-claro — se bastan solas. */
-.bg-color1{ background:var(--bg-color1); color:var(--text-color1); }
-.bg-color2{ background:var(--bg-color2); color:var(--text-color2); --subtitle-color:rgba(255,255,255,.94); --eyebrow-color:#ffffff; }
-.bg-color3{ background:var(--bg-color3); color:var(--text-color3); --subtitle-color:rgba(255,255,255,.94); --eyebrow-color:#ffffff; }
-.bg-color4{ background:var(--bg-color4); color:var(--text-color4); }
+.bg-color1{ background:var(--bg-color1); color:var(--bg-text-color1); }
+.bg-color2{ background:var(--bg-color2); color:var(--bg-text-color2); --subtitle-color:rgba(255,255,255,.94); --eyebrow-color:#ffffff; }
+.bg-color3{ background:var(--bg-color3); color:var(--bg-text-color3); --subtitle-color:rgba(255,255,255,.94); --eyebrow-color:#ffffff; }
+.bg-color4{ background:var(--bg-color4); color:var(--bg-text-color4); }
 .has-bg-image .hero-copy,
 .has-bg-image .cta-inner{ text-shadow:0 1px 3px rgba(0,0,0,.38); }
 .has-bg-image .eyebrow{ text-shadow:0 1px 3px rgba(0,0,0,.55); }
@@ -115,7 +115,7 @@
     var(--overlay-color);
 }
 /* overlay-strong: velo plano más denso, para fotos muy claras o muy ruidosas */
-.has-bg-image.overlay-strong{ --overlay-color:rgba(var(--overlay-base),.75); }
+.has-bg-image.overlay-strong{ --overlay-color:rgba(var(--color-overlay-base),.75); }
 .has-bg-image.has-bg-color.overlay-strong{ --overlay-color:color-mix(in srgb,var(--section-bg-color) 82%,transparent); }
 /* bg-top: ancla el recorte de background-size:cover arriba en vez de al centro.
    Uso: fotos verticales (fachadas) donde el centrado por defecto corta el rótulo
@@ -173,7 +173,7 @@
 /* === Slider: controles (solo visibles con JS activo) === */
 .slider-nav{display:none;gap:.5rem;justify-content:flex-end;margin-bottom:.75rem}
 .js .slider-nav{display:flex}
-.slider-btn{width:44px;height:44px;border-radius:999px;border:1px solid var(--control-border);background:var(--control-bg);cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
+.slider-btn{width:44px;height:44px;border-radius:999px;border:1px solid var(--color-control-border);background:var(--color-control-bg);cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
 .slider-btn:hover{background:var(--bg-color1)}
 .slider-btn .icon{width:1.2em;height:1.2em}
 .slider-btn[data-slider-prev] .icon{transform:rotate(180deg)}
@@ -188,12 +188,12 @@
 
 /* === Lightbox === */
 .gallery-lightbox{border:0;padding:0;background:transparent;max-width:min(92vw,1100px);width:auto}
-.gallery-lightbox::backdrop{background:var(--backdrop)}
+.gallery-lightbox::backdrop{background:var(--color-backdrop)}
 .gallery-lightbox figure{margin:0}
 .gallery-lightbox img{max-width:min(92vw,1100px);max-height:82vh;display:block;border-radius:var(--radius)}
 .gallery-lightbox figcaption{color:#fff;text-align:center;padding:.6rem;font-size:1rem}
-.lightbox-close{position:fixed;top:1rem;right:1rem;width:52px;height:52px;border-radius:999px;border:0;background:var(--control-bg);font-size:1.8rem;line-height:1;cursor:pointer}
-.lightbox-nav{position:fixed;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:999px;border:0;background:var(--control-bg);cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
+.lightbox-close{position:fixed;top:1rem;right:1rem;width:52px;height:52px;border-radius:999px;border:0;background:var(--color-control-bg);font-size:1.8rem;line-height:1;cursor:pointer}
+.lightbox-nav{position:fixed;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:999px;border:0;background:var(--color-control-bg);cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
 .lightbox-prev{left:1rem}.lightbox-prev .icon{transform:rotate(180deg)}
 .lightbox-next{right:1rem}
 .lightbox-nav .icon{width:1.3em;height:1.3em}
@@ -223,11 +223,11 @@
 .counter-item strong{transition:transform .6s cubic-bezier(.2,1.4,.4,1)}
 .counter-item strong.counter-tick{transform:scale(1.07)}
 .counter-item span.counter-plus{position:absolute;left:50%;top:-1.9em;transform:translate(-50%,10px);
-  background:var(--surface);color:var(--color-text);font-size:.8rem;font-weight:700;
+  background:var(--color-bg-over);color:var(--color-text);font-size:.8rem;font-weight:700;
   padding:.35em .8em;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.18);
   white-space:nowrap;opacity:0;transition:opacity .8s ease,transform .8s ease;pointer-events:none}
 .counter-item span.counter-plus::after{content:"";position:absolute;left:50%;bottom:-5px;
-  transform:translateX(-50%);border:6px solid transparent;border-top-color:var(--surface);border-bottom:0}
+  transform:translateX(-50%);border:6px solid transparent;border-top-color:var(--color-bg-over);border-bottom:0}
 .counter-item span.counter-plus.is-shown{opacity:1;transform:translate(-50%,-4px)}
 @media (prefers-reduced-motion:reduce){.counter-item strong{transition:none}}
 
