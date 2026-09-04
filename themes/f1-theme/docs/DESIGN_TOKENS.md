@@ -12,12 +12,11 @@ internos en `em` (pendientes).
 
 ## ⚠️ Restricción de marca
 
-> **El verde `#34855B` (`--bg-color3`) es el color del logo, aportado por el
-> cliente. No se cambia, ni se ajusta de tono, ni se sustituye.**
+> **El logo es del cliente y no se toca.** El color definido es el `#34830b` (verde)
+> SVG original (`static/images/logo-fausto-animado-color.svg`)
 >
-> Todos los demás colores de la paleta son provisionales y pueden cambiar
-> mientras se cierra el diseño. No dar ningún valor hex por definitivo salvo
-> ese verde.
+> El resto de colores de la paleta son provisionales mientras se cierra el
+> diseño. No dar ningún hex por definitivo salvo los del SVG del logo.
 
 ---
 
@@ -31,7 +30,7 @@ todos los bugs de contraste que hemos tenido.
 ```css
 --bg-color1: #f5efe5;  --bg-text-color1: #1c1a17;   /* crema  → texto oscuro */
 --bg-color2: #1B3A5C;  --bg-text-color2: #ffffff;   /* navy   → texto blanco */
---bg-color3: #34855B;  --bg-text-color3: #ffffff;   /* verde LOGO (fijo)     */
+--bg-color3: #34855B;  --bg-text-color3: #ffffff;   /* verde  → texto blanco */
 --bg-color4: #C9A84C;  --bg-text-color4: #1c1a17;   /* dorado → texto oscuro */
 ```
 
@@ -149,11 +148,17 @@ h2.fs-xs { font-size: 1.25rem; }   /* ~20px */
 Van en `rem` (fuente única de verdad, `html`) y con selector `tipo.clase`
 `(0,1,1)`, que gana siempre a la regla base sin depender del orden del archivo.
 
-> **Limitación real de Goldmark:** los attributes `{.clase}` sólo funcionan en
-> **headings**. En párrafos y listas se quedan como texto literal — verificado
-> con build. Para un párrafo entero, usar `{{< text textSize="s" >}}`; para
-> parte de un párrafo, `<span class="fs-s">` inline (funciona porque
-> `unsafe = true` está activado).
+> **Sintaxis de los attributes:** funcionan en headings, párrafos y listas
+> (verificado con build), pero el atributo va **en la línea siguiente** al
+> bloque, no al final de la misma línea:
+>
+> ```markdown
+> Un párrafo destacado, más grande que el resto.
+> {.fs-xl}
+> ```
+>
+> Para dar tamaño a *parte* de un párrafo, no al bloque entero, usar
+> `<span class="fs-s">` inline — funciona porque `unsafe = true` está activado.
 
 **`block-text-*` — generadas por el parámetro `textSize` de los bloques:**
 
@@ -227,15 +232,7 @@ de navegadores antiguos — sobre todo Samsung Internet viejo, frecuente en el
 público objetivo. Sin fallback, esos navegadores descartarían la declaración
 entera y el bloque colapsaría.
 
-### 3.2 Flexbox: `flex-basis` cambia de eje
-
-En `flex-direction:row`, `flex-basis` controla el **ancho**. En `column`,
-controla la **altura**. Una regla como `flex:1 1 22rem` fuera de media query
-reparte columnas correctamente en desktop y reserva 22rem de **alto vacío** en
-móvil. Cualquier `flex-basis` pensado para modo fila va **dentro** de la media
-query de 821px, nunca en la regla base.
-
-### 3.3 Breakout en móvil (CTA/BANNER)
+### 3.2 Breakout de imágenes en móvil
 
 Un bloque insertado en el body markdown vive dentro de `.container.prose`, que
 ya recorta `calc(100% - 2rem)`. Quitarle su propio margen **no basta**: hay que
@@ -293,8 +290,3 @@ por `delimit`/`safeCSS` las escape a `&#39;`.
 4. Documentarlo aquí.
 5. Añadir un ejemplo en `content/demo/_index.md` — nunca duplicar el que ya
    exista, extenderlo.
-
-> **Nota sobre `.gitignore`:** la entrada `docs/` captura también
-> `themes/f1-theme/docs/`. Los archivos ya versionados siguen tracked, pero un
-> doc **nuevo** del tema será ignorado en silencio — hace falta `git add -f`, o
-> cambiar la regla a `/docs/` (sólo raíz).
