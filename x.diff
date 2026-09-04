@@ -1,0 +1,37 @@
+diff --git a/themes/f1-theme/assets/css/critical.css b/themes/f1-theme/assets/css/critical.css
+index 40785c4..aa1b25d 100644
+--- a/themes/f1-theme/assets/css/critical.css
++++ b/themes/f1-theme/assets/css/critical.css
+@@ -129,6 +129,19 @@ a {color: inherit;}
+ 	max-width: 78ch;
+ }
+ 
++/* <figure> trae margen del navegador (~40px laterales): sin esta regla la foto
++   del hero queda encogida y descentrada respecto al texto de al lado. */
++.hero-media {
++	margin: 0;
++}
++
++.hero-media img {
++	width: 100%;
++	height: auto;
++	display: block;
++	border-radius: var(--radius);
++}
++
+ .hero h1 {
+ 	font-size: clamp(2.25rem,5vw,4.75rem);
+ 	line-height: 1.05;
+diff --git a/themes/f1-theme/layouts/partials/hero.html b/themes/f1-theme/layouts/partials/hero.html
+index a4a6555..de67105 100644
+--- a/themes/f1-theme/layouts/partials/hero.html
++++ b/themes/f1-theme/layouts/partials/hero.html
+@@ -27,7 +27,7 @@
+       </div>
+       {{ end }}
+     </div>
+-    {{ if .image }}<figure class="hero-media"><img src="{{ .image }}" alt="{{ .imageAlt }}"></figure>{{ end }}
++    {{ if .image }}<figure class="hero-media">{{ partial "responsive-img.html" (dict "src" .image "alt" .imageAlt "sizes" "(min-width:821px) 45vw, 100vw" "loading" "eager") }}</figure>{{ end }}
+   </div>
+ </section>
+ {{ end }}

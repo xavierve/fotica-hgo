@@ -20,3 +20,14 @@ theme = 'f1-theme'
 - `themes/f1-theme/layouts/partials/`: bloques reutilizables.
 - `themes/f1-theme/assets/css/`: CSS del tema.
 - `themes/f1-theme/docs/`: documentación mínima funcional.
+
+## Documentación
+
+- `ARCHITECTURE.md` — cómo se ensambla el tema.
+- `DESIGN_PRINCIPLES.md` — principios de diseño del tema.
+- `DESIGN_TOKENS.md` — colores, tipografía, espaciado e imágenes responsive.
+- `BLOCKS.md` — bloques disponibles y sus parámetros.
+- `FRONTMATTER.md` — campos de front matter.
+- `PAGE_TYPES.md` — tipos de página.
+- `INSTALL.md` — instalación.
+- `CHANGELOG.md` — historial de cambios.

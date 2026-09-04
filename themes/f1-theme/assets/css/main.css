@@ -307,7 +307,7 @@
   display:flex;flex-wrap:wrap;flex-direction:column;align-items:flex-start;justify-content:space-between;
   gap:clamp(1.5rem,4vw,3rem);
 }
-.cta-layout-split .cta-text{flex:1 1 22rem}
+.cta-layout-split .cta-text{flex:1 1 auto}
 /* título generoso, subtítulo unido debajo como una sola unidad de texto */
 .cta-layout-split .cta-text h2{
   font-size:clamp(1.6rem,3.2vw,2.5rem);line-height:1.15;margin:0;
@@ -321,7 +321,11 @@
 /* sobre fondo oscuro, el subtítulo hereda el color claro del sistema de contraste */
 .cta-layout-split.has-bg-image .cta-subtitle,
 .cta-layout-split.has-bg-color:not(.bg-claro) .cta-subtitle{color:var(--subtitle-color)}
-@media(min-width:641px){
+@media(min-width:821px){
+  /* En fila, flex-basis controla el ANCHO y reparte texto/botones. En movil
+     (columna) controlaria la ALTURA, reservando 22rem de alto en vacio — por
+     eso solo vive aqui. Mismo breakpoint que el resto del tema. */
+  .cta-layout-split .cta-text{flex:1 1 22rem}
   .cta-layout-split .cta-inner{flex-direction:row;align-items:center}
   .cta-layout-split .cta-actions{text-align:right}
   .cta-layout-split .cta-row{justify-content:flex-end}
