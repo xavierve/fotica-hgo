@@ -1,10 +1,10 @@
 # Ignorar la carpeta llamada "imagenes" (originales sin seleccionar y no finalizadas) y todo lo que tenga dentro
-imagenes/
+/imagenes/
 
 # web producida
-public/
+/public/
 # documentos del proyecto que no quiero que se publiquen en github
-docs/
+/docs/
 
 # sys files
 *.
