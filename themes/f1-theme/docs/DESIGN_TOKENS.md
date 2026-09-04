@@ -25,7 +25,35 @@ internos en `em` (pendientes).
 Hay **tres familias** con propósitos distintos. Mezclarlas es la fuente de casi
 todos los bugs de contraste que hemos tenido.
 
-### 1.1 Paleta de marca (pares fondo ↔ texto)
+### 1.1 Tokens semánticos
+
+```css
+--color-text: #1c1a17;             /* texto normal del body */
+--color-muted: #625d55;            /* texto secundario: captions, ayudas */
+--color-dark: #25211d;             /* negro suavizado */
+--color-bg: #fffdf8;               /* fondo del LIENZO (body), blanco roto */
+--color-bg-over: #fff;             /* fondo de lo que va ENCIMA: cards, controles */
+--color-accent: #C9A84C;           /* FONDO de botón primario */
+--color-accent-text: #8a6d20;      /* TEXTO de enlaces/acento */
+--color-control-bg: var(--color-bg-over);
+--color-control-border: rgba(0,0,0,.15);
+--color-overlay-base: 27,42,56;    /* RGB suelto, para rgba() del overlay */
+--color-backdrop: rgba(15,20,25,.85);
+```
+
+**`--color-bg` vs `--color-bg-over`:** el primero es el fondo de la página
+(blanco roto). El segundo es blanco puro, para elementos *elevados* que van
+encima: cards, testimonios, team-cards, campos de formulario. Esa diferencia
+sutil, junto con la sombra, es lo que hace que una card se perciba flotando sin
+necesidad de un borde marcado.
+
+**`--color-accent` vs `--color-accent-text`:** son dos tokens porque el acento
+hace dos trabajos incompatibles. Como **fondo de botón** necesita ser claro (para
+que el texto oscuro encima se lea); como **texto de enlace** necesita ser oscuro
+(para leerse sobre fondos claros). Un solo token no puede cumplir ambos — usar
+`--color-accent` como color de texto fue un bug real en `.card-link`.
+
+### 1.2 Paleta de marca (pares fondo ↔ texto)
 
 ```css
 --bg-color1: #f5efe5;  --bg-text-color1: #1c1a17;   /* crema  → texto oscuro */
@@ -57,39 +85,70 @@ es manual — por eso viven pegados en `:root`.
   class: "bg-claro"     # avisa a los botones de que el fondo es claro
 ```
 
-`bg-claro` sólo hace falta en el caso puntual con fondo **claro**: sin él, el
-tema asume fondo oscuro y pinta los botones para ese contexto. Con las clases
-`bg-colorN` no se usa nunca — ya lo traen resuelto.
+### 1.3 Parámetros de fondo y color
 
-### 1.2 Tokens semánticos
+Cinco parámetros, disponibles en hero, cta y banner (los que aceptan imagen de
+fondo). `bgColor`/`textColor`/`class` están además en el resto de bloques.
 
-```css
---color-text: #1c1a17;             /* texto normal del body */
---color-muted: #625d55;            /* texto secundario: captions, ayudas */
---color-dark: #25211d;             /* negro suavizado */
---color-bg: #fffdf8;               /* fondo del LIENZO (body), blanco roto */
---color-bg-over: #fff;             /* fondo de lo que va ENCIMA: cards, controles */
---color-accent: #C9A84C;           /* FONDO de botón primario */
---color-accent-text: #8a6d20;      /* TEXTO de enlaces/acento */
---color-control-bg: var(--color-bg-over);
---color-control-border: rgba(0,0,0,.15);
---color-overlay-base: 27,42,56;    /* RGB suelto, para rgba() del overlay */
---color-backdrop: rgba(15,20,25,.85);
+| Parámetro | Qué hace |
+|---|---|
+| `bg` | Imagen de fondo (desktop, y móvil si no hay `bgMobile`). |
+| `bgMobile` | Imagen de fondo sólo en móvil — recorte distinto, no sólo tamaño. |
+| `bgColor` | Color de fondo plano. Con `bg`, tiñe el overlay en vez de pintar el fondo. |
+| `textColor` | Color del texto, a juego con un `bgColor` puntual. |
+| `class` | Clases modificadoras (ver 1.3). |
+
+`bgColor` y `textColor` se escriben **en hexadecimal** y son para colores fuera
+de la paleta. Para los colores de marca no se usan: va `class: "bg-colorN"`, que
+ya trae el par fondo+texto resuelto.
+
+```yaml
+# imagen de fondo, con recorte propio para móvil
+- type: cta
+  bg: "/images/300-audicion_hero.webp"
+  bgMobile: "/images/300-audicion_hero_m.webp"
+
+# imagen + tinte de color sobre el overlay
+- type: cta
+  bg: "/images/300-audicion_hero.webp"
+  bgColor: "#1B3A5C"
+
+# color plano puntual, fuera de paleta
+- type: cta
+  bgColor: "#eef7f4"
+  textColor: "#1c1a17"
+  class: "bg-claro"
 ```
 
-**`--color-bg` vs `--color-bg-over`:** el primero es el fondo de la página
-(blanco roto). El segundo es blanco puro, para elementos *elevados* que van
-encima: cards, testimonios, team-cards, campos de formulario. Esa diferencia
-sutil, junto con la sombra, es lo que hace que una card se perciba flotando sin
-necesidad de un borde marcado.
+### 1.4 Clases modificadoras (`class:`)
 
-**`--color-accent` vs `--color-accent-text`:** son dos tokens porque el acento
-hace dos trabajos incompatibles. Como **fondo de botón** necesita ser claro (para
-que el texto oscuro encima se lea); como **texto de enlace** necesita ser oscuro
-(para leerse sobre fondos claros). Un solo token no puede cumplir ambos — usar
-`--color-accent` como color de texto fue un bug real en `.card-link`.
+**Legibilidad sobre imagen** — las fotos reales no son predecibles; estas clases
+son las palancas para que el texto se lea sin cambiar la foto:
 
-### 1.3 Criterio de contraste
+| Clase | Efecto | Cuándo |
+|---|---|---|
+| `scrim` | Degradado direccional sobre el lado del texto. | Preserva la foto donde no hay copy. La opción menos invasiva. |
+| `overlay-strong` | Sube el overlay del 55% al 75%. | Fotos claras donde el overlay normal no basta. |
+| `panel` | Caja semiopaca con desenfoque tras el texto. | La más segura en fotos imprevisibles: garantiza contraste pase lo que pase. |
+
+**Encuadre:**
+
+| Clase | Efecto |
+|---|---|
+| `bg-top` | `background-position:top center` — evita que un recorte alto corte cabezas o rótulos. En uso en el hero de Nosotros. |
+
+**Contraste de fondo claro:**
+
+`bg-claro` marca que un `bgColor` **puntual** es claro. Desde que existe
+`textColor`, ya no hace falta para el color del texto — pero **sigue siendo
+necesaria para los botones**: sin ella el tema asume fondo oscuro y pinta el
+`.btn-outline` en blanco, invisible sobre un fondo claro. También corrige el
+subtítulo del `cta-layout-split`.
+
+No se usa junto a las clases `bg-colorN`: ésas ya traen su tratamiento de
+botones resuelto.
+
+### 1.5 Criterio de contraste
 
 Objetivo del proyecto: **WCAG AA** — 4.5:1 texto normal, 3:1 texto grande.
 Público 45-75+, así que se cumple con margen, no al límite.
@@ -232,7 +291,7 @@ de navegadores antiguos — sobre todo Samsung Internet viejo, frecuente en el
 público objetivo. Sin fallback, esos navegadores descartarían la declaración
 entera y el bloque colapsaría.
 
-### 3.2 Breakout de imágenes en móvil
+### 3.2 Imágrenes con Breakout en móvil
 
 Un bloque insertado en el body markdown vive dentro de `.container.prose`, que
 ya recorta `calc(100% - 2rem)`. Quitarle su propio margen **no basta**: hay que
@@ -286,7 +345,8 @@ por `delimit`/`safeCSS` las escape a `&#39;`.
 
 1. Definirlo en `:root` de `critical.css`, junto a su familia.
 2. Si es un color de fondo de marca, crear **a la vez** su pareja de texto.
-3. Verificar contraste antes de usarlo (ver 1.3).
+3. Verificar contraste antes de usarlo (ver 1.5).
 4. Documentarlo aquí.
 5. Añadir un ejemplo en `content/demo/_index.md` — nunca duplicar el que ya
    exista, extenderlo.
+
