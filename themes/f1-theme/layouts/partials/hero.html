@@ -27,7 +27,7 @@
       </div>
       {{ end }}
     </div>
-    {{ if .image }}<figure class="hero-media"><img src="{{ .image }}" alt="{{ .imageAlt }}"></figure>{{ end }}
+    {{ if .image }}<figure class="hero-media">{{ partial "responsive-img.html" (dict "src" .image "alt" .imageAlt "sizes" "(min-width:821px) 45vw, 100vw" "loading" "eager") }}</figure>{{ end }}
   </div>
 </section>
 {{ end }}

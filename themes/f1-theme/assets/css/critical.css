@@ -129,6 +129,19 @@ a {color: inherit;}
 	max-width: 78ch;
 }
 
+/* <figure> trae margen del navegador (~40px laterales): sin esta regla la foto
+   del hero queda encogida y descentrada respecto al texto de al lado. */
+.hero-media {
+	margin: 0;
+}
+
+.hero-media img {
+	width: 100%;
+	height: auto;
+	display: block;
+	border-radius: var(--radius);
+}
+
 .hero h1 {
 	font-size: clamp(2.25rem,5vw,4.75rem);
 	line-height: 1.05;
