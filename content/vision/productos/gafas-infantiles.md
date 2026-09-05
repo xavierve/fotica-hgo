@@ -68,6 +68,10 @@ El 80% de la información que llega a nuestro cerebro entra a través de la vist
 
 ¿Reconoces alguna? La revisión completa es gratuita y sale de dudas en media hora.
 
+{{< image-text image="/images/212-vision_infantil_revision.webp" imageAlt="Óptico de Ópticas Fausto realizando una revisión visual infantil" reverse="true" >}}
+Una revisión de verdad, no un vistazo — con pruebas pensadas para la edad del niño, sin necesidad de que sepa leer.
+{{< /image-text >}}
+
 ## Antes de los libros, la revisión
 
 Cada septiembre nos encontramos lo mismo: niños que llevaban meses viendo mal sin que nadie lo supiera — con dolores de cabeza, fatiga o notas que no reflejan su esfuerzo. Una revisión antes del curso localiza el problema a tiempo y evita descubrirlo a mitad de trimestre, cuando ya ha pasado factura.
@@ -83,3 +87,7 @@ Y ya que estamos: la audición también cuenta en el rendimiento escolar. Si tu 
 - **Protección frente a pantallas** — filtro de luz azul disponible para las horas de tablet, ordenador y consola. → [Filtros de luz azul](/vision/productos/filtros-solares-luz-azul/)
 - **Gafas de sol infantiles** — los ojos de los niños son más sensibles al UV que los de los adultos; la protección solar certificada no es un capricho.
 - **Adaptadas a cada cara y cada edad** — el ajuste correcto no es estética: unas gafas que bailan no corrigen bien.
+
+{{< image-text image="/images/226-infantil_resistencia_card3.webp" imageAlt="Niña demostrando la flexibilidad de una montura infantil de Ópticas Fausto" >}}
+No es solo un mensaje comercial — la montura está pensada para doblarse antes que romperse.
+{{< /image-text >}}

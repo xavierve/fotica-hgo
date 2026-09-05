@@ -80,6 +80,10 @@ sections:
 - **Libertad estética** — usa cualquier gafa de sol de moda, luce tu maquillaje, muestra tu cara tal cual es.
 - **Visión clara incluso con poca luz.**
 
+{{< image-text image="/images/223-lentillas_libertad.webp" imageAlt="Mujer disfrutando de libertad de movimiento con lentes de contacto" >}}
+Sin montura que se resbale, sin empañarse con el viento ni con el salitre — solo la vista libre para lo que estés haciendo.
+{{< /image-text >}}
+
 {{< banner >}}¿Quieres experimentar la sensación de usar lentillas… **sin sentir que las llevas puestas**?{{< /banner >}}
 
 ## No vendemos lentillas: adaptamos la tuya

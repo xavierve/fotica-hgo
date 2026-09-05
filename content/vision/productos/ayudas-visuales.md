@@ -61,6 +61,10 @@ Aumentan el tamaño de lo que miras, con un amplio rango de aumentos que las hac
 - **Lupas de pecho** — cuelgan del cuello y dejan las dos manos libres: costura, punto, manualidades.
 - **Lupas de bolsillo** — para llevar siempre encima.
 
+{{< image-text image="/images/225-ayuda_lupa.webp" imageAlt="Mujer mayor usando una lupa de mano para leer una carta" >}}
+Volver a leer sin forzar la vista ni pedir ayuda — a veces la diferencia la marca una ayuda tan sencilla como esta.
+{{< /image-text >}}
+
 ## Microscopios: gafas de gran aumento
 
 Gafas convencionales — también llamadas «gafas-lupa» — con gran aumento, que permiten ver nítido al acercarse mucho al objeto. Para lectura prolongada con las manos libres.

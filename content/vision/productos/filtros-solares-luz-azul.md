@@ -70,6 +70,10 @@ Ordenador, móvil, tablet, televisión, luces LED: prácticamente cualquier pant
 
 **Lentes con tratamiento CSR.** Su función preventiva está avalada por estudios de la UCM (Universidad Complutense de Madrid). Su uso continuado aporta, a corto plazo, más confort visual, mejor contraste y menos fatiga; a largo plazo, contribuye a proteger la retina de la exposición prolongada a la luz.
 
+{{< image-text image="/images/224-filtros_visrta.webp" imageAlt="Gafas con filtro de luz azul junto a un portátil" reverse="true" >}}
+Si tu día pasa entre pantallas, el filtro no se nota mientras trabajas — se nota al final de la jornada, en cuánto menos cansada tienes la vista.
+{{< /image-text >}}
+
 **Recomendado para:** todas las edades — especialmente quienes trabajan muchas horas frente al ordenador o pasan tiempo prolongado con el móvil o la tablet. También disponible para [gafas infantiles](/vision/productos/gafas-infantiles/): los niños de hoy acumulan más horas de pantalla que ninguna generación anterior.
 
 {{< cta title="Pide tu evaluación" microcopy="Evaluación con equipo de exploración óptica · Sin compromiso" >}}

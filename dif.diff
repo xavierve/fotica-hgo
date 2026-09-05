@@ -1,26 +1,68 @@
-diff --git a/content/vision/productos/gafas-progresivas.md b/content/vision/productos/gafas-progresivas.md
-index d62fc6b..870b758 100644
---- a/content/vision/productos/gafas-progresivas.md
-+++ b/content/vision/productos/gafas-progresivas.md
-@@ -8,7 +8,7 @@ weight: 20
+diff --git a/content/vision/productos/ayudas-visuales.md b/content/vision/productos/ayudas-visuales.md
+index 9ddc5c5..d9b7888 100644
+--- a/content/vision/productos/ayudas-visuales.md
++++ b/content/vision/productos/ayudas-visuales.md
+@@ -61,6 +61,10 @@ Aumentan el tamaño de lo que miras, con un amplio rango de aumentos que las hac
+ - **Lupas de pecho** — cuelgan del cuello y dejan las dos manos libres: costura, punto, manualidades.
+ - **Lupas de bolsillo** — para llevar siempre encima.
  
- card:
-   description: "Una sola gafa para todas las distancias. Adaptación garantizada."
--  image: "/images/cards/222-progresivas_hero.webp"
-+  image: "/images/cards/222-progresivas_card.webp"
-   imageAlt: "Gafas progresivas en Ópticas Fausto, Torre del Mar"
- 
- og:
-@@ -72,9 +72,9 @@ La diferencia entre una progresiva básica y una de gama alta no es la marca del
- 
- **Con cada lente entregamos el certificado de autenticidad del fabricante**, que acredita la gama y calidad exactas que has comprado. Cuando compares ofertas — incluida la nuestra — pide siempre ese certificado: es la única forma de saber qué calidad de lente hay realmente dentro de un 2×1.
- 
--{{< image-text image="/images/222-lentes_progresivas_calidades.webp" imageAlt="Comparativa de campo de visión entre gama económica, premium y gama alta en lentes progresivas" >}}
--La diferencia entre gamas no es solo el nombre del estuche: se nota en cuánto puedes ver con nitidez sin mover la cabeza. Por eso te decimos la gama exacta antes de que decidas, no después.
--{{< /image-text >}}
-+<img src="/images/222-lentes_progresivas_calidades.webp" alt="Comparativa de campo de visión entre gama económica, premium y gama alta en lentes progresivas" style="width:100%;border-radius:var(--radius);display:block;margin:1.5rem 0">
++{{< image-text image="/images/225-ayuda_lupa.webp" imageAlt="Mujer mayor usando una lupa de mano para leer una carta" >}}
++Volver a leer sin forzar la vista ni pedir ayuda — a veces la diferencia la marca una ayuda tan sencilla como esta.
++{{< /image-text >}}
 +
-+*La diferencia entre gamas no es solo el nombre del estuche: se nota en cuánto puedes ver con nitidez sin mover la cabeza. Por eso te decimos la gama exacta antes de que decidas, no después.*
+ ## Microscopios: gafas de gran aumento
  
- {{< cta title="Pide tu presupuesto de progresivas" microcopy="Adaptación garantizada · Certificado del fabricante en cada lente" >}}
+ Gafas convencionales — también llamadas «gafas-lupa» — con gran aumento, que permiten ver nítido al acercarse mucho al objeto. Para lectura prolongada con las manos libres.
+diff --git a/content/vision/productos/filtros-solares-luz-azul.md b/content/vision/productos/filtros-solares-luz-azul.md
+index 3e163f2..35bb5da 100644
+--- a/content/vision/productos/filtros-solares-luz-azul.md
++++ b/content/vision/productos/filtros-solares-luz-azul.md
+@@ -70,6 +70,10 @@ Ordenador, móvil, tablet, televisión, luces LED: prácticamente cualquier pant
  
+ **Lentes con tratamiento CSR.** Su función preventiva está avalada por estudios de la UCM (Universidad Complutense de Madrid). Su uso continuado aporta, a corto plazo, más confort visual, mejor contraste y menos fatiga; a largo plazo, contribuye a proteger la retina de la exposición prolongada a la luz.
+ 
++{{< image-text image="/images/224-filtros_visrta.webp" imageAlt="Gafas con filtro de luz azul junto a un portátil" reverse="true" >}}
++Si tu día pasa entre pantallas, el filtro no se nota mientras trabajas — se nota al final de la jornada, en cuánto menos cansada tienes la vista.
++{{< /image-text >}}
++
+ **Recomendado para:** todas las edades — especialmente quienes trabajan muchas horas frente al ordenador o pasan tiempo prolongado con el móvil o la tablet. También disponible para [gafas infantiles](/vision/productos/gafas-infantiles/): los niños de hoy acumulan más horas de pantalla que ninguna generación anterior.
+ 
+ {{< cta title="Pide tu evaluación" microcopy="Evaluación con equipo de exploración óptica · Sin compromiso" >}}
+diff --git a/content/vision/productos/gafas-infantiles.md b/content/vision/productos/gafas-infantiles.md
+index d1e4a42..a113316 100644
+--- a/content/vision/productos/gafas-infantiles.md
++++ b/content/vision/productos/gafas-infantiles.md
+@@ -68,6 +68,10 @@ El 80% de la información que llega a nuestro cerebro entra a través de la vist
+ 
+ ¿Reconoces alguna? La revisión completa es gratuita y sale de dudas en media hora.
+ 
++{{< image-text image="/images/212-vision_infantil_revision.webp" imageAlt="Óptico de Ópticas Fausto realizando una revisión visual infantil" reverse="true" >}}
++Una revisión de verdad, no un vistazo — con pruebas pensadas para la edad del niño, sin necesidad de que sepa leer.
++{{< /image-text >}}
++
+ ## Antes de los libros, la revisión
+ 
+ Cada septiembre nos encontramos lo mismo: niños que llevaban meses viendo mal sin que nadie lo supiera — con dolores de cabeza, fatiga o notas que no reflejan su esfuerzo. Una revisión antes del curso localiza el problema a tiempo y evita descubrirlo a mitad de trimestre, cuando ya ha pasado factura.
+@@ -83,3 +87,7 @@ Y ya que estamos: la audición también cuenta en el rendimiento escolar. Si tu
+ - **Protección frente a pantallas** — filtro de luz azul disponible para las horas de tablet, ordenador y consola. → [Filtros de luz azul](/vision/productos/filtros-solares-luz-azul/)
+ - **Gafas de sol infantiles** — los ojos de los niños son más sensibles al UV que los de los adultos; la protección solar certificada no es un capricho.
+ - **Adaptadas a cada cara y cada edad** — el ajuste correcto no es estética: unas gafas que bailan no corrigen bien.
++
++{{< image-text image="/images/226-infantil_resistencia_card3.webp" imageAlt="Niña demostrando la flexibilidad de una montura infantil de Ópticas Fausto" >}}
++No es solo un mensaje comercial — la montura está pensada para doblarse antes que romperse.
++{{< /image-text >}}
+diff --git a/content/vision/productos/lentes-de-contacto.md b/content/vision/productos/lentes-de-contacto.md
+index 4fad495..6e51611 100644
+--- a/content/vision/productos/lentes-de-contacto.md
++++ b/content/vision/productos/lentes-de-contacto.md
+@@ -80,6 +80,10 @@ sections:
+ - **Libertad estética** — usa cualquier gafa de sol de moda, luce tu maquillaje, muestra tu cara tal cual es.
+ - **Visión clara incluso con poca luz.**
+ 
++{{< image-text image="/images/223-lentillas_libertad.webp" imageAlt="Mujer disfrutando de libertad de movimiento con lentes de contacto" >}}
++Sin montura que se resbale, sin empañarse con el viento ni con el salitre — solo la vista libre para lo que estés haciendo.
++{{< /image-text >}}
++
+ {{< banner >}}¿Quieres experimentar la sensación de usar lentillas… **sin sentir que las llevas puestas**?{{< /banner >}}
+ 
+ ## No vendemos lentillas: adaptamos la tuya
