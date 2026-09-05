@@ -62,6 +62,14 @@ sections:
 
 ¿Prefieres encargarte tú del cuidado diario? Tenemos [kits de limpieza, secado y pilas](/audicion/productos/ayudas-auditivas/) — y te enseñamos a usarlos.
 
+{{< image-text image="/images/314-mantenimiento-audifonos_limpieza.webp" imageAlt="Kits de limpieza y secado para audífonos" >}}
+Kits de limpieza y secado, listos para llevarte a casa — lo mismo que usamos aquí, para el día a día entre revisión y revisión.
+{{< /image-text >}}
+
+{{< image-text image="/images/314-mantenimiento-audifonos_pilas.webp" imageAlt="Pilas de zinc-aire para audífonos, todos los tamaños" reverse="true" >}}
+Pilas de todos los tamaños, siempre en stock — para que un audífono sin batería no te pille nunca a media conversación.
+{{< /image-text >}}
+
 ## Sea cual sea la marca de tu audífono, te ayudamos
 
 ¿Compraste tu audífono en otro centro, en otra ciudad o hace años? No importa: nuestro **Servicio Técnico Multimarca** lo revisa, lo ajusta, lo repara y — si es necesario — **lo adapta de nuevo a tu audición actual**, con pruebas auditivas en cabina y seguimiento posterior, para que disfrutes de la mejor audición posible con el aparato que ya tienes.

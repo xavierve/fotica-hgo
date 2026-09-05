@@ -66,6 +66,10 @@ Fabricados a medida en **silicona hipoalergénica**, impiden la entrada de agua 
 - **Nadadores y bañistas habituales** — en piscina o mar, todo el año.
 - **Personas con otitis de repetición, drenajes o perforaciones timpánicas** — incluida la prescripción habitual del pediatra o el otorrino para los más pequeños: hacemos moldes de baño infantiles.
 
+{{< image-text image="/images/323-protectores_oido_a_medida.webp" imageAlt="Mujer colocándose un molde de baño a medida en la playa de Torre del Mar" >}}
+Hecho a la forma exacta de tu oído — se coloca en segundos y no se mueve ni con oleaje.
+{{< /image-text >}}
+
 Vivimos junto al mar: aquí los oídos pasan más tiempo en remojo que en casi cualquier otro sitio. Un molde bien hecho es la diferencia entre disfrutar el agua y temerla.
 
 {{< cta title="Pide tus moldes a medida" microcopy="Impresión del oído en tienda, rápida e indolora" >}}
