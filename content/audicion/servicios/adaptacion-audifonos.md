@@ -51,6 +51,10 @@ sections:
     labelCall: "Llamar ahora"
 ---
 
+{{< image-text image="/images/312-audifonos_cambio_de_vida.webp" imageAlt="Mujer riendo en una terraza de Torre del Mar, con audífono visible" >}}
+Volver a reírte sin pedir que te repitan el chiste — de eso trata todo lo que viene a continuación.
+{{< /image-text >}}
+
 ## El proceso, paso a paso (sin sorpresas)
 
 1. **Estudio auditivo completo** — en [cabina insonorizada](/audicion/servicios/audiometria/), con equipo audiométrico profesional, para conocer con precisión el tipo y grado de tu pérdida.

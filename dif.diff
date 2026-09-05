@@ -1,24 +1,44 @@
 diff --git a/content/audicion/servicios/adaptacion-audifonos.md b/content/audicion/servicios/adaptacion-audifonos.md
-index 42c8a70..fa8c0ef 100644
+index eff1820..96bf1fc 100644
 --- a/content/audicion/servicios/adaptacion-audifonos.md
 +++ b/content/audicion/servicios/adaptacion-audifonos.md
-@@ -54,7 +54,7 @@ sections:
+@@ -51,6 +51,10 @@ sections:
+     labelCall: "Llamar ahora"
+ ---
+ 
++{{< image-text image="/images/312-audifonos_cambio_de_vida.webp" imageAlt="Mujer riendo en una terraza de Torre del Mar, con audífono visible" >}}
++Volver a reírte sin pedir que te repitan el chiste — de eso trata todo lo que viene a continuación.
++{{< /image-text >}}
++
  ## El proceso, paso a paso (sin sorpresas)
  
  1. **Estudio auditivo completo** — en [cabina insonorizada](/audicion/servicios/audiometria/), con equipo audiométrico profesional, para conocer con precisión el tipo y grado de tu pérdida.
--2. **Selección del audífono** — el que mejor se adapta a tus necesidades funcionales y estéticas, **sea cual sea tu presupuesto**. → [Conoce los tipos de audífono](/audicion/productos/audifonos/)
-+2. **Selección del audífono** — el que mejor se adapta a tus necesidades funcionales y estéticas, **sea cual sea tu presupuesto**. Somos **multimarca**: no dependemos de un solo fabricante, así que la recomendación parte de tu caso, no de un catálogo cerrado. → [Conoce los tipos de audífono](/audicion/productos/audifonos/)
- 3. **Prueba real, gratuita y sin compromiso** — te lo llevas a casa y compruebas cómo te ayuda en tu vida de verdad: la sobremesa, la calle, la televisión. No en una sala silenciosa.
- 4. **Ajuste personalizado** — afinamos el audífono según lo que nos cuentes tras la prueba: qué oíste bien, qué te molestó, qué faltó.
- 5. **Seguimiento continuado** — revisiones periódicas para que siga funcionando como esperas, **incluso años después de la compra**. → [Mantenimiento](/audicion/servicios/mantenimiento-audifonos/) · [Rehabilitación auditiva](/audicion/servicios/rehabilitacion-auditiva/)
-@@ -63,6 +63,10 @@ sections:
+diff --git a/content/audicion/servicios/rehabilitacion-auditiva.md b/content/audicion/servicios/rehabilitacion-auditiva.md
+index e93cabd..a709828 100644
+--- a/content/audicion/servicios/rehabilitacion-auditiva.md
++++ b/content/audicion/servicios/rehabilitacion-auditiva.md
+@@ -8,13 +8,13 @@ weight: 50
  
- La adaptación de audífonos en los más pequeños requiere una sensibilidad y experiencia especiales — en lo técnico y en el acompañamiento a la familia durante todo el proceso. En Fausto trabajamos de la mano de padres y madres para que esta etapa sea lo más sencilla y natural posible para el niño: explicamos cada paso, resolvemos cada duda y ajustamos el ritmo al del pequeño, no al revés.
+ card:
+   description: "Aprender a sacarle todo el partido a tu audífono es un proceso. Te acompañamos."
+-  image: "/images/cards/315-terapia_auditiva.webp"
++  image: "/images/cards/315-rehabilitacion_auditiva.webp"
+   imageAlt: "Rehabilitación auditiva en Ópticas Fausto"
  
-+{{< image-text image="/images/312-adaptacion_infantil.webp" imageAlt="Óptica de Ópticas Fausto adaptando unos auriculares a un niño" >}}
-+Con los más pequeños todo se hace jugando — la prueba se convierte en un rato agradable, no en una experiencia que temer.
-+{{< /image-text >}}
-+
- Un oído bien atendido desde el principio marca una diferencia enorme en su lenguaje, su aprendizaje y su relación con los demás.
+ og:
+   title: "Ponerte el audífono es el primer paso. Volver a oír bien de verdad, un camino."
+   description: "Pautas y ejercicios que ayudan a tu cerebro a reaprender a interpretar los sonidos, con progreso medido con audiometrías de control."
+-  image: "/images/315-terapia_auditiva.webp"
++  image: "/images/315-rehabilitacion_auditiva.webp"
+   type: "article"
  
- {{< cta title="Cuéntanos vuestro caso" microcopy="Adaptación infantil con acompañamiento a la familia" >}}
+ schema:
+@@ -26,7 +26,7 @@ hero:
+   title: "Ponerte el audífono es el primer paso. Volver a oír bien de verdad, un camino."
+   subtitle: "Aprender a sacarle el máximo partido a tu audífono — volver a entender conversaciones en sitios ruidosos, reconocer sonidos que llevabas años sin oír — es un proceso. Si estos días todo te suena raro, metálico o demasiado fuerte, no es que tu audífono esté mal: es que **tu cerebro está reaprendiendo**. Y en ese camino no tienes que estar solo."
+   ctaPreset: contact
+-  bg: "/images/315-terapia_auditiva.webp"
++  bg: "/images/315-rehabilitacion_auditiva.webp"
+ sections:
+   - type: faq
+     title: "Preguntas frecuentes sobre la rehabilitación auditiva"

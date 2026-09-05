@@ -8,13 +8,13 @@ weight: 50
 
 card:
   description: "Aprender a sacarle todo el partido a tu audífono es un proceso. Te acompañamos."
-  image: "/images/cards/315-terapia_auditiva.webp"
+  image: "/images/cards/315-rehabilitacion_auditiva.webp"
   imageAlt: "Rehabilitación auditiva en Ópticas Fausto"
 
 og:
   title: "Ponerte el audífono es el primer paso. Volver a oír bien de verdad, un camino."
   description: "Pautas y ejercicios que ayudan a tu cerebro a reaprender a interpretar los sonidos, con progreso medido con audiometrías de control."
-  image: "/images/315-terapia_auditiva.webp"
+  image: "/images/315-rehabilitacion_auditiva.webp"
   type: "article"
 
 schema:
@@ -26,7 +26,7 @@ hero:
   title: "Ponerte el audífono es el primer paso. Volver a oír bien de verdad, un camino."
   subtitle: "Aprender a sacarle el máximo partido a tu audífono — volver a entender conversaciones en sitios ruidosos, reconocer sonidos que llevabas años sin oír — es un proceso. Si estos días todo te suena raro, metálico o demasiado fuerte, no es que tu audífono esté mal: es que **tu cerebro está reaprendiendo**. Y en ese camino no tienes que estar solo."
   ctaPreset: contact
-  bg: "/images/315-terapia_auditiva.webp"
+  bg: "/images/315-rehabilitacion_auditiva.webp"
 sections:
   - type: faq
     title: "Preguntas frecuentes sobre la rehabilitación auditiva"
