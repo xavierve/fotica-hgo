@@ -85,7 +85,38 @@ elegir. Git trackea el historial de qué entra y sale. Al elegir una candidata,
 se mueve con `mv` a `static/images/` con su nombre final en convención — sin
 tocar configuración de Hugo.
 
+### Tarea actual: asignar imágenes al copy de cada página
+
+Reglas (Foco, 5 sep):
+
+0. No cambiar los textos existentes sin permiso.
+0. Las páginas ya tienen `og.image` y `hero.bg` asignados — esta tarea es solo
+   sobre imágenes **dentro del copy** (`image-text`), no toca hero ni OG salvo
+   que se detecte y confirme un error puntual (ver caso 215 más abajo).
+1. Revisar las candidatas disponibles en `draft-images/` antes de proponer.
+2. El path final en el diff del `(page).md` debe ser `/images/(filename).webp`
+   — Foco mueve el archivo después, no hace falta usar el prefijo
+   `draft-images/`.
+3. Si no hay ninguna candidata razonable para una página, o si falta una
+   imagen que la página necesitaría, dar un **prompt en inglés** para
+   generarla — no forzar una imagen que no encaje.
+
+Progreso: 211, 212, 213, 214, 215, 216 cerradas (Vision servicios completo).
+Pendiente: 200 (hub Visión), 221-226 (Vision productos), 3xx (Audición
+completo).
+
 15. **Indicador de scroll + botón volver-arriba**: (a) en heros de landings (home, /vision/, /audicion/, progresivas, lentes-de-contacto, gafas-infantiles), indicador de scroll con `icon: arrow-down` (partial icons.html), animación sutil, dentro de `<a>`/`<button>` con `aria-label`; (b) botón global "volver arriba" con `arrow-up`, visible solo tras ~1.5 viewports de scroll, `aria-label="Volver arriba"`, desplazamiento suave vía CSS `scroll-behavior: smooth` (respeta `prefers-reduced-motion`). En móvil no debe solaparse con el sticky footer de contacto (tarea 9): coordinar posiciones.
+
+16. **SEO/Schema de 214 (Baja Visión) sin reforzar con el máster de Juan**
+    (detectado 5 sep, al insertar el certificado en el copy). `title`,
+    `description`, `og.*` y `schema` de `baja-vision.md` no mencionan la
+    credencial (Máster en Rehabilitación Visual, U. de Valladolid) — es una
+    señal de autoridad/experiencia real (E-E-A-T) que hoy solo vive en el
+    copy del body, no en metadatos. Relacionado con la tarea 11
+    (`Person`/`hasCredential` en schema Organization) — cuando se aborde esa
+    tarea, revisar si 214 necesita además su propio refuerzo puntual de
+    `title`/`description`. No tocar el copy del body sin permiso (regla 0
+    arriba).
 
 ### Prioridad baja / al recibir material
 11. `employee`/`Person` en schema Organization para los 7 miembros del equipo ya publicados en `/nosotros/` (el contenido ya está completo — esto es solo la parte de schema.org, pendiente).

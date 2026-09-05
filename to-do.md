@@ -1,4 +1,4 @@
-## asignar imágenes a las páginas.
+## asignar imágenes a las páginas, trabajando en fases de a 3 páginas.
 0- No cambiar los textos sin permiso. 
 0- Las páginas ya tienen OG y Hero asignada. 
 1- Revisa disponibles en carpeta /draft-images/
