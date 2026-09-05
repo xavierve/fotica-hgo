@@ -73,6 +73,10 @@ Disponibles **sin y con graduación** (miopía, hipermetropía e incluso bifocal
 - **Tratamiento antivaho** y **protección UV**, de gran eficacia y resistencia.
 - Para piscina, mar y buceo recreativo.
 
+{{< image-text image="/images/227-gafas_natacion_graduadas.webp" imageAlt="Pareja con gafas de natación graduadas en la playa de Torre del Mar" reverse="true" >}}
+Con tu graduación puesta, el mar deja de ser una mancha borrosa — lo ves tan bien como en tierra.
+{{< /image-text >}}
+
 ¿Usas lentillas? Puedes nadar con ellas bajo unas gafas de natación — pero para nadadores habituales, unas gafas graduadas propias suelen ser la opción más cómoda y segura. → [Más sobre lentillas y natación](/vision/productos/lentes-de-contacto/)
 
 {{< cta title="Pide asesoramiento" microcopy="Asesoramiento por deporte · Con y sin graduación" >}}

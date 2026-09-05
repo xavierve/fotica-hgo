@@ -1,15 +1,15 @@
 diff --git a/content/vision/productos/gafas-deportivas.md b/content/vision/productos/gafas-deportivas.md
-index 2d3fa52..417dbd4 100644
+index 417dbd4..9100dff 100644
 --- a/content/vision/productos/gafas-deportivas.md
 +++ b/content/vision/productos/gafas-deportivas.md
-@@ -57,6 +57,10 @@ En fútbol, baloncesto y deportes de raqueta — pádel incluido, el gran deport
- - Materiales de alta resistencia al impacto ([policarbonato óptico](/vision/productos/lentes-oftalmicas/)) y ajuste envolvente que no se mueve durante el juego.
- - **Especialmente recomendadas en niños** que juegan con gafas: la montura de diario no está diseñada para recibir un balonazo. → [Gafas infantiles](/vision/productos/gafas-infantiles/)
+@@ -73,6 +73,10 @@ Disponibles **sin y con graduación** (miopía, hipermetropía e incluso bifocal
+ - **Tratamiento antivaho** y **protección UV**, de gran eficacia y resistencia.
+ - Para piscina, mar y buceo recreativo.
  
-+{{< image-text image="/images/227-gafas_proteccion_paddel.webp" imageAlt="Persona jugando al pádel con gafas de protección deportiva" >}}
-+El pádel se juega a centímetros de la pared y de la pareja de al lado — la protección ocular no es opcional, es parte del equipo.
++{{< image-text image="/images/227-gafas_natacion_graduadas.webp" imageAlt="Pareja con gafas de natación graduadas en la playa de Torre del Mar" reverse="true" >}}
++Con tu graduación puesta, el mar deja de ser una mancha borrosa — lo ves tan bien como en tierra.
 +{{< /image-text >}}
 +
- ### ¿Y para ciclismo o deportes al aire libre?
+ ¿Usas lentillas? Puedes nadar con ellas bajo unas gafas de natación — pero para nadadores habituales, unas gafas graduadas propias suelen ser la opción más cómoda y segura. → [Más sobre lentillas y natación](/vision/productos/lentes-de-contacto/)
  
- Para ciclismo, running o náutica, la prioridad cambia: protección frente a sol, viento e impactos leves, con lentes envolventes y [filtros solares o polarizados](/vision/productos/filtros-solares-luz-azul/) según la actividad — graduables en la mayoría de los casos. Te asesoramos según tu deporte y tus horas de práctica.
+ {{< cta title="Pide asesoramiento" microcopy="Asesoramiento por deporte · Con y sin graduación" >}}
