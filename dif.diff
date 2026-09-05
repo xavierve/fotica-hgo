@@ -1,36 +1,15 @@
-diff --git a/CLAUDE.md b/CLAUDE.md
-index 18c4f8d..1f0d569 100644
---- a/CLAUDE.md
-+++ b/CLAUDE.md
-@@ -70,7 +70,9 @@ Shortcodes añadidos (validados con `hugo build` real, sin warnings):
+diff --git a/content/vision/servicios/baja-vision.md b/content/vision/servicios/baja-vision.md
+index b7433ac..85912a9 100644
+--- a/content/vision/servicios/baja-vision.md
++++ b/content/vision/servicios/baja-vision.md
+@@ -91,6 +91,10 @@ No dejamos que elijas a ciegas: cada ayuda se prueba en la propia consulta, para
  
-    **Aviso de color de texto (real, detectado revisando `.hero-subtitle`):** hoy `.has-bg-image` aplica `color:#fff`/`--subtitle-color` a TODA la sección, sin distinguir si el texto está encima de la foto o no. En el nuevo layout apilado, el bloque de texto en móvil deja de estar sobre la imagen (pasa a un bloque en flujo aparte, debajo) — si sigue heredando el blanco de `has-bg-image`, quedará blanco sobre fondo claro, invisible. Hace falta que el bloque de texto en modo apilado-móvil tenga su propio color explícito (oscuro, `--color-text`), independiente de si la sección padre tiene `has-bg-image` o no.
+ La finalidad es siempre la misma: **potenciar el resto visual para recuperar actividades abandonadas y mantener la independencia.**
  
--   **Criterio de aceptación:** build limpio con y sin variantes `_hd`/recortes móvil creados; ninguna imagen rota si falta un archivo opcional; el layout apilado en móvil se ve y se comporta como bloque en flujo normal (no absolute/fixed); el texto se lee bien en ambos breakpoints, sin heredar blanco donde ya no hay foto detrás; verificar visualmente en varios anchos de viewport, no solo que compile.
-+   **Aviso de altura del bloque imagen en móvil (Foco, 5 sep):** en el layout apilado, el bloque de imagen no puede usar el mismo `min-height` de presencia que banner/CTA (`70svh`) — con esa altura, la imagen empujaría el H1 y el subtítulo fuera del viewport inicial, obligando a hacer scroll para ver el titular de la propia página. El hero necesita menos altura de imagen que un banner/CTA, precisamente porque debajo va contenido que sí tiene que verse sin scroll. Punto de partida sugerido: `50svh` (con fallback `50vh`, mismo motivo que en banner/CTA — ver 3.1 en `DESIGN_TOKENS.md`), a ajustar según cómo quede el conjunto imagen+H1+subtítulo+botones en un viewport real de móvil.
++{{< image-text image="/images/214-certificado_master.webp" imageAlt="Título de Máster Universitario en Rehabilitación Visual de Juan de Dios Rivas Santaolalla, Universidad de Valladolid" >}}
++Juan, nuestro especialista en baja visión, no se formó solo en el mostrador: es **Máster en Rehabilitación Visual por la Universidad de Valladolid** — una especialización concreta en esto, no una formación genérica. Cuando evaluamos tu caso, partimos de ese conocimiento clínico, no de un catálogo.
++{{< /image-text >}}
 +
-+   **Criterio de aceptación:** build limpio con y sin variantes `_hd`/recortes móvil creados; ninguna imagen rota si falta un archivo opcional; el layout apilado en móvil se ve y se comporta como bloque en flujo normal (no absolute/fixed); el texto se lee bien en ambos breakpoints, sin heredar blanco donde ya no hay foto detrás; el H1 y el subtítulo son visibles sin scroll en un móvil estándar (ver aviso de altura arriba); verificar visualmente en varios anchos de viewport, no solo que compile.
+ Conoce en detalle todas las ayudas disponibles en nuestra página de [Ayudas Visuales](/vision/productos/ayudas-visuales/).
  
- 8b. **Imágenes responsive (`srcset`/`w`+`sizes`) en Text-Image, Gallery, Team, Cards, Testimonials, Brands-logos** — ✅ hecho (`partials/responsive-img.html`, conectado en los 7 bloques con `<img>` propio). Patrón: convención de nombre `foto.webp` (1x) + `foto_hd.webp` (2x), `os.FileExists` sobre la ruta física, `w`+`sizes` no `x`. Pendiente aparte, no bloqueante: el lightbox de `gallery.html` rellena el `<img>` vía JS desde el JSON de `.items`, no pasa por Hugo — para que la vista ampliada también use `_hd` haría falta tocar ese JS, ver si compensa el esfuerzo.
- 9. **Sticky footer móvil** con Llamada / WhatsApp / Ubicación (requisito ap8.1), usando `icons.html` y datos de site.yaml.
-diff --git a/content/vision/servicios/vision-40.md b/content/vision/servicios/vision-40.md
-index 8f0cfe7..2868fce 100644
---- a/content/vision/servicios/vision-40.md
-+++ b/content/vision/servicios/vision-40.md
-@@ -27,6 +27,7 @@ hero:
-   subtitle: "A los 40 y algo empieza a pasar, y casi nadie quiere reconocerlo: el WhatsApp se aleja un poco más del brazo, la carta del restaurante de repente «está mal iluminada», las letras pequeñas del periódico se amontonan. No es que tus ojos fallen — es la **vista cansada**, y le pasa prácticamente a todo el mundo a partir de esta edad. La buena noticia: tiene solución, y **cuanto antes la abordes, menos te costará adaptarte.**"
-   ctaPreset: contact
-   bg: "/images/215_vision_40_hero.webp"
-+  bgMobile: "/images/215_vision_40_hero_m.webp"
- 
- sections:
-   - type: faq
-@@ -74,7 +75,7 @@ Los cambios en tu visión no tienen por qué cambiarte la vida: un programa de r
- 
- En la revisión valoramos tu graduación, tus actividades y tus preferencias para recomendarte la opción — o la combinación — que mejor encaje contigo.
- 
--{{< image-text image="/images/215_vision_40_hero_m.webp" imageAlt="Pareja eligiendo montura con una óptica de Ópticas Fausto en Torre del Mar" >}}
-+{{< image-text image="/images/200-vision.webp" imageAlt="Pareja adulta probando monturas en Ópticas Fausto, Torre del Mar" >}}
- Elegir la solución adecuada no es solo cuestión de graduación — también de que la montura te guste y te dure. Nos tomamos el tiempo para las dos cosas.
- {{< /image-text >}}
- 
+ {{< cta title="Cuéntanos tu dificultad" microcopy="Evaluación personalizada · Prueba las ayudas en consulta antes de decidir" >}}

@@ -91,6 +91,10 @@ No dejamos que elijas a ciegas: cada ayuda se prueba en la propia consulta, para
 
 La finalidad es siempre la misma: **potenciar el resto visual para recuperar actividades abandonadas y mantener la independencia.**
 
+{{< image-text image="/images/214-certificado_master.webp" imageAlt="Título de Máster Universitario en Rehabilitación Visual de Juan de Dios Rivas Santaolalla, Universidad de Valladolid" >}}
+Juan, nuestro especialista en baja visión, no se formó solo en el mostrador: es **Máster en Rehabilitación Visual por la Universidad de Valladolid** — una especialización concreta en esto, no una formación genérica. Cuando evaluamos tu caso, partimos de ese conocimiento clínico, no de un catálogo.
+{{< /image-text >}}
+
 Conoce en detalle todas las ayudas disponibles en nuestra página de [Ayudas Visuales](/vision/productos/ayudas-visuales/).
 
 {{< cta title="Cuéntanos tu dificultad" microcopy="Evaluación personalizada · Prueba las ayudas en consulta antes de decidir" >}}
