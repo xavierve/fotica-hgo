@@ -27,6 +27,7 @@ hero:
   subtitle: "A los 40 y algo empieza a pasar, y casi nadie quiere reconocerlo: el WhatsApp se aleja un poco más del brazo, la carta del restaurante de repente «está mal iluminada», las letras pequeñas del periódico se amontonan. No es que tus ojos fallen — es la **vista cansada**, y le pasa prácticamente a todo el mundo a partir de esta edad. La buena noticia: tiene solución, y **cuanto antes la abordes, menos te costará adaptarte.**"
   ctaPreset: contact
   bg: "/images/215_vision_40_hero.webp"
+  bgMobile: "/images/215_vision_40_hero_m.webp"
 
 sections:
   - type: faq
@@ -74,7 +75,7 @@ Los cambios en tu visión no tienen por qué cambiarte la vida: un programa de r
 
 En la revisión valoramos tu graduación, tus actividades y tus preferencias para recomendarte la opción — o la combinación — que mejor encaje contigo.
 
-{{< image-text image="/images/215_vision_40_hero_m.webp" imageAlt="Pareja eligiendo montura con una óptica de Ópticas Fausto en Torre del Mar" >}}
+{{< image-text image="/images/200-vision.webp" imageAlt="Pareja adulta probando monturas en Ópticas Fausto, Torre del Mar" >}}
 Elegir la solución adecuada no es solo cuestión de graduación — también de que la montura te guste y te dure. Nos tomamos el tiempo para las dos cosas.
 {{< /image-text >}}
 
