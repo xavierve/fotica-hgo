@@ -8,13 +8,13 @@ weight: 60
 
 card:
   description: "El gimnasio de tus ojos: entrena habilidades visuales."
-  image: "/images/cards/216_baja_vision_juan_hero.webp"
+  image: "/images/cards/216-terapia_visual_hero.webp"
   imageAlt: "Sesión de terapia visual en Ópticas Fausto, Torre del Mar"
 
 og:
   title: "El gimnasio de tus ojos — Terapia visual"
   description: "Programa de entrenamiento visual individualizado, en consulta y en casa, con revisiones que miden el progreso de forma objetiva."
-  image: "/images/216_baja_vision_juan_hero.webp"
+  image: "/images/216-terapia_visual_hero.webp"
   type: "article"
 
 schema:
@@ -26,7 +26,7 @@ hero:
   title: "El gimnasio de tus ojos"
   subtitle: "Ver bien no es solo «tener buena vista». Es enfocar rápido al pasar de la pizarra al cuaderno, coordinar los dos ojos para leer sin perderse de línea, mantener la atención sin agotarse. Cuando alguna de esas habilidades falla, las gafas no siempre bastan — y ahí es donde entra la **terapia visual**: un programa de entrenamiento personalizado para desarrollar las habilidades que la visión necesita."
   ctaPreset: contact
-  bg: "/images/216_baja_vision_juan_hero.webp"
+  bg: "/images/216-terapia_visual_hero.webp"
 
 sections:
   - type: faq
@@ -61,6 +61,10 @@ La terapia visual es un tratamiento individualizado que se prescribe para mejora
 - Mantenimiento de la atención visual
 - Estrés visual por trabajo excesivo en visión cercana
 - Deficiencias visuo-motoras y perceptivo-cognitivas, fundamentales en la etapa escolar
+
+{{< image-text image="/images/216-terapia_visual.webp" imageAlt="Ejercicio de terapia visual con bola de Marsden en Ópticas Fausto" reverse="true" >}}
+Ejercicios como este trabajan el seguimiento ocular y la coordinación — no son un juego, son parte del programa medible de cada sesión.
+{{< /image-text >}}
 
 Se compone de una serie de procedimientos que se realizan **en consulta y en casa**, siempre bajo la supervisión de nuestros ópticos-optometristas, con revisiones que miden el progreso de forma objetiva.
 

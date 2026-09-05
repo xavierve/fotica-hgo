@@ -74,6 +74,10 @@ Los cambios en tu visión no tienen por qué cambiarte la vida: un programa de r
 
 En la revisión valoramos tu graduación, tus actividades y tus preferencias para recomendarte la opción — o la combinación — que mejor encaje contigo.
 
+{{< image-text image="/images/215_vision_40_hero_m.webp" imageAlt="Pareja eligiendo montura con una óptica de Ópticas Fausto en Torre del Mar" >}}
+Elegir la solución adecuada no es solo cuestión de graduación — también de que la montura te guste y te dure. Nos tomamos el tiempo para las dos cosas.
+{{< /image-text >}}
+
 ### Y de paso, vigilamos lo que no se ve
 
 A partir de esta edad pueden aparecer otros problemas que al principio no dan síntomas: glaucoma, retinopatía diabética, degeneración macular asociada a la edad o cataratas. Una revisión periódica permite [detectarlos a tiempo](/vision/servicios/optometria/).

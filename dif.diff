@@ -1,45 +1,56 @@
-diff --git a/themes/f1-theme/assets/css/main.css b/themes/f1-theme/assets/css/main.css
-index 52fda8c..639fc08 100644
---- a/themes/f1-theme/assets/css/main.css
-+++ b/themes/f1-theme/assets/css/main.css
-@@ -307,7 +307,7 @@
-   display:flex;flex-wrap:wrap;flex-direction:column;align-items:flex-start;justify-content:space-between;
-   gap:clamp(1.5rem,4vw,3rem);
- }
--.cta-layout-split .cta-text{flex:1 1 22rem}
-+.cta-layout-split .cta-text{flex:1 1 auto}
- /* título generoso, subtítulo unido debajo como una sola unidad de texto */
- .cta-layout-split .cta-text h2{
-   font-size:clamp(1.6rem,3.2vw,2.5rem);line-height:1.15;margin:0;
-@@ -321,7 +321,11 @@
- /* sobre fondo oscuro, el subtítulo hereda el color claro del sistema de contraste */
- .cta-layout-split.has-bg-image .cta-subtitle,
- .cta-layout-split.has-bg-color:not(.bg-claro) .cta-subtitle{color:var(--subtitle-color)}
--@media(min-width:641px){
-+@media(min-width:821px){
-+  /* En fila, flex-basis controla el ANCHO y reparte texto/botones. En movil
-+     (columna) controlaria la ALTURA, reservando 22rem de alto en vacio — por
-+     eso solo vive aqui. Mismo breakpoint que el resto del tema. */
-+  .cta-layout-split .cta-text{flex:1 1 22rem}
-   .cta-layout-split .cta-inner{flex-direction:row;align-items:center}
-   .cta-layout-split .cta-actions{text-align:right}
-   .cta-layout-split .cta-row{justify-content:flex-end}
-diff --git a/themes/f1-theme/docs/README.md b/themes/f1-theme/docs/README.md
-index 1be3a20..a98bfd1 100644
---- a/themes/f1-theme/docs/README.md
-+++ b/themes/f1-theme/docs/README.md
-@@ -20,3 +20,14 @@ theme = 'f1-theme'
- - `themes/f1-theme/layouts/partials/`: bloques reutilizables.
- - `themes/f1-theme/assets/css/`: CSS del tema.
- - `themes/f1-theme/docs/`: documentación mínima funcional.
+diff --git a/content/vision/servicios/baja-vision.md b/content/vision/servicios/baja-vision.md
+index bd82b41..b7433ac 100644
+--- a/content/vision/servicios/baja-vision.md
++++ b/content/vision/servicios/baja-vision.md
+@@ -73,6 +73,10 @@ Hablamos de baja visión cuando la pérdida de agudeza o de campo visual no pued
+ 
+ Muchas de estas patologías pueden detectarse a tiempo en el [examen de salud ocular](/vision/servicios/optometria/) de una revisión completa.
+ 
++{{< image-text image="/images/214_baja_vision_juan.webp" imageAlt="Juan de Dios, óptico-optometrista de Ópticas Fausto, realizando una revisión ocular a un paciente" >}}
++Muchas de estas patologías se detectan antes de dar síntomas — otro motivo más para no dejar pasar la revisión anual, sobre todo a partir de cierta edad.
++{{< /image-text >}}
 +
-+## Documentación
+ ## Ayudas para cada actividad, no una solución única
+ 
+ No existe «la» ayuda de baja visión: existe la adecuada para cada persona, cada patología y cada actividad. Tras evaluar tu resto visual, te proponemos la combinación que mejor funcione:
+@@ -81,6 +85,10 @@ No existe «la» ayuda de baja visión: existe la adecuada para cada persona, ca
+ - **Ayudas no ópticas** — filtros selectivos, atriles, iluminación adecuada: pequeños cambios de ergonomía con gran efecto.
+ - **Ayudas electrónicas** — lupas-televisión y sistemas de ampliación por proyección, para tareas prolongadas.
+ 
++{{< image-text image="/images/214-atencion_D3A0090.webp" imageAlt="Auxiliar óptica de Ópticas Fausto mostrando una ayuda visual a una clienta" reverse="true" >}}
++No dejamos que elijas a ciegas: cada ayuda se prueba en la propia consulta, para que compruebes el efecto antes de decidir.
++{{< /image-text >}}
 +
-+- `ARCHITECTURE.md` — cómo se ensambla el tema.
-+- `DESIGN_PRINCIPLES.md` — principios de diseño del tema.
-+- `DESIGN_TOKENS.md` — colores, tipografía, espaciado e imágenes responsive.
-+- `BLOCKS.md` — bloques disponibles y sus parámetros.
-+- `FRONTMATTER.md` — campos de front matter.
-+- `PAGE_TYPES.md` — tipos de página.
-+- `INSTALL.md` — instalación.
-+- `CHANGELOG.md` — historial de cambios.
+ La finalidad es siempre la misma: **potenciar el resto visual para recuperar actividades abandonadas y mantener la independencia.**
+ 
+ Conoce en detalle todas las ayudas disponibles en nuestra página de [Ayudas Visuales](/vision/productos/ayudas-visuales/).
+diff --git a/content/vision/servicios/terapia-visual.md b/content/vision/servicios/terapia-visual.md
+index ed25482..06fec41 100644
+--- a/content/vision/servicios/terapia-visual.md
++++ b/content/vision/servicios/terapia-visual.md
+@@ -62,6 +62,10 @@ La terapia visual es un tratamiento individualizado que se prescribe para mejora
+ - Estrés visual por trabajo excesivo en visión cercana
+ - Deficiencias visuo-motoras y perceptivo-cognitivas, fundamentales en la etapa escolar
+ 
++{{< image-text image="/images/216-terapia_visual.webp" imageAlt="Ejercicio de terapia visual con bola de Marsden en Ópticas Fausto" reverse="true" >}}
++Ejercicios como este trabajan el seguimiento ocular y la coordinación — no son un juego, son parte del programa medible de cada sesión.
++{{< /image-text >}}
++
+ Se compone de una serie de procedimientos que se realizan **en consulta y en casa**, siempre bajo la supervisión de nuestros ópticos-optometristas, con revisiones que miden el progreso de forma objetiva.
+ 
+ ## El peso de no diagnosticar a tiempo
+diff --git a/content/vision/servicios/vision-40.md b/content/vision/servicios/vision-40.md
+index da5edcf..8f0cfe7 100644
+--- a/content/vision/servicios/vision-40.md
++++ b/content/vision/servicios/vision-40.md
+@@ -74,6 +74,10 @@ Los cambios en tu visión no tienen por qué cambiarte la vida: un programa de r
+ 
+ En la revisión valoramos tu graduación, tus actividades y tus preferencias para recomendarte la opción — o la combinación — que mejor encaje contigo.
+ 
++{{< image-text image="/images/215_vision_40_hero_m.webp" imageAlt="Pareja eligiendo montura con una óptica de Ópticas Fausto en Torre del Mar" >}}
++Elegir la solución adecuada no es solo cuestión de graduación — también de que la montura te guste y te dure. Nos tomamos el tiempo para las dos cosas.
++{{< /image-text >}}
++
+ ### Y de paso, vigilamos lo que no se ve
+ 
+ A partir de esta edad pueden aparecer otros problemas que al principio no dan síntomas: glaucoma, retinopatía diabética, degeneración macular asociada a la edad o cataratas. Una revisión periódica permite [detectarlos a tiempo](/vision/servicios/optometria/).

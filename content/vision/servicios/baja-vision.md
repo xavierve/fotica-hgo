@@ -73,6 +73,10 @@ Hablamos de baja visión cuando la pérdida de agudeza o de campo visual no pued
 
 Muchas de estas patologías pueden detectarse a tiempo en el [examen de salud ocular](/vision/servicios/optometria/) de una revisión completa.
 
+{{< image-text image="/images/214_baja_vision_juan.webp" imageAlt="Juan de Dios, óptico-optometrista de Ópticas Fausto, realizando una revisión ocular a un paciente" >}}
+Muchas de estas patologías se detectan antes de dar síntomas — otro motivo más para no dejar pasar la revisión anual, sobre todo a partir de cierta edad.
+{{< /image-text >}}
+
 ## Ayudas para cada actividad, no una solución única
 
 No existe «la» ayuda de baja visión: existe la adecuada para cada persona, cada patología y cada actividad. Tras evaluar tu resto visual, te proponemos la combinación que mejor funcione:
@@ -80,6 +84,10 @@ No existe «la» ayuda de baja visión: existe la adecuada para cada persona, ca
 - **Ayudas ópticas** — lupas (manuales, con soporte, de pecho, de bolsillo), microscopios, telescopios, telemicroscopios y gafas prismáticas.
 - **Ayudas no ópticas** — filtros selectivos, atriles, iluminación adecuada: pequeños cambios de ergonomía con gran efecto.
 - **Ayudas electrónicas** — lupas-televisión y sistemas de ampliación por proyección, para tareas prolongadas.
+
+{{< image-text image="/images/214-atencion_D3A0090.webp" imageAlt="Auxiliar óptica de Ópticas Fausto mostrando una ayuda visual a una clienta" reverse="true" >}}
+No dejamos que elijas a ciegas: cada ayuda se prueba en la propia consulta, para que compruebes el efecto antes de decidir.
+{{< /image-text >}}
 
 La finalidad es siempre la misma: **potenciar el resto visual para recuperar actividades abandonadas y mantener la independencia.**
 
