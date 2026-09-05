@@ -55,6 +55,10 @@ sections:
 
 Una audiometría es la prueba que mide con precisión tu audición: **a qué volúmenes oyes, en qué frecuencias y con qué claridad distingues las palabras**. La realizamos en nuestra **cabina insonorizada**, con equipo audiométrico profesional, para garantizar un resultado fiable sin interferencias del ruido exterior.
 
+{{< image-text image="/images/311-audiometria_tecnologia_audio_D3A0015.webp" imageAlt="Paciente realizando una audiometría en la cabina insonorizada de Ópticas Fausto" >}}
+Sin ruido de fondo, sin interferencias de la calle — el resultado que sale de aquí es el de tu oído, no el del entorno.
+{{< /image-text >}}
+
 - **Indolora** y sin preparación previa.
 - **Sin derivación médica**: puedes venir directamente.
 - Se realiza y **se analiza en la misma cita** — sales sabiendo cómo está tu oído, explicado con claridad.

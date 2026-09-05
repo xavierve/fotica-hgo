@@ -1,15 +1,24 @@
-diff --git a/content/vision/productos/gafas-deportivas.md b/content/vision/productos/gafas-deportivas.md
-index 417dbd4..9100dff 100644
---- a/content/vision/productos/gafas-deportivas.md
-+++ b/content/vision/productos/gafas-deportivas.md
-@@ -73,6 +73,10 @@ Disponibles **sin y con graduación** (miopía, hipermetropía e incluso bifocal
- - **Tratamiento antivaho** y **protección UV**, de gran eficacia y resistencia.
- - Para piscina, mar y buceo recreativo.
+diff --git a/content/audicion/servicios/adaptacion-audifonos.md b/content/audicion/servicios/adaptacion-audifonos.md
+index 42c8a70..fa8c0ef 100644
+--- a/content/audicion/servicios/adaptacion-audifonos.md
++++ b/content/audicion/servicios/adaptacion-audifonos.md
+@@ -54,7 +54,7 @@ sections:
+ ## El proceso, paso a paso (sin sorpresas)
  
-+{{< image-text image="/images/227-gafas_natacion_graduadas.webp" imageAlt="Pareja con gafas de natación graduadas en la playa de Torre del Mar" reverse="true" >}}
-+Con tu graduación puesta, el mar deja de ser una mancha borrosa — lo ves tan bien como en tierra.
+ 1. **Estudio auditivo completo** — en [cabina insonorizada](/audicion/servicios/audiometria/), con equipo audiométrico profesional, para conocer con precisión el tipo y grado de tu pérdida.
+-2. **Selección del audífono** — el que mejor se adapta a tus necesidades funcionales y estéticas, **sea cual sea tu presupuesto**. → [Conoce los tipos de audífono](/audicion/productos/audifonos/)
++2. **Selección del audífono** — el que mejor se adapta a tus necesidades funcionales y estéticas, **sea cual sea tu presupuesto**. Somos **multimarca**: no dependemos de un solo fabricante, así que la recomendación parte de tu caso, no de un catálogo cerrado. → [Conoce los tipos de audífono](/audicion/productos/audifonos/)
+ 3. **Prueba real, gratuita y sin compromiso** — te lo llevas a casa y compruebas cómo te ayuda en tu vida de verdad: la sobremesa, la calle, la televisión. No en una sala silenciosa.
+ 4. **Ajuste personalizado** — afinamos el audífono según lo que nos cuentes tras la prueba: qué oíste bien, qué te molestó, qué faltó.
+ 5. **Seguimiento continuado** — revisiones periódicas para que siga funcionando como esperas, **incluso años después de la compra**. → [Mantenimiento](/audicion/servicios/mantenimiento-audifonos/) · [Rehabilitación auditiva](/audicion/servicios/rehabilitacion-auditiva/)
+@@ -63,6 +63,10 @@ sections:
+ 
+ La adaptación de audífonos en los más pequeños requiere una sensibilidad y experiencia especiales — en lo técnico y en el acompañamiento a la familia durante todo el proceso. En Fausto trabajamos de la mano de padres y madres para que esta etapa sea lo más sencilla y natural posible para el niño: explicamos cada paso, resolvemos cada duda y ajustamos el ritmo al del pequeño, no al revés.
+ 
++{{< image-text image="/images/312-adaptacion_infantil.webp" imageAlt="Óptica de Ópticas Fausto adaptando unos auriculares a un niño" >}}
++Con los más pequeños todo se hace jugando — la prueba se convierte en un rato agradable, no en una experiencia que temer.
 +{{< /image-text >}}
 +
- ¿Usas lentillas? Puedes nadar con ellas bajo unas gafas de natación — pero para nadadores habituales, unas gafas graduadas propias suelen ser la opción más cómoda y segura. → [Más sobre lentillas y natación](/vision/productos/lentes-de-contacto/)
+ Un oído bien atendido desde el principio marca una diferencia enorme en su lenguaje, su aprendizaje y su relación con los demás.
  
- {{< cta title="Pide asesoramiento" microcopy="Asesoramiento por deporte · Con y sin graduación" >}}
+ {{< cta title="Cuéntanos vuestro caso" microcopy="Adaptación infantil con acompañamiento a la familia" >}}

@@ -52,14 +52,26 @@ sections:
 
 Despertador digital con salida de voz y **alarma de vibración bajo la almohada**: imposible no enterarse, sin depender del oído. Con pantalla LED grande e indicador de 24 horas — pensado también para quien duerme sin el audífono puesto (es decir, todo el mundo).
 
+{{< image-text image="/images/322-ayudas_auditivas_despertador_vibraciones.webp" imageAlt="Despertador con alarma de vibración bajo la almohada" >}}
+La vibración no falla aunque el sonido no llegue — la forma más segura de no perderte la mañana.
+{{< /image-text >}}
+
 ## Auriculares amplificadores de TV
 
 El clásico conflicto doméstico — «¡baja eso!» / «¡es que no lo oigo!» — tiene solución sencilla: un **amplificador de televisión y música** de manejo muy fácil, con acumuladores recargables. Sus dos auriculares ofrecen una percepción espacial natural del sonido, con sistema limitador para mayor comodidad. Cada uno a su volumen, todos contentos.
+
+{{< image-text image="/images/322-ayudas_auditivas_sistemas_infrarojos.webp" imageAlt="Auriculares inalámbricos amplificadores para ver la televisión" reverse="true" >}}
+Sin cables por el salón, sin pelearos por el volumen — cada uno oye la tele a su gusto.
+{{< /image-text >}}
 
 ## Transmisores y receptor de bolsillo
 
 - **Transmisores de timbre, teléfono y conversación** — para no perderte ninguna llamada ni visita.
 - **Receptor de bolsillo** — recibe las señales de los transmisores y avisa con **luces y vibración**, identificando cada aviso con un código de colores fácil de reconocer. Pequeño, ligero y discreto: te lo llevas de habitación en habitación.
+
+{{< image-text image="/images/322-ayudas_auditivas_transmisor_telefono.webp" imageAlt="Transmisor inalámbrico de timbre y teléfono" >}}
+Se conecta al timbre, al teléfono o a quien te llama desde otra habitación — y avisa aunque no tengas puesto el audífono.
+{{< /image-text >}}
 
 ## Consumibles y kits de mantenimiento
 

@@ -27,6 +27,7 @@ hero:
   subtitle: "Un audífono bien cuidado dura más y funciona mejor — y un audífono que falla te deja fuera de las conversaciones justo cuando más las necesitas. Por eso en Fausto el mantenimiento no termina el día de la compra: somos **Servicio Técnico Multimarca** y seguimos aquí después, con equipo profesional, para que el tuyo siga rindiendo como el primer día — **lo compraras donde lo compraras**."
   ctaPreset: contact
   bg: "/images/314-mantenimiento_audifonos_hero.webp"
+  bgMobile: "/images/314-mantenimiento_audifonos_hero_m.webp"
 
 sections:
   - type: faq

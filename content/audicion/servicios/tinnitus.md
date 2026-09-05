@@ -63,6 +63,10 @@ Es más frecuente en personas con pérdida auditiva, aunque cualquiera puede pad
 
 La TRT combina enriquecimiento sonoro y pautas de habituación para **reentrenar al cerebro a reclasificar el tinnitus**: que deje de tratarlo como una amenaza a la que prestar atención constante y pase a filtrarlo, como filtra el ruido de la nevera o del tráfico lejano. Es un proceso gradual, con seguimiento — y donde el acompañamiento continuado marca la diferencia.
 
+{{< image-text image="/images/313-certificado_tinnitus.webp" imageAlt="Certificado de Experto en Terapia de Reentrenamiento del Tinnitus (TRT) de Juan de Dios Rivas Santaolalla" >}}
+Juan, nuestro especialista, es **Experto en Terapia de Reentrenamiento del Tinnitus** — una formación específica, no una improvisación sobre la marcha.
+{{< /image-text >}}
+
 ### Audífonos cuando hay pérdida auditiva
 
 Si tienes tinnitus y pérdida auditiva a la vez, los [audífonos](/audicion/productos/audifonos/) pueden ayudarte en dos frentes: **mejoran tu audición y reducen las molestias del tinnitus** — al devolver al cerebro los sonidos del entorno, el pitido pierde protagonismo — además de aliviar la ansiedad y el estrés que suele provocar.

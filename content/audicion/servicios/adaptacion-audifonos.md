@@ -54,14 +54,22 @@ sections:
 ## El proceso, paso a paso (sin sorpresas)
 
 1. **Estudio auditivo completo** — en [cabina insonorizada](/audicion/servicios/audiometria/), con equipo audiométrico profesional, para conocer con precisión el tipo y grado de tu pérdida.
-2. **Selección del audífono** — el que mejor se adapta a tus necesidades funcionales y estéticas, **sea cual sea tu presupuesto**. → [Conoce los tipos de audífono](/audicion/productos/audifonos/)
+2. **Selección del audífono** — el que mejor se adapta a tus necesidades funcionales y estéticas, **sea cual sea tu presupuesto**. Somos **multimarca**: no dependemos de un solo fabricante, así que la recomendación parte de tu caso, no de un catálogo cerrado. → [Conoce los tipos de audífono](/audicion/productos/audifonos/)
 3. **Prueba real, gratuita y sin compromiso** — te lo llevas a casa y compruebas cómo te ayuda en tu vida de verdad: la sobremesa, la calle, la televisión. No en una sala silenciosa.
 4. **Ajuste personalizado** — afinamos el audífono según lo que nos cuentes tras la prueba: qué oíste bien, qué te molestó, qué faltó.
 5. **Seguimiento continuado** — revisiones periódicas para que siga funcionando como esperas, **incluso años después de la compra**. → [Mantenimiento](/audicion/servicios/mantenimiento-audifonos/) · [Rehabilitación auditiva](/audicion/servicios/rehabilitacion-auditiva/)
 
+{{< image-text image="/images/312-adaptacion_audifonos_hero_D3A0077.webp" imageAlt="Óptico de Ópticas Fausto explicando el resultado de una audiometría a una clienta" reverse="true" >}}
+Te enseñamos tu propio audiograma y te lo explicamos con calma — decides con datos delante, no a ciegas.
+{{< /image-text >}}
+
 ## Adaptación infantil: técnica y, sobre todo, acompañamiento
 
 La adaptación de audífonos en los más pequeños requiere una sensibilidad y experiencia especiales — en lo técnico y en el acompañamiento a la familia durante todo el proceso. En Fausto trabajamos de la mano de padres y madres para que esta etapa sea lo más sencilla y natural posible para el niño: explicamos cada paso, resolvemos cada duda y ajustamos el ritmo al del pequeño, no al revés.
+
+{{< image-text image="/images/312-adaptacion_infantil.webp" imageAlt="Óptica de Ópticas Fausto adaptando unos auriculares a un niño" >}}
+Con los más pequeños todo se hace jugando — la prueba se convierte en un rato agradable, no en una experiencia que temer.
+{{< /image-text >}}
 
 Un oído bien atendido desde el principio marca una diferencia enorme en su lenguaje, su aprendizaje y su relación con los demás.
 
