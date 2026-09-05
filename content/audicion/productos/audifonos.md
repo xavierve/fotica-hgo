@@ -87,4 +87,8 @@ Con todos los datos, te explicamos tu caso y te aconsejamos la solución **más 
 
 ¿Cuál es el tuyo? Depende de tu pérdida, la anatomía de tu oído, tu destreza manual y tus prioridades (discreción, autonomía, conectividad). Justo lo que valoramos contigo en el estudio.
 
+{{< image-text image="/images/321-audifonos_nueva_vida.webp" imageAlt="Pareja mayor riendo en una terraza, él le habla al oído, ella con audífono discreto" >}}
+Discreto de verdad es que ni en un susurro al oído se note. Eso es lo que buscamos cuando te lo adaptamos.
+{{< /image-text >}}
+
 {{< cta title="Pide tu estudio auditivo" microcopy="Prueba gratuita en casa · Todos los presupuestos" >}}

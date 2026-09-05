@@ -69,6 +69,10 @@ El proceso se apoya en **revisiones periódicas en nuestra [cabina insonorizada]
 
 Entre revisiones, te llevas pautas y ejercicios sencillos para el día a día — escuchar en distintos entornos, exponerte gradualmente a situaciones más exigentes — explicados sin tecnicismos.
 
+{{< image-text image="/images/315-rehabilitacion_audifonos2.webp" imageAlt="Mujer practicando ejercicios de escucha en casa con su audífono" reverse="true" >}}
+El entrenamiento no se queda en la consulta — sigue en casa, con la radio, con una videollamada, con cualquier sonido cotidiano.
+{{< /image-text >}}
+
 ## La diferencia entre tener un audífono y volver a oír bien
 
 La rehabilitación auditiva no sustituye al [audífono](/audicion/productos/audifonos/): lo complementa. Es el acompañamiento que separa «llevo un aparato en la oreja» de «he recuperado mis conversaciones» — y en Fausto es parte del [seguimiento que hacemos con cada cliente](/audicion/servicios/adaptacion-audifonos/), no un extra que termina el día de la compra.

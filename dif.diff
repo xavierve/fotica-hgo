@@ -1,13 +1,28 @@
 diff --git a/content/audicion/productos/audifonos.md b/content/audicion/productos/audifonos.md
-index d57c54c..d99fd8f 100644
+index 6cfd0b7..a9749c7 100644
 --- a/content/audicion/productos/audifonos.md
 +++ b/content/audicion/productos/audifonos.md
-@@ -83,6 +83,8 @@ Con todos los datos, te explicamos tu caso y te aconsejamos la solución **más
- - **RITE** — retroauriculares con el auricular dentro del conducto auditivo: más pequeños y estéticos, adaptables a pérdidas **moderadas y severas**. El equilibrio discreción/potencia.
- - **Intracanal (ITE/ITC/CIC)** — van completamente dentro del oído, en una carcasa personalizada, sin nada detrás del pabellón. Distintos tamaños, para pérdidas **leves, moderadas y severas**: los más invisibles.
+@@ -87,4 +87,8 @@ Con todos los datos, te explicamos tu caso y te aconsejamos la solución **más
  
-+<img src="/images/321-audifonos_tipos.webp" alt="Gama de tipos de audífonos, de retroauricular a intracanal, de mayor a menor tamaño" style="width:100%;border-radius:var(--radius);display:block;margin:1.5rem 0">
-+
  ¿Cuál es el tuyo? Depende de tu pérdida, la anatomía de tu oído, tu destreza manual y tus prioridades (discreción, autonomía, conectividad). Justo lo que valoramos contigo en el estudio.
  
++{{< image-text image="/images/321-audifonos_nueva_vida.webp" imageAlt="Pareja mayor riendo en una terraza, él le habla al oído, ella con audífono discreto" >}}
++Discreto de verdad es que ni en un susurro al oído se note. Eso es lo que buscamos cuando te lo adaptamos.
++{{< /image-text >}}
++
  {{< cta title="Pide tu estudio auditivo" microcopy="Prueba gratuita en casa · Todos los presupuestos" >}}
+diff --git a/content/audicion/servicios/rehabilitacion-auditiva.md b/content/audicion/servicios/rehabilitacion-auditiva.md
+index a709828..86e0ff4 100644
+--- a/content/audicion/servicios/rehabilitacion-auditiva.md
++++ b/content/audicion/servicios/rehabilitacion-auditiva.md
+@@ -69,6 +69,10 @@ El proceso se apoya en **revisiones periódicas en nuestra [cabina insonorizada]
+ 
+ Entre revisiones, te llevas pautas y ejercicios sencillos para el día a día — escuchar en distintos entornos, exponerte gradualmente a situaciones más exigentes — explicados sin tecnicismos.
+ 
++{{< image-text image="/images/315-rehabilitacion_audifonos2.webp" imageAlt="Mujer practicando ejercicios de escucha en casa con su audífono" reverse="true" >}}
++El entrenamiento no se queda en la consulta — sigue en casa, con la radio, con una videollamada, con cualquier sonido cotidiano.
++{{< /image-text >}}
++
+ ## La diferencia entre tener un audífono y volver a oír bien
+ 
+ La rehabilitación auditiva no sustituye al [audífono](/audicion/productos/audifonos/): lo complementa. Es el acompañamiento que separa «llevo un aparato en la oreja» de «he recuperado mis conversaciones» — y en Fausto es parte del [seguimiento que hacemos con cada cliente](/audicion/servicios/adaptacion-audifonos/), no un extra que termina el día de la compra.
