@@ -8,7 +8,7 @@ weight: 10
 
 card:
   description: "Tipos, diferencias y cómo elegimos el tuyo. Con prueba gratuita en casa."
-  image: "/images/cards/321-audifonos_hero.webp"
+  image: "/images/cards/321-audifonos_tipos.webp"
   imageAlt: "Audífonos en Ópticas Fausto, Centro Auditivo Homologado"
 
 og:
@@ -82,6 +82,8 @@ Con todos los datos, te explicamos tu caso y te aconsejamos la solución **más 
 - **Open Fit** — retroauriculares con tubo fino y oliva en lugar de molde: dejan el oído «abierto», son muy cómodos y discretos. Para pérdidas **leves y moderadas**.
 - **RITE** — retroauriculares con el auricular dentro del conducto auditivo: más pequeños y estéticos, adaptables a pérdidas **moderadas y severas**. El equilibrio discreción/potencia.
 - **Intracanal (ITE/ITC/CIC)** — van completamente dentro del oído, en una carcasa personalizada, sin nada detrás del pabellón. Distintos tamaños, para pérdidas **leves, moderadas y severas**: los más invisibles.
+
+<img src="/images/321-audifonos_tipos.webp" alt="Gama de tipos de audífonos, de retroauricular a intracanal, de mayor a menor tamaño" style="width:100%;border-radius:var(--radius);display:block;margin:1.5rem 0">
 
 ¿Cuál es el tuyo? Depende de tu pérdida, la anatomía de tu oído, tu destreza manual y tus prioridades (discreción, autonomía, conectividad). Justo lo que valoramos contigo en el estudio.
 

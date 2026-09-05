@@ -1,44 +1,13 @@
-diff --git a/content/audicion/servicios/adaptacion-audifonos.md b/content/audicion/servicios/adaptacion-audifonos.md
-index eff1820..96bf1fc 100644
---- a/content/audicion/servicios/adaptacion-audifonos.md
-+++ b/content/audicion/servicios/adaptacion-audifonos.md
-@@ -51,6 +51,10 @@ sections:
-     labelCall: "Llamar ahora"
- ---
+diff --git a/content/audicion/productos/audifonos.md b/content/audicion/productos/audifonos.md
+index d57c54c..d99fd8f 100644
+--- a/content/audicion/productos/audifonos.md
++++ b/content/audicion/productos/audifonos.md
+@@ -83,6 +83,8 @@ Con todos los datos, te explicamos tu caso y te aconsejamos la solución **más
+ - **RITE** — retroauriculares con el auricular dentro del conducto auditivo: más pequeños y estéticos, adaptables a pérdidas **moderadas y severas**. El equilibrio discreción/potencia.
+ - **Intracanal (ITE/ITC/CIC)** — van completamente dentro del oído, en una carcasa personalizada, sin nada detrás del pabellón. Distintos tamaños, para pérdidas **leves, moderadas y severas**: los más invisibles.
  
-+{{< image-text image="/images/312-audifonos_cambio_de_vida.webp" imageAlt="Mujer riendo en una terraza de Torre del Mar, con audífono visible" >}}
-+Volver a reírte sin pedir que te repitan el chiste — de eso trata todo lo que viene a continuación.
-+{{< /image-text >}}
++<img src="/images/321-audifonos_tipos.webp" alt="Gama de tipos de audífonos, de retroauricular a intracanal, de mayor a menor tamaño" style="width:100%;border-radius:var(--radius);display:block;margin:1.5rem 0">
 +
- ## El proceso, paso a paso (sin sorpresas)
+ ¿Cuál es el tuyo? Depende de tu pérdida, la anatomía de tu oído, tu destreza manual y tus prioridades (discreción, autonomía, conectividad). Justo lo que valoramos contigo en el estudio.
  
- 1. **Estudio auditivo completo** — en [cabina insonorizada](/audicion/servicios/audiometria/), con equipo audiométrico profesional, para conocer con precisión el tipo y grado de tu pérdida.
-diff --git a/content/audicion/servicios/rehabilitacion-auditiva.md b/content/audicion/servicios/rehabilitacion-auditiva.md
-index e93cabd..a709828 100644
---- a/content/audicion/servicios/rehabilitacion-auditiva.md
-+++ b/content/audicion/servicios/rehabilitacion-auditiva.md
-@@ -8,13 +8,13 @@ weight: 50
- 
- card:
-   description: "Aprender a sacarle todo el partido a tu audífono es un proceso. Te acompañamos."
--  image: "/images/cards/315-terapia_auditiva.webp"
-+  image: "/images/cards/315-rehabilitacion_auditiva.webp"
-   imageAlt: "Rehabilitación auditiva en Ópticas Fausto"
- 
- og:
-   title: "Ponerte el audífono es el primer paso. Volver a oír bien de verdad, un camino."
-   description: "Pautas y ejercicios que ayudan a tu cerebro a reaprender a interpretar los sonidos, con progreso medido con audiometrías de control."
--  image: "/images/315-terapia_auditiva.webp"
-+  image: "/images/315-rehabilitacion_auditiva.webp"
-   type: "article"
- 
- schema:
-@@ -26,7 +26,7 @@ hero:
-   title: "Ponerte el audífono es el primer paso. Volver a oír bien de verdad, un camino."
-   subtitle: "Aprender a sacarle el máximo partido a tu audífono — volver a entender conversaciones en sitios ruidosos, reconocer sonidos que llevabas años sin oír — es un proceso. Si estos días todo te suena raro, metálico o demasiado fuerte, no es que tu audífono esté mal: es que **tu cerebro está reaprendiendo**. Y en ese camino no tienes que estar solo."
-   ctaPreset: contact
--  bg: "/images/315-terapia_auditiva.webp"
-+  bg: "/images/315-rehabilitacion_auditiva.webp"
- sections:
-   - type: faq
-     title: "Preguntas frecuentes sobre la rehabilitación auditiva"
+ {{< cta title="Pide tu estudio auditivo" microcopy="Prueba gratuita en casa · Todos los presupuestos" >}}
