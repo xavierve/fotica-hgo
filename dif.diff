@@ -1,44 +1,27 @@
-diff --git a/CLAUDE.md b/CLAUDE.md
-index 1f0d569..6818267 100644
---- a/CLAUDE.md
-+++ b/CLAUDE.md
-@@ -85,8 +85,39 @@ elegir. Git trackea el historial de qué entra y sale. Al elegir una candidata,
- se mueve con `mv` a `static/images/` con su nombre final en convención — sin
- tocar configuración de Hugo.
+diff --git a/content/vision/productos/gafas-progresivas.md b/content/vision/productos/gafas-progresivas.md
+index 419cf96..41adf74 100644
+--- a/content/vision/productos/gafas-progresivas.md
++++ b/content/vision/productos/gafas-progresivas.md
+@@ -80,3 +80,7 @@ La diferencia entre una progresiva básica y una de gama alta no es la marca del
+ - **Adaptación garantizada** — con revisiones incluidas hasta que estés cómodo.
+ - **Certificado del fabricante** — sabes exactamente qué lente llevas.
+ - **Seguimiento real** — el ajuste fino de una progresiva a veces llega en la segunda o tercera visita. Aquí esas visitas están incluidas, y te atiende quien ya conoce tu caso.
++
++{{< image-text image="/images/221-lentes_atencion_mesa_D3A0082.webp" imageAlt="Óptica de Ópticas Fausto asesorando a una clienta en la elección de montura" reverse="true" >}}
++El asesoramiento no termina cuando eliges la lente — sigue cuando eliges la montura que la va a llevar, y cuando vuelves si algo no encaja del todo.
++{{< /image-text >}}
+diff --git a/content/vision/productos/lentes-oftalmicas.md b/content/vision/productos/lentes-oftalmicas.md
+index f6de76c..3bd60e3 100644
+--- a/content/vision/productos/lentes-oftalmicas.md
++++ b/content/vision/productos/lentes-oftalmicas.md
+@@ -72,6 +72,10 @@ sections:
  
-+### Tarea actual: asignar imágenes al copy de cada página
-+
-+Reglas (Foco, 5 sep):
-+
-+0. No cambiar los textos existentes sin permiso.
-+0. Las páginas ya tienen `og.image` y `hero.bg` asignados — esta tarea es solo
-+   sobre imágenes **dentro del copy** (`image-text`), no toca hero ni OG salvo
-+   que se detecte y confirme un error puntual (ver caso 215 más abajo).
-+1. Revisar las candidatas disponibles en `draft-images/` antes de proponer.
-+2. El path final en el diff del `(page).md` debe ser `/images/(filename).webp`
-+   — Foco mueve el archivo después, no hace falta usar el prefijo
-+   `draft-images/`.
-+3. Si no hay ninguna candidata razonable para una página, o si falta una
-+   imagen que la página necesitaría, dar un **prompt en inglés** para
-+   generarla — no forzar una imagen que no encaje.
-+
-+Progreso: 211, 212, 213, 214, 215, 216 cerradas (Vision servicios completo).
-+Pendiente: 200 (hub Visión), 221-226 (Vision productos), 3xx (Audición
-+completo).
-+
- 15. **Indicador de scroll + botón volver-arriba**: (a) en heros de landings (home, /vision/, /audicion/, progresivas, lentes-de-contacto, gafas-infantiles), indicador de scroll con `icon: arrow-down` (partial icons.html), animación sutil, dentro de `<a>`/`<button>` con `aria-label`; (b) botón global "volver arriba" con `arrow-up`, visible solo tras ~1.5 viewports de scroll, `aria-label="Volver arriba"`, desplazamiento suave vía CSS `scroll-behavior: smooth` (respeta `prefers-reduced-motion`). En móvil no debe solaparse con el sticky footer de contacto (tarea 9): coordinar posiciones.
+ La precisión de la maquinaria actual permite **personalizar cualquier lente**, monofocal o progresiva: se fabrica teniendo en cuenta tus medidas y tu uso real, ampliando los campos de visión, reduciendo aberraciones y maximizando el confort. Es la diferencia entre una lente «de tu graduación» y una lente *tuya*. El punto de partida es siempre [tu graduación exacta](/vision/servicios/optometria/).
  
-+16. **SEO/Schema de 214 (Baja Visión) sin reforzar con el máster de Juan**
-+    (detectado 5 sep, al insertar el certificado en el copy). `title`,
-+    `description`, `og.*` y `schema` de `baja-vision.md` no mencionan la
-+    credencial (Máster en Rehabilitación Visual, U. de Valladolid) — es una
-+    señal de autoridad/experiencia real (E-E-A-T) que hoy solo vive en el
-+    copy del body, no en metadatos. Relacionado con la tarea 11
-+    (`Person`/`hasCredential` en schema Organization) — cuando se aborde esa
-+    tarea, revisar si 214 necesita además su propio refuerzo puntual de
-+    `title`/`description`. No tocar el copy del body sin permiso (regla 0
-+    arriba).
++{{< image-text image="/images/221-tecnologia_D3A0084.webp" imageAlt="Óptico de Ópticas Fausto trabajando con maquinaria de precisión para personalizar lentes" >}}
++La maquinaria que hace posible esa personalización la tenemos aquí, en el propio centro — no dependemos de un laboratorio externo para ajustar tu lente a tu medida.
++{{< /image-text >}}
 +
- ### Prioridad baja / al recibir material
- 11. `employee`/`Person` en schema Organization para los 7 miembros del equipo ya publicados en `/nosotros/` (el contenido ya está completo — esto es solo la parte de schema.org, pendiente).
- 12. `memberOf` (Sociedad Española de Baja Visión) y `hasCredential` (Centro Auditivo Homologado, si hay denominación oficial) en Organization.
+ {{< cta title="Pide tu presupuesto sin compromiso" microcopy="Presupuesto claro, línea a línea" >}}
+ 
+ ## Cómo cuidar tus lentes para que duren

@@ -80,3 +80,7 @@ La diferencia entre una progresiva básica y una de gama alta no es la marca del
 - **Adaptación garantizada** — con revisiones incluidas hasta que estés cómodo.
 - **Certificado del fabricante** — sabes exactamente qué lente llevas.
 - **Seguimiento real** — el ajuste fino de una progresiva a veces llega en la segunda o tercera visita. Aquí esas visitas están incluidas, y te atiende quien ya conoce tu caso.
+
+{{< image-text image="/images/221-lentes_atencion_mesa_D3A0082.webp" imageAlt="Óptica de Ópticas Fausto asesorando a una clienta en la elección de montura" reverse="true" >}}
+El asesoramiento no termina cuando eliges la lente — sigue cuando eliges la montura que la va a llevar, y cuando vuelves si algo no encaja del todo.
+{{< /image-text >}}

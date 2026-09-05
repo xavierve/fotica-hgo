@@ -72,6 +72,10 @@ sections:
 
 La precisión de la maquinaria actual permite **personalizar cualquier lente**, monofocal o progresiva: se fabrica teniendo en cuenta tus medidas y tu uso real, ampliando los campos de visión, reduciendo aberraciones y maximizando el confort. Es la diferencia entre una lente «de tu graduación» y una lente *tuya*. El punto de partida es siempre [tu graduación exacta](/vision/servicios/optometria/).
 
+{{< image-text image="/images/221-tecnologia_D3A0084.webp" imageAlt="Óptico de Ópticas Fausto trabajando con maquinaria de precisión para personalizar lentes" >}}
+La maquinaria que hace posible esa personalización la tenemos aquí, en el propio centro — no dependemos de un laboratorio externo para ajustar tu lente a tu medida.
+{{< /image-text >}}
+
 {{< cta title="Pide tu presupuesto sin compromiso" microcopy="Presupuesto claro, línea a línea" >}}
 
 ## Cómo cuidar tus lentes para que duren
