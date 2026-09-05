@@ -102,4 +102,8 @@ Lente con filtro selectivo que bloquea la parte más perjudicial y molesta de la
 
 Las personas con **Degeneración Macular (DMAE)** pueden mejorar su calidad de vida y realizar con más facilidad tareas cotidianas — reconocer caras, distinguir bordillos — además de ganar sensación de seguridad dentro y fuera de casa. Pacientes con **glaucoma o retinopatía diabética**, con síntomas similares, también pueden beneficiarse de su adaptación.
 
+{{< image-text image="/images/225-filtro_ML_DMAE_confort.webp" imageAlt="Pareja mayor disfrutando de una terraza con filtro selectivo ML DMAE Confort" reverse="true" >}}
+Menos deslumbramiento no es solo comodidad — es volver a disfrutar de una terraza al sol sin entornar los ojos ni perderte la cara de quien tienes delante.
+{{< /image-text >}}
+
 {{< cta title="Cuéntanos tu dificultad" microcopy="Prueba las ayudas en consulta antes de decidir" >}}
