@@ -57,6 +57,10 @@ En fútbol, baloncesto y deportes de raqueta — pádel incluido, el gran deport
 - Materiales de alta resistencia al impacto ([policarbonato óptico](/vision/productos/lentes-oftalmicas/)) y ajuste envolvente que no se mueve durante el juego.
 - **Especialmente recomendadas en niños** que juegan con gafas: la montura de diario no está diseñada para recibir un balonazo. → [Gafas infantiles](/vision/productos/gafas-infantiles/)
 
+{{< image-text image="/images/227-gafas_proteccion_paddel.webp" imageAlt="Persona jugando al pádel con gafas de protección deportiva" >}}
+El pádel se juega a centímetros de la pared y de la pareja de al lado — la protección ocular no es opcional, es parte del equipo.
+{{< /image-text >}}
+
 ### ¿Y para ciclismo o deportes al aire libre?
 
 Para ciclismo, running o náutica, la prioridad cambia: protección frente a sol, viento e impactos leves, con lentes envolventes y [filtros solares o polarizados](/vision/productos/filtros-solares-luz-azul/) según la actividad — graduables en la mayoría de los casos. Te asesoramos según tu deporte y tus horas de práctica.
