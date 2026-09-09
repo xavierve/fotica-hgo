@@ -2,7 +2,7 @@
 # Para otro proyecto/idioma: copiar como en.yaml, de.yaml… y traducir valores.
 home: { other: "Inicio" }
 mainNav: { other: "Navegación principal" }
-secondaryNav: { other: "Navegación secundaria" }
+secondaryNav: { other: "Navegación" }
 readMore: { other: "Ver más" }
 call: { other: "Llamar" }
 whatsapp: { other: "WhatsApp" }

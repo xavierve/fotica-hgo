@@ -1,6 +1,6 @@
 home: { other: "Home" }
 mainNav: { other: "Main navigation" }
-secondaryNav: { other: "Secondary navigation" }
+secondaryNav: { other: "Navigation" }
 readMore: { other: "Read more" }
 call: { other: "Call" }
 whatsapp: { other: "WhatsApp" }

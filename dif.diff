@@ -1,79 +1,141 @@
-diff --git a/content/contacto/_index.md b/content/contacto/_index.md
-index 1350755..e9e4d1d 100644
---- a/content/contacto/_index.md
-+++ b/content/contacto/_index.md
-@@ -42,20 +42,35 @@ sections:
+diff --git a/data/site.yaml b/data/site.yaml
+index 1f0db7f..3012257 100644
+--- a/data/site.yaml
++++ b/data/site.yaml
+@@ -14,7 +14,7 @@ footer:
+     logo: "/images/logo-fausto-animado-claro.svg"
+     logoAlt: "Ópticas Fausto — Centro Óptico y Auditivo en Torre del Mar"
+   title: "Ópticas Fausto"
+-  description: "Más de 44 años cuidando la visión y la audición en Torre del Mar."
++  description: "Desde 1982, cuidando bien de la vista y del oído."
  
- ## Nuestros dos centros en Torre del Mar
- 
-+{{< text-split >}}
-+{{< text-split-item >}}
-+[![Fachada y ubicación de Fausto Andalucía en Google Maps](/images/400-fausto_andalucia_mapa.webp)](https://share.google/lt3s0XecMBnpr3exH)
-+
- **Fausto Andalucía**
--Av. Andalucía, 84 B · 29740 Torre del Mar (Málaga)
--Teléfono: [(+34) 952 54 09 64](tel:+34952540964)
--[Cómo llegar →](https://share.google/lt3s0XecMBnpr3exH)
-+
-+[{{< icon "location" >}} Av. Andalucía, 84 B · 29740 Torre del Mar (Málaga)](https://share.google/lt3s0XecMBnpr3exH)
-+
-+[{{< icon "phone" >}} (+34) 952 54 09 64](tel:+34952540964)
-+{{< /text-split-item >}}
-+
-+{{< text-split-item >}}
-+[![Fachada y ubicación de Fausto Duque en Google Maps](/images/400-fausto_duque_mapa.webp)](https://share.google/uotnWlZFT0nfpuVoP)
- 
- **Fausto Duque**
--Av. Duque de Ahumada, 1C · 29740 Torre del Mar (Málaga)
--Teléfono: [(+34) 952 54 70 90](tel:+34952547090)
--[Cómo llegar →](https://share.google/uotnWlZFT0nfpuVoP)
-+
-+[{{< icon "location" >}} Av. Duque de Ahumada, 1C · 29740 Torre del Mar (Málaga)](https://share.google/uotnWlZFT0nfpuVoP)
-+
-+[{{< icon "phone" >}} (+34) 952 54 70 90](tel:+34952547090)
-+{{< /text-split-item >}}
-+{{< /text-split >}}
- 
- **Común a ambos centros**
--WhatsApp / Móvil: [+34 717 77 00 90](https://wa.me/34717770090)
--Email: [info@opticafausto.com](mailto:info@opticafausto.com)
--Horario: **lunes a viernes, 10:00–13:30 y 17:30–21:00 · sábados, 10:00–13:30**
-+
-+[{{< icon "whatsapp" >}} Móvil / WhatsApp: +34 717 77 00 90](https://wa.me/34717770090)
-+
-+[{{< icon "email" >}} info@opticafausto.com](mailto:info@opticafausto.com)
-+
-+{{< icon "clock" >}} Horario: **lunes a viernes, 10:00–13:30 y 17:30–21:00 · sábados, 10:00–13:30**
- 
- <!-- PENDIENTE cliente: confirmar sábados y variaciones de temporada;
-      el horario debe coincidir exactamente con Google Business Profile. -->
+ business:
+   locationType: "Optician"
+@@ -81,14 +81,14 @@ locations:
+   - id: "avenida"
+     name: "Centro Fausto Andalucía"
+     address: "Av. Andalucía, 84 B"
+-    location: "29740 Torre del Mar (Málaga)"
++    location: "Torre del Mar (Málaga)"
+     phone: "+34952540964"
+     phoneLabel: "952 54 09 64"
+     mapUrl: "https://share.google/lt3s0XecMBnpr3exH"
+   - id: "duque"
+     name: "Centro Fausto Duque"
+     address: "Av. Duque de Ahumada, 1C"
+-    location: "29740 Torre del Mar (Málaga)"
++    location: "Torre del Mar (Málaga)"
+     phone: "+34952547090"
+     phoneLabel: "952 54 70 90"
+     mapUrl: "https://share.google/uotnWlZFT0nfpuVoP"
 diff --git a/themes/f1-theme/assets/css/main.css b/themes/f1-theme/assets/css/main.css
-index 639fc08..0602a65 100644
+index 0602a65..e275478 100644
 --- a/themes/f1-theme/assets/css/main.css
 +++ b/themes/f1-theme/assets/css/main.css
-@@ -56,7 +56,7 @@
- /* === v02: utilidades fs, iconos btn, fondos CTA responsive, banner === */
- /* fs-*: talla para TEXTO SUELTO EN PROSA (headings/parrafos via {.fs-s} en markdown body). NO usar en class: de un bloque/shortcode -- para eso esta textSize (ver block-text-*). */
- .fs-xs{font-size:.75em}.fs-s{font-size:.875em}.fs-l{font-size:1.25em}.fs-xl{font-size:1.5em}h2.fs-s{font-size:1.5rem}h2.fs-xs{font-size:1.25rem}
--.btn .icon{width:1.1em;height:1.1em;vertical-align:-.18em;margin-right:.45em}.has-bg-color{background:var(--section-bg-color)}.has-bg-image{background-image:var(--section-bg-mobile,var(--section-bg));background-size:cover;background-position:center;position:relative}
-+.icon{width:1.1em;height:1.1em;vertical-align:-.18em}.btn .icon{width:1.1em;height:1.1em;vertical-align:-.18em;margin-right:.45em}.has-bg-color{background:var(--section-bg-color)}.has-bg-image{background-image:var(--section-bg-mobile,var(--section-bg));background-size:cover;background-position:center;position:relative}
- @supports (background-image:image-set(url(a.png) 1x)){.has-bg-image{background-image:var(--section-bg-mobile-hd,var(--section-bg-hd,var(--section-bg-mobile,var(--section-bg))))}}
- .has-bg-image>.container{position:relative;z-index:1}.has-bg-image{--overlay-color:rgba(var(--color-overlay-base),.55)}
- .has-bg-image::before{content:"";position:absolute;inset:0;background:var(--overlay-color)}.has-bg-image.has-bg-color{background-color:transparent}.has-bg-image.has-bg-color{--overlay-color:color-mix(in srgb,var(--section-bg-color) 60%,transparent)}.has-bg-image .btn-outline,
+@@ -36,7 +36,12 @@
+ .breadcrumb{font-size:.92rem;background:var(--color-bg-over);border-bottom:1px solid rgba(0,0,0,.06)}.breadcrumb ol{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:0;padding:.7rem 0}.breadcrumb li+li:before{content:"/";margin-right:.5rem;color:var(--color-muted)}.counter{background:var(--color-dark);color:#fff}.counter-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;text-align:center}.counter-item strong{display:block;font-size:clamp(2rem,5vw,4rem);line-height:1}.counter-item span{color:rgba(255,255,255,.82)}.section-note{text-align:center;font-size:1.1rem}.trustbar{background:var(--bg-color1);padding:1rem 0}.trustbar-inner{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;font-weight:700}.image-text-inner{display:grid;grid-template-columns:1fr;gap:clamp(1rem,3vw,1.75rem);align-items:center}.cards-grid,.gallery-grid,.logo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}.card,.testimonial,.team-card{background:var(--color-bg-over);border:1px solid rgba(0,0,0,.08);border-radius:var(--radius);overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.04)}.testimonial footer img{width:56px;height:56px;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.5rem}.logo-grid img{max-height:40px;width:auto;object-fit:contain}
+ .card{position:relative;transition:box-shadow .2s ease,transform .2s ease}
+ .card:hover{box-shadow:0 14px 34px rgba(0,0,0,.09);transform:translateY(-2px)}
+-.card-link.stretched-link::after{content:"";position:absolute;inset:0}.card-body,.testimonial,.team-card{padding:1.25rem}.card-link{font-weight:800;color:var(--color-accent-text)}.cta{background:var(--bg-color1);text-align:center}.faq details{background:var(--color-bg-over);border:1px solid rgba(0,0,0,.08);border-radius:12px;padding:1rem;margin:.75rem 0}.faq summary{cursor:pointer;font-weight:800}.site-footer{background:var(--color-dark);color:#fff;padding:3rem 0 1.5rem}.footer-grid{display:grid;grid-template-columns:1fr;gap:2rem}.site-footer a{display:inline-block;color:#fff;text-decoration:none;margin:.25rem .5rem .25rem 0}.footer-logo{max-height:54px}.footer-bottom{border-top:1px solid rgba(255,255,255,.16);margin-top:2rem;padding-top:1rem;color:rgba(255,255,255,.82)}address{font-style:normal;margin:0 0 1rem}.slider-track{display:flex;gap:1rem;overflow:auto;scroll-snap-type:x mandatory}.slide{min-width:min(80vw,420px);scroll-snap-align:start;background:var(--color-bg-over);border-radius:var(--radius);padding:1rem}.timeline-list{list-style:none;padding:0}.timeline-list li{border-left:3px solid var(--color-accent);padding:0 0 1.5rem 1rem}.social-links{margin-top:1rem}
++.card-link.stretched-link::after{content:"";position:absolute;inset:0}.card-body,.testimonial,.team-card{padding:1.25rem}.card-link{font-weight:800;color:var(--color-accent-text)}.cta{background:var(--bg-color1);text-align:center}.faq details{background:var(--color-bg-over);border:1px solid rgba(0,0,0,.08);border-radius:12px;padding:1rem;margin:.75rem 0}.faq summary{cursor:pointer;font-weight:800}.site-footer{background:var(--color-dark);color:#fff;padding:3rem 0 1.5rem}.footer-grid{display:grid;grid-template-columns:1fr;gap:2rem}
++.footer-grid nav{display:flex;flex-direction:column;gap:.5rem}
++.social-links{margin-top:1rem;display:flex;gap:1rem}
++.social-links a{display:inline-flex}
++.social-links .icon{width:1.6em;height:1.6em}
++.footer-grid address .icon{margin-right:.4em}.site-footer a{display:inline-block;color:#fff;text-decoration:none;margin:.25rem .5rem .25rem 0}.footer-logo{max-height:54px}.footer-bottom{border-top:1px solid rgba(255,255,255,.16);margin-top:2rem;padding-top:1rem;color:rgba(255,255,255,.82)}address{font-style:normal;margin:0 0 1rem}.slider-track{display:flex;gap:1rem;overflow:auto;scroll-snap-type:x mandatory}.slide{min-width:min(80vw,420px);scroll-snap-align:start;background:var(--color-bg-over);border-radius:var(--radius);padding:1rem}.timeline-list{list-style:none;padding:0}.timeline-list li{border-left:3px solid var(--color-accent);padding:0 0 1.5rem 1rem}
+ .block{padding:var(--block-pad) 0}.block-banner{padding:clamp(2rem,4vw,3rem) 0}.block-pad-compact{padding:var(--block-pad-compact) 0}.block-pad-spacious{padding:var(--block-pad-spacious) 0}.block-width-default>.container{max-width:var(--container)}
+ /* ── width:wide ────────────────────────────────────────────────────────────
+    El breakout de .prose ya ensancha la <section> hasta --container-wide, pero
+diff --git a/themes/f1-theme/layouts/partials/footer.html b/themes/f1-theme/layouts/partials/footer.html
+index f4d3712..d9947b5 100644
+--- a/themes/f1-theme/layouts/partials/footer.html
++++ b/themes/f1-theme/layouts/partials/footer.html
+@@ -14,7 +14,7 @@
+ {{ $brandLogo := or $footerBrand.logo $brand.logo }}
+ {{ $brandLogoAlt := or $footerBrand.logoAlt $brand.logoAlt $brand.name site.Title }}
+ {{ $brandTitle := or $footerBrand.title $brand.title $brand.name site.Title }}
+-{{ $brandDescription := or $footerBrand.description $brand.description }}
++{{ $brandDescription := or $footerBrand.description $footer.description $brand.description }}
+ {{ $copyright := or $footer.copyright $brand.name site.Title }}
+ <footer class="site-footer">
+   <div class="container footer-grid">
+@@ -30,7 +30,7 @@
+       </nav>
+       {{ with $social }}
+       <div class="social-links">
+-        {{ range . }}<a href="{{ .url | safeURL }}" aria-label="{{ .platform | default .text }}">{{ .text | default .platform }}</a>{{ end }}
++        {{ range . }}<a href="{{ .url | safeURL }}" aria-label="{{ .platform | default .text }}">{{ partial "icons.html" (lower (.platform | default .text)) }}</a>{{ end }}
+       </div>
+       {{ end }}
+     </section>
+@@ -40,20 +40,24 @@
+       {{ $location := . }}
+       <address>
+         <strong>{{ .name }}</strong><br>
++        {{ if .mapUrl }}<a href="{{ .mapUrl | safeURL }}">{{ partial "icons.html" "location" }}{{ with .address }}{{ . }}{{ end }}{{ with $location.location }}, {{ . }}{{ end }}</a><br>
++        {{ else }}
+         {{ with .address }}{{ . }}<br>{{ end }}
+         {{ with .location }}{{ . }}<br>{{ end }}
+-        {{ with .phone }}<a href="{{ printf "tel:%s" . | safeURL }}">{{ $location.phoneLabel | default . }}</a>{{ end }}
++        {{ end }}
++        {{ with .phone }}<a href="{{ printf "tel:%s" . | safeURL }}">{{ partial "icons.html" "phone" }}{{ $location.phoneLabel | default . }}</a>{{ end }}
+         {{ with .whatsapp }} · <a href="{{ printf "https://wa.me/%s" (replace . "+" "") | safeURL }}">WhatsApp</a>{{ end }}
+         {{ with .email }} · <a href="{{ printf "mailto:%s" . | safeURL }}">{{ . }}</a>{{ end }}
+-        {{ with .mapUrl }} · <a href="{{ . | safeURL }}">Ubicación</a>{{ end }}
+       </address>
+       {{ else }}
+       <address>
+-        {{ with $contact.phone }}<a href="{{ printf "tel:%s" . | safeURL }}">{{ $contact.phoneLabel | default . }}</a>{{ end }}
++        {{ if $contact.mapUrl }}<a href="{{ $contact.mapUrl | safeURL }}">{{ partial "icons.html" "location" }}{{ with $contact.location }}{{ . }}{{ end }}</a><br>
++        {{ else }}
++        {{ with $contact.location }}{{ . }}<br>{{ end }}
++        {{ end }}
++        {{ with $contact.phone }}<a href="{{ printf "tel:%s" . | safeURL }}">{{ partial "icons.html" "phone" }}{{ $contact.phoneLabel | default . }}</a>{{ end }}
+         {{ with $contact.whatsapp }} · <a href="{{ printf "https://wa.me/%s" (replace . "+" "") | safeURL }}">WhatsApp</a>{{ end }}
+         {{ with $contact.email }} · <a href="{{ printf "mailto:%s" . | safeURL }}">{{ . }}</a>{{ end }}
+-        {{ with $contact.location }}<br>{{ . }}{{ end }}
+-        {{ with $contact.mapUrl }}<br><a href="{{ . | safeURL }}">Ubicación</a>{{ end }}
+       </address>
+       {{ end }}
+     </section>
+diff --git a/themes/f1-theme/layouts/partials/icons.html b/themes/f1-theme/layouts/partials/icons.html
+index 0dc87b7..6110f49 100644
+--- a/themes/f1-theme/layouts/partials/icons.html
++++ b/themes/f1-theme/layouts/partials/icons.html
+@@ -36,4 +36,8 @@
+ <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 15h-2v-6h2zm0-8h-2V7h2z"/></svg>
+ {{- else if eq $name "arrow-right" -}}
+ <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M13.2 6.3 19.9 13l-6.7 6.7-1.4-1.4L16.5 14H4v-2h12.5l-4.7-4.3z"/></svg>
++{{- else if eq $name "facebook" -}}
++<svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12z"/></svg>
++{{- else if eq $name "instagram" -}}
++<svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 2c-2.7 0-3.1 0-4.1.1-1.1.1-1.8.2-2.5.5-.7.3-1.3.6-1.8 1.2-.6.5-.9 1.1-1.2 1.8-.3.7-.5 1.4-.5 2.5C1.8 9.1 1.8 9.5 1.8 12.2s0 3.1.1 4.1c.1 1.1.2 1.8.5 2.5.3.7.6 1.3 1.2 1.8.5.6 1.1.9 1.8 1.2.7.3 1.4.5 2.5.5 1 .1 1.4.1 4.1.1s3.1 0 4.1-.1c1.1-.1 1.8-.2 2.5-.5.7-.3 1.3-.6 1.8-1.2.6-.5.9-1.1 1.2-1.8.3-.7.5-1.4.5-2.5.1-1 .1-1.4.1-4.1s0-3.1-.1-4.1c-.1-1.1-.2-1.8-.5-2.5-.3-.7-.6-1.3-1.2-1.8-.5-.6-1.1-.9-1.8-1.2-.7-.3-1.4-.5-2.5-.5C15.1 2 14.7 2 12 2zm0 1.8c2.6 0 2.9 0 4 .1.9.1 1.5.2 1.8.4.5.2.8.4 1.1.7.3.3.6.7.7 1.1.2.3.3.9.4 1.8.1 1.1.1 1.4.1 4s0 2.9-.1 4c-.1.9-.2 1.5-.4 1.8-.2.5-.4.8-.7 1.1-.3.3-.7.6-1.1.7-.3.2-.9.3-1.8.4-1.1.1-1.4.1-4 .1s-2.9 0-4-.1c-.9-.1-1.5-.2-1.8-.4-.5-.2-.8-.4-1.1-.7-.3-.3-.6-.7-.7-1.1-.2-.3-.3-.9-.4-1.8-.1-1.1-.1-1.4-.1-4s0-2.9.1-4c.1-.9.2-1.5.4-1.8.2-.5.4-.8.7-1.1.3-.3.7-.6 1.1-.7.3-.2.9-.3 1.8-.4 1.1-.1 1.4-.1 4-.1zm0 3.2a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zm5.2-8.4a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4z"/></svg>
+ {{- end -}}
+\ No newline at end of file
 diff --git a/themes/f1-theme/layouts/shortcodes/icon.html b/themes/f1-theme/layouts/shortcodes/icon.html
-new file mode 100644
-index 0000000..91049df
---- /dev/null
+index 91049df..dc956b0 100644
+--- a/themes/f1-theme/layouts/shortcodes/icon.html
 +++ b/themes/f1-theme/layouts/shortcodes/icon.html
-@@ -0,0 +1,11 @@
-+{{- /*
-+  {{< icon "phone" >}} — inserta un icono SVG inline dentro del body markdown.
-+  Envoltorio fino sobre partials/icons.html (que hasta ahora solo se llamaba
-+  desde plantillas Go, nunca desde contenido). Nombres disponibles: los mismos
-+  que icons.html — phone, whatsapp, location, mail/email, clock, etc.
+@@ -2,10 +2,20 @@
+   {{< icon "phone" >}} — inserta un icono SVG inline dentro del body markdown.
+   Envoltorio fino sobre partials/icons.html (que hasta ahora solo se llamaba
+   desde plantillas Go, nunca desde contenido). Nombres disponibles: los mismos
+-  que icons.html — phone, whatsapp, location, mail/email, clock, etc.
++  que icons.html — phone, whatsapp, location, mail/email, clock, facebook,
++  instagram, etc.
 +
-+  Fuera de un .btn (donde .btn .icon ya fija el tamaño), el icono usa la regla
-+  base .icon{} de main.css — mismo tratamiento visual (1.1em, alineado con el
-+  texto) en cualquier contexto suelto.
-+*/ -}}
-+{{ partial "icons.html" (.Get 0) }}
++  {{< icon "whatsapp" size="xl" >}} — tamaño opcional, reutiliza la escala
++  fs-xs|s|l|xl (mismos tokens que textSize en bloques). Como el icono usa
++  unidades em (.icon{width:1.1em}), envolverlo en cualquier elemento con
++  font-size propio ya lo escala — size="xl" es solo azúcar para no escribir
++  <span class="fs-xl">{{< icon ... >}}</span> a mano.
+ 
+   Fuera de un .btn (donde .btn .icon ya fija el tamaño), el icono usa la regla
+   base .icon{} de main.css — mismo tratamiento visual (1.1em, alineado con el
+   texto) en cualquier contexto suelto.
+ */ -}}
+-{{ partial "icons.html" (.Get 0) }}
++{{- $size := .Get "size" -}}
++{{- if $size }}<span class="fs-{{ $size }}">{{ partial "icons.html" (.Get 0) }}</span>
++{{- else }}{{ partial "icons.html" (.Get 0) }}
++{{- end -}}

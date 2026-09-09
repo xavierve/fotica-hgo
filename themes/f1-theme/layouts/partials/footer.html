@@ -14,14 +14,14 @@
 {{ $brandLogo := or $footerBrand.logo $brand.logo }}
 {{ $brandLogoAlt := or $footerBrand.logoAlt $brand.logoAlt $brand.name site.Title }}
 {{ $brandTitle := or $footerBrand.title $brand.title $brand.name site.Title }}
-{{ $brandDescription := or $footerBrand.description $brand.description }}
+{{ $brandDescription := or $footerBrand.description $footer.description $brand.description }}
 {{ $copyright := or $footer.copyright $brand.name site.Title }}
 <footer class="site-footer">
   <div class="container footer-grid">
     <section>
-      {{ with $brandLogo }}<img class="footer-logo" src="{{ . }}" alt="{{ $brandLogoAlt }}" width="245" height="54" loading="lazy">{{ end }}
       <h2>{{ $brandTitle }}</h2>
       {{ with $brandDescription }}<p>{{ . }}</p>{{ end }}
+      {{ with $brandLogo }}<img class="footer-logo" src="{{ . }}" alt="{{ $brandLogoAlt }}" width="245" height="54" loading="lazy">{{ end }}
     </section>
     <section>
       <h2>{{ i18n "secondaryNav" }}</h2>
@@ -30,7 +30,7 @@
       </nav>
       {{ with $social }}
       <div class="social-links">
-        {{ range . }}<a href="{{ .url | safeURL }}" aria-label="{{ .platform | default .text }}">{{ .text | default .platform }}</a>{{ end }}
+        {{ range . }}<a href="{{ .url | safeURL }}" aria-label="{{ .platform | default .text }}">{{ partial "icons.html" (lower (.platform | default .text)) }}</a>{{ end }}
       </div>
       {{ end }}
     </section>
@@ -40,20 +40,24 @@
       {{ $location := . }}
       <address>
         <strong>{{ .name }}</strong><br>
+        {{ if .mapUrl }}<a href="{{ .mapUrl | safeURL }}">{{ partial "icons.html" "location" }}{{ with .address }}{{ . }}{{ end }}{{ with $location.location }}, {{ . }}{{ end }}</a><br>
+        {{ else }}
         {{ with .address }}{{ . }}<br>{{ end }}
         {{ with .location }}{{ . }}<br>{{ end }}
-        {{ with .phone }}<a href="{{ printf "tel:%s" . | safeURL }}">{{ $location.phoneLabel | default . }}</a>{{ end }}
+        {{ end }}
+        {{ with .phone }}<a href="{{ printf "tel:%s" . | safeURL }}">{{ partial "icons.html" "phone" }}{{ $location.phoneLabel | default . }}</a>{{ end }}
         {{ with .whatsapp }} · <a href="{{ printf "https://wa.me/%s" (replace . "+" "") | safeURL }}">WhatsApp</a>{{ end }}
         {{ with .email }} · <a href="{{ printf "mailto:%s" . | safeURL }}">{{ . }}</a>{{ end }}
-        {{ with .mapUrl }} · <a href="{{ . | safeURL }}">Ubicación</a>{{ end }}
       </address>
       {{ else }}
       <address>
-        {{ with $contact.phone }}<a href="{{ printf "tel:%s" . | safeURL }}">{{ $contact.phoneLabel | default . }}</a>{{ end }}
+        {{ if $contact.mapUrl }}<a href="{{ $contact.mapUrl | safeURL }}">{{ partial "icons.html" "location" }}{{ with $contact.location }}{{ . }}{{ end }}</a><br>
+        {{ else }}
+        {{ with $contact.location }}{{ . }}<br>{{ end }}
+        {{ end }}
+        {{ with $contact.phone }}<a href="{{ printf "tel:%s" . | safeURL }}">{{ partial "icons.html" "phone" }}{{ $contact.phoneLabel | default . }}</a>{{ end }}
         {{ with $contact.whatsapp }} · <a href="{{ printf "https://wa.me/%s" (replace . "+" "") | safeURL }}">WhatsApp</a>{{ end }}
         {{ with $contact.email }} · <a href="{{ printf "mailto:%s" . | safeURL }}">{{ . }}</a>{{ end }}
-        {{ with $contact.location }}<br>{{ . }}{{ end }}
-        {{ with $contact.mapUrl }}<br><a href="{{ . | safeURL }}">Ubicación</a>{{ end }}
       </address>
       {{ end }}
     </section>
