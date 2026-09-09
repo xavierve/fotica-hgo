@@ -79,7 +79,7 @@ navigation:
 # Si en el futuro una sede tuviera horario distinto, añadir hoursSpec aquí para sobreescribir.
 locations:
   - id: "avenida"
-    name: "Centro Fausto Avenida"
+    name: "Centro Fausto Andalucía"
     address: "Av. Andalucía, 84 B"
     location: "29740 Torre del Mar (Málaga)"
     phone: "+34952540964"
@@ -87,7 +87,7 @@ locations:
     mapUrl: "https://share.google/lt3s0XecMBnpr3exH"
   - id: "duque"
     name: "Centro Fausto Duque"
-    address: "C/ Duque de Ahumada, 1C"
+    address: "Av. Duque de Ahumada, 1C"
     location: "29740 Torre del Mar (Málaga)"
     phone: "+34952547090"
     phoneLabel: "952 54 70 90"

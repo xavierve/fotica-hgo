@@ -42,13 +42,13 @@ sections:
 
 ## Nuestros dos centros en Torre del Mar
 
-**Fausto Avenida**
+**Fausto Andalucía**
 Av. Andalucía, 84 B · 29740 Torre del Mar (Málaga)
 Teléfono: [(+34) 952 54 09 64](tel:+34952540964)
 [Cómo llegar →](https://share.google/lt3s0XecMBnpr3exH)
 
 **Fausto Duque**
-C/ Duque de Ahumada, 1C · 29740 Torre del Mar (Málaga)
+Av. Duque de Ahumada, 1C · 29740 Torre del Mar (Málaga)
 Teléfono: [(+34) 952 54 70 90](tel:+34952547090)
 [Cómo llegar →](https://share.google/uotnWlZFT0nfpuVoP)
 

@@ -97,7 +97,7 @@ sections:
       - question: "¿Necesito cita previa?"
         answer: "No es imprescindible, aunque recomendamos pedir cita para evitar esperas, especialmente en revisiones visuales o estudios auditivos."
       - question: "¿Dónde están las ópticas Fausto?"
-        answer: "Tenemos dos centros en Torre del Mar: Fausto Avenida (Avenida de Andalucía, 84 B) y Fausto Duque (en Calle Duque de Ahumada, 1C)."
+        answer: "Tenemos dos centros en Torre del Mar: Fausto Andalucía (Avenida de Andalucía, 84 B) y Fausto Duque (en Av. Duque de Ahumada, 1C)."
       - question: "¿Hacéis revisiones visuales?"
         answer: "Sí. Realizamos revisiones visuales y optométricas para valorar tu graduación, detectar molestias visuales y recomendarte la solución más adecuada."
       - question: "¿Sois también centro auditivo?"

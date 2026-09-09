@@ -86,14 +86,14 @@ sections:
     subtitle: "Mismo trato, mismo compromiso, distinta esquina del pueblo."
     items:
       - image: "/images/100-instalaciones_fausto_avenida_fachada.webp"
-        imageAlt: "Fachada de Centro Fausto Avenida, Torre del Mar"
-        legend: "Centro Fausto Avenida — Av. Andalucía, 84 B"
+        imageAlt: "Fachada de Centro Fausto Andalucía, Torre del Mar"
+        legend: "Centro Fausto Andalucía — Av. Andalucía, 84 B"
       - image: "/images/100-instalaciones_fausto_avenida_interior.webp"
-        imageAlt: "Interior de Centro Fausto Avenida"
-        legend: "Centro Fausto Avenida — interior"
+        imageAlt: "Interior de Centro Fausto Andalucía"
+        legend: "Centro Fausto Andalucía — interior"
       - image: "/images/100-instalaciones_fausto_duque_fachada.webp"
         imageAlt: "Fachada de Centro Fausto Duque, Torre del Mar"
-        legend: "Centro Fausto Duque — C/ Duque de Ahumada, 1C"
+        legend: "Centro Fausto Duque — Av. Duque de Ahumada, 1C"
       - image: "/images/100-instalaciones_fausto_duque_interior.webp"
         imageAlt: "Interior de Centro Fausto Duque, techo abovedado de ladrillo visto"
         legend: "Centro Fausto Duque — interior"
@@ -142,10 +142,10 @@ Mi hijo tenía problemas de visión y Anabel le trató con una delicadeza incre�
 {{< /testimonials >}}
 
 {{< text-split width="wide" >}}
-{{< text-split-item align="center" quote="true" >}}
+{{< text-split-item textSize="xl" align="center" >}}
 «Si trabajas bien y eres buena gente, entras en la familia de Fausto.»
 {{< /text-split-item >}}
-{{< text-split-item textSize="l" pad="m" margin="0 0 1rem 0" >}}
+{{< text-split-item textSize="m" pad="m" margin="0 0 1rem 0" >}}
 Lo dice el propio equipo directivo, y no es una frase para la web: es la razón por la que María José lleva 30 años aquí, por la que Melania lleva 25, y por la que Victoria, después de una temporada en Alemania, volvió a Torre del Mar y a Fausto sin pensárselo. Y también es la razón por la que, con quienes en algún momento dejaron de trabajar aquí, la relación sigue siendo buena. Lo primero es ser personas, respetarnos y valorarnos mutuamente — con el cliente, con el proveedor, con quien trabaja hoy y con quien trabajó ayer.
 {{< /text-split-item >}}
 {{< /text-split >}}
