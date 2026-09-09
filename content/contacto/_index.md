@@ -42,24 +42,39 @@ sections:
 
 ## Nuestros dos centros en Torre del Mar
 
-**Fausto Andalucía**
-Av. Andalucía, 84 B · 29740 Torre del Mar (Málaga)
-Teléfono: [(+34) 952 54 09 64](tel:+34952540964)
-[Cómo llegar →](https://share.google/lt3s0XecMBnpr3exH)
+{{< text-split >}}
+{{< text-split-item >}}
+[![Fachada y ubicación de Fausto Andalucía en Google Maps](/images/400-fausto_andalucia_mapa.webp)](https://share.google/lt3s0XecMBnpr3exH)
 
-**Fausto Duque**
-Av. Duque de Ahumada, 1C · 29740 Torre del Mar (Málaga)
-Teléfono: [(+34) 952 54 70 90](tel:+34952547090)
-[Cómo llegar →](https://share.google/uotnWlZFT0nfpuVoP)
+**Centro Fausto Andalucía**
 
-**Común a ambos centros**
-WhatsApp / Móvil: [+34 717 77 00 90](https://wa.me/34717770090)
-Email: [info@opticafausto.com](mailto:info@opticafausto.com)
-Horario: **lunes a viernes, 10:00–13:30 y 17:30–21:00 · sábados, 10:00–13:30**
+[{{< icon "location" >}} Av. Andalucía, 84 B · Torre del Mar](https://share.google/lt3s0XecMBnpr3exH)
+
+[{{< icon "phone" >}} (+34) 952 54 09 64](tel:+34952540964)
+{{< /text-split-item >}}
+
+{{< text-split-item >}}
+[![Fachada y ubicación de Fausto Duque en Google Maps](/images/400-fausto_duque_mapa.webp)](https://share.google/uotnWlZFT0nfpuVoP)
+
+**Centro Fausto Duque**
+
+[{{< icon "location" >}} Av. Duque de Ahumada, 1C · Torre del Mar](https://share.google/uotnWlZFT0nfpuVoP)
+
+[{{< icon "phone" >}} (+34) 952 54 70 90](tel:+34952547090)
+{{< /text-split-item >}}
+{{< /text-split >}}
+
+### **Común a ambos centros**
+
+[{{< icon "whatsapp" >}} Móvil / WhatsApp: +34 717 77 00 90](https://wa.me/34717770090)
+
+[{{< icon "email" >}} info@opticafausto.com](mailto:info@opticafausto.com)
+
+{{< icon "clock" >}} Horario: **lunes a viernes, 10:00–13:30 y 17:30–21:00 · sábados, 10:00–13:30**
 
 <!-- PENDIENTE cliente: confirmar sábados y variaciones de temporada;
      el horario debe coincidir exactamente con Google Business Profile. -->
-
+---
 ## ¿Prefieres escribirnos? Cuéntanos en qué podemos ayudarte
 
 <!-- IMPLEMENTACIÓN (Claude Code): formulario dual según dispositivo (ap7.5).

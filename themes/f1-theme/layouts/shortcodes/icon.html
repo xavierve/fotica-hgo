@@ -1,0 +1,11 @@
+{{- /*
+  {{< icon "phone" >}} — inserta un icono SVG inline dentro del body markdown.
+  Envoltorio fino sobre partials/icons.html (que hasta ahora solo se llamaba
+  desde plantillas Go, nunca desde contenido). Nombres disponibles: los mismos
+  que icons.html — phone, whatsapp, location, mail/email, clock, etc.
+
+  Fuera de un .btn (donde .btn .icon ya fija el tamaño), el icono usa la regla
+  base .icon{} de main.css — mismo tratamiento visual (1.1em, alineado con el
+  texto) en cualquier contexto suelto.
+*/ -}}
+{{ partial "icons.html" (.Get 0) }}
