@@ -2,7 +2,7 @@
 
 ## Contexto del proyecto
 
-Sitio estático **Hugo 0.163** para Ópticas Fausto, negocio familiar de óptica y audiología en Torre del Mar (Málaga), fundado en 1982, con dos centros: **Centro Fausto Andalucía** y **Centro Fausto Duque**. Deploy en **Cloudflare Pages**. Dominio nuevo `opticasfausto.com`; el viejo `opticafausto.com` (WordPress) redirigirá con 301.
+Sitio estático **Hugo 0.163** para Ópticas Fausto, negocio familiar de óptica y audiología en Torre del Mar (Málaga), fundado en 1982, con dos centros: **Centro Fausto Andalucía** y **Centro Fausto Duque**. Deploy en **Hostinger** (cambio de decisión, 6 sep: los bloqueos de IP de Cloudflare durante partidos de fútbol hacían el sitio intermitentemente inaccesible — decisión cerrada, no reabrir). Dominio nuevo `opticasfausto.com`; el viejo `opticafausto.com` (WordPress) redirigirá con 301.
 
 Objetivo: SEO local (Torre del Mar / Axarquía) + conversión a llamada/WhatsApp/visita física. Público 45–75+ años: **legibilidad y simplicidad son requisitos, no preferencias** (cuerpo ≥18px, contraste WCAG AA, sin modales ni pop-ups, nunca).
 
@@ -47,15 +47,14 @@ Shortcodes añadidos (validados con `hugo build` real, sin warnings):
 ## TAREAS PENDIENTES (Claude Code)
 
 ### Prioridad alta
-1. **Formulario de contacto** (`/contacto/`): Cloudflare Worker que recibe POST y envía vía Resend (tier gratuito). Campos: nombre, teléfono, mensaje. Dual por dispositivo (spec en comentario HTML de `content/contacto/_index.md` y ap7.5 del proyecto): móvil = mailto principal + formulario colapsado; desktop = formulario principal. Confirmación inline sin redirección. Checkbox RGPD → `/aviso-legal/`.
+1. **Formulario de contacto** (`/contacto/`): cambio de hosting a Hostinger (ver Contexto del proyecto) — el backend ya NO es Cloudflare Worker + Resend, pasa a **PHP `mail()`**, sencillo, servido por el propio hosting. Revisar spam/SPF-DKIM del dominio en Hostinger para que el correo no caiga en spam. Campos: nombre, teléfono, mensaje. Dual por dispositivo (spec en comentario HTML de `content/contacto/_index.md` y ap7.5 del proyecto): móvil = mailto principal + formulario colapsado; desktop = formulario principal. Confirmación inline sin redirección. Checkbox RGPD → `/aviso-legal/`. El comentario de implementación y el texto legal de protección de datos (`contacto` y `aviso-legal`) ya están actualizados a PHP mail() (6 sep) — queda una nota `<!-- PENDIENTE -->` en ambos para confirmar la redacción exacta una vez el mecanismo esté implementado de verdad (si el hosting interviene como encargado de tratamiento técnico, ajustar).
 2. **Ofuscación JS de CIF y domicilio** en `/aviso-legal/`: spans marcados con `data-obf` en el contenido. Render vía JS en cliente (anti-scraping). El CIF real lo aporta el cliente (placeholder actual).
-3. **`.gitignore`**: añadir `public/` (está commiteado) y `resources/_gen/`.
-4. **Verificar 404 en Cloudflare Pages**: `/404.html` debe servirse con estado HTTP 404 real (Pages lo hace por defecto; confirmar tras deploy). El template ya lleva `noindex`, pero el meta se emite dentro de `main` — moverlo al `<head>` vía mecanismo del tema (p. ej. `.Store` leído en `header-meta.html`).
+3. **Verificar 404 en Hostinger**: `/404.html` debe servirse con estado HTTP 404 real — comprobar cómo lo resuelve Hostinger (Cloudflare Pages lo hacía por defecto; hosting tradicional puede necesitar configurarlo a mano, p. ej. `ErrorDocument 404` en `.htaccess`). El template ya lleva `noindex`, pero el meta se emite dentro de `main` — moverlo al `<head>` vía mecanismo del tema (p. ej. `.Store` leído en `header-meta.html`).
 
 ### Prioridad media
-5. **`hoursSpec` en site.yaml** cuando el cliente valide horarios (sábados/temporada): el soporte en `schema.html` ya existe (formato comentado en el propio partial). Debe coincidir EXACTAMENTE con los dos Google Business Profiles.
-6. **Redirecciones**: `_redirects` de Cloudflare Pages para el dominio viejo → nuevo (301), incluyendo los 4 subdominios landing (`audicion.`, `lentes-graduadas.` → `/vision/productos/gafas-progresivas/`, `lentillas.` → `/vision/productos/lentes-de-contacto/`, `vueltaalcole.` → `/vision/productos/gafas-infantiles/`) y el mapeo de URLs del WordPress antiguo. Revisar logs de 404 tras el lanzamiento: cada 404 recurrente es una 301 pendiente.
-7. **Espaciados internos de blocks en `em`** (no rem/px) para que `fs-s/fs-l` y `textSize` escalen el bloque completo, y revisar la escala tipográfica base hacia `clamp()`.
+4. **`hoursSpec` en site.yaml** — ✅ hecho (6 sep): horarios confirmados por el cliente y ya en `site.yaml` para las 2 sedes (lunes a viernes 10:00–13:30 y 17:30–21:00, sábados 10:00–13:30), coincide con el texto ya desplegado en `/contacto/`. Verificado en el JSON-LD generado.
+5. **Redirecciones**: cambia el mecanismo por el cambio de hosting (ver Contexto del proyecto) — en Hostinger es `.htaccess` (Apache, `RewriteRule`/`Redirect 301`), no el `_redirects` de Cloudflare Pages. Del dominio viejo → nuevo, incluyendo los 4 subdominios landing (`audicion.`, `lentes-graduadas.` → `/vision/productos/gafas-progresivas/`, `lentillas.` → `/vision/productos/lentes-de-contacto/`, `vueltaalcole.` → `/vision/productos/gafas-infantiles/`) y el mapeo de URLs del WordPress antiguo. Revisar logs de 404 tras el lanzamiento: cada 404 recurrente es una 301 pendiente.
+6. **Espaciados internos de blocks en `em`** (no rem/px) para que `fs-s/fs-l` y `textSize` escalen el bloque completo, y revisar la escala tipográfica base hacia `clamp()`.
 8. **Hero: pasar de `background-image` a `<picture>`/`<img>` real, con layout apilado en móvil.**
 
    **Decisión ya tomada, no reabrir:** en móvil la imagen va SOLA arriba (bloque propio, `<img>` en flujo normal de documento) con el texto debajo sobre fondo de color — nunca overlay con texto encima. Motivo: más seguro/legible para el público objetivo 45-75+ (ver sesión del 21 ago). En desktop se mantiene el patrón actual: imagen de fondo con overlay oscuro y texto encima. Son dos modos de LAYOUT distintos según breakpoint, no solo un recorte distinto — por eso `background-image` no puede resolverlo solo (no hay forma de que un fondo CSS se comporte como "bloque con su propia altura seguido de otro bloque de texto"). CTA y Banner se QUEDAN en `background-image` a propósito (ya tienen soporte `image-set()` vía `_hd` — ver `partials/bg-image-style.html` — y así conservan la opción de `background-attachment:fixed`, que no existe para `<img>`).
@@ -132,17 +131,19 @@ completo).
 
 16. **SEO/Schema de 214 (Baja Visión) sin reforzar con el máster de Juan**
     (detectado 5 sep, al insertar el certificado en el copy). `title`,
-    `description`, `og.*` y `schema` de `baja-vision.md` no mencionan la
+    `description` y `og.*` de `baja-vision.md` todavía no mencionan la
     credencial (Máster en Rehabilitación Visual, U. de Valladolid) — es una
     señal de autoridad/experiencia real (E-E-A-T) que hoy solo vive en el
-    copy del body, no en metadatos. Relacionado con la tarea 11
-    (`Person`/`hasCredential` en schema Organization) — cuando se aborde esa
-    tarea, revisar si 214 necesita además su propio refuerzo puntual de
-    `title`/`description`. No tocar el copy del body sin permiso (regla 0
-    arriba).
+    copy del body, no en metadatos. La parte de schema.org ya está resuelta
+    (✅ tarea 11, 6 sep: Juan tiene `hasCredential` con el máster y la
+    certificación TRT, más `identifier` con su número de colegiado). Queda
+    solo: (a) si 214/315/313 deberían referenciar el `@id` de Juan
+    (`#person-juan`) como `provider` de su Service en vez de solo mencionarlo
+    en el copy, y (b) el refuerzo puntual de `title`/`description` de 214. No
+    tocar el copy del body sin permiso (regla 0 arriba).
 
 ### Prioridad baja / al recibir material
-11. `employee`/`Person` en schema Organization para los 7 miembros del equipo ya publicados en `/nosotros/` (el contenido ya está completo — esto es solo la parte de schema.org, pendiente).
+11. ✅ hecho (6 sep) — `employee`/`Person` en schema Organization para los 7 miembros del equipo, leído directamente del array `team:` de `nosotros/_index.md`. Juan lleva además `hasCredential` (máster + TRT) e `identifier` (colegiado 22762). Solo en `/nosotros/`, no repetido en el resto del sitio.
 12. `memberOf` (Sociedad Española de Baja Visión) y `hasCredential` (Centro Auditivo Homologado, si hay denominación oficial) en Organization.
 13. CSS crítico inline en home; objetivo PageSpeed móvil >85.
 14. hreflang / preparación multilingüe (diferido, no presupuestado).

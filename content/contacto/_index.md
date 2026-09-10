@@ -81,7 +81,8 @@ sections:
      Móvil: CTA principal mailto + formulario colapsado bajo "¿Prefieres escribirnos aquí?"
      Desktop: formulario visible, email como alternativa debajo.
      Campos: Nombre · Teléfono · Mensaje breve.
-     Backend: Cloudflare Worker + Resend.
+     Backend: PHP mail() (hosting Hostinger — cambio de decisión, 6 sep: ya
+     no es Cloudflare Worker + Resend, ver Contexto del proyecto en CLAUDE.md).
      Microcopy botón: "Te respondemos lo antes posible dentro de nuestro horario de tienda."
      Confirmación sin redirección: "¡Recibido! Te contactaremos muy pronto.
      Si es urgente, llámanos o ven directamente a la tienda." -->
@@ -91,7 +92,12 @@ sections:
 - **Responsable:** Ana Isabel Santaolalla Gámez.
 - **Finalidad:** responder a tu solicitud de contacto.
 - **Legitimación:** tu consentimiento al enviar el formulario.
-- **Destinatarios:** tus datos se transmiten de forma cifrada a través de un proveedor de envío de correo electrónico (Resend), que actúa como encargado del tratamiento y no almacena los datos de forma permanente. No se ceden a ningún otro tercero.
+- **Destinatarios:** tu mensaje se envía directamente desde nuestro servidor de hosting a nuestro correo electrónico, sin pasar por ningún servicio externo de envío de emails. No se ceden tus datos a ningún tercero.
+
+<!-- PENDIENTE Claude Code: confirmar redacción exacta con el mecanismo real
+     de envío una vez implementado (PHP mail() en Hostinger, 6 sep — ya no
+     Resend). Si el hosting SÍ interviene como encargado de tratamiento
+     técnico, ajustar esta frase en consecuencia; no dejarla sin revisar. -->
 - **Derechos:** puedes acceder, rectificar o suprimir tus datos, así como ejercer el resto de derechos reconocidos por la normativa, escribiendo a info@opticafausto.com.
 
 ☐ He leído y acepto la [Política de Privacidad](/aviso-legal/).

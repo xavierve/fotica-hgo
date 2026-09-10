@@ -85,6 +85,16 @@ locations:
     phone: "+34952540964"
     phoneLabel: "952 54 09 64"
     mapUrl: "https://share.google/lt3s0XecMBnpr3exH"
+    hoursSpec:
+      - days: ["Monday","Tuesday","Wednesday","Thursday","Friday"]
+        opens: "10:00"
+        closes: "13:30"
+      - days: ["Monday","Tuesday","Wednesday","Thursday","Friday"]
+        opens: "17:30"
+        closes: "21:00"
+      - days: ["Saturday"]
+        opens: "10:00"
+        closes: "13:30"
   - id: "duque"
     name: "Centro Fausto Duque"
     address: "Av. Duque de Ahumada, 1C"
@@ -92,6 +102,16 @@ locations:
     phone: "+34952547090"
     phoneLabel: "952 54 70 90"
     mapUrl: "https://share.google/uotnWlZFT0nfpuVoP"
+    hoursSpec:
+      - days: ["Monday","Tuesday","Wednesday","Thursday","Friday"]
+        opens: "10:00"
+        closes: "13:30"
+      - days: ["Monday","Tuesday","Wednesday","Thursday","Friday"]
+        opens: "17:30"
+        closes: "21:00"
+      - days: ["Saturday"]
+        opens: "10:00"
+        closes: "13:30"
 
 # ─── SOCIAL ──────────────────────────────────────────────────────────────────
 social:

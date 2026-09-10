@@ -60,7 +60,12 @@ El suministro de datos personales requiere una edad mínima de 14 años, o dispo
 
 ### 3. Destinatarios de tus datos
 
-Tus datos se transmiten de forma cifrada a través de un proveedor de envío de correo electrónico (**Resend**), que actúa como encargado del tratamiento exclusivamente para hacernos llegar tu mensaje, y que no los almacena de forma permanente. No cedemos tus datos a ningún otro tercero, salvo obligación legal.
+Tu mensaje se envía directamente desde nuestro servidor de hosting a nuestro correo electrónico, sin pasar por ningún servicio externo de envío de emails. No cedemos tus datos a ningún tercero, salvo obligación legal.
+
+<!-- PENDIENTE Claude Code: confirmar redacción exacta con el mecanismo real
+     de envío una vez implementado (PHP mail() en Hostinger, 6 sep — ya no
+     Resend). Si el hosting SÍ interviene como encargado de tratamiento
+     técnico, ajustar esta frase en consecuencia; no dejarla sin revisar. -->
 
 ### 4. Derechos en relación con tus datos personales
 
