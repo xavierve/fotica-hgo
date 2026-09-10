@@ -130,3 +130,27 @@ document.querySelectorAll('.block-gallery').forEach(function (bloque) {
     }, 1100);
   }
 })();
+
+/* === Menú móvil: toggle accesible (aria-expanded, cierre con Escape y al
+   navegar). Sin él, .site-nav queda inalcanzable por debajo de 821px — no es
+   decorativo, es el único acceso a la navegación en móvil. === */
+(function () {
+  var toggle = document.querySelector('.nav-toggle');
+  var nav = document.getElementById('site-nav');
+  if (!toggle || !nav) return;
+
+  function cerrar() {
+    nav.classList.remove('is-open');
+    toggle.setAttribute('aria-expanded', 'false');
+  }
+  toggle.addEventListener('click', function () {
+    var abierto = nav.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+  });
+  nav.addEventListener('click', function (e) {
+    if (e.target.tagName === 'A') cerrar();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') cerrar();
+  });
+})();

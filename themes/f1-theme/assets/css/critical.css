@@ -68,6 +68,11 @@ a {color: inherit;}
 	transition: background-color .2s ease,transform .2s ease,box-shadow .2s ease;
 }
 
+.btn-small {
+	padding: .55rem .9rem;
+	font-size: .9rem;
+}
+
 .btn-outline {
 	background: transparent;
 	color: var(--color-accent);
@@ -84,6 +89,7 @@ a {color: inherit;}
 }
 
 .header-inner {
+	position: relative;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -97,19 +103,78 @@ a {color: inherit;}
 	display: block;
 }
 
+/* Móvil: panel desplegable bajo el header, oculto salvo .is-open (JS).
+   Desktop (821px+): vuelve a fila inline, sin panel. */
 .site-nav {
 	display: none;
-	gap: 1rem;
+	flex-direction: column;
+	gap: .25rem;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	right: 0;
+	background: var(--color-bg-over);
+	border-bottom: 1px solid rgba(0,0,0,.06);
+	box-shadow: 0 12px 24px rgba(0,0,0,.08);
+	padding: .5rem clamp(1rem,4vw,5rem) 1rem;
+}
+
+.site-nav.is-open {
+	display: flex;
 }
 
 .site-nav a {
 	text-decoration: none;
 	font-weight: 600;
+	padding: .6rem 0;
 }
 
 .header-actions {
 	display: flex;
 	gap: .5rem;
+}
+
+/* Móvil: el botón de llamada va icono-solo (evita que el número se parta en
+   2 líneas y deforme la pastilla — era el bug real). El texto sigue existiendo
+   para lectores de pantalla, solo se oculta visualmente. */
+.btn-label {
+	position: absolute;
+	width: 1px; height: 1px;
+	padding: 0; margin: -1px;
+	overflow: hidden;
+	clip: rect(0,0,0,0);
+	white-space: nowrap;
+	border: 0;
+}
+
+.nav-toggle {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.5rem;
+	height: 2.5rem;
+	padding: 0;
+	border: 0;
+	background: none;
+	color: var(--color-text);
+	cursor: pointer;
+}
+
+.nav-toggle .icon {
+	width: 1.5em;
+	height: 1.5em;
+}
+
+.nav-toggle-close {
+	display: none;
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle-open {
+	display: none;
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle-close {
+	display: inline-flex;
 }
 
 .hero {
@@ -174,6 +239,25 @@ a {color: inherit;}
 
 @media(min-width:821px) {
 	.hero-inner {grid-template-columns: minmax(0,1.1fr) minmax(280px,.9fr);}
-	.site-nav {display: flex;}
+	.site-nav {
+		display: flex;
+		position: static;
+		flex-direction: row;
+		gap: 1rem;
+		padding: 0;
+		border: 0;
+		box-shadow: none;
+		background: none;
+	}
+	.site-nav a {padding: 0;}
 	.header-actions .btn-outline {display: inline-flex;}
+	.btn-label {
+		position: static;
+		width: auto; height: auto;
+		padding: 0; margin: 0;
+		overflow: visible;
+		clip: auto;
+		white-space: normal;
+	}
+	.nav-toggle {display: none;}
 }

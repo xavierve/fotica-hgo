@@ -28,12 +28,16 @@
       {{ else if $logo }}<img src="{{ $logo }}" alt="{{ $logoAlt }}">
       {{ else }}<span>{{ $brandName }}</span>{{ end }}
     </a>
-    <nav class="site-nav" aria-label="{{ i18n "mainNav" }}">
+    <nav class="site-nav" id="site-nav" aria-label="{{ i18n "mainNav" }}">
       {{ range $nav }}<a href="{{ .url | safeURL }}">{{ .text }}</a>{{ end }}
     </nav>
     <div class="header-actions">
-      {{ with $phone }}<a class="btn btn-small" href="{{ printf "tel:%s" . | safeURL }}">{{ $phoneLabel }}</a>{{ end }}
+      {{ with $phone }}<a class="btn btn-small" href="{{ printf "tel:%s" . | safeURL }}">{{ partial "icons.html" "phone" }}<span class="btn-label">{{ $phoneLabel }}</span></a>{{ end }}
       {{ with $whatsapp }}<a class="btn btn-small btn-outline" href="{{ printf "https://wa.me/%s" (replace . "+" "") | safeURL }}">WhatsApp</a>{{ end }}
     </div>
+    <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="{{ i18n "openMenu" }}">
+      <span class="nav-toggle-open">{{ partial "icons.html" "menu" }}</span>
+      <span class="nav-toggle-close">{{ partial "icons.html" "close" }}</span>
+    </button>
   </div>
 </header>

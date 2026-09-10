@@ -1,5 +1,6 @@
 home: { other: "Home" }
 mainNav: { other: "Main navigation" }
+openMenu: { other: "Open menu" }
 secondaryNav: { other: "Navigation" }
 readMore: { other: "Read more" }
 call: { other: "Call" }
