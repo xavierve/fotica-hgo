@@ -234,7 +234,7 @@ a {color: inherit;}
 	margin-top: 1.5rem;
 }
 
-.header-actions .btn-outline {
+.header-actions .btn-2 {
 	display: none;
 }
 
@@ -259,7 +259,7 @@ a {color: inherit;}
 		background: none;
 	}
 	.site-nav a {padding: 0;}
-	.header-actions .btn-outline {display: inline-flex;}
+	.header-actions .btn-2 {display: inline-flex;}
 	.nav-toggle {display: none;}
 	/* Icono-solo real: círculo compacto (mismo tamaño que .nav-toggle), no la
 	   pastilla ancha de .btn con el texto oculto dentro — esa desperdiciaba
