@@ -33,7 +33,7 @@
     </nav>
     <div class="header-actions">
       {{ with $phone }}<a class="btn btn-small" href="{{ printf "tel:%s" . | safeURL }}">{{ partial "icons.html" "phone" }}<span class="btn-label">{{ $phoneLabel }}</span></a>{{ end }}
-      {{ with $whatsapp }}<a class="btn btn-small btn-outline" href="{{ printf "https://wa.me/%s" (replace . "+" "") | safeURL }}">WhatsApp</a>{{ end }}
+      {{ with $whatsapp }}<a class="btn btn-small btn-outline" href="{{ printf "https://wa.me/%s" (replace . "+" "") | safeURL }}">{{ partial "icons.html" "whatsapp" }}<span class="btn-label">WhatsApp</span></a>{{ end }}
     </div>
     <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="{{ i18n "openMenu" }}">
       <span class="nav-toggle-open">{{ partial "icons.html" "menu" }}</span>

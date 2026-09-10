@@ -63,6 +63,7 @@ a {color: inherit;}
 	background: var(--color-accent);
 	color: var(--color-text);
 	text-decoration: none;
+	white-space: nowrap;
 	font-weight: 600; /* el btn-outline usa font-weight 700 , lo rebajo por efecto visaul q lo deja muy pesado */
 	letter-spacing: 0.02em; /* aumento espaciado por mismo efecto ↑ */
 	transition: background-color .2s ease,transform .2s ease,box-shadow .2s ease;
@@ -239,6 +240,14 @@ a {color: inherit;}
 
 @media(min-width:821px) {
 	.hero-inner {grid-template-columns: minmax(0,1.1fr) minmax(280px,.9fr);}
+}
+
+/* El header tiene su propio breakpoint, distinto del genérico de 821px del
+   resto del tema (mismo motivo que cta-layout-split a 641px — ver
+   DESIGN_TOKENS.md 3.1): logo + 5 enlaces de nav + 2 botones (icono-solo,
+   círculo compacto) no caben antes de esto. Medido con Playwright, no a
+   ojo: desborda hasta 835px, cabe desde 840px. */
+@media(min-width:840px) {
 	.site-nav {
 		display: flex;
 		position: static;
@@ -251,13 +260,36 @@ a {color: inherit;}
 	}
 	.site-nav a {padding: 0;}
 	.header-actions .btn-outline {display: inline-flex;}
+	.nav-toggle {display: none;}
+	/* Icono-solo real: círculo compacto (mismo tamaño que .nav-toggle), no la
+	   pastilla ancha de .btn con el texto oculto dentro — esa desperdiciaba
+	   el padding pensado para el texto y no cabía. El texto (.btn-label)
+	   sigue oculto aquí; vuelve a aparecer en el siguiente breakpoint, donde
+	   el botón recupera su forma de pastilla normal. */
+	.header-actions .btn {
+		width: 2.5rem;
+		height: 2.5rem;
+		padding: 0;
+		gap: 0;
+	}
+}
+
+/* Los botones recuperan texto + forma de pastilla: aquí sí hace falta medir
+   con margen, porque nav + 2 botones con texto es lo más ancho que pide el
+   header (ver historial de Playwright en el repo — desborda justo en el
+   borde, 1090-1095px, por eso 1100px y no un número más ajustado). */
+@media(min-width:1100px) {
+	.header-actions .btn {
+		width: auto;
+		height: auto;
+		padding: .85rem 1.15rem;
+		gap: .5rem;
+	}
 	.btn-label {
 		position: static;
 		width: auto; height: auto;
 		padding: 0; margin: 0;
 		overflow: visible;
 		clip: auto;
-		white-space: normal;
 	}
-	.nav-toggle {display: none;}
 }

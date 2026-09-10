@@ -1,226 +1,80 @@
 diff --git a/themes/f1-theme/assets/css/critical.css b/themes/f1-theme/assets/css/critical.css
-index aa1b25d..718851b 100644
+index 718851b..2a986b1 100644
 --- a/themes/f1-theme/assets/css/critical.css
 +++ b/themes/f1-theme/assets/css/critical.css
-@@ -68,6 +68,11 @@ a {color: inherit;}
- 	transition: background-color .2s ease,transform .2s ease,box-shadow .2s ease;
- }
- 
-+.btn-small {
-+	padding: .55rem .9rem;
-+	font-size: .9rem;
-+}
-+
- .btn-outline {
- 	background: transparent;
- 	color: var(--color-accent);
-@@ -84,6 +89,7 @@ a {color: inherit;}
- }
- 
- .header-inner {
-+	position: relative;
- 	display: flex;
- 	align-items: center;
- 	justify-content: space-between;
-@@ -97,14 +103,30 @@ a {color: inherit;}
- 	display: block;
- }
- 
-+/* Móvil: panel desplegable bajo el header, oculto salvo .is-open (JS).
-+   Desktop (821px+): vuelve a fila inline, sin panel. */
- .site-nav {
- 	display: none;
--	gap: 1rem;
-+	flex-direction: column;
-+	gap: .25rem;
-+	position: absolute;
-+	top: 100%;
-+	left: 0;
-+	right: 0;
-+	background: var(--color-bg-over);
-+	border-bottom: 1px solid rgba(0,0,0,.06);
-+	box-shadow: 0 12px 24px rgba(0,0,0,.08);
-+	padding: .5rem clamp(1rem,4vw,5rem) 1rem;
-+}
-+
-+.site-nav.is-open {
-+	display: flex;
- }
- 
- .site-nav a {
+@@ -63,6 +63,7 @@ a {color: inherit;}
+ 	background: var(--color-accent);
+ 	color: var(--color-text);
  	text-decoration: none;
- 	font-weight: 600;
-+	padding: .6rem 0;
- }
- 
- .header-actions {
-@@ -112,6 +134,49 @@ a {color: inherit;}
- 	gap: .5rem;
- }
- 
-+/* Móvil: el botón de llamada va icono-solo (evita que el número se parta en
-+   2 líneas y deforme la pastilla — era el bug real). El texto sigue existiendo
-+   para lectores de pantalla, solo se oculta visualmente. */
-+.btn-label {
-+	position: absolute;
-+	width: 1px; height: 1px;
-+	padding: 0; margin: -1px;
-+	overflow: hidden;
-+	clip: rect(0,0,0,0);
 +	white-space: nowrap;
-+	border: 0;
-+}
-+
-+.nav-toggle {
-+	display: inline-flex;
-+	align-items: center;
-+	justify-content: center;
-+	width: 2.5rem;
-+	height: 2.5rem;
-+	padding: 0;
-+	border: 0;
-+	background: none;
-+	color: var(--color-text);
-+	cursor: pointer;
-+}
-+
-+.nav-toggle .icon {
-+	width: 1.5em;
-+	height: 1.5em;
-+}
-+
-+.nav-toggle-close {
-+	display: none;
-+}
-+
-+.nav-toggle[aria-expanded="true"] .nav-toggle-open {
-+	display: none;
-+}
-+
-+.nav-toggle[aria-expanded="true"] .nav-toggle-close {
-+	display: inline-flex;
-+}
-+
- .hero {
- 	padding: clamp(4rem,8vw,7rem) 0;
- 	background: linear-gradient(135deg,var(--color-bg),var(--bg-color1));
-@@ -174,6 +239,25 @@ a {color: inherit;}
+ 	font-weight: 600; /* el btn-outline usa font-weight 700 , lo rebajo por efecto visaul q lo deja muy pesado */
+ 	letter-spacing: 0.02em; /* aumento espaciado por mismo efecto ↑ */
+ 	transition: background-color .2s ease,transform .2s ease,box-shadow .2s ease;
+@@ -239,6 +240,14 @@ a {color: inherit;}
  
  @media(min-width:821px) {
  	.hero-inner {grid-template-columns: minmax(0,1.1fr) minmax(280px,.9fr);}
--	.site-nav {display: flex;}
-+	.site-nav {
-+		display: flex;
-+		position: static;
-+		flex-direction: row;
-+		gap: 1rem;
-+		padding: 0;
-+		border: 0;
-+		box-shadow: none;
-+		background: none;
-+	}
-+	.site-nav a {padding: 0;}
++}
++
++/* El header tiene su propio breakpoint, distinto del genérico de 821px del
++   resto del tema (mismo motivo que cta-layout-split a 641px — ver
++   DESIGN_TOKENS.md 3.1): logo + 5 enlaces de nav + 2 botones (icono-solo,
++   círculo compacto) no caben antes de esto. Medido con Playwright, no a
++   ojo: desborda hasta 835px, cabe desde 840px. */
++@media(min-width:840px) {
+ 	.site-nav {
+ 		display: flex;
+ 		position: static;
+@@ -251,13 +260,36 @@ a {color: inherit;}
+ 	}
+ 	.site-nav a {padding: 0;}
  	.header-actions .btn-outline {display: inline-flex;}
-+	.btn-label {
-+		position: static;
-+		width: auto; height: auto;
-+		padding: 0; margin: 0;
-+		overflow: visible;
-+		clip: auto;
-+		white-space: normal;
-+	}
 +	.nav-toggle {display: none;}
++	/* Icono-solo real: círculo compacto (mismo tamaño que .nav-toggle), no la
++	   pastilla ancha de .btn con el texto oculto dentro — esa desperdiciaba
++	   el padding pensado para el texto y no cabía. El texto (.btn-label)
++	   sigue oculto aquí; vuelve a aparecer en el siguiente breakpoint, donde
++	   el botón recupera su forma de pastilla normal. */
++	.header-actions .btn {
++		width: 2.5rem;
++		height: 2.5rem;
++		padding: 0;
++		gap: 0;
++	}
++}
++
++/* Los botones recuperan texto + forma de pastilla: aquí sí hace falta medir
++   con margen, porque nav + 2 botones con texto es lo más ancho que pide el
++   header (ver historial de Playwright en el repo — desborda justo en el
++   borde, 1090-1095px, por eso 1100px y no un número más ajustado). */
++@media(min-width:1100px) {
++	.header-actions .btn {
++		width: auto;
++		height: auto;
++		padding: .85rem 1.15rem;
++		gap: .5rem;
++	}
+ 	.btn-label {
+ 		position: static;
+ 		width: auto; height: auto;
+ 		padding: 0; margin: 0;
+ 		overflow: visible;
+ 		clip: auto;
+-		white-space: normal;
+ 	}
+-	.nav-toggle {display: none;}
  }
 \ No newline at end of file
-diff --git a/themes/f1-theme/assets/js/main.js b/themes/f1-theme/assets/js/main.js
-index 812d2ff..7a32fb4 100644
---- a/themes/f1-theme/assets/js/main.js
-+++ b/themes/f1-theme/assets/js/main.js
-@@ -130,3 +130,27 @@ document.querySelectorAll('.block-gallery').forEach(function (bloque) {
-     }, 1100);
-   }
- })();
-+
-+/* === Menú móvil: toggle accesible (aria-expanded, cierre con Escape y al
-+   navegar). Sin él, .site-nav queda inalcanzable por debajo de 821px — no es
-+   decorativo, es el único acceso a la navegación en móvil. === */
-+(function () {
-+  var toggle = document.querySelector('.nav-toggle');
-+  var nav = document.getElementById('site-nav');
-+  if (!toggle || !nav) return;
-+
-+  function cerrar() {
-+    nav.classList.remove('is-open');
-+    toggle.setAttribute('aria-expanded', 'false');
-+  }
-+  toggle.addEventListener('click', function () {
-+    var abierto = nav.classList.toggle('is-open');
-+    toggle.setAttribute('aria-expanded', abierto ? 'true' : 'false');
-+  });
-+  nav.addEventListener('click', function (e) {
-+    if (e.target.tagName === 'A') cerrar();
-+  });
-+  document.addEventListener('keydown', function (e) {
-+    if (e.key === 'Escape') cerrar();
-+  });
-+})();
-diff --git a/themes/f1-theme/i18n/en.yaml b/themes/f1-theme/i18n/en.yaml
-index 4b468b0..d6bc59b 100644
---- a/themes/f1-theme/i18n/en.yaml
-+++ b/themes/f1-theme/i18n/en.yaml
-@@ -1,5 +1,6 @@
- home: { other: "Home" }
- mainNav: { other: "Main navigation" }
-+openMenu: { other: "Open menu" }
- secondaryNav: { other: "Navigation" }
- readMore: { other: "Read more" }
- call: { other: "Call" }
-diff --git a/themes/f1-theme/i18n/es.yaml b/themes/f1-theme/i18n/es.yaml
-index 205c24b..fb6bd7f 100644
---- a/themes/f1-theme/i18n/es.yaml
-+++ b/themes/f1-theme/i18n/es.yaml
-@@ -2,6 +2,7 @@
- # Para otro proyecto/idioma: copiar como en.yaml, de.yaml… y traducir valores.
- home: { other: "Inicio" }
- mainNav: { other: "Navegación principal" }
-+openMenu: { other: "Abrir menú" }
- secondaryNav: { other: "Navegación" }
- readMore: { other: "Ver más" }
- call: { other: "Llamar" }
 diff --git a/themes/f1-theme/layouts/partials/header.html b/themes/f1-theme/layouts/partials/header.html
-index 1fc66fd..bf63e5f 100644
+index bf63e5f..abbcf89 100644
 --- a/themes/f1-theme/layouts/partials/header.html
 +++ b/themes/f1-theme/layouts/partials/header.html
-@@ -28,12 +28,16 @@
-       {{ else if $logo }}<img src="{{ $logo }}" alt="{{ $logoAlt }}">
-       {{ else }}<span>{{ $brandName }}</span>{{ end }}
-     </a>
--    <nav class="site-nav" aria-label="{{ i18n "mainNav" }}">
-+    <nav class="site-nav" id="site-nav" aria-label="{{ i18n "mainNav" }}">
-       {{ range $nav }}<a href="{{ .url | safeURL }}">{{ .text }}</a>{{ end }}
+@@ -33,7 +33,7 @@
      </nav>
      <div class="header-actions">
--      {{ with $phone }}<a class="btn btn-small" href="{{ printf "tel:%s" . | safeURL }}">{{ $phoneLabel }}</a>{{ end }}
-+      {{ with $phone }}<a class="btn btn-small" href="{{ printf "tel:%s" . | safeURL }}">{{ partial "icons.html" "phone" }}<span class="btn-label">{{ $phoneLabel }}</span></a>{{ end }}
-       {{ with $whatsapp }}<a class="btn btn-small btn-outline" href="{{ printf "https://wa.me/%s" (replace . "+" "") | safeURL }}">WhatsApp</a>{{ end }}
+       {{ with $phone }}<a class="btn btn-small" href="{{ printf "tel:%s" . | safeURL }}">{{ partial "icons.html" "phone" }}<span class="btn-label">{{ $phoneLabel }}</span></a>{{ end }}
+-      {{ with $whatsapp }}<a class="btn btn-small btn-outline" href="{{ printf "https://wa.me/%s" (replace . "+" "") | safeURL }}">WhatsApp</a>{{ end }}
++      {{ with $whatsapp }}<a class="btn btn-small btn-outline" href="{{ printf "https://wa.me/%s" (replace . "+" "") | safeURL }}">{{ partial "icons.html" "whatsapp" }}<span class="btn-label">WhatsApp</span></a>{{ end }}
      </div>
-+    <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="{{ i18n "openMenu" }}">
-+      <span class="nav-toggle-open">{{ partial "icons.html" "menu" }}</span>
-+      <span class="nav-toggle-close">{{ partial "icons.html" "close" }}</span>
-+    </button>
-   </div>
- </header>
-diff --git a/themes/f1-theme/layouts/partials/icons.html b/themes/f1-theme/layouts/partials/icons.html
-index 6110f49..1b57f34 100644
---- a/themes/f1-theme/layouts/partials/icons.html
-+++ b/themes/f1-theme/layouts/partials/icons.html
-@@ -40,4 +40,8 @@
- <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12z"/></svg>
- {{- else if eq $name "instagram" -}}
- <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 2c-2.7 0-3.1 0-4.1.1-1.1.1-1.8.2-2.5.5-.7.3-1.3.6-1.8 1.2-.6.5-.9 1.1-1.2 1.8-.3.7-.5 1.4-.5 2.5C1.8 9.1 1.8 9.5 1.8 12.2s0 3.1.1 4.1c.1 1.1.2 1.8.5 2.5.3.7.6 1.3 1.2 1.8.5.6 1.1.9 1.8 1.2.7.3 1.4.5 2.5.5 1 .1 1.4.1 4.1.1s3.1 0 4.1-.1c1.1-.1 1.8-.2 2.5-.5.7-.3 1.3-.6 1.8-1.2.6-.5.9-1.1 1.2-1.8.3-.7.5-1.4.5-2.5.1-1 .1-1.4.1-4.1s0-3.1-.1-4.1c-.1-1.1-.2-1.8-.5-2.5-.3-.7-.6-1.3-1.2-1.8-.5-.6-1.1-.9-1.8-1.2-.7-.3-1.4-.5-2.5-.5C15.1 2 14.7 2 12 2zm0 1.8c2.6 0 2.9 0 4 .1.9.1 1.5.2 1.8.4.5.2.8.4 1.1.7.3.3.6.7.7 1.1.2.3.3.9.4 1.8.1 1.1.1 1.4.1 4s0 2.9-.1 4c-.1.9-.2 1.5-.4 1.8-.2.5-.4.8-.7 1.1-.3.3-.7.6-1.1.7-.3.2-.9.3-1.8.4-1.1.1-1.4.1-4 .1s-2.9 0-4-.1c-.9-.1-1.5-.2-1.8-.4-.5-.2-.8-.4-1.1-.7-.3-.3-.6-.7-.7-1.1-.2-.3-.3-.9-.4-1.8-.1-1.1-.1-1.4-.1-4s0-2.9.1-4c.1-.9.2-1.5.4-1.8.2-.5.4-.8.7-1.1.3-.3.7-.6 1.1-.7.3-.2.9-.3 1.8-.4 1.1-.1 1.4-.1 4-.1zm0 3.2a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zm5.2-8.4a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4z"/></svg>
-+{{- else if eq $name "menu" -}}
-+<svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/></svg>
-+{{- else if eq $name "close" -}}
-+<svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M6.4 4.98 12 10.6l5.6-5.62L19 6.4 13.4 12l5.6 5.6-1.4 1.42L12 13.4l-5.6 5.62-1.4-1.42L10.6 12 5 6.4z"/></svg>
- {{- end -}}
-\ No newline at end of file
+     <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="{{ i18n "openMenu" }}">
+       <span class="nav-toggle-open">{{ partial "icons.html" "menu" }}</span>
