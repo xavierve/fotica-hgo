@@ -352,6 +352,21 @@
    .card-media, mover el selector a ese wrapper es más robusto que .card img. */
 .card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
 .team-card img{width:100%;aspect-ratio:1/1;object-fit:cover;object-position:top center;display:block}
+/* Bio: "huevo de pascua" a propósito -- discreto por defecto, sin la caja con
+   borde de .block-faq (aquí sería ruido, no una pregunta que resolver). Nunca
+   modal: el público 45-75+ lo abandona (ap8.1) -- por eso <details> nativo. */
+.team-card details{margin:.5rem 0 0;border:0;padding:0;background:none}
+.team-card summary{
+	cursor:pointer;
+	list-style:none;
+	font-weight:600;
+	font-size:.9rem;
+	color:var(--color-accent-text);
+}
+.team-card summary::-webkit-details-marker{display:none}
+.team-card summary::after{content:"▸";display:inline-block;margin-left:.35em;transition:transform .2s ease}
+.team-card details[open] summary::after{transform:rotate(90deg)}
+.team-card details p{margin:.6rem 0 0;font-size:.9rem;color:var(--color-muted)}
 
 /* === Gallery: object-position:top en vez del center por defecto.
    Motivo: fachadas verticales (p.ej. avenida-fachada.webp, 1440x2160) forzadas a
