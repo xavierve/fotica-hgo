@@ -114,20 +114,18 @@
         {{- with .role }}{{ $person = merge $person (dict "jobTitle" .) }}{{ end -}}
         {{- with .image }}{{ $person = merge $person (dict "image" (. | absURL)) }}{{ end -}}
         {{- with .bio }}{{ $person = merge $person (dict "description" .) }}{{ end -}}
-        {{- if eq .name "Juan" -}}
-          {{- $credentials := slice
-                (dict
-                  "@type" "EducationalOccupationalCredential"
-                  "credentialCategory" "degree"
-                  "name" "Máster Universitario en Rehabilitación Visual"
-                  "recognizedBy" (dict "@type" "CollegeOrUniversity" "name" "Universidad de Valladolid"))
-                (dict
-                  "@type" "EducationalOccupationalCredential"
-                  "credentialCategory" "certificate"
-                  "name" "Experto en Terapia de Reentrenamiento del Tinnitus (TRT)")
-          -}}
-          {{- $person = merge $person (dict "hasCredential" $credentials) -}}
-          {{- $person = merge $person (dict "identifier" (dict "@type" "PropertyValue" "propertyID" "Número de colegiado" "value" "22762")) -}}
+        {{- with .credentials -}}
+          {{- $creds := slice -}}
+          {{- range . -}}
+            {{- $c := dict "@type" "EducationalOccupationalCredential" "name" .name -}}
+            {{- with .category }}{{ $c = merge $c (dict "credentialCategory" .) }}{{ end -}}
+            {{- with .recognizedBy }}{{ $c = merge $c (dict "recognizedBy" (dict "@type" "CollegeOrUniversity" "name" .)) }}{{ end -}}
+            {{- $creds = $creds | append $c -}}
+          {{- end -}}
+          {{- $person = merge $person (dict "hasCredential" $creds) -}}
+        {{- end -}}
+        {{- with .licenseNumber -}}
+          {{- $person = merge $person (dict "identifier" (dict "@type" "PropertyValue" "propertyID" "Número de colegiado" "value" .)) -}}
         {{- end -}}
         {{- $graph = $graph | append $person -}}
       {{- end -}}
@@ -147,8 +145,47 @@
 -}}
 {{- with or .Params.seo.description .Params.description }}{{ $page = merge $page (dict "description" .) }}{{ end -}}
 {{- if eq $pageType "Service" -}}
+  {{/* provider: por defecto la Organization. Si la página declara
+       schema.provider (nombre de alguien en el team de /nosotros/), se
+       construye el Person completo aquí -- no solo un @id -- para que
+       esta página sea autosuficiente si un lector la procesa sin cruzar
+       con /nosotros/. Fuente única de los datos: el array team de
+       /nosotros/, vía site.GetPage -- ningún nombre va hardcodeado en el
+       tema, todo credentials/licenseNumber viene del front matter. */}}
+  {{- $provider := dict "@id" $orgId -}}
+  {{- with .Params.schema.provider -}}
+    {{- $providerName := . -}}
+    {{- with site.GetPage "/nosotros/" -}}
+      {{- range .Params.sections -}}
+        {{- if eq .type "team" -}}
+          {{- range .items -}}
+            {{- if eq .name $providerName -}}
+              {{- $pId := printf "%s#person-%s" $base (anchorize .name) -}}
+              {{- $p := dict "@type" "Person" "@id" $pId "name" .name "worksFor" (dict "@id" $orgId) -}}
+              {{- with .role }}{{ $p = merge $p (dict "jobTitle" .) }}{{ end -}}
+              {{- with .image }}{{ $p = merge $p (dict "image" (. | absURL)) }}{{ end -}}
+              {{- with .credentials -}}
+                {{- $creds := slice -}}
+                {{- range . -}}
+                  {{- $c := dict "@type" "EducationalOccupationalCredential" "name" .name -}}
+                  {{- with .category }}{{ $c = merge $c (dict "credentialCategory" .) }}{{ end -}}
+                  {{- with .recognizedBy }}{{ $c = merge $c (dict "recognizedBy" (dict "@type" "CollegeOrUniversity" "name" .)) }}{{ end -}}
+                  {{- $creds = $creds | append $c -}}
+                {{- end -}}
+                {{- $p = merge $p (dict "hasCredential" $creds) -}}
+              {{- end -}}
+              {{- with .licenseNumber -}}
+                {{- $p = merge $p (dict "identifier" (dict "@type" "PropertyValue" "propertyID" "Número de colegiado" "value" .)) -}}
+              {{- end -}}
+              {{- $provider = $p -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
   {{- $page = merge $page (dict
-        "provider" (dict "@id" $orgId)
+        "provider" $provider
         "areaServed" (dict "@type" "Place" "name" ($siteData.business.areaServed | default site.Title))
   ) -}}
   {{- with .Params.schema.serviceType }}{{ $page = merge $page (dict "serviceType" .) }}{{ end -}}

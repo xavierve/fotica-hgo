@@ -20,6 +20,7 @@ og:
 schema:
   type: Service
   serviceType: "Rehabilitación auditiva"
+  provider: "Juan"
   includeBreadcrumb: true
 
 hero:

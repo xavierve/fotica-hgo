@@ -50,6 +50,13 @@ sections:
         role: "Óptico-Optometrista y Audioprotesista · Máster en Baja Visión"
         image: "/images/100-equipo_optometrista_audioprotesista_juan.webp"
         bio: "Hijo de Leonor. Tercera generación de la familia en la profesión. Combina la optometría con la audiología — una especialización poco común que permite dar una atención integral a quienes tienen necesidades en ambas áreas."
+        licenseNumber: "22762"
+        credentials:
+          - name: "Máster Universitario en Rehabilitación Visual"
+            category: "degree"
+            recognizedBy: "Universidad de Valladolid"
+          - name: "Experto en Terapia de Reentrenamiento del Tinnitus (TRT)"
+            category: "certificate"
       - name: "María José"
         role: "Auxiliar de Óptica"
         image: "/images/100-equipo_auxiliar_mariajose.webp"

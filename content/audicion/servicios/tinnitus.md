@@ -20,6 +20,7 @@ og:
 schema:
   type: Service
   serviceType: "Tratamiento de tinnitus / Terapia TRT"
+  provider: "Juan"
   includeBreadcrumb: true
 
 hero:

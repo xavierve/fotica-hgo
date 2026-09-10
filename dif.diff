@@ -1,15 +1,140 @@
-diff --git a/CLAUDE.md b/CLAUDE.md
-index d4f285a..f866959 100644
---- a/CLAUDE.md
-+++ b/CLAUDE.md
-@@ -47,7 +47,9 @@ Shortcodes añadidos (validados con `hugo build` real, sin warnings):
- ## TAREAS PENDIENTES (Claude Code)
+diff --git a/content/audicion/servicios/rehabilitacion-auditiva.md b/content/audicion/servicios/rehabilitacion-auditiva.md
+index 86e0ff4..6527ce6 100644
+--- a/content/audicion/servicios/rehabilitacion-auditiva.md
++++ b/content/audicion/servicios/rehabilitacion-auditiva.md
+@@ -20,6 +20,7 @@ og:
+ schema:
+   type: Service
+   serviceType: "Rehabilitación auditiva"
++  provider: "Juan"
+   includeBreadcrumb: true
  
- ### Prioridad alta
--1. **Formulario de contacto** (`/contacto/`): cambio de hosting a Hostinger (ver Contexto del proyecto) — el backend ya NO es Cloudflare Worker + Resend, pasa a **PHP `mail()`**, sencillo, servido por el propio hosting. Revisar spam/SPF-DKIM del dominio en Hostinger para que el correo no caiga en spam. Campos: nombre, teléfono, mensaje. Dual por dispositivo (spec en comentario HTML de `content/contacto/_index.md` y ap7.5 del proyecto): móvil = mailto principal + formulario colapsado; desktop = formulario principal. Confirmación inline sin redirección. Checkbox RGPD → `/aviso-legal/`. El comentario de implementación y el texto legal de protección de datos (`contacto` y `aviso-legal`) ya están actualizados a PHP mail() (6 sep) — queda una nota `<!-- PENDIENTE -->` en ambos para confirmar la redacción exacta una vez el mecanismo esté implementado de verdad (si el hosting interviene como encargado de tratamiento técnico, ajustar).
-+1. **Formulario de contacto** (`/contacto/`): cambio de hosting a Hostinger (ver Contexto del proyecto) — el backend ya NO es Cloudflare Worker + Resend, pasa a **PHP `mail()`**, sencillo, servido por el propio hosting. Campos: nombre, teléfono, mensaje. Dual por dispositivo (spec en comentario HTML de `content/contacto/_index.md` y ap7.5 del proyecto): móvil = mailto principal + formulario colapsado; desktop = formulario principal. Confirmación inline sin redirección. Checkbox RGPD → `/aviso-legal/`. El comentario de implementación y el texto legal de protección de datos (`contacto` y `aviso-legal`) ya están actualizados a PHP mail() (6 sep) — queda una nota `<!-- PENDIENTE -->` en ambos para confirmar la redacción exacta una vez el mecanismo esté implementado de verdad (si el hosting interviene como encargado de tratamiento técnico, ajustar).
-+
-+   **Email del dominio, verificado (6 sep):** SPF (`v=spf1 include:_spf.mail.hostinger.com...`) y DKIM (3 CNAME `hostingermail-a/b/c.dkim...`) ya configurados en Hostinger — listos para que `mail()` no caiga en spam. DMARC en modo monitor: `v=DMARC1; p=none; rua=mailto:web@opticasfausto.com;` (confirmar que ese buzón existe y se revisa). **No cerrar esta pieza** — `p=none` es solo el arranque: monitorizar ~1 mes viendo los informes agregados, y solo entonces decidir si se sube a `p=quarantine`/`p=reject`. NS de la zona limpiados (6 sep): se quitaron 2 registros `NS` residuales de `dns-parking.com` sin función (Cloudflare gestiona el dominio con su propio par de nameservers, fijado en el registrador, no editable desde la zona).
- 2. **Ofuscación JS de CIF y domicilio** en `/aviso-legal/`: spans marcados con `data-obf` en el contenido. Render vía JS en cliente (anti-scraping). El CIF real lo aporta el cliente (placeholder actual).
- 3. **Verificar 404 en Hostinger**: `/404.html` debe servirse con estado HTTP 404 real — comprobar cómo lo resuelve Hostinger (Cloudflare Pages lo hacía por defecto; hosting tradicional puede necesitar configurarlo a mano, p. ej. `ErrorDocument 404` en `.htaccess`). El template ya lleva `noindex`, pero el meta se emite dentro de `main` — moverlo al `<head>` vía mecanismo del tema (p. ej. `.Store` leído en `header-meta.html`).
+ hero:
+diff --git a/content/audicion/servicios/tinnitus.md b/content/audicion/servicios/tinnitus.md
+index e99a9a7..28d9591 100644
+--- a/content/audicion/servicios/tinnitus.md
++++ b/content/audicion/servicios/tinnitus.md
+@@ -20,6 +20,7 @@ og:
+ schema:
+   type: Service
+   serviceType: "Tratamiento de tinnitus / Terapia TRT"
++  provider: "Juan"
+   includeBreadcrumb: true
  
+ hero:
+diff --git a/content/nosotros/_index.md b/content/nosotros/_index.md
+index aeca556..903ae52 100644
+--- a/content/nosotros/_index.md
++++ b/content/nosotros/_index.md
+@@ -50,6 +50,13 @@ sections:
+         role: "Óptico-Optometrista y Audioprotesista · Máster en Baja Visión"
+         image: "/images/100-equipo_optometrista_audioprotesista_juan.webp"
+         bio: "Hijo de Leonor. Tercera generación de la familia en la profesión. Combina la optometría con la audiología — una especialización poco común que permite dar una atención integral a quienes tienen necesidades en ambas áreas."
++        licenseNumber: "22762"
++        credentials:
++          - name: "Máster Universitario en Rehabilitación Visual"
++            category: "degree"
++            recognizedBy: "Universidad de Valladolid"
++          - name: "Experto en Terapia de Reentrenamiento del Tinnitus (TRT)"
++            category: "certificate"
+       - name: "María José"
+         role: "Auxiliar de Óptica"
+         image: "/images/100-equipo_auxiliar_mariajose.webp"
+diff --git a/content/vision/servicios/baja-vision.md b/content/vision/servicios/baja-vision.md
+index 85912a9..1458146 100644
+--- a/content/vision/servicios/baja-vision.md
++++ b/content/vision/servicios/baja-vision.md
+@@ -20,6 +20,7 @@ og:
+ schema:
+   type: Service
+   serviceType: "Evaluación y ayudas de baja visión"
++  provider: "Juan"
+   includeBreadcrumb: true
+ 
+ hero:
+diff --git a/themes/f1-theme/layouts/partials/schema.html b/themes/f1-theme/layouts/partials/schema.html
+index 3af1169..03749b3 100644
+--- a/themes/f1-theme/layouts/partials/schema.html
++++ b/themes/f1-theme/layouts/partials/schema.html
+@@ -114,20 +114,18 @@
+         {{- with .role }}{{ $person = merge $person (dict "jobTitle" .) }}{{ end -}}
+         {{- with .image }}{{ $person = merge $person (dict "image" (. | absURL)) }}{{ end -}}
+         {{- with .bio }}{{ $person = merge $person (dict "description" .) }}{{ end -}}
+-        {{- if eq .name "Juan" -}}
+-          {{- $credentials := slice
+-                (dict
+-                  "@type" "EducationalOccupationalCredential"
+-                  "credentialCategory" "degree"
+-                  "name" "Máster Universitario en Rehabilitación Visual"
+-                  "recognizedBy" (dict "@type" "CollegeOrUniversity" "name" "Universidad de Valladolid"))
+-                (dict
+-                  "@type" "EducationalOccupationalCredential"
+-                  "credentialCategory" "certificate"
+-                  "name" "Experto en Terapia de Reentrenamiento del Tinnitus (TRT)")
+-          -}}
+-          {{- $person = merge $person (dict "hasCredential" $credentials) -}}
+-          {{- $person = merge $person (dict "identifier" (dict "@type" "PropertyValue" "propertyID" "Número de colegiado" "value" "22762")) -}}
++        {{- with .credentials -}}
++          {{- $creds := slice -}}
++          {{- range . -}}
++            {{- $c := dict "@type" "EducationalOccupationalCredential" "name" .name -}}
++            {{- with .category }}{{ $c = merge $c (dict "credentialCategory" .) }}{{ end -}}
++            {{- with .recognizedBy }}{{ $c = merge $c (dict "recognizedBy" (dict "@type" "CollegeOrUniversity" "name" .)) }}{{ end -}}
++            {{- $creds = $creds | append $c -}}
++          {{- end -}}
++          {{- $person = merge $person (dict "hasCredential" $creds) -}}
++        {{- end -}}
++        {{- with .licenseNumber -}}
++          {{- $person = merge $person (dict "identifier" (dict "@type" "PropertyValue" "propertyID" "Número de colegiado" "value" .)) -}}
+         {{- end -}}
+         {{- $graph = $graph | append $person -}}
+       {{- end -}}
+@@ -147,8 +145,47 @@
+ -}}
+ {{- with or .Params.seo.description .Params.description }}{{ $page = merge $page (dict "description" .) }}{{ end -}}
+ {{- if eq $pageType "Service" -}}
++  {{/* provider: por defecto la Organization. Si la página declara
++       schema.provider (nombre de alguien en el team de /nosotros/), se
++       construye el Person completo aquí -- no solo un @id -- para que
++       esta página sea autosuficiente si un lector la procesa sin cruzar
++       con /nosotros/. Fuente única de los datos: el array team de
++       /nosotros/, vía site.GetPage -- ningún nombre va hardcodeado en el
++       tema, todo credentials/licenseNumber viene del front matter. */}}
++  {{- $provider := dict "@id" $orgId -}}
++  {{- with .Params.schema.provider -}}
++    {{- $providerName := . -}}
++    {{- with site.GetPage "/nosotros/" -}}
++      {{- range .Params.sections -}}
++        {{- if eq .type "team" -}}
++          {{- range .items -}}
++            {{- if eq .name $providerName -}}
++              {{- $pId := printf "%s#person-%s" $base (anchorize .name) -}}
++              {{- $p := dict "@type" "Person" "@id" $pId "name" .name "worksFor" (dict "@id" $orgId) -}}
++              {{- with .role }}{{ $p = merge $p (dict "jobTitle" .) }}{{ end -}}
++              {{- with .image }}{{ $p = merge $p (dict "image" (. | absURL)) }}{{ end -}}
++              {{- with .credentials -}}
++                {{- $creds := slice -}}
++                {{- range . -}}
++                  {{- $c := dict "@type" "EducationalOccupationalCredential" "name" .name -}}
++                  {{- with .category }}{{ $c = merge $c (dict "credentialCategory" .) }}{{ end -}}
++                  {{- with .recognizedBy }}{{ $c = merge $c (dict "recognizedBy" (dict "@type" "CollegeOrUniversity" "name" .)) }}{{ end -}}
++                  {{- $creds = $creds | append $c -}}
++                {{- end -}}
++                {{- $p = merge $p (dict "hasCredential" $creds) -}}
++              {{- end -}}
++              {{- with .licenseNumber -}}
++                {{- $p = merge $p (dict "identifier" (dict "@type" "PropertyValue" "propertyID" "Número de colegiado" "value" .)) -}}
++              {{- end -}}
++              {{- $provider = $p -}}
++            {{- end -}}
++          {{- end -}}
++        {{- end -}}
++      {{- end -}}
++    {{- end -}}
++  {{- end -}}
+   {{- $page = merge $page (dict
+-        "provider" (dict "@id" $orgId)
++        "provider" $provider
+         "areaServed" (dict "@type" "Place" "name" ($siteData.business.areaServed | default site.Title))
+   ) -}}
+   {{- with .Params.schema.serviceType }}{{ $page = merge $page (dict "serviceType" .) }}{{ end -}}

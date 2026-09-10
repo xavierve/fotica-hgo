@@ -20,6 +20,7 @@ og:
 schema:
   type: Service
   serviceType: "Evaluación y ayudas de baja visión"
+  provider: "Juan"
   includeBreadcrumb: true
 
 hero:
