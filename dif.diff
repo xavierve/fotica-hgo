@@ -1,80 +1,58 @@
-diff --git a/themes/f1-theme/assets/css/critical.css b/themes/f1-theme/assets/css/critical.css
-index 718851b..2a986b1 100644
---- a/themes/f1-theme/assets/css/critical.css
-+++ b/themes/f1-theme/assets/css/critical.css
-@@ -63,6 +63,7 @@ a {color: inherit;}
- 	background: var(--color-accent);
- 	color: var(--color-text);
- 	text-decoration: none;
-+	white-space: nowrap;
- 	font-weight: 600; /* el btn-outline usa font-weight 700 , lo rebajo por efecto visaul q lo deja muy pesado */
- 	letter-spacing: 0.02em; /* aumento espaciado por mismo efecto ↑ */
- 	transition: background-color .2s ease,transform .2s ease,box-shadow .2s ease;
-@@ -239,6 +240,14 @@ a {color: inherit;}
+diff --git a/themes/f1-theme/layouts/partials/schema.html b/themes/f1-theme/layouts/partials/schema.html
+index c475945..3af1169 100644
+--- a/themes/f1-theme/layouts/partials/schema.html
++++ b/themes/f1-theme/layouts/partials/schema.html
+@@ -88,6 +88,53 @@
+       "publisher" (dict "@id" $orgId)
+ ) -}}
  
- @media(min-width:821px) {
- 	.hero-inner {grid-template-columns: minmax(0,1.1fr) minmax(280px,.9fr);}
-+}
++{{/* ---------- 3b. Equipo (Person), solo en la página que los presenta ----------
++     No se repite en cada página (serían 7 Person con bio completa en el JSON-LD
++     de TODO el sitio): solo en /nosotros/, que es donde vive el contenido real
++     de equipo. Se vinculan a la Organization vía worksFor (equivalente válido a
++     Organization.employee, sin tener que reconstruir el nodo $org ya añadido
++     al @graph más arriba).
++     Juan lleva además hasCredential (máster + certificación TRT) e identifier
++     (número de colegiado) — datos reales, no relleno: ver 214 (Baja Visión) y
++     315 (Rehabilitación Auditiva)/313 (Tinnitus), donde ya se mencionan en el
++     copy. Pendiente natural: referenciar este mismo @id desde esas páginas
++     (provider en su nodo Service) en vez de repetir los datos — no lo hago
++     aquí para no mezclar tareas. */}}
++{{- if eq .RelPermalink "/nosotros/" -}}
++  {{- range .Params.sections -}}
++    {{- if eq .type "team" -}}
++      {{- range .items -}}
++        {{- $personId := printf "%s#person-%s" $base (anchorize .name) -}}
++        {{- $person := dict
++              "@type" "Person"
++              "@id" $personId
++              "name" .name
++              "worksFor" (dict "@id" $orgId)
++        -}}
++        {{- with .role }}{{ $person = merge $person (dict "jobTitle" .) }}{{ end -}}
++        {{- with .image }}{{ $person = merge $person (dict "image" (. | absURL)) }}{{ end -}}
++        {{- with .bio }}{{ $person = merge $person (dict "description" .) }}{{ end -}}
++        {{- if eq .name "Juan" -}}
++          {{- $credentials := slice
++                (dict
++                  "@type" "EducationalOccupationalCredential"
++                  "credentialCategory" "degree"
++                  "name" "Máster Universitario en Rehabilitación Visual"
++                  "recognizedBy" (dict "@type" "CollegeOrUniversity" "name" "Universidad de Valladolid"))
++                (dict
++                  "@type" "EducationalOccupationalCredential"
++                  "credentialCategory" "certificate"
++                  "name" "Experto en Terapia de Reentrenamiento del Tinnitus (TRT)")
++          -}}
++          {{- $person = merge $person (dict "hasCredential" $credentials) -}}
++          {{- $person = merge $person (dict "identifier" (dict "@type" "PropertyValue" "propertyID" "Número de colegiado" "value" "22762")) -}}
++        {{- end -}}
++        {{- $graph = $graph | append $person -}}
++      {{- end -}}
++    {{- end -}}
++  {{- end -}}
++{{- end -}}
 +
-+/* El header tiene su propio breakpoint, distinto del genérico de 821px del
-+   resto del tema (mismo motivo que cta-layout-split a 641px — ver
-+   DESIGN_TOKENS.md 3.1): logo + 5 enlaces de nav + 2 botones (icono-solo,
-+   círculo compacto) no caben antes de esto. Medido con Playwright, no a
-+   ojo: desborda hasta 835px, cabe desde 840px. */
-+@media(min-width:840px) {
- 	.site-nav {
- 		display: flex;
- 		position: static;
-@@ -251,13 +260,36 @@ a {color: inherit;}
- 	}
- 	.site-nav a {padding: 0;}
- 	.header-actions .btn-outline {display: inline-flex;}
-+	.nav-toggle {display: none;}
-+	/* Icono-solo real: círculo compacto (mismo tamaño que .nav-toggle), no la
-+	   pastilla ancha de .btn con el texto oculto dentro — esa desperdiciaba
-+	   el padding pensado para el texto y no cabía. El texto (.btn-label)
-+	   sigue oculto aquí; vuelve a aparecer en el siguiente breakpoint, donde
-+	   el botón recupera su forma de pastilla normal. */
-+	.header-actions .btn {
-+		width: 2.5rem;
-+		height: 2.5rem;
-+		padding: 0;
-+		gap: 0;
-+	}
-+}
-+
-+/* Los botones recuperan texto + forma de pastilla: aquí sí hace falta medir
-+   con margen, porque nav + 2 botones con texto es lo más ancho que pide el
-+   header (ver historial de Playwright en el repo — desborda justo en el
-+   borde, 1090-1095px, por eso 1100px y no un número más ajustado). */
-+@media(min-width:1100px) {
-+	.header-actions .btn {
-+		width: auto;
-+		height: auto;
-+		padding: .85rem 1.15rem;
-+		gap: .5rem;
-+	}
- 	.btn-label {
- 		position: static;
- 		width: auto; height: auto;
- 		padding: 0; margin: 0;
- 		overflow: visible;
- 		clip: auto;
--		white-space: normal;
- 	}
--	.nav-toggle {display: none;}
- }
-\ No newline at end of file
-diff --git a/themes/f1-theme/layouts/partials/header.html b/themes/f1-theme/layouts/partials/header.html
-index bf63e5f..abbcf89 100644
---- a/themes/f1-theme/layouts/partials/header.html
-+++ b/themes/f1-theme/layouts/partials/header.html
-@@ -33,7 +33,7 @@
-     </nav>
-     <div class="header-actions">
-       {{ with $phone }}<a class="btn btn-small" href="{{ printf "tel:%s" . | safeURL }}">{{ partial "icons.html" "phone" }}<span class="btn-label">{{ $phoneLabel }}</span></a>{{ end }}
--      {{ with $whatsapp }}<a class="btn btn-small btn-outline" href="{{ printf "https://wa.me/%s" (replace . "+" "") | safeURL }}">WhatsApp</a>{{ end }}
-+      {{ with $whatsapp }}<a class="btn btn-small btn-outline" href="{{ printf "https://wa.me/%s" (replace . "+" "") | safeURL }}">{{ partial "icons.html" "whatsapp" }}<span class="btn-label">WhatsApp</span></a>{{ end }}
-     </div>
-     <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="{{ i18n "openMenu" }}">
-       <span class="nav-toggle-open">{{ partial "icons.html" "menu" }}</span>
+ {{/* ---------- 4. Nodo de la página actual ---------- */}}
+ {{- $pageType := $schema.type | default (cond .IsHome "WebPage" "WebPage") -}}
+ {{- $pageId := printf "%s#%s" .Permalink (lower $pageType) -}}
