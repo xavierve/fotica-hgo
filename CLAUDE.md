@@ -169,8 +169,11 @@ completo).
 
 ```bash
 hugo build          # debe compilar sin errores ni warnings
+node -c themes/f1-theme/assets/js/main.js   # el build NO detecta JS roto
 # JSON-LD: validar una página de cada tipo en https://validator.schema.org
 # Enlaces internos: no debe haber hrefs a rutas inexistentes en public/
 ```
 
 Antes de commitear cambios del tema: build limpio + revisar visualmente home, un hub (`/vision/`), una página estándar (`/vision/servicios/optometria/`) y una landing (`/vision/productos/lentes-de-contacto/`).
+
+**Para cambios de CSS/layout, el build limpio no basta** — varios bugs reales de este proyecto compilaban sin un solo warning (un `white-space` que se pisaba a sí mismo, un JS roto entero, un botón que se deformaba solo entre dos breakpoints). Ver la skill `visual-qa` (`.claude/skills/visual-qa/`): mide el resultado renderizado con Playwright en varios anchos, en vez de comprobarlo a ojo. Incluye el método para **elegir un breakpoint midiendo dónde rompe de verdad**, que es de donde salieron los del header (840/1100px).

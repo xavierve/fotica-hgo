@@ -1,38 +1,131 @@
+diff --git a/.claude/skills/visual-qa/SKILL.md b/.claude/skills/visual-qa/SKILL.md
+new file mode 100644
+index 0000000..f781bda
+--- /dev/null
++++ b/.claude/skills/visual-qa/SKILL.md
+@@ -0,0 +1,109 @@
++---
++name: visual-qa
++description: Verificar cambios de CSS/layout midiendo el resultado renderizado con Playwright, en vez de a ojo. Usar al tocar header, hero, breakpoints, botones, o cualquier cambio responsive del theme f1-theme. También al elegir un breakpoint nuevo — medir dónde rompe de verdad en lugar de escoger un número redondo.
++---
++
++# QA visual con Playwright
++
++El build limpio de Hugo **no prueba que algo se vea bien**. En este proyecto
++varios bugs reales compilaban sin un solo warning. Para cambios de CSS/layout,
++medir el resultado renderizado.
++
++## Preparación
++
++```bash
++pip install playwright --break-system-packages && playwright install chromium
++hugo --minify -D -d /tmp/qa
++cd /tmp/qa && (python3 -m http.server 8000 &)
++```
++
++Servir por HTTP, no abrir con `file://` — el JS del theme (menú móvil,
++slider, galería) no se comporta igual desde el sistema de archivos.
++
++Levantar el servidor y lanzar Playwright **en el mismo comando**: si se
++separan en dos llamadas, el proceso del servidor puede haber muerto.
++
++## Qué medir, no solo mirar
++
++```python
++from playwright.sync_api import sync_playwright
++with sync_playwright() as p:
++    b = p.chromium.launch()
++    for w in [359, 700, 820, 840, 900, 1099, 1100, 1280]:
++        page = b.new_page(viewport={'width': w, 'height': 200})
++        page.goto('http://localhost:8000/')
++        overflow = page.evaluate('document.documentElement.scrollWidth > window.innerWidth')
++        h = page.eval_on_selector('.header-actions .btn', 'el => el.getBoundingClientRect().height')
++        print(w, 'overflow:', overflow, '| altura:', round(h, 1))
++        page.close()
++    b.close()
++```
++
++**Dos comprobaciones, no una.** El desbordamiento horizontal
++(`scrollWidth > innerWidth`) NO detecta que un texto se parta en varias
++líneas: eso hace el elemento más alto, no la página más ancha. Vigilar
++también la **altura** del elemento: si cambia en un ancho donde no hay
++cambio de breakpoint, hay un wrap oculto. Así se encontró que
++`white-space: normal` en `.btn-label` pisaba el `nowrap` de `.btn` justo al
++hacerse visible el texto.
++
++## Elegir un breakpoint: medir, no redondear
++
++Los breakpoints del header (840px, 1100px) salieron de bracketing, no de
++números bonitos. El método: probar un rango, estrechar hasta encontrar el
++punto exacto donde deja de romper, y dejar margen.
++
++```python
++for w in [821, 830, 840, 850]:   # primero grueso
++for w in [836, 838, 840, 842]:   # luego fino
++```
++
++Si se toca un breakpoint existente, volver a medir: el valor correcto
++cambia en cuanto cambia cualquier otra cosa del header. Al hacer el
++`nowrap` efectivo de verdad, el corte real subió de 1020 a 1090.
++
++## Interacción: probar con clic real
++
++`aria-expanded` y las clases de estado se comprueban pulsando, no leyendo
++el CSS:
++
++```python
++page.click('.nav-toggle')
++page.wait_for_timeout(200)
++print(page.locator('.nav-toggle').get_attribute('aria-expanded'))
++```
++
++## Comprobar que el JS sigue vivo
++
++Un `str_replace` mal encajado puede romper `main.js` entero (slider,
++galería, contador, menú), y Hugo compila igual sin avisar:
++
++```bash
++node -c themes/f1-theme/assets/js/main.js
++```
++
++Y capturar errores de consola en la propia página:
++
++```python
++page.on('pageerror', lambda e: print('PAGEERROR:', e))
++```
++
++## Inspeccionar el JSON-LD generado
++
++```python
++import json
++s = open('/tmp/qa/nosotros/index.html').read()
++i = s.find('application/ld+json>') + len('application/ld+json>')
++data = json.loads(s[i:s.find('</script>', i)])
++```
++
++Ojo: con `--minify`, el atributo va sin comillas
++(`application/ld+json>`), así que un regex que las espere no encuentra nada.
++
++## Regla de fondo
++
++Comprobar antes de afirmar. En esta sesión se dieron por buenos cambios que
++no lo estaban (un `white-space` que se pisaba solo, un JS roto entero, un
++icono que "no tenía círculo" cuando la forma venía en el propio SVG). En
++los tres casos la diferencia la marcó ejecutar la comprobación en lugar de
++razonar sobre el código.
 diff --git a/CLAUDE.md b/CLAUDE.md
-index f866959..07a2054 100644
+index 07a2054..9b66dbd 100644
 --- a/CLAUDE.md
 +++ b/CLAUDE.md
-@@ -73,14 +73,29 @@ Shortcodes añadidos (validados con `hugo build` real, sin warnings):
+@@ -169,8 +169,11 @@ completo).
  
-    **Aviso de altura del bloque imagen en móvil (Foco, 5 sep):** en el layout apilado, el bloque de imagen no puede usar el mismo `min-height` de presencia que banner/CTA (`70svh`) — con esa altura, la imagen empujaría el H1 y el subtítulo fuera del viewport inicial, obligando a hacer scroll para ver el titular de la propia página. El hero necesita menos altura de imagen que un banner/CTA, precisamente porque debajo va contenido que sí tiene que verse sin scroll. Punto de partida sugerido: `50svh` (con fallback `50vh`, mismo motivo que en banner/CTA — ver 3.1 en `DESIGN_TOKENS.md`), a ajustar según cómo quede el conjunto imagen+H1+subtítulo+botones en un viewport real de móvil.
+ ```bash
+ hugo build          # debe compilar sin errores ni warnings
++node -c themes/f1-theme/assets/js/main.js   # el build NO detecta JS roto
+ # JSON-LD: validar una página de cada tipo en https://validator.schema.org
+ # Enlaces internos: no debe haber hrefs a rutas inexistentes en public/
+ ```
  
--   **Dos modos de hero, elegidos por foto — spec para valorar con Code (Foco + Claude, 5 sep, tras 4 pruebas en desktop):**
-+   **Dos modos de hero — spec para valorar con Code (Foco + Claude, 5 sep, tras 4 pruebas en desktop; defecto invertido el 10 sep):**
- 
--   El diagnóstico de las pruebas: el problema no es la técnica de overlay, es la foto. Un overlay tiene que oscurecer lo suficiente para que el texto se lea sobre las zonas claras de la foto, y con eso la foto muere; no hay opacidad que sirva a las dos cosas. Y ninguna técnica hace que un H1 viva bien encima de una cara. Las fotos **con espacio negativo** (todas las generadas con IA para hero, que se pidieron así) aguantan un overlay ligero. Las fotos **reales de sesión, con sujetos por todo el encuadre** (ej. `215_vision_40_hero.webp`), no aguantan ninguna. Por tanto:
-+   El diagnóstico de las pruebas: el problema no es la técnica de overlay, es la foto. Un overlay tiene que oscurecer lo suficiente para que el texto se lea sobre las zonas claras de la foto, y con eso la foto muere; no hay opacidad que sirva a las dos cosas. Y ninguna técnica hace que un H1 viva bien encima de una cara. Las fotos **con espacio negativo** (todas las generadas con IA para hero, que se pidieron así) aguantan un overlay ligero. Las fotos **reales de sesión, con sujetos por todo el encuadre** (ej. `215_vision_40_hero.webp`), no aguantan ninguna. Como la mayoría del sitio usa fotos reales de sesión, **apilado pasa a ser el modo por defecto** y overlay queda como excepción puntual:
- 
-    | Modo | Cuándo | Cómo |
-    |---|---|---|
--   | `overlay` (por defecto) | Foto con zona tranquila para el texto | Como hoy, pero con `scrim` (degradado solo sobre el lado del texto) en vez de overlay plano. La clase `.scrim` ya existe. |
--   | `stacked` (opt-in, `hero.layout: stacked`) | Foto real sin zona tranquila | Foto sola arriba, bloque de color debajo con el texto. Es el mismo layout que ya se decidió para móvil, extendido a desktop en esa página concreta. |
-+   | `stacked` (**por defecto**, `hero.layout` ausente) | La norma en este proyecto | Foto sola arriba, bloque de color debajo con el texto. Mismo layout en móvil y desktop. |
-+   | `overlay` (opt-in, `hero.layout: overlay`) | Excepción puntual — foto con zona tranquila para el texto | Texto sobre la imagen, con `scrim` (degradado solo sobre el lado del texto) en vez de overlay plano. La clase `.scrim` ya existe. Previsto para Contacto y quizá alguna otra. |
+ Antes de commitear cambios del tema: build limpio + revisar visualmente home, un hub (`/vision/`), una página estándar (`/vision/servicios/optometria/`) y una landing (`/vision/productos/lentes-de-contacto/`).
 +
-+   **Un solo bloque `hero`, no dos.** Apilado y overlay son la misma pieza
-+   (imagen + H1 + subtítulo + CTAs, con su schema y su semántica) en dos
-+   presentaciones — eso es un parámetro de layout, no un bloque nuevo, igual
-+   que `cta-layout-split` es una variante de `cta` y no un bloque aparte.
-+   Duplicar el bloque duplicaría el mantenimiento del preload LCP,
-+   `responsive-img`, `ctaPreset` y `bgMobile`. Decidido con Foco (10 sep)
-+   tras plantear si convenía separarlos de cara a reutilizar el tema: no
-+   conviene — un tema reutilizable mejora por tener pocas piezas con
-+   parámetros claros, no por acumular variantes hermanas con nombres
-+   parecidos.
-+
-+   **Ventaja del defecto invertido:** ninguna página declara hoy `layout:`
-+   en su front matter, así que todas pasan a apilado solas, sin migrar ni un
-+   `.md`. Solo hay que añadir `layout: overlay` donde se quiera la excepción.
- 
-    **Spec del modo `stacked` en desktop** (la variante que mejor funcionó, img4 de las pruebas):
- 
++**Para cambios de CSS/layout, el build limpio no basta** — varios bugs reales de este proyecto compilaban sin un solo warning (un `white-space` que se pisaba a sí mismo, un JS roto entero, un botón que se deformaba solo entre dos breakpoints). Ver la skill `visual-qa` (`.claude/skills/visual-qa/`): mide el resultado renderizado con Playwright en varios anchos, en vez de comprobarlo a ojo. Incluye el método para **elegir un breakpoint midiendo dónde rompe de verdad**, que es de donde salieron los del header (840/1100px).
