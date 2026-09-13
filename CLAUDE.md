@@ -73,14 +73,29 @@ Shortcodes añadidos (validados con `hugo build` real, sin warnings):
 
    **Aviso de altura del bloque imagen en móvil (Foco, 5 sep):** en el layout apilado, el bloque de imagen no puede usar el mismo `min-height` de presencia que banner/CTA (`70svh`) — con esa altura, la imagen empujaría el H1 y el subtítulo fuera del viewport inicial, obligando a hacer scroll para ver el titular de la propia página. El hero necesita menos altura de imagen que un banner/CTA, precisamente porque debajo va contenido que sí tiene que verse sin scroll. Punto de partida sugerido: `50svh` (con fallback `50vh`, mismo motivo que en banner/CTA — ver 3.1 en `DESIGN_TOKENS.md`), a ajustar según cómo quede el conjunto imagen+H1+subtítulo+botones en un viewport real de móvil.
 
-   **Dos modos de hero, elegidos por foto — spec para valorar con Code (Foco + Claude, 5 sep, tras 4 pruebas en desktop):**
+   **Dos modos de hero — spec para valorar con Code (Foco + Claude, 5 sep, tras 4 pruebas en desktop; defecto invertido el 10 sep):**
 
-   El diagnóstico de las pruebas: el problema no es la técnica de overlay, es la foto. Un overlay tiene que oscurecer lo suficiente para que el texto se lea sobre las zonas claras de la foto, y con eso la foto muere; no hay opacidad que sirva a las dos cosas. Y ninguna técnica hace que un H1 viva bien encima de una cara. Las fotos **con espacio negativo** (todas las generadas con IA para hero, que se pidieron así) aguantan un overlay ligero. Las fotos **reales de sesión, con sujetos por todo el encuadre** (ej. `215_vision_40_hero.webp`), no aguantan ninguna. Por tanto:
+   El diagnóstico de las pruebas: el problema no es la técnica de overlay, es la foto. Un overlay tiene que oscurecer lo suficiente para que el texto se lea sobre las zonas claras de la foto, y con eso la foto muere; no hay opacidad que sirva a las dos cosas. Y ninguna técnica hace que un H1 viva bien encima de una cara. Las fotos **con espacio negativo** (todas las generadas con IA para hero, que se pidieron así) aguantan un overlay ligero. Las fotos **reales de sesión, con sujetos por todo el encuadre** (ej. `215_vision_40_hero.webp`), no aguantan ninguna. Como la mayoría del sitio usa fotos reales de sesión, **apilado pasa a ser el modo por defecto** y overlay queda como excepción puntual:
 
    | Modo | Cuándo | Cómo |
    |---|---|---|
-   | `overlay` (por defecto) | Foto con zona tranquila para el texto | Como hoy, pero con `scrim` (degradado solo sobre el lado del texto) en vez de overlay plano. La clase `.scrim` ya existe. |
-   | `stacked` (opt-in, `hero.layout: stacked`) | Foto real sin zona tranquila | Foto sola arriba, bloque de color debajo con el texto. Es el mismo layout que ya se decidió para móvil, extendido a desktop en esa página concreta. |
+   | `stacked` (**por defecto**, `hero.layout` ausente) | La norma en este proyecto | Foto sola arriba, bloque de color debajo con el texto. Mismo layout en móvil y desktop. |
+   | `overlay` (opt-in, `hero.layout: overlay`) | Excepción puntual — foto con zona tranquila para el texto | Texto sobre la imagen, con `scrim` (degradado solo sobre el lado del texto) en vez de overlay plano. La clase `.scrim` ya existe. Previsto para Contacto y quizá alguna otra. |
+
+   **Un solo bloque `hero`, no dos.** Apilado y overlay son la misma pieza
+   (imagen + H1 + subtítulo + CTAs, con su schema y su semántica) en dos
+   presentaciones — eso es un parámetro de layout, no un bloque nuevo, igual
+   que `cta-layout-split` es una variante de `cta` y no un bloque aparte.
+   Duplicar el bloque duplicaría el mantenimiento del preload LCP,
+   `responsive-img`, `ctaPreset` y `bgMobile`. Decidido con Foco (10 sep)
+   tras plantear si convenía separarlos de cara a reutilizar el tema: no
+   conviene — un tema reutilizable mejora por tener pocas piezas con
+   parámetros claros, no por acumular variantes hermanas con nombres
+   parecidos.
+
+   **Ventaja del defecto invertido:** ninguna página declara hoy `layout:`
+   en su front matter, así que todas pasan a apilado solas, sin migrar ni un
+   `.md`. Solo hay que añadir `layout: overlay` donde se quiera la excepción.
 
    **Spec del modo `stacked` en desktop** (la variante que mejor funcionó, img4 de las pruebas):
 
