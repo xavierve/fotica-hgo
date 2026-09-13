@@ -1,433 +1,82 @@
 diff --git a/CLAUDE.md b/CLAUDE.md
-index 9b66dbd..137567c 100644
+index 137567c..ea1ea50 100644
 --- a/CLAUDE.md
 +++ b/CLAUDE.md
-@@ -42,128 +42,267 @@ Hecho y validado: `schema.html` v02 (@graph completo, BreadcrumbList, FAQPage 
- Shortcodes añadidos (validados con `hugo build` real, sin warnings):
- - `testimonial` (cita suelta con wrapper propio), `testimonials` + `testimonial-item` (grid de citas anidadas, reutiliza `.cards-grid`/`.block-testimonials` — mismo CSS que el bloque `type: testimonials` de `sections:`).
- - `text-split` + `text-split-item`: grid simétrico 2 columnas para pares texto+texto (o texto+vídeo a futuro — Goldmark `unsafe=true` ya permite HTML embebido sin tratamiento especial). Reutiliza la mecánica de `.image-text-inner` (1fr → 1fr 1fr en desktop). Modificadores por item: `textSize` (reutiliza `block-text-*`), `align` (reutiliza `block-align-*`), `pad` (tokens propios `has-pad-s/m/l` sobre `--space-s/m/l`, más pequeños que el pad de sección), `margin` (CSS libre vía `safeCSS`, sin tokens — como `bgColor`). El wrapper admite `width="wide|full"` como cualquier bloque.
--- Sección equipo en `/nosotros/` (punto 11 de abajo): ya completa con 7 personas, fotos y bios — eliminar de pendientes.
-+- Sección equipo en `/nosotros/`: completa con 7 personas, fotos y bios (el bio se despliega con `<details>`, nunca modal). Schema `Person` de los 7 generado desde el array `team:`, con `hasCredential`/`licenseNumber` leídos del front matter — sin nombres hardcodeados en el tema.
+@@ -164,6 +164,15 @@ criterio y lo documente.
+ `image-set()` vía `_hd` (`partials/bg-image-style.html`) y así conservan la
+ opción de `background-attachment:fixed`, que no existe para `<img>`.
  
- ## TAREAS PENDIENTES (Claude Code)
++**`bg-image-style.html` NO se retira ni se deja morir.** Aunque `stacked` use
++`<img>`, el tratamiento responsive de `background-image` (`image-set()` con
++`_hd`, más `--section-bg-mobile` para el recorte vertical) tiene que seguir
++**funcional y probado**, porque lo usa el modo `overlay` — y porque el tema es
++reutilizable: otro proyecto puede elegir `overlay` como defecto. Si `stacked`
++deja de invocarlo, asegurarse igualmente de que `overlay` lo sigue
++ejercitando, y de que la página de demo cubre ese caso. No dar por muerta una
++rama solo porque este proyecto la use poco.
++
+ **Cuestiones abiertas para Code:** (a) si las dos columnas de `stacked` deben
+ ser automáticas o un parámetro aparte; (b) proporción 50/50 vs 40/60 — con
+ 40/60 el subtítulo respira más y el H1 sigue en 2-3 líneas; (c) si `scrim`
+@@ -187,8 +196,12 @@ con `aria-label`.
+ viewports de scroll, `aria-label="Volver arriba"`, desplazamiento suave vía
+ CSS `scroll-behavior: smooth` (respetando `prefers-reduced-motion`).
  
--### Prioridad alta
--1. **Formulario de contacto** (`/contacto/`): cambio de hosting a Hostinger (ver Contexto del proyecto) — el backend ya NO es Cloudflare Worker + Resend, pasa a **PHP `mail()`**, sencillo, servido por el propio hosting. Campos: nombre, teléfono, mensaje. Dual por dispositivo (spec en comentario HTML de `content/contacto/_index.md` y ap7.5 del proyecto): móvil = mailto principal + formulario colapsado; desktop = formulario principal. Confirmación inline sin redirección. Checkbox RGPD → `/aviso-legal/`. El comentario de implementación y el texto legal de protección de datos (`contacto` y `aviso-legal`) ya están actualizados a PHP mail() (6 sep) — queda una nota `<!-- PENDIENTE -->` en ambos para confirmar la redacción exacta una vez el mecanismo esté implementado de verdad (si el hosting interviene como encargado de tratamiento técnico, ajustar).
-+Orden fijado por Foco (10 sep). Las tareas 1-3 son de layout y comparten
-+zona de pantalla: conviene hacerlas seguidas y en este orden, porque la 2 y
-+la 3 tienen que coordinar posiciones entre sí.
-+
-+### 1. Layout del hero — `stacked` (defecto) y `overlay` (opt-in)
-+
-+**Qué está decidido y no se reabre:** el hero nunca lleva texto encima de la
-+imagen en móvil. Motivo: legibilidad para el público 45-75+ (sesión 21 ago).
-+
-+**Qué cambió el 10 sep:** originalmente apilado era solo para móvil y desktop
-+siempre iba con overlay. Tras 4 pruebas visuales en desktop, **apilado pasa a
-+ser el modo por defecto en todos los anchos**, y overlay queda como excepción
-+puntual. El diagnóstico que lo justifica: el problema no es la técnica de
-+overlay, es la foto. Un overlay tiene que oscurecer lo suficiente para que el
-+texto se lea sobre las zonas claras, y con eso la foto muere; no hay opacidad
-+que sirva a las dos cosas, y ninguna técnica hace que un H1 viva bien encima
-+de una cara. Las fotos con espacio negativo (las generadas con IA, que se
-+pidieron así) aguantan overlay ligero; las fotos reales de sesión, con
-+sujetos por todo el encuadre (ej. `215_vision_40_hero.webp`), no aguantan
-+ninguna — y son la mayoría del sitio.
-+
-+| Modo | Cuándo | Cómo |
-+|---|---|---|
-+| `stacked` (**defecto**, `hero.layout` ausente) | La norma | Foto sola arriba, bloque de color debajo con el texto. Mismo patrón en móvil y desktop. |
-+| `overlay` (opt-in, `hero.layout: overlay`) | Excepción puntual | Texto sobre la imagen, con `scrim` (degradado solo sobre el lado del texto) en vez de overlay plano. `.scrim` ya existe. Previsto para Contacto y quizá alguna otra. |
-+
-+**Un solo bloque `hero`, no dos.** Son la misma pieza (imagen + H1 +
-+subtítulo + CTAs, con su schema) en dos presentaciones: eso es un parámetro
-+de layout, igual que `cta-layout-split` es una variante de `cta`. Duplicar el
-+bloque duplicaría el mantenimiento del preload LCP, `responsive-img`,
-+`ctaPreset` y `bgMobile`. Decidido con Foco (10 sep) al plantear si convenía
-+separarlos de cara a reutilizar el tema: no conviene — un tema reutilizable
-+mejora por tener pocas piezas con parámetros claros, no por acumular
-+variantes hermanas con nombres parecidos.
-+
-+**Ventaja del defecto:** ninguna página declara hoy `layout:`, así que todas
-+pasan a apilado solas, sin migrar ni un `.md`. Solo se añade
-+`layout: overlay` donde se quiera la excepción.
-+
-+**Punto de partida real:** `hero.html` tiene hoy dos modos que conviven — (a)
-+`bg`/`bgMobile` como `background-image` de sección completa (Nosotros, Visión,
-+Audición), y (b) `.image` como `<img>` real en split a dos columnas (Home). El
-+(a) queda sustituido por `stacked` + `overlay`. **Pendiente de decidir con
-+Foco:** qué pasa con el (b) — si el split de Home se absorbe dentro de
-+`stacked` como variante, o sigue siendo un tercer modo. No asumir, preguntar.
-+
-+**Spec de `stacked`** (la variante que mejor funcionó en las pruebas):
-+
-+- **Banda de foto arriba**, a sangre completa. Altura por `aspect-ratio`, no
-+  `min-height` fijo, para que escale con el ancho (el prototipo usaba
-+  `min-height:500px` y se quedaba igual en cualquier pantalla). Recorte
-+  configurable: el prototipo necesitó `center 30%` para no cortar caras, así
-+  que hace falta un parámetro (`hero.imagePosition` o similar) — el punto de
-+  interés cambia con cada foto.
-+- **Altura de la banda en móvil:** no usar el `70svh` de presencia de
-+  banner/CTA. Con esa altura la imagen empuja H1 y subtítulo fuera del
-+  viewport inicial, y hay que hacer scroll para ver el titular de la propia
-+  página. Punto de partida: `50svh`, con fallback `50vh` (mismo motivo que en
-+  banner/CTA — ver 3.1 en `DESIGN_TOKENS.md`), a ajustar mirando el conjunto
-+  imagen+H1+subtítulo+botones en un móvil real.
-+- **Bloque de color debajo**, `bg-color2` (navy), a sangre completa. Dentro,
-+  contenido en **dos columnas** (flex) en desktop: H1 a la izquierda
-+  (`flex-basis` ~50%), subtítulo + CTAs a la derecha, `gap` ~3em. Reduce el
-+  bloque de ~800px (una columna) a ~500px y elimina el muro vacío de la
-+  derecha. En móvil colapsa a una columna: foto, H1, subtítulo, botones.
-+- **Ancho del contenedor: `wide` (`--container-wide`, 1440px)**, no el
-+  default de 1120px. Motivo: el H1 y el subtítulo son largos en **todos** los
-+  heros del sitio (es el tono de la marca, no un caso puntual), y en 1120px a
-+  dos columnas no caben con dignidad. El prototipo usó `width:100vw` (full) —
-+  **eso hay que evitarlo**: saca el H1 de la rejilla (arrancaba a 22px del
-+  borde mientras logo, nav, breadcrumb y H2 alinean a ~340px) y parece un
-+  descuido. `wide` mantiene la alineación con el resto de la página (los
-+  `cards` de los hubs ya usan `width="wide"`). Si Code ve motivo para `full`,
-+  que el contenido interior siga en `.container` aunque el fondo vaya a sangre.
-+- **`text-wrap: balance` en el H1.** Al ganar ancho la columna, el titular
-+  parte dejando un "que" colgando tras los dos puntos y "lince" huérfano en
-+  la última línea. `balance` lo reparte sin tocar el texto, y es mejora
-+  progresiva (quien no lo soporta lo ignora). Alternativa: `max-width` en el H1.
-+- **Padding inferior del bloque navy: recortar ~30%** — quedaban ~150px de
-+  navy vacío bajo los botones.
-+- Alineación vertical de las dos columnas: el prototipo las alinea arriba y
-+  queda aire bajo el H1 (la derecha es más alta). `align-items:center` es la
-+  alternativa. Decidir a propósito, no por defecto — a Foco le vale como está.
-+
-+**Aviso de color de texto (bug real, detectado revisando `.hero-subtitle`):**
-+`.has-bg-image` aplica hoy `color:#fff`/`--subtitle-color` a TODA la sección,
-+sin distinguir si el texto está encima de la foto o no. En `stacked` el texto
-+ya no está sobre la imagen — si hereda ese blanco, queda blanco sobre fondo
-+claro, invisible. El bloque de texto necesita color explícito propio, con
-+independencia de si la sección padre tiene `has-bg-image`.
-+
-+**Mecanismos a reutilizar, no reinventar:**
-+- Densidad `_hd` vía `os.FileExists` sobre la ruta física — mismo patrón que
-+  `partials/responsive-img.html`. Nunca debe dar error si falta la variante.
-+- Descriptor `w` + `sizes` (no `x`): el hero es candidato a LCP, aquí la
-+  precisión de tamaño de renderizado importa más que en ningún otro bloque.
-+- Recorte distinto móvil/desktop (hoy `bg`/`bgMobile`) → `<picture>` con
-+  `<source media>`. Breakpoint: el tema usa **821px** de forma consistente;
-+  la nota vieja de "768×400px" es de la sesión del 21 ago y queda descartada.
-+- Preload no bloqueante (`<link rel="preload" as="image" fetchpriority="high">`)
-+  solo en páginas que tengan hero — condicional en el `<head>`, nunca
-+  precargar algo que la página no use. Con `srcset`, evaluar
-+  `imagesrcset`/`imagesizes`; Safari va por detrás, degrada al `href` simple.
-+
-+**Sobre el prototipo de Foco:** lo hizo con estilos inline y
-+`background-image` para probar rápido — no es la implementación. La banda de
-+foto en `stacked` es justo donde `<picture>`/`<img>` con `object-fit:cover` +
-+`object-position` (equivalente al `background-position` del prototipo) encaja
-+mejor que `background-image`: no hay texto encima, así que no hay motivo para
-+conservar `background-attachment`, y se gana `srcset`/`sizes` real. Si Code
-+prefiere `background-image` por coherencia con banner/CTA,
-+`bg-image-style.html` ya da `image-set()`. Cualquiera vale: que elija con
-+criterio y lo documente.
-+
-+**CTA y Banner se quedan en `background-image` a propósito** — ya tienen
-+`image-set()` vía `_hd` (`partials/bg-image-style.html`) y así conservan la
-+opción de `background-attachment:fixed`, que no existe para `<img>`.
-+
-+**Cuestiones abiertas para Code:** (a) si las dos columnas de `stacked` deben
-+ser automáticas o un parámetro aparte; (b) proporción 50/50 vs 40/60 — con
-+40/60 el subtítulo respira más y el H1 sigue en 2-3 líneas; (c) si `scrim`
-+debe ser el tratamiento por defecto de `overlay` o seguir siendo opt-in.
-+
-+**Criterio de aceptación:** build limpio con y sin variantes `_hd`/recortes
-+móvil; ninguna imagen rota si falta un archivo opcional; el texto se lee bien
-+en todos los anchos, sin heredar blanco donde ya no hay foto detrás; H1 y
-+subtítulo visibles sin scroll en un móvil estándar; en desktop el contenido
-+alinea con la rejilla del resto de la página y el H1 no deja huérfanos.
-+Verificar con la skill `visual-qa`, no a ojo.
-+
-+### 2. Indicador de scroll + botón volver-arriba
-+
-+(a) En heros de landings (home, `/vision/`, `/audicion/`, progresivas,
-+lentes-de-contacto, gafas-infantiles): indicador de scroll con
-+`icon: arrow-down` (`icons.html`), animación sutil, dentro de `<a>`/`<button>`
-+con `aria-label`.
-+
-+(b) Botón global "volver arriba" con `arrow-up`, visible solo tras ~1.5
-+viewports de scroll, `aria-label="Volver arriba"`, desplazamiento suave vía
-+CSS `scroll-behavior: smooth` (respetando `prefers-reduced-motion`).
-+
-+**En móvil no debe solaparse con el sticky footer (tarea 3): coordinar
-+posiciones.** Por eso van seguidas en el orden.
-+
-+### 3. Sticky footer móvil
-+
-+Llamada / WhatsApp / Ubicación (requisito ap8.1), usando `icons.html` y datos
-+de `site.yaml`. Coordinar con el botón volver-arriba de la tarea 2.
-+
-+Referencia útil: el header ya resolvió problemas equivalentes (iconos-solo en
-+pantallas estrechas, breakpoints medidos, `white-space:nowrap` en `.btn` para
-+que el número no parta el botón). Mirar `critical.css` antes de reinventar.
-+
-+### 4. Optimización de imágenes
-+
-+Dos frentes distintos, ambos pendientes:
-+
-+- **Variantes `_hd`**: el mecanismo ya existe y está conectado
-+  (`responsive-img.html` en 7 bloques, `bg-image-style.html` en banner/cta),
-+  pero **casi ninguna imagen tiene su `_hd` generada todavía**. Convención:
-+  `foto.webp` (1x) + `foto_hd.webp` (2x, doble de ancho). Todo degrada sin
-+  error si falta, así que se puede ir haciendo por lotes.
-+- **Encuadre / arte móvil**: generar recortes `_m` donde el encuadre de
-+  escritorio no funcione en vertical. No hacerlo por sistema — solo donde
-+  visualmente haga falta (caras cortadas, sujeto descentrado, texto de la
-+  foto ilegible). Hoy solo `215_vision_40_hero_m.webp` y
-+  `314-mantenimiento_audifonos_hero_m.webp` tienen variante móvil.
-+
-+Pendiente aparte, no bloqueante: el lightbox de `gallery.html` rellena el
-+`<img>` vía JS desde el JSON de `.items`, sin pasar por Hugo — para que la
-+vista ampliada use `_hd` habría que tocar ese JS. Valorar si compensa.
-+
-+### 5. Formulario de contacto (`/contacto/`)
-+
-+Backend: **PHP `mail()`** servido por el propio hosting (Hostinger). Campos:
-+nombre, teléfono, mensaje. Dual por dispositivo (spec en comentario HTML de
-+`content/contacto/_index.md` y ap7.5 del proyecto): móvil = mailto principal +
-+formulario colapsado; desktop = formulario principal. Confirmación inline sin
-+redirección. Checkbox RGPD → `/aviso-legal/`.
-+
-+**Texto legal:** ya actualizado a PHP mail() (6 sep) en `contacto` y
-+`aviso-legal`, pero queda una nota `<!-- PENDIENTE -->` en ambos: confirmar la
-+redacción exacta una vez el mecanismo esté implementado de verdad. Si el
-+hosting interviene como encargado de tratamiento técnico, hay que ajustarla.
-+
-+**Email del dominio, verificado (6 sep):** SPF
-+(`v=spf1 include:_spf.mail.hostinger.com...`) y DKIM (3 CNAME
-+`hostingermail-a/b/c.dkim...`) ya configurados — listos para que `mail()` no
-+caiga en spam. DMARC en modo monitor:
-+`v=DMARC1; p=none; rua=mailto:web@opticasfausto.com;`. **No cerrar esta
-+pieza:** `p=none` es solo el arranque — monitorizar ~1 mes los informes
-+agregados y solo entonces decidir si se sube a `p=quarantine`/`p=reject`.
-+
-+### 6. Ofuscación JS de CIF y domicilio en `/aviso-legal/`
-+
-+Spans marcados con `data-obf` en el contenido, render vía JS en cliente
-+(anti-scraping). El CIF real lo aporta el cliente (placeholder actual).
-+
-+### 7. Verificar 404 en Hostinger
-+
-+`/404.html` debe servirse con estado HTTP 404 real — comprobar cómo lo
-+resuelve Hostinger (Cloudflare Pages lo hacía por defecto; hosting tradicional
-+puede necesitar `ErrorDocument 404` en `.htaccess`). El template ya lleva
-+`noindex`, pero el meta se emite dentro de `main` — moverlo al `<head>` vía
-+mecanismo del tema (p. ej. `.Store` leído en `header-meta.html`).
-+
-+### 8. Redirecciones
-+
-+En Hostinger es `.htaccess` (Apache, `RewriteRule`/`Redirect 301`), no el
-+`_redirects` de Cloudflare Pages. Del dominio viejo → nuevo, incluyendo los 4
-+subdominios landing (`audicion.`, `lentes-graduadas.` →
-+`/vision/productos/gafas-progresivas/`, `lentillas.` →
-+`/vision/productos/lentes-de-contacto/`, `vueltaalcole.` →
-+`/vision/productos/gafas-infantiles/`) y el mapeo de URLs del WordPress
-+antiguo. Revisar logs de 404 tras el lanzamiento: cada 404 recurrente es una
-+301 pendiente.
+-**En móvil no debe solaparse con el sticky footer (tarea 3): coordinar
+-posiciones.** Por eso van seguidas en el orden.
++**Solo en desktop** (decidido con Foco, 10 sep): en móvil la esquina inferior
++la ocupa el sticky footer de contacto (tarea 3), que es prioritario — llamar y
++escribir por WhatsApp es el objetivo de conversión del sitio; volver arriba,
++no. Superponerlos o pelearse por el sitio no compensa. En móvil el gesto
++nativo del sistema (tocar la barra de estado en iOS, o seguir haciendo scroll)
++ya cubre esa necesidad.
  
--   **Email del dominio, verificado (6 sep):** SPF (`v=spf1 include:_spf.mail.hostinger.com...`) y DKIM (3 CNAME `hostingermail-a/b/c.dkim...`) ya configurados en Hostinger — listos para que `mail()` no caiga en spam. DMARC en modo monitor: `v=DMARC1; p=none; rua=mailto:web@opticasfausto.com;` (confirmar que ese buzón existe y se revisa). **No cerrar esta pieza** — `p=none` es solo el arranque: monitorizar ~1 mes viendo los informes agregados, y solo entonces decidir si se sube a `p=quarantine`/`p=reject`. NS de la zona limpiados (6 sep): se quitaron 2 registros `NS` residuales de `dns-parking.com` sin función (Cloudflare gestiona el dominio con su propio par de nameservers, fijado en el registrador, no editable desde la zona).
--2. **Ofuscación JS de CIF y domicilio** en `/aviso-legal/`: spans marcados con `data-obf` en el contenido. Render vía JS en cliente (anti-scraping). El CIF real lo aporta el cliente (placeholder actual).
--3. **Verificar 404 en Hostinger**: `/404.html` debe servirse con estado HTTP 404 real — comprobar cómo lo resuelve Hostinger (Cloudflare Pages lo hacía por defecto; hosting tradicional puede necesitar configurarlo a mano, p. ej. `ErrorDocument 404` en `.htaccess`). El template ya lleva `noindex`, pero el meta se emite dentro de `main` — moverlo al `<head>` vía mecanismo del tema (p. ej. `.Store` leído en `header-meta.html`).
-+### 9. Espaciados internos de blocks en `em`
-+
-+No rem/px, para que `fs-s`/`fs-l` y `textSize` escalen el bloque completo.
-+Revisar de paso la escala tipográfica base hacia `clamp()`.
+ ### 3. Sticky footer móvil
  
--### Prioridad media
--4. **`hoursSpec` en site.yaml** — ✅ hecho (6 sep): horarios confirmados por el cliente y ya en `site.yaml` para las 2 sedes (lunes a viernes 10:00–13:30 y 17:30–21:00, sábados 10:00–13:30), coincide con el texto ya desplegado en `/contacto/`. Verificado en el JSON-LD generado.
--5. **Redirecciones**: cambia el mecanismo por el cambio de hosting (ver Contexto del proyecto) — en Hostinger es `.htaccess` (Apache, `RewriteRule`/`Redirect 301`), no el `_redirects` de Cloudflare Pages. Del dominio viejo → nuevo, incluyendo los 4 subdominios landing (`audicion.`, `lentes-graduadas.` → `/vision/productos/gafas-progresivas/`, `lentillas.` → `/vision/productos/lentes-de-contacto/`, `vueltaalcole.` → `/vision/productos/gafas-infantiles/`) y el mapeo de URLs del WordPress antiguo. Revisar logs de 404 tras el lanzamiento: cada 404 recurrente es una 301 pendiente.
--6. **Espaciados internos de blocks en `em`** (no rem/px) para que `fs-s/fs-l` y `textSize` escalen el bloque completo, y revisar la escala tipográfica base hacia `clamp()`.
--8. **Hero: pasar de `background-image` a `<picture>`/`<img>` real, con layout apilado en móvil.**
-+### 10. `title`/`description` de 214 (Baja Visión)
+@@ -201,18 +214,34 @@ que el número no parta el botón). Mirar `critical.css` antes de reinventar.
  
--   **Decisión ya tomada, no reabrir:** en móvil la imagen va SOLA arriba (bloque propio, `<img>` en flujo normal de documento) con el texto debajo sobre fondo de color — nunca overlay con texto encima. Motivo: más seguro/legible para el público objetivo 45-75+ (ver sesión del 21 ago). En desktop se mantiene el patrón actual: imagen de fondo con overlay oscuro y texto encima. Son dos modos de LAYOUT distintos según breakpoint, no solo un recorte distinto — por eso `background-image` no puede resolverlo solo (no hay forma de que un fondo CSS se comporte como "bloque con su propia altura seguido de otro bloque de texto"). CTA y Banner se QUEDAN en `background-image` a propósito (ya tienen soporte `image-set()` vía `_hd` — ver `partials/bg-image-style.html` — y así conservan la opción de `background-attachment:fixed`, que no existe para `<img>`).
-+`title`, `description` y `og.*` de `baja-vision.md` no mencionan la credencial
-+de Juan (Máster en Rehabilitación Visual, U. de Valladolid) — señal de
-+autoridad real (E-E-A-T) que hoy solo vive en el copy del body. La parte de
-+schema ya está resuelta (Juan es `provider` con `hasCredential` e
-+`identifier`). **No tocar el copy del body sin permiso.**
+ ### 4. Optimización de imágenes
  
--   **Punto de partida real:** `hero.html` hoy tiene DOS modos que conviven — (a) `bg`/`bgMobile` como `background-image` de sección completa (usado en Nosotros/Visión/Audición), y (b) `.image` como `<img>` real en layout split a dos columnas (usado en Home). Antes de escribir código, decidir con Foco si el nuevo modo apilado-en-móvil sustituye al (a) completamente, o si conviven los tres modos según la página. No asumir.
+-Dos frentes distintos, ambos pendientes:
 -
--   **Mecanismos a reutilizar, no reinventar:**
--   - Densidad de píxeles (`_hd`) vía `os.FileExists` sobre la ruta física — mismo patrón que `partials/responsive-img.html` (para el `<img>` en sí) y `partials/bg-image-style.html` (si en algún punto intermedio sigue haciendo falta un `background-image`). Nunca debe dar error si falta la variante `_hd`.
--   - Para el `<img>` real: descriptor `w` + `sizes` (no `x`), igual que `responsive-img.html` — el hero es candidato a LCP, aquí sí importa la precisión de tamaño real de renderizado, más que en cualquier otro bloque.
--   - Dirección de arte (recorte distinto móvil/desktop, hoy `bg`/`bgMobile`) → traducir a `<picture>` con `<source media="(min-width:821px)">` apuntando al recorte de escritorio, y el `<img>` por defecto (fuera de `<source>`) sirviendo el recorte de móvil — coherente con mobile-first. **Ojo con el breakpoint**: la decisión de diseño original hablaba de 768×400px para el layout apilado, pero el resto del theme usa 821px consistentemente (`min-width:821px` en todo `main.css`/`critical.css`) — decidir un único breakpoint y no mezclar los dos.
--   - Preload no bloqueante (`<link rel="preload" as="image" href="..." fetchpriority="high">`) para la imagen del hero, solo en páginas donde exista (condicional en el `<head>`, nunca precargar algo que la página no vaya a usar). Si se usa `srcset`, evaluar `imagesrcset`/`imagesizes` en el preload — Safari va por detrás en soporte, degrada con gracia al `href` simple si no lo entiende.
--
--   **Aviso de color de texto (real, detectado revisando `.hero-subtitle`):** hoy `.has-bg-image` aplica `color:#fff`/`--subtitle-color` a TODA la sección, sin distinguir si el texto está encima de la foto o no. En el nuevo layout apilado, el bloque de texto en móvil deja de estar sobre la imagen (pasa a un bloque en flujo aparte, debajo) — si sigue heredando el blanco de `has-bg-image`, quedará blanco sobre fondo claro, invisible. Hace falta que el bloque de texto en modo apilado-móvil tenga su propio color explícito (oscuro, `--color-text`), independiente de si la sección padre tiene `has-bg-image` o no.
--
--   **Aviso de altura del bloque imagen en móvil (Foco, 5 sep):** en el layout apilado, el bloque de imagen no puede usar el mismo `min-height` de presencia que banner/CTA (`70svh`) — con esa altura, la imagen empujaría el H1 y el subtítulo fuera del viewport inicial, obligando a hacer scroll para ver el titular de la propia página. El hero necesita menos altura de imagen que un banner/CTA, precisamente porque debajo va contenido que sí tiene que verse sin scroll. Punto de partida sugerido: `50svh` (con fallback `50vh`, mismo motivo que en banner/CTA — ver 3.1 en `DESIGN_TOKENS.md`), a ajustar según cómo quede el conjunto imagen+H1+subtítulo+botones en un viewport real de móvil.
--
--   **Dos modos de hero — spec para valorar con Code (Foco + Claude, 5 sep, tras 4 pruebas en desktop; defecto invertido el 10 sep):**
--
--   El diagnóstico de las pruebas: el problema no es la técnica de overlay, es la foto. Un overlay tiene que oscurecer lo suficiente para que el texto se lea sobre las zonas claras de la foto, y con eso la foto muere; no hay opacidad que sirva a las dos cosas. Y ninguna técnica hace que un H1 viva bien encima de una cara. Las fotos **con espacio negativo** (todas las generadas con IA para hero, que se pidieron así) aguantan un overlay ligero. Las fotos **reales de sesión, con sujetos por todo el encuadre** (ej. `215_vision_40_hero.webp`), no aguantan ninguna. Como la mayoría del sitio usa fotos reales de sesión, **apilado pasa a ser el modo por defecto** y overlay queda como excepción puntual:
--
--   | Modo | Cuándo | Cómo |
--   |---|---|---|
--   | `stacked` (**por defecto**, `hero.layout` ausente) | La norma en este proyecto | Foto sola arriba, bloque de color debajo con el texto. Mismo layout en móvil y desktop. |
--   | `overlay` (opt-in, `hero.layout: overlay`) | Excepción puntual — foto con zona tranquila para el texto | Texto sobre la imagen, con `scrim` (degradado solo sobre el lado del texto) en vez de overlay plano. La clase `.scrim` ya existe. Previsto para Contacto y quizá alguna otra. |
--
--   **Un solo bloque `hero`, no dos.** Apilado y overlay son la misma pieza
--   (imagen + H1 + subtítulo + CTAs, con su schema y su semántica) en dos
--   presentaciones — eso es un parámetro de layout, no un bloque nuevo, igual
--   que `cta-layout-split` es una variante de `cta` y no un bloque aparte.
--   Duplicar el bloque duplicaría el mantenimiento del preload LCP,
--   `responsive-img`, `ctaPreset` y `bgMobile`. Decidido con Foco (10 sep)
--   tras plantear si convenía separarlos de cara a reutilizar el tema: no
--   conviene — un tema reutilizable mejora por tener pocas piezas con
--   parámetros claros, no por acumular variantes hermanas con nombres
--   parecidos.
--
--   **Ventaja del defecto invertido:** ninguna página declara hoy `layout:`
--   en su front matter, así que todas pasan a apilado solas, sin migrar ni un
--   `.md`. Solo hay que añadir `layout: overlay` donde se quiera la excepción.
--
--   **Spec del modo `stacked` en desktop** (la variante que mejor funcionó, img4 de las pruebas):
--
--   - **Banda de foto arriba**, a sangre completa. Altura por `aspect-ratio`, no `min-height` fijo, para que escale con el ancho (el prototipo usaba `min-height:500px` y se queda igual en cualquier pantalla). Recorte configurable — el prototipo necesitó `center 30%` para no cortar caras; hace falta un parámetro (`hero.imagePosition` o similar) porque el punto de interés cambia por foto.
--   - **Bloque de color debajo**, `bg-color2` (navy), a sangre completa. Dentro, el contenido en **dos columnas** (flex): H1 a la izquierda (`flex-basis` ~50%), subtítulo + botones CTA a la derecha, `gap` ~3em. Esto reduce el bloque de ~800px (una columna) a ~500px y elimina el muro vacío de la derecha.
--   - **Ancho del contenedor: `wide` (`--container-wide`, 1440px), no el default de 1120px.** Motivo real: el H1 y el subtítulo son **largos en todos los heros** del sitio (es el tono de la marca, no un caso puntual), y en 1120px a dos columnas no caben con dignidad. El prototipo usó `width:100vw` (full) — **eso es lo que hay que evitar**: saca el H1 de la rejilla (arrancaba a 22px del borde del viewport mientras logo, nav, breadcrumb y H2 alinean a ~340px) y se ve como un descuido. `wide` mantiene la alineación con el resto de la página (los `cards` de los hubs ya usan `width="wide"`). Si Code ve motivo para `full`, que el contenido interior siga en `.container` aunque el fondo vaya a sangre.
--   - **`text-wrap: balance` en el H1.** Al ganar ancho la columna, el titular parte con un "que" colgando tras los dos puntos y "lince" huérfano solo en la última línea. `balance` reparte las líneas y elimina el huérfano sin tocar el texto. Es mejora progresiva: quien no lo soporta lo ignora. Alternativa: `max-width` en el H1.
--   - **Padding inferior del bloque navy: recortar ~30%.** Quedaban ~150px de navy vacío bajo los botones.
--   - Alineación vertical de las dos columnas: el prototipo las alinea arriba y queda aire bajo el H1 (la columna derecha es más alta). `align-items:center` es la alternativa. Decidir a propósito, no por defecto — a Foco le vale como está.
--   - **Móvil:** colapsa a una columna (foto, H1, subtítulo, botones), como ya estaba decidido. Se aplica el aviso de altura de arriba (`50svh`).
--
--   **Sobre el prototipo:** Foco lo hizo con estilos inline y `background-image` para probar rápido — no es la implementación. La banda de foto en modo `stacked` es justo donde `<picture>`/`<img>` con `object-fit:cover` + `object-position` (equivalente al `background-position` del prototipo) encaja mejor que `background-image`: no hay texto encima, así que no hay motivo para conservar `background-attachment`, y se gana `srcset`/`sizes` real vía `responsive-img.html`. Si Code prefiere `background-image` por coherencia con banner/CTA, el partial `bg-image-style.html` ya da `image-set()`. Cualquiera de las dos vale; que Code elija con criterio y lo documente.
--
--   **Cuestiones abiertas para Code:** (a) si las dos columnas del modo `stacked` deben ser automáticas o un parámetro aparte; (b) proporción 50/50 vs 40/60 — con 40/60 el subtítulo respira más y el H1 sigue en 2-3 líneas; (c) si `scrim` debe pasar a ser el overlay por defecto para todos los heros en modo `overlay`, o seguir siendo opt-in.
--
--   **Criterio de aceptación:** build limpio con y sin variantes `_hd`/recortes móvil creados; ninguna imagen rota si falta un archivo opcional; el layout apilado en móvil se ve y se comporta como bloque en flujo normal (no absolute/fixed); el texto se lee bien en ambos breakpoints, sin heredar blanco donde ya no hay foto detrás; el H1 y el subtítulo son visibles sin scroll en un móvil estándar (ver aviso de altura arriba); en modo `stacked` desktop, el contenido alinea con la rejilla del resto de la página y el H1 no deja huérfanos; verificar visualmente en varios anchos de viewport, no solo que compile.
-+### Prioridad baja / al recibir material
+-- **Variantes `_hd`**: el mecanismo ya existe y está conectado
+-  (`responsive-img.html` en 7 bloques, `bg-image-style.html` en banner/cta),
+-  pero **casi ninguna imagen tiene su `_hd` generada todavía**. Convención:
+-  `foto.webp` (1x) + `foto_hd.webp` (2x, doble de ancho). Todo degrada sin
+-  error si falta, así que se puede ir haciendo por lotes.
+-- **Encuadre / arte móvil**: generar recortes `_m` donde el encuadre de
+-  escritorio no funcione en vertical. No hacerlo por sistema — solo donde
+-  visualmente haga falta (caras cortadas, sujeto descentrado, texto de la
+-  foto ilegible). Hoy solo `215_vision_40_hero_m.webp` y
+-  `314-mantenimiento_audifonos_hero_m.webp` tienen variante móvil.
++**Estado real (verificado 10 sep): no existe ninguna variante `_hd` todavía.**
++El mecanismo está conectado y funcionando (`responsive-img.html` en 7 bloques,
++`bg-image-style.html` en banner/cta), pero sin archivos que servir — todo cae
++al 1x, sin error, que es justo como está diseñado.
++
++**El sentido de la conversión depende del tamaño al que se muestra cada
++imagen**, y eso parte la tarea en dos mitades muy distintas:
++
++- **Hacedero hoy, en lote.** Imágenes que se muestran pequeñas: fotos de
++  equipo (750×1125, se ven a ~370px en el grid), cards, avatares de
++  testimonios, logos. Ahí el archivo actual **ya es el 2x**: lo que falta es
++  generar el **1x reduciendo**. Ganancia inmediata de peso en móviles sin
++  pantalla retina, sin perder nada en los que sí la tienen. Encaja bien con
++  Code: script sobre `static/images/` (PIL o ImageMagick), con reglas según
++  el tamaño del slot donde se usa cada imagen.
++- **Bloqueado por falta de original.** Heros y banners a ancho completo
++  (1440×960): a 1440px de viewport ese archivo **ya es el 1x**. Un `_hd` real
++  necesitaría ~2880px, y **ampliar no sirve** — añade peso sin añadir detalle,
++  y acaba siendo peor que no tener `_hd`. Requiere el original de cámara o
++  regenerar con IA a mayor resolución. **No generar `_hd` por upscaling en
++  ningún caso.**
++- **Encuadre / arte móvil (`_m`)**: recortes verticales donde el encuadre de
++  escritorio no funcione en vertical. No por sistema — solo donde visualmente
++  haga falta (caras cortadas, sujeto descentrado, elemento clave fuera de
++  plano). Hoy solo `215_vision_40_hero_m.webp` y
++  `314-mantenimiento_audifonos_hero_m.webp` tienen variante móvil. **Qué
++  imágenes lo necesitan es juicio visual, no automatizable:** lo decide Foco
++  (o se revisa en el Proyecto de Claude.ai), no un script.
  
--8b. **Imágenes responsive (`srcset`/`w`+`sizes`) en Text-Image, Gallery, Team, Cards, Testimonials, Brands-logos** — ✅ hecho (`partials/responsive-img.html`, conectado en los 7 bloques con `<img>` propio). Patrón: convención de nombre `foto.webp` (1x) + `foto_hd.webp` (2x), `os.FileExists` sobre la ruta física, `w`+`sizes` no `x`. Pendiente aparte, no bloqueante: el lightbox de `gallery.html` rellena el `<img>` vía JS desde el JSON de `.items`, no pasa por Hugo — para que la vista ampliada también use `_hd` haría falta tocar ese JS, ver si compensa el esfuerzo.
--9. **Sticky footer móvil** con Llamada / WhatsApp / Ubicación (requisito ap8.1), usando `icons.html` y datos de site.yaml.
-+11. `memberOf` (Sociedad Española de Baja Visión) y `hasCredential` (Centro
-+    Auditivo Homologado, si hay denominación oficial) en Organization.
-+12. CSS crítico inline en home; objetivo PageSpeed móvil >85.
-+13. hreflang / preparación multilingüe (diferido, no presupuestado).
- 
--## Flujo de imágenes candidatas
-+## Flujo de imágenes
- 
- `draft-images/` en la raíz del repo (hermana de `static/`, NO dentro de
- `static/images/`) — Hugo no la ve, cero riesgo de publicar candidatas sin
--elegir. Git trackea el historial de qué entra y sale. Al elegir una candidata,
--se mueve con `mv` a `static/images/` con su nombre final en convención — sin
--tocar configuración de Hugo.
--
--### Tarea actual: asignar imágenes al copy de cada página
--
--Reglas (Foco, 5 sep):
--
--0. No cambiar los textos existentes sin permiso.
--0. Las páginas ya tienen `og.image` y `hero.bg` asignados — esta tarea es solo
--   sobre imágenes **dentro del copy** (`image-text`), no toca hero ni OG salvo
--   que se detecte y confirme un error puntual (ver caso 215 más abajo).
--1. Revisar las candidatas disponibles en `draft-images/` antes de proponer.
--2. El path final en el diff del `(page).md` debe ser `/images/(filename).webp`
--   — Foco mueve el archivo después, no hace falta usar el prefijo
--   `draft-images/`.
--3. Si no hay ninguna candidata razonable para una página, o si falta una
--   imagen que la página necesitaría, dar un **prompt en inglés** para
--   generarla — no forzar una imagen que no encaje.
--
--Progreso: 211, 212, 213, 214, 215, 216 cerradas (Vision servicios completo).
--Pendiente: 200 (hub Visión), 221-226 (Vision productos), 3xx (Audición
--completo).
--
--15. **Indicador de scroll + botón volver-arriba**: (a) en heros de landings (home, /vision/, /audicion/, progresivas, lentes-de-contacto, gafas-infantiles), indicador de scroll con `icon: arrow-down` (partial icons.html), animación sutil, dentro de `<a>`/`<button>` con `aria-label`; (b) botón global "volver arriba" con `arrow-up`, visible solo tras ~1.5 viewports de scroll, `aria-label="Volver arriba"`, desplazamiento suave vía CSS `scroll-behavior: smooth` (respeta `prefers-reduced-motion`). En móvil no debe solaparse con el sticky footer de contacto (tarea 9): coordinar posiciones.
--
--16. **SEO/Schema de 214 (Baja Visión) sin reforzar con el máster de Juan**
--    (detectado 5 sep, al insertar el certificado en el copy). `title`,
--    `description` y `og.*` de `baja-vision.md` todavía no mencionan la
--    credencial (Máster en Rehabilitación Visual, U. de Valladolid) — es una
--    señal de autoridad/experiencia real (E-E-A-T) que hoy solo vive en el
--    copy del body, no en metadatos. La parte de schema.org ya está resuelta
--    (✅ tarea 11, 6 sep: Juan tiene `hasCredential` con el máster y la
--    certificación TRT, más `identifier` con su número de colegiado). Queda
--    solo: (a) si 214/315/313 deberían referenciar el `@id` de Juan
--    (`#person-juan`) como `provider` de su Service en vez de solo mencionarlo
--    en el copy, y (b) el refuerzo puntual de `title`/`description` de 214. No
--    tocar el copy del body sin permiso (regla 0 arriba).
--
--### Prioridad baja / al recibir material
--11. ✅ hecho (6 sep) — `employee`/`Person` en schema Organization para los 7 miembros del equipo, leído directamente del array `team:` de `nosotros/_index.md`. Juan lleva además `hasCredential` (máster + TRT) e `identifier` (colegiado 22762). Solo en `/nosotros/`, no repetido en el resto del sitio.
--12. `memberOf` (Sociedad Española de Baja Visión) y `hasCredential` (Centro Auditivo Homologado, si hay denominación oficial) en Organization.
--13. CSS crítico inline en home; objetivo PageSpeed móvil >85.
--14. hreflang / preparación multilingüe (diferido, no presupuestado).
-+elegir. Git trackea el historial de qué entra y sale. Al elegir una candidata
-+se mueve con `mv` a `static/images/` con su nombre final — sin tocar
-+configuración de Hugo.
-+
-+**Asignación de imágenes al copy: ✅ completada (6 sep).** Los 22 archivos de
-+Visión y Audición (hubs 200/300 y todas sus páginas hijas) tienen al menos
-+una imagen en el copy. Lo que queda sobre imágenes es la tarea 4
-+(optimización), no la asignación.
-+
-+Reglas que siguen vigentes para cualquier imagen nueva:
-+- No cambiar textos existentes sin permiso.
-+- El path en el `.md` es siempre `/images/(filename).webp` — Foco mueve el
-+  archivo desde `draft-images/` después.
-+- Si no hay candidata razonable, dar un **prompt en inglés** para generarla
-+  en vez de forzar una imagen que no encaje.
-+- `.webp` para todo salvo OG (que va en `.jpg`).
- 
- ## Cómo verificar
- 
-@@ -174,6 +313,48 @@ node -c themes/f1-theme/assets/js/main.js   # el build NO detecta JS roto
- # Enlaces internos: no debe haber hrefs a rutas inexistentes en public/
- ```
- 
--Antes de commitear cambios del tema: build limpio + revisar visualmente home, un hub (`/vision/`), una página estándar (`/vision/servicios/optometria/`) y una landing (`/vision/productos/lentes-de-contacto/`).
-+Antes de commitear cambios del tema: build limpio + revisar home, un hub
-+(`/vision/`), una página estándar (`/vision/servicios/optometria/`) y una
-+landing (`/vision/productos/lentes-de-contacto/`).
-+
-+### QA visual: medir, no mirar
-+
-+**Para cambios de CSS/layout el build limpio no basta.** Varios bugs reales de
-+este proyecto compilaban sin un solo warning: un `white-space` que se pisaba a
-+sí mismo, un `main.js` roto entero (slider, galería y contador caídos), un
-+botón que se deformaba solo entre dos breakpoints concretos.
-+
-+Usar la skill **`visual-qa`** (`.claude/skills/visual-qa/SKILL.md`): mide el
-+resultado renderizado con Playwright en varios anchos en lugar de comprobarlo
-+a ojo, e incluye el método para elegir un breakpoint midiendo dónde rompe de
-+verdad — de ahí salieron los del header (840/1100px).
-+
-+Primera vez en una máquina nueva:
-+
-+```bash
-+pip install playwright --break-system-packages && playwright install chromium
-+```
- 
--**Para cambios de CSS/layout, el build limpio no basta** — varios bugs reales de este proyecto compilaban sin un solo warning (un `white-space` que se pisaba a sí mismo, un JS roto entero, un botón que se deformaba solo entre dos breakpoints). Ver la skill `visual-qa` (`.claude/skills/visual-qa/`): mide el resultado renderizado con Playwright en varios anchos, en vez de comprobarlo a ojo. Incluye el método para **elegir un breakpoint midiendo dónde rompe de verdad**, que es de donde salieron los del header (840/1100px).
-+**Si Claude Code tiene otra vía mejor para inspeccionar el render** (un MCP de
-+navegador, capacidad nativa de captura, o herramienta equivalente), usarla y
-+decirlo — lo que importa es *medir el resultado*, no la herramienta concreta.
-+Playwright es lo que ya está probado funcionando en este proyecto, no un
-+requisito.
-+
-+### Comprobar en deploy real, no solo en local
-+
-+`hugo server` y el `public/` local no reproducen todo. Tras desplegar en
-+Hostinger, comprobar sobre el dominio real:
-+
-+- **HTTP 404 de verdad** en una URL inexistente (tarea 7) — no basta con que
-+  se vea la página bonita: mirar el código de estado.
-+- **Redirecciones 301** del dominio viejo y de los 4 subdominios (tarea 8),
-+  comprobando que la cadena no pasa por un 302 intermedio.
-+- **Formulario**: envío real y que el correo llegue a bandeja, no a spam
-+  (tarea 5). Probar desde Gmail y desde Outlook, que filtran distinto.
-+- **Certificado SSL** válido en `opticasfausto.com` y en `www.` (los CAA
-+  aplicados el 10 sep limitan qué autoridades pueden emitirlo).
-+- **PageSpeed Insights móvil** contra la URL real, no local: el objetivo >85
-+  depende de latencia y compresión del servidor, que en local no existen.
-+- **Cabeceras de caché** de Hostinger para `static/`: si sirve imágenes y CSS
-+  sin `Cache-Control` razonable, las visitas repetidas pagan de más.
+ Pendiente aparte, no bloqueante: el lightbox de `gallery.html` rellena el
+ `<img>` vía JS desde el JSON de `.items`, sin pasar por Hugo — para que la
