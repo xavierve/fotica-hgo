@@ -196,12 +196,15 @@ con `aria-label`.
 viewports de scroll, `aria-label="Volver arriba"`, desplazamiento suave vía
 CSS `scroll-behavior: smooth` (respetando `prefers-reduced-motion`).
 
-**Solo en desktop** (decidido con Foco, 10 sep): en móvil la esquina inferior
-la ocupa el sticky footer de contacto (tarea 3), que es prioritario — llamar y
-escribir por WhatsApp es el objetivo de conversión del sitio; volver arriba,
-no. Superponerlos o pelearse por el sitio no compensa. En móvil el gesto
-nativo del sistema (tocar la barra de estado en iOS, o seguir haciendo scroll)
-ya cubre esa necesidad.
+**También en móvil** (corregido 13 sep — el 10 sep se había descartado por
+miedo al solape con el sticky footer, pero Foco aportó una referencia real que
+lo desmiente: Instituto Levilaser). Conviven bien si el botón es un círculo
+pequeño en la esquina inferior derecha, **por encima** de la barra, no dentro
+de ella. Ojo a un detalle visible en esa misma referencia: el botón tapaba
+parcialmente la etiqueta "Ubicación" del último ítem del sticky footer. Dejar
+holgura suficiente o reservar espacio en la propia barra para que nada quede
+cubierto. Verificar con la skill `visual-qa` a 359px de ancho, que es donde
+más aprieta.
 
 ### 3. Sticky footer móvil
 
@@ -229,12 +232,31 @@ imagen**, y eso parte la tarea en dos mitades muy distintas:
   pantalla retina, sin perder nada en los que sí la tienen. Encaja bien con
   Code: script sobre `static/images/` (PIL o ImageMagick), con reglas según
   el tamaño del slot donde se usa cada imagen.
-- **Bloqueado por falta de original.** Heros y banners a ancho completo
-  (1440×960): a 1440px de viewport ese archivo **ya es el 1x**. Un `_hd` real
-  necesitaría ~2880px, y **ampliar no sirve** — añade peso sin añadir detalle,
-  y acaba siendo peor que no tener `_hd`. Requiere el original de cámara o
-  regenerar con IA a mayor resolución. **No generar `_hd` por upscaling en
-  ningún caso.**
+- **Heros y banners a ancho completo (1440×960): el modelo `_hd` 1x/2x NO es
+  el adecuado aquí.** Pesos reales medidos sobre `215_vision_40_hero.webp`
+  (calidad 78): 640px→50KB · 1280px→112KB · **1440px (actual)→139KB** ·
+  1920px→171KB · 2880px→261KB.
+
+  - **Techo recomendado: 1920px, no 2880.** La diferencia visible en un
+    monitor retina es mínima y son minoría; el coste en LCP lo pagan todos.
+  - **En `stacked` (que usa `<img>`): escalera de anchos con descriptor `w`**
+    — 640/960/1280/1920 — en vez de dos peldaños 1x/2x. Con `w`+`sizes` el
+    navegador combina ancho de viewport *y* densidad, y elige bien solo: un
+    móvil de 390px con DPR 3 pide ~1170px y coge el peldaño de 1280, no el
+    de 1920. `responsive-img.html` ya usa `w`+`sizes`, pero solo genera dos
+    peldaños (1x y 2x); ampliarlo a escalera es parte de esta tarea.
+  - **Aviso sobre `bg-image-style.html` (overlay, banner, CTA):** usa
+    `image-set(... 1x, ... 2x)`, que son descriptores de **densidad pura**.
+    Ese mismo móvil DPR 3 se descarga el archivo 2x entero (2880px, 261KB)
+    para una pantalla que necesitaba 1170 — justo el escenario que penaliza
+    PageSpeed móvil, y donde más duele porque el hero es el LCP. Si se quiere
+    afinar, hacen falta media queries por ancho, no solo por densidad.
+  - **No generar `_hd` por upscaling (ni con IA).** Añade peso sin añadir
+    detalle real, y en fotos de personas puede meter artefactos — ya se vio
+    con el bordado de una bata ("YAUSTO", "OPTOMETIDRTA"). Si hacen falta
+    anchos mayores, **buscar primero los originales de cámara**: los nombres
+    tipo `D3A0068` sugieren archivos de réflex, que disparan muy por encima
+    de 2880px. Ahí está el detalle de verdad, y gratis.
 - **Encuadre / arte móvil (`_m`)**: recortes verticales donde el encuadre de
   escritorio no funcione en vertical. No por sistema — solo donde visualmente
   haga falta (caras cortadas, sujeto descentrado, elemento clave fuera de
