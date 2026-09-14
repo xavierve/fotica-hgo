@@ -24,6 +24,9 @@
   Parámetros con nombre (todos opcionales salvo image):
     image     — ruta de la imagen (obligatorio)
     imageAlt  — alt text
+    caption   — leyenda bajo la imagen (figcaption). Admite markdown inline.
+                No debe repetir el alt: el alt describe la escena, la leyenda
+                aporta el dato (nombre, centro, credencial).
     title     — título opcional sobre el copy
     variant   — default | soft | featured | contrast
     width     — default | wide | full
@@ -41,6 +44,7 @@
     "text"     .Inner
     "image"    $image
     "imageAlt" (.Get "imageAlt")
+    "caption"  (.Get "caption")
     "variant"  (.Get "variant")
     "width"    (.Get "width")
     "reverse"  (eq (.Get "reverse") "true")

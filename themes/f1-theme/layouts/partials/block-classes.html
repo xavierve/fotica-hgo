@@ -1,4 +1,5 @@
 {{ $ctx := .context }}
+{{ $name := .name }}
 {{/* Alias de talla (s/m/l) → nombres canónicos, solo para pad. textSize ya NO tiene
      alias: xs|s|m|l|xl es el nombre canónico directo de la clase block-text-*.
      Ver "Talla de bloque vs talla de prosa" en docs/FRONTMATTER.md. */}}
@@ -20,5 +21,20 @@
 {{ end }}
 {{ with $ctx.class }}
   {{ $classes = $classes | append . }}
+{{ end }}
+{{/* has-surface: el bloque pinta fondo propio, sea por parametro (bgColor/bg),
+     por variante, por clase de paleta (bg-colorN) o por ser un tipo de bloque
+     que siempre lleva banda. Gobierna el ritmo vertical: los bloques CON fondo
+     conservan padding (el aire va dentro de la banda); los que NO tienen fondo
+     usan margin, que colapsa entre hermanos. Ver "Ritmo vertical" en main.css. */}}
+{{ $surfaceVariants := slice "soft" "featured" "contrast" }}
+{{ $surfaceBlocks := slice "counter" "trustbar" }}
+{{ if or
+      $ctx.bgColor
+      $ctx.bg
+      (in $surfaceVariants ($ctx.variant | default "default"))
+      (in $surfaceBlocks $name)
+      (strings.Contains ($ctx.class | default "") "bg-color") }}
+  {{ $classes = $classes | append "has-surface" }}
 {{ end }}
 {{ return (delimit $classes " ") }}

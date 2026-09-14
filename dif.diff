@@ -1,138 +1,95 @@
-diff --git a/CLAUDE.md b/CLAUDE.md
-index 877c3c2..b4f8984 100644
---- a/CLAUDE.md
-+++ b/CLAUDE.md
-@@ -217,34 +217,30 @@ que el número no parta el botón). Mirar `critical.css` antes de reinventar.
+diff --git a/themes/f1-theme/assets/css/main.css b/themes/f1-theme/assets/css/main.css
+index 2f12e0f..4511571 100644
+--- a/themes/f1-theme/assets/css/main.css
++++ b/themes/f1-theme/assets/css/main.css
+@@ -299,6 +299,26 @@
+    (A nivel de página las sections NO llevan margin: las bandas deben tocarse.) */
+ .prose .block{margin-block:clamp(1.5rem,4vw,2.5rem)}
  
- ### 4. Optimización de imágenes
- 
--**Estado real (verificado 10-13 sep): no existe ninguna variante alternativa
--todavía.** El mecanismo está conectado y funcionando (`responsive-img.html` en
--7 bloques, `bg-image-style.html` en banner/cta), pero sin archivos que servir —
--todo cae al tamaño único, sin error, que es justo como está diseñado.
--
--**El giro que define esta tarea (Foco, 13 sep): la ganancia está en generar
--variantes MÁS PEQUEÑAS, no un `_hd` más grande.** Las fotos con código de
--cámara (`D3A####`) existen en alta calidad, pero **la mayoría de los heros son
--generados con IA a ~1440px, y ese es su techo de detalle real**. Regenerar a
--más resolución no vale: la IA no es determinista, saldría otra imagen distinta,
--no la misma más grande — y esas ya están elegidas y colocadas. Pero hoy todos
--los dispositivos se descargan el archivo completo, incluidos móviles que
--necesitan la mitad. Ahí está el ahorro, y no hace falta ningún archivo que no
--se pueda derivar de los que ya hay.
--
--Encaja bien con Code: script sobre `static/images/` (PIL o ImageMagick), con
--reglas según el tamaño del slot donde se usa cada imagen.
--
--- **Imágenes en slots pequeños** (fotos de equipo 750×1125 que se ven a
--  ~370px, cards, avatares de testimonios, logos): el archivo actual **ya es el
--  2x** del slot. Generar la variante reducida da ganancia inmediata en móviles
--  sin pantalla retina, sin perder nada en los que sí la tienen.
--- **Heros y banners a ancho completo (1440×960).** Pesos reales medidos sobre
--  `215_vision_40_hero.webp` (calidad 78): 640px→50KB · 960px→84KB ·
--  1280px→112KB · **1440px (actual)→139KB** · 1920px→171KB · 2880px→261KB.
--
--  Hoy **todos** los dispositivos descargan los 139KB. Con una escalera
--  640/960/1280/1440 y descriptores `w`+`sizes`, el navegador elige solo:
-+Medidas, proporciones y criterios: `themes/f1-theme/docs/GUIA-IMAGENES.md`.
++/* === Ritmo vertical entre bloques de página ==============================
++   Problema: .block lleva padding arriba y abajo, y el padding NO colapsa, asi
++   que dos bloques transparentes seguidos sumaban el doble de aire (96+96=192).
++   Regla:
++     - bloque CON fondo (.has-surface) -> conserva padding: el aire va DENTRO
++       de la banda y las bandas siguen tocandose entre si.
++     - bloque SIN fondo -> el aire pasa a margin, que colapsa entre hermanos:
++       dos transparentes seguidos separan --block-pad una sola vez.
++   flow-root en #main-content evita que ese margin se escape del contenedor. */
++#main-content{display:flow-root}
++.block:not(.has-surface){padding-block:0;margin-block:var(--block-pad)}
++.block-pad-compact:not(.has-surface){margin-block:var(--block-pad-compact)}
++.block-pad-spacious:not(.has-surface){margin-block:var(--block-pad-spacious)}
 +
-+**Hecho (14 sep):**
-+- **OG** — 25 JPG a 1200×630 en `static/images/og/`, `.md` apuntando ahí.
-+- **Cards** — 21 base a 800×600 (4:3) + sus 21 `_hd` a 1600×1200.
-+- **Equipo** — 7 fichas recortadas a 750×750 cuadrado (antes 750×1125
-+  verticales, con un tercio del peso que se descargaba sin verse nunca).
++/* Leyenda de imagen en image-text (figcaption) */
++.image-text-caption{margin-top:.55rem;font-size:.85em;line-height:1.45;color:var(--color-muted)}
++.image-text-caption p{margin:0}
++.image-text-caption strong{color:inherit}
++.has-surface .image-text-caption{color:inherit;opacity:.8}
 +
-+**Pendiente:**
-+- **image-text** — en curso. Base 700 de ancho, `_hd` 1400. Ojo: la imagen
-+  ocupa la mitad del contenedor, no su ancho completo (528px en `m`, 688px en
-+  `wide`) — ver la tabla de la guía.
-+- **Heros** — pendiente. Aquí la ganancia está en generar variantes **más
-+  pequeñas**, no un `_hd` mayor: la mayoría son imágenes de IA a ~1440px y esa
-+  es su resolución nativa, no hay más detalle que extraer. Regenerar a más
-+  resolución no vale (la IA no es determinista: saldría otra imagen), y
-+  **ampliar con un upscaler tampoco** — añade peso sin detalle y en fotos con
-+  personas mete artefactos (ya pasó con el bordado de una bata: "YAUSTO",
-+  "OPTOMETIDRTA").
-+
-+  Pesos medidos sobre `215_vision_40_hero.webp` a calidad 78: 640→50KB ·
-+  960→84KB · 1280→112KB · **1440 (actual)→139KB** · 1920→171KB · 2880→261KB.
-+  Hoy todos los dispositivos descargan los 139KB. Con escalera 640/960/1280/1440
-+  y descriptores `w`+`sizes`, el navegador elige solo:
- 
-   | Dispositivo | Necesita | Elige | Ahorro |
-   |---|---|---|---|
-@@ -253,35 +249,26 @@ reglas según el tamaño del slot donde se usa cada imagen.
-   | iPhone 14 (390, DPR3) | 1170px | 1280w | **27 KB** |
-   | iPad (820, DPR2) / Desktop | 1440px+ | 1440w | 0 KB |
- 
--  Ahorro directo en el LCP con conexión móvil, sin perder calidad en ningún
--  dispositivo.
--
--  - **Techo: 1440px** para heros de IA (su resolución nativa). Para los que
--    vengan de cámara, 1920px como máximo razonable — más no compensa.
--  - `responsive-img.html` ya usa `w`+`sizes`, pero solo genera dos peldaños
--    (1x y 2x). **Ampliarlo a escalera descendente es el núcleo de esta
--    tarea**, y aplica por igual a fotos de IA y de cámara.
--  - **Aviso sobre `bg-image-style.html` (overlay, banner, CTA):** usa
--    `image-set(... 1x, ... 2x)`, descriptores de **densidad pura**. Un móvil
--    con DPR 3 se descarga el archivo 2x entero para una pantalla que
--    necesitaba mucho menos — justo lo que penaliza PageSpeed móvil, y donde
--    más duele porque el hero es el LCP. Para afinarlo hacen falta media
--    queries por ancho, no solo por densidad.
--  - **No generar `_hd` por upscaling (ni con IA).** Añade peso sin detalle
--    real, y en fotos de personas mete artefactos — ya se vio con el bordado de
--    una bata ("YAUSTO", "OPTOMETIDRTA"). Para las fotos `D3A####` que sí
--    tienen original de cámara, generar desde ese original, no ampliando.
--- **Encuadre / arte móvil (`_m`)**: recortes verticales donde el encuadre de
--  escritorio no funcione en vertical. No por sistema — solo donde visualmente
--  haga falta (caras cortadas, sujeto descentrado, elemento clave fuera de
--  plano). Hoy solo `215_vision_40_hero_m.webp` y
--  `314-mantenimiento_audifonos_hero_m.webp` tienen variante móvil. **Qué
--  imágenes lo necesitan es juicio visual, no automatizable:** lo decide Foco
--  (o se revisa en el Proyecto de Claude.ai), no un script.
--
--Pendiente aparte, no bloqueante: el lightbox de `gallery.html` rellena el
--`<img>` vía JS desde el JSON de `.items`, sin pasar por Hugo — para que la
--vista ampliada use `_hd` habría que tocar ese JS. Valorar si compensa.
-+  Excepción: las fotos con código de cámara (`D3A####`) tienen original en alta
-+  calidad — para esas sí cabe un `_hd` real, generado desde el original (nunca
-+  ampliando el WebP ya reducido), con techo de 1920px.
-+- **Slider** (780 de ancho) y **logos de marca** (320) — sin tocar todavía.
-+- **Arte móvil (`_m`)** — recortes verticales solo donde el encuadre de
-+  escritorio no funcione (caras cortadas, sujeto descentrado). Hoy solo
-+  `215_vision_40_hero_m.webp` y `314-mantenimiento_audifonos_hero_m.webp`.
-+  **Qué imágenes lo necesitan es juicio visual, no automatizable.**
-+
-+**Cambios de theme que faltan para aprovechar todo esto:**
-+- `responsive-img.html` usa `w`+`sizes`, pero solo genera **dos peldaños**
-+  (base y `_hd`). Ampliarlo a escalera descendente es lo que desbloquea el
-+  ahorro de la tabla de arriba.
-+- `bg-image-style.html` (overlay, banner, CTA) usa `image-set(... 1x, ... 2x)`,
-+  descriptores de **densidad pura**: un móvil con DPR3 se descarga el archivo
-+  2x entero aunque necesite mucho menos. Para afinarlo hacen falta media
-+  queries por ancho, no solo por densidad.
-+- No bloqueante: el lightbox de `gallery.html` rellena el `<img>` vía JS desde
-+  el JSON de `.items`, sin pasar por Hugo — para que la vista ampliada use
-+  `_hd` habría que tocar ese JS. Valorar si compensa.
- 
- ### 5. Formulario de contacto (`/contacto/`)
- 
-diff --git a/themes/f1-theme/docs/GUIA-IMAGENES.md b/themes/f1-theme/docs/GUIA-IMAGENES.md
-index 3b62d52..78ccee4 100644
---- a/themes/f1-theme/docs/GUIA-IMAGENES.md
-+++ b/themes/f1-theme/docs/GUIA-IMAGENES.md
-@@ -75,10 +75,10 @@ todo el ancho: en un iPhone de 430px con DPR3 son ~1200px. Por eso el `_hd` de
- cards es 1600 y no 700 — lo justifica el teléfono, no el monitor.
- 
- **Equipo: cuadrado, no vertical.** El CSS aplica `aspect-ratio:1/1` +
--`object-fit:cover` + `object-position:top center`. Con un archivo vertical
--750×1125, **los 375px de abajo se descargan y no se ven nunca**: un tercio del
--peso desperdiciado en cada foto. Recortar el cuadrado en el archivo, no
--dejárselo al navegador. 750×750 cubre DPR2 exactamente; 1500×1500 cubre DPR3.
-+`object-fit:cover` + `object-position:top center`. Recortar el cuadrado **en el
-+archivo**, no dejárselo al navegador: con un vertical 750×1125, el tercio
-+inferior se descarga y no se ve nunca. 750×750 cubre DPR2 exactamente;
-+1500×1500 cubre DPR3.
- 
- Al recortar, encuadrar **busto (cabeza y hombros)** sabiendo que el recorte va
- desde arriba: lo que quede por debajo del pecho se pierde.
+ /* spacer shortcode — altura fluida por talla (m por defecto) */
+ .spacer{height:var(--space-m)}
+ .spacer-s{height:var(--space-s)}
+diff --git a/themes/f1-theme/layouts/partials/block-classes.html b/themes/f1-theme/layouts/partials/block-classes.html
+index 393732b..45b2a2c 100644
+--- a/themes/f1-theme/layouts/partials/block-classes.html
++++ b/themes/f1-theme/layouts/partials/block-classes.html
+@@ -1,4 +1,5 @@
+ {{ $ctx := .context }}
++{{ $name := .name }}
+ {{/* Alias de talla (s/m/l) → nombres canónicos, solo para pad. textSize ya NO tiene
+      alias: xs|s|m|l|xl es el nombre canónico directo de la clase block-text-*.
+      Ver "Talla de bloque vs talla de prosa" en docs/FRONTMATTER.md. */}}
+@@ -21,4 +22,19 @@
+ {{ with $ctx.class }}
+   {{ $classes = $classes | append . }}
+ {{ end }}
++{{/* has-surface: el bloque pinta fondo propio, sea por parametro (bgColor/bg),
++     por variante, por clase de paleta (bg-colorN) o por ser un tipo de bloque
++     que siempre lleva banda. Gobierna el ritmo vertical: los bloques CON fondo
++     conservan padding (el aire va dentro de la banda); los que NO tienen fondo
++     usan margin, que colapsa entre hermanos. Ver "Ritmo vertical" en main.css. */}}
++{{ $surfaceVariants := slice "soft" "featured" "contrast" }}
++{{ $surfaceBlocks := slice "counter" "trustbar" }}
++{{ if or
++      $ctx.bgColor
++      $ctx.bg
++      (in $surfaceVariants ($ctx.variant | default "default"))
++      (in $surfaceBlocks $name)
++      (strings.Contains ($ctx.class | default "") "bg-color") }}
++  {{ $classes = $classes | append "has-surface" }}
++{{ end }}
+ {{ return (delimit $classes " ") }}
+diff --git a/themes/f1-theme/layouts/partials/blocks/image-text.html b/themes/f1-theme/layouts/partials/blocks/image-text.html
+index 3e9b63d..ceaf61c 100644
+--- a/themes/f1-theme/layouts/partials/blocks/image-text.html
++++ b/themes/f1-theme/layouts/partials/blocks/image-text.html
+@@ -6,6 +6,6 @@
+       {{ with .title }}<h2>{{ . }}</h2>{{ end }}
+       {{ with .text }}<div class="prose">{{ . | markdownify }}</div>{{ end }}
+     </div>
+-    {{ with .image }}<figure class="image-text-media">{{ partial "responsive-img.html" (dict "src" . "alt" $.imageAlt "sizes" "(min-width:821px) 50vw, 100vw") }}</figure>{{ end }}
++    {{ with .image }}<figure class="image-text-media">{{ partial "responsive-img.html" (dict "src" . "alt" $.imageAlt "sizes" "(min-width:821px) 50vw, 100vw") }}{{ with $.caption }}<figcaption class="image-text-caption">{{ . | markdownify }}</figcaption>{{ end }}</figure>{{ end }}
+   </div>
+ </section>
+diff --git a/themes/f1-theme/layouts/shortcodes/image-text.html b/themes/f1-theme/layouts/shortcodes/image-text.html
+index 45e3a29..64bd2cf 100644
+--- a/themes/f1-theme/layouts/shortcodes/image-text.html
++++ b/themes/f1-theme/layouts/shortcodes/image-text.html
+@@ -24,6 +24,9 @@
+   Parámetros con nombre (todos opcionales salvo image):
+     image     — ruta de la imagen (obligatorio)
+     imageAlt  — alt text
++    caption   — leyenda bajo la imagen (figcaption). Admite markdown inline.
++                No debe repetir el alt: el alt describe la escena, la leyenda
++                aporta el dato (nombre, centro, credencial).
+     title     — título opcional sobre el copy
+     variant   — default | soft | featured | contrast
+     width     — default | wide | full
+@@ -41,6 +44,7 @@
+     "text"     .Inner
+     "image"    $image
+     "imageAlt" (.Get "imageAlt")
++    "caption"  (.Get "caption")
+     "variant"  (.Get "variant")
+     "width"    (.Get "width")
+     "reverse"  (eq (.Get "reverse") "true")
