@@ -8,7 +8,7 @@ page_id: "2.0"
 og:
   title: "Recupera la alegría de los detalles — Visión en Ópticas Fausto"
   description: "Revisiones completas, gafas, progresivas y lentillas en Torre del Mar. Desde 1982, sin prisas y sin presión."
-  image: "/images/200-vision.webp"
+  image: "/images/og/200-vision.jpg"
   type: "website"
 
 schema:

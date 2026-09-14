@@ -16,7 +16,7 @@ seo:
 og:
   title: "Más de 44 años mirando por ti — Ópticas Fausto"
   description: "Tres generaciones de la familia Fausto en Torre del Mar desde 1982. Conoce al equipo y los dos centros."
-  image: "/images/100-equipo_fausto_completo.webp"
+  image: "/images/og/100-equipo_fausto_completo.jpg"
   type: "website"
 
 schema:
