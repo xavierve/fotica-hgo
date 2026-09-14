@@ -23,7 +23,13 @@
 {{- $hasHd := false -}}
 {{- if and $ext (not (strings.HasPrefix $src "http")) -}}
   {{- $hd = replace $src $ext (printf "_hd%s" $ext) 1 -}}
-  {{- $hasHd = os.FileExists (printf "static%s" $hd) -}}
+  {{/* Hacen falta LOS DOS archivos: el _hd para servirlo, y la base para leer
+       su ancho con images.Config. Comprobar solo el _hd rompía el build
+       durante la transición, cuando el original se renombra a _hd antes de
+       generar la base (images.Config falla con "file does not exist"). */}}
+  {{- $hasHd = and
+        (os.FileExists (printf "static%s" $hd))
+        (os.FileExists (printf "static%s" $src)) -}}
 {{- end -}}
 <img src="{{ $src }}"
   {{- if $hasHd -}}

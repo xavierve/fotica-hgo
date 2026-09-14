@@ -350,6 +350,13 @@ schema ya está resuelta (Juan es `provider` con `hasCredential` e
 
 ## Flujo de imágenes
 
+**Medidas, proporciones, calidad de exportación y criterios de encuadre por
+tipo de imagen: `themes/f1-theme/docs/GUIA-IMAGENES.md`.** Incluye la tabla de
+qué ancho necesita cada bloque (calculada desde los `sizes` que declara el
+propio theme), la convención `_hd`/`_m`, y por qué en los heros la ganancia
+está en generar variantes más pequeñas y no un `_hd` mayor. Consultarla antes
+de generar, recortar o encargar cualquier imagen.
+
 `draft-images/` en la raíz del repo (hermana de `static/`, NO dentro de
 `static/images/`) — Hugo no la ve, cero riesgo de publicar candidatas sin
 elegir. Git trackea el historial de qué entra y sale. Al elegir una candidata

@@ -1,0 +1,211 @@
+# Guía de imágenes — Ópticas Fausto
+*Medidas, recorte y entrega de fotografías. Verificada contra el repo.*
+
+---
+
+## Tabla de formatos
+
+> **Las proporciones marcadas en negrita las fuerza el CSS** con
+> `aspect-ratio` + `object-fit:cover`: si el archivo llega con otra
+> proporción, el navegador recorta y se pierde lo que sobre. Entregar ya en
+> la proporción correcta evita sorpresas. Verificado en `main.css`:
+> `.card img` → 4/3 · `.team-card img` → 1/1 · `.gallery-open img` → 4/3.
+> Ningún otro bloque fuerza proporción.
+
+
+| Uso | Clave front matter | Base | `_hd` (2x) | Proporción | Formato |
+|---|---|---|---|---|---|
+| **Hero** | `hero.bg` | 1440 ancho | — (ver abajo) | ~3:2 | WebP |
+| **Hero móvil** | `hero.bgMobile` | 768 ancho | 1536 | ~4:5 vertical | WebP |
+| **OG / Social** | `og.image` | 1200×630 | — | 1.91:1 | **JPG** |
+| **Cards** | `card.image` | **800×600** | 1600×1200 | **4:3** | WebP |
+| **Equipo** | `team.items[].image` | **750×750** | 1500×1500 | **1:1 cuadrado** | WebP |
+| **Galería** | `gallery.items[].image` | 1200×900 | 2400×1800 | **4:3** | WebP |
+| **image-text** | en el shortcode | 1120 ancho | 2240 | libre | WebP |
+| **Slider** | `slider.items[].image` | 840 ancho | — | libre | WebP |
+| **Logos de marca** | `brands.items[].image` | 320 ancho | — | libre | WebP/SVG |
+
+> El prefijo `100-` agrupa cosas distintas: solo las `100-equipo_<nombre>` son
+> fichas de equipo. `100-equipo_fausto_completo` es el hero de la home y las
+> `100-instalaciones_*` son galería — esas siguen las medidas de su propio
+> tipo, no las de equipo.
+
+---
+
+## De dónde salen estos números
+
+Cada bloque del theme declara un `sizes` que dice **a qué ancho se muestra
+realmente** la imagen. Ancho mostrado × densidad de pantalla = ancho de
+archivo necesario. No son cifras redondas elegidas a ojo.
+
+| Bloque | `sizes` del theme | Se muestra a | DPR2 | DPR3 |
+|---|---|---|---|---|
+| Hero (stacked) | `100vw` | hasta 1440px | 2880px | — |
+| Cards / Equipo | `(min-width:1100px) 33vw, (min-width:600px) 50vw, 100vw` | ~370px desktop · ~400px móvil | ~740px | ~1200px |
+| image-text | `(min-width:821px) 50vw, 100vw` | ~560px | ~1120px | — |
+| Hero split (Home) | `(min-width:821px) 45vw, 100vw` | ~500px | ~1000px | — |
+| Slider | `min(80vw, 420px)` | 420px | 840px | — |
+| Logos | `160px` | 160px | 320px | — |
+| Avatar testimonio | `56px` | 56px | 112px | — |
+
+**Ojo con las cards: el caso exigente es móvil, no desktop.** En desktop van a
+3 columnas (~350px cada una), pero en móvil ocupan una sola columna a casi
+todo el ancho: en un iPhone de 430px con DPR3 son ~1200px. Por eso el `_hd` de
+cards es 1600 y no 700 — lo justifica el teléfono, no el monitor.
+
+**Equipo: cuadrado, no vertical.** El CSS aplica `aspect-ratio:1/1` +
+`object-fit:cover` + `object-position:top center`. Con un archivo vertical
+750×1125, **los 375px de abajo se descargan y no se ven nunca**: un tercio del
+peso desperdiciado en cada foto. Recortar el cuadrado en el archivo, no
+dejárselo al navegador. 750×750 cubre DPR2 exactamente; 1500×1500 cubre DPR3.
+
+Al recortar, encuadrar **busto (cabeza y hombros)** sabiendo que el recorte va
+desde arriba: lo que quede por debajo del pecho se pierde.
+
+### Convención de nombres
+
+```
+foto.webp       ← tamaño base (1x)
+foto_hd.webp    ← doble de ancho (2x)
+foto_m.webp     ← recorte móvil (composición distinta, no escalado)
+```
+
+`_hd` y `_m` son **siempre opcionales**: si no existen, el theme sirve la base
+sin error. Se pueden ir añadiendo por lotes.
+
+---
+
+## Heros: la ganancia está en BAJAR, no en subir
+
+**La mayoría de los heros son imágenes generadas con IA a ~1440px. Esa es su
+resolución nativa: no hay más detalle que extraer.** Regenerar a más
+resolución no sirve — la IA no es determinista, saldría otra imagen distinta,
+y las actuales ya están elegidas y colocadas.
+
+**No pasarlas por un upscaler (ni de IA).** Añade peso sin detalle real, y en
+fotos con personas mete artefactos: ya ocurrió con el bordado de una bata, que
+salió como "YAUSTO" y "OPTOMETIDRTA".
+
+Lo que sí da ganancia es generar **variantes más pequeñas**, porque hoy todos
+los dispositivos descargan el archivo completo. Pesos medidos sobre
+`215_vision_40_hero.webp` a calidad 78:
+
+| Ancho | Peso | Quién lo usaría |
+|---|---|---|
+| 640px | 50 KB | — |
+| 960px | 84 KB | iPhone SE, Android medio (DPR2) |
+| 1280px | 112 KB | iPhone 14 (DPR3) |
+| **1440px (actual)** | **139 KB** | iPad, desktop |
+| 1920px | 171 KB | solo fotos de cámara |
+| 2880px | 261 KB | no compensa |
+
+Ahorro por hero en móvil: **entre 27 y 55 KB**, sin perder calidad en ningún
+dispositivo. En el LCP con conexión móvil eso se nota en PageSpeed.
+
+**Excepción — fotos con código de cámara (`D3A####`):** existen en alta calidad
+original. Para esas sí se puede generar `_hd` de verdad, partiendo del archivo
+original, nunca ampliando el WebP ya reducido. Techo razonable: 1920px.
+
+---
+
+## Qué se puede automatizar y qué no
+
+Un script de lote (PIL, ImageMagick, o Claude Code ejecutándolos) **trabaja a
+ciegas sobre el contenido**: no evalúa si una cara queda cortada ni si el
+sujeto sigue centrado. Eso divide las operaciones en dos grupos:
+
+**Seguro en lote, sin revisar:**
+- Reescalado proporcional (mismo encuadre, menos píxeles).
+- Cambio de calidad/compresión.
+- Conversión de formato.
+- Generar la escalera descendente de anchos.
+
+**Requiere ojo humano antes de dar por bueno:**
+- Cualquier **recorte que cambie la proporción** — el cuadrado de equipo, los
+  `_m` móviles. Ahí es donde se cortan cabezas.
+- Elegir el punto de interés (`hero.imagePosition`).
+- Decidir **qué** imágenes necesitan variante `_m`: es criterio visual, no una
+  regla que un script pueda aplicar.
+
+En la práctica: que el lote haga reescalado y compresión, y que los recortes
+pasen por revisión **mirando el resultado**, no confiando en que el recuadro
+cayó donde debía. Claude Code puede abrir una imagen y verla, pero no lo hará
+sobre 100 archivos en un bucle salvo que se le pida explícitamente.
+
+---
+
+## Rutas en el proyecto
+
+```
+static/
+  images/
+    (page-code)-nombre_descripcion.webp        ← imagen principal
+    (page-code)-nombre_descripcion_hd.webp     ← variante 2x (opcional)
+    (page-code)-nombre_descripcion_m.webp      ← recorte móvil (opcional)
+    og/
+      (page-code)-slug.jpg                     ← OG siempre JPG, 1200×630
+    cards/
+      (page-code)-slug.webp                    ← miniatura de listado
+```
+
+`draft-images/` (raíz del repo, hermana de `static/`) es la **biblioteca de
+candidatas**: Hugo no la ve. Al elegir una se mueve con `mv` a
+`static/images/` con su nombre final. Nunca se referencia `draft-images/` en
+un `.md`.
+
+---
+
+## Calidad de exportación
+
+| Formato | Calidad | Notas |
+|---|---|---|
+| WebP | **78** | Con este valor se midieron los pesos de la tabla de arriba |
+| JPG (solo OG) | 85 | Suficiente para previsualizaciones sociales |
+
+Un hero de 1440px de ancho a calidad 78 debe pesar **entre 100 y 150 KB**. Si
+pasa de 200 KB, bajar a 70 antes que reducir dimensiones.
+
+---
+
+## Criterios de encuadre por tipo
+
+**Hero (modo `stacked`, el habitual)**
+— La imagen va **sola en una banda superior**, sin texto encima: no hace falta
+reservar zona neutra, el texto va debajo sobre fondo de color.
+— Sí importa el **punto de interés**: la banda recorta arriba y abajo, así que
+el sujeto debe quedar centrado verticalmente o indicarse con
+`hero.imagePosition`.
+— Para móvil: **reencuadrar, no escalar.** Composición distinta de la misma
+escena, priorizando caras o elemento principal.
+
+**Hero (modo `overlay`, excepcional)**
+— Aquí sí hace falta zona neutra donde caiga el texto.
+— Evitar fotos con sujetos repartidos por todo el encuadre: ninguna opacidad
+de overlay hace que un H1 se lea bien encima de una cara.
+
+**Cards**
+— **Proporción 4:3** (`800×600`), forzada por CSS. Con otra proporción el
+navegador recorta desde el centro y se pierde lo que sobre.
+— Elemento principal reconocible a 200px de ancho.
+— Mismo tipo de encuadre en todas las de una misma sección, para que la
+cuadrícula se vea coherente.
+
+**Equipo**
+— Cuadrado, encuadre de busto, recorte desde arriba.
+— Fondo neutro o desenfocado, iluminación homogénea entre todos.
+
+**OG / Social**
+— Margen en los bordes: algunas redes recortan.
+— Sin texto en la foto: se duplicaría con el título OG que genera el theme.
+— Legible en miniatura pequeña (es como aparece en WhatsApp).
+
+---
+
+## WebP: soporte
+
+~97% del tráfico global. Safari desde iOS 14 / macOS Big Sur (2020). Válido
+como formato único para todo el sitio **excepto OG**, donde se mantiene JPG
+por compatibilidad con rastreadores externos.
+
+No hace falta fallback JPEG para el público objetivo (España, dispositivos
+actuales).

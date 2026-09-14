@@ -26,6 +26,7 @@ theme = 'f1-theme'
 - `ARCHITECTURE.md` — cómo se ensambla el tema.
 - `DESIGN_PRINCIPLES.md` — principios de diseño del tema.
 - `DESIGN_TOKENS.md` — colores, tipografía, espaciado e imágenes responsive.
+- `GUIA-IMAGENES.md` — medidas, proporciones, variantes `_hd`/`_m`, calidad de exportación y criterios de encuadre por tipo de imagen.
 - `BLOCKS.md` — bloques disponibles y sus parámetros.
 - `FRONTMATTER.md` — campos de front matter.
 - `PAGE_TYPES.md` — tipos de página.
