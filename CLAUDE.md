@@ -217,34 +217,30 @@ que el número no parta el botón). Mirar `critical.css` antes de reinventar.
 
 ### 4. Optimización de imágenes
 
-**Estado real (verificado 10-13 sep): no existe ninguna variante alternativa
-todavía.** El mecanismo está conectado y funcionando (`responsive-img.html` en
-7 bloques, `bg-image-style.html` en banner/cta), pero sin archivos que servir —
-todo cae al tamaño único, sin error, que es justo como está diseñado.
+Medidas, proporciones y criterios: `themes/f1-theme/docs/GUIA-IMAGENES.md`.
 
-**El giro que define esta tarea (Foco, 13 sep): la ganancia está en generar
-variantes MÁS PEQUEÑAS, no un `_hd` más grande.** Las fotos con código de
-cámara (`D3A####`) existen en alta calidad, pero **la mayoría de los heros son
-generados con IA a ~1440px, y ese es su techo de detalle real**. Regenerar a
-más resolución no vale: la IA no es determinista, saldría otra imagen distinta,
-no la misma más grande — y esas ya están elegidas y colocadas. Pero hoy todos
-los dispositivos se descargan el archivo completo, incluidos móviles que
-necesitan la mitad. Ahí está el ahorro, y no hace falta ningún archivo que no
-se pueda derivar de los que ya hay.
+**Hecho (14 sep):**
+- **OG** — 25 JPG a 1200×630 en `static/images/og/`, `.md` apuntando ahí.
+- **Cards** — 21 base a 800×600 (4:3) + sus 21 `_hd` a 1600×1200.
+- **Equipo** — 7 fichas recortadas a 750×750 cuadrado (antes 750×1125
+  verticales, con un tercio del peso que se descargaba sin verse nunca).
 
-Encaja bien con Code: script sobre `static/images/` (PIL o ImageMagick), con
-reglas según el tamaño del slot donde se usa cada imagen.
+**Pendiente:**
+- **image-text** — en curso. Base 700 de ancho, `_hd` 1400. Ojo: la imagen
+  ocupa la mitad del contenedor, no su ancho completo (528px en `m`, 688px en
+  `wide`) — ver la tabla de la guía.
+- **Heros** — pendiente. Aquí la ganancia está en generar variantes **más
+  pequeñas**, no un `_hd` mayor: la mayoría son imágenes de IA a ~1440px y esa
+  es su resolución nativa, no hay más detalle que extraer. Regenerar a más
+  resolución no vale (la IA no es determinista: saldría otra imagen), y
+  **ampliar con un upscaler tampoco** — añade peso sin detalle y en fotos con
+  personas mete artefactos (ya pasó con el bordado de una bata: "YAUSTO",
+  "OPTOMETIDRTA").
 
-- **Imágenes en slots pequeños** (fotos de equipo 750×1125 que se ven a
-  ~370px, cards, avatares de testimonios, logos): el archivo actual **ya es el
-  2x** del slot. Generar la variante reducida da ganancia inmediata en móviles
-  sin pantalla retina, sin perder nada en los que sí la tienen.
-- **Heros y banners a ancho completo (1440×960).** Pesos reales medidos sobre
-  `215_vision_40_hero.webp` (calidad 78): 640px→50KB · 960px→84KB ·
-  1280px→112KB · **1440px (actual)→139KB** · 1920px→171KB · 2880px→261KB.
-
-  Hoy **todos** los dispositivos descargan los 139KB. Con una escalera
-  640/960/1280/1440 y descriptores `w`+`sizes`, el navegador elige solo:
+  Pesos medidos sobre `215_vision_40_hero.webp` a calidad 78: 640→50KB ·
+  960→84KB · 1280→112KB · **1440 (actual)→139KB** · 1920→171KB · 2880→261KB.
+  Hoy todos los dispositivos descargan los 139KB. Con escalera 640/960/1280/1440
+  y descriptores `w`+`sizes`, el navegador elige solo:
 
   | Dispositivo | Necesita | Elige | Ahorro |
   |---|---|---|---|
@@ -253,35 +249,26 @@ reglas según el tamaño del slot donde se usa cada imagen.
   | iPhone 14 (390, DPR3) | 1170px | 1280w | **27 KB** |
   | iPad (820, DPR2) / Desktop | 1440px+ | 1440w | 0 KB |
 
-  Ahorro directo en el LCP con conexión móvil, sin perder calidad en ningún
-  dispositivo.
+  Excepción: las fotos con código de cámara (`D3A####`) tienen original en alta
+  calidad — para esas sí cabe un `_hd` real, generado desde el original (nunca
+  ampliando el WebP ya reducido), con techo de 1920px.
+- **Slider** (780 de ancho) y **logos de marca** (320) — sin tocar todavía.
+- **Arte móvil (`_m`)** — recortes verticales solo donde el encuadre de
+  escritorio no funcione (caras cortadas, sujeto descentrado). Hoy solo
+  `215_vision_40_hero_m.webp` y `314-mantenimiento_audifonos_hero_m.webp`.
+  **Qué imágenes lo necesitan es juicio visual, no automatizable.**
 
-  - **Techo: 1440px** para heros de IA (su resolución nativa). Para los que
-    vengan de cámara, 1920px como máximo razonable — más no compensa.
-  - `responsive-img.html` ya usa `w`+`sizes`, pero solo genera dos peldaños
-    (1x y 2x). **Ampliarlo a escalera descendente es el núcleo de esta
-    tarea**, y aplica por igual a fotos de IA y de cámara.
-  - **Aviso sobre `bg-image-style.html` (overlay, banner, CTA):** usa
-    `image-set(... 1x, ... 2x)`, descriptores de **densidad pura**. Un móvil
-    con DPR 3 se descarga el archivo 2x entero para una pantalla que
-    necesitaba mucho menos — justo lo que penaliza PageSpeed móvil, y donde
-    más duele porque el hero es el LCP. Para afinarlo hacen falta media
-    queries por ancho, no solo por densidad.
-  - **No generar `_hd` por upscaling (ni con IA).** Añade peso sin detalle
-    real, y en fotos de personas mete artefactos — ya se vio con el bordado de
-    una bata ("YAUSTO", "OPTOMETIDRTA"). Para las fotos `D3A####` que sí
-    tienen original de cámara, generar desde ese original, no ampliando.
-- **Encuadre / arte móvil (`_m`)**: recortes verticales donde el encuadre de
-  escritorio no funcione en vertical. No por sistema — solo donde visualmente
-  haga falta (caras cortadas, sujeto descentrado, elemento clave fuera de
-  plano). Hoy solo `215_vision_40_hero_m.webp` y
-  `314-mantenimiento_audifonos_hero_m.webp` tienen variante móvil. **Qué
-  imágenes lo necesitan es juicio visual, no automatizable:** lo decide Foco
-  (o se revisa en el Proyecto de Claude.ai), no un script.
-
-Pendiente aparte, no bloqueante: el lightbox de `gallery.html` rellena el
-`<img>` vía JS desde el JSON de `.items`, sin pasar por Hugo — para que la
-vista ampliada use `_hd` habría que tocar ese JS. Valorar si compensa.
+**Cambios de theme que faltan para aprovechar todo esto:**
+- `responsive-img.html` usa `w`+`sizes`, pero solo genera **dos peldaños**
+  (base y `_hd`). Ampliarlo a escalera descendente es lo que desbloquea el
+  ahorro de la tabla de arriba.
+- `bg-image-style.html` (overlay, banner, CTA) usa `image-set(... 1x, ... 2x)`,
+  descriptores de **densidad pura**: un móvil con DPR3 se descarga el archivo
+  2x entero aunque necesite mucho menos. Para afinarlo hacen falta media
+  queries por ancho, no solo por densidad.
+- No bloqueante: el lightbox de `gallery.html` rellena el `<img>` vía JS desde
+  el JSON de `.items`, sin pasar por Hugo — para que la vista ampliada use
+  `_hd` habría que tocar ese JS. Valorar si compensa.
 
 ### 5. Formulario de contacto (`/contacto/`)
 

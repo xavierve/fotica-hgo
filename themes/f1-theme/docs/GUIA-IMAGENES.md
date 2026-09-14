@@ -75,10 +75,10 @@ todo el ancho: en un iPhone de 430px con DPR3 son ~1200px. Por eso el `_hd` de
 cards es 1600 y no 700 — lo justifica el teléfono, no el monitor.
 
 **Equipo: cuadrado, no vertical.** El CSS aplica `aspect-ratio:1/1` +
-`object-fit:cover` + `object-position:top center`. Con un archivo vertical
-750×1125, **los 375px de abajo se descargan y no se ven nunca**: un tercio del
-peso desperdiciado en cada foto. Recortar el cuadrado en el archivo, no
-dejárselo al navegador. 750×750 cubre DPR2 exactamente; 1500×1500 cubre DPR3.
+`object-fit:cover` + `object-position:top center`. Recortar el cuadrado **en el
+archivo**, no dejárselo al navegador: con un vertical 750×1125, el tercio
+inferior se descarga y no se ve nunca. 750×750 cubre DPR2 exactamente;
+1500×1500 cubre DPR3.
 
 Al recortar, encuadrar **busto (cabeza y hombros)** sabiendo que el recorte va
 desde arriba: lo que quede por debajo del pecho se pierde.
