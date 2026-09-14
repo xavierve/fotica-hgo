@@ -12,7 +12,7 @@ seo:
 og:
   title: "Ópticas Fausto | Visión y audición en Torre del Mar desde 1982"
   description: "Más de 27.000 personas han confiado en Ópticas Fausto para cuidar su visión y su audición."
-  image: "/images/og/inicio.jpg"
+  image: "/images/og/100-equipo_fausto_completo.jpg"
   type: "website"
 schema:
   type: "WebPage"
@@ -54,13 +54,18 @@ sections:
   - type: image-text
     title: "Nos conocemos de toda la vida. Y eso se nota."
     text: "Ópticas Fausto no es solo una óptica ni solo un centro auditivo. Es un lugar al que muchas personas vuelven porque se sienten conocidas, escuchadas y acompañadas. La continuidad del equipo nos permite saber quién vuelve por la puerta, qué necesita y cómo le fue con su última revisión, sus gafas o sus audífonos. Esa confianza se construye con años de cercanía real y con la tranquilidad de no empezar de cero en cada visita."
+    image: "/images/100-atencion-personalizada.webp"
+    imageAlt: "En Opticas Fausto somos personas atendiendo a personas"
   - type: image-text
     title: "Atención humana, seguimiento real"
     text: "La relación no termina cuando alguien compra unas gafas o un audífono. Seguimos acompañando en la adaptación, resolvemos dudas, ajustamos, revisamos y estamos pendientes de la evolución de cada persona. Preferimos asesorar con honestidad, recomendar lo que realmente encaja y atender sin prisas, porque cuidar la visión y la audición también significa estar cerca después de la compra."
+    image: "/images/100-atencion-duque.webp"
+    imageAlt: "aquí los clientes son conocidos de años"
     reverse: true
   - type: cta
     title: "¿Hace tiempo que no revisas tu vista?"
     subtitle: "Una revisión visual puede ayudarte a detectar cambios de graduación, fatiga visual o molestias que quizá llevas tiempo normalizando. Ven a vernos y te asesoraremos personalmente."
+    bgColor: "var(--bg-color1)"
     button1:
       text: "Ver soluciones de visión"
       url: "/vision/"
@@ -70,6 +75,7 @@ sections:
   - type: cta
     title: "¿Notas que oyes peor en conversaciones?"
     subtitle: "Si subes más la televisión, te cuesta seguir una charla o pides que te repitan las cosas, podemos ayudarte con un estudio auditivo y un asesoramiento claro, sin compromiso."
+    bgColor: "var(--bg-color2)"
     button1:
       text: "Ver soluciones de audición"
       url: "/audicion/"

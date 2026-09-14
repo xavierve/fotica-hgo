@@ -21,8 +21,8 @@
 | **Cards** | `card.image` | **800×600** | 1600×1200 | **4:3** | WebP |
 | **Equipo** | `team.items[].image` | **750×750** | 1500×1500 | **1:1 cuadrado** | WebP |
 | **Galería** | `gallery.items[].image` | 1200×900 | 2400×1800 | **4:3** | WebP |
-| **image-text** | en el shortcode | 1120 ancho | 2240 | libre | WebP |
-| **Slider** | `slider.items[].image` | 840 ancho | — | libre | WebP |
+| **image-text** | en el shortcode | **700 ancho** | 1400 | libre | WebP |
+| **Slider** | `slider.items[].image` | **780 ancho** | — | libre | WebP |
 | **Logos de marca** | `brands.items[].image` | 320 ancho | — | libre | WebP/SVG |
 
 > El prefijo `100-` agrupa cosas distintas: solo las `100-equipo_<nombre>` son
@@ -42,11 +42,32 @@ archivo necesario. No son cifras redondas elegidas a ojo.
 |---|---|---|---|---|
 | Hero (stacked) | `100vw` | hasta 1440px | 2880px | — |
 | Cards / Equipo | `(min-width:1100px) 33vw, (min-width:600px) 50vw, 100vw` | ~370px desktop · ~400px móvil | ~740px | ~1200px |
-| image-text | `(min-width:821px) 50vw, 100vw` | ~560px | ~1120px | — |
-| Hero split (Home) | `(min-width:821px) 45vw, 100vw` | ~500px | ~1000px | — |
-| Slider | `min(80vw, 420px)` | 420px | 840px | — |
+| image-text | `(min-width:821px) 50vw, 100vw` | 528px (`m`) · 688px (`wide`) · ~704px (`full`) | ~1056-1408px | — |
+| Hero split (Home) | `(min-width:821px) 45vw, 100vw` | ~475px (columna `.9fr`) | ~950px | — |
+| Slider | `min(80vw, 420px)` | 388px (420 − 32 de padding) | ~776px | — |
 | Logos | `160px` | 160px | 320px | — |
 | Avatar testimonio | `56px` | 56px | 112px | — |
+
+**image-text no ocupa el ancho del contenedor: ocupa la mitad.** Son dos
+columnas `1fr 1fr` con un `gap` de hasta 64px, así que la imagen mide
+aproximadamente la mitad del contenedor menos medio gap (medido por Foco en el
+inspector, 14 sep, y confirmado con el CSS):
+
+| `width` del bloque | Contenedor | Imagen | DPR2 necesita |
+|---|---|---|---|
+| default (`m`) | 1120px | **528px** | ~1056px |
+| `wide` | 1440px | **688px** | ~1376px |
+| `full` | según ventana | ~704px | ~1408px |
+
+Con **700 de ancho base y 1400 en `_hd`** quedan cubiertas las tres variantes.
+En móvil el bloque colapsa a una columna y la imagen pasa a ~100vw, pero ahí
+el `_hd` de 1400 da de sobra incluso a DPR3.
+
+**El mismo cuidado con otros bloques:** el ancho del contenedor no es el ancho
+de la imagen cuando hay columnas o padding de por medio. En el slider, la
+`.slide` mide 420px pero tiene `padding:1rem`, así que la imagen real son
+388px. En el hero split de la home, la columna de imagen es `.9fr` de 2fr
+sobre 1120px: ~475px, no los ~500 que daría un 45vw teórico.
 
 **Ojo con las cards: el caso exigente es móvil, no desktop.** En desktop van a
 3 columnas (~350px cada una), pero en móvil ocupan una sola columna a casi
