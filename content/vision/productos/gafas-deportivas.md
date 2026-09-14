@@ -8,13 +8,13 @@ weight: 70
 
 card:
   description: "Protección homologada para deporte, natación y buceo."
-  image: "/images/cards/227-gafas_proteccion_y_deportivas_hero.webp"
+  image: "/images/cards/227-gafas_proteccion_y_deportivas.webp"
   imageAlt: "Gafas deportivas graduadas en Ópticas Fausto"
 
 og:
   title: "Ver bien mientras haces deporte no es un lujo. Es seguridad."
   description: "Gafas de protección homologadas, soluciones para aire libre y natación graduada. Con y sin graduación, adultos y niños."
-  image: "/images/227-gafas_proteccion_y_deportivas_hero.webp"
+  image: "/images/og/227-gafas_proteccion_y_deportivas.jpg"
   type: "article"
 
 schema:

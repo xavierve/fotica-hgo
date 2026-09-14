@@ -8,13 +8,13 @@ weight: 20
 
 card:
   description: "Paso a paso, con prueba gratuita en tu día a día antes de decidir. Adultos y niños."
-  image: "/images/cards/312-audifonos_hero.webp"
+  image: "/images/cards/312-audifonos.webp"
   imageAlt: "Adaptación de audífonos en Ópticas Fausto"
 
 og:
   title: "Volver a conectar con quienes más quieres — Adaptación de audífonos"
   description: "Pruebas el audífono en tu vida real — en casa, en la calle, en una conversación — y solo entonces decides. Sin compromiso, en Torre del Mar."
-  image: "/images/312-audifonos_hero.webp"
+  image: "/images/og/312-audifonos.jpg"
   type: "article"
 
 schema:

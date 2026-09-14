@@ -8,13 +8,13 @@ weight: 30
 
 card:
   description: "Para dormir, trabajar, nadar o tocar música: moldes hechos para tu oído."
-  image: "/images/cards/323-protectores_audicion_hero.webp"
+  image: "/images/cards/323-protectores_audicion.webp"
   imageAlt: "Protectores auditivos a medida en Ópticas Fausto"
 
 og:
   title: "Hay ruidos que no puedes evitar. De los que sí puedes protegerte."
   description: "Moldes a medida, fabricados según la forma exacta de tu oído: antirruido para dormir, trabajo y música, y moldes de baño. Torre del Mar."
-  image: "/images/323-protectores_audicion_hero.webp"
+  image: "/images/og/323-protectores_audicion.jpg"
   type: "article"
 
 schema:

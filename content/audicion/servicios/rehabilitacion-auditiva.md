@@ -14,7 +14,7 @@ card:
 og:
   title: "Ponerte el audífono es el primer paso. Volver a oír bien de verdad, un camino."
   description: "Pautas y ejercicios que ayudan a tu cerebro a reaprender a interpretar los sonidos, con progreso medido con audiometrías de control."
-  image: "/images/315-rehabilitacion_auditiva.webp"
+  image: "/images/og/315-rehabilitacion_auditiva.jpg"
   type: "article"
 
 schema:

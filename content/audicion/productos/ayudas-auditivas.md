@@ -8,13 +8,13 @@ weight: 20
 
 card:
   description: "Despertadores, amplificadores de TV, avisadores: pequeñas ayudas, gran diferencia."
-  image: "/images/cards/322-ayudas_auditivas_hero.webp"
+  image: "/images/cards/322-ayudas_auditivas.webp"
   imageAlt: "Ayudas técnicas auditivas en Ópticas Fausto"
 
 og:
   title: "Una pequeña ayuda que hace una gran diferencia — Ayudas auditivas"
   description: "Oír el despertador, disfrutar de la TV sin discutir por el volumen, saber cuándo llaman a la puerta. Catálogo de ayudas técnicas en Torre del Mar."
-  image: "/images/322-ayudas_auditivas_hero.webp"
+  image: "/images/og/322-ayudas_auditivas.jpg"
   type: "article"
 
 schema:

@@ -8,13 +8,13 @@ weight: 10
 
 card:
   description: "Materiales, tratamientos y personalización de tus cristales."
-  image: "/images/cards/221-lentes_oftalmicas_hero.webp"
+  image: "/images/cards/221-lentes_oftalmicas.webp"
   imageAlt: "Lentes oftálmicas en el taller de Ópticas Fausto"
 
 og:
   title: "La montura se ve. Las lentes se notan."
   description: "Tipos, materiales y tratamientos de las lentes para gafas, explicados con claridad. Personalización y asesoramiento honesto en Torre del Mar."
-  image: "/images/221-lentes_oftalmicas_hero.webp"
+  image: "/images/og/221-lentes_oftalmicas.jpg"
   type: "article"
 
 schema:

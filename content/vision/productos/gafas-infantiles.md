@@ -8,13 +8,13 @@ weight: 60
 
 card:
   description: "Chulas e irrompibles, para que las usen y duren."
-  image: "/images/cards/226-infantil_hero.webp"
+  image: "/images/cards/226-infantil.webp"
   imageAlt: "Gafas infantiles resistentes en Ópticas Fausto"
 
 og:
   title: "Gafas chulas e irrompibles — con revisión visual gratuita"
   description: "Monturas infantiles resistentes, adaptadas a su edad y su cara, con revisión visual completa gratis. Torre del Mar, desde 1982."
-  image: "/images/226-infantil_hero.webp"
+  image: "/images/og/226-infantil.jpg"
   type: "article"
 
 schema:

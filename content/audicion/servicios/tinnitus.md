@@ -8,13 +8,13 @@ weight: 30
 
 card:
   description: "Zumbidos y pitidos: qué son y cómo los tratamos con terapia TRT."
-  image: "/images/cards/313-tinnitus_hero.webp"
+  image: "/images/cards/313-tinnitus.webp"
   imageAlt: "Tratamiento de tinnitus en Ópticas Fausto"
 
 og:
   title: "Ese pitido que solo oyes tú tiene nombre. Y tiene tratamiento."
   description: "Expertos en Terapia de Reentrenamiento de Tinnitus (TRT) y en audífonos para pérdidas auditivas con acúfenos. Torre del Mar."
-  image: "/images/313-tinnitus_hero.webp"
+  image: "/images/og/313-tinnitus.jpg"
   type: "article"
 
 schema:

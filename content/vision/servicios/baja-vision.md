@@ -8,13 +8,13 @@ weight: 40
 
 card:
   description: "Cuando las gafas no bastan, hay ayudas que devuelven autonomía."
-  image: "/images/cards/214-baja_vision-hero.webp"
+  image: "/images/cards/214-baja_vision.webp"
   imageAlt: "Evaluación de baja visión en Ópticas Fausto, Torre del Mar"
 
 og:
   title: "Baja visión: aprovechar al máximo la visión que queda"
   description: "Especialistas en baja visión en Torre del Mar. Ayudas ópticas, no ópticas y electrónicas para recuperar actividades y autonomía."
-  image: "/images/214-baja_vision-hero.webp"
+  image: "/images/og/214-baja_vision.jpg"
   type: "article"
 
 schema:

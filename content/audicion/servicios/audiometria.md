@@ -8,13 +8,13 @@ weight: 10
 
 card:
   description: "La prueba que mide con precisión cómo oyes. En cabina insonorizada, sin derivación médica."
-  image: "/images/cards/311-audiometriia_hero.webp"
+  image: "/images/cards/311-audiometria.webp"
   imageAlt: "Audiometría en cabina insonorizada en Ópticas Fausto"
 
 og:
   title: "La prueba que mide, con precisión, cómo oyes — Audiometría"
   description: "Estudio auditivo en cabina insonorizada con resultado en el momento. Indolora, sin derivación médica. Torre del Mar, desde 1982."
-  image: "/images/311-audiometriia_hero.webp"
+  image: "/images/og/311-audiometria.jpg"
   type: "article"
 
 schema:

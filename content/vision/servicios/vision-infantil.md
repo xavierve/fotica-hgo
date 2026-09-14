@@ -8,13 +8,13 @@ weight: 20
 
 card:
   description: "Un tercio del fracaso escolar tiene origen visual. Revisa a tiempo."
-  image: "/images/cards/212-vision_infantil_hero.webp"
+  image: "/images/cards/212-vision_infantil.webp"
   imageAlt: "Revisión visual infantil en Ópticas Fausto, Torre del Mar"
 
 og:
   title: "La importancia de actuar a tiempo — Visión infantil"
   description: "Señales de alerta, anomalías más frecuentes y consejos de higiene visual para niños. Revisión desde los 3 años."
-  image: "/images/212-vision_infantil_hero.webp"
+  image: "/images/og/212-vision_infantil.jpg"
   type: "article"
 
 schema:

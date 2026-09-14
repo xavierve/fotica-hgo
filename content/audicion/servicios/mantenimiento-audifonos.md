@@ -8,13 +8,13 @@ weight: 40
 
 card:
   description: "Servicio Técnico Multimarca: sea cual sea la marca de tu audífono, lo revisamos, reparamos y readaptamos."
-  image: "/images/cards/314-mantenimiento_audifonos_hero.webp"
+  image: "/images/cards/314-mantenimiento_audifonos.webp"
   imageAlt: "Mantenimiento técnico de audífonos en Ópticas Fausto"
 
 og:
   title: "Tu audífono, como el primer día. Sea cual sea su marca."
   description: "Servicio Técnico Multimarca en Torre del Mar: limpieza, secado, filtros, diagnóstico y readaptación — lo compraras donde lo compraras."
-  image: "/images/314-mantenimiento_audifonos_hero.webp"
+  image: "/images/og/314-mantenimiento_audifonos.jpg"
   type: "article"
 
 schema:

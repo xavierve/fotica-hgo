@@ -8,13 +8,13 @@ weight: 40
 
 card:
   description: "Protección a medida para sol y pantallas."
-  image: "/images/cards/224-filtros_hero.webp"
+  image: "/images/cards/224-filtros.webp"
   imageAlt: "Filtros solares y de luz azul en Ópticas Fausto"
 
 og:
   title: "El sol y las pantallas no dañan igual tus ojos"
   description: "Filtros solares, polarizados y de luz azul (CSR): te recomendamos el que encaja con tu día a día, tras evaluar tu caso en Torre del Mar."
-  image: "/images/224-filtros_hero.webp"
+  image: "/images/og/224-filtros.jpg"
   type: "article"
 
 schema:

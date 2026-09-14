@@ -8,13 +8,13 @@ weight: 10
 
 card:
   description: "Tipos, diferencias y cómo elegimos el tuyo. Con prueba gratuita en casa."
-  image: "/images/cards/321-audifonos_tipos.webp"
+  image: "/images/cards/321-audifonos.webp"
   imageAlt: "Audífonos en Ópticas Fausto, Centro Auditivo Homologado"
 
 og:
   title: "Un paso adelante para volver a conectar con quienes más quieres"
   description: "Audífonos para todos los presupuestos, con estudio completo y prueba gratuita en tu vida diaria antes de decidir. Torre del Mar."
-  image: "/images/321-audifonos_hero.webp"
+  image: "/images/og/321-audifonos.jpg"
   type: "article"
 
 schema:

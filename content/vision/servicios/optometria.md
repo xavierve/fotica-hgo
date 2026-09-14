@@ -8,13 +8,13 @@ weight: 10
 
 card:
   description: "La revisión completa que detecta lo que tú aún no notas."
-  image: "/images/cards/211-optometria_D3A0064.webp"
+  image: "/images/cards/211-optometria.webp"
   imageAlt: "Examen optométrico en Ópticas Fausto, Torre del Mar"
 
 og:
   title: "Optometría en Torre del Mar — el examen que detecta lo que aún no notas"
   description: "Evaluación visual completa con resultado en el momento. 44 años de experiencia en Torre del Mar."
-  image: "/images/211-optometria_D3A0064.webp"
+  image: "/images/og/211-optometria.jpg"
   type: "article"
 
 schema:

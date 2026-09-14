@@ -8,13 +8,13 @@ weight: 30
 
 card:
   description: "Frena el avance de la miopía en niños y jóvenes."
-  image: "/images/cards/213-optometria_D3A0075.webp"
+  image: "/images/cards/213-miopia.webp"
   imageAlt: "Estudio de control de miopía con topógrafo corneal en Ópticas Fausto"
 
 og:
   title: "Frenar la miopía es posible — Control de miopía y Orto-K"
   description: "Lentes nocturnas que corrigen la visión mientras duermes y frenan el avance de la miopía. Estudio personalizado con topógrafo corneal."
-  image: "/images/213-optometria_D3A0075.webp"
+  image: "/images/og/213-miopia.jpg"
   type: "article"
 
 schema:

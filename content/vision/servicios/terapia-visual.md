@@ -8,13 +8,13 @@ weight: 60
 
 card:
   description: "El gimnasio de tus ojos: entrena habilidades visuales."
-  image: "/images/cards/216-terapia_visual_hero.webp"
+  image: "/images/cards/216-terapia_visual.webp"
   imageAlt: "Sesión de terapia visual en Ópticas Fausto, Torre del Mar"
 
 og:
   title: "El gimnasio de tus ojos — Terapia visual"
   description: "Programa de entrenamiento visual individualizado, en consulta y en casa, con revisiones que miden el progreso de forma objetiva."
-  image: "/images/216-terapia_visual_hero.webp"
+  image: "/images/og/216-terapia_visual.jpg"
   type: "article"
 
 schema:
