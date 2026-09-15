@@ -17,6 +17,22 @@ Objetivo: SEO local (Torre del Mar / Axarquía) + conversión a llamada/WhatsApp
 - **Iconos:** `partials/icons.html` (phone, whatsapp, location, mail), SVG inline con `currentColor`.
 - Las carpetas `content/*/servicios/` y `content/*/productos/` usan `build.render: never`: organizan slugs, no son páginas. Breadcrumbs (visual y schema) las excluyen filtrando por `RelPermalink` vacío — **no volver a filtros por título**.
 
+## Precedencia de las fuentes
+
+Cuando dos documentos se contradigan, el orden de autoridad es:
+
+1. **El código y los datos** — `data/site.yaml`, los partials del tema, el front
+   matter de `content/`. Lo que hace el build es lo que es.
+2. **Este `CLAUDE.md`** y los docs del tema (`themes/f1-theme/docs/`).
+3. **`/docs/`** — carpeta ignorada por git, no se publica. Es **histórico y
+   contexto humano**: brief, TODO, notas de estructura. **No prevalece.** Si
+   algo de `/docs/` contradice al código o a una decisión posterior tomada en
+   conversación, gana lo nuevo — y lo correcto es actualizar el documento de
+   `/docs/`, no seguirlo.
+
+No crear copias de este archivo en `/docs/` ni en ningún otro sitio: dos
+CLAUDE.md divergen, y la copia vieja acaba dictando convenciones muertas.
+
 ## Convenciones fijadas (no cambiar sin consultar)
 
 - Slugs canon: `vision-40`, `lentes-de-contacto`, `filtros-solares-luz-azul`, `lentes-oftalmicas` (femenino en slug, H1, title y enlaces).
