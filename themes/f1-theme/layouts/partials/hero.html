@@ -13,7 +13,7 @@
       {{ with .eyebrow }}<p class="eyebrow">{{ . }}</p>{{ end }}
       {{ with .title }}<h1>{{ . }}</h1>{{ end }}
       {{ with .subtitle }}<p class="hero-subtitle">{{ . | markdownify }}</p>{{ end }}
-      {{ if eq .ctaPreset "contact" }}
+      {{ if eq .preset "contact" }}
       {{ $contact := (hugo.Data.site | default dict).contact | default dict }}
       {{ $wa := replace ($contact.whatsapp | default "") "+" "" }}
       <div class="cta-row">

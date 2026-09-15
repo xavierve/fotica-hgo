@@ -22,7 +22,7 @@ hero:
   eyebrow: "Desde 1982 en Torre del Mar"
   title: "Más de 44 años cuidando tu visión y tu audición"
   subtitle: "En Ópticas Fausto te atendemos con la cercanía de quien conoce a sus clientes y el compromiso de seguir acompañándote después de cada revisión, cada gafa y cada audífono."
-  ctaPreset: contact
+  preset: contact
   image: "/images/100-equipo_fausto_completo.webp"
   imageAlt: "El equipo de Ópticas Fausto en su tienda de Torre del Mar"
 sections:
@@ -54,7 +54,7 @@ sections:
   - type: image-text
     title: "Nos conocemos de toda la vida. Y eso se nota."
     text: "Ópticas Fausto no es solo una óptica ni solo un centro auditivo. Es un lugar al que muchas personas vuelven porque se sienten conocidas, escuchadas y acompañadas. La continuidad del equipo nos permite saber quién vuelve por la puerta, qué necesita y cómo le fue con su última revisión, sus gafas o sus audífonos. Esa confianza se construye con años de cercanía real y con la tranquilidad de no empezar de cero en cada visita."
-    image: "/images/100-atencion-personalizada.webp"
+    image: "/images/100-atencion_personalizada.webp"
     imageAlt: "Leonor atendiendo a una clienta y su hija en el Centro Fausto Andalucía"
     caption: "**Leonor** en Centro Fausto Andalucía"
   - type: image-text

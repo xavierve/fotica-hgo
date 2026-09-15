@@ -24,7 +24,7 @@ hero:
   bg: "https://picsum.photos/seed/fausto-hero/1600/700"
   bgMobile: "https://picsum.photos/seed/fausto-hero-m/700/900"
   bgColor: "var(--bg-color2)"
-  ctaPreset: contact
+  preset: contact
   labelCall: "Llamar ahora"
   class: "scrim"           # activo aquí — comparar con los 3 CTA de abajo (scrim/overlay-strong/panel)
   

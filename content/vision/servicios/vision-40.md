@@ -25,7 +25,7 @@ schema:
 hero:
   title: "No te quedes atrás: que tu vista siga siendo de lince"
   subtitle: "A los 40 y algo empieza a pasar, y casi nadie quiere reconocerlo: el WhatsApp se aleja un poco más del brazo, la carta del restaurante de repente «está mal iluminada», las letras pequeñas del periódico se amontonan. No es que tus ojos fallen — es la **vista cansada**, y le pasa prácticamente a todo el mundo a partir de esta edad. La buena noticia: tiene solución, y **cuanto antes la abordes, menos te costará adaptarte.**"
-  ctaPreset: contact
+  preset: contact
   bg: "/images/215_vision_40_hero.webp"
   bgMobile: "/images/215_vision_40_hero_m.webp"
 

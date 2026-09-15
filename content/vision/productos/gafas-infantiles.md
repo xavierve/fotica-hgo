@@ -24,7 +24,7 @@ schema:
 hero:
   title: "Gafas chulas e irrompibles"
   subtitle: "**Para que las usen — y para que duren.** Unas gafas infantiles tienen dos exámenes que aprobar: que a tu hijo le gusten lo suficiente como para no querer quitárselas, y que sobrevivan al patio, al deporte y a la mochila. En Ópticas Fausto encontrarás monturas y gafas de sol infantiles de todos los materiales y tamaños, adaptadas a su defecto visual, su edad y su forma facial — sin limitar ni su actividad diaria ni su deporte."
-  ctaPreset: contact
+  preset: contact
   bg: "/images/226-infantil_hero.webp"
 
 sections:

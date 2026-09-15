@@ -25,7 +25,7 @@ schema:
 hero:
   title: "La miopía de tu hijo no tiene por qué seguir subiendo"
   subtitle: "Cada revisión, media dioptría más. Si esa frase te suena, no estás solo: la miopía se ha convertido en un problema creciente en Europa, especialmente entre niños y adolescentes. La buena noticia es que hoy **es posible frenar su avance** — y una de las técnicas más eficaces trabaja mientras tu hijo duerme."
-  ctaPreset: contact
+  preset: contact
   bg: "/images/213-optometria_D3A0075.webp"
 
 sections:

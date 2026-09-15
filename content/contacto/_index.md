@@ -18,7 +18,7 @@ schema:
 hero:
   title: "Estamos a una llamada, un mensaje o una visita"
   subtitle: "¿Tienes una duda, quieres pedir cita o necesitas ayuda con algo urgente? Cualquiera de nuestros dos centros de Torre del Mar te atiende — **sin cita previa si lo necesitas**. Atendemos también en inglés y alemán."
-  ctaPreset: contact
+  preset: contact
 
 sections:
   - type: faq

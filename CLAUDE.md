@@ -13,7 +13,7 @@ Objetivo: SEO local (Torre del Mar / Axarquía) + conversión a llamada/WhatsApp
 - **Tema:** `themes/f1-theme`. Sistema de bloques: `sections:` en front matter → `partials/section-renderer.html` → `partials/blocks/*.html`. Docs del tema en `themes/f1-theme/docs/FRONTMATTER.md` (mantener actualizado al añadir bloques o parámetros).
 - **Orden de render** (single/list): breadcrumb → hero (clave `hero:` del front matter) → body markdown (contenedor `prose`) → sections. Las FAQ y el CTA de cierre viven en `sections:` (el schema FAQPage solo lee de ahí); el desarrollo largo va en body markdown con shortcodes intercalados.
 - **Shortcodes** (`layouts/shortcodes/`): `cta`, `banner`, `cards` — delegan en los blocks correspondientes para paridad HTML/CSS total. `cards` autodescubre las páginas hijas de una sección leyendo `linkTitle`, `card.description`, `card.image`, `weight`.
-- **Datos de negocio centralizados:** `data/site.yaml` (contacto, locations, navegación, social). Los teléfonos NUNCA se escriben en contenido ni templates: siempre desde site.yaml (`preset: contact` en CTAs, `ctaPreset: contact` en heros).
+- **Datos de negocio centralizados:** `data/site.yaml` (contacto, locations, navegación, social). Los teléfonos NUNCA se escriben en contenido ni templates: siempre desde site.yaml (`preset: contact`, misma clave en heros y en CTAs).
 - **Iconos:** `partials/icons.html` (phone, whatsapp, location, mail), SVG inline con `currentColor`.
 - Las carpetas `content/*/servicios/` y `content/*/productos/` usan `build.render: never`: organizan slugs, no son páginas. Breadcrumbs (visual y schema) las excluyen filtrando por `RelPermalink` vacío — **no volver a filtros por título**.
 
@@ -76,7 +76,7 @@ ninguna — y son la mayoría del sitio.
 subtítulo + CTAs, con su schema) en dos presentaciones: eso es un parámetro
 de layout, igual que `cta-layout-split` es una variante de `cta`. Duplicar el
 bloque duplicaría el mantenimiento del preload LCP, `responsive-img`,
-`ctaPreset` y `bgMobile`. Decidido con Foco (10 sep) al plantear si convenía
+`preset` y `bgMobile`. Decidido con Foco (10 sep) al plantear si convenía
 separarlos de cara a reutilizar el tema: no conviene — un tema reutilizable
 mejora por tener pocas piezas con parámetros claros, no por acumular
 variantes hermanas con nombres parecidos.

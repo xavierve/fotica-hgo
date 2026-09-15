@@ -26,7 +26,7 @@ schema:
 hero:
   title: "Ponerte el audífono es el primer paso. Volver a oír bien de verdad, un camino."
   subtitle: "Aprender a sacarle el máximo partido a tu audífono — volver a entender conversaciones en sitios ruidosos, reconocer sonidos que llevabas años sin oír — es un proceso. Si estos días todo te suena raro, metálico o demasiado fuerte, no es que tu audífono esté mal: es que **tu cerebro está reaprendiendo**. Y en ese camino no tienes que estar solo."
-  ctaPreset: contact
+  preset: contact
   bg: "/images/315-rehabilitacion_auditiva.webp"
 sections:
   - type: faq

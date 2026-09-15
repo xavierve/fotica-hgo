@@ -18,7 +18,7 @@ schema:
 hero:
   title: "Recupera la alegría de los detalles"
   subtitle: "Hay días en los que el mundo se ve un poco menos nítido y nos acostumbramos sin darnos cuenta. El color de una puesta de sol, la letra pequeña de un libro, la cara de alguien al otro lado de la calle: pequeños detalles que dejamos de ver sin notar cuándo empezó. Reconocerlo a tiempo no es un signo de debilidad: es el primer paso para recuperar algo que muchas veces dábamos por perdido sin razón. En Ópticas Fausto llevamos 44 años, desde 1982, ayudando a la gente de Torre del Mar a volver a ver con claridad — sin prisas, sin presión, con la confianza de quien te conoce."
-  ctaPreset: contact
+  preset: contact
   bg: "/images/200-vision.webp"
 
 sections:

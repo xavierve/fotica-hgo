@@ -26,7 +26,7 @@ schema:
 hero:
   title: "Ese pitido que solo oyes tú tiene nombre. Y tiene tratamiento."
   subtitle: "Un silbido, un zumbido, una palpitación que nadie más percibe — y que está ahí al acostarte, en el silencio, a veces todo el día. Se llama **tinnitus** (o acúfeno), es mucho más común de lo que crees, y lo más importante: **no tienes por qué resignarte a vivir con él tal como está.** En Fausto somos expertos en **Terapia de Reentrenamiento de Tinnitus (TRT)** y en la adaptación de audífonos para pérdidas auditivas con tinnitus."
-  ctaPreset: contact
+  preset: contact
   bg: "/images/313-tinnitus_hero.webp"
 
 sections:

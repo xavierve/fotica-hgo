@@ -24,7 +24,7 @@ schema:
 hero:
   title: "Lentillas: el superpoder oculto"
   subtitle: "Millones de personas ven perfectamente y nadie sabe que es gracias a sus lentes de contacto. Campo de visión completo, libertad de movimiento, cualquier gafa de sol que te guste — y hoy, con los materiales actuales, casi cualquier persona puede llevarlas, sea cual sea su graduación o su edad."
-  ctaPreset: contact
+  preset: contact
   bg: "/images/223-lentillas_hero.webp"
 
 sections:

@@ -25,7 +25,7 @@ schema:
 hero:
   title: "Volver a conectar con quienes más quieres"
   subtitle: "Decidir dar el paso hacia un audífono no siempre es fácil. Por eso en Fausto lo hemos organizado para que **la decisión la tome tu vida diaria, no un comercial**: lo usas, lo pruebas en casa, en la calle, en una conversación real — y solo entonces decides. Sin ningún compromiso."
-  ctaPreset: contact
+  preset: contact
   bg: "/images/312-audifonos_hero.webp"
 
 sections:
