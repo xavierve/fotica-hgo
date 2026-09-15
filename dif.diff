@@ -1,13 +1,43 @@
-diff --git a/themes/f1-theme/layouts/partials/blocks/image-text.html b/themes/f1-theme/layouts/partials/blocks/image-text.html
-index 3e9b63d..d178796 100644
---- a/themes/f1-theme/layouts/partials/blocks/image-text.html
-+++ b/themes/f1-theme/layouts/partials/blocks/image-text.html
-@@ -1,5 +1,8 @@
- {{ $extra := slice }}
- {{ if .reverse }}{{ $extra = $extra | append "is-reverse" }}{{ end }}
-+{{/* Sin imagen el grid de dos columnas dejaba la derecha vacia y el texto
-+     ocupando solo media pagina. is-textonly lo colapsa a una columna. */}}
-+{{ if not .image }}{{ $extra = $extra | append "is-textonly" }}{{ end }}
- <section class="{{ partial "block-classes.html" (dict "name" "image-text" "context" . "extra" $extra) }}">
-   <div class="container image-text-inner has-cols">
-     <div class="image-text-copy">
+diff --git a/content/contacto/_index.md b/content/contacto/_index.md
+index 5fb8ae3..af6f4c7 100644
+--- a/content/contacto/_index.md
++++ b/content/contacto/_index.md
+@@ -72,8 +72,6 @@ sections:
+ 
+ {{< icon "clock" >}} Horario: **lunes a viernes, 10:00–13:30 y 17:30–21:00 · sábados, 10:00–13:30**
+ 
+-<!-- PENDIENTE cliente: confirmar sábados y variaciones de temporada;
+-     el horario debe coincidir exactamente con Google Business Profile. -->
+ ---
+ ## ¿Prefieres escribirnos? Cuéntanos en qué podemos ayudarte
+ 
+diff --git a/data/site.yaml b/data/site.yaml
+index 765bc8d..5d48d93 100644
+--- a/data/site.yaml
++++ b/data/site.yaml
+@@ -78,7 +78,7 @@ navigation:
+ # hoursSpec se hereda de contact.hoursSpec en schema.html (mismos horarios ambas sedes).
+ # Si en el futuro una sede tuviera horario distinto, añadir hoursSpec aquí para sobreescribir.
+ locations:
+-  - id: "avenida"
++  - id: "andalucia"
+     name: "Centro Fausto Andalucía"
+     address: "Av. Andalucía, 84 B"
+     location: "Torre del Mar"
+diff --git a/themes/f1-theme/layouts/partials/header-meta.html b/themes/f1-theme/layouts/partials/header-meta.html
+index 439a495..5d3d70a 100644
+--- a/themes/f1-theme/layouts/partials/header-meta.html
++++ b/themes/f1-theme/layouts/partials/header-meta.html
+@@ -1,8 +1,10 @@
+ {{ partial "seo.html" . }}
+ {{ partial "og.html" . }}
+ {{ partial "schema.html" . }}
+-{{ $critical := resources.Get "css/critical.css" }}{{ if $critical }}<style>{{ $critical.Content | safeCSS }}</style>{{ end }}
+-{{ $css := resources.Get "css/main.css" }}{{ if $css }}<link rel="stylesheet" href="{{ $css.RelPermalink }}">{{ end }}
++{{/* El CSS fuente se mantiene legible (sin minificar) para poder leerlo y
++     generar diffs limpios; Hugo lo minifica en el build. */}}
++{{ $critical := resources.Get "css/critical.css" }}{{ if $critical }}<style>{{ ($critical | minify).Content | safeCSS }}</style>{{ end }}
++{{ $css := resources.Get "css/main.css" }}{{ if $css }}{{ $css = $css | minify | fingerprint }}<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">{{ end }}
+ <link rel="icon" href="/favicon/favicon.ico" sizes="32x32">
+ <link rel="icon" href="/favicon/favicon.svg" type="image/svg+xml">
+ <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png">

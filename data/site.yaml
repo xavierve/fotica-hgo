@@ -78,7 +78,7 @@ navigation:
 # hoursSpec se hereda de contact.hoursSpec en schema.html (mismos horarios ambas sedes).
 # Si en el futuro una sede tuviera horario distinto, añadir hoursSpec aquí para sobreescribir.
 locations:
-  - id: "avenida"
+  - id: "andalucia"
     name: "Centro Fausto Andalucía"
     address: "Av. Andalucía, 84 B"
     location: "Torre del Mar"

@@ -72,8 +72,6 @@ sections:
 
 {{< icon "clock" >}} Horario: **lunes a viernes, 10:00–13:30 y 17:30–21:00 · sábados, 10:00–13:30**
 
-<!-- PENDIENTE cliente: confirmar sábados y variaciones de temporada;
-     el horario debe coincidir exactamente con Google Business Profile. -->
 ---
 ## ¿Prefieres escribirnos? Cuéntanos en qué podemos ayudarte
 

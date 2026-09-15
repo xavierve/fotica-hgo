@@ -83,7 +83,7 @@ sections:
   # - Fachadas: Avenida vertical, Duque vertical también disponible (alternativa a la
   #   horizontal D3A7496 usada ahora). Foco resuelve el mismatch de aspect ratio con
   #   `object-fit: cover` en CSS en vez de recortar/homogeneizar los archivos — no
-  #   hace falta sustituir 100-instalaciones_fausto_avenida_fachada.webp por la vertical salvo que se prefiera
+  #   hace falta sustituir 100-instalaciones_fausto_andalucia_fachada.webp por la vertical salvo que se prefiera
   #   por composición, no por el ratio en sí.
   # - PLACEHOLDER horario: { { < hours > } } aún no existe (pendiente Claude Code, ver
   #   memoria de proyecto). En cuanto exista, valorar si añadirlo aquí o dejarlo solo
@@ -92,10 +92,10 @@ sections:
     title: "Dos centros en Torre del Mar, un mismo equipo"
     subtitle: "Mismo trato, mismo compromiso, distinta esquina del pueblo."
     items:
-      - image: "/images/100-instalaciones_fausto_avenida_fachada.webp"
+      - image: "/images/100-instalaciones_fausto_andalucia_fachada.webp"
         imageAlt: "Fachada de Centro Fausto Andalucía, Torre del Mar"
         legend: "Centro Fausto Andalucía — Av. Andalucía, 84 B"
-      - image: "/images/100-instalaciones_fausto_avenida_interior.webp"
+      - image: "/images/100-instalaciones_fausto_andalucia_interior.webp"
         imageAlt: "Interior de Centro Fausto Andalucía"
         legend: "Centro Fausto Andalucía — interior"
       - image: "/images/100-instalaciones_fausto_duque_fachada.webp"

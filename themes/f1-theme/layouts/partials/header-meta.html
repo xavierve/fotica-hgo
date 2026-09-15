@@ -1,8 +1,10 @@
 {{ partial "seo.html" . }}
 {{ partial "og.html" . }}
 {{ partial "schema.html" . }}
-{{ $critical := resources.Get "css/critical.css" }}{{ if $critical }}<style>{{ $critical.Content | safeCSS }}</style>{{ end }}
-{{ $css := resources.Get "css/main.css" }}{{ if $css }}<link rel="stylesheet" href="{{ $css.RelPermalink }}">{{ end }}
+{{/* El CSS fuente se mantiene legible (sin minificar) para poder leerlo y
+     generar diffs limpios; Hugo lo minifica en el build. */}}
+{{ $critical := resources.Get "css/critical.css" }}{{ if $critical }}<style>{{ ($critical | minify).Content | safeCSS }}</style>{{ end }}
+{{ $css := resources.Get "css/main.css" }}{{ if $css }}{{ $css = $css | minify | fingerprint }}<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">{{ end }}
 <link rel="icon" href="/favicon/favicon.ico" sizes="32x32">
 <link rel="icon" href="/favicon/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png">
