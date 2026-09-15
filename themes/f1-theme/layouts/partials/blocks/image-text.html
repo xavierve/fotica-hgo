@@ -1,5 +1,8 @@
 {{ $extra := slice }}
 {{ if .reverse }}{{ $extra = $extra | append "is-reverse" }}{{ end }}
+{{/* Sin imagen el grid de dos columnas dejaba la derecha vacia y el texto
+     ocupando solo media pagina. is-textonly lo colapsa a una columna. */}}
+{{ if not .image }}{{ $extra = $extra | append "is-textonly" }}{{ end }}
 <section class="{{ partial "block-classes.html" (dict "name" "image-text" "context" . "extra" $extra) }}">
   <div class="container image-text-inner has-cols">
     <div class="image-text-copy">

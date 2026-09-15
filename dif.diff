@@ -1,95 +1,13 @@
-diff --git a/themes/f1-theme/assets/css/main.css b/themes/f1-theme/assets/css/main.css
-index 2f12e0f..4511571 100644
---- a/themes/f1-theme/assets/css/main.css
-+++ b/themes/f1-theme/assets/css/main.css
-@@ -299,6 +299,26 @@
-    (A nivel de página las sections NO llevan margin: las bandas deben tocarse.) */
- .prose .block{margin-block:clamp(1.5rem,4vw,2.5rem)}
- 
-+/* === Ritmo vertical entre bloques de página ==============================
-+   Problema: .block lleva padding arriba y abajo, y el padding NO colapsa, asi
-+   que dos bloques transparentes seguidos sumaban el doble de aire (96+96=192).
-+   Regla:
-+     - bloque CON fondo (.has-surface) -> conserva padding: el aire va DENTRO
-+       de la banda y las bandas siguen tocandose entre si.
-+     - bloque SIN fondo -> el aire pasa a margin, que colapsa entre hermanos:
-+       dos transparentes seguidos separan --block-pad una sola vez.
-+   flow-root en #main-content evita que ese margin se escape del contenedor. */
-+#main-content{display:flow-root}
-+.block:not(.has-surface){padding-block:0;margin-block:var(--block-pad)}
-+.block-pad-compact:not(.has-surface){margin-block:var(--block-pad-compact)}
-+.block-pad-spacious:not(.has-surface){margin-block:var(--block-pad-spacious)}
-+
-+/* Leyenda de imagen en image-text (figcaption) */
-+.image-text-caption{margin-top:.55rem;font-size:.85em;line-height:1.45;color:var(--color-muted)}
-+.image-text-caption p{margin:0}
-+.image-text-caption strong{color:inherit}
-+.has-surface .image-text-caption{color:inherit;opacity:.8}
-+
- /* spacer shortcode — altura fluida por talla (m por defecto) */
- .spacer{height:var(--space-m)}
- .spacer-s{height:var(--space-s)}
-diff --git a/themes/f1-theme/layouts/partials/block-classes.html b/themes/f1-theme/layouts/partials/block-classes.html
-index 393732b..45b2a2c 100644
---- a/themes/f1-theme/layouts/partials/block-classes.html
-+++ b/themes/f1-theme/layouts/partials/block-classes.html
-@@ -1,4 +1,5 @@
- {{ $ctx := .context }}
-+{{ $name := .name }}
- {{/* Alias de talla (s/m/l) → nombres canónicos, solo para pad. textSize ya NO tiene
-      alias: xs|s|m|l|xl es el nombre canónico directo de la clase block-text-*.
-      Ver "Talla de bloque vs talla de prosa" en docs/FRONTMATTER.md. */}}
-@@ -21,4 +22,19 @@
- {{ with $ctx.class }}
-   {{ $classes = $classes | append . }}
- {{ end }}
-+{{/* has-surface: el bloque pinta fondo propio, sea por parametro (bgColor/bg),
-+     por variante, por clase de paleta (bg-colorN) o por ser un tipo de bloque
-+     que siempre lleva banda. Gobierna el ritmo vertical: los bloques CON fondo
-+     conservan padding (el aire va dentro de la banda); los que NO tienen fondo
-+     usan margin, que colapsa entre hermanos. Ver "Ritmo vertical" en main.css. */}}
-+{{ $surfaceVariants := slice "soft" "featured" "contrast" }}
-+{{ $surfaceBlocks := slice "counter" "trustbar" }}
-+{{ if or
-+      $ctx.bgColor
-+      $ctx.bg
-+      (in $surfaceVariants ($ctx.variant | default "default"))
-+      (in $surfaceBlocks $name)
-+      (strings.Contains ($ctx.class | default "") "bg-color") }}
-+  {{ $classes = $classes | append "has-surface" }}
-+{{ end }}
- {{ return (delimit $classes " ") }}
 diff --git a/themes/f1-theme/layouts/partials/blocks/image-text.html b/themes/f1-theme/layouts/partials/blocks/image-text.html
-index 3e9b63d..ceaf61c 100644
+index 3e9b63d..d178796 100644
 --- a/themes/f1-theme/layouts/partials/blocks/image-text.html
 +++ b/themes/f1-theme/layouts/partials/blocks/image-text.html
-@@ -6,6 +6,6 @@
-       {{ with .title }}<h2>{{ . }}</h2>{{ end }}
-       {{ with .text }}<div class="prose">{{ . | markdownify }}</div>{{ end }}
-     </div>
--    {{ with .image }}<figure class="image-text-media">{{ partial "responsive-img.html" (dict "src" . "alt" $.imageAlt "sizes" "(min-width:821px) 50vw, 100vw") }}</figure>{{ end }}
-+    {{ with .image }}<figure class="image-text-media">{{ partial "responsive-img.html" (dict "src" . "alt" $.imageAlt "sizes" "(min-width:821px) 50vw, 100vw") }}{{ with $.caption }}<figcaption class="image-text-caption">{{ . | markdownify }}</figcaption>{{ end }}</figure>{{ end }}
-   </div>
- </section>
-diff --git a/themes/f1-theme/layouts/shortcodes/image-text.html b/themes/f1-theme/layouts/shortcodes/image-text.html
-index 45e3a29..64bd2cf 100644
---- a/themes/f1-theme/layouts/shortcodes/image-text.html
-+++ b/themes/f1-theme/layouts/shortcodes/image-text.html
-@@ -24,6 +24,9 @@
-   Parámetros con nombre (todos opcionales salvo image):
-     image     — ruta de la imagen (obligatorio)
-     imageAlt  — alt text
-+    caption   — leyenda bajo la imagen (figcaption). Admite markdown inline.
-+                No debe repetir el alt: el alt describe la escena, la leyenda
-+                aporta el dato (nombre, centro, credencial).
-     title     — título opcional sobre el copy
-     variant   — default | soft | featured | contrast
-     width     — default | wide | full
-@@ -41,6 +44,7 @@
-     "text"     .Inner
-     "image"    $image
-     "imageAlt" (.Get "imageAlt")
-+    "caption"  (.Get "caption")
-     "variant"  (.Get "variant")
-     "width"    (.Get "width")
-     "reverse"  (eq (.Get "reverse") "true")
+@@ -1,5 +1,8 @@
+ {{ $extra := slice }}
+ {{ if .reverse }}{{ $extra = $extra | append "is-reverse" }}{{ end }}
++{{/* Sin imagen el grid de dos columnas dejaba la derecha vacia y el texto
++     ocupando solo media pagina. is-textonly lo colapsa a una columna. */}}
++{{ if not .image }}{{ $extra = $extra | append "is-textonly" }}{{ end }}
+ <section class="{{ partial "block-classes.html" (dict "name" "image-text" "context" . "extra" $extra) }}">
+   <div class="container image-text-inner has-cols">
+     <div class="image-text-copy">
