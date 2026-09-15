@@ -1,0 +1,20 @@
+{{- /*
+  partials/hours.html — horario de apertura desde data/site.yaml (contact.hours).
+
+  Fuente unica: contact.hours alimenta footer, pagina de contacto y bloque
+  locations; contact.hoursSpec alimenta schema.org en schema.html. Cambiar el
+  horario = editar site.yaml, nada mas.
+
+  Las claves vacias no se pintan (sunday: "" = cerrado, no se muestra).
+*/ -}}
+{{- $h := site.Data.site.contact.hours | default dict -}}
+{{- if or $h.weekdays $h.saturday $h.sunday -}}
+<div class="hours">
+  {{ partial "icons.html" "clock" }}
+  <ul class="hours-list">
+    {{ with $h.weekdays }}<li>{{ . }}</li>{{ end }}
+    {{ with $h.saturday }}<li>{{ . }}</li>{{ end }}
+    {{ with $h.sunday }}<li>{{ . }}</li>{{ end }}
+  </ul>
+</div>
+{{- end -}}

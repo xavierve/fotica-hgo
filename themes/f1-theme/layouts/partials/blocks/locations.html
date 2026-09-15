@@ -1,0 +1,61 @@
+{{- /*
+  blocks/locations.html — sedes del negocio desde data/site.yaml.
+
+  NO recibe direcciones ni telefonos por parametro: los lee de site.locations[]
+  para que exista una sola fuente de verdad (la misma que consume footer.html
+  y schema.html). Si cambia un telefono, se cambia en site.yaml y punto.
+
+  sections:
+    - type: locations
+      title: "Dos centros en Torre del Mar para estar siempre cerca"
+      subtitle: "Contamos con dos centros..."
+      layout: compact        # compact (sin imagen) | full (con imagen, por defecto)
+      showCommon: true       # anade movil/WhatsApp, email y horario comunes
+
+  Cada sede usa de site.yaml: name, address, location, phone, phoneLabel,
+  mapUrl y -- solo en layout full -- image + imageAlt.
+*/ -}}
+{{- $siteData := site.Data.site -}}
+{{- $locations := $siteData.locations | default slice -}}
+{{- $contact := $siteData.contact | default dict -}}
+{{- $compact := eq (.layout | default "full") "compact" -}}
+{{- $extra := slice (printf "locations-%s" (cond $compact "compact" "full")) -}}
+<section class="{{ partial "block-classes.html" (dict "name" "locations" "context" . "extra" $extra) }}">
+  <div class="container">
+    {{ with .title }}<h2>{{ . }}</h2>{{ end }}
+    {{ with .subtitle }}<p class="section-subtitle">{{ . }}</p>{{ end }}
+    <div class="locations-grid">
+      {{ range $locations }}
+      {{- $loc := . -}}
+      <article class="location-card">
+        {{ if and (not $compact) $loc.image }}
+        <a class="location-media" href="{{ $loc.mapUrl | safeURL }}">
+          {{ partial "responsive-img.html" (dict "src" $loc.image "alt" ($loc.imageAlt | default (printf "Ubicación de %s en el mapa" $loc.name)) "sizes" "(min-width:821px) 50vw, 100vw") }}
+        </a>
+        {{ end }}
+        <h3 class="location-name">{{ $loc.name }}</h3>
+        <address class="location-meta">
+          {{ if $loc.mapUrl }}
+          <a href="{{ $loc.mapUrl | safeURL }}">{{ partial "icons.html" "location" }}<span>{{ $loc.address }}{{ with $loc.location }} · {{ . }}{{ end }}</span></a>
+          {{ else }}
+          <span>{{ partial "icons.html" "location" }}<span>{{ $loc.address }}{{ with $loc.location }} · {{ . }}{{ end }}</span></span>
+          {{ end }}
+          {{ with $loc.phone }}
+          <a href="{{ printf "tel:%s" . | safeURL }}">{{ partial "icons.html" "phone" }}<span>{{ $loc.phoneLabel | default . }}</span></a>
+          {{ end }}
+        </address>
+      </article>
+      {{ end }}
+    </div>
+    {{ if .showCommon }}
+    <div class="locations-common">
+      <h3>Común a ambos centros</h3>
+      <p class="locations-common-links">
+        {{ with $contact.whatsapp }}<a href="{{ printf "https://wa.me/%s" (replace . "+" "") | safeURL }}">{{ partial "icons.html" "whatsapp" }}<span>Móvil / WhatsApp: {{ $contact.phoneLabel | default . }}</span></a>{{ end }}
+        {{ with $contact.email }}<a href="{{ printf "mailto:%s" . | safeURL }}">{{ partial "icons.html" "email" }}<span>{{ . }}</span></a>{{ end }}
+      </p>
+      {{ partial "hours.html" . }}
+    </div>
+    {{ end }}
+  </div>
+</section>

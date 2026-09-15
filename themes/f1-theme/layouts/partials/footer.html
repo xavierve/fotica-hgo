@@ -60,6 +60,7 @@
         {{ with $contact.email }} · <a href="{{ printf "mailto:%s" . | safeURL }}">{{ . }}</a>{{ end }}
       </address>
       {{ end }}
+      {{ partial "hours.html" . }}
     </section>
   </div>
   <div class="container footer-bottom">

@@ -65,10 +65,10 @@
   {{- with $loc.phone }}{{ $optician = merge $optician (dict "telephone" .) }}{{ end -}}
   {{- with $loc.mapUrl }}{{ $optician = merge $optician (dict "hasMap" .) }}{{ end -}}
   {{- with $loc.image }}{{ $optician = merge $optician (dict "image" (. | absURL)) }}{{ end -}}
-  {{/* openingHoursSpecification: pendiente de validación del cliente.
-       Cuando se confirme, añadir en site.yaml por location:
+  {{/* openingHoursSpecification: se hereda de contact.hoursSpec salvo que la
+       sede defina el suyo propio. Formato en site.yaml:
        hoursSpec: [{days: [Monday,…], opens: "10:00", closes: "13:30"}, …] */}}
-  {{- with $loc.hoursSpec -}}
+  {{- with (or $loc.hoursSpec $contact.hoursSpec) -}}
     {{- $spec := slice -}}
     {{- range . -}}
       {{- $spec = $spec | append (dict "@type" "OpeningHoursSpecification" "dayOfWeek" .days "opens" .opens "closes" .closes) -}}

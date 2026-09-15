@@ -1110,7 +1110,7 @@ h2.fs-xs {
 }
 
 /* === Gallery: object-position:top en vez del center por defecto.
-   Motivo: fachadas verticales (p.ej. avenida-fachada.webp, 1440x2160) forzadas a
+   Motivo: fachadas verticales (p.ej. andalucia-fachada.webp, 1440x2160) forzadas a
    la caja 4/3 existente pierden ~40% de la imagen; con center-crop eso significa
    cortar el rótulo "Fausto" de la parte superior, justo el elemento de marca que
    más importa en una foto de fachada. object-position:top ancla el recorte arriba
@@ -1165,5 +1165,99 @@ h2.fs-xs {
 @media(min-width:821px) {
   .text-split-inner {
     grid-template-columns: 1fr 1fr
+  }
+}
+/* === bloque locations ====================================================
+   Sedes desde site.yaml. Dos layouts:
+     .locations-full    -> con imagen de mapa/fachada (pagina Contacto)
+     .locations-compact -> solo texto y enlaces (home, footer de seccion)
+   Los iconos y el color de enlace heredan de la superficie (--bg-text-color),
+   asi que el bloque funciona sobre fondo claro y sobre banda oscura. */
+.locations-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+}
+.location-media {
+  display: block;
+  margin-bottom: .9rem;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.location-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.location-name {
+  margin: 0 0 .4rem;
+  font-size: 1.15em;
+}
+.location-meta {
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+  font-style: normal;
+}
+.location-meta a,
+.locations-common-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  color: var(--color-accent-text);
+  font-weight: 600;
+  text-decoration: none;
+}
+.location-meta a:hover,
+.locations-common-links a:hover {
+  text-decoration: underline;
+}
+.locations-common {
+  margin-top: clamp(1.75rem, 4vw, 2.5rem);
+}
+.locations-common h3 {
+  margin: 0 0 .6rem;
+}
+.locations-common-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem 1.5rem;
+  margin: 0 0 .6rem;
+}
+/* Horario — partial hours.html, usado en footer, contacto y locations */
+.hours {
+  display: flex;
+  align-items: flex-start;
+  gap: .45rem;
+}
+.hours-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.hours-list li {
+  margin: 0;
+}
+.footer-grid .hours {
+  margin-top: .75rem;
+}
+/* En superficie con fondo propio los enlaces siguen el par de color */
+.has-surface .location-meta a,
+.has-surface .locations-common-links a {
+  color: inherit;
+}
+/* El layout compacto centra si el bloque lo pide (align: center) */
+.block-align-center .location-meta {
+  align-items: center;
+}
+.block-align-center .locations-common-links {
+  justify-content: center;
+}
+.block-align-center .hours {
+  justify-content: center;
+}
+@media(min-width:821px) {
+  .locations-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

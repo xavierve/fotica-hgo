@@ -1,0 +1,17 @@
+{{- /*
+  {{< locations layout="compact" showCommon="true" title="..." subtitle="..." >}}
+
+  Equivalente en body markdown del bloque sections: - type: locations.
+  Los datos salen de site.yaml, no de parametros. Ver blocks/locations.html.
+*/ -}}
+{{ partial "blocks/locations.html" (dict
+    "title"      (.Get "title")
+    "subtitle"   (.Get "subtitle")
+    "layout"     (.Get "layout")
+    "showCommon" (eq (.Get "showCommon") "true")
+    "variant"    (.Get "variant")
+    "width"      (.Get "width")
+    "align"      (.Get "align")
+    "pad"        (.Get "pad")
+    "class"      (.Get "class")
+) }}

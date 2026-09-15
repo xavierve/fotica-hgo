@@ -80,7 +80,7 @@ sections:
   #   no se benefician de indirección vía site.yaml — decisión consciente, no descuido.
   # - Teléfono, email, WhatsApp y horario: siguen SIN aparecer aquí. Eso sí cambia
   #   (el horario cada verano/invierno) y sí debe salir de site.yaml — ver TODO abajo.
-  # - Fachadas: Avenida vertical, Duque vertical también disponible (alternativa a la
+  # - Fachadas: Andalucía vertical, Duque vertical también disponible (alternativa a la
   #   horizontal D3A7496 usada ahora). Foco resuelve el mismatch de aspect ratio con
   #   `object-fit: cover` en CSS en vez de recortar/homogeneizar los archivos — no
   #   hace falta sustituir 100-instalaciones_fausto_andalucia_fachada.webp por la vertical salvo que se prefiera
@@ -164,6 +164,6 @@ Lo dice el propio equipo directivo, y no es una frase para la web: es la razón 
      archivo — cambia cada verano/invierno y su única fuente debe ser site.yaml.
      Ver TODO completo en la memoria del proyecto: "Arquitectura de horarios". -->
 
-<!-- {{< cta title="Cómo llegar y horarios de cada centro" subtitle="Direcciones, teléfonos y horario de Avenida y Duque." b1text="Ver ubicaciones" b1url="/contacto/" b1icon="location" >}}
+<!-- {{< cta title="Cómo llegar y horarios de cada centro" subtitle="Direcciones, teléfonos y horario de Andalucía y Duque." b1text="Ver ubicaciones" b1url="/contacto/" b1icon="location" >}}
 -->
 

@@ -44,16 +44,18 @@ contact:
     saturday: "Sábados: 10:00–13:30"
     sunday: ""   # vacío = cerrado, footer no lo muestra
 
-  # Formato schema.org → consumed by schema.html vía location.hoursSpec
-  # (cada location lo hereda; si en el futuro difieren por sede, sobreescribir en la location)
+  # Formato schema.org → consumed by schema.html. La clave es "days" (no
+  # "dayOfWeek"): es la que lee schema.html al construir OpeningHoursSpecification.
+  # Cada sede lo hereda de aquí; si en el futuro una difiere, añadir hoursSpec
+  # dentro de esa location para sobreescribir.
   hoursSpec:
-    - dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday"]
+    - days: ["Monday","Tuesday","Wednesday","Thursday","Friday"]
       opens: "10:00"
       closes: "13:30"
-    - dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday"]
+    - days: ["Monday","Tuesday","Wednesday","Thursday","Friday"]
       opens: "17:30"
       closes: "21:00"
-    - dayOfWeek: ["Saturday"]
+    - days: ["Saturday"]
       opens: "10:00"
       closes: "13:30"
 
@@ -85,16 +87,8 @@ locations:
     phone: "+34952540964"
     phoneLabel: "952 54 09 64"
     mapUrl: "https://share.google/lt3s0XecMBnpr3exH"
-    hoursSpec:
-      - days: ["Monday","Tuesday","Wednesday","Thursday","Friday"]
-        opens: "10:00"
-        closes: "13:30"
-      - days: ["Monday","Tuesday","Wednesday","Thursday","Friday"]
-        opens: "17:30"
-        closes: "21:00"
-      - days: ["Saturday"]
-        opens: "10:00"
-        closes: "13:30"
+    image: "/images/400-fausto_andalucia_mapa.webp"
+    imageAlt: "Fachada y ubicación de Fausto Andalucía en Google Maps"
   - id: "duque"
     name: "Centro Fausto Duque"
     address: "Av. Duque de Ahumada, 1C"
@@ -102,16 +96,8 @@ locations:
     phone: "+34952547090"
     phoneLabel: "952 54 70 90"
     mapUrl: "https://share.google/uotnWlZFT0nfpuVoP"
-    hoursSpec:
-      - days: ["Monday","Tuesday","Wednesday","Thursday","Friday"]
-        opens: "10:00"
-        closes: "13:30"
-      - days: ["Monday","Tuesday","Wednesday","Thursday","Friday"]
-        opens: "17:30"
-        closes: "21:00"
-      - days: ["Saturday"]
-        opens: "10:00"
-        closes: "13:30"
+    image: "/images/400-fausto_duque_mapa.webp"
+    imageAlt: "Fachada y ubicación de Fausto Duque en Google Maps"
 
 # ─── SOCIAL ──────────────────────────────────────────────────────────────────
 social:
