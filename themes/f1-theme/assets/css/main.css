@@ -379,6 +379,10 @@ address {
     grid-template-columns: 1fr 1fr;
     gap: clamp(2rem, 5vw, 4rem)
   }
+  /* sin imagen no hay segunda columna que rellenar */
+  .block-image-text.is-textonly .image-text-inner {
+    grid-template-columns: 1fr
+  }
   .footer-grid {
     grid-template-columns: 1fr 1fr 1.35fr
   }
@@ -964,6 +968,45 @@ h2.fs-xs {
    (A nivel de página las sections NO llevan margin: las bandas deben tocarse.) */
 .prose .block {
   margin-block: clamp(1.5rem, 4vw, 2.5rem)
+}
+
+/* === Ritmo vertical entre bloques de página ==============================
+   .block lleva padding arriba y abajo, y el padding NO colapsa: dos bloques
+   transparentes seguidos sumaban el doble de aire (96+96=192).
+     - bloque CON fondo (.has-surface) -> conserva padding: el aire va DENTRO
+       de la banda y las bandas siguen tocándose entre sí.
+     - bloque SIN fondo -> el aire pasa a margin, que colapsa entre hermanos.
+   flow-root en #main-content evita que ese margin se escape del contenedor. */
+#main-content {
+  display: flow-root
+}
+.block:not(.has-surface) {
+  padding-block: 0;
+  margin-block: var(--block-pad)
+}
+.block-pad-compact:not(.has-surface) {
+  margin-block: var(--block-pad-compact)
+}
+.block-pad-spacious:not(.has-surface) {
+  margin-block: var(--block-pad-spacious)
+}
+
+/* Leyenda de imagen en image-text (figcaption) */
+.image-text-caption {
+  margin-top: .55rem;
+  font-size: .85em;
+  line-height: 1.45;
+  color: var(--color-muted)
+}
+.image-text-caption p {
+  margin: 0
+}
+.image-text-caption strong {
+  color: inherit
+}
+.has-surface .image-text-caption {
+  color: inherit;
+  opacity: .8
 }
 
 /* spacer shortcode — altura fluida por talla (m por defecto) */
