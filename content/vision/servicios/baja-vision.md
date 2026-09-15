@@ -74,7 +74,7 @@ Hablamos de baja visión cuando la pérdida de agudeza o de campo visual no pued
 
 Muchas de estas patologías pueden detectarse a tiempo en el [examen de salud ocular](/vision/servicios/optometria/) de una revisión completa.
 
-{{< image-text image="/images/214_baja_vision_juan.webp" imageAlt="Juan de Dios, óptico-optometrista de Ópticas Fausto, realizando una revisión ocular a un paciente" >}}
+{{< image-text image="/images/214-baja_vision_juan.webp" imageAlt="Juan de Dios, óptico-optometrista de Ópticas Fausto, realizando una revisión ocular a un paciente" >}}
 Muchas de estas patologías se detectan antes de dar síntomas — otro motivo más para no dejar pasar la revisión anual, sobre todo a partir de cierta edad.
 {{< /image-text >}}
 

@@ -1,510 +1,174 @@
-diff --git a/content/_index.md b/content/_index.md
-index 603241e..3d97fd3 100644
---- a/content/_index.md
-+++ b/content/_index.md
-@@ -55,7 +55,7 @@ sections:
-     title: "Nos conocemos de toda la vida. Y eso se nota."
-     text: "Ópticas Fausto no es solo una óptica ni solo un centro auditivo. Es un lugar al que muchas personas vuelven porque se sienten conocidas, escuchadas y acompañadas. La continuidad del equipo nos permite saber quién vuelve por la puerta, qué necesita y cómo le fue con su última revisión, sus gafas o sus audífonos. Esa confianza se construye con años de cercanía real y con la tranquilidad de no empezar de cero en cada visita."
-     image: "/images/100-atencion-personalizada.webp"
--    imageAlt: "Leonor atendiendo a una clienta y su hija en el Centro Fausto Avenida"
-+    imageAlt: "Leonor atendiendo a una clienta y su hija en el Centro Fausto Andalucía"
-     caption: "**Leonor** en Centro Fausto Andalucía"
-   - type: image-text
-     title: "Atención humana, seguimiento real"
-@@ -84,9 +84,11 @@ sections:
-     button2:
-       text: "Llamar ahora"
-       url: "tel:+34952540964"
--  - type: image-text
+diff --git a/content/demo/_index.md b/content/demo/_index.md
+index 3b4cea0..4152e2b 100644
+--- a/content/demo/_index.md
++++ b/content/demo/_index.md
+@@ -311,6 +311,39 @@ sections:
+     bgColor: "#4a2f6b"
+     textSize: l
+     preset: contact
++
++  # ============ LOCATIONS — sedes desde data/site.yaml, NO por parámetro ============
++  # Los datos (nombre, dirección, teléfono, mapUrl, image) salen de site.yaml →
++  # locations[]. El bloque solo decide cómo se presentan.
 +  - type: locations
-     title: "Dos centros en Torre del Mar para estar siempre cerca"
--    text: "Contamos con dos centros en Torre del Mar, pensados para atender tanto a residentes como a visitantes. También atendemos en inglés y alemán para turistas o personas extranjeras que necesiten ayuda con gafas, lentillas o audífonos durante su estancia."
-+    subtitle: "Contamos con dos centros en Torre del Mar, pensados para atender tanto a residentes como a visitantes. También atendemos en inglés y alemán para turistas o personas extranjeras que necesiten ayuda con gafas, lentillas o audífonos durante su estancia."
++    title: "16.1- locations · layout: compact (solo texto y enlaces)"
++    subtitle: "Sin imagen: nombre, dirección enlazada a Maps y teléfono en tel:. Es el layout para intercalar en una home sin cargarla de fotos."
++    layout: "compact"
++
++  - type: locations
++    title: "16.2- locations · layout: compact · align: center"
++    subtitle: "Mismo layout, centrado: los iconos, los enlaces y el horario se alinean al centro vía block-align-center."
 +    layout: "compact"
 +    align: "center"
-   - type: testimonials
-     title: "Lo que dicen quienes confían en nosotros"
-     items:
-diff --git a/content/contacto/_index.md b/content/contacto/_index.md
-index af6f4c7..e407cf7 100644
---- a/content/contacto/_index.md
-+++ b/content/contacto/_index.md
-@@ -42,35 +42,7 @@ sections:
- 
- ## Nuestros dos centros en Torre del Mar
- 
--{{< text-split >}}
--{{< text-split-item >}}
--[![Fachada y ubicación de Fausto Andalucía en Google Maps](/images/400-fausto_andalucia_mapa.webp)](https://share.google/lt3s0XecMBnpr3exH)
--
--**Centro Fausto Andalucía**
--
--[{{< icon "location" >}} Av. Andalucía, 84 B · Torre del Mar](https://share.google/lt3s0XecMBnpr3exH)
--
--[{{< icon "phone" >}} (+34) 952 54 09 64](tel:+34952540964)
--{{< /text-split-item >}}
--
--{{< text-split-item >}}
--[![Fachada y ubicación de Fausto Duque en Google Maps](/images/400-fausto_duque_mapa.webp)](https://share.google/uotnWlZFT0nfpuVoP)
--
--**Centro Fausto Duque**
--
--[{{< icon "location" >}} Av. Duque de Ahumada, 1C · Torre del Mar](https://share.google/uotnWlZFT0nfpuVoP)
--
--[{{< icon "phone" >}} (+34) 952 54 70 90](tel:+34952547090)
--{{< /text-split-item >}}
--{{< /text-split >}}
--
--### **Común a ambos centros**
--
--[{{< icon "whatsapp" >}} Móvil / WhatsApp: +34 717 77 00 90](https://wa.me/34717770090)
--
--[{{< icon "email" >}} info@opticafausto.com](mailto:info@opticafausto.com)
--
--{{< icon "clock" >}} Horario: **lunes a viernes, 10:00–13:30 y 17:30–21:00 · sábados, 10:00–13:30**
-+{{< locations showCommon="true" >}}
- 
++
++  - type: locations
++    title: "16.3- locations · layout: compact · showCommon: true"
++    subtitle: "Añade el bloque común a ambas sedes: móvil/WhatsApp, email y horario desde contact.hours."
++    layout: "compact"
++    showCommon: true
++
++  - type: locations
++    title: "16.4- locations · layout: full (con imagen de mapa)"
++    subtitle: "Usa location.image + imageAlt de site.yaml y enlaza la imagen a mapUrl. Es el layout de la página de Contacto."
++    layout: "full"
++    showCommon: true
++
++  - type: locations
++    title: "16.5- locations · class: bg-color2 (sobre banda oscura)"
++    subtitle: "Los enlaces e iconos heredan el par de color de la superficie: no hay que tocar nada para que se lean sobre fondo oscuro."
++    layout: "compact"
++    class: "bg-color2"
++    align: "center"
  ---
- ## ¿Prefieres escribirnos? Cuéntanos en qué podemos ayudarte
-diff --git a/content/nosotros/_index.md b/content/nosotros/_index.md
-index 8e90dcd..b49775d 100644
---- a/content/nosotros/_index.md
-+++ b/content/nosotros/_index.md
-@@ -80,7 +80,7 @@ sections:
-   #   no se benefician de indirección vía site.yaml — decisión consciente, no descuido.
-   # - Teléfono, email, WhatsApp y horario: siguen SIN aparecer aquí. Eso sí cambia
-   #   (el horario cada verano/invierno) y sí debe salir de site.yaml — ver TODO abajo.
--  # - Fachadas: Avenida vertical, Duque vertical también disponible (alternativa a la
-+  # - Fachadas: Andalucía vertical, Duque vertical también disponible (alternativa a la
-   #   horizontal D3A7496 usada ahora). Foco resuelve el mismatch de aspect ratio con
-   #   `object-fit: cover` en CSS en vez de recortar/homogeneizar los archivos — no
-   #   hace falta sustituir 100-instalaciones_fausto_andalucia_fachada.webp por la vertical salvo que se prefiera
-@@ -164,6 +164,6 @@ Lo dice el propio equipo directivo, y no es una frase para la web: es la razón
-      archivo — cambia cada verano/invierno y su única fuente debe ser site.yaml.
-      Ver TODO completo en la memoria del proyecto: "Arquitectura de horarios". -->
  
--<!-- {{< cta title="Cómo llegar y horarios de cada centro" subtitle="Direcciones, teléfonos y horario de Avenida y Duque." b1text="Ver ubicaciones" b1url="/contacto/" b1icon="location" >}}
-+<!-- {{< cta title="Cómo llegar y horarios de cada centro" subtitle="Direcciones, teléfonos y horario de Andalucía y Duque." b1text="Ver ubicaciones" b1url="/contacto/" b1icon="location" >}}
- -->
+ ## P1- El prose: body markdown {.demo}
+@@ -491,6 +524,35 @@ Las cards siguientes **no están escritas aquí**: se autodescubren de `/vision/
  
-diff --git a/data/site.yaml b/data/site.yaml
-index 5d48d93..7962c0f 100644
---- a/data/site.yaml
-+++ b/data/site.yaml
-@@ -44,16 +44,18 @@ contact:
-     saturday: "Sábados: 10:00–13:30"
-     sunday: ""   # vacío = cerrado, footer no lo muestra
+ {{< cards section="/vision/servicios" columns="3" title="cards automáticas de una sección" >}}
  
--  # Formato schema.org → consumed by schema.html vía location.hoursSpec
--  # (cada location lo hereda; si en el futuro difieren por sede, sobreescribir en la location)
-+  # Formato schema.org → consumed by schema.html. La clave es "days" (no
-+  # "dayOfWeek"): es la que lee schema.html al construir OpeningHoursSpecification.
-+  # Cada sede lo hereda de aquí; si en el futuro una difiere, añadir hoursSpec
-+  # dentro de esa location para sobreescribir.
-   hoursSpec:
--    - dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday"]
-+    - days: ["Monday","Tuesday","Wednesday","Thursday","Friday"]
-       opens: "10:00"
-       closes: "13:30"
--    - dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday"]
-+    - days: ["Monday","Tuesday","Wednesday","Thursday","Friday"]
-       opens: "17:30"
-       closes: "21:00"
--    - dayOfWeek: ["Saturday"]
-+    - days: ["Saturday"]
-       opens: "10:00"
-       closes: "13:30"
++### p12- Shortcode {{</* locations */>}}
++
++Las sedes **no se escriben aquí**: salen de `data/site.yaml` → `locations[]`, la
++misma fuente que alimentan el footer y el `schema.org`. Cambiar un teléfono en
++`site.yaml` lo cambia en los tres sitios a la vez.
++
++Versión compacta, sin imagen:
++
++{{< locations layout="compact" title="p12.1- locations · layout compact" subtitle="Dirección enlazada a Google Maps y teléfono clicable, sin foto." >}}
++
++Con el bloque común (móvil/WhatsApp, email y horario):
++
++{{< locations layout="compact" showCommon="true" title="p12.2- locations · showCommon" >}}
++
++Versión completa, con la imagen de mapa de cada sede:
++
++{{< locations layout="full" title="p12.3- locations · layout full" subtitle="Usa location.image de site.yaml; la imagen enlaza al mapa." >}}
++
++### p13- Shortcode {{</* hours */>}}
++
++Horario desde `site.yaml` → `contact.hours`. Las claves vacías no se pintan, así
++que `sunday: ""` desaparece solo. Lo usan el footer, el bloque `locations` con
++`showCommon` y cualquier página que lo intercale en el prose:
++
++{{< hours >}}
++
++Para el `schema.org` **no** se usa este partial: los datos salen de
++`contact.hoursSpec` (clave `days`), que cada sede hereda salvo que defina el suyo.
++
+ ---
  
-@@ -85,16 +87,8 @@ locations:
-     phone: "+34952540964"
-     phoneLabel: "952 54 09 64"
-     mapUrl: "https://share.google/lt3s0XecMBnpr3exH"
--    hoursSpec:
--      - days: ["Monday","Tuesday","Wednesday","Thursday","Friday"]
--        opens: "10:00"
--        closes: "13:30"
--      - days: ["Monday","Tuesday","Wednesday","Thursday","Friday"]
--        opens: "17:30"
--        closes: "21:00"
--      - days: ["Saturday"]
--        opens: "10:00"
--        closes: "13:30"
-+    image: "/images/400-fausto_andalucia_mapa.webp"
-+    imageAlt: "Fachada y ubicación de Fausto Andalucía en Google Maps"
-   - id: "duque"
-     name: "Centro Fausto Duque"
-     address: "Av. Duque de Ahumada, 1C"
-@@ -102,16 +96,8 @@ locations:
-     phone: "+34952547090"
-     phoneLabel: "952 54 70 90"
-     mapUrl: "https://share.google/uotnWlZFT0nfpuVoP"
--    hoursSpec:
--      - days: ["Monday","Tuesday","Wednesday","Thursday","Friday"]
--        opens: "10:00"
--        closes: "13:30"
--      - days: ["Monday","Tuesday","Wednesday","Thursday","Friday"]
--        opens: "17:30"
--        closes: "21:00"
--      - days: ["Saturday"]
--        opens: "10:00"
--        closes: "13:30"
-+    image: "/images/400-fausto_duque_mapa.webp"
-+    imageAlt: "Fachada y ubicación de Fausto Duque en Google Maps"
+ **Fin del `PROSE` de la demo. AHORA SE PROCESAN LAS SECTIONS**
+diff --git a/themes/f1-theme/docs/BLOCKS.md b/themes/f1-theme/docs/BLOCKS.md
+index af608c7..13baba0 100644
+--- a/themes/f1-theme/docs/BLOCKS.md
++++ b/themes/f1-theme/docs/BLOCKS.md
+@@ -238,6 +238,59 @@ sections:
+     text: "Frase destacada en **markdown**."
+ ```
  
- # ─── SOCIAL ──────────────────────────────────────────────────────────────────
- social:
-diff --git a/scripts/recoge-imagenes-image-text.bat b/scripts/recoge-imagenes-image-text.bat
-new file mode 100644
-index 0000000..cb28285
---- /dev/null
-+++ b/scripts/recoge-imagenes-image-text.bat
-@@ -0,0 +1,16 @@
-+@echo off
-+REM ===========================================================================
-+REM  recoge-imagenes-image-text.bat
-+REM
-+REM  Copia a static\images\_resize\ todas las imagenes usadas por bloques
-+REM  image-text, tanto en front matter (- type: image-text ... image: "...")
-+REM  como en shortcodes ({{< image-text image="..." >}}).
-+REM
-+REM  Uso: doble clic, o desde la raiz del repo:  scripts\recoge-imagenes-image-text.bat
-+REM  No modifica ni borra nada: solo copia. Se puede relanzar las veces que haga falta.
-+REM ===========================================================================
-+setlocal
-+cd /d "%~dp0\.."
-+powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0recoge-imagenes-image-text.ps1"
-+echo.
-+pause
-diff --git a/scripts/recoge-imagenes-image-text.ps1 b/scripts/recoge-imagenes-image-text.ps1
-new file mode 100644
-index 0000000..db1b79c
---- /dev/null
-+++ b/scripts/recoge-imagenes-image-text.ps1
-@@ -0,0 +1,59 @@
-+# Recoge las imagenes usadas por bloques image-text y las copia a static\images\_resize
-+$ErrorActionPreference = 'Stop'
-+$repo    = Split-Path -Parent $PSScriptRoot
-+$content = Join-Path $repo 'content'
-+$images  = Join-Path $repo 'static\images'
-+$dest    = Join-Path $images '_resize'
++## Locations
 +
-+if (-not (Test-Path $content)) { Write-Host "No encuentro content\ -- lanza el script desde el repo." -f Red; exit 1 }
-+if (-not (Test-Path $dest))    { New-Item -ItemType Directory -Path $dest | Out-Null }
++Sedes del negocio. **No recibe direcciones ni teléfonos por parámetro**: los lee
++de `data/site.yaml` → `locations[]`, la misma fuente que consumen `footer.html`
++y `schema.html`. Si cambia un teléfono se edita `site.yaml` y se actualiza en
++todo el sitio a la vez.
 +
-+$rutas = New-Object System.Collections.Generic.HashSet[string]
++```yaml
++sections:
++  - type: locations
++    title:
++    subtitle:
++    layout: compact      # compact (sin imagen) | full (con imagen, por defecto)
++    showCommon: true     # añade móvil/WhatsApp, email y horario comunes
++    align: center
++```
 +
-+foreach ($md in Get-ChildItem -Path $content -Filter *.md -Recurse) {
-+    $lineas = Get-Content -LiteralPath $md.FullName -Encoding UTF8
++De cada sede usa `name`, `address`, `location`, `phone`, `phoneLabel` y
++`mapUrl`; en `layout: full` añade además `image` e `imageAlt`. La dirección
++enlaza a `mapUrl` y el teléfono a `tel:`, con iconos `location` y `phone`.
 +
-+    # --- 1. shortcodes: {{< image-text ... image="/images/x.webp" ... >}}
-+    foreach ($m in [regex]::Matches(($lineas -join "`n"), '\{\{<\s*image-text\b[^>]*?image\s*=\s*"([^"]+)"')) {
-+        [void]$rutas.Add($m.Groups[1].Value)
-+    }
++Equivalente en body markdown:
 +
-+    # --- 2. front matter: dentro de "- type: image-text" hasta el siguiente "- type:"
-+    $dentro = $false
-+    foreach ($l in $lineas) {
-+        if ($l -match '^\s*-\s*type:\s*(\S+)') {
-+            $dentro = ($matches[1].Trim('"''') -eq 'image-text')
-+            continue
-+        }
-+        if ($dentro -and $l -match '^\s*image:\s*"?([^"\r\n]+)"?\s*$') {
-+            [void]$rutas.Add($matches[1].Trim())
-+        }
-+    }
-+}
++```
++{{</* locations layout="compact" showCommon="true" title="…" subtitle="…" */>}}
++```
 +
-+$copiadas = 0; $faltan = @(); $remotas = 0
-+foreach ($r in $rutas) {
-+    # las paginas demo usan placeholders remotos (picsum.photos): no son nuestras
-+    if ($r -match '^https?://') { $remotas++; continue }
-+    $rel = $r -replace '^/images/', '' -replace '/', '\'
-+    $src = Join-Path $images $rel
-+    if (Test-Path -LiteralPath $src) {
-+        Copy-Item -LiteralPath $src -Destination $dest -Force
-+        $copiadas++
-+        # variante _hd si existe (convencion de responsive-img.html)
-+        $hd = [IO.Path]::ChangeExtension($src, $null).TrimEnd('.') + '_hd' + [IO.Path]::GetExtension($src)
-+        if (Test-Path -LiteralPath $hd) { Copy-Item -LiteralPath $hd -Destination $dest -Force; $copiadas++ }
-+    } else {
-+        $faltan += $r
-+    }
-+}
++`layout` es un parámetro propio y no tiene nada que ver con `variant`, que sigue
++siendo el de fondo (`soft`/`featured`/`contrast`) como en el resto de bloques.
 +
-+Write-Host ""
-+Write-Host "Referencias image-text encontradas: $($rutas.Count)" -f Cyan
-+Write-Host "Archivos copiados a _resize:        $copiadas" -f Green
-+if ($remotas) { Write-Host "Omitidas (URL remota, demo):        $remotas" -f DarkGray }
-+if ($faltan.Count) {
-+    Write-Host "NO encontrados en static\images ($($faltan.Count)):" -f Yellow
-+    $faltan | Sort-Object | ForEach-Object { Write-Host "  $_" -f Yellow }
-+}
-+Write-Host "Destino: $dest" -f DarkGray
-diff --git a/themes/f1-theme/assets/css/main.css b/themes/f1-theme/assets/css/main.css
-index 17d50b0..70eefea 100644
---- a/themes/f1-theme/assets/css/main.css
-+++ b/themes/f1-theme/assets/css/main.css
-@@ -1110,7 +1110,7 @@ h2.fs-xs {
- }
++## Hours
++
++Horario de apertura desde `site.yaml` → `contact.hours`. No es un bloque de
++`sections:`, es un partial reutilizable con shortcode:
++
++```
++{{</* hours */>}}
++```
++
++```yaml
++# data/site.yaml
++contact:
++  hours:
++    weekdays: "Lunes a viernes: 10:00–13:30 y 17:30–21:00"
++    saturday: "Sábados: 10:00–13:30"
++    sunday: ""        # vacío = cerrado, no se pinta
++```
++
++Lo consumen `footer.html`, el bloque `locations` (con `showCommon: true`) y
++cualquier página vía shortcode. El schema.org se alimenta aparte de
++`contact.hoursSpec` (clave `days`, no `dayOfWeek`), que cada sede hereda salvo
++que defina el suyo propio.
++
+ ## FAQ
  
- /* === Gallery: object-position:top en vez del center por defecto.
--   Motivo: fachadas verticales (p.ej. avenida-fachada.webp, 1440x2160) forzadas a
-+   Motivo: fachadas verticales (p.ej. andalucia-fachada.webp, 1440x2160) forzadas a
-    la caja 4/3 existente pierden ~40% de la imagen; con center-crop eso significa
-    cortar el rótulo "Fausto" de la parte superior, justo el elemento de marca que
-    más importa en una foto de fachada. object-position:top ancla el recorte arriba
-@@ -1166,4 +1166,98 @@ h2.fs-xs {
-   .text-split-inner {
-     grid-template-columns: 1fr 1fr
-   }
--}
-\ No newline at end of file
-+}
-+/* === bloque locations ====================================================
-+   Sedes desde site.yaml. Dos layouts:
-+     .locations-full    -> con imagen de mapa/fachada (pagina Contacto)
-+     .locations-compact -> solo texto y enlaces (home, footer de seccion)
-+   Los iconos y el color de enlace heredan de la superficie (--bg-text-color),
-+   asi que el bloque funciona sobre fondo claro y sobre banda oscura. */
-+.locations-grid {
-+  display: grid;
-+  grid-template-columns: 1fr;
-+  gap: clamp(1.5rem, 4vw, 2.5rem);
-+}
-+.location-media {
-+  display: block;
-+  margin-bottom: .9rem;
-+  border-radius: 12px;
-+  overflow: hidden;
-+}
-+.location-media img {
-+  display: block;
-+  width: 100%;
-+  height: auto;
-+}
-+.location-name {
-+  margin: 0 0 .4rem;
-+  font-size: 1.15em;
-+}
-+.location-meta {
-+  display: flex;
-+  flex-direction: column;
-+  gap: .35rem;
-+  font-style: normal;
-+}
-+.location-meta a,
-+.locations-common-links a {
-+  display: inline-flex;
-+  align-items: center;
-+  gap: .45rem;
-+  color: var(--color-accent-text);
-+  font-weight: 600;
-+  text-decoration: none;
-+}
-+.location-meta a:hover,
-+.locations-common-links a:hover {
-+  text-decoration: underline;
-+}
-+.locations-common {
-+  margin-top: clamp(1.75rem, 4vw, 2.5rem);
-+}
-+.locations-common h3 {
-+  margin: 0 0 .6rem;
-+}
-+.locations-common-links {
-+  display: flex;
-+  flex-wrap: wrap;
-+  gap: .4rem 1.5rem;
-+  margin: 0 0 .6rem;
-+}
-+/* Horario — partial hours.html, usado en footer, contacto y locations */
-+.hours {
-+  display: flex;
-+  align-items: flex-start;
-+  gap: .45rem;
-+}
-+.hours-list {
-+  list-style: none;
-+  margin: 0;
-+  padding: 0;
-+}
-+.hours-list li {
-+  margin: 0;
-+}
-+.footer-grid .hours {
-+  margin-top: .75rem;
-+}
-+/* En superficie con fondo propio los enlaces siguen el par de color */
-+.has-surface .location-meta a,
-+.has-surface .locations-common-links a {
-+  color: inherit;
-+}
-+/* El layout compacto centra si el bloque lo pide (align: center) */
-+.block-align-center .location-meta {
-+  align-items: center;
-+}
-+.block-align-center .locations-common-links {
-+  justify-content: center;
-+}
-+.block-align-center .hours {
-+  justify-content: center;
-+}
-+@media(min-width:821px) {
-+  .locations-grid {
-+    grid-template-columns: repeat(2, minmax(0, 1fr));
-+  }
-+}
-diff --git a/themes/f1-theme/layouts/partials/blocks/locations.html b/themes/f1-theme/layouts/partials/blocks/locations.html
-new file mode 100644
-index 0000000..9797f48
---- /dev/null
-+++ b/themes/f1-theme/layouts/partials/blocks/locations.html
-@@ -0,0 +1,61 @@
-+{{- /*
-+  blocks/locations.html — sedes del negocio desde data/site.yaml.
+ FAQ solo existe como bloque dentro de `sections`.
+diff --git a/themes/f1-theme/docs/CHANGELOG.md b/themes/f1-theme/docs/CHANGELOG.md
+index 276b23d..35bd762 100644
+--- a/themes/f1-theme/docs/CHANGELOG.md
++++ b/themes/f1-theme/docs/CHANGELOG.md
+@@ -1,5 +1,25 @@
+ # F1 Theme · Changelog
+ 
++## Sin versión — bloque locations, partial hours y fuente única de horarios
 +
-+  NO recibe direcciones ni telefonos por parametro: los lee de site.locations[]
-+  para que exista una sola fuente de verdad (la misma que consume footer.html
-+  y schema.html). Si cambia un telefono, se cambia en site.yaml y punto.
++- Nuevo bloque `locations` (+ shortcode) que pinta las sedes desde
++  `site.yaml` → `locations[]`, con `layout: compact|full` y `showCommon`.
++  Elimina las direcciones, teléfonos y enlaces de mapa escritos a mano en
++  la página de Contacto.
++- Nuevo partial `hours.html` + shortcode `{{< hours >}}`, fuente única desde
++  `contact.hours`. El footer pasa a mostrar horario (antes no lo hacía).
++- `schema.html`: `openingHoursSpecification` hereda de `contact.hoursSpec`
++  cuando la sede no define el suyo — `or $loc.hoursSpec $contact.hoursSpec`.
++- `contact.hoursSpec` normalizado de `dayOfWeek:` a `days:`, que es la clave
++  que schema.html lee realmente; con `dayOfWeek` los días salían vacíos.
++  Eliminados los `hoursSpec` duplicados dentro de cada location.
++- `image-text`: nuevo parámetro `caption` (figcaption bajo la imagen) y clase
++  `is-textonly` cuando no hay imagen, para que el grid no deje media página
++  vacía.
++- `block-classes.html` emite `has-surface` cuando el bloque pinta fondo propio;
++  el ritmo vertical pasa a margin en los bloques sin fondo, que colapsa entre
++  hermanos y evita sumar el doble de padding entre dos sections seguidas.
 +
-+  sections:
-+    - type: locations
-+      title: "Dos centros en Torre del Mar para estar siempre cerca"
-+      subtitle: "Contamos con dos centros..."
-+      layout: compact        # compact (sin imagen) | full (con imagen, por defecto)
-+      showCommon: true       # anade movil/WhatsApp, email y horario comunes
-+
-+  Cada sede usa de site.yaml: name, address, location, phone, phoneLabel,
-+  mapUrl y -- solo en layout full -- image + imageAlt.
-+*/ -}}
-+{{- $siteData := site.Data.site -}}
-+{{- $locations := $siteData.locations | default slice -}}
-+{{- $contact := $siteData.contact | default dict -}}
-+{{- $compact := eq (.layout | default "full") "compact" -}}
-+{{- $extra := slice (printf "locations-%s" (cond $compact "compact" "full")) -}}
-+<section class="{{ partial "block-classes.html" (dict "name" "locations" "context" . "extra" $extra) }}">
-+  <div class="container">
-+    {{ with .title }}<h2>{{ . }}</h2>{{ end }}
-+    {{ with .subtitle }}<p class="section-subtitle">{{ . }}</p>{{ end }}
-+    <div class="locations-grid">
-+      {{ range $locations }}
-+      {{- $loc := . -}}
-+      <article class="location-card">
-+        {{ if and (not $compact) $loc.image }}
-+        <a class="location-media" href="{{ $loc.mapUrl | safeURL }}">
-+          {{ partial "responsive-img.html" (dict "src" $loc.image "alt" ($loc.imageAlt | default (printf "Ubicación de %s en el mapa" $loc.name)) "sizes" "(min-width:821px) 50vw, 100vw") }}
-+        </a>
-+        {{ end }}
-+        <h3 class="location-name">{{ $loc.name }}</h3>
-+        <address class="location-meta">
-+          {{ if $loc.mapUrl }}
-+          <a href="{{ $loc.mapUrl | safeURL }}">{{ partial "icons.html" "location" }}<span>{{ $loc.address }}{{ with $loc.location }} · {{ . }}{{ end }}</span></a>
-+          {{ else }}
-+          <span>{{ partial "icons.html" "location" }}<span>{{ $loc.address }}{{ with $loc.location }} · {{ . }}{{ end }}</span></span>
-+          {{ end }}
-+          {{ with $loc.phone }}
-+          <a href="{{ printf "tel:%s" . | safeURL }}">{{ partial "icons.html" "phone" }}<span>{{ $loc.phoneLabel | default . }}</span></a>
-+          {{ end }}
-+        </address>
-+      </article>
-+      {{ end }}
-+    </div>
-+    {{ if .showCommon }}
-+    <div class="locations-common">
-+      <h3>Común a ambos centros</h3>
-+      <p class="locations-common-links">
-+        {{ with $contact.whatsapp }}<a href="{{ printf "https://wa.me/%s" (replace . "+" "") | safeURL }}">{{ partial "icons.html" "whatsapp" }}<span>Móvil / WhatsApp: {{ $contact.phoneLabel | default . }}</span></a>{{ end }}
-+        {{ with $contact.email }}<a href="{{ printf "mailto:%s" . | safeURL }}">{{ partial "icons.html" "email" }}<span>{{ . }}</span></a>{{ end }}
-+      </p>
-+      {{ partial "hours.html" . }}
-+    </div>
-+    {{ end }}
-+  </div>
-+</section>
-diff --git a/themes/f1-theme/layouts/partials/footer.html b/themes/f1-theme/layouts/partials/footer.html
-index 7bef7de..e021f11 100644
---- a/themes/f1-theme/layouts/partials/footer.html
-+++ b/themes/f1-theme/layouts/partials/footer.html
-@@ -60,6 +60,7 @@
-         {{ with $contact.email }} · <a href="{{ printf "mailto:%s" . | safeURL }}">{{ . }}</a>{{ end }}
-       </address>
-       {{ end }}
-+      {{ partial "hours.html" . }}
-     </section>
-   </div>
-   <div class="container footer-bottom">
-diff --git a/themes/f1-theme/layouts/partials/hours.html b/themes/f1-theme/layouts/partials/hours.html
-new file mode 100644
-index 0000000..35d44b4
---- /dev/null
-+++ b/themes/f1-theme/layouts/partials/hours.html
-@@ -0,0 +1,20 @@
-+{{- /*
-+  partials/hours.html — horario de apertura desde data/site.yaml (contact.hours).
-+
-+  Fuente unica: contact.hours alimenta footer, pagina de contacto y bloque
-+  locations; contact.hoursSpec alimenta schema.org en schema.html. Cambiar el
-+  horario = editar site.yaml, nada mas.
-+
-+  Las claves vacias no se pintan (sunday: "" = cerrado, no se muestra).
-+*/ -}}
-+{{- $h := site.Data.site.contact.hours | default dict -}}
-+{{- if or $h.weekdays $h.saturday $h.sunday -}}
-+<div class="hours">
-+  {{ partial "icons.html" "clock" }}
-+  <ul class="hours-list">
-+    {{ with $h.weekdays }}<li>{{ . }}</li>{{ end }}
-+    {{ with $h.saturday }}<li>{{ . }}</li>{{ end }}
-+    {{ with $h.sunday }}<li>{{ . }}</li>{{ end }}
-+  </ul>
-+</div>
-+{{- end -}}
-diff --git a/themes/f1-theme/layouts/partials/schema.html b/themes/f1-theme/layouts/partials/schema.html
-index 03749b3..b549d74 100644
---- a/themes/f1-theme/layouts/partials/schema.html
-+++ b/themes/f1-theme/layouts/partials/schema.html
-@@ -65,10 +65,10 @@
-   {{- with $loc.phone }}{{ $optician = merge $optician (dict "telephone" .) }}{{ end -}}
-   {{- with $loc.mapUrl }}{{ $optician = merge $optician (dict "hasMap" .) }}{{ end -}}
-   {{- with $loc.image }}{{ $optician = merge $optician (dict "image" (. | absURL)) }}{{ end -}}
--  {{/* openingHoursSpecification: pendiente de validación del cliente.
--       Cuando se confirme, añadir en site.yaml por location:
-+  {{/* openingHoursSpecification: se hereda de contact.hoursSpec salvo que la
-+       sede defina el suyo propio. Formato en site.yaml:
-        hoursSpec: [{days: [Monday,…], opens: "10:00", closes: "13:30"}, …] */}}
--  {{- with $loc.hoursSpec -}}
-+  {{- with (or $loc.hoursSpec $contact.hoursSpec) -}}
-     {{- $spec := slice -}}
-     {{- range . -}}
-       {{- $spec = $spec | append (dict "@type" "OpeningHoursSpecification" "dayOfWeek" .days "opens" .opens "closes" .closes) -}}
-diff --git a/themes/f1-theme/layouts/shortcodes/hours.html b/themes/f1-theme/layouts/shortcodes/hours.html
-new file mode 100644
-index 0000000..968257e
---- /dev/null
-+++ b/themes/f1-theme/layouts/shortcodes/hours.html
-@@ -0,0 +1,2 @@
-+{{- /* {{< hours >}} — horario desde site.yaml. Ver partials/hours.html. */ -}}
-+{{ partial "hours.html" . }}
-diff --git a/themes/f1-theme/layouts/shortcodes/locations.html b/themes/f1-theme/layouts/shortcodes/locations.html
-new file mode 100644
-index 0000000..a6a8e12
---- /dev/null
-+++ b/themes/f1-theme/layouts/shortcodes/locations.html
-@@ -0,0 +1,17 @@
-+{{- /*
-+  {{< locations layout="compact" showCommon="true" title="..." subtitle="..." >}}
-+
-+  Equivalente en body markdown del bloque sections: - type: locations.
-+  Los datos salen de site.yaml, no de parametros. Ver blocks/locations.html.
-+*/ -}}
-+{{ partial "blocks/locations.html" (dict
-+    "title"      (.Get "title")
-+    "subtitle"   (.Get "subtitle")
-+    "layout"     (.Get "layout")
-+    "showCommon" (eq (.Get "showCommon") "true")
-+    "variant"    (.Get "variant")
-+    "width"      (.Get "width")
-+    "align"      (.Get "align")
-+    "pad"        (.Get "pad")
-+    "class"      (.Get "class")
-+) }}
+ ## Sin versión — convención de type: a guión alto, fix <p> y div duplicado
+ 
+ - Eliminado el normalizador `replace $type "_" "-"` de `section-renderer.html`

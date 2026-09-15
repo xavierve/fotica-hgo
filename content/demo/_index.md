@@ -311,6 +311,39 @@ sections:
     bgColor: "#4a2f6b"
     textSize: l
     preset: contact
+
+  # ============ LOCATIONS — sedes desde data/site.yaml, NO por parámetro ============
+  # Los datos (nombre, dirección, teléfono, mapUrl, image) salen de site.yaml →
+  # locations[]. El bloque solo decide cómo se presentan.
+  - type: locations
+    title: "16.1- locations · layout: compact (solo texto y enlaces)"
+    subtitle: "Sin imagen: nombre, dirección enlazada a Maps y teléfono en tel:. Es el layout para intercalar en una home sin cargarla de fotos."
+    layout: "compact"
+
+  - type: locations
+    title: "16.2- locations · layout: compact · align: center"
+    subtitle: "Mismo layout, centrado: los iconos, los enlaces y el horario se alinean al centro vía block-align-center."
+    layout: "compact"
+    align: "center"
+
+  - type: locations
+    title: "16.3- locations · layout: compact · showCommon: true"
+    subtitle: "Añade el bloque común a ambas sedes: móvil/WhatsApp, email y horario desde contact.hours."
+    layout: "compact"
+    showCommon: true
+
+  - type: locations
+    title: "16.4- locations · layout: full (con imagen de mapa)"
+    subtitle: "Usa location.image + imageAlt de site.yaml y enlaza la imagen a mapUrl. Es el layout de la página de Contacto."
+    layout: "full"
+    showCommon: true
+
+  - type: locations
+    title: "16.5- locations · class: bg-color2 (sobre banda oscura)"
+    subtitle: "Los enlaces e iconos heredan el par de color de la superficie: no hay que tocar nada para que se lean sobre fondo oscuro."
+    layout: "compact"
+    class: "bg-color2"
+    align: "center"
 ---
 
 ## P1- El prose: body markdown {.demo}
@@ -490,6 +523,35 @@ Segunda cita — mismo `.cards-grid` que usa el bloque de sections, mismo CSS.
 Las cards siguientes **no están escritas aquí**: se autodescubren de `/vision/servicios/` leyendo `linkTitle`, `card.description`, `card.image` y `weight` de cada página hija:
 
 {{< cards section="/vision/servicios" columns="3" title="cards automáticas de una sección" >}}
+
+### p12- Shortcode {{</* locations */>}}
+
+Las sedes **no se escriben aquí**: salen de `data/site.yaml` → `locations[]`, la
+misma fuente que alimentan el footer y el `schema.org`. Cambiar un teléfono en
+`site.yaml` lo cambia en los tres sitios a la vez.
+
+Versión compacta, sin imagen:
+
+{{< locations layout="compact" title="p12.1- locations · layout compact" subtitle="Dirección enlazada a Google Maps y teléfono clicable, sin foto." >}}
+
+Con el bloque común (móvil/WhatsApp, email y horario):
+
+{{< locations layout="compact" showCommon="true" title="p12.2- locations · showCommon" >}}
+
+Versión completa, con la imagen de mapa de cada sede:
+
+{{< locations layout="full" title="p12.3- locations · layout full" subtitle="Usa location.image de site.yaml; la imagen enlaza al mapa." >}}
+
+### p13- Shortcode {{</* hours */>}}
+
+Horario desde `site.yaml` → `contact.hours`. Las claves vacías no se pintan, así
+que `sunday: ""` desaparece solo. Lo usan el footer, el bloque `locations` con
+`showCommon` y cualquier página que lo intercale en el prose:
+
+{{< hours >}}
+
+Para el `schema.org` **no** se usa este partial: los datos salen de
+`contact.hoursSpec` (clave `days`), que cada sede hereda salvo que defina el suyo.
 
 ---
 

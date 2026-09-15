@@ -238,6 +238,59 @@ sections:
     text: "Frase destacada en **markdown**."
 ```
 
+## Locations
+
+Sedes del negocio. **No recibe direcciones ni teléfonos por parámetro**: los lee
+de `data/site.yaml` → `locations[]`, la misma fuente que consumen `footer.html`
+y `schema.html`. Si cambia un teléfono se edita `site.yaml` y se actualiza en
+todo el sitio a la vez.
+
+```yaml
+sections:
+  - type: locations
+    title:
+    subtitle:
+    layout: compact      # compact (sin imagen) | full (con imagen, por defecto)
+    showCommon: true     # añade móvil/WhatsApp, email y horario comunes
+    align: center
+```
+
+De cada sede usa `name`, `address`, `location`, `phone`, `phoneLabel` y
+`mapUrl`; en `layout: full` añade además `image` e `imageAlt`. La dirección
+enlaza a `mapUrl` y el teléfono a `tel:`, con iconos `location` y `phone`.
+
+Equivalente en body markdown:
+
+```
+{{</* locations layout="compact" showCommon="true" title="…" subtitle="…" */>}}
+```
+
+`layout` es un parámetro propio y no tiene nada que ver con `variant`, que sigue
+siendo el de fondo (`soft`/`featured`/`contrast`) como en el resto de bloques.
+
+## Hours
+
+Horario de apertura desde `site.yaml` → `contact.hours`. No es un bloque de
+`sections:`, es un partial reutilizable con shortcode:
+
+```
+{{</* hours */>}}
+```
+
+```yaml
+# data/site.yaml
+contact:
+  hours:
+    weekdays: "Lunes a viernes: 10:00–13:30 y 17:30–21:00"
+    saturday: "Sábados: 10:00–13:30"
+    sunday: ""        # vacío = cerrado, no se pinta
+```
+
+Lo consumen `footer.html`, el bloque `locations` (con `showCommon: true`) y
+cualquier página vía shortcode. El schema.org se alimenta aparte de
+`contact.hoursSpec` (clave `days`, no `dayOfWeek`), que cada sede hereda salvo
+que defina el suyo propio.
+
 ## FAQ
 
 FAQ solo existe como bloque dentro de `sections`.
