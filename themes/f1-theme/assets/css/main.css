@@ -112,6 +112,23 @@
 .counter-item span {
   color: rgba(255, 255, 255, .82)
 }
+/* En movil el auto-fit con minmax(150px) daba dos columnas, asi que con tres
+   datos el tercero quedaba descolgado en la fila de abajo y su etiqueta partia
+   a dos lineas. Una sola columna: los tres se leen como una lista. */
+@media(max-width:820px) {
+  .counter-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem
+  }
+  .counter-item strong {
+    font-size: clamp(2.25rem, 11vw, 3rem)
+  }
+  /* El globo del plusOne se posiciona a -1.9em sobre su numero; apilados, ese
+     hueco caeria encima de la etiqueta del item anterior. */
+  .counter-item[data-plus-one] {
+    margin-top: 1.6em
+  }
+}
 .section-note {
   text-align: center;
   font-size: 1.1rem
