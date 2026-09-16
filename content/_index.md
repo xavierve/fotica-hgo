@@ -67,7 +67,7 @@ sections:
   - type: cta
     title: "¿Hace tiempo que no revisas tu vista?"
     subtitle: "Una revisión visual puede ayudarte a detectar cambios de graduación, fatiga visual o molestias que quizá llevas tiempo normalizando. Ven a vernos y te asesoraremos personalmente."
-    class: "bg-color1 cta-ornamento cta-ornamento-ojo"
+    class: "bg-color3 cta-ornamento cta-ornamento-ojo"
     button1:
       text: "Ver soluciones de visión"
       url: "/vision/"

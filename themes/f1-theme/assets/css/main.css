@@ -1457,6 +1457,6 @@ h2.fs-xs {
     right: auto;
     transform: translateX(-50%);
     height: var(--ornamento-alto);
-    opacity: .6
+    opacity: .8
   }
 }
