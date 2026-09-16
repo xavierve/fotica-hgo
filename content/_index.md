@@ -67,7 +67,7 @@ sections:
   - type: cta
     title: "¿Hace tiempo que no revisas tu vista?"
     subtitle: "Una revisión visual puede ayudarte a detectar cambios de graduación, fatiga visual o molestias que quizá llevas tiempo normalizando. Ven a vernos y te asesoraremos personalmente."
-    class: "bg-color1"
+    class: "bg-color1 cta-ornamento cta-ornamento-ojo"
     button1:
       text: "Ver soluciones de visión"
       url: "/vision/"
@@ -77,7 +77,7 @@ sections:
   - type: cta
     title: "¿Notas que oyes peor en conversaciones?"
     subtitle: "Si subes más la televisión, te cuesta seguir una charla o pides que te repitan las cosas, podemos ayudarte con un estudio auditivo y un asesoramiento claro, sin compromiso."
-    class: "bg-color2"
+    class: "bg-color2 cta-ornamento cta-ornamento-oreja"
     button1:
       text: "Ver soluciones de audición"
       url: "/audicion/"

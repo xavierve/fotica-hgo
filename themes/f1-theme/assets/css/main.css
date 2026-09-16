@@ -1370,3 +1370,63 @@ h2.fs-xs {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+/* === Ornamento de marca en CTA (uso puntual: los dos CTA de la home) =======
+   El SVG se pinta con mask + background-color:currentColor, no como
+   background-image: asi hereda el par de color de la superficie y funciona
+   igual sobre bg-color1 (tinta oscura) que sobre bg-color2 (blanco). Un PNG
+   blanco solo habria servido sobre fondo oscuro.
+   Decorativo puro: va en ::before, no en el DOM, y no necesita aria-hidden.
+   Las dos URLs son dato de sitio; el mecanismo (.cta-ornamento + --ornamento)
+   es generico. Si hace falta en mas paginas, conviene pasarlo a parametro del
+   bloque en vez de ampliar esta lista. */
+.cta-ornamento {
+  position: relative;
+  overflow: hidden
+}
+.cta-ornamento .cta-inner {
+  position: relative
+}
+.cta-ornamento .cta-inner::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 70%;
+  background-color: currentColor;
+  opacity: .14;
+  pointer-events: none;
+  -webkit-mask: var(--ornamento) no-repeat center/contain;
+  mask: var(--ornamento) no-repeat center/contain
+}
+/* La proporcion sale del viewBox de cada archivo: ojo 62.7x56, oreja 51.7x56 */
+.cta-ornamento-ojo {
+  --ornamento: url("/images/ornamento-ojo.svg")
+}
+.cta-ornamento-oreja {
+  --ornamento: url("/images/ornamento-oreja.svg")
+}
+.cta-ornamento-ojo .cta-inner::before {
+  left: 0;
+  aspect-ratio: 1.12
+}
+.cta-ornamento-oreja .cta-inner::before {
+  right: 0;
+  aspect-ratio: .92
+}
+/* El texto se aparta para dejarle sitio; con text-align:center del bloque,
+   queda centrado en el espacio restante, no bajo el dibujo. */
+@media(min-width:821px) {
+  .cta-ornamento-ojo .cta-inner {
+    padding-left: 22%
+  }
+  .cta-ornamento-oreja .cta-inner {
+    padding-right: 22%
+  }
+}
+/* En movil no hay ancho que repartir: el ornamento se oculta. */
+@media(max-width:820px) {
+  .cta-ornamento .cta-inner::before {
+    display: none
+  }
+}
