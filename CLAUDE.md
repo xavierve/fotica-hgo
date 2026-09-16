@@ -251,16 +251,21 @@ Medidas, proporciones y criterios: `themes/f1-theme/docs/GUIA-IMAGENES.md`.
   ninguno de los dos bloques. Las medidas quedan en la guía para otros
   proyectos del theme; aquí no hay nada que optimizar.
 
+**Hecho (16 sep):**
+- **Galería** — los 4 `100-instalaciones_*` optimizados, con `_hd` a 2400×1800
+  en tres de ellos. La vertical de 1386×1592 quedó reencuadrada a 957×888.
+  En paralelo se corrigió el lightbox: `gallery.html` resuelve la variante `_hd`
+  en build y la pasa en el JSON, y `mostrar()` usa `imageHd || image`. Antes la
+  ampliación servía la versión pequeña mientras la rejilla podía estar sirviendo
+  la `_hd` — la foto grande salía con menos resolución que su miniatura.
+
+  Dos cabos sueltos, no bloqueantes: `andalucia_fachada` (957×888) es la única
+  sin `_hd`, así que en el lightbox se amplía la base; y las tres bases están a
+  1350×900, 1200×900 y 957×888, proporciones distintas entre sí — el recuadro
+  4:3 del CSS las recorta de forma desigual. Ojo al `object-position: top` de
+  `.gallery-open img`, puesto para no cortar los rótulos de fachada.
+
 **Pendiente:**
-- **Galería** — nunca entró en esta tarea, ni como hecha ni como pendiente.
-  Los 4 `100-instalaciones_*` que la alimentan siguen en tamaño de origen:
-  1386×1592 (266 KB), y tres a 1440×960 (159–215 KB). La guía pide base
-  1200×900 y `_hd` 2400×1800, y el CSS las pinta en un recuadro 4:3 de ~370px
-  (`sizes="(min-width:1100px) 33vw…"`). Ninguna tiene `_hd`, así que hoy el
-  navegador descarga ~200 KB para mostrar una miniatura. Generar base 1200×900
-  + `_hd` 2400×1800; la de 1386×1592 es vertical y hay que reencuadrarla a 4:3,
-  no escalarla. Ojo al `object-position: top` de `.gallery-open img`, que está
-  puesto para no cortar los rótulos de fachada.
 - **Heros** — ⏸ **EN PAUSA, no tocar.** Decisión 16 sep: el recorte depende de
   la altura de banda del layout `stacked`, que aún no está implementado en
   `partials/hero.html`. Reencuadrar ahora significaría hacerlo dos veces.

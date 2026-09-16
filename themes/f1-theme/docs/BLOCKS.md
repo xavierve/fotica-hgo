@@ -218,6 +218,66 @@ sections:
 `tone` ya no existe (eliminado — `bgColor`/`textColor`/`class` cubren cualquier
 combinación de color sin necesitar variantes con nombre fijo).
 
+### Ornamento de marca
+
+Dibujo grande de marca detrás del texto del CTA. **No es un parámetro del
+bloque: se activa con clases**, porque hoy solo se usa en los dos CTA de la
+home (la bifurcación visión / audición).
+
+```yaml
+  - type: cta
+    class: "bg-color3 cta-ornamento cta-ornamento-ojo"
+  - type: cta
+    class: "bg-color2 cta-ornamento cta-ornamento-oreja"
+```
+
+- `cta-ornamento` — activa el mecanismo (posicionamiento, recorte, tamaño).
+- `cta-ornamento-ojo` / `cta-ornamento-oreja` — eligen el dibujo y el lado.
+
+**Las dos clases de dibujo son propias de este tema**, no genéricas: apuntan a
+`/images/ornamento-ojo.svg` y `/images/ornamento-oreja.svg`, extraídos del
+logotipo de Fausto (grupos `g71` y `g64` de `logo-fausto.svg`). El mecanismo
+`cta-ornamento` sí es reutilizable — la variable `--ornamento` acepta cualquier
+SVG. Si el ornamento hace falta en más de un par de páginas, el momento de
+convertirlo en parámetro del bloque es ese; con dos CTA no compensa.
+
+**Se pinta con `mask` + `background-color: currentColor`, no con
+`background-image`.** Así hereda el par de color de la superficie y funciona
+igual sobre `bg-color1` (tinta oscura), `bg-color2` (blanco) o `bg-color3`
+(blanco). Un PNG blanco solo habría servido sobre fondo oscuro, y habría hecho
+falta una segunda exportación para el resto.
+
+**Dos presentaciones, un archivo:**
+
+| | Desktop (≥821px) | Móvil (<821px) |
+|---|---|---|
+| Rol | marca de agua | icono |
+| Tamaño | 130% de `.cta-inner` ≈ 70% de la banda | `clamp(48px, 13vw, 64px)` |
+| Posición | al lado del texto, sangrando por el borde | centrado sobre el titular |
+| Opacidad | .20 ojo · .26 oreja | .8 |
+| Hueco | `padding` lateral del 30% / 26% | `padding-top` de `.cta-inner` |
+
+El porcentaje de altura se resuelve contra `.cta-inner`, que es solo la caja del
+texto — la section añade `--block-pad` arriba y abajo. Por eso 130% y no 70%.
+
+Las opacidades de desktop **no son iguales a propósito**: la tinta oscura sobre
+crema empasta antes que el blanco sobre navy o verde. Y la de móvil no
+distingue superficie: si algún día vuelve a usarse un CTA con `bg-color1`, ese
+.8 sería tinta casi maciza sobre el crema y habría que bajarlo solo en
+`cta-ornamento-ojo` dentro de la media query.
+
+Es decorativo puro: va en `::before`, no en el DOM, así que no lo anuncia un
+lector de pantalla y no necesita `aria-hidden`. Si algún día pasara a ser
+informativo (por ejemplo identificando visión o audición en cada card), ahí sí
+tendría que estar en el marcado con su etiqueta.
+
+**El ornamento no debe ir en `--color-accent`.** El oro es el color de acción
+del sitio, y un dibujo grande en oro macizo compite con el botón que tiene
+debajo — invierte la jerarquía. Además el oro y el verde `bg-color3` tienen
+luminancia casi idéntica (1,98:1), así que el mismo valor daría una oreja
+rotunda sobre navy y un ojo turbio sobre verde. Para más presencia, subir la
+opacidad del `currentColor`, no cambiar el color.
+
 ## Banner
 
 Frase destacada / guiño de confianza, sin botones — para eso usa `cta`. Mismo
