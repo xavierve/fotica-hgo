@@ -1437,7 +1437,7 @@ h2.fs-xs {
   opacity: .26
 }
 /* En movil no hay ancho que repartir: el ornamento se oculta. */
-@media(max-width:120px) {
+@media(max-width:820px) {
   .cta-ornamento .cta-inner::before {
     display: none
   }
