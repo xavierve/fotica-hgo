@@ -28,8 +28,7 @@ hero:
   subtitle: "A tu servicio en Torre del Mar desde 1982. Tres generaciones de la misma familia, el mismo compromiso: conocerte de verdad y seguir aquí cuando vuelvas."
   preset: contact
   bg: "/images/100-instalaciones_fausto_duque_fachada.webp"
-
-  class: "panel"
+  class: "bg-top panel"
 
 sections:
   # ============  — declaración de intenciones antes del grid individual ============

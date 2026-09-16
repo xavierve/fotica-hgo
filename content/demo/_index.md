@@ -257,11 +257,11 @@ sections:
     bg: "https://picsum.photos/seed/cta1/1600/500"
     preset: contact
   - type: cta
-    title: "15.5- cta · bg + bgMobile + bgColor3 (overlay tintado)"
+    title: "15.5- cta · bg + bgMobile + class Scrim & Panel"
     subtitle: "Reduce la ventana para ver la imagen móvil."
     bg: "https://picsum.photos/seed/cta2/1600/500"
     bgMobile: "https://picsum.photos/seed/cta2m/700/800"
-    bgColor: "var(--bg-color3)"
+    class: "scrim panel"
     preset: contact
     labelCall: "Llamar ahora"
     labelWhatsapp: "Escríbenos"
@@ -414,7 +414,7 @@ Segundo párrafo, tras un espacio grande. (`s`, `m`, `l` disponibles.)
 
 {{< banner class="bg-color4" textSize="l" >}}p4.2- Banner con `class: bg-color4` y `textSize: l`.{{< /banner >}}
 
-{{< banner bg="/images/100-instalaciones_fausto_duque_fachada.webp" width="wide" pad="l" >}}p4.3- Banner con `bg` (imagen de fondo)  `width=wide` `pad=l`.{{< /banner >}}
+{{< banner bg="/images/100-instalaciones_fausto_duque_fachada.webp" width="wide" pad="l" class="panel" >}}p4.3- Banner con `bg` (imagen de fondo)  `width=wide` `pad=l`.{{< /banner >}}
 
 {{< banner textSize="xl" align="center" class="bg-color1" >}}p4.4- Banner con `textSize="xl"`class="bg-color1" y alineado al centro.{{< /banner >}}
 
