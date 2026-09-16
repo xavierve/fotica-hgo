@@ -154,8 +154,45 @@
   height: 56px;
   border-radius: 50%;
   object-fit: cover;
-  vertical-align: middle;
+  vertical-align: middle
+}
+
+/* === Testimonios ==========================================================
+   Rejilla propia: la genérica .cards-grid (minmax 240px) está pensada para
+   cards con imagen, donde la columna estrecha no molesta. Una cita es texto
+   corrido y a 240-300px se parte en cinco palabras por renglón. */
+.testimonial {
+  display: flex;
+  flex-direction: column
+}
+.testimonial>p {
+  margin-top: 0
+}
+/* El pie se ancla abajo: así los tres autores quedan alineados aunque las
+   citas midan distinto, en vez de flotar cada uno a su altura. */
+.testimonial footer {
+  margin-top: auto;
+  padding-top: .9rem;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  flex-wrap: wrap
+}
+/* La plantilla emite <strong>Nombre</strong><span>5/5</span> sin separación:
+   el gap del flex los despega y el punto medio los distingue. */
+.testimonial footer span {
+  color: var(--color-muted);
+  font-weight: 600
+}
+.testimonial footer strong+span::before {
+  content: "·";
   margin-right: .5rem
+}
+@media(min-width:821px) {
+  .block-testimonials .cards-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1rem, 2.5vw, 1.75rem)
+  }
 }
 .logo-grid img {
   max-height: 40px;
