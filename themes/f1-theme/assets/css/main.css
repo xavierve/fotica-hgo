@@ -127,6 +127,34 @@
   justify-content: center;
   font-weight: 700
 }
+/* En movil el flex-wrap centrado partia los items a media frase y cada linea
+   suelta se centraba por su cuenta, asi que los iconos quedaban a alturas y
+   sangrias distintas. Aqui se apila uno por fila y cada item pasa a grid
+   icono|texto: los iconos comparten columna y el texto que envuelve cuelga
+   alineado con su primera linea, no bajo el icono.
+   width:fit-content + margin-inline:auto centra el bloque entero conservando
+   ese borde izquierdo comun; si un item no cabe, max-width lo devuelve al
+   ancho del contenedor y envuelve con normalidad. */
+@media(max-width:820px) {
+  .trustbar-inner {
+    flex-direction: column;
+    align-items: stretch;
+    width: fit-content;
+    max-width: 100%;
+    margin-inline: auto;
+    gap: .55rem;
+    text-align: left
+  }
+  .trustbar-inner>span {
+    display: grid;
+    grid-template-columns: 1.15em 1fr;
+    align-items: baseline;
+    column-gap: .55em
+  }
+  .trustbar-inner .trustbar-icon .icon {
+    margin-right: 0
+  }
+}
 .image-text-inner {
   display: grid;
   grid-template-columns: 1fr;
