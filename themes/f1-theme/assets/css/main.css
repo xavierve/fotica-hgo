@@ -129,9 +129,19 @@
     margin-top: 1.6em
   }
 }
+/* Cierre de bloque bajo los datos del counter. Pegado a la ultima etiqueta se
+   leia como un cuarto dato, y ademas mas brillante que las etiquetas, que es
+   la jerarquia al reves: es un remate, no una cifra.
+   Misma familia (el sitio usa una sola): lo que cambia es el rol — cursiva,
+   un punto mas bajo y atenuado con opacity, no con un color fijo, para que
+   siga funcionando si el bloque cambia de fondo. */
 .section-note {
   text-align: center;
-  font-size: 1.1rem
+  font-size: 1.05rem;
+  font-style: italic;
+  opacity: .78;
+  max-width: 46ch;
+  margin: clamp(2rem, 6vw, 3rem) auto 0
 }
 .trustbar {
   background: var(--bg-color1);
