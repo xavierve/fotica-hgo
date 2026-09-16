@@ -154,39 +154,44 @@
   height: 56px;
   border-radius: 50%;
   object-fit: cover;
-  vertical-align: middle
+  vertical-align: middle;
+  margin-right: .5rem
 }
 
 /* === Testimonios ==========================================================
    Rejilla propia: la genérica .cards-grid (minmax 240px) está pensada para
    cards con imagen, donde la columna estrecha no molesta. Una cita es texto
    corrido y a 240-300px se parte en cinco palabras por renglón. */
+/* margin:0 — <blockquote> trae "margin: 1em 40px" del user-agent y el único
+   reset global del tema es box-sizing: eran 80px de ancho perdidos por
+   tarjeta, que se leían como separación excesiva entre columnas. */
 .testimonial {
   display: flex;
-  flex-direction: column
+  flex-direction: column;
+  margin: 0
 }
 .testimonial>p {
   margin-top: 0
 }
 /* El pie se ancla abajo: así los tres autores quedan alineados aunque las
-   citas midan distinto, en vez de flotar cada uno a su altura. */
+   citas midan distinto, en vez de flotar cada uno a su altura.
+   Nombre y puntuación en dos líneas a propósito: en columna estrecha un
+   nombre largo ("Residente de Torre del Mar") envuelve siempre, y con el pie
+   en fila el separador acababa abriendo renglón como una viñeta suelta.
+   La plantilla emite <strong>Nombre</strong><span>5/5</span> sin nada en
+   medio, así que la separación la pone el salto de línea. */
 .testimonial footer {
   margin-top: auto;
-  padding-top: .9rem;
-  display: flex;
-  align-items: center;
-  gap: .5rem;
-  flex-wrap: wrap
+  padding-top: .9rem
 }
-/* La plantilla emite <strong>Nombre</strong><span>5/5</span> sin separación:
-   el gap del flex los despega y el punto medio los distingue. */
+.testimonial footer strong {
+  display: block
+}
 .testimonial footer span {
+  display: block;
+  margin-top: .15rem;
   color: var(--color-muted);
   font-weight: 600
-}
-.testimonial footer strong+span::before {
-  content: "·";
-  margin-right: .5rem
 }
 @media(min-width:821px) {
   .block-testimonials .cards-grid {
