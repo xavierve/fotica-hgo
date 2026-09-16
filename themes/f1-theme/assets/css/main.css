@@ -636,6 +636,7 @@ h2.fs-xs {
 }
 /* panel: caja semiopaca tras el texto. La opción más segura en fotos imprevisibles. */
 .has-bg-image.panel .hero-copy,
+.has-bg-image.panel .banner-inner,
 .has-bg-image.panel .cta-inner {
   background: rgba(20, 30, 40, .55);
   backdrop-filter: blur(3px);
