@@ -245,7 +245,14 @@ Medidas, proporciones y criterios: `themes/f1-theme/docs/GUIA-IMAGENES.md`.
 - **image-text** — en curso. Base 700 de ancho, `_hd` 1400. Ojo: la imagen
   ocupa la mitad del contenedor, no su ancho completo (528px en `m`, 688px en
   `wide`) — ver la tabla de la guía.
-- **Heros** — pendiente. Aquí la ganancia está en generar variantes **más
+- **Heros** — ⏸ **EN PAUSA, no tocar.** Decisión 16 sep: el recorte depende de
+  la altura de banda del layout `stacked`, que aún no está implementado en
+  `partials/hero.html`. Reencuadrar ahora significaría hacerlo dos veces.
+  Se retoma cuando el layout esté en el tema y la banda se pueda medir en el
+  inspector. Ver «Heros: pendiente del layout apilado» en GUIA-IMAGENES.md.
+  Lo que sigue es el análisis de pesos, válido pero aplazado:
+
+  Aquí la ganancia está en generar variantes **más
   pequeñas**, no un `_hd` mayor: la mayoría son imágenes de IA a ~1440px y esa
   es su resolución nativa, no hay más detalle que extraer. Regenerar a más
   resolución no vale (la IA no es determinista: saldría otra imagen), y

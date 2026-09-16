@@ -15,8 +15,9 @@
 
 | Uso | Clave front matter | Base | `_hd` (2x) | Proporción | Formato |
 |---|---|---|---|---|---|
-| **Hero** | `hero.bg` | 1440 ancho | — (ver abajo) | ~3:2 | WebP |
-| **Hero móvil** | `hero.bgMobile` | 768 ancho | 1536 | ~4:5 vertical | WebP |
+| **Hero** | `hero.bg` | 1440×960 | 1920×1280 *(solo cámara)* | 3:2 | WebP |
+| **Hero móvil** | `hero.bgMobile` | **768×420** ⚠ | 1536×840 | **3:2** ⚠ | WebP |
+| **Hero figura** | `hero.image` | 1440 ancho | 2880 | libre | WebP |
 | **OG / Social** | `og.image` | 1200×630 | — | 1.91:1 | **JPG** |
 | **Cards** | `card.image` | **800×600** | 1600×1200 | **4:3** | WebP |
 | **Equipo** | `team.items[].image` | **750×750** | 1500×1500 | **1:1 cuadrado** | WebP |
@@ -24,6 +25,14 @@
 | **image-text** | en el shortcode | **700 ancho** | 1400 | libre | WebP |
 | **Slider** | `slider.items[].image` | **780 ancho** | — | libre | WebP |
 | **Logos de marca** | `brands.items[].image` | 320 ancho | — | libre | WebP/SVG |
+
+> ⚠ **Los heros están PENDIENTES de cerrar.** Las medidas de `hero.bg` y
+> `hero.bgMobile` de esta tabla son provisionales: dependen de la altura real
+> de la banda en el layout `stacked`, que **todavía no está implementado** en
+> `partials/hero.html` (hoy solo existen el split de dos columnas y la columna
+> única con fondo detrás). No reencuadrar heros hasta entonces — se harían dos
+> veces. Qué sí se puede adelantar y qué no: ver «Heros: pendiente del layout
+> apilado» más abajo.
 
 > El prefijo `100-` agrupa cosas distintas: solo las `100-equipo_<nombre>` son
 > fichas de equipo. `100-equipo_fausto_completo` es el hero de la home y las
@@ -128,6 +137,54 @@ original. Para esas sí se puede generar `_hd` de verdad, partiendo del archivo
 original, nunca ampliando el WebP ya reducido. Techo razonable: 1920px.
 
 ---
+
+## Heros: pendiente del layout apilado
+
+**No reencuadrar ni regenerar heros todavía.** El recorte final depende de la
+proporción de la banda, y la proporción depende de la altura que fije el CSS
+del layout `stacked` — que este documento describe pero el tema aún no
+implementa. Reencuadrar 24 imágenes contra una especificación teórica significa
+reencuadrarlas dos veces.
+
+**Inventario actual** (salida de `scripts/recoge-imagenes-hero.ps1`):
+24 `bg` · 3 `bgMobile` · 1 `image` · solo 2 con variante `_hd`.
+
+**Dos cosas cambian con el apilado y no estaban contempladas antes:**
+
+1. En split la foto ocupa media columna (~560px en portátil); **en apilado pasa
+   a ancho completo**, así que necesita 1440–1920 de ancho real. Es un
+   requisito distinto y cambia qué variantes compensa generar.
+2. La altura de la banda es una decisión de CSS, **no** la proporción del
+   archivo: `object-fit: cover` recorta. El archivo solo necesita píxeles para
+   llenarla a DPR2.
+
+**Estimación de partida** (a confirmar midiendo en el inspector, no aquí):
+
+```css
+.hero-band { height: clamp(200px, 55vw, 280px); }            /* móvil  */
+@media(min-width:821px){ .hero-band{ height: clamp(260px, 26vw, 380px); } }
+```
+
+Sale de restar a la altura útil del viewport el header (~72px desktop, ~60
+móvil) y el bloque de copy completo (~350px desktop, ~300 móvil, contando
+eyebrow + H1 + dos o tres líneas de subtítulo + fila de CTA). El criterio es
+que **el H1 se vea sin scroll**: si entra, no hace falta ningún chevron ni
+indicador de scroll, que además competiría por la atención con los botones de
+llamada y WhatsApp.
+
+**Qué sí se puede hacer ya**, porque no depende del layout:
+- Variantes **hacia abajo** de los `bg` (1280 y 960): cambian el ancho, no el
+  encuadre. Es el ahorro grande de LCP en móvil.
+- Corregir nombres de variantes `_hd` mal formados.
+- Inventariar qué heros vienen de cámara (`D3A####`, tienen original y admiten
+  `_hd` real hasta 1920) y cuáles de IA (nativos a ~1440, no se suben).
+
+**Qué queda bloqueado hasta el layout:**
+- Reencuadrar los 3 `bgMobile`: hoy son 843×1264 (retrato 2:3), formato pensado
+  para texto **encima** del fondo. Con el texto debajo, esa proporción se come
+  el viewport antes del H1.
+- Fijar el `hero.imagePosition` de cada imagen: es un juicio visual sobre el
+  recorte real, no un cálculo.
 
 ## Qué se puede automatizar y qué no
 

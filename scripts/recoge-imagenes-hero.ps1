@@ -1,4 +1,4 @@
-# Recoge las imagenes usadas por los HERO y las copia a static\images\_resize\hero\
+﻿# Recoge las imagenes usadas por los HERO y las copia a static\images\_resize\hero\
 # Separa por rol, porque cada uno se reescala distinto:
 #   bg        -> fondo CSS apaisado, full-bleed (ancho grande)
 #   bgMobile  -> fondo CSS vertical para movil
@@ -84,7 +84,7 @@ if ($faltan.Count) {
 $malos = Get-ChildItem -Path $images -Filter '*._hd.*' -File -ErrorAction SilentlyContinue
 if ($malos) {
     Write-Host ""
-    Write-Host "AVISO — variantes _hd mal nombradas (el theme no las encuentra):" -f Red
+    Write-Host "AVISO - variantes _hd mal nombradas (el theme no las encuentra):" -f Red
     $malos | ForEach-Object {
         $ok = $_.Name -replace '\._hd\.', '_hd.'
         Write-Host ("  {0}  ->  deberia ser  {1}" -f $_.Name, $ok) -f Red
