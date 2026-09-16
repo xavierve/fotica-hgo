@@ -241,10 +241,26 @@ Medidas, proporciones y criterios: `themes/f1-theme/docs/GUIA-IMAGENES.md`.
 - **Equipo** — 7 fichas recortadas a 750×750 cuadrado (antes 750×1125
   verticales, con un tercio del peso que se descargaba sin verse nunca).
 
-**Pendiente:**
-- **image-text** — en curso. Base 700 de ancho, `_hd` 1400. Ojo: la imagen
-  ocupa la mitad del contenedor, no su ancho completo (528px en `m`, 688px en
+**Hecho (16 sep):**
+- **image-text** — completado. Base 700 de ancho, `_hd` 1400. La imagen ocupa
+  la mitad del contenedor, no su ancho completo (528px en `m`, 688px en
   `wide`) — ver la tabla de la guía.
+
+**No aplica en Fausto:**
+- **Slider** (780 de ancho) y **logos de marca** (320) — el sitio no usa hoy
+  ninguno de los dos bloques. Las medidas quedan en la guía para otros
+  proyectos del theme; aquí no hay nada que optimizar.
+
+**Pendiente:**
+- **Galería** — nunca entró en esta tarea, ni como hecha ni como pendiente.
+  Los 4 `100-instalaciones_*` que la alimentan siguen en tamaño de origen:
+  1386×1592 (266 KB), y tres a 1440×960 (159–215 KB). La guía pide base
+  1200×900 y `_hd` 2400×1800, y el CSS las pinta en un recuadro 4:3 de ~370px
+  (`sizes="(min-width:1100px) 33vw…"`). Ninguna tiene `_hd`, así que hoy el
+  navegador descarga ~200 KB para mostrar una miniatura. Generar base 1200×900
+  + `_hd` 2400×1800; la de 1386×1592 es vertical y hay que reencuadrarla a 4:3,
+  no escalarla. Ojo al `object-position: top` de `.gallery-open img`, que está
+  puesto para no cortar los rótulos de fachada.
 - **Heros** — ⏸ **EN PAUSA, no tocar.** Decisión 16 sep: el recorte depende de
   la altura de banda del layout `stacked`, que aún no está implementado en
   `partials/hero.html`. Reencuadrar ahora significaría hacerlo dos veces.
@@ -275,7 +291,6 @@ Medidas, proporciones y criterios: `themes/f1-theme/docs/GUIA-IMAGENES.md`.
   Excepción: las fotos con código de cámara (`D3A####`) tienen original en alta
   calidad — para esas sí cabe un `_hd` real, generado desde el original (nunca
   ampliando el WebP ya reducido), con techo de 1920px.
-- **Slider** (780 de ancho) y **logos de marca** (320) — sin tocar todavía.
 - **Arte móvil (`_m`)** — recortes verticales solo donde el encuadre de
   escritorio no funcione (caras cortadas, sujeto descentrado). Hoy solo
   `215_vision_40_hero_m.webp` y `314-mantenimiento_audifonos_hero_m.webp`.

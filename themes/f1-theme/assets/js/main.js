@@ -27,7 +27,8 @@ document.querySelectorAll('.block-gallery').forEach(function (bloque) {
 
   function mostrar(n) {
     i = (n + items.length) % items.length;
-    img.src = items[i].image;
+    // imageHd si la plantilla la encontro; si no, la base
+    img.src = items[i].imageHd || items[i].image;
     img.alt = items[i].imageAlt || '';
     cap.textContent = items[i].legend || '';
   }
