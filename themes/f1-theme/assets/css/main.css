@@ -1436,9 +1436,27 @@ h2.fs-xs {
 .cta-ornamento-oreja .cta-inner::before {
   opacity: .26
 }
-/* En movil no hay ancho que repartir: el ornamento se oculta. */
+/* En movil no hay ancho lateral que repartir, asi que el ornamento deja de
+   ser marca de agua y pasa a icono sobre el titular: mismo archivo, tamano
+   pequeno y opacidad alta (a 56px un fantasma al 20% no se leeria).
+   El hueco lo abre el padding-top de .cta-inner, no un margen del dibujo,
+   para que no dependa de --block-pad ni lo corte el overflow:hidden.
+   Centrado, no a la izquierda: el titular y el subtitulo van centrados por
+   text-align del bloque, y un icono pegado al borde rompe ese eje. */
 @media(max-width:820px) {
-  .cta-ornamento .cta-inner::before {
-    display: none
+  .cta-ornamento .cta-inner {
+    --ornamento-alto: clamp(48px, 13vw, 64px);
+    padding-top: calc(var(--ornamento-alto) + .65rem)
+  }
+  .cta-ornamento .cta-inner::before,
+  .cta-ornamento-ojo .cta-inner::before,
+  .cta-ornamento-oreja .cta-inner::before {
+    top: 0;
+    bottom: auto;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    height: var(--ornamento-alto);
+    opacity: .6
   }
 }
