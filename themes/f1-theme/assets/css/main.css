@@ -627,26 +627,49 @@ h2.fs-xs {
 }
 
 /* Clases de paleta: fondo + texto emparejados, listas para usar en class:
-   No dependen de bgColor/has-bg-color/bg-claro — se bastan solas. */
+   No dependen de bgColor/has-bg-color/bg-claro — se bastan solas.
+
+   background-COLOR, no el atajo "background": el atajo reinicia todas las
+   subpropiedades, incluida background-image, y estas reglas van despues de
+   .has-bg-image en el archivo. Con el atajo, un bloque con bg + class
+   bg-colorN perdia la imagen de fondo (la pisaba con "none" por orden de
+   cascada, sin que ninguna especificidad lo impidiera). */
 .bg-color1 {
-  background: var(--bg-color1);
+  background-color: var(--bg-color1);
   color: var(--bg-text-color1);
 }
 .bg-color2 {
-  background: var(--bg-color2);
+  background-color: var(--bg-color2);
   color: var(--bg-text-color2);
   --subtitle-color: rgba(255, 255, 255, .94);
   --eyebrow-color: #ffffff;
 }
 .bg-color3 {
-  background: var(--bg-color3);
+  background-color: var(--bg-color3);
   color: var(--bg-text-color3);
   --subtitle-color: rgba(255, 255, 255, .94);
   --eyebrow-color: #ffffff;
 }
 .bg-color4 {
-  background: var(--bg-color4);
+  background-color: var(--bg-color4);
   color: var(--bg-text-color4);
+}
+/* Con imagen de fondo, el color de paleta pasa a teñir el velo en vez de
+   taparlo — mismo criterio que .has-bg-image.has-bg-color. */
+.has-bg-image:is(.bg-color1, .bg-color2, .bg-color3, .bg-color4) {
+  background-color: transparent;
+}
+.has-bg-image.bg-color1 {
+  --overlay-color: color-mix(in srgb, var(--bg-color1) 60%, transparent);
+}
+.has-bg-image.bg-color2 {
+  --overlay-color: color-mix(in srgb, var(--bg-color2) 60%, transparent);
+}
+.has-bg-image.bg-color3 {
+  --overlay-color: color-mix(in srgb, var(--bg-color3) 60%, transparent);
+}
+.has-bg-image.bg-color4 {
+  --overlay-color: color-mix(in srgb, var(--bg-color4) 60%, transparent);
 }
 .has-bg-image .hero-copy,
 .has-bg-image .cta-inner {
