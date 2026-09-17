@@ -1430,15 +1430,18 @@ h2.fs-xs {
   color: inherit;
 }
 /* El layout compacto centra si el bloque lo pide (align: center) */
-/* Centrado: se centra el bloque entero (fit-content + margin auto), no cada
-   linea por separado. Asi los iconos comparten columna y el texto que envuelve
-   cuelga alineado con su primera linea. Mismo criterio que en .trustbar-inner. */
+/* Centrado: afecta al titulo y al subtitulo del bloque, NO a las fichas.
+   Centrar cada ficha por su cuenta (fit-content + margin auto) las descuadraba
+   entre si: la de Duque envuelve y la de Andalucia no, asi que cada bloque se
+   centraba a un ancho distinto y los iconos de una sede no alineaban con los
+   de la otra. Direcciones y telefonos son datos, y los datos se leen mejor en
+   bandera izquierda: las fichas alinean al borde del contenedor y las cuatro
+   lineas comparten una sola columna de iconos. Mismo criterio que el footer. */
+.block-align-center .location-card {
+  text-align: left;
+}
 .block-align-center .location-meta {
   align-items: stretch;
-  width: fit-content;
-  max-width: 100%;
-  margin-inline: auto;
-  text-align: left;
 }
 .block-align-center .locations-common-links {
   justify-content: center;
