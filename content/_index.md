@@ -91,6 +91,7 @@ sections:
     align: "center"
   - type: testimonials
     title: "Lo que dicen quienes confían en nosotros"
+    class: "bg-color1"
     items:
       - text: "Llevo años viniendo y aquí me conocen de verdad. No tengo que explicar nada: saben qué gafas llevo, cómo me fue la última vez, qué me funcionó. Eso no lo encuentras en cualquier sitio."
         name: "Residente de Torre del Mar"
