@@ -5,6 +5,7 @@
   --color-bg: #fffdf8;
   --color-accent: #C9A84C;
   --color-accent-text: #8a6d20;
+  --color-link: #08783e;
   --color-dark: #25211d;
   --color-bg-over: #fff;
   --color-control-bg: var(--color-bg-over);
@@ -97,7 +98,7 @@ a {
 
 .btn-outline {
   background: transparent;
-  color: var(--color-accent);
+  color: var(--color-link);
   border: 1px solid currentColor;
 }
 

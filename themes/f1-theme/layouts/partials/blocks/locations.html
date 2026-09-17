@@ -15,7 +15,7 @@
   Cada sede usa de site.yaml: name, address, location, phone, phoneLabel,
   mapUrl y -- solo en layout full -- image + imageAlt.
 */ -}}
-{{- $siteData := site.Data.site -}}
+{{- $siteData := hugo.Data.site -}}
 {{- $locations := $siteData.locations | default slice -}}
 {{- $contact := $siteData.contact | default dict -}}
 {{- $compact := eq (.layout | default "full") "compact" -}}

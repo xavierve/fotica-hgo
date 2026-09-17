@@ -7,7 +7,7 @@
 
   Las claves vacias no se pintan (sunday: "" = cerrado, no se muestra).
 */ -}}
-{{- $h := site.Data.site.contact.hours | default dict -}}
+{{- $h := hugo.Data.site.contact.hours | default dict -}}
 {{- if or $h.weekdays $h.saturday $h.sunday -}}
 <div class="hours">
   {{ partial "icons.html" "clock" }}
