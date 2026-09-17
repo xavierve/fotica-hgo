@@ -323,8 +323,18 @@
   width: 1.6em;
   height: 1.6em
 }
+/* Icono y texto en columnas: con el icono inline, una direccion que envuelve
+   metia la segunda linea debajo del propio icono ("...Torre del / Mar").
+   inline-grid y no grid: los <a> van seguidos de <br>, y en bloque se sumaria
+   un salto de linea extra. */
+.footer-grid address a {
+  display: inline-grid;
+  grid-template-columns: 1.1em 1fr;
+  align-items: baseline;
+  column-gap: .4em
+}
 .footer-grid address .icon {
-  margin-right: .4em
+  margin-right: 0
 }
 .site-footer a {
   display: inline-block;
@@ -1364,7 +1374,15 @@ h2.fs-xs {
   gap: .35rem;
   font-style: normal;
 }
-.location-meta a,
+.location-meta a {
+  display: inline-grid;
+  grid-template-columns: 1.1em 1fr;
+  align-items: baseline;
+  column-gap: .45rem;
+  color: var(--color-accent-text);
+  font-weight: 600;
+  text-decoration: none
+}
 .locations-common-links a {
   display: inline-flex;
   align-items: center;
@@ -1412,8 +1430,15 @@ h2.fs-xs {
   color: inherit;
 }
 /* El layout compacto centra si el bloque lo pide (align: center) */
+/* Centrado: se centra el bloque entero (fit-content + margin auto), no cada
+   linea por separado. Asi los iconos comparten columna y el texto que envuelve
+   cuelga alineado con su primera linea. Mismo criterio que en .trustbar-inner. */
 .block-align-center .location-meta {
-  align-items: center;
+  align-items: stretch;
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+  text-align: left;
 }
 .block-align-center .locations-common-links {
   justify-content: center;
