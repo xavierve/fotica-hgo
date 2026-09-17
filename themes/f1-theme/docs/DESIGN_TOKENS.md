@@ -12,8 +12,13 @@ internos en `em` (pendientes).
 
 ## ⚠️ Restricción de marca
 
-> **El logo es del cliente y no se toca.** El color definido es el `#34830b` (verde)
-> SVG original (`static/images/logo-fausto-animado-color.svg`)
+> **El logo es del cliente y no se toca.** Verde de marca: `#08783e` (cambio aprobado
+> por el cliente; sustituye al `#34830b` original, que daba contraste AA sin margen).
+> SVG original (`static/images/logo-fausto-animado-color.svg`).
+> Variantes derivadas (mismo tono, 149°): `#1da55f` en el logo claro sobre fondo
+> oscuro y `#8cf2be` en el favicon en modo oscuro.
+> El verde de paleta `--bg-color3` y `brand.themeColor` (`data/site.yaml`) usan el
+> mismo `#08783e`: logo y paleta ya no divergen.
 >
 > El resto de colores de la paleta son provisionales mientras se cierra el
 > diseño. No dar ningún hex por definitivo salvo los del SVG del logo.
@@ -58,7 +63,7 @@ que el texto oscuro encima se lea); como **texto de enlace** necesita ser oscuro
 ```css
 --bg-color1: #f5efe5;  --bg-text-color1: #1c1a17;   /* crema  → texto oscuro */
 --bg-color2: #1B3A5C;  --bg-text-color2: #ffffff;   /* navy   → texto blanco */
---bg-color3: #34855B;  --bg-text-color3: #ffffff;   /* verde  → texto blanco */
+--bg-color3: #08783e;  --bg-text-color3: #ffffff;   /* verde  → texto blanco (5.58:1) */
 --bg-color4: #C9A84C;  --bg-text-color4: #1c1a17;   /* dorado → texto oscuro */
 ```
 

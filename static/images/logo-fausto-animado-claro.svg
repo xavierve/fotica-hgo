@@ -4,7 +4,7 @@
  <style>
 .logo-fausto {
   color: #ffffff;                /* subtítulo, ondas, pupila — variante clara para fondo oscuro */
-  --fausto-primary: #5aa11f;     /* título, ojo y oreja */
+  --fausto-primary: #1da55f;     /* título, ojo y oreja */
   --fausto-background: transparent;
   --fausto-cycle-duration: 5s;
 }
