@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" id="svg51" width="59.568" height="52.878" viewBox="0 0 59.568 52.878">
   <style>
-    .c-green  { stroke: #34830b; }
+    .c-green  { stroke: #08783e; }
     .c-dark   { fill: #1a1a1a; }
     @media (prefers-color-scheme: dark) {
-      .c-green  { stroke: #B2F07F; }
+      .c-green  { stroke: #8cf2be; }
       .c-dark   { fill: #ffffff; }
     }
   </style>

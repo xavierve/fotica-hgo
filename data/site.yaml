@@ -8,6 +8,7 @@ brand:
   logo: "/images/logo-fausto.svg"
   logoAlt: "Ópticas Fausto — Centro Óptico y Auditivo en Torre del Mar"
   logoInline: "images/logo-fausto-animado.svg"
+  themeColor: "#08783e"   # <meta name="theme-color">; mantener igual que --bg-color3
 
 footer:
   brand:

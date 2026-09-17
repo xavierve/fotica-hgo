@@ -8,5 +8,5 @@
 <link rel="icon" href="/favicon/favicon.ico" sizes="32x32">
 <link rel="icon" href="/favicon/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png">
-<meta name="theme-color" content="#34855B">
+{{ with (hugo.Data.site.brand | default dict).themeColor }}<meta name="theme-color" content="{{ . }}">{{ end }}
 <meta name="viewport" content="width=device-width, initial-scale=1">

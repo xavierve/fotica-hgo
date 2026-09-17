@@ -8,7 +8,7 @@ page_id: "4.0"
 og:
   title: "Estamos a una llamada, un mensaje o una visita — Ópticas Fausto"
   description: "Dos centros en Torre del Mar, horario de 10:00–13:30 y 17:30–21:00. Atención también en inglés y alemán."
-  image: "/images/og/contacto.jpg"
+  image: "/images/og/0-inicio.jpg"
   type: "website"
 
 schema:

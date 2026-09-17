@@ -16,4 +16,4 @@ disableKinds = ['taxonomy', 'term']
 
 [params]
   siteName = 'Ópticas Fausto'
-  defaultOgImage = '/images/og/opticas-fausto.jpg'
+  defaultOgImage = '/images/og/0-inicio.jpg'
