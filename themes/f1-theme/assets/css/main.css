@@ -1115,6 +1115,7 @@ h2.fs-xs {
 /* Leyenda de imagen en image-text (figcaption) */
 .image-text-caption {
   margin-top: .55rem;
+  text-align: center;
   font-size: .85em;
   line-height: 1.45;
   color: var(--color-muted)

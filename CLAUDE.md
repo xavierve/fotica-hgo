@@ -142,6 +142,22 @@ Foco:** qué pasa con el (b) — si el split de Home se absorbe dentro de
   progresiva (quien no lo soporta lo ignora). Alternativa: `max-width` en el H1.
 - **Padding inferior del bloque navy: recortar ~30%** — quedaban ~150px de
   navy vacío bajo los botones.
+- **Padding SUPERIOR del hero: depende del modo, no es un valor único.**
+  Hoy `.hero` usa `clamp(4rem, 8vw, 7rem)` siempre, y ese aire está pensado
+  para el hero CON fondo: separa el texto del borde de la foto para que el
+  titular no parezca pegado al recorte. Sin fondo no separa nada — son 64px
+  de página vacía entre el header y el eyebrow, y en móvil se pagan caros:
+  con ellos el eyebrow arranca hacia los 90px y los botones de Llamar y
+  WhatsApp aterrizan sobre los 540, justo en el filo del pliegue de un iPhone
+  SE. En la home, donde el hero ES la conversión, eso no es estético.
+  Los tres casos, que pide una clase emitida por el partial (mismo patrón que
+  `has-surface` o `is-textonly`, no un `clamp` retocado):
+  - **banda apilada arriba** → `0`. Una banda a sangre debe tocar el header.
+  - **solo texto, sin fondo** (home hoy) → aire corto, ~32-40px en móvil;
+    en desktop el valor actual sobra de sitio y sí aporta.
+  - **fondo detrás del texto** (`overlay`) → el `clamp` actual, sin tocar.
+  Detectado el 17 sep sobre la home. NO tocarlo antes de implementar
+  `stacked`: cambiar el `clamp` ahora obliga a cambiarlo otra vez después.
 - Alineación vertical de las dos columnas: el prototipo las alinea arriba y
   queda aire bajo el H1 (la derecha es más alta). `align-items:center` es la
   alternativa. Decidir a propósito, no por defecto — a Foco le vale como está.
