@@ -15,19 +15,19 @@
   --color-dark: #25211d;                 /* negro suavizado: footer, bloques contrast */
   --color-accent: #C9A84C;               /* dorado: FONDO de boton sobre fondo oscuro y ornamentos (filetes, bordes decorativos) */
   --color-accent-text: #8a6d20;          /* dorado como TEXTO sobre fondo claro: eyebrow */
-  --color-control-bg: var(--color-bg-over);
-  --color-control-border: rgba(0, 0, 0, .15);
+  --color-control-bg: var(--color-bg-over);   /* fondo de campos de formulario y controles */
+  --color-control-border: rgba(0, 0, 0, .15); /* borde de esos controles; negro translucido para funcionar sobre cualquier fondo claro */
   --color-overlay-base: 27, 42, 56;      /* RGB suelto, para rgba() del overlay */
-  --color-backdrop: rgba(15, 20, 25, .85); 
+  --color-backdrop: rgba(15, 20, 25, .85);   /* velo a pantalla completa detras del lightbox */
   /* Fondos de banda: cada bg-colorN va SIEMPRE con su bg-colorN-text. 3 y 4 son alias: el mismo color cumple otro rol y no debe divergir. */
   --bg-color1: #f5efe5;
   --bg-color2: #1B3A5C;
   --bg-color3: var(--color-link);
   --bg-color4: var(--color-accent);
-  --bg-text-color1: var(--color-text);
-  --bg-text-color2: var(--color-text-inverse);
-  --bg-text-color3: var(--color-text-inverse);
-  --bg-text-color4: var(--color-text);
+  --bg-color1-text: var(--color-text);
+  --bg-color2-text: var(--color-text-inverse);
+  --bg-color3-text: var(--color-text-inverse);
+  --bg-color4-text: var(--color-text);
   --container: 1120px;
   --container-wide: 1440px;
   --space-s: clamp(1rem, 2vw, 1.5rem);
@@ -88,9 +88,9 @@ a {
   gap: .5rem;
   padding: .85rem 1.15rem;
   border-radius: 999px;
-  /* --btn-bg / --btn-fg: los repinta el contexto (fondo oscuro → dorado) */
+  /* --btn-bg / --btn-text: los repinta el contexto (fondo oscuro → dorado) */
   background: var(--btn-bg, var(--color-link));
-  color: var(--btn-fg, #fff);
+  color: var(--btn-text, #fff);
   text-decoration: none;
   white-space: nowrap;
   font-weight: 600;

@@ -271,12 +271,17 @@ lector de pantalla y no necesita `aria-hidden`. Si algún día pasara a ser
 informativo (por ejemplo identificando visión o audición en cada card), ahí sí
 tendría que estar en el marcado con su etiqueta.
 
-**El ornamento no debe ir en `--color-accent`.** El oro es el color de acción
-del sitio, y un dibujo grande en oro macizo compite con el botón que tiene
-debajo — invierte la jerarquía. Además el oro y el verde `bg-color3` tienen
-luminancia casi idéntica (1,98:1), así que el mismo valor daría una oreja
+**El ornamento no debe ir en `--color-accent`.** Un dibujo grande en oro macizo
+compite con el botón dorado que tiene debajo en las bandas oscuras — invierte la
+jerarquía. Y el contraste no acompaña: el oro da 2.44:1 sobre el verde
+`bg-color3` (medido con el verde actual `#08783e`; con el anterior `#34855B`
+eran 1.98:1) frente a 5.09:1 sobre navy, así que el mismo valor daría una oreja
 rotunda sobre navy y un ojo turbio sobre verde. Para más presencia, subir la
-opacidad del `currentColor`, no cambiar el color.
+opacidad del `currentColor`, no cambiar el color. Sobre verde, usar opacidad 1:
+a .88 el oro pierde la poca separación que tiene.
+
+El color de acción del sitio es `--color-link` (verde) sobre fondo claro y
+`--color-accent` (oro) sobre fondo oscuro — ver `DESIGN_TOKENS.md` 1.1.1.
 
 ## Banner
 

@@ -641,7 +641,7 @@ h2.fs-xs {
 .bg-color2 .btn:not(.btn-outline),
 .bg-color3 .btn:not(.btn-outline) {
   --btn-bg: var(--color-accent);
-  --btn-fg: var(--color-text);
+  --btn-text: var(--color-text);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .85);
 }
 @media(min-width:821px) {
@@ -759,23 +759,23 @@ h2.fs-xs {
    cascada, sin que ninguna especificidad lo impidiera). */
 .bg-color1 {
   background-color: var(--bg-color1);
-  color: var(--bg-text-color1);
+  color: var(--bg-color1-text);
 }
 .bg-color2 {
   background-color: var(--bg-color2);
-  color: var(--bg-text-color2);
+  color: var(--bg-color2-text);
   --subtitle-color: rgba(255, 255, 255, .94);
   --eyebrow-color: var(--color-text-inverse);
 }
 .bg-color3 {
   background-color: var(--bg-color3);
-  color: var(--bg-text-color3);
+  color: var(--bg-color3-text);
   --subtitle-color: rgba(255, 255, 255, .94);
   --eyebrow-color: var(--color-text-inverse);
 }
 .bg-color4 {
   background-color: var(--bg-color4);
-  color: var(--bg-text-color4);
+  color: var(--bg-color4-text);
 }
 /* Con imagen de fondo, el color de paleta pasa a teñir el velo en vez de
    taparlo — mismo criterio que .has-bg-image.has-bg-color. */
@@ -1404,7 +1404,7 @@ h2.fs-xs {
    Sedes desde site.yaml. Dos layouts:
      .locations-full    -> con imagen de mapa/fachada (pagina Contacto)
      .locations-compact -> solo texto y enlaces (home, footer de seccion)
-   Los iconos y el color de enlace heredan de la superficie (--bg-text-color),
+   Los iconos y el color de enlace heredan de la superficie (--bg-colorN-text),
    asi que el bloque funciona sobre fondo claro y sobre banda oscura. */
 .locations-grid {
   display: grid;

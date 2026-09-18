@@ -34,17 +34,28 @@ todos los bugs de contraste que hemos tenido.
 
 ```css
 --color-text: #1c1a17;             /* texto normal del body */
+--color-text-inverse: #ffffff;     /* texto sobre fondo oscuro */
 --color-muted: #625d55;            /* texto secundario: captions, ayudas */
---color-dark: #25211d;             /* negro suavizado */
+--color-dark: #25211d;             /* negro suavizado: footer, bloques contrast */
 --color-bg: #fffdf8;               /* fondo del LIENZO (body), blanco roto */
 --color-bg-over: #fff;             /* fondo de lo que va ENCIMA: cards, controles */
---color-accent: #C9A84C;           /* FONDO de botón primario */
---color-accent-text: #8a6d20;      /* TEXTO de enlaces/acento */
+--color-link: #08783e;             /* ACCIÓN sobre fondo claro (ver 1.1.1) */
+--color-link-inverse: var(--color-text-inverse);  /* acción sobre fondo oscuro */
+--color-accent: #C9A84C;           /* dorado: fondo de botón sobre oscuro + ornamentos */
+--color-accent-text: #8a6d20;      /* dorado como TEXTO sobre fondo claro: eyebrow */
 --color-control-bg: var(--color-bg-over);
 --color-control-border: rgba(0,0,0,.15);
 --color-overlay-base: 27,42,56;    /* RGB suelto, para rgba() del overlay */
 --color-backdrop: rgba(15,20,25,.85);
 ```
+
+**Convención de nombres** (la misma en cualquier proyecto que reutilice el tema):
+
+| Patrón | Significado |
+|---|---|
+| `--color-<rol>` | El rol, nunca el nombre del color (`link`, `accent`, `text`) |
+| `<algo>-text` | Color del TEXTO que va sobre ese fondo |
+| `<algo>-inverse` | El mismo rol, resuelto para fondo oscuro |
 
 **`--color-bg` vs `--color-bg-over`:** el primero es el fondo de la página
 (blanco roto). El segundo es blanco puro, para elementos *elevados* que van
@@ -52,27 +63,66 @@ encima: cards, testimonios, team-cards, campos de formulario. Esa diferencia
 sutil, junto con la sombra, es lo que hace que una card se perciba flotando sin
 necesidad de un borde marcado.
 
-**`--color-accent` vs `--color-accent-text`:** son dos tokens porque el acento
+#### 1.1.1 `--color-link` es el color de ACCIÓN, no solo de enlaces
+
+Verde de marca. Se usa en:
+
+| Dónde | Propiedad | Archivo |
+|---|---|---|
+| Enlaces dentro de `.prose` | `color` + subrayado | `main.css` (regla inicial) |
+| `.card-link` ("Ver más") | `color` | `main.css` |
+| `.team-card summary` | `color` | `main.css` |
+| `.location-meta a`, `.locations-common-links a` | `color` | `main.css` |
+| `.btn` (fondo de botón primario) | `--btn-bg` por defecto | `critical.css` |
+| `.btn-outline` (texto y borde vía `currentColor`) | `color` | `critical.css` |
+| Item activo del nav (`aria-current` / `.is-section`) | `color` + filete | `critical.css` |
+| `--bg-color3` | alias | `critical.css` |
+
+**Sobre fondo oscuro no se usa.** El verde da 2.09:1 sobre navy y no contrasta
+consigo mismo sobre `bg-color3`. Ahí entran `--color-link-inverse` (texto y
+`btn-outline`, blanco: lo que distingue el enlace es el subrayado, no el color)
+y `--color-accent` (fondo del botón primario, con filete blanco). El repintado
+vive en una sola regla de `main.css`, la que agrupa
+`.has-bg-image`, `.has-bg-color:not(.bg-claro)`, `.bg-color2` y `.bg-color3`.
+
+**`--color-accent` vs `--color-accent-text`:** son dos tokens porque el dorado
 hace dos trabajos incompatibles. Como **fondo de botón** necesita ser claro (para
-que el texto oscuro encima se lea); como **texto de enlace** necesita ser oscuro
-(para leerse sobre fondos claros). Un solo token no puede cumplir ambos — usar
-`--color-accent` como color de texto fue un bug real en `.card-link`.
+que el texto oscuro encima se lea); como **texto** necesita ser oscuro (para
+leerse sobre fondos claros). Un solo token no puede cumplir ambos — usar
+`--color-accent` como color de texto fue un bug real en `.card-link` y en
+`.btn-outline` (2.25:1 sobre crema).
+
+**Contrastes medidos** (sobre `--color-bg` #fffdf8 salvo indicación):
+
+| Combinación | Ratio | Uso |
+|---|---|---|
+| `--color-link` sobre crema | 5.48:1 | Texto y botón: AA ✅ |
+| Blanco sobre `--color-link` | 5.58:1 | Texto dentro del botón verde |
+| `--color-accent` sobre crema | 2.25:1 | ❌ nunca como texto ni borde |
+| `--color-accent-text` sobre crema | 4.82:1 | Eyebrow: AA ✅ |
+| `--color-text` sobre `--color-accent` | 7.6:1 | Texto dentro del botón dorado |
+| `--color-accent` sobre `--bg-color2` | 5.09:1 | Botón dorado sobre navy |
+| `--color-accent` sobre `--bg-color3` | 2.44:1 | Necesita el filete blanco |
+| `--color-link` sobre `--bg-color2` | 2.09:1 | ❌ por eso existe el inverse |
 
 ### 1.2 Paleta de marca (pares fondo ↔ texto)
 
 ```css
---bg-color1: #f5efe5;  --bg-text-color1: #1c1a17;   /* crema  → texto oscuro */
---bg-color2: #1B3A5C;  --bg-text-color2: #ffffff;   /* navy   → texto blanco */
---bg-color3: #08783e;  --bg-text-color3: #ffffff;   /* verde  → texto blanco (5.58:1) */
---bg-color4: #C9A84C;  --bg-text-color4: #1c1a17;   /* dorado → texto oscuro */
+--bg-color1: #f5efe5;               --bg-color1-text: var(--color-text);          /* crema  → texto oscuro */
+--bg-color2: #1B3A5C;               --bg-color2-text: var(--color-text-inverse);  /* navy   → texto blanco */
+--bg-color3: var(--color-link);     --bg-color3-text: var(--color-text-inverse);  /* verde  → texto blanco (5.58:1) */
+--bg-color4: var(--color-accent);   --bg-color4-text: var(--color-text);          /* dorado → texto oscuro */
 ```
 
-Cada `--bg-colorN` va **siempre emparejado** con su `--bg-text-colorN`. La
+3 y 4 son **alias**, no hex repetidos: el mismo color cumple otro rol en el
+sistema y no debe poder divergir.
+
+Cada `--bg-colorN` va **siempre emparejado** con su `--bg-colorN-text`. La
 relación es de *contención*: "si pinto la sección de este color, el texto que va
 DENTRO es este otro".
 
 **Regla no negociable:** si se repinta un `--bg-colorN`, hay que revisar su
-`--bg-text-colorN` en la misma línea. CSS no puede calcular contraste de forma
+`--bg-colorN-text` en la misma línea. CSS no puede calcular contraste de forma
 fiable hoy (`color-contrast()` no tiene soporte real), así que el emparejamiento
 es manual — por eso viven pegados en `:root`.
 
