@@ -1,6 +1,7 @@
 {{ partial "seo.html" . }}
 {{ partial "og.html" . }}
 {{ partial "schema.html" . }}
+{{ partial "hero-preload.html" . }}
 {{/* El CSS fuente se mantiene legible (sin minificar) para poder leerlo y
      generar diffs limpios; Hugo lo minifica en el build. */}}
 {{ $critical := resources.Get "css/critical.css" }}{{ if $critical }}<style>{{ ($critical | minify).Content | safeCSS }}</style>{{ end }}

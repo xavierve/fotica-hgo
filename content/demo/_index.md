@@ -26,6 +26,7 @@ hero:
   bgColor: "var(--bg-color2)"
   preset: contact
   labelCall: "Llamar ahora"
+  layout: overlay          # opt-in: texto sobre la foto (>=821px); en movil se apila. Sin layout = stacked
   class: "scrim"           # activo aquí — comparar con los 3 CTA de abajo (scrim/overlay-strong/panel)
   
 sections:

@@ -7,37 +7,26 @@
 
   El ancho para el descriptor "w" se lee del archivo real con images.Config
   (no hay que declararlo a mano) -- se asume que "_hd" mide exactamente el
-  doble de ancho que el archivo normal, por convencion.
+  doble de ancho que el archivo normal, por convencion. Ver img-srcset.html.
 
   Parametros (dict):
-    src      -> ruta publica, ej "/images/211-optometria_D3A0068.webp" (obligatorio)
-    alt      -> texto alternativo (obligatorio)
-    sizes    -> atributo sizes, ej "(min-width:821px) 33vw, 100vw" (opcional;
-                por defecto, el ancho real del archivo en px -> tamano fijo)
-    class    -> clase css opcional
-    loading  -> "lazy" (defecto) | "eager"
+    src           -> ruta publica, ej "/images/211-optometria_D3A0068.webp" (obligatorio)
+    alt           -> texto alternativo (obligatorio)
+    sizes         -> atributo sizes, ej "(min-width:821px) 33vw, 100vw" (opcional;
+                     por defecto, el ancho real del archivo en px -> tamano fijo)
+    class         -> clase css opcional
+    loading       -> "lazy" (defecto) | "eager"
+    fetchpriority -> "high" | "low" | "auto" (opcional; solo para candidatas a LCP)
+    style         -> style="" opcional (ej. object-position del hero)
 */ -}}
-{{- $src := .src -}}
-{{- $ext := path.Ext $src -}}
-{{- $hd := "" -}}
-{{- $hasHd := false -}}
-{{- if and $ext (not (strings.HasPrefix $src "http")) -}}
-  {{- $hd = replace $src $ext (printf "_hd%s" $ext) 1 -}}
-  {{/* Hacen falta LOS DOS archivos: el _hd para servirlo, y la base para leer
-       su ancho con images.Config. Comprobar solo el _hd rompía el build
-       durante la transición, cuando el original se renombra a _hd antes de
-       generar la base (images.Config falla con "file does not exist"). */}}
-  {{- $hasHd = and
-        (os.FileExists (printf "static%s" $hd))
-        (os.FileExists (printf "static%s" $src)) -}}
-{{- end -}}
-<img src="{{ $src }}"
-  {{- if $hasHd -}}
-    {{- $cfg := images.Config (printf "static%s" $src) -}}
-    {{- $w := $cfg.Width -}}
-  srcset="{{ $src }} {{ $w }}w, {{ $hd }} {{ mul $w 2 }}w"
-  sizes="{{ .sizes | default (printf "%dpx" $w) }}"
+{{- $set := partial "img-srcset.html" .src -}}
+<img src="{{ .src }}"
+  {{- if $set.hasHd }}
+  srcset="{{ $set.srcset }}"
+  sizes="{{ .sizes | default (printf "%dpx" $set.w) }}"
   {{- end }}
   alt="{{ .alt }}"
   loading="{{ .loading | default "lazy" }}"
-  {{- with .class }} class="{{ . }}"{{ end }}>
+  {{- with .fetchpriority }} fetchpriority="{{ . }}"{{ end }}
+  {{- with .class }} class="{{ . }}"{{ end }}
+  {{- with .style }} style="{{ . | safeCSS }}"{{ end }}>

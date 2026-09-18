@@ -605,7 +605,7 @@ h2.fs-xs {
 }
 @supports (background-image:image-set(url(a.png) 1x)) {
   .has-bg-image {
-    background-image: var(--section-bg-mobile-hd, var(--section-bg-hd, var(--section-bg-mobile, var(--section-bg))))
+    background-image: var(--section-bg-mobile-hd, var(--section-bg-mobile, var(--section-bg-hd, var(--section-bg))))
   }
 }
 .has-bg-image>.container {
@@ -836,6 +836,34 @@ h2.fs-xs {
   .has-bg-image.panel .hero-copy,
   .has-bg-image.panel .cta-inner {
     background: rgba(20, 30, 40, .72);
+  }
+}
+/* overlay (hero.layout: overlay): texto sobre la foto SOLO desde 821px. En movil
+   el hero nunca lleva texto encima de la imagen (decision del 21 ago, no se
+   reabre): la misma background-image pasa a ser una banda (--hero-band-h) arriba y el
+   texto queda debajo sobre color liso. Sigue siendo background-image, asi que
+   se ejercita el image-set/_hd y --section-bg-mobile de bg-image-style.html.
+   Va aqui, tras el bloque .has-bg-image, para ganar por orden. */
+@media(max-width:820px) {
+  .hero-overlay.has-bg-image {
+    background-color: var(--section-bg-color, var(--bg-color2));
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: 100% var(--hero-band-h);
+    padding: calc(var(--hero-band-h) + clamp(2rem, 4.5vw, 3.5rem)) 0 clamp(2.8rem, 5.6vw, 4.9rem);
+  }
+  .hero-overlay.has-bg-image::before {
+    display: none;
+  }
+  .hero-overlay .hero-copy,
+  .hero-overlay .eyebrow {
+    text-shadow: none;
+  }
+  .hero-overlay.has-bg-image.panel .hero-copy {
+    background: none;
+    backdrop-filter: none;
+    padding: 0;
+    border-radius: 0;
   }
 }
 /* En hero con imagen, evitar que el texto se extienda bajo la zona “ocupada” de la foto */

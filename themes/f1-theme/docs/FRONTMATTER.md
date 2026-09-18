@@ -29,13 +29,16 @@ schema:
   includeFAQ: true
 
 hero:
+  layout: ""            # stacked (defecto, si se omite) | overlay | split
   eyebrow: ""
   title: ""
   subtitle: ""
-  image: ""
+  preset: contact       # botones Llamar + WhatsApp desde data/site.yaml
+  bg: ""                # imagen del hero (stacked y overlay)
+  bgMobile: ""          # recorte propio para móvil (opcional)
+  imagePosition: ""     # stacked: punto de interés del recorte, ej. "center 30%"
+  image: ""             # split: figura junto al texto (en stacked/overlay sirve de alias de bg)
   imageAlt: ""
-  bg: ""
-  bgMobile: ""
   bgColor: ""
   primaryCTA:
     text: ""
@@ -83,6 +86,32 @@ Todos los bloques de `sections` aceptan:
 - `textSize`: `xs`, `s`, `m`, `l`, `xl` — solo bloques/shortcodes de bloque (no confundir con la utilidad CSS fs-*, para texto suelto en prosa; ver "Talla de bloque vs talla de prosa" más abajo)
 - `align`: `left`, `center`, `right`
 - `class`: string opcional
+
+## Hero: layouts
+
+Un solo bloque, tres presentaciones. `hero.layout` elige; si se omite, es
+`stacked`. El contenido (eyebrow, H1, subtítulo, CTAs) y sus parámetros son
+los mismos en las tres.
+
+| `layout` | Qué es | Imagen | Cuándo |
+|---|---|---|---|
+| `stacked` (**defecto**) | Banda de foto a sangre arriba; debajo, bloque `bg-color2` con H1 a la izquierda y subtítulo + CTAs a la derecha (una columna en móvil). | `bg` (o `image`) | La norma. |
+| `overlay` | Texto sobre la foto (`background-image` + `scrim`). **Solo desde 821px**: en móvil se apila igual que `stacked` — nunca hay texto sobre foto en móvil. | `bg` (o `image`) | Excepción, con fotos de espacio negativo. |
+| `split` | Texto y figura en dos columnas (una en móvil, texto primero). | `image` | Home. |
+
+Sin imagen utilizable el hero degrada a solo texto (clase `hero-plain`).
+
+Parámetros propios del hero:
+
+- `layout`: `stacked` | `overlay` | `split`.
+- `imagePosition`: (`stacked`) `object-position` de la foto, ej. `"center 30%"`, `"top"`. Cada foto tiene su punto de interés; por defecto `center`.
+- `imageAlt`: alt de la foto. Si se omite queda `alt=""` (decorativa).
+- `scrim`: (`overlay`) `false` desactiva el degradado direccional, que va activo por defecto.
+- `bgMobile`: recorte para móvil. En `stacked` es un `<source media="(max-width:820px)">`; en `overlay`, la variable `--section-bg-mobile`.
+- `bgColor` / `textColor`: en `stacked` sustituyen el color del bloque de texto (por defecto `bg-color2`); en `overlay` tiñen el velo.
+- `class`: clases extra en el `<section>`. `panel`, `overlay-strong` y `bg-top` son de `overlay`; en `stacked` el encuadre va por `imagePosition`.
+
+Variantes `_hd` (`foto.webp` → `foto_hd.webp`): si existen se usan solas (`srcset` w en `stacked`/`split`, `image-set()` en `overlay`); si faltan, no hay error. La imagen del hero se precarga en el `<head>` (`hero-preload.html`) solo en páginas que la tienen, con un preload por breakpoint si hay `bgMobile`.
 
 ## Reglas
 

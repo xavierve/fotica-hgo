@@ -4,9 +4,9 @@ Todos los tokens viven en `:root`, dentro de `assets/css/critical.css`.
 Nada de color, tamaño o espaciado se escribe a pelo en el CSS del tema: si un
 valor se repite o puede cambiar, es un token.
 
-Este documento cubre lo que ya está **estable**. No documenta el hero (su
-arquitectura va a cambiar — ver tarea 8 en `CLAUDE.md`) ni los espaciados
-internos en `em` (pendientes).
+Este documento cubre lo que ya está **estable**. Del hero solo documenta sus
+tokens (1.3.1); los layouts están en `FRONTMATTER.md`. Los espaciados internos
+en `em` siguen pendientes.
 
 ---
 
@@ -180,6 +180,17 @@ ya trae el par fondo+texto resuelto.
   class: "bg-claro"
 ```
 
+### 1.3.1 Tokens del hero
+
+En `:root` (`critical.css`). Los usan el hero `stacked` y, en móvil, el `overlay`.
+
+| Token | Valor | Qué controla |
+|---|---|---|
+| `--hero-band-h` | `40vh`, y `40svh` si el navegador lo soporta | Alto de la banda de foto en móvil. No son los 70svh de banner/CTA (ver 3.1): header + breadcrumb ya ocupan ~120px y con 50svh el H1 de 4 líneas de un 359×640 quedaba en el filo del pliegue. En desktop manda `aspect-ratio: 3/1` (mín. 18rem, máx. 60svh). |
+| `--hero-width` | `var(--container-wide)` | Ancho del contenido del bloque de texto en `stacked`. Un solo sitio para cambiarlo a `var(--container)`. |
+
+Padding superior del hero, por clase emitida por el partial: `hero-stacked` → 0 (la banda toca el header o el breadcrumb); `hero-split` / `hero-plain` → `clamp(2rem, 8vw, 7rem)`; `hero-overlay` → el `clamp(4rem, 8vw, 7rem)` base de `.hero`.
+
 ### 1.4 Clases modificadoras (`class:`)
 
 **Legibilidad sobre imagen** — las fotos reales no son predecibles; estas clases
@@ -195,7 +206,7 @@ son las palancas para que el texto se lea sin cambiar la foto:
 
 | Clase | Efecto |
 |---|---|
-| `bg-top` | `background-position:top center` — evita que un recorte alto corte cabezas o rótulos. En uso en el hero de Nosotros. |
+| `bg-top` | `background-position:top center` — evita que un recorte alto corte cabezas o rótulos. Para `background-image` (cta, banner, hero `overlay`); el hero `stacked` usa `hero.imagePosition`. |
 
 **Contraste de fondo claro:**
 

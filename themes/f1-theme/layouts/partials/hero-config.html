@@ -1,0 +1,35 @@
+{{- /*
+  partials/hero-config.html
+
+  Resuelve, a partir del front matter `hero:` de una pagina, QUE layout se
+  renderiza y con QUE imagen. Lo usan hero.html (markup) y header-meta.html
+  (preload LCP): una sola fuente de verdad, para que el preload nunca apunte
+  a una imagen que el hero no usa.
+
+  Entrada: la pagina (.). Sin `hero:` devuelve layout "" (y sin src).
+
+  hero.layout:
+    (ausente) | stacked -> foto a sangre arriba, bloque de color debajo. DEFECTO.
+    overlay             -> texto sobre la imagen (solo desde 821px; en movil se
+                           apila igualmente: nunca hay texto sobre foto en movil).
+    split               -> texto + figura en dos columnas (Home).
+  Sin imagen utilizable el hero degrada a "plain" (solo texto).
+
+  Origen de la imagen: split -> `image`. stacked/overlay -> `bg`, y si falta,
+  `image` (una pagina que declare image sin layout sigue teniendo foto).
+
+  Devuelve dict: layout, src, mobile ("" si no hay bgMobile).
+*/ -}}
+{{- $h := .Params.hero | default dict -}}
+{{- $layout := $h.layout | default "stacked" -}}
+{{- $src := "" -}}
+{{- if eq $layout "split" -}}
+  {{- $src = $h.image | default "" -}}
+{{- else -}}
+  {{- $src = $h.bg | default ($h.image | default "") -}}
+{{- end -}}
+{{- $mobile := "" -}}
+{{- if ne $layout "split" -}}{{- $mobile = $h.bgMobile | default "" -}}{{- end -}}
+{{- if not $src -}}{{- $layout = "plain" -}}{{- $mobile = "" -}}{{- end -}}
+{{- if not .Params.hero -}}{{- $layout = "" -}}{{- end -}}
+{{- return (dict "layout" $layout "src" $src "mobile" $mobile) -}}

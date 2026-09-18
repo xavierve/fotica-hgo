@@ -1,33 +1,71 @@
+{{- /*
+  partials/hero.html
+
+  Un solo bloque, tres presentaciones (hero.layout; la resolucion vive en
+  hero-config.html):
+    stacked (defecto) -> foto a sangre arriba, bloque de color debajo
+    overlay           -> texto sobre la foto (background-image + scrim), solo
+                         desde 821px; en movil se apila como stacked
+    split             -> texto + figura en dos columnas
+  Sin imagen: "plain" (solo texto). El contenido (eyebrow, H1, subtitulo,
+  CTAs) es el mismo en todas: hero-copy.html. Parametros: docs/FRONTMATTER.md.
+*/ -}}
 {{ with .Params.hero }}
-{{/* Fondos: sistema unificado hero/CTA/counter — clases has-bg-* y vars --section-bg* */}}
-{{ $bg := .bg }}
-<section class="hero{{ if $bg }} has-bg-image{{ end }}{{ if .bgColor }} has-bg-color{{ end }}{{ with .class }} {{ . }}{{ end }}"
+{{ $cfg := partial "hero-config.html" $ }}
+{{ $layout := $cfg.layout }}
+{{ $sizesFull := "100vw" }}
+
+{{ if eq $layout "stacked" }}
+{{/* La foto va en <img> real (no background-image): sin texto encima no hay
+     motivo para background-attachment, y se gana srcset/sizes, fetchpriority
+     y object-position. bgMobile -> <source media> con el mismo breakpoint (821px) que el resto del tema. */}}
+{{ $pos := "" }}{{ with .imagePosition }}{{ $pos = printf "object-position:%s" . }}{{ end }}
+<section class="hero hero-stacked{{ with .class }} {{ . }}{{ end }}">
+  <figure class="hero-band">
+    <picture>
+      {{- with $cfg.mobile }}
+      {{- $mset := partial "img-srcset.html" . }}
+      <source media="(max-width:820px)" srcset="{{ if $mset.hasHd }}{{ $mset.srcset }}{{ else }}{{ . }}{{ end }}"{{ if $mset.hasHd }} sizes="{{ $sizesFull }}"{{ end }}>
+      {{- end }}
+      {{ partial "responsive-img.html" (dict "src" $cfg.src "alt" (.imageAlt | default "") "sizes" $sizesFull "loading" "eager" "fetchpriority" "high" "style" $pos) }}
+    </picture>
+  </figure>
+  <div class="hero-body {{ if .bgColor }}has-bg-color{{ else }}bg-color2{{ end }}"
+    {{- $styles := slice -}}
+    {{- with .bgColor }}{{ $styles = $styles | append (printf "--section-bg-color:%s" .) }}{{ end -}}
+    {{- with .textColor }}{{ $styles = $styles | append (printf "--section-text-color:%s" .) }}{{ end -}}
+    {{- with $styles }} style="{{ delimit . ";" | safeCSS }}"{{ end }}>
+    <div class="container hero-inner">
+      {{ partial "hero-copy.html" . }}
+    </div>
+  </div>
+</section>
+
+{{ else if eq $layout "overlay" }}
+{{/* Sigue en background-image a proposito: es el camino que ejercita
+     bg-image-style.html (image-set con _hd, --section-bg-mobile). scrim por defecto (hero.scrim: false lo desactiva). */}}
+{{ $extra := slice "hero-overlay" "has-bg-image" }}
+{{ if and (ne .scrim false) (not (in (.class | default "") "scrim")) }}{{ $extra = $extra | append "scrim" }}{{ end }}
+{{ if .bgColor }}{{ $extra = $extra | append "has-bg-color" }}{{ end }}
+<section class="hero {{ delimit $extra " " }}{{ with .class }} {{ . }}{{ end }}"
   {{- $styles := slice -}}
-  {{- with $bg }}{{ $styles = $styles | append (printf "--section-bg:url('%s')" .) }}{{ end -}}
-  {{- with .bgMobile }}{{ $styles = $styles | append (printf "--section-bg-mobile:url('%s')" .) }}{{ end -}}
+  {{- $styles = $styles | append (partial "bg-image-style.html" (dict "src" $cfg.src "varName" "section-bg")) -}}
+  {{- with $cfg.mobile }}{{ $styles = $styles | append (partial "bg-image-style.html" (dict "src" . "varName" "section-bg-mobile")) }}{{ end -}}
   {{- with .bgColor }}{{ $styles = $styles | append (printf "--section-bg-color:%s" .) }}{{ end -}}
   {{- with .textColor }}{{ $styles = $styles | append (printf "--section-text-color:%s" .) }}{{ end -}}
   {{- with $styles }} style="{{ delimit . ";" | safeCSS }}"{{ end }}>
-  <div class="container hero-inner{{ if not .image }} no-media{{ end }}">
-    <div class="hero-copy">
-      {{ with .eyebrow }}<p class="eyebrow">{{ . }}</p>{{ end }}
-      {{ with .title }}<h1>{{ . }}</h1>{{ end }}
-      {{ with .subtitle }}<p class="hero-subtitle">{{ . | markdownify }}</p>{{ end }}
-      {{ if eq .preset "contact" }}
-      {{ $contact := (hugo.Data.site | default dict).contact | default dict }}
-      {{ $wa := replace ($contact.whatsapp | default "") "+" "" }}
-      <div class="cta-row">
-        <a class="btn btn-fill" href="{{ printf "tel:%s" $contact.phone | safeURL }}">{{ partial "icons.html" "phone" }}{{ .labelCall | default (i18n "call") }}</a>
-        <a class="btn btn-outline" href="https://wa.me/{{ $wa }}">{{ partial "icons.html" "whatsapp" }}{{ .labelWhatsapp | default (i18n "whatsapp") }}</a>
-      </div>
-      {{ else if or .primaryCTA .secondaryCTA }}
-      <div class="cta-row">
-        {{ with .primaryCTA }}<a class="btn btn-fill" href="{{ .url | safeURL }}">{{ with .icon }}{{ partial "icons.html" . }}{{ end }}{{ .text }}</a>{{ end }}
-        {{ with .secondaryCTA }}<a class="btn btn-outline" href="{{ .url | safeURL }}">{{ with .icon }}{{ partial "icons.html" . }}{{ end }}{{ .text }}</a>{{ end }}
-      </div>
-      {{ end }}
-    </div>
-    {{ if .image }}<figure class="hero-media">{{ partial "responsive-img.html" (dict "src" .image "alt" .imageAlt "sizes" "(min-width:821px) 45vw, 100vw" "loading" "eager") }}</figure>{{ end }}
+  <div class="container hero-inner no-media">
+    {{ partial "hero-copy.html" . }}
   </div>
 </section>
+
+{{ else }}
+{{/* split (texto + figura) y plain (solo texto) */}}
+<section class="hero hero-{{ $layout }}{{ with .class }} {{ . }}{{ end }}">
+  <div class="container hero-inner{{ if eq $layout "plain" }} no-media{{ end }}">
+    {{ partial "hero-copy.html" . }}
+    {{ if eq $layout "split" }}<figure class="hero-media">{{ partial "responsive-img.html" (dict "src" $cfg.src "alt" (.imageAlt | default "") "sizes" "(min-width:821px) 45vw, 100vw" "loading" "eager" "fetchpriority" "high") }}</figure>{{ end }}
+  </div>
+</section>
+{{ end }}
 {{ end }}

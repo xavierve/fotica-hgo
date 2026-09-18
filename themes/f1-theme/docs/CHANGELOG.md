@@ -1,5 +1,29 @@
 # F1 Theme · Changelog
 
+## Sin versión — hero: layouts `stacked` (defecto), `overlay` y `split`
+
+- `hero.html` pasa de dos modos superpuestos (`bg` de sección completa / `image`
+  en split) a un solo bloque con `hero.layout`: `stacked` (defecto, foto a
+  sangre arriba + bloque `bg-color2` debajo, H1 | subtítulo+CTAs en dos
+  columnas desde 821px), `overlay` (texto sobre la foto con `scrim`, solo
+  desde 821px; en móvil se apila) y `split` (el de la Home). Ninguna página
+  con `bg` necesita migrar: pasan a `stacked` solas.
+- Parciales nuevos: `hero-config.html` (resuelve layout e imagen; lo comparten
+  el markup y el preload), `hero-copy.html` (contenido común),
+  `hero-preload.html` (preload LCP no bloqueante, solo con imagen, con
+  `imagesrcset` y un preload por breakpoint si hay `bgMobile`) e
+  `img-srcset.html` (la lógica de `_hd` que vivía dentro de
+  `responsive-img.html`, extraída; salida idéntica).
+- `responsive-img.html`: parámetros nuevos `fetchpriority` y `style`.
+- Nuevos tokens `--hero-band-h` y `--hero-width`; `hero.imagePosition`
+  (`object-position` en `stacked`) y `hero.scrim`.
+- Padding superior del hero por modo (`hero-stacked` 0, `hero-split`/
+  `hero-plain` aire corto, `hero-overlay` sin cambios).
+- Fix: en `main.css` la cadena `--section-bg-mobile-hd → --section-bg-hd →
+  --section-bg-mobile` saltaba `bgMobile` en móvil cuando la imagen de
+  escritorio tenía `_hd` y la móvil no. Ahora: móvil-hd → móvil →
+  escritorio-hd → escritorio (afecta también a cta y banner).
+
 ## Sin versión — bloque locations, partial hours y fuente única de horarios
 
 - Nuevo bloque `locations` (+ shortcode) que pinta las sedes desde

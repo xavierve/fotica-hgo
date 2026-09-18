@@ -138,12 +138,28 @@ original, nunca ampliando el WebP ya reducido. Techo razonable: 1920px.
 
 ---
 
-## Heros: pendiente del layout apilado
+## Heros: layout apilado ya implementado, reencuadre pendiente de decisión
 
-**No reencuadrar ni regenerar heros todavía.** El recorte final depende de la
-proporción de la banda, y la proporción depende de la altura que fije el CSS
-del layout `stacked` — que este documento describe pero el tema aún no
-implementa. Reencuadrar 24 imágenes contra una especificación teórica significa
+> **Actualización:** el layout `stacked` ya está en el tema y la banda se puede
+> medir. Las medidas reales están en la tabla siguiente y sustituyen a la
+> estimación de más abajo (que se conserva por su razonamiento). El reencuadre
+> de imágenes sigue en pausa hasta que Foco lo retome.
+
+| Ancho de pantalla | Banda (ancho × alto) | Proporción |
+|---|---|---|
+| Móvil 359–390 | 359–390 × 256–338 (`40svh` de 640–844) | ~1.4:1 a 1.15:1 |
+| 821 | 821 × 288 | ~2.85:1 |
+| 1024 | 1024 × 341 | 3:1 |
+| 1440 | 1440 × 480 | 3:1 |
+| 1920 | 1920 × 540 (tope `60svh` de 900) | 3.55:1 |
+
+Con `object-fit: cover`, la foto se recorta arriba y abajo (desktop) o a los
+lados (móvil, casi cuadrada). Ese es el recorte que hay que mirar al
+reencuadrar; `hero.imagePosition` fija el punto de interés.
+
+**Antes de implementar el layout se decía:** no reencuadrar ni regenerar heros
+todavía, porque el recorte final depende de la proporción de la banda.
+Reencuadrar 24 imágenes contra una especificación teórica significa
 reencuadrarlas dos veces.
 
 **Inventario actual** (salida de `scripts/recoge-imagenes-hero.ps1`):

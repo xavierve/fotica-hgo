@@ -38,6 +38,14 @@
   --block-pad-spacious: clamp(4rem, 9vw, 8rem);
   --fs-highlight: clamp(1.52em, 2.7vw, 1.8em);
   --radius: 18px;
+  /* Hero apilado/overlay: alto de la banda de foto en movil y ancho de su contenido. */
+  --hero-band-h: 40vh;
+  --hero-width: var(--container-wide);
+}
+@supports (height: 1svh) {
+  :root {
+    --hero-band-h: 40svh;
+  }
 }
 
 * {
@@ -277,6 +285,106 @@ a {
   flex-wrap: wrap;
   gap: .75rem;
   margin-top: 1.5rem;
+}
+
+/* === Layouts del hero (hero.layout, ver partials/hero.html) ===
+   Padding SUPERIOR segun modo — clase emitida por el partial, no un clamp
+   retocado: el aire de arriba solo tiene sentido cuando hay una foto detras
+   del texto de la que separarlo.
+     overlay  -> el clamp de .hero (arriba), sin tocar
+     stacked  -> 0: la banda de foto debe tocar el header
+     split / plain (sin foto detras) -> aire corto en movil (los botones tienen
+                que quedar sobre el pliegue), el clamp completo solo en desktop */
+.hero-split,
+.hero-plain {
+  padding-top: clamp(2rem, 8vw, 7rem);
+}
+
+/* stacked: foto sola a sangre arriba + bloque de color debajo.
+   Movil: --hero-band-h (40svh, fallback 40vh), NO los 70svh de banner/CTA — con
+   esa altura la imagen empuja H1 y subtitulo fuera del primer viewport (ver 3.1
+   en DESIGN_TOKENS.md). Medido: header + breadcrumb ya ocupan ~120px, con 50svh
+   el H1 de 4 lineas a 359x640 quedaba en el filo del pliegue y el subtitulo fuera.
+   Desktop: aspect-ratio, para que escale con el ancho. */
+.hero-stacked {
+  padding: 0;
+  background: none;
+}
+
+.hero-band {
+  margin: 0;
+  height: var(--hero-band-h);
+  overflow: hidden;
+  background: var(--bg-color2);
+}
+
+.hero-band picture {
+  display: block;
+  height: 100%;
+}
+
+.hero-band img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center; /* hero.imagePosition lo sobreescribe inline */
+  border-radius: 0;
+}
+
+/* Bloque de texto. Bajo la foto el aire superior es corto; el inferior es el
+   antiguo padding de .hero recortado ~30% (quedaban ~150px de navy vacio). */
+.hero-body {
+  padding: clamp(2rem, 4.5vw, 3.5rem) 0 clamp(2.8rem, 5.6vw, 4.9rem);
+}
+
+/* Ancho "wide" (--container-wide): H1 y subtitulo son largos en todos los
+   heros del sitio y a 1120px en dos columnas no caben. wide, y no 100vw:
+   mantiene la alineacion con logo, nav y breadcrumb. */
+.hero-stacked .hero-inner {
+  width: min(var(--hero-width), calc(100% - 2rem));
+  grid-template-columns: 1fr;
+}
+
+/* H1 mas contenido que el global (clamp 5vw / 4.75rem): en media columna de
+   ~700px ese tamano parte los titulares en 4 lineas. balance reparte las lineas
+   sin tocar el texto (mejora progresiva: quien no lo soporta lo ignora). */
+.hero-stacked h1 {
+  font-size: clamp(2.25rem, 3.6vw, 3.25rem);
+  text-wrap: balance;
+}
+
+.hero-stacked .hero-head > :first-child,
+.hero-stacked .hero-subtitle {
+  margin-top: 0;
+}
+
+@media(min-width:821px) {
+  .hero-band {
+    width: 100%; /* sin esto, max-height + aspect-ratio encogen tambien el ancho */
+    height: auto;
+    aspect-ratio: 3 / 1;
+    min-height: 18rem;
+    max-height: 60vh;
+    max-height: 60svh;
+  }
+  /* Dos columnas: H1 (+eyebrow) a la izquierda, subtitulo + CTAs a la derecha.
+     Alineadas arriba a proposito (align-items:flex-start). */
+  .hero-stacked .hero-copy {
+    display: flex;
+    gap: 3em;
+    align-items: flex-start;
+  }
+  .hero-stacked .hero-head {
+    flex: 0 0 calc(50% - 1.5em);
+  }
+  .hero-stacked .hero-text {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+  .hero-stacked .hero-head:only-child {
+    flex-basis: 100%;
+  }
 }
 
 .header-actions .header-action2 {
