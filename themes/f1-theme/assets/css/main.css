@@ -578,12 +578,14 @@ h2.fs-xs {
   color: #fff;
   border-color: #fff
 }
-/* Botón primario sobre fondo oscuro: borde fino blanco que lo separa del fondo
-   (el dorado sobre verde/navy apenas contrasta como FORMA aunque su texto sí lo haga) */
+/* Botón primario sobre fondo oscuro: pasa a dorado (el verde sobre navy o sobre
+   el propio verde no contrasta como FORMA) + filete blanco que lo separa del fondo. */
 .has-bg-image .btn:not(.btn-outline),
 .has-bg-color:not(.bg-claro) .btn:not(.btn-outline),
 .bg-color2 .btn:not(.btn-outline),
 .bg-color3 .btn:not(.btn-outline) {
+  --btn-bg: var(--color-accent);
+  --btn-fg: var(--color-text);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .85);
 }
 @media(min-width:821px) {
@@ -1053,7 +1055,7 @@ h2.fs-xs {
 /* === Botones: hover/focus === */
 .btn:hover,
 .btn:focus-visible {
-  background: color-mix(in srgb, var(--color-accent) 88%, black);
+  background: color-mix(in srgb, var(--btn-bg, var(--color-link)) 88%, black);
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(0, 0, 0, .18);
 }
