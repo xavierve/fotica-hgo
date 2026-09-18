@@ -636,10 +636,10 @@ h2.fs-xs {
 }
 /* Botón primario sobre fondo oscuro: pasa a dorado (el verde sobre navy o sobre
    el propio verde no contrasta como FORMA) + filete blanco que lo separa del fondo. */
-.has-bg-image .btn:not(.btn-outline),
-.has-bg-color:not(.bg-claro) .btn:not(.btn-outline),
-.bg-color2 .btn:not(.btn-outline),
-.bg-color3 .btn:not(.btn-outline) {
+.has-bg-image .btn-fill,
+.has-bg-color:not(.bg-claro) .btn-fill,
+.bg-color2 .btn-fill,
+.bg-color3 .btn-fill {
   --btn-bg: var(--color-accent);
   --btn-text: var(--color-text);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .85);
@@ -1129,10 +1129,10 @@ h2.fs-xs {
   transform: translateY(-2px);
 }
 /* sobre fondo oscuro, el primario conserva su filete blanco al elevarse */
-.has-bg-image .btn:not(.btn-outline):hover,
-.has-bg-color:not(.bg-claro) .btn:not(.btn-outline):hover,
-.bg-color2 .btn:not(.btn-outline):hover,
-.bg-color3 .btn:not(.btn-outline):hover {
+.has-bg-image .btn-fill:hover,
+.has-bg-color:not(.bg-claro) .btn-fill:hover,
+.bg-color2 .btn-fill:hover,
+.bg-color3 .btn-fill:hover {
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .85), 0 6px 16px rgba(0, 0, 0, .3);
 }
 @media (prefers-reduced-motion:reduce) {
@@ -1145,10 +1145,10 @@ h2.fs-xs {
     transform: none;
     box-shadow: none
   }
-  .has-bg-image .btn:not(.btn-outline):hover,
-  .has-bg-color:not(.bg-claro) .btn:not(.btn-outline):hover,
-  .bg-color2 .btn:not(.btn-outline):hover,
-  .bg-color3 .btn:not(.btn-outline):hover {
+  .has-bg-image .btn-fill:hover,
+  .has-bg-color:not(.bg-claro) .btn-fill:hover,
+  .bg-color2 .btn-fill:hover,
+  .bg-color3 .btn-fill:hover {
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .85)
   }
 }

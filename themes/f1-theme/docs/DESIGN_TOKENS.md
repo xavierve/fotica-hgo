@@ -73,10 +73,15 @@ Verde de marca. Se usa en:
 | `.card-link` ("Ver más") | `color` | `main.css` |
 | `.team-card summary` | `color` | `main.css` |
 | `.location-meta a`, `.locations-common-links a` | `color` | `main.css` |
-| `.btn` (fondo de botón primario) | `--btn-bg` por defecto | `critical.css` |
+| `.btn-fill` (fondo de botón relleno) | `--btn-bg` por defecto | `critical.css` |
 | `.btn-outline` (texto y borde vía `currentColor`) | `color` | `critical.css` |
 | Item activo del nav (`aria-current` / `.is-section`) | `color` + filete | `critical.css` |
 | `--bg-color3` | alias | `critical.css` |
+
+**Dos variantes de botón:** `.btn` es la base (forma, tamaño, transición) y
+nunca se usa sola; encima va `.btn-fill` (relleno) o `.btn-outline` (contorno).
+Tenerlas nombradas evita el `.btn:not(.btn-outline)` que arrastraban los
+repintados por contexto.
 
 **Sobre fondo oscuro no se usa.** El verde da 2.09:1 sobre navy y no contrasta
 consigo mismo sobre `bg-color3`. Ahí entran `--color-link-inverse` (texto y

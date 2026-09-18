@@ -50,7 +50,7 @@
     <div class="cta-actions">
       <div class="cta-row">
         {{ range $i, $b := . }}
-        <a class="btn{{ if gt $i 0 }} btn-outline{{ end }}" href="{{ $b.url | safeURL }}">{{ with $b.icon }}{{ partial "icons.html" . }}{{ end }}{{ $b.text }}</a>
+        <a class="btn {{ if gt $i 0 }}btn-outline{{ else }}btn-fill{{ end }}" href="{{ $b.url | safeURL }}">{{ with $b.icon }}{{ partial "icons.html" . }}{{ end }}{{ $b.text }}</a>
         {{ end }}
       </div>
       {{ with $.microcopy }}<p class="cta-microcopy">{{ . }}</p>{{ end }}

@@ -41,8 +41,8 @@ sections:
     items:
       - icon: "family"
         text: "Empresa familiar desde 1982"
-      - icon: "location"
-        text: "Dos centros en Torre del Mar"
+      - icon: "home"
+        text: "Prueba tu audífono en casa, sin compromiso"
       - icon: "hearing"
         text: "Centro Auditivo Homologado"
       - icon: "cog"

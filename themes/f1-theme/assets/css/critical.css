@@ -105,6 +105,9 @@ a {
   font-size: .9rem;
 }
 
+/* .btn-fill: variante rellena. No necesita reglas propias aqui (hereda .btn),
+   existe como clase para que los repintados por contexto sean un selector
+   simple: .bg-color2 .btn-fill en vez de .bg-color2 .btn:not(.btn-outline). */
 .btn-outline {
   background: transparent;
   color: var(--color-link);

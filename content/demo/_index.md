@@ -53,6 +53,7 @@ sections:
       - { icon: "arrow-up", text: "arrow-up" }
       - { icon: "arrow-right", text: "arrow-right" }
       - { icon: "info", text: "info" }
+      - { icon: "home", text: "home" }
 
   # ============ IMAGE_TEXT — las 4 variants ============
   - type: image-text

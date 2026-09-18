@@ -17,12 +17,12 @@
       {{ $contact := (hugo.Data.site | default dict).contact | default dict }}
       {{ $wa := replace ($contact.whatsapp | default "") "+" "" }}
       <div class="cta-row">
-        <a class="btn" href="{{ printf "tel:%s" $contact.phone | safeURL }}">{{ partial "icons.html" "phone" }}{{ .labelCall | default (i18n "call") }}</a>
+        <a class="btn btn-fill" href="{{ printf "tel:%s" $contact.phone | safeURL }}">{{ partial "icons.html" "phone" }}{{ .labelCall | default (i18n "call") }}</a>
         <a class="btn btn-outline" href="https://wa.me/{{ $wa }}">{{ partial "icons.html" "whatsapp" }}{{ .labelWhatsapp | default (i18n "whatsapp") }}</a>
       </div>
       {{ else if or .primaryCTA .secondaryCTA }}
       <div class="cta-row">
-        {{ with .primaryCTA }}<a class="btn" href="{{ .url | safeURL }}">{{ with .icon }}{{ partial "icons.html" . }}{{ end }}{{ .text }}</a>{{ end }}
+        {{ with .primaryCTA }}<a class="btn btn-fill" href="{{ .url | safeURL }}">{{ with .icon }}{{ partial "icons.html" . }}{{ end }}{{ .text }}</a>{{ end }}
         {{ with .secondaryCTA }}<a class="btn btn-outline" href="{{ .url | safeURL }}">{{ with .icon }}{{ partial "icons.html" . }}{{ end }}{{ .text }}</a>{{ end }}
       </div>
       {{ end }}
