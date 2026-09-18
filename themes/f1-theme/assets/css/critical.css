@@ -279,7 +279,7 @@ a {
   margin-top: 1.5rem;
 }
 
-.header-actions .btn-2 {
+.header-actions .header-action2 {
   display: none;
 }
 
@@ -312,7 +312,7 @@ a {
   .site-nav a.is-section {
     box-shadow: 0 2px 0 currentColor;
   }
-  .header-actions .btn-2 {
+  .header-actions .header-action2 {
     display: inline-flex;
   }
   .nav-toggle {
