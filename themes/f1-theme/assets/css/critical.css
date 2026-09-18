@@ -8,24 +8,18 @@
   --color-text: #1c1a17;                 /* texto base */
   --color-text-inverse: #ffffff;         /* texto base sobre fondo oscuro */
   --color-muted: #625d55;                /* texto de menor relevancia: pies, ayudas */
+  --color-link: #08783e;                 /* ACCION sobre fondo claro: enlaces, fondo de boton primario, borde de btn-outline, item activo del nav. Verde de marca. */
+  --color-link-inverse: var(--color-text-inverse); /* lo mismo sobre fondo oscuro (el verde no contrasta ahi); lo distingue el subrayado, no el color */
   --color-bg: #fffdf8;                   /* fondo de pagina */
   --color-bg-over: #fff;                 /* fondo de lo elevado: cards, controles */
   --color-dark: #25211d;                 /* negro suavizado: footer, bloques contrast */
-  --color-link: #08783e;                 /* ACCION sobre fondo claro: enlaces, fondo de
-                                            boton primario, borde de btn-outline, item
-                                            activo del nav. Verde de marca. */
-  --color-link-inverse: var(--color-text-inverse); /* lo mismo sobre fondo oscuro (el
-                                            verde no contrasta ahi); lo distingue el
-                                            subrayado, no el color */
-  --color-accent: #C9A84C;               /* dorado: FONDO de boton sobre fondo oscuro y
-                                            ornamentos (filetes, bordes decorativos) */
+  --color-accent: #C9A84C;               /* dorado: FONDO de boton sobre fondo oscuro y ornamentos (filetes, bordes decorativos) */
   --color-accent-text: #8a6d20;          /* dorado como TEXTO sobre fondo claro: eyebrow */
   --color-control-bg: var(--color-bg-over);
   --color-control-border: rgba(0, 0, 0, .15);
   --color-overlay-base: 27, 42, 56;      /* RGB suelto, para rgba() del overlay */
-  --color-backdrop: rgba(15, 20, 25, .85);
-  /* Fondos de banda: cada bg-colorN va SIEMPRE con su bg-colorN-text.
-     3 y 4 son alias: el mismo color cumple otro rol y no debe divergir. */
+  --color-backdrop: rgba(15, 20, 25, .85); 
+  /* Fondos de banda: cada bg-colorN va SIEMPRE con su bg-colorN-text. 3 y 4 son alias: el mismo color cumple otro rol y no debe divergir. */
   --bg-color1: #f5efe5;
   --bg-color2: #1B3A5C;
   --bg-color3: var(--color-link);
