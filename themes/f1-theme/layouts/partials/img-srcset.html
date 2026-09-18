@@ -16,12 +16,19 @@
     hasHd   -> bool: existen la base y la _hd
     hd      -> ruta de la _hd ("" si no hay)
     w       -> ancho real de la base en px (0 si no hay _hd)
-    srcset  -> "base Nw, hd 2Nw" ("" si no hay _hd)
+    hdW     -> ancho real de la _hd en px (0 si no hay _hd)
+    srcset  -> "base Nw, hd Mw" con los anchos REALES de ambos archivos ("" si no hay _hd)
+
+  Los dos anchos se leen del archivo (images.Config), no se asume que la _hd
+  mida el doble de la base: declarar de mas en un descriptor w hace que el
+  navegador crea que la imagen es mas nitida de lo que es y la elija antes de
+  tiempo (p.ej. una _hd de 2399px declarada como 2700w).
 */ -}}
 {{- $src := . -}}
 {{- $ext := path.Ext $src -}}
 {{- $hd := "" -}}
 {{- $w := 0 -}}
+{{- $hdW := 0 -}}
 {{- $srcset := "" -}}
 {{- if and $ext (not (strings.HasPrefix $src "http")) -}}
   {{- $cand := replace $src $ext (printf "_hd%s" $ext) 1 -}}
@@ -32,7 +39,8 @@
   {{- if and (os.FileExists (printf "static%s" $cand)) (os.FileExists (printf "static%s" $src)) -}}
     {{- $hd = $cand -}}
     {{- $w = (images.Config (printf "static%s" $src)).Width -}}
-    {{- $srcset = printf "%s %dw, %s %dw" $src $w $hd (mul $w 2) -}}
+    {{- $hdW = (images.Config (printf "static%s" $hd)).Width -}}
+    {{- $srcset = printf "%s %dw, %s %dw" $src $w $hd $hdW -}}
   {{- end -}}
 {{- end -}}
-{{- return (dict "src" $src "hasHd" (ne $hd "") "hd" $hd "w" $w "srcset" $srcset) -}}
+{{- return (dict "src" $src "hasHd" (ne $hd "") "hd" $hd "w" $w "hdW" $hdW "srcset" $srcset) -}}

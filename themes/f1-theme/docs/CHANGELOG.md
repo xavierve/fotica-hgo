@@ -19,6 +19,8 @@
   (`object-position` en `stacked`) y `hero.scrim`.
 - Padding superior del hero por modo (`hero-stacked` 0, `hero-split`/
   `hero-plain` aire corto, `hero-overlay` sin cambios).
+- Hero `stacked`: banda de foto con tope de ancho `--hero-band-max` (1440px), laterales del color del bloque; el color de fondo pasa al `<section>`. `sizes` calculado en `hero-config.html` (`(min-width:1440px) 1440px, 100vw`) y compartido con el preload. `max-height: 60svh` de la banda se mantiene como red de seguridad en ventanas anchas y bajas.
+- `img-srcset.html` declara los anchos **reales** de base y `_hd` (antes asumía `_hd` = 2× base, y ninguna lo es). Cambia los descriptores `w` de todas las imágenes responsive del sitio; ver «Las `_hd` no miden el doble» en `GUIA-IMAGENES.md`.
 - Fix: en `main.css` la cadena `--section-bg-mobile-hd → --section-bg-hd →
   --section-bg-mobile` saltaba `bgMobile` en móvil cuando la imagen de
   escritorio tenía `_hd` y la móvil no. Ahora: móvil-hd → móvil →

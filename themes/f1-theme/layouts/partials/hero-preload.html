@@ -14,8 +14,7 @@
 */ -}}
 {{- $cfg := partial "hero-config.html" . -}}
 {{- if $cfg.src -}}
-  {{- $sizes := "100vw" -}}
-  {{- if eq $cfg.layout "split" -}}{{- $sizes = "(min-width:821px) 45vw, 100vw" -}}{{- end -}}
+  {{- $sizes := $cfg.sizes -}}
   {{- $entries := slice (dict "src" $cfg.src "media" "") -}}
   {{- if $cfg.mobile -}}
     {{- $entries = slice (dict "src" $cfg.mobile "media" "(max-width:820px)") (dict "src" $cfg.src "media" "(min-width:821px)") -}}

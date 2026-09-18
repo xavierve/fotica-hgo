@@ -38,9 +38,11 @@
   --block-pad-spacious: clamp(4rem, 9vw, 8rem);
   --fs-highlight: clamp(1.52em, 2.7vw, 1.8em);
   --radius: 18px;
-  /* Hero apilado/overlay: alto de la banda de foto en movil y ancho de su contenido. */
+  /* Hero apilado/overlay: alto de la banda de foto en movil, ancho de su contenido
+     y ancho maximo de la foto (= ancho nativo de las fotos del hero; ver .hero-band). */
   --hero-band-h: 40vh;
   --hero-width: var(--container-wide);
+  --hero-band-max: 1440px; /* mantener sincronizado con $bandMax en hero-config.html */
 }
 @supports (height: 1svh) {
   :root {
@@ -308,14 +310,20 @@ a {
    Desktop: aspect-ratio, para que escale con el ancho. */
 .hero-stacked {
   padding: 0;
-  background: none;
+  background-image: none; /* el color lo pone bg-color2 / has-bg-color en el propio <section> */
 }
 
+/* Tope de ancho de la foto: --hero-band-max (1440px, el ancho nativo de las
+   fotos del hero). Por encima, la banda no crece: sin tope, la foto se amplia
+   (x1.33 a 1920px, x1.78 a 2560px, con perdida de nitidez) y ademas se recorta
+   mas — a 2560px solo se veia el 33% del alto de la foto, frente al 44% a 1440px.
+   Los laterales son el color del <section>, el mismo del bloque de texto, y el
+   borde de la foto coincide con el del H1 (ambos miden 1440). */
 .hero-band {
-  margin: 0;
+  margin: 0 auto;
+  max-width: var(--hero-band-max);
   height: var(--hero-band-h);
   overflow: hidden;
-  background: var(--bg-color2);
 }
 
 .hero-band picture {
@@ -365,6 +373,11 @@ a {
     height: auto;
     aspect-ratio: 3 / 1;
     min-height: 18rem;
+    /* Red de seguridad. Con el ancho capado el aspect-ratio da como mucho 480px,
+       pero en una ventana ancha y baja (proporcion mayor de 1.8:1: navegador no
+       maximizado, 1440x700...) 480px son mas del 60% del alto y sacan el H1 de
+       la primera pantalla. Este tope solo actua en esos casos; en 1366x768 o
+       1920x1080 no interviene. Si min-height y max-height chocan, gana min-height. */
     max-height: 60vh;
     max-height: 60svh;
   }

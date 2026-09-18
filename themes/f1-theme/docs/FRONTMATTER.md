@@ -111,6 +111,8 @@ Parámetros propios del hero:
 - `bgColor` / `textColor`: en `stacked` sustituyen el color del bloque de texto (por defecto `bg-color2`); en `overlay` tiñen el velo.
 - `class`: clases extra en el `<section>`. `panel`, `overlay-strong` y `bg-top` son de `overlay`; en `stacked` el encuadre va por `imagePosition`.
 
+En `stacked` la banda tiene un ancho máximo de 1440px (`--hero-band-max`): en pantallas más anchas la foto no se amplía y los laterales toman el color del bloque de texto. `overlay` no lleva tope: es una excepción a sangre.
+
 Variantes `_hd` (`foto.webp` → `foto_hd.webp`): si existen se usan solas (`srcset` w en `stacked`/`split`, `image-set()` en `overlay`); si faltan, no hay error. La imagen del hero se precarga en el `<head>` (`hero-preload.html`) solo en páginas que la tienen, con un preload por breakpoint si hay `bgMobile`.
 
 ## Reglas

@@ -13,28 +13,30 @@
 {{ with .Params.hero }}
 {{ $cfg := partial "hero-config.html" $ }}
 {{ $layout := $cfg.layout }}
-{{ $sizesFull := "100vw" }}
 
 {{ if eq $layout "stacked" }}
 {{/* La foto va en <img> real (no background-image): sin texto encima no hay
      motivo para background-attachment, y se gana srcset/sizes, fetchpriority
      y object-position. bgMobile -> <source media> con el mismo breakpoint (821px) que el resto del tema. */}}
 {{ $pos := "" }}{{ with .imagePosition }}{{ $pos = printf "object-position:%s" . }}{{ end }}
-<section class="hero hero-stacked{{ with .class }} {{ . }}{{ end }}">
+{{/* El color de fondo va en el <section>, no solo en el bloque de texto: con la
+     banda limitada de ancho (--hero-band-max), los laterales de la foto tienen
+     que ser el mismo color para que el conjunto se lea como un marco. */}}
+<section class="hero hero-stacked {{ if .bgColor }}has-bg-color{{ else }}bg-color2{{ end }}{{ with .class }} {{ . }}{{ end }}"
+  {{- $styles := slice -}}
+  {{- with .bgColor }}{{ $styles = $styles | append (printf "--section-bg-color:%s" .) }}{{ end -}}
+  {{- with .textColor }}{{ $styles = $styles | append (printf "--section-text-color:%s" .) }}{{ end -}}
+  {{- with $styles }} style="{{ delimit . ";" | safeCSS }}"{{ end }}>
   <figure class="hero-band">
     <picture>
       {{- with $cfg.mobile }}
       {{- $mset := partial "img-srcset.html" . }}
-      <source media="(max-width:820px)" srcset="{{ if $mset.hasHd }}{{ $mset.srcset }}{{ else }}{{ . }}{{ end }}"{{ if $mset.hasHd }} sizes="{{ $sizesFull }}"{{ end }}>
+      <source media="(max-width:820px)" srcset="{{ if $mset.hasHd }}{{ $mset.srcset }}{{ else }}{{ . }}{{ end }}"{{ if $mset.hasHd }} sizes="100vw"{{ end }}>
       {{- end }}
-      {{ partial "responsive-img.html" (dict "src" $cfg.src "alt" (.imageAlt | default "") "sizes" $sizesFull "loading" "eager" "fetchpriority" "high" "style" $pos) }}
+      {{ partial "responsive-img.html" (dict "src" $cfg.src "alt" (.imageAlt | default "") "sizes" $cfg.sizes "loading" "eager" "fetchpriority" "high" "style" $pos) }}
     </picture>
   </figure>
-  <div class="hero-body {{ if .bgColor }}has-bg-color{{ else }}bg-color2{{ end }}"
-    {{- $styles := slice -}}
-    {{- with .bgColor }}{{ $styles = $styles | append (printf "--section-bg-color:%s" .) }}{{ end -}}
-    {{- with .textColor }}{{ $styles = $styles | append (printf "--section-text-color:%s" .) }}{{ end -}}
-    {{- with $styles }} style="{{ delimit . ";" | safeCSS }}"{{ end }}>
+  <div class="hero-body">
     <div class="container hero-inner">
       {{ partial "hero-copy.html" . }}
     </div>
@@ -64,7 +66,7 @@
 <section class="hero hero-{{ $layout }}{{ with .class }} {{ . }}{{ end }}">
   <div class="container hero-inner{{ if eq $layout "plain" }} no-media{{ end }}">
     {{ partial "hero-copy.html" . }}
-    {{ if eq $layout "split" }}<figure class="hero-media">{{ partial "responsive-img.html" (dict "src" $cfg.src "alt" (.imageAlt | default "") "sizes" "(min-width:821px) 45vw, 100vw" "loading" "eager" "fetchpriority" "high") }}</figure>{{ end }}
+    {{ if eq $layout "split" }}<figure class="hero-media">{{ partial "responsive-img.html" (dict "src" $cfg.src "alt" (.imageAlt | default "") "sizes" $cfg.sizes "loading" "eager" "fetchpriority" "high") }}</figure>{{ end }}
   </div>
 </section>
 {{ end }}

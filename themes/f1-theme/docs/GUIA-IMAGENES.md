@@ -49,7 +49,7 @@ archivo necesario. No son cifras redondas elegidas a ojo.
 
 | Bloque | `sizes` del theme | Se muestra a | DPR2 | DPR3 |
 |---|---|---|---|---|
-| Hero (stacked) | `100vw` | hasta 1440px | 2880px | — |
+| Hero (stacked) | `(min-width:1440px) 1440px, 100vw` | hasta 1440px (banda con tope) | 2880px | — |
 | Cards / Equipo | `(min-width:1100px) 33vw, (min-width:600px) 50vw, 100vw` | ~370px desktop · ~400px móvil | ~740px | ~1200px |
 | image-text | `(min-width:821px) 50vw, 100vw` | 528px (`m`) · 688px (`wide`) · ~704px (`full`) | ~1056-1408px | — |
 | Hero split (Home) | `(min-width:821px) 45vw, 100vw` | ~475px (columna `.9fr`) | ~950px | — |
@@ -153,6 +153,12 @@ original, nunca ampliando el WebP ya reducido. Techo razonable: 1920px.
 | 1440 | 1440 × 480 | 3:1 |
 | 1920 | 1920 × 540 (tope `60svh` de 900) | 3.55:1 |
 
+**Tope de ancho: 1440px.** Desde 1440px de viewport la banda no crece (los laterales son el navy del bloque), así que ningún archivo se amplía por CSS más allá de su tamaño y el recorte no empeora en pantallas grandes. Consecuencias sobre las imágenes:
+
+- Un monitor retina de 1440px (DPR 2) pide 2880px. Ninguna imagen actual llega ahí; las únicas con `_hd` son Nosotros (2399px) y el hub de Visión (1440px). El resto se sirve a ~1440px y el navegador la estira ×2 (inevitable sin regenerar; ver el aviso sobre IA más abajo).
+- **Inventario de `hero.bg` (stacked):** 25 imágenes, anchos de 700 a 2508px. **10 miden menos de 1440** (1200–1402px; la más estrecha es `322-ayudas_auditivas_hero`, 1200), así que ya se amplían un poco en un 1440 sin retina. **4 miden más** (1680, 1920, 2400, 2508): el tope les quita nitidez que sí tienen. Solo 3 tienen `_hd`.
+- El `srcset` usa el ancho **real** de cada archivo, no «el doble de la base» (ver más abajo).
+
 Con `object-fit: cover`, la foto se recorta arriba y abajo (desktop) o a los
 lados (móvil, casi cuadrada). Ese es el recorte que hay que mirar al
 reencuadrar; `hero.imagePosition` fija el punto de interés.
@@ -201,6 +207,19 @@ llamada y WhatsApp.
   el viewport antes del H1.
 - Fijar el `hero.imagePosition` de cada imagen: es un juicio visual sobre el
   recorte real, no un cálculo.
+
+## Las `_hd` no miden el doble (aviso de auditoría)
+
+`img-srcset.html` lee el ancho real de la base y de la `_hd` y declara ambos en el `srcset` (antes asumía `_hd` = 2× la base y sobredeclaraba). Al hacerlo salió que **ninguna `_hd` del sitio mide 2×**: van de 1.1× a 1.6×, y hay casos peores:
+
+| Archivo | Base → `_hd` | Problema |
+|---|---|---|
+| `322-ayudas_auditivas_transmisor_telefono_hd` | 700 → 407 | La `_hd` es **más pequeña** que la base |
+| `322-ayudas_auditivas_sistemas_infrarojos_hd` | 700 → 567 | Ídem |
+| `311-audiometria_hd` (card) | 1003 → 1003 | Igual que la base; no aporta nada |
+| `223-lentillas_hd` (card) | 949 → 949 | Ídem |
+
+Con los anchos reales el navegador ya no elige la «hd» pequeña en retina (antes la elegía creyéndola 1400w), pero estas cuatro conviene regenerarlas o retirarlas en la tarea de optimización de imágenes.
 
 ## Qué se puede automatizar y qué no
 

@@ -18,7 +18,12 @@
   Origen de la imagen: split -> `image`. stacked/overlay -> `bg`, y si falta,
   `image` (una pagina que declare image sin layout sigue teniendo foto).
 
-  Devuelve dict: layout, src, mobile ("" si no hay bgMobile).
+  Devuelve dict: layout, src, mobile ("" si no hay bgMobile), sizes.
+
+  sizes: el atributo sizes de la imagen (y del preload), calculado UNA vez para
+  que markup y preload nunca diverjan. En stacked la banda tiene tope de ancho
+  (--hero-band-max en critical.css): por encima de eso la foto no crece, asi que
+  el navegador no debe pedir un archivo mayor. $bandMax y el token CSS van a la vez.
 */ -}}
 {{- $h := .Params.hero | default dict -}}
 {{- $layout := $h.layout | default "stacked" -}}
@@ -30,6 +35,10 @@
 {{- end -}}
 {{- $mobile := "" -}}
 {{- if ne $layout "split" -}}{{- $mobile = $h.bgMobile | default "" -}}{{- end -}}
+{{- $bandMax := 1440 -}}{{- /* = --hero-band-max */ -}}
+{{- $sizes := "100vw" -}}
+{{- if eq $layout "stacked" -}}{{- $sizes = printf "(min-width:%dpx) %dpx, 100vw" $bandMax $bandMax -}}{{- end -}}
+{{- if eq $layout "split" -}}{{- $sizes = "(min-width:821px) 45vw, 100vw" -}}{{- end -}}
 {{- if not $src -}}{{- $layout = "plain" -}}{{- $mobile = "" -}}{{- end -}}
 {{- if not .Params.hero -}}{{- $layout = "" -}}{{- end -}}
-{{- return (dict "layout" $layout "src" $src "mobile" $mobile) -}}
+{{- return (dict "layout" $layout "src" $src "mobile" $mobile "sizes" $sizes) -}}
