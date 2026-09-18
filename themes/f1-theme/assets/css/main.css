@@ -101,7 +101,7 @@
 }
 .counter {
   background: var(--color-dark);
-  color: #fff
+  color: var(--color-text-inverse)
 }
 .counter-grid {
   display: grid;
@@ -354,7 +354,7 @@
 }
 .site-footer {
   background: var(--color-dark);
-  color: #fff;
+  color: var(--color-text-inverse);
   padding: 3rem 0 1.5rem
 }
 .footer-grid {
@@ -394,7 +394,7 @@
 }
 .site-footer a {
   display: inline-block;
-  color: #fff;
+  color: var(--color-link-inverse);
   text-decoration: none;
   margin: .25rem .5rem .25rem 0
 }
@@ -502,14 +502,14 @@ address {
 }
 .block-variant-contrast {
   background: var(--color-dark);
-  color: #fff
+  color: var(--color-text-inverse)
 }
 .block-variant-contrast .btn-outline {
-  color: var(--color-bg-over)
+  color: var(--color-link-inverse)
 }
 .block-counter {
   background: var(--color-dark);
-  color: #fff
+  color: var(--color-text-inverse)
 }
 .block-trustbar {
   background: var(--bg-color1);
@@ -631,8 +631,8 @@ h2.fs-xs {
 .has-bg-color:not(.bg-claro) .btn-outline,
 .bg-color2 .btn-outline,
 .bg-color3 .btn-outline {
-  color: #fff;
-  border-color: #fff
+  color: var(--color-link-inverse);
+  border-color: currentColor
 }
 /* Botón primario sobre fondo oscuro: pasa a dorado (el verde sobre navy o sobre
    el propio verde no contrasta como FORMA) + filete blanco que lo separa del fondo. */
@@ -737,9 +737,9 @@ h2.fs-xs {
    aquí dentro del contexto de imagen. Un solo sitio, sirve para hero, CTA y counter. */
 .has-bg-image,
 .has-bg-color:not(.bg-claro) {
-  color: var(--section-text-color, #fff);
+  color: var(--section-text-color, var(--color-text-inverse));
   --subtitle-color: rgba(255, 255, 255, .94);
-  --eyebrow-color: #ffffff;
+  --eyebrow-color: var(--color-text-inverse);
   --color-muted: rgba(255, 255, 255, .90);
   /* por si algún bloque usa muted dentro */
 }
@@ -765,13 +765,13 @@ h2.fs-xs {
   background-color: var(--bg-color2);
   color: var(--bg-text-color2);
   --subtitle-color: rgba(255, 255, 255, .94);
-  --eyebrow-color: #ffffff;
+  --eyebrow-color: var(--color-text-inverse);
 }
 .bg-color3 {
   background-color: var(--bg-color3);
   color: var(--bg-text-color3);
   --subtitle-color: rgba(255, 255, 255, .94);
-  --eyebrow-color: #ffffff;
+  --eyebrow-color: var(--color-text-inverse);
 }
 .bg-color4 {
   background-color: var(--bg-color4);
@@ -972,7 +972,7 @@ h2.fs-xs {
   border-radius: var(--radius)
 }
 .gallery-lightbox figcaption {
-  color: #fff;
+  color: var(--color-text-inverse);
   text-align: center;
   padding: .6rem;
   font-size: 1rem
