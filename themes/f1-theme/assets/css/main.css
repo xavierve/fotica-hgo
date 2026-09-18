@@ -157,7 +157,10 @@
   gap: 1rem;
   flex-wrap: wrap;
   justify-content: center;
-  font-weight: 700
+  font-weight: 700;
+  list-style: none;
+  margin: 0;
+  padding: 0
 }
 /* En movil el flex-wrap centrado partia los items a media frase y cada linea
    suelta se centraba por su cuenta, asi que los iconos quedaban a alturas y
@@ -178,16 +181,16 @@
     justify-content: center;
     align-items: start;
     column-gap: clamp(1.5rem, 4vw, 3rem);
-    row-gap: .65rem;
+    row-gap: 1rem;
     text-align: left;
   }
-  .trustbar-inner>span {
+  .trustbar-inner>li {
     display: grid;
     grid-template-columns: 1.15em 1fr;
     align-items: baseline;
     column-gap: .55em;
   }
-  .trustbar-inner>span:last-child:nth-child(odd) {
+  .trustbar-inner>li:last-child:nth-child(odd) {
     grid-column: 1 / -1;
     justify-self: center;
   }
@@ -202,10 +205,10 @@
     width: fit-content;
     max-width: 100%;
     margin-inline: auto;
-    gap: .55rem;
+    gap: .85rem;
     text-align: left
   }
-  .trustbar-inner>span {
+  .trustbar-inner>li {
     display: grid;
     grid-template-columns: 1.15em 1fr;
     align-items: baseline;

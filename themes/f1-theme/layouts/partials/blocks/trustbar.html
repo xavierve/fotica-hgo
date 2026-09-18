@@ -2,14 +2,16 @@
 <section class="{{ partial "block-classes.html" (dict "name" "trustbar" "context" $) }}" aria-label="{{ i18n "trustbarLabel" }}">
   <div class="container">
     {{ with $.title }}<h2>{{ . }}</h2>{{ end }}
-    <div class="trustbar-inner">
+    {{/* Lista real (ul/li): son items equivalentes, y asi un lector de pantalla
+         anuncia "lista con N elementos" y permite recorrerla como tal. */}}
+    <ul class="trustbar-inner">
     {{ range . }}
-    <span>
+    <li>
       {{ with .icon }}{{ with partial "icons.html" . }}<span class="trustbar-icon" aria-hidden="true">{{ . }}</span>{{ end }}{{ end }}
       {{ .text }}
-    </span>
+    </li>
     {{ end }}
-    </div>
+    </ul>
   </div>
 </section>
 {{ end }}
