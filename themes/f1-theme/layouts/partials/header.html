@@ -1,3 +1,4 @@
+{{ $page := . }}
 {{ $siteData := hugo.Data.site | default dict }}
 {{ $brand := $siteData.brand | default dict }}
 {{ $header := $siteData.header | default dict }}
@@ -29,7 +30,15 @@
       {{ else }}<span>{{ $brandName }}</span>{{ end }}
     </a>
     <nav class="site-nav" id="site-nav" aria-label="{{ i18n "mainNav" }}">
-      {{ range $nav }}<a href="{{ .url | safeURL }}">{{ .text }}</a>{{ end }}
+      {{/* Activo: coincidencia exacta = aria-current="page"; una pagina hija de la
+           seccion (p.ej. /vision/servicios/optometria/ bajo /vision/) marca el
+           padre con .is-section. "/" se excluye del prefijo: casaria con todo. */}}
+      {{ range $nav }}
+        {{ $url := .url }}
+        {{ $isPage := eq $page.RelPermalink ($url | relURL) }}
+        {{ $isSection := and (ne $url "/") (hasPrefix $page.RelPermalink ($url | relURL)) }}
+        <a href="{{ $url | safeURL }}"{{ if $isPage }} aria-current="page"{{ else if $isSection }} class="is-section"{{ end }}>{{ .text }}</a>
+      {{ end }}
     </nav>
     <div class="header-actions">
       {{ with $phone }}<a class="btn btn-small" href="{{ printf "tel:%s" . | safeURL }}">{{ partial "icons.html" "phone" }}<span class="btn-label">{{ $phoneLabel }}</span></a>{{ end }}

@@ -154,6 +154,14 @@ a {
   padding: .6rem 0;
 }
 
+/* Pagina activa. En movil (panel apilado) solo color + peso: un filete bajo el
+   item se leeria como separador de lista. El subrayado se anade en desktop. */
+.site-nav a[aria-current="page"],
+.site-nav a.is-section {
+  color: var(--color-link);
+  font-weight: 700;
+}
+
 .header-actions {
   display: flex;
   gap: .5rem;
@@ -287,7 +295,11 @@ a {
     background: none;
   }
   .site-nav a {
-    padding: 0;
+    padding: 0 0 .25rem;
+  }
+  .site-nav a[aria-current="page"],
+  .site-nav a.is-section {
+    box-shadow: 0 2px 0 currentColor;
   }
   .header-actions .btn-2 {
     display: inline-flex;

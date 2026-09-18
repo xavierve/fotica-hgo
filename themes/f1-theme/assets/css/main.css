@@ -1,3 +1,8 @@
+.prose :is(p, li, td, blockquote) a:not(.btn) {
+  color: var(--color-link);
+  text-decoration: underline;
+  text-underline-offset: .2em;
+}
 .prose :first-child {
   margin-top: 0
 }
@@ -162,6 +167,34 @@
    width:fit-content + margin-inline:auto centra el bloque entero conservando
    ese borde izquierdo comun; si un item no cabe, max-width lo devuelve al
    ancho del contenedor y envuelve con normalidad. */
+/* Desktop: dos columnas en vez de flex-wrap centrado. Con 5-8 items el wrap
+   dejaba filas de 3 + 2 + 1 con sangrias distintas; en rejilla los iconos
+   comparten dos ejes verticales y el bloque entero se centra. Un item impar
+   suelto al final ocupa las dos columnas y se centra. */
+@media(min-width:821px) {
+  .trustbar-inner {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, auto));
+    justify-content: center;
+    align-items: start;
+    column-gap: clamp(1.5rem, 4vw, 3rem);
+    row-gap: .65rem;
+    text-align: left;
+  }
+  .trustbar-inner>span {
+    display: grid;
+    grid-template-columns: 1.15em 1fr;
+    align-items: baseline;
+    column-gap: .55em;
+  }
+  .trustbar-inner>span:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    justify-self: center;
+  }
+  .trustbar-inner .trustbar-icon .icon {
+    margin-right: 0;
+  }
+}
 @media(max-width:820px) {
   .trustbar-inner {
     flex-direction: column;
@@ -195,6 +228,26 @@
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1rem
 }
+/* Card en columna: el pie (.card-link) se ancla abajo con margin-top:auto, igual
+   que en .testimonial, para que los "Ver más" queden alineados aunque las
+   descripciones midan distinto. */
+.card {
+  display: flex;
+  flex-direction: column;
+}
+.card-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.card-body>:last-child {
+  margin-bottom: 0;
+}
+.card-link {
+  margin-top: auto;
+  padding-top: .6rem;
+}
+
 .card,
 .testimonial,
 .team-card {
