@@ -1,5 +1,19 @@
 # F1 Theme · Changelog
 
+## Sin versión — `main.js`: cada bloque independiente aislado
+
+- Nuevo helper `aislar(nombre, fn)` al principio de `main.js`: ejecuta `fn` en
+  `try/catch` y registra el fallo con `console.error` nombrando el bloque. Los
+  cinco bloques independientes (barra fija y volver-arriba, slider, galería,
+  reveal y contador, menú móvil) van dentro. Antes, una excepción en cualquiera
+  abortaba el resto del script: la del menú móvil —el único acceso a la
+  navegación por debajo de 821px— es la última de todas y caía con cualquier
+  fallo anterior.
+- El bloque de la barra ya no necesita ir el primero para protegerse de los
+  demás; se ha reescrito su comentario. Se queda donde está.
+- No cubre errores de sintaxis (el script entero no se parsea y nada corre):
+  para eso, `node -c themes/f1-theme/assets/js/main.js` antes de commitear.
+
 ## Sin versión — reveal: el contenido nunca se queda oculto si el JS falla
 
 - `main.js`: la preparación y el cableado del *reveal* (desde `var STAGGER` hasta

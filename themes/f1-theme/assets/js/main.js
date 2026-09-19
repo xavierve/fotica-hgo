@@ -1,11 +1,25 @@
 document.documentElement.classList.add('js');
 
-/* Este bloque va PRIMERO a proposito: la barra fija es una accion de contacto y
-   esta oculta bajo html.js-boot (clase puesta en el <head>) hasta que este codigo
-   la muestre. Si algo anterior
-   (slider, galeria, contador) lanzara una excepcion, el resto del script no se
-   ejecutaria y la barra se quedaria oculta para siempre. Los fallos de CARGA de
-   main.js los cubre el onerror del <script> en baseof.html. */
+/* Cada bloque independiente de este archivo va dentro de aislar(): si uno lanza
+   una excepcion, se registra y los demas siguen. Sin esto, una excepcion (p.ej. el
+   JSON.parse de la galeria) abortaba el resto del script y arrastraba bloques
+   que no tienen nada que ver: el menu movil, que es el UNICO acceso a la
+   navegacion por debajo de 821px, esta el ultimo de todos.
+   No cubre los errores de SINTAXIS (el script entero no se parsea y nada corre):
+   de esos protege `node -c themes/f1-theme/assets/js/main.js` antes de commitear. */
+function aislar(nombre, fn) {
+  try {
+    fn();
+  } catch (e) {
+    if (window.console) console.error('main.js: fallo en el bloque "' + nombre + '"; el resto sigue', e);
+  }
+}
+
+/* La barra fija es una accion de contacto y esta oculta bajo html.js-boot (clase
+   puesta en el <head>) hasta que este codigo la muestre. Ya no hace falta que
+   este bloque vaya el primero para protegerlo de fallos de los demas: cada
+   bloque esta aislado con aislar(). Los fallos de CARGA de main.js los cubre el
+   onerror del <script> en baseof.html. */
 /* === Barra fija y boton volver-arriba: cuando mostrarlos ===
    UNA sola senal para las dos piezas: un IntersectionObserver (no un listener
    de scroll: solo dispara al cruzar el umbral, sin trabajo en cada pixel).
@@ -23,7 +37,7 @@ document.documentElement.classList.add('js');
 
    Sin IntersectionObserver no hay senal: la barra es una accion de contacto,
    asi que se muestra ya en lugar de quedarse oculta bajo html.js. === */
-(function () {
+aislar('barra fija y volver-arriba', function () {
   var boton = document.querySelector('.back-to-top');
   var barra = document.querySelector('.sticky-cta');
   if (!boton && !barra) return;
@@ -62,61 +76,65 @@ document.documentElement.classList.add('js');
     var destino = document.getElementById('top');
     if (destino) destino.focus({ preventScroll: true });
   });
-})();
+});
 
 /* === Slider: desplazar una tarjeta por clic. Sin JS, la pista sigue siendo
    scrollable por arrastre/rueda (scroll-snap CSS). === */
-document.querySelectorAll('.block-slider').forEach(function (bloque) {
-  var track = bloque.querySelector('.slider-track');
-  if (!track) return;
-  function paso() {
-    var slide = track.querySelector('.slide');
-    return slide ? slide.offsetWidth + 16 : 320;
-  }
-  bloque.querySelector('[data-slider-prev]')?.addEventListener('click', function () {
-    track.scrollBy({ left: -paso(), behavior: 'smooth' });
-  });
-  bloque.querySelector('[data-slider-next]')?.addEventListener('click', function () {
-    track.scrollBy({ left: paso(), behavior: 'smooth' });
+aislar('slider', function () {
+  document.querySelectorAll('.block-slider').forEach(function (bloque) {
+    var track = bloque.querySelector('.slider-track');
+    if (!track) return;
+    function paso() {
+      var slide = track.querySelector('.slide');
+      return slide ? slide.offsetWidth + 16 : 320;
+    }
+    bloque.querySelector('[data-slider-prev]')?.addEventListener('click', function () {
+      track.scrollBy({ left: -paso(), behavior: 'smooth' });
+    });
+    bloque.querySelector('[data-slider-next]')?.addEventListener('click', function () {
+      track.scrollBy({ left: paso(), behavior: 'smooth' });
+    });
   });
 });
 
 /* === Gallery lightbox: <dialog> nativo (foco, Escape y backdrop gratis).
    Flechas de teclado para navegar; los datos vienen del JSON embebido. === */
-document.querySelectorAll('.block-gallery').forEach(function (bloque) {
-  var dlg = bloque.querySelector('.gallery-lightbox');
-  if (!dlg || !dlg.showModal) return; // navegador sin <dialog>: la imagen queda como está
-  var items = JSON.parse(dlg.querySelector('script[type="application/json"]').textContent);
-  var img = dlg.querySelector('img'), cap = dlg.querySelector('figcaption'), i = 0;
+aislar('galeria (lightbox)', function () {
+  document.querySelectorAll('.block-gallery').forEach(function (bloque) {
+    var dlg = bloque.querySelector('.gallery-lightbox');
+    if (!dlg || !dlg.showModal) return; // navegador sin <dialog>: la imagen queda como está
+    var items = JSON.parse(dlg.querySelector('script[type="application/json"]').textContent);
+    var img = dlg.querySelector('img'), cap = dlg.querySelector('figcaption'), i = 0;
 
-  function mostrar(n) {
-    i = (n + items.length) % items.length;
-    // imageHd si la plantilla la encontro; si no, la base
-    img.src = items[i].imageHd || items[i].image;
-    img.alt = items[i].imageAlt || '';
-    cap.textContent = items[i].legend || '';
-  }
-  bloque.addEventListener('click', function (e) {
-    var btn = e.target.closest('.gallery-open');
-    if (!btn) return;
-    mostrar(+btn.dataset.galleryIndex);
-    dlg.showModal();
+    function mostrar(n) {
+      i = (n + items.length) % items.length;
+      // imageHd si la plantilla la encontro; si no, la base
+      img.src = items[i].imageHd || items[i].image;
+      img.alt = items[i].imageAlt || '';
+      cap.textContent = items[i].legend || '';
+    }
+    bloque.addEventListener('click', function (e) {
+      var btn = e.target.closest('.gallery-open');
+      if (!btn) return;
+      mostrar(+btn.dataset.galleryIndex);
+      dlg.showModal();
+    });
+    dlg.querySelector('[data-lightbox-close]').addEventListener('click', function () { dlg.close(); });
+    dlg.querySelector('[data-lightbox-prev]').addEventListener('click', function () { mostrar(i - 1); });
+    dlg.querySelector('[data-lightbox-next]').addEventListener('click', function () { mostrar(i + 1); });
+    dlg.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') mostrar(i - 1);
+      if (e.key === 'ArrowRight') mostrar(i + 1);
+    });
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); }); // clic en el fondo
   });
-  dlg.querySelector('[data-lightbox-close]').addEventListener('click', function () { dlg.close(); });
-  dlg.querySelector('[data-lightbox-prev]').addEventListener('click', function () { mostrar(i - 1); });
-  dlg.querySelector('[data-lightbox-next]').addEventListener('click', function () { mostrar(i + 1); });
-  dlg.addEventListener('keydown', function (e) {
-    if (e.key === 'ArrowLeft') mostrar(i - 1);
-    if (e.key === 'ArrowRight') mostrar(i + 1);
-  });
-  dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); }); // clic en el fondo
 });
 
 /* === Efectos de visualización (reveal on scroll + counter) ===
    Orquestación: IntersectionObserver marca .is-visible al entrar en viewport;
    el CSS hace el resto. Hijos designados reciben retardo escalonado (stagger).
    Todo desactivado si el usuario pide movimiento reducido. === */
-(function () {
+aislar('reveal y contador', function () {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   if (!('IntersectionObserver' in window)) return;
 
@@ -206,12 +224,12 @@ document.querySelectorAll('.block-gallery').forEach(function (bloque) {
       requestAnimationFrame(function () { globo.classList.add('is-shown'); });
     }, 1100);
   }
-})();
+});
 
 /* === Menú móvil: toggle accesible (aria-expanded, cierre con Escape y al
    navegar). Sin él, .site-nav queda inalcanzable por debajo de 821px — no es
    decorativo, es el único acceso a la navegación en móvil. === */
-(function () {
+aislar('menu movil', function () {
   var toggle = document.querySelector('.nav-toggle');
   var nav = document.getElementById('site-nav');
   if (!toggle || !nav) return;
@@ -230,4 +248,4 @@ document.querySelectorAll('.block-gallery').forEach(function (bloque) {
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') cerrar();
   });
-})();
+});
