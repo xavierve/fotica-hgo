@@ -221,7 +221,11 @@ y el hueco no tendría sentido). Un filete vertical separa los tres CTAs
 
 El `safe-area-inset-bottom` (el notch) no entra en `--sticky-cta-h`: se suma
 aparte en cada regla, para que el token siga significando «lo que mide la
-barra».
+barra». **No añadir `viewport-fit=cover` a la meta viewport:** sin él iOS
+excluye las áreas seguras y un `fixed; bottom: 0` ya queda sobre el indicador
+de inicio, así que esos `env()` valen 0 y son código muerto inofensivo, dejado
+a propósito. Con `cover` cambiaría el render del sitio entero en esos
+dispositivos sin ganar nada.
 
 ### 1.4 Clases modificadoras (`class:`)
 

@@ -549,7 +549,17 @@ a {
 
    El alto de la barra NO incluye el safe-area inferior (el notch de un iPhone):
    ese se suma aparte en cada regla que lo usa. Asi el token sigue siendo "lo
-   que mide la barra" en cualquier dispositivo, con notch o sin el. */
+   que mide la barra" en cualquier dispositivo, con notch o sin el.
+
+   NO AÑADIR viewport-fit=cover a la meta viewport (header-meta.html). Sin cover,
+   iOS EXCLUYE las areas seguras del viewport: un elemento fixed con bottom:0 ya
+   queda por encima del indicador de inicio, que es el comportamiento correcto.
+   Por eso env(safe-area-inset-bottom) vale 0 en la practica y los env() de este
+   bloque son codigo muerto INOFENSIVO: se dejan a proposito, no son un error.
+   Anadir cover cambiaria el render del sitio ENTERO en esos dispositivos (todo
+   el contenido pasaria a pintarse bajo el notch y el indicador) sin ganar nada
+   aqui. Si algun dia hiciera falta por otro motivo, entonces estos env() pasan
+   a ser necesarios y ya estan puestos. */
 :root {
   --sticky-cta-h: 3.5rem; /* 0px desde 821px: alli no hay barra */
   --back-to-top-size: 2.75rem;
