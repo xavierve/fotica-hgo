@@ -38,6 +38,16 @@
   --block-pad-spacious: clamp(4rem, 9vw, 8rem);
   --fs-highlight: clamp(1.52em, 2.7vw, 1.8em);
   --radius: 18px;
+  /* Hero apilado/overlay: alto de la banda de foto en movil, ancho de su contenido
+     y ancho maximo de la foto (= ancho nativo de las fotos del hero; ver .hero-band). */
+  --hero-band-h: 40vh;
+  --hero-width: var(--container-wide);
+  --hero-band-max: 1440px; /* mantener sincronizado con $bandMax en hero-config.html */
+}
+@supports (height: 1svh) {
+  :root {
+    --hero-band-h: 40svh;
+  }
 }
 
 * {
@@ -223,9 +233,18 @@ a {
   display: inline-flex;
 }
 
+/* Fondo por defecto del hero sin imagen ni color de paleta.
+   Va como background-COLOR, nunca como background-image: un background-image
+   (y un linear-gradient lo es) se pinta SIEMPRE por encima del
+   background-color, asi que el degradado que habia aqui tapaba el navy de
+   .bg-color2/3 pasara lo que pasara en la cascada.
+   Depende del orden de carga: critical.css va inlinado en <head> ANTES del
+   <link> de main.css (ver header-meta.html), asi que .bg-color* -- misma
+   especificidad, una clase -- gana por orden. Si algun dia se bundlean al
+   reves, esta regla empieza a ganar y hay que revisarla. */
 .hero {
   padding: clamp(4rem, 8vw, 7rem) 0;
-  background: linear-gradient(135deg, var(--color-bg), var(--bg-color1));
+  background-color: var(--bg-color1);
 }
 
 .hero-inner {
@@ -240,6 +259,21 @@ a {
   max-width: 78ch;
 }
 
+/* overlay: la banda se alinea con logo, nav y breadcrumb como stacked y split;
+   la medida de linea (78ch) baja al copy, que es donde debe estar. Sobre el
+   .container, max-width + margin-inline:auto centraba el bloque entero y el
+   texto del overlay quedaba desalineado del resto del sitio. El tope de linea
+   NO sube a --hero-width: el texto va encima de la foto, donde leer ya cuesta
+   mas, y a 1440 saldrian renglones de ~200 caracteres. */
+.hero-overlay .hero-inner {
+  width: min(var(--hero-width), calc(100% - 2rem));
+  max-width: none;
+}
+
+.hero-overlay .hero-copy {
+  max-width: 78ch;
+}
+
 /* <figure> trae margen del navegador (~40px laterales): sin esta regla la foto
    del hero queda encogida y descentrada respecto al texto de al lado. */
 .hero-media {
@@ -251,6 +285,14 @@ a {
   height: auto;
   display: block;
   border-radius: var(--radius);
+}
+
+/* Limite de linea solo al subtitulo (parrafo largo), nunca al H1 ni al
+   contenedor. Vive aqui, con el resto de la geometria del hero, y no en
+   main.css: es medida de linea del bloque que abre la pagina, asi que se
+   resuelve en el mismo sitio que los anchos de banda y de columna. */
+.hero-subtitle {
+  max-width: 60ch;
 }
 
 .hero h1 {
@@ -277,6 +319,142 @@ a {
   flex-wrap: wrap;
   gap: .75rem;
   margin-top: 1.5rem;
+}
+
+/* === Layouts del hero (hero.layout, ver partials/hero.html) ===
+   Padding SUPERIOR segun modo — clase emitida por el partial, no un clamp
+   retocado: el aire de arriba solo tiene sentido cuando hay una foto detras
+   del texto de la que separarlo.
+     overlay  -> el clamp de .hero (arriba), sin tocar
+     stacked  -> 0: la banda de foto debe tocar el header
+     split / plain (sin foto detras) -> aire corto en movil (los botones tienen
+                que quedar sobre el pliegue), el clamp completo solo en desktop */
+.hero-split,
+.hero-plain {
+  padding-top: clamp(2rem, 8vw, 7rem);
+}
+
+/* stacked: foto sola a sangre arriba + bloque de color debajo.
+   Movil: --hero-band-h (40svh, fallback 40vh), NO los 70svh de banner/CTA — con
+   esa altura la imagen empuja H1 y subtitulo fuera del primer viewport (ver 3.1
+   en DESIGN_TOKENS.md). Medido: header + breadcrumb ya ocupan ~120px, con 50svh
+   el H1 de 4 lineas a 359x640 quedaba en el filo del pliegue y el subtitulo fuera.
+   Desktop: aspect-ratio, para que escale con el ancho. */
+.hero-stacked {
+  padding: 0;
+  background-image: none; /* el color lo pone bg-color2 / has-bg-color en el propio <section> */
+}
+
+/* Tope de ancho de la foto: --hero-band-max (1440px, el ancho nativo de las
+   fotos del hero). Por encima, la banda no crece: sin tope, la foto se amplia
+   (x1.33 a 1920px, x1.78 a 2560px, con perdida de nitidez) y ademas se recorta
+   mas — a 2560px solo se veia el 33% del alto de la foto, frente al 44% a 1440px.
+   Los laterales son el color del <section>, el mismo del bloque de texto, y el
+   borde de la foto coincide con el del H1 (ambos miden 1440). */
+.hero-band {
+  margin: 0 auto;
+  max-width: var(--hero-band-max);
+  height: var(--hero-band-h);
+  overflow: hidden;
+}
+
+.hero-band picture {
+  display: block;
+  height: 100%;
+}
+
+.hero-band img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center; /* hero.imagePosition lo sobreescribe inline */
+  border-radius: 0;
+}
+
+/* Bloque de texto. Bajo la foto el aire superior es corto; el inferior es el
+   antiguo padding de .hero recortado ~30% (quedaban ~150px de navy vacio). */
+.hero-body {
+  padding: clamp(2rem, 4.5vw, 3.5rem) 0 clamp(2.8rem, 5.6vw, 4.9rem);
+}
+
+/* Ancho "wide" (--container-wide): H1 y subtitulo son largos en todos los
+   heros del sitio y a 1120px en dos columnas no caben. wide, y no 100vw:
+   mantiene la alineacion con logo, nav y breadcrumb.
+   Aplica a stacked Y split: split es literalmente dos columnas, asi que el
+   .container por defecto (1120px) le dejaba ~580px de texto y ~480px de foto.
+   overlay no entra: usa .hero-inner.no-media, con su propio tope de 78ch. */
+.hero-stacked .hero-inner,
+.hero-split .hero-inner {
+  width: min(var(--hero-width), calc(100% - 2rem));
+}
+
+.hero-stacked .hero-inner {
+  grid-template-columns: 1fr;
+}
+
+/* split: columnas al 50/50 y gap mas corto. El reparto 1.1fr/.9fr del hero
+   generico dejaba la foto en ~605px sobre una banda de 1440; al 50/50 son
+   ~672px. Cambiar el reparto vale mas ancho (+67px) que vaciar el gap entero
+   (+32px), y el gap sigue haciendo falta: sin el, el texto toca el borde de
+   la foto y se lee como error de maquetacion.
+   El padding inferior baja del clamp global (hasta 7rem): en split la altura
+   la marca la foto, y 112px muertos debajo descuadran el copy largo. */
+@media(min-width:821px) {
+  .hero-split .hero-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+}
+
+.hero-split {
+  padding-bottom: clamp(2rem, 5vw, 4rem);
+}
+
+/* H1 mas contenido que el global (clamp 5vw / 4.75rem): en media columna de
+   ~700px ese tamano parte los titulares en 4 lineas. balance reparte las lineas
+   sin tocar el texto (mejora progresiva: quien no lo soporta lo ignora). */
+.hero-stacked h1 {
+  font-size: clamp(2.25rem, 3.6vw, 3.25rem);
+  text-wrap: balance;
+}
+
+.hero-stacked .hero-head > :first-child,
+.hero-stacked .hero-subtitle {
+  margin-top: 0;
+}
+
+@media(min-width:821px) {
+  .hero-band {
+    width: 100%; /* sin esto, max-height + aspect-ratio encogen tambien el ancho */
+    height: auto;
+    aspect-ratio: 3 / 1;
+    min-height: 18rem;
+    /* Red de seguridad. Con el ancho capado el aspect-ratio da como mucho 480px,
+       pero en una ventana ancha y baja (proporcion mayor de 1.8:1: navegador no
+       maximizado, 1440x700...) 480px son mas del 60% del alto y sacan el H1 de
+       la primera pantalla. Este tope solo actua en esos casos; en 1366x768 o
+       1920x1080 no interviene. Si min-height y max-height chocan, gana min-height. */
+    max-height: 60vh;
+    max-height: 60svh;
+  }
+  /* Dos columnas: H1 (+eyebrow) a la izquierda, subtitulo + CTAs a la derecha.
+     Alineadas arriba a proposito (align-items:flex-start). */
+  .hero-stacked .hero-copy {
+    display: flex;
+    gap: 3em;
+    align-items: flex-start;
+  }
+  .hero-stacked .hero-head {
+    flex: 0 0 calc(50% - 1.5em);
+  }
+  .hero-stacked .hero-text {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+  .hero-stacked .hero-head:only-child {
+    flex-basis: 100%;
+  }
 }
 
 .header-actions .header-action2 {

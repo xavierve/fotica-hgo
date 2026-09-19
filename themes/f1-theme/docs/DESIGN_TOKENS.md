@@ -4,9 +4,9 @@ Todos los tokens viven en `:root`, dentro de `assets/css/critical.css`.
 Nada de color, tamaño o espaciado se escribe a pelo en el CSS del tema: si un
 valor se repite o puede cambiar, es un token.
 
-Este documento cubre lo que ya está **estable**. No documenta el hero (su
-arquitectura va a cambiar — ver tarea 8 en `CLAUDE.md`) ni los espaciados
-internos en `em` (pendientes).
+Este documento cubre lo que ya está **estable**. Del hero solo documenta sus
+tokens (1.3.1); los layouts están en `FRONTMATTER.md`. Los espaciados internos
+en `em` siguen pendientes.
 
 ---
 
@@ -147,8 +147,12 @@ es manual — por eso viven pegados en `:root`.
 
 ### 1.3 Parámetros de fondo y color
 
-Cinco parámetros, disponibles en hero, cta y banner (los que aceptan imagen de
+Cinco parámetros, disponibles en cta y banner (los que aceptan imagen de
 fondo). `bgColor`/`textColor`/`class` están además en el resto de bloques.
+
+> **El hero no usa `bg` ni `bgMobile`.** Su foto sale siempre de `hero.image`,
+> y la variante móvil se detecta por convención `_m` (ver FRONTMATTER.md).
+> `bgColor`, `textColor` y `class` sí funcionan igual en el hero.
 
 | Parámetro | Qué hace |
 |---|---|
@@ -180,6 +184,22 @@ ya trae el par fondo+texto resuelto.
   class: "bg-claro"
 ```
 
+### 1.3.1 Tokens del hero
+
+En `:root` (`critical.css`). Los usan el hero `stacked` y, en móvil, el `overlay`.
+
+| Token | Valor | Qué controla |
+|---|---|---|
+| `--hero-band-h` | `40vh`, y `40svh` si el navegador lo soporta | Alto de la banda de foto en móvil. No son los 70svh de banner/CTA (ver 3.1): header + breadcrumb ya ocupan ~120px y con 50svh el H1 de 4 líneas de un 359×640 quedaba en el filo del pliegue. En desktop manda `aspect-ratio: 3/1` (mín. 18rem, máx. 60svh). |
+| `--hero-width` | `var(--container-wide)` | Ancho del contenido del bloque de texto en `stacked`. Un solo sitio para cambiarlo a `var(--container)`. |
+| `--hero-band-max` | `1440px` | Ancho máximo de la banda de foto en `stacked` (el ancho nativo de las fotos del hero). Por encima la banda no crece y los laterales son el color del bloque (`bg-color2`). Va a la par con `$bandMax` en `hero-config.html`, que fija el `sizes`. |
+
+**Por qué el tope de ancho.** Sin él la foto se amplía (×1.33 a 1920px, ×1.78 a 2560px) y además se recorta más: a 2560px solo se veía el 33% del alto frente al 44% a 1440px. Con el tope, el recorte es siempre el de 1440 y el borde de la foto coincide con el del H1.
+
+**Por qué se queda el `max-height: 60svh` de la banda en desktop.** Con el ancho capado el `aspect-ratio 3/1` da como mucho 480px, pero en una ventana ancha y baja (proporción mayor de 1.8:1, p. ej. 1440×700) esos 480px son más del 60% del alto y sacan el H1 de la primera pantalla. Es una red de seguridad: en 1366×768 o 1920×1080 no interviene.
+
+Padding superior del hero, por clase emitida por el partial: `hero-stacked` → 0 (la banda toca el header o el breadcrumb); `hero-split` / `hero-plain` → `clamp(2rem, 8vw, 7rem)`; `hero-overlay` → el `clamp(4rem, 8vw, 7rem)` base de `.hero`.
+
 ### 1.4 Clases modificadoras (`class:`)
 
 **Legibilidad sobre imagen** — las fotos reales no son predecibles; estas clases
@@ -195,7 +215,7 @@ son las palancas para que el texto se lea sin cambiar la foto:
 
 | Clase | Efecto |
 |---|---|
-| `bg-top` | `background-position:top center` — evita que un recorte alto corte cabezas o rótulos. En uso en el hero de Nosotros. |
+| `bg-top` | `background-position:top center` — evita que un recorte alto corte cabezas o rótulos. Para `background-image` (cta, banner, hero `overlay`); el hero `stacked` usa `hero.imagePosition`. |
 
 **Contraste de fondo claro:**
 
@@ -378,7 +398,7 @@ Convención: `foto.webp` (1x) + `foto_hd.webp` (2x, doble de ancho).
 La variante `_hd` es **siempre opcional** — si no existe, se sirve la normal sin
 error.
 
-- **`<img>` reales** → `partials/responsive-img.html`. Lee el ancho real del
+- **`<img>` reales** → `partials/img-responsive.html`. Lee el ancho real del
   archivo con `images.Config` (no hay que declararlo), genera `srcset` con
   descriptor `w` + `sizes` para que el navegador elija según tamaño de
   renderizado **y** densidad. Conectado en: cards, team, gallery, slider,

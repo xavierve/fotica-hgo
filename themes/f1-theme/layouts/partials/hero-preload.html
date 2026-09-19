@@ -1,0 +1,32 @@
+{{- /*
+  partials/hero-preload.html
+
+  Preload no bloqueante de la imagen del hero (candidata a LCP), solo en
+  paginas que tienen hero con imagen: nunca precarga algo que la pagina no
+  usa. Lee hero-config.html, la misma resolucion que el markup del hero.
+
+  - stacked / split: <img> con srcset w -> imagesrcset + imagesizes (Safari va
+    por detras y degrada al href simple).
+  - overlay: es background-image con image-set 1x/2x -> imagesrcset por
+    densidad, que es lo que el navegador usara.
+  - bgMobile: un preload por breakpoint (media), para no bajar las dos.
+  Entrada: la pagina (.).
+*/ -}}
+{{- $cfg := partial "hero-config.html" . -}}
+{{- if $cfg.src -}}
+  {{- $sizes := $cfg.sizes -}}
+  {{- $entries := slice (dict "src" $cfg.src "media" "") -}}
+  {{- if $cfg.mobile -}}
+    {{- $entries = slice (dict "src" $cfg.mobile "media" "(max-width:820px)") (dict "src" $cfg.src "media" "(min-width:821px)") -}}
+  {{- end -}}
+  {{- range $entries -}}
+    {{- $set := partial "img-srcset.html" .src -}}
+<link rel="preload" as="image" href="{{ .src }}" fetchpriority="high"
+  {{- with .media }} media="{{ . }}"{{ end -}}
+  {{- if $set.hasHd -}}
+    {{- /* atributo entero por safeHTMLAttr: html/template trata imagesrcset como URL y escapa los espacios (%20) */ -}}
+    {{- if eq $cfg.layout "overlay" }} {{ printf "imagesrcset=\"%s 1x, %s 2x\"" .src $set.hd | safeHTMLAttr }}
+    {{- else }} {{ printf "imagesrcset=\"%s\" imagesizes=\"%s\"" $set.srcset $sizes | safeHTMLAttr }}{{ end -}}
+  {{- end }}>
+{{ end -}}
+{{- end -}}

@@ -25,7 +25,8 @@ hero:
   title: "La montura se ve. Las lentes se notan."
   subtitle: "Al elegir gafas, casi toda la atención se la lleva la montura — pero lo que determina cómo ves, cuánto pesan y cuánto duran son las **lentes oftálmicas**: los cristales graduados que compensan tu defecto visual (miopía, hipermetropía, astigmatismo o presbicia). Aquí te explicamos, sin letra pequeña, qué opciones existen y cuándo tiene sentido cada una."
   preset: contact
-  bg: "/images/221-lentes_oftalmicas_hero.webp"
+  image: "/images/221-lentes_oftalmicas_hero.webp"
+  imageAlt: "Tres lentes oftálmicas transparentes superpuestas, con los reflejos azulados del tratamiento antirreflejante"
 
 sections:
   - type: faq

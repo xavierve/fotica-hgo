@@ -23,6 +23,7 @@ hero:
   title: "Más de 44 años cuidando tu visión y tu audición"
   subtitle: "En Ópticas Fausto te atendemos con la cercanía de quien conoce a sus clientes y el compromiso de seguir acompañándote después de cada revisión, cada gafa y cada audífono."
   preset: contact
+  layout: split
   image: "/images/100-equipo_fausto_completo.webp"
   imageAlt: "El equipo de Ópticas Fausto en su tienda de Torre del Mar"
 sections:

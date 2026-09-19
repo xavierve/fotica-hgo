@@ -1,0 +1,35 @@
+{{- /*
+  partials/hero-copy.html
+
+  Contenido del hero, identico en todos los layouts. Dos wrappers:
+    .hero-head -> eyebrow + H1
+    .hero-text -> subtitulo + CTAs
+  En stacked son dos columnas en desktop; en el resto, simplemente apilados
+  (sin CSS de layout propio). Entrada: el dict `hero:` del front matter.
+*/ -}}
+<div class="hero-copy">
+  {{- if or .eyebrow .title }}
+  <div class="hero-head">
+    {{ with .eyebrow }}<p class="eyebrow">{{ . }}</p>{{ end }}
+    {{ with .title }}<h1>{{ . }}</h1>{{ end }}
+  </div>
+  {{- end }}
+  {{- if or .subtitle (eq .preset "contact") .primaryCTA .secondaryCTA }}
+  <div class="hero-text">
+    {{ with .subtitle }}<p class="hero-subtitle">{{ . | markdownify }}</p>{{ end }}
+    {{ if eq .preset "contact" }}
+    {{ $contact := (hugo.Data.site | default dict).contact | default dict }}
+    {{ $wa := replace ($contact.whatsapp | default "") "+" "" }}
+    <div class="cta-row">
+      <a class="btn btn-fill" href="{{ printf "tel:%s" $contact.phone | safeURL }}">{{ partial "icons.html" "phone" }}{{ .labelCall | default (i18n "call") }}</a>
+      <a class="btn btn-outline" href="https://wa.me/{{ $wa }}">{{ partial "icons.html" "whatsapp" }}{{ .labelWhatsapp | default (i18n "whatsapp") }}</a>
+    </div>
+    {{ else if or .primaryCTA .secondaryCTA }}
+    <div class="cta-row">
+      {{ with .primaryCTA }}<a class="btn btn-fill" href="{{ .url | safeURL }}">{{ with .icon }}{{ partial "icons.html" . }}{{ end }}{{ .text }}</a>{{ end }}
+      {{ with .secondaryCTA }}<a class="btn btn-outline" href="{{ .url | safeURL }}">{{ with .icon }}{{ partial "icons.html" . }}{{ end }}{{ .text }}</a>{{ end }}
+    </div>
+    {{ end }}
+  </div>
+  {{- end }}
+</div>

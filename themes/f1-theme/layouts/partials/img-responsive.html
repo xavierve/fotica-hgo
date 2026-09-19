@@ -1,0 +1,41 @@
+{{- /*
+  partials/img-responsive.html
+
+  <img> con dos mejoras automaticas, ambas por convencion de nombre y ambas
+  opcionales: si el archivo no esta, el markup cae limpio al <img> de siempre.
+
+    foto_hd.webp -> densidad, via srcset w (ver img-srcset.html)
+    foto_m.webp  -> art direction en movil, via <picture><source media> (ver
+                    img-mobile.html). Solo se emite <picture> si el _m existe:
+                    las imagenes sin variante movil no pagan markup de mas.
+
+  Parametros (dict):
+    src           -> ruta publica, ej "/images/211-optometria_D3A0068.webp" (obligatorio)
+    alt           -> texto alternativo (obligatorio)
+    sizes         -> atributo sizes, ej "(min-width:821px) 33vw, 100vw" (opcional;
+                     por defecto, el ancho real del archivo en px -> tamano fijo)
+    class         -> clase css opcional
+    loading       -> "lazy" (defecto) | "eager"
+    fetchpriority -> "high" | "low" | "auto" (opcional; solo para candidatas a LCP)
+    style         -> style="" opcional (ej. object-position del hero)
+    noMobile      -> true desactiva la deteccion de "_m" (para quien ya envuelva
+                     el <img> en su propio <picture>)
+*/ -}}
+{{- $set := partial "img-srcset.html" .src -}}
+{{- $m := "" -}}
+{{- if not .noMobile -}}{{- $m = partial "img-mobile.html" .src -}}{{- end -}}
+{{- if $m -}}
+{{- $mset := partial "img-srcset.html" $m -}}
+<picture><source media="(max-width:820px)" srcset="{{ if $mset.hasHd }}{{ $mset.srcset }}{{ else }}{{ $m }}{{ end }}"{{ if $mset.hasHd }} sizes="100vw"{{ end }}>
+{{- end -}}
+<img src="{{ .src }}"
+  {{- if $set.hasHd }}
+  srcset="{{ $set.srcset }}"
+  sizes="{{ .sizes | default (printf "%dpx" $set.w) }}"
+  {{- end }}
+  alt="{{ .alt }}"
+  loading="{{ .loading | default "lazy" }}"
+  {{- with .fetchpriority }} fetchpriority="{{ . }}"{{ end }}
+  {{- with .class }} class="{{ . }}"{{ end }}
+  {{- with .style }} style="{{ . | safeCSS }}"{{ end }}>
+{{- if $m }}</picture>{{ end -}}

@@ -29,13 +29,14 @@ schema:
   includeFAQ: true
 
 hero:
+  layout: ""            # stacked (defecto, si se omite) | overlay | split
   eyebrow: ""
   title: ""
   subtitle: ""
-  image: ""
-  imageAlt: ""
-  bg: ""
-  bgMobile: ""
+  preset: contact       # botones Llamar + WhatsApp desde data/site.yaml
+  image: ""             # la foto del hero, en los TRES layouts
+  imageAlt: ""          # obligatorio si hay image
+  imagePosition: ""     # stacked: punto de interés del recorte, ej. "center 30%"
   bgColor: ""
   primaryCTA:
     text: ""
@@ -83,6 +84,73 @@ Todos los bloques de `sections` aceptan:
 - `textSize`: `xs`, `s`, `m`, `l`, `xl` — solo bloques/shortcodes de bloque (no confundir con la utilidad CSS fs-*, para texto suelto en prosa; ver "Talla de bloque vs talla de prosa" más abajo)
 - `align`: `left`, `center`, `right`
 - `class`: string opcional
+
+## Hero: layouts
+
+Un solo bloque, tres presentaciones. `hero.layout` elige; si se omite, es
+`stacked`. El contenido (eyebrow, H1, subtítulo, CTAs) y sus parámetros son
+los mismos en las tres.
+
+| `layout` | Qué es | Imagen | Cuándo |
+|---|---|---|---|
+| `stacked` (**defecto**) | Banda de foto a sangre arriba; debajo, bloque `bg-color2` con H1 a la izquierda y subtítulo + CTAs a la derecha (una columna en móvil). | `<img>` | La norma. |
+| `overlay` | Texto sobre la foto (`background-image` + `scrim`). **Solo desde 821px**: en móvil se apila igual que `stacked` — nunca hay texto sobre foto en móvil. | `background-image` | Excepción, con fotos de espacio negativo. |
+| `split` | Texto y figura en dos columnas (una en móvil, texto primero). | `<img>` | Home. |
+
+La foto sale **siempre de `hero.image`**. `layout` decide cómo se pinta, no de
+qué clave se lee. Las claves `bg` y `bgMobile` ya no existen en el hero (sí en
+`cta` y `banner`, que son otra API): una página con `layout: split` y solo `bg`
+degradaba a `plain` sin avisar.
+
+Sin imagen utilizable el hero degrada a solo texto (clase `hero-plain`).
+
+Parámetros propios del hero:
+
+- `layout`: `stacked` | `overlay` | `split`.
+- `imagePosition`: (`stacked`) `object-position` de la foto, ej. `"center 30%"`, `"top"`. Cada foto tiene su punto de interés; por defecto `center`.
+- `imageAlt`: alt de la foto. Si se omite queda `alt=""` (decorativa).
+- `scrim`: (`overlay`) `false` desactiva el degradado direccional, que va activo por defecto.
+- `bgColor` / `textColor`: en `stacked` sustituyen el color del bloque de texto (por defecto `bg-color2`); en `overlay` tiñen el velo.
+- `class`: clases extra en el `<section>`. `panel`, `overlay-strong` y `bg-top` son de `overlay`; en `stacked` el encuadre va por `imagePosition`.
+
+En `stacked` la banda tiene un ancho máximo de 1440px (`--hero-band-max`): en pantallas más anchas la foto no se amplía y los laterales toman el color del bloque de texto. `overlay` no lleva tope: es una excepción a sangre. `stacked` y `split` comparten el ancho `--hero-width` (= `--container-wide`, 1440px) en vez del `--container` de 1120px: en dos columnas, 1120 deja el texto en ~580px y la foto en ~480px.
+
+### Variantes de imagen: `_hd` y `_m`
+
+Las dos son **por convención de nombre de archivo, nunca por front matter**, y
+las dos son opcionales: si el archivo no está, el markup cae limpio.
+
+| Sufijo | Qué es | Para qué | Cómo se sirve |
+|---|---|---|---|
+| `foto_hd.webp` | la MISMA foto con más píxeles | densidad (retina) | `srcset` w en `stacked`/`split`, `image-set()` en `overlay` |
+| `foto_m.webp` | OTRO encuadre, vertical | art direction en móvil | `<source media="(max-width:820px)">` |
+
+No son intercambiables. `srcset` elige candidato por ancho y DPR, así que dos
+archivos con el mismo aspecto y distinto recorte le resultan equivalentes y
+serviría cualquiera: el cambio de **encuadre** solo lo resuelve `<picture>`.
+
+`_m` funciona en cualquier bloque que pase por `img-responsive.html`, no solo
+en el hero: `cta`, `banner`, `image-text`, `cards`, `gallery`, `team`. El
+`<picture>` se emite **solo si el `_m` existe**, así que las imágenes sin
+variante móvil no pagan markup de más.
+
+Ninguna de las dos funciona con URLs externas: la detección es `os.FileExists`
+sobre `static/`.
+
+La imagen del hero se precarga en el `<head>` (`hero-preload.html`) solo en
+páginas que la tienen, con un preload por breakpoint si existe el `_m`.
+
+### Partials de imagen
+
+| Partial | Responsabilidad |
+|---|---|
+| `img-responsive.html` | emite el `<img>`, y el `<picture>` si hay `_m`. Es el que llaman los bloques. |
+| `img-srcset.html` | resuelve el `_hd` y devuelve el `srcset` w con los anchos reales. |
+| `img-mobile.html` | resuelve el `_m` y devuelve su ruta, o `""`. |
+
+`img-responsive.html` acepta `noMobile: true` para quien monte su propio
+`<picture>`. (Antes se llamaba `responsive-img.html`; se renombró para que los
+tres partials sean la misma familia `img-*`.)
 
 ## Reglas
 

@@ -15,9 +15,8 @@
 
 | Uso | Clave front matter | Base | `_hd` (2x) | Proporción | Formato |
 |---|---|---|---|---|---|
-| **Hero** | `hero.bg` | 1440×960 | 1920×1280 *(solo cámara)* | 3:2 | WebP |
-| **Hero móvil** | `hero.bgMobile` | **768×420** ⚠ | 1536×840 | **3:2** ⚠ | WebP |
-| **Hero figura** | `hero.image` | 1440 ancho | 2880 | libre | WebP |
+| **Hero** (los tres layouts) | `hero.image` | 1440×960 | `_hd` 1920×1280 *(solo cámara)* | 3:2 | WebP |
+| **Hero móvil** | *(sin clave: `_m` por convención)* | **768×420** ⚠ | `_m_hd` 1536×840 | **3:2** ⚠ | WebP |
 | **OG / Social** | `og.image` | 1200×630 | — | 1.91:1 | **JPG** |
 | **Cards** | `card.image` | **800×600** | 1600×1200 | **4:3** | WebP |
 | **Equipo** | `team.items[].image` | **750×750** | 1500×1500 | **1:1 cuadrado** | WebP |
@@ -26,8 +25,8 @@
 | **Slider** | `slider.items[].image` | **780 ancho** | — | libre | WebP |
 | **Logos de marca** | `brands.items[].image` | 320 ancho | — | libre | WebP/SVG |
 
-> ⚠ **Los heros están PENDIENTES de cerrar.** Las medidas de `hero.bg` y
-> `hero.bgMobile` de esta tabla son provisionales: dependen de la altura real
+> ⚠ **Los heros están PENDIENTES de cerrar.** Las medidas de esta tabla son
+> provisionales: dependen de la altura real
 > de la banda en el layout `stacked`, que **todavía no está implementado** en
 > `partials/hero.html` (hoy solo existen el split de dos columnas y la columna
 > única con fondo detrás). No reencuadrar heros hasta entonces — se harían dos
@@ -49,7 +48,7 @@ archivo necesario. No son cifras redondas elegidas a ojo.
 
 | Bloque | `sizes` del theme | Se muestra a | DPR2 | DPR3 |
 |---|---|---|---|---|
-| Hero (stacked) | `100vw` | hasta 1440px | 2880px | — |
+| Hero (stacked) | `(min-width:1440px) 1440px, 100vw` | hasta 1440px (banda con tope) | 2880px | — |
 | Cards / Equipo | `(min-width:1100px) 33vw, (min-width:600px) 50vw, 100vw` | ~370px desktop · ~400px móvil | ~740px | ~1200px |
 | image-text | `(min-width:821px) 50vw, 100vw` | 528px (`m`) · 688px (`wide`) · ~704px (`full`) | ~1056-1408px | — |
 | Hero split (Home) | `(min-width:821px) 45vw, 100vw` | ~475px (columna `.9fr`) | ~950px | — |
@@ -138,16 +137,39 @@ original, nunca ampliando el WebP ya reducido. Techo razonable: 1920px.
 
 ---
 
-## Heros: pendiente del layout apilado
+## Heros: layout apilado ya implementado, reencuadre pendiente de decisión
 
-**No reencuadrar ni regenerar heros todavía.** El recorte final depende de la
-proporción de la banda, y la proporción depende de la altura que fije el CSS
-del layout `stacked` — que este documento describe pero el tema aún no
-implementa. Reencuadrar 24 imágenes contra una especificación teórica significa
+> **Actualización:** el layout `stacked` ya está en el tema y la banda se puede
+> medir. Las medidas reales están en la tabla siguiente y sustituyen a la
+> estimación de más abajo (que se conserva por su razonamiento). El reencuadre
+> de imágenes sigue en pausa hasta que Foco lo retome.
+
+| Ancho de pantalla | Banda (ancho × alto) | Proporción |
+|---|---|---|
+| Móvil 359–390 | 359–390 × 256–338 (`40svh` de 640–844) | ~1.4:1 a 1.15:1 |
+| 821 | 821 × 288 | ~2.85:1 |
+| 1024 | 1024 × 341 | 3:1 |
+| 1440 | 1440 × 480 | 3:1 |
+| 1920 | 1920 × 540 (tope `60svh` de 900) | 3.55:1 |
+
+**Tope de ancho: 1440px.** Desde 1440px de viewport la banda no crece (los laterales son el navy del bloque), así que ningún archivo se amplía por CSS más allá de su tamaño y el recorte no empeora en pantallas grandes. Consecuencias sobre las imágenes:
+
+- Un monitor retina de 1440px (DPR 2) pide 2880px. Ninguna imagen actual llega ahí; las únicas con `_hd` son Nosotros (2399px) y el hub de Visión (1440px). El resto se sirve a ~1440px y el navegador la estira ×2 (inevitable sin regenerar; ver el aviso sobre IA más abajo).
+- **Inventario de `hero.bg` (stacked):** 25 imágenes, anchos de 700 a 2508px. **10 miden menos de 1440** (1200–1402px; la más estrecha es `322-ayudas_auditivas_hero`, 1200), así que ya se amplían un poco en un 1440 sin retina. **4 miden más** (1680, 1920, 2400, 2508): el tope les quita nitidez que sí tienen. Solo 3 tienen `_hd`.
+- El `srcset` usa el ancho **real** de cada archivo, no «el doble de la base» (ver más abajo).
+
+Con `object-fit: cover`, la foto se recorta arriba y abajo (desktop) o a los
+lados (móvil, casi cuadrada). Ese es el recorte que hay que mirar al
+reencuadrar; `hero.imagePosition` fija el punto de interés.
+
+**Antes de implementar el layout se decía:** no reencuadrar ni regenerar heros
+todavía, porque el recorte final depende de la proporción de la banda.
+Reencuadrar 24 imágenes contra una especificación teórica significa
 reencuadrarlas dos veces.
 
 **Inventario actual** (salida de `scripts/recoge-imagenes-hero.ps1`):
-24 `bg` · 3 `bgMobile` · 1 `image` · solo 2 con variante `_hd`.
+25 `hero.image` (tras unificar: ya no hay `hero.bg`) · 3 variantes `_m` ·
+solo 2 con variante `_hd`.
 
 **Dos cosas cambian con el apilado y no estaban contempladas antes:**
 
@@ -185,6 +207,64 @@ llamada y WhatsApp.
   el viewport antes del H1.
 - Fijar el `hero.imagePosition` de cada imagen: es un juicio visual sobre el
   recorte real, no un cálculo.
+
+## DECISIÓN ABIERTA · nitidez de los heros en desktop
+
+Ninguna de estas tres opciones está tomada. La página de inicio ya va en
+`split`; las 24 páginas de contenido son `stacked` por defecto.
+
+**El problema, en una línea:** en `stacked` la banda mide 1440px, así que un
+portátil retina pide 2880 y el archivo que existe es de 1440. Esas 24 páginas
+se sirven a 1x. En `split` la figura mide ~672px y el mismo archivo de 1440 da
+2.1x de sobra. La nitidez, con la fototeca actual, solo se cobra en `split`.
+
+**El conflicto:** los subtítulos de esas 24 páginas son largos (el de Audición
+ronda los 460 caracteres). En `split` el copy supera en altura a la foto, que
+es lo que descartó poner la foto a la izquierda. `stacked` absorbe el texto
+largo sin desequilibrio.
+
+| Opción | Qué cuesta | Qué se gana | Qué se pierde |
+|---|---|---|---|
+| **A. Dejar `stacked` a 1x** | nada | cero trabajo | heros suaves en retina, en las 24 |
+| **B. Bajar `--hero-band-max`** de 1440 a ~1200 | una línea en `critical.css` | el estiramiento pasa de 2x a 1.66x | heros más estrechos en desktop; no resuelve, atenúa |
+| **C. Pasar páginas a `split`** | acortar el subtítulo de cada una y mover el resto al primer bloque de texto | 2.1x real, sin regenerar ni una imagen | trabajo de copy página a página |
+| **D. Regenerar a 2880** | pedir o rehacer 24 fotos | `stacked` nítido | coste y, en las de IA, no siempre es posible |
+
+Si se va a C no hace falta hacerlo de golpe: `layout` es por página.
+
+### ¿Queda mal variar el layout del hero según la página?
+
+Depende de si hay regla o no la hay.
+
+Variar **por tipo de página** es un sistema, y se lee como intención: inicio en
+`split`, páginas de servicio y producto en `stacked`, alguna portada de sección
+en `overlay` si la foto tiene espacio negativo. El visitante percibe jerarquía,
+no desorden, y quien edite mañana sabe qué poner sin preguntar.
+
+Variar **caso a caso**, según qué quedó mejor ese día, sí queda mal: con un
+público de 45-75 años la previsibilidad de la página es parte de la
+accesibilidad, y en un tema pensado para reutilizarse deja una decisión
+implícita que nadie puede reconstruir.
+
+La regla, si se adopta C, debería quedar escrita en PAGE_TYPES.md como «layout
+de hero por tipo de página», no elegirse página a página. Y el criterio que
+decide no es estético sino de contenido: **`split` mientras el subtítulo quepa
+en la altura de la foto; `stacked` cuando no quepa.**
+
+---
+
+## Las `_hd` no miden el doble (aviso de auditoría)
+
+`img-srcset.html` lee el ancho real de la base y de la `_hd` y declara ambos en el `srcset` (antes asumía `_hd` = 2× la base y sobredeclaraba). Al hacerlo salió que **ninguna `_hd` del sitio mide 2×**: van de 1.1× a 1.6×, y hay casos peores:
+
+| Archivo | Base → `_hd` | Problema |
+|---|---|---|
+| `322-ayudas_auditivas_transmisor_telefono_hd` | 700 → 407 | La `_hd` es **más pequeña** que la base |
+| `322-ayudas_auditivas_sistemas_infrarojos_hd` | 700 → 567 | Ídem |
+| `311-audiometria_hd` (card) | 1003 → 1003 | Igual que la base; no aporta nada |
+| `223-lentillas_hd` (card) | 949 → 949 | Ídem |
+
+Con los anchos reales el navegador ya no elige la «hd» pequeña en retina (antes la elegía creyéndola 1400w), pero estas cuatro conviene regenerarlas o retirarlas en la tarea de optimización de imágenes.
 
 ## Qué se puede automatizar y qué no
 
