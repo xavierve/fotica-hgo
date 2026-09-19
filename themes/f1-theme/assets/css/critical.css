@@ -17,6 +17,7 @@
   --color-accent-text: #8a6d20;          /* dorado como TEXTO sobre fondo claro: eyebrow */
   --color-control-bg: var(--color-bg-over);   /* fondo de campos de formulario y controles */
   --color-control-border: rgba(0, 0, 0, .15); /* borde de esos controles; negro translucido para funcionar sobre cualquier fondo claro */
+  --color-error: #a3001d;                /* texto y borde de un error de formulario (mas de 7:1 sobre --color-bg) */
   --color-overlay-base: 27, 42, 56;      /* RGB suelto, para rgba() del overlay */
   --color-backdrop: rgba(15, 20, 25, .85);   /* velo a pantalla completa detras del lightbox */
   /* Fondos de banda: cada bg-colorN va SIEMPRE con su bg-colorN-text. 3 y 4 son alias: el mismo color cumple otro rol y no debe divergir. */

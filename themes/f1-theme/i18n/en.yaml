@@ -17,3 +17,41 @@ backToTop: { other: "Back to top" }
 location: { other: "Location" }
 locationTo: { other: "Directions to {{ .Name }}, opens the map" }
 quickContact: { other: "Quick contact" }
+cfSummary: { other: "Prefer to write to us here?" }
+cfMailto: { other: "Send us an email" }
+cfAlt: { other: "You can also write to us at" }
+cfName: { other: "Name" }
+cfPhone: { other: "Phone" }
+cfEmail: { other: "Email" }
+cfMessage: { other: "Message" }
+cfRequired: { other: "(required)" }
+cfOptional: { other: "(optional)" }
+cfConsentPre: { other: "I have read and accept the" }
+cfPrivacy: { other: "Privacy Policy" }
+cfSend: { other: "Send message" }
+cfSending: { other: "Sending…" }
+cfMicrocopy: { other: "We reply as soon as possible, within our opening hours." }
+cfOkTitle: { other: "Received!" }
+cfOkText: { other: "We will contact you very soon. If it is urgent, call us or drop by the shop." }
+cfHoneypot: { other: "If you are a person, leave this field empty" }
+errNombre: { other: "Please enter your name." }
+errTelefono: { other: "Please enter a valid phone number: digits, spaces and the + sign only." }
+errEmail: { other: "This email does not look valid. Check it or leave it blank." }
+errMensaje: { other: "Please tell us briefly how we can help (5 to 2000 characters)." }
+errAcepto: { other: "Tick the box to be able to send your message." }
+errLineas: { other: "This field takes a single line, with no line breaks or special characters." }
+errTiempo: { other: "The form was sent too quickly. Wait a moment and press “Send message” again." }
+errSend: { other: "We could not send your message. Please try again or call us: we will help right away." }
+errGeneric: { other: "We could not process your submission. Please try again or call us." }
+errNetwork: { other: "We could not connect. Check your connection and try again, or call us." }
+errPageTitle: { other: "We could not send your message" }
+errBack: { other: "Back to the form" }
+errOrCall: { other: "You can call us or message us on WhatsApp right now:" }
+mailSubject: { other: "Message from the website" }
+mailIntro: { other: "New message from the website contact form." }
+mailName: { other: "Name" }
+mailPhone: { other: "Phone" }
+mailEmail: { other: "Email" }
+mailNone: { other: "not provided" }
+mailMessage: { other: "Message" }
+mailFooter: { other: "Reply to this email to answer the visitor (only if they left an email); otherwise call the phone number given." }

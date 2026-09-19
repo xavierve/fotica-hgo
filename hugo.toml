@@ -17,3 +17,9 @@ disableKinds = ['taxonomy', 'term']
 [params]
   siteName = 'Ópticas Fausto'
   defaultOgImage = '/images/og/0-inicio.jpg'
+
+# public/contacto/config.php lo genera el shortcode contact-form (ver el shortcode);
+# .php necesita su tipo de medio para que Hugo lo publique.
+[mediaTypes]
+  [mediaTypes.'application/x-httpd-php']
+    suffixes = ['php']

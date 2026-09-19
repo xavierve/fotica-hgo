@@ -1648,3 +1648,192 @@ h2.fs-xs {
     opacity: .8
   }
 }
+
+/* === Formulario de contacto (shortcode contact-form) ===
+   Publico de 45-75+: etiquetas y campos a tamano de cuerpo (>=18px, tambien evita el
+   zoom automatico de iOS), campos de 48px de alto, borde de 2px con contraste >=3:1
+   (WCAG 1.4.11: --color-control-border no llega), el error se dice con TEXTO (no solo
+   con color) y el foco se ve. Mobile-first: la base es el movil. */
+.cf {
+  margin-block: 1.5rem;
+}
+
+/* Confirmacion: oculta salvo que el JS la muestre (.is-shown) o que el PHP redirija a
+   /contacto/#recibido (:target, sin JS). Al mostrarse oculta el formulario. */
+.cf-ok {
+  display: none;
+  padding: 1.25rem 1.5rem;
+  border: 2px solid var(--color-link);
+  border-radius: var(--radius);
+  background: var(--color-bg-over);
+}
+.cf-ok:target,
+.cf-ok.is-shown {
+  display: block;
+}
+.cf-ok:target ~ .cf-main,
+.cf-ok.is-shown ~ .cf-main {
+  display: none;
+}
+.cf-ok:focus {
+  outline: 3px solid var(--bg-color2);
+  outline-offset: 3px;
+}
+.cf-ok-title {
+  margin-top: 0;
+}
+
+/* Movil: el correo es la accion principal y el formulario va colapsado en un <details>. */
+.cf-mailto {
+  margin: 0 0 1rem;
+}
+.cf-alt {
+  display: none;
+}
+.cf-details > summary {
+  display: flex;
+  align-items: center;
+  min-height: 3rem;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--color-link);
+  text-decoration: underline;
+}
+.cf-details > summary:focus-visible {
+  outline: 3px solid var(--bg-color2);
+  outline-offset: 2px;
+}
+.cf-details[open] > summary {
+  margin-bottom: .5rem;
+}
+
+.cf-form {
+  display: grid;
+  gap: 1.25rem;
+  max-width: 40rem;
+}
+.cf-field label {
+  display: block;
+  margin-bottom: .35rem;
+  font-weight: 600;
+}
+.cf-req {
+  font-weight: 400;
+  color: var(--color-muted);
+}
+.cf-field input[type="text"],
+.cf-field input[type="tel"],
+.cf-field input[type="email"],
+.cf-field textarea {
+  display: block;
+  width: 100%;
+  min-height: 3rem;
+  padding: .7rem .9rem;
+  font: inherit;
+  color: var(--color-text);
+  background: var(--color-control-bg);
+  border: 2px solid var(--color-muted);
+  border-radius: 10px;
+}
+.cf-field textarea {
+  min-height: 9rem;
+  resize: vertical;
+}
+.cf-field input:focus-visible,
+.cf-field textarea:focus-visible {
+  outline: 3px solid var(--bg-color2);
+  outline-offset: 2px;
+  border-color: var(--bg-color2);
+}
+.cf-field [aria-invalid="true"] {
+  border-color: var(--color-error);
+}
+.cf-error {
+  margin: .4rem 0 0;
+  font-weight: 600;
+  color: var(--color-error);
+}
+.cf-error::before {
+  content: "⚠ " / "";
+}
+
+.cf-consent {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: .75rem;
+  align-items: start;
+}
+.cf-consent input[type="checkbox"] {
+  width: 1.6rem;
+  height: 1.6rem;
+  margin: .1rem 0 0;
+  accent-color: var(--color-link);
+}
+.cf-consent label {
+  margin: 0;
+  font-weight: 400;
+}
+.cf-consent .cf-error {
+  grid-column: 1 / -1;
+}
+
+.cf-legal {
+  padding: 1rem 1.25rem;
+  border-left: 4px solid var(--bg-color1);
+  background: var(--color-bg-over);
+}
+.cf-legal ul {
+  margin-block: .5rem 0;
+  padding-left: 1.25rem;
+}
+
+/* Honeypot: fuera de pantalla, no display:none (algunos bots saltan los ocultos). */
+.cf-hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.cf-alert:not(:empty) {
+  padding: .9rem 1.1rem;
+  border: 2px solid var(--color-error);
+  border-radius: 10px;
+  font-weight: 600;
+  color: var(--color-error);
+}
+.cf-submit {
+  min-height: 3rem;
+  justify-self: start;
+  cursor: pointer;
+}
+.cf-submit[aria-disabled="true"] {
+  opacity: .7;
+  cursor: progress;
+}
+.cf-microcopy {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+/* Desktop: el formulario esta a la vista y el correo queda como alternativa debajo.
+   ::details-content permite mostrar el <details> cerrado sin JS; sin soporte se deja la
+   pestana visible (el formulario sigue siendo alcanzable) y main.js lo abre. */
+@media (min-width: 821px) {
+  .cf-mailto {
+    display: none;
+  }
+  .cf-alt {
+    display: block;
+    margin-top: 1.25rem;
+  }
+  @supports selector(::details-content) {
+    .cf-details > summary {
+      display: none;
+    }
+    .cf-details::details-content {
+      content-visibility: visible;
+    }
+  }
+}

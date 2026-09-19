@@ -249,3 +249,107 @@ aislar('menu movil', function () {
     if (e.key === 'Escape') cerrar();
   });
 });
+
+/* === Formulario de contacto: envio por fetch, validacion accesible y confirmacion inline ===
+   El <form> funciona SIN este bloque (POST normal, el PHP redirige a /contacto/#recibido):
+   esto solo intercepta el submit para no recargar y pintar la confirmacion en su sitio. */
+aislar('formulario de contacto', function () {
+  var form = document.querySelector('.cf-form');
+  if (!form) return;
+  var ok = document.getElementById('recibido');
+  var alerta = document.getElementById('cf-alert');
+  var boton = form.querySelector('.cf-submit');
+  var details = document.querySelector('.cf-details');
+  var CAMPOS = ['nombre', 'telefono', 'email', 'mensaje', 'acepto'];
+  var t0 = Date.now();
+  var enviando = false;
+
+  // Desktop: el <details> abierto (el CSS ya lo muestra en navegadores modernos; esto fija la
+  // semantica para los lectores de pantalla y cubre los que no soportan ::details-content).
+  if (details && window.matchMedia) {
+    var mq = window.matchMedia('(min-width: 821px)');
+    var abrir = function () { if (mq.matches) details.open = true; };
+    abrir();
+    if (mq.addEventListener) mq.addEventListener('change', abrir);
+  }
+  if (ok && location.hash === '#recibido') ok.focus();
+
+  // Con JS se valida aqui, con mensajes propios y accesibles; sin JS queda la validacion nativa.
+  form.noValidate = true;
+
+  function texto(clave) { return form.getAttribute('data-msg-' + clave) || ''; }
+  function valor(n) { return (form.elements[n].value || '').trim(); }
+  function limpiar(n) {
+    var c = form.elements[n], e = document.getElementById('cf-' + n + '-error');
+    if (!c || !e) return;
+    c.removeAttribute('aria-invalid');
+    c.removeAttribute('aria-describedby');
+    e.hidden = true;
+    e.textContent = '';
+  }
+  function marcar(n, mensaje) {
+    var c = form.elements[n], e = document.getElementById('cf-' + n + '-error');
+    if (!c || !e) return;
+    e.textContent = mensaje;
+    e.hidden = false;
+    c.setAttribute('aria-invalid', 'true');
+    c.setAttribute('aria-describedby', e.id);
+  }
+  // Pinta los errores y lleva el foco al PRIMER campo con error. Devuelve true si habia alguno.
+  function pintar(errores) {
+    var primero = null;
+    CAMPOS.forEach(function (n) {
+      if (errores[n]) { marcar(n, errores[n]); if (!primero) primero = form.elements[n]; } else limpiar(n);
+    });
+    if (primero) primero.focus();
+    return !!primero;
+  }
+  // Misma validacion que el servidor (enviar.php), que es el que manda.
+  function validar() {
+    var e = {}, tel = valor('telefono'), m = valor('mensaje').length;
+    if (!valor('nombre')) e.nombre = texto('nombre');
+    if (!/^[0-9+()\s.\-]{6,30}$/.test(tel) || tel.replace(/\D/g, '').length < 6) e.telefono = texto('telefono');
+    if (valor('email') && !/^[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$/.test(valor('email'))) e.email = texto('email');
+    if (m < 5 || m > 2000) e.mensaje = texto('mensaje');
+    if (!form.elements.acepto.checked) e.acepto = texto('acepto');
+    return e;
+  }
+  function terminar() {
+    enviando = false;
+    boton.removeAttribute('aria-disabled');
+    boton.textContent = form.getAttribute('data-label-send');
+  }
+  function exito() {
+    form.reset();
+    ok.classList.add('is-shown');   // oculta el formulario (CSS: .cf-ok.is-shown ~ .cf-main)
+    ok.focus();                     // y el foco pasa a la confirmacion (role=status, aria-live=polite)
+  }
+
+  form.addEventListener('input', function (ev) { if (CAMPOS.indexOf(ev.target.name) > -1) limpiar(ev.target.name); });
+  form.addEventListener('change', function (ev) { if (CAMPOS.indexOf(ev.target.name) > -1) limpiar(ev.target.name); });
+
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    if (enviando) return;
+    alerta.textContent = '';
+    if (pintar(validar())) return;
+
+    enviando = true;
+    boton.setAttribute('aria-disabled', 'true');
+    boton.textContent = form.getAttribute('data-label-sending');
+    form.elements._t.value = String(Date.now() - t0);   // ms entre carga y envio (antispam)
+
+    fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' }, credentials: 'same-origin' })
+      .then(function (r) {
+        return r.json().then(function (j) { return j; }, function () { return null; });
+      })
+      .then(function (j) {
+        if (j && j.ok) { exito(); return; }
+        if (j && j.errors && Object.keys(j.errors).length && pintar(j.errors)) return;
+        alerta.textContent = (j && j.message) || texto('send');
+      }, function () {
+        alerta.textContent = texto('network');
+      })
+      .then(terminar);
+  });
+});

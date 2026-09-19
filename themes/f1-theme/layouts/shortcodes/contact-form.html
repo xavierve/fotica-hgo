@@ -1,0 +1,145 @@
+{{- /*
+  {{< contact-form >}} ... texto legal en markdown ... {{< /contact-form >}}
+
+  Formulario de contacto: nombre, telefono, correo (opcional), mensaje y casilla
+  RGPD. El contenido de entre las etiquetas (la informacion sobre proteccion de
+  datos) se renderiza como markdown ARRIBA de la casilla, para que se lea antes
+  de aceptar.
+
+  Backend: static/contacto/enviar.php (PHP mail() en el hosting). Este shortcode
+  GENERA, en cada build, public/contacto/config.php con las direcciones y los
+  mensajes -- salen de data/site.yaml (contact.form.from / contact.form.to) y de
+  i18n --, de modo que el PHP no duplica ningun dato del negocio.
+
+  ALINEACION SPF/DKIM: contact.form.from tiene que ser una direccion del propio
+  dominio del sitio (baseURL). Si no lo es, el BUILD FALLA: un From de otro dominio
+  rompe la alineacion y el correo pasa a ser suplantacion a ojos del receptor.
+  (En localhost, donde no hay dominio, no se comprueba.)
+
+  Sin JS funciona igual: <form method="post"> normal; el PHP responde con un 303 a
+  #recibido (la confirmacion se muestra con :target) o con una pagina de errores.
+  El JS de main.js solo intercepta el submit, valida y pinta la confirmacion en su
+  sitio. El colapso en movil es un <details>, no un toggle por JS.
+*/ -}}
+{{- $site := hugo.Data.site | default dict -}}
+{{- $contact := $site.contact | default dict -}}
+{{- $form := $contact.form | default dict -}}
+{{- $from := $form.from | default "" -}}
+{{- $to := $form.to | default $contact.email | default "" -}}
+{{- if or (not $from) (not $to) -}}
+  {{- errorf "contact-form: faltan contact.form.from y/o el destinatario (contact.form.to o contact.email) en data/site.yaml" -}}
+{{- end -}}
+{{- $baseHost := (urls.Parse site.BaseURL).Hostname -}}
+{{- $fromHost := index (split $from "@") 1 -}}
+{{- $esLocal := in (slice "localhost" "127.0.0.1") $baseHost -}}
+{{- if not $esLocal -}}
+  {{- if not (or (eq $fromHost $baseHost) (strings.HasSuffix $baseHost (printf ".%s" $fromHost)) (strings.HasSuffix $fromHost (printf ".%s" $baseHost))) -}}
+    {{- errorf "contact-form: contact.form.from (%s) no esta alineado con el dominio del sitio (%s). El From debe ser una direccion del propio dominio (SPF/DKIM)." $from $baseHost -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Cadenas: UNA sola fuente (i18n) para el PHP, el JS y el HTML */ -}}
+{{- $mensajes := dict -}}
+{{- range slice "errNombre" "errTelefono" "errEmail" "errMensaje" "errAcepto" "errLineas" "errTiempo" "errSend" "errGeneric" "errNetwork" "errPageTitle" "errBack" "errOrCall" "mailSubject" "mailIntro" "mailName" "mailPhone" "mailEmail" "mailNone" "mailMessage" "mailFooter" -}}
+  {{- $mensajes = merge $mensajes (dict . (i18n .)) -}}
+{{- end -}}
+
+{{- /* config.php: publicado por el propio build en public/contacto/config.php */ -}}
+{{- $cfg := dict
+    "to" $to
+    "from" $from
+    "fromName" ($form.fromName | default "")
+    "host" $baseHost
+    "contactUrl" "/contacto/"
+    "phone" ($contact.phone | default "")
+    "phoneLabel" ($contact.phoneLabel | default "")
+    "whatsapp" ($contact.whatsapp | default "")
+    "msg" $mensajes -}}
+{{- $php := printf "<?php\n// GENERADO por Hugo (layouts/shortcodes/contact-form.html) desde data/site.yaml en cada\n// build. NO editar a mano: se pierde en el siguiente build. Lo lee static/contacto/enviar.php.\nif (basename(__FILE__) === basename($_SERVER['SCRIPT_FILENAME'] ?? '')) { http_response_code(404); exit; }\nreturn json_decode(<<<'JSON'\n%s\nJSON\n, true);\n" ($cfg | jsonify) -}}
+{{- $cfgRes := resources.FromString "contacto/config.php" $php -}}
+{{- $_ := $cfgRes.RelPermalink -}}
+
+{{- $wa := replace ($contact.whatsapp | default "") "+" "" -}}
+<div class="cf" id="contacto-formulario">
+
+  {{- /* Confirmacion. Contenedor con aria-live y foco movido a el (main.js). Sin JS se
+         muestra con :target, cuando el PHP redirige a /contacto/#recibido. */}}
+  <div class="cf-ok" id="recibido" role="status" aria-live="polite" tabindex="-1">
+    <h3 class="cf-ok-title">{{ i18n "cfOkTitle" }}</h3>
+    <p>{{ i18n "cfOkText" }}</p>
+    <div class="cta-row">
+      {{ with $contact.phone }}<a class="btn btn-fill" href="{{ printf "tel:%s" . | safeURL }}">{{ partial "icons.html" "phone" }}{{ i18n "call" }}</a>{{ end }}
+      {{ with $wa }}<a class="btn btn-outline" href="https://wa.me/{{ . }}">{{ partial "icons.html" "whatsapp" }}{{ i18n "whatsapp" }}</a>{{ end }}
+    </div>
+  </div>
+
+  <div class="cf-main">
+    {{- /* Movil: el correo es la accion principal y el formulario queda colapsado. */}}
+    {{ with $contact.email }}<p class="cf-mailto"><a class="btn btn-fill" href="mailto:{{ . }}">{{ partial "icons.html" "mail" }}{{ i18n "cfMailto" }}</a></p>{{ end }}
+
+    <details class="cf-details">
+      <summary>{{ i18n "cfSummary" }}</summary>
+
+      <form class="cf-form" method="post" action="/contacto/enviar.php"
+        data-msg-nombre="{{ i18n "errNombre" }}" data-msg-telefono="{{ i18n "errTelefono" }}"
+        data-msg-email="{{ i18n "errEmail" }}" data-msg-mensaje="{{ i18n "errMensaje" }}"
+        data-msg-acepto="{{ i18n "errAcepto" }}" data-msg-lineas="{{ i18n "errLineas" }}"
+        data-msg-network="{{ i18n "errNetwork" }}" data-msg-send="{{ i18n "errSend" }}"
+        data-msg-generic="{{ i18n "errGeneric" }}"
+        data-label-send="{{ i18n "cfSend" }}" data-label-sending="{{ i18n "cfSending" }}">
+
+        <div class="cf-field">
+          <label for="cf-nombre">{{ i18n "cfName" }} <span class="cf-req">{{ i18n "cfRequired" }}</span></label>
+          <input type="text" id="cf-nombre" name="nombre" autocomplete="name" maxlength="100" required>
+          <p class="cf-error" id="cf-nombre-error" hidden></p>
+        </div>
+
+        <div class="cf-field">
+          <label for="cf-telefono">{{ i18n "cfPhone" }} <span class="cf-req">{{ i18n "cfRequired" }}</span></label>
+          <input type="tel" id="cf-telefono" name="telefono" autocomplete="tel" inputmode="tel" maxlength="30" required>
+          <p class="cf-error" id="cf-telefono-error" hidden></p>
+        </div>
+
+        <div class="cf-field">
+          <label for="cf-email">{{ i18n "cfEmail" }} <span class="cf-req">{{ i18n "cfOptional" }}</span></label>
+          <input type="email" id="cf-email" name="email" autocomplete="email" maxlength="254">
+          <p class="cf-error" id="cf-email-error" hidden></p>
+        </div>
+
+        <div class="cf-field">
+          <label for="cf-mensaje">{{ i18n "cfMessage" }} <span class="cf-req">{{ i18n "cfRequired" }}</span></label>
+          <textarea id="cf-mensaje" name="mensaje" rows="5" maxlength="2000" required></textarea>
+          <p class="cf-error" id="cf-mensaje-error" hidden></p>
+        </div>
+
+        {{- /* Honeypot: un campo que un humano no ve ni rellena. Fuera de pantalla, no
+               display:none (algunos bots saltan los ocultos); fuera del orden de tabulacion. */}}
+        <div class="cf-hp" aria-hidden="true">
+          <label>{{ i18n "cfHoneypot" }} <input type="text" name="sitio_web" tabindex="-1" autocomplete="off"></label>
+        </div>
+        {{- /* Tiempo entre carga y envio (ms). Lo rellena main.js al enviar; sin JS va vacio. */}}
+        <input type="hidden" name="_t" value="">
+
+        {{- with .Inner }}
+        <div class="cf-legal">{{ . | $.Page.RenderString (dict "display" "block") }}</div>
+        {{- end }}
+
+        <div class="cf-field cf-consent">
+          <input type="checkbox" id="cf-acepto" name="acepto" value="1" required>
+          <label for="cf-acepto">{{ i18n "cfConsentPre" }} <a href="/aviso-legal/#privacidad">{{ i18n "cfPrivacy" }}</a></label>
+          <p class="cf-error" id="cf-acepto-error" hidden></p>
+        </div>
+
+        {{- /* Errores generales (red, servidor). Siempre presente, vacio hasta que hace falta:
+               una region role=alert que aparece ya con texto no siempre se anuncia. */}}
+        <div class="cf-alert" id="cf-alert" role="alert"></div>
+
+        <button type="submit" class="btn btn-fill cf-submit">{{ i18n "cfSend" }}</button>
+        <p class="cf-microcopy">{{ i18n "cfMicrocopy" }}</p>
+      </form>
+    </details>
+
+    {{- /* Desktop: el formulario esta a la vista y el correo queda como alternativa debajo. */}}
+    {{ with $contact.email }}<p class="cf-alt">{{ i18n "cfAlt" }} <a href="mailto:{{ . }}">{{ . }}</a></p>{{ end }}
+  </div>
+</div>

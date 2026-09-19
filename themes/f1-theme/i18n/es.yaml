@@ -19,3 +19,41 @@ backToTop: { other: "Volver arriba" }
 location: { other: "Ubicación" }
 locationTo: { other: "Cómo llegar a {{ .Name }}, abre el mapa" }
 quickContact: { other: "Contacto rápido" }
+cfSummary: { other: "¿Prefieres escribirnos aquí?" }
+cfMailto: { other: "Escríbenos un correo" }
+cfAlt: { other: "También puedes escribirnos a" }
+cfName: { other: "Nombre" }
+cfPhone: { other: "Teléfono" }
+cfEmail: { other: "Correo electrónico" }
+cfMessage: { other: "Mensaje" }
+cfRequired: { other: "(obligatorio)" }
+cfOptional: { other: "(opcional)" }
+cfConsentPre: { other: "He leído y acepto la" }
+cfPrivacy: { other: "Política de Privacidad" }
+cfSend: { other: "Enviar mensaje" }
+cfSending: { other: "Enviando…" }
+cfMicrocopy: { other: "Te respondemos lo antes posible dentro de nuestro horario de tienda." }
+cfOkTitle: { other: "¡Recibido!" }
+cfOkText: { other: "Te contactaremos muy pronto. Si es urgente, llámanos o ven directamente a la tienda." }
+cfHoneypot: { other: "Si eres una persona, deja este campo vacío" }
+errNombre: { other: "Escribe tu nombre." }
+errTelefono: { other: "Escribe un teléfono válido: solo números, espacios y el signo +." }
+errEmail: { other: "Este correo no parece válido. Revísalo o déjalo en blanco." }
+errMensaje: { other: "Cuéntanos brevemente en qué podemos ayudarte (entre 5 y 2000 caracteres)." }
+errAcepto: { other: "Marca la casilla para poder enviar tu mensaje." }
+errLineas: { other: "Este campo solo admite una línea, sin saltos de línea ni caracteres especiales." }
+errTiempo: { other: "Has enviado el formulario demasiado rápido. Espera un momento y vuelve a pulsar «Enviar mensaje»." }
+errSend: { other: "No hemos podido enviar tu mensaje. Inténtalo de nuevo o llámanos: te atendemos enseguida." }
+errGeneric: { other: "No hemos podido procesar el envío. Inténtalo de nuevo o llámanos." }
+errNetwork: { other: "No hemos podido conectar. Comprueba tu conexión e inténtalo de nuevo, o llámanos." }
+errPageTitle: { other: "No hemos podido enviar tu mensaje" }
+errBack: { other: "Volver al formulario" }
+errOrCall: { other: "Puedes llamarnos o escribirnos por WhatsApp ahora mismo:" }
+mailSubject: { other: "Mensaje desde la web" }
+mailIntro: { other: "Nuevo mensaje desde el formulario de contacto de la web." }
+mailName: { other: "Nombre" }
+mailPhone: { other: "Teléfono" }
+mailEmail: { other: "Correo" }
+mailNone: { other: "no indicado" }
+mailMessage: { other: "Mensaje" }
+mailFooter: { other: "Responde a este correo para contestar al visitante (solo si dejó un correo); si no, llámale al teléfono indicado." }

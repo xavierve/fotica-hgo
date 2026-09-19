@@ -41,6 +41,18 @@ contact:
   # cae a contact.locationUrl y, si tampoco existe, a /contacto/.
   locationId: "andalucia"
 
+  # Formulario de contacto (/contacto/). Hugo genera public/contacto/config.php a
+  # partir de esto; static/contacto/enviar.php lo lee. El destinatario es el buzon
+  # de contact.email salvo que se ponga "to" aqui.
+  #   from: direccion del PROPIO dominio del sitio (baseURL). Si no lo esta, el build
+  #         falla: un From de otro dominio rompe la alineacion SPF/DKIM. NUNCA es la
+  #         direccion del visitante (esa va en Reply-To). Conviene que exista como
+  #         buzon, para recibir los rebotes.
+  form:
+    from: "web@opticasfausto.com"
+    fromName: "Ópticas Fausto (web)"
+    # to: "contacto@opticasfausto.com"   # por defecto, contact.email
+
   # HORARIOS — fuente única para footer, página de contacto y schema.org.
   # Temporada invierno (oct–may): 17:30–21:00 · Temporada verano (jun–sep): revisar con cliente.
   # Formato legible → consumed by footer.html y contacto shortcode/partial
