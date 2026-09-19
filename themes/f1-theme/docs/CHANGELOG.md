@@ -1,5 +1,19 @@
 # F1 Theme · Changelog
 
+## Sin versión — formulario de contacto (shortcode `contact-form`)
+
+- Nuevo shortcode `contact-form` + `static/contacto/enviar.php` (PHP `mail()`). `From` fijo del
+  propio dominio y correo del visitante en `Reply-To`; cualquier carácter de control en un campo de
+  una línea **rechaza** el envío; honeypot (misma respuesta de éxito) + tiempo mínimo; sin persistencia.
+- El shortcode genera `public/contacto/config.php` desde `data/site.yaml` (`contact.form.*`); el
+  **build falla** si el `From` no está alineado con `baseURL`. `hugo.toml` declara el tipo de medio
+  `.php` para poder publicarlo.
+- Sin JS: POST normal, 303 a `/contacto/#recibido` (confirmación con `:target`) o página de errores.
+  Con JS: `fetch`, validación con `aria-invalid`/`aria-describedby`, foco al primer error y confirmación
+  en un contenedor `aria-live="polite"` con el foco. Móvil colapsado con `<details>` nativo.
+- Token `--color-error`; estilos `.cf-*` en `main.css`; bloque `aislar('formulario de contacto')` en
+  `main.js`; cadenas i18n `cf*`, `err*` y `mail*` (es y en).
+
 ## Sin versión — `main.js`: cada bloque independiente aislado
 
 - Nuevo helper `aislar(nombre, fn)` al principio de `main.js`: ejecuta `fn` en

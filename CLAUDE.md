@@ -301,18 +301,94 @@ Medidas, proporciones y criterios: `themes/f1-theme/docs/GUIA-IMAGENES.md`.
   el JSON de `.items`, sin pasar por Hugo — para que la vista ampliada use
   `_hd` habría que tocar ese JS. Valorar si compensa.
 
-### 5. º de contacto (`/contacto/`)
+### 5. Formulario de contacto (`/contacto/`) — implementado; falta verificar en Hostinger
 
-Backend: **PHP `mail()`** servido por el propio hosting (Hostinger). Campos:
-nombre, teléfono, mensaje. Dual por dispositivo (spec en comentario HTML de
-`content/contacto/_index.md` y ap7.5 del proyecto): móvil = mailto contacto@opticasfausto.com +
-formulario colapsado; desktop = formulario principal. Confirmación inline sin
-redirección. Checkbox RGPD → `/aviso-legal/`.
+Backend: **PHP `mail()`** del propio hosting, sin PHPMailer ni credenciales SMTP
+guardadas (SPF y DKIM ya alineados, ver abajo). Campos: nombre, teléfono, **correo
+(opcional)** y mensaje, más la casilla RGPD. El correo es opcional a propósito: sin
+él no hay `Reply-To`, pero el teléfono sigue siendo obligatorio.
 
-**Texto legal:** ya actualizado a PHP mail() (6 sep) en `contacto` y
-`aviso-legal`, pero queda una nota `<!-- PENDIENTE -->` en ambos: confirmar la
-redacción exacta una vez el mecanismo esté implementado de verdad. Si el
-hosting interviene como encargado de tratamiento técnico, hay que ajustarla.
+**Piezas y dónde viven**
+
+| Pieza | Ruta | Qué es |
+|---|---|---|
+| Endpoint | `static/contacto/enviar.php` | Versionado. Hugo lo copia a `public/contacto/enviar.php`. |
+| Config | `public/contacto/config.php` | **Generado en cada build** por el shortcode `contact-form` desde `data/site.yaml` (`contact.form.from`, `contact.form.to`, teléfonos) e i18n. No está en git. |
+| Formulario | shortcode `{{< contact-form >}}…{{< /contact-form >}}` | El markdown de dentro (info RGPD) se pinta sobre la casilla. |
+| Front | `main.css` (`.cf-*`), bloque `aislar('formulario de contacto')` de `main.js` | |
+
+**Despliegue: dónde vive el `.php`.** Va en `static/` para que Hugo lo copie a
+`public/` y suba con el resto: forma parte del ciclo de despliegue, no está fuera
+de él. `config.php` también acaba en `public/`. Consecuencias:
+
+- El deploy tiene que subir **`public/` completo, incluidos los `*.php`** (si algún día
+  filtra por extensión, incluirlos).
+- **Nada se sube ni se edita a mano en el hosting.** Un deploy que sincroniza borrando lo
+  que sobra (`rsync --delete`, espejo por FTP, «reemplazar carpeta») elimina cualquier
+  `.php` colocado a mano en la primera subida. Los dos ficheros sobreviven precisamente
+  porque están dentro de `public/`.
+- Cambiar destinatario o remitente = editar `data/site.yaml` + build + subir.
+- Si `config.php` no llega, `enviar.php` responde 500 y no envía nada (falla cerrado).
+- **A confirmar por Foco:** el método de despliegue no está documentado en el repo (no hay
+  script ni workflow). Confirmar cómo se sube `public/` y que incluye los `.php`.
+- Requisitos del hosting: PHP ≥ 7.4 con `mbstring`, `mail()` habilitado y el buzón
+  `web@opticasfausto.com` existente (recibe los rebotes).
+
+**Decisiones de diseño (no reabrir sin motivo)**
+
+1. **Cabeceras.** `From:` es SIEMPRE la dirección fija `contact.form.from`, del propio
+   dominio; **nunca** la del visitante (rompería la alineación SPF/DKIM y sería suplantación).
+   El correo del visitante va en `Reply-To:` (solo la dirección, sin nombre). El **build
+   falla** si el dominio de `from` no está alineado con `baseURL` (en localhost no se
+   comprueba). El sobre (`-f`) usa el mismo remitente.
+   `nombre`, `teléfono` y `correo` pueden acabar en una cabecera (`Subject`, `Reply-To`): cualquier
+   carácter de control, en particular `\r` o `\n`, **rechaza el envío** (400); no se filtra en
+   silencio. El asunto va codificado (RFC 2047). El mensaje sí admite saltos de línea (van al
+   cuerpo, no a cabeceras).
+2. **Sin JS.** El `<form>` hace un POST normal. Éxito → **303 a `/contacto/#recibido`**, donde
+   la confirmación se muestra con `:target` (así un F5 no reenvía). Errores → página HTML
+   autocontenida (422) con el motivo, enlace de vuelta y llamar/WhatsApp. El JS solo intercepta el
+   submit (`fetch` con `Accept: application/json`), valida y pinta la confirmación en su sitio.
+   El colapso en móvil es un `<details>`, sin JS. Escritorio: el formulario a la vista vía
+   `::details-content`; main.js abre el `<details>` por semántica y para los navegadores sin ese
+   soporte (allí la pestaña se queda visible y sigue funcionando).
+3. **Antispam sin captcha.** Honeypot (`sitio_web`, fuera de pantalla) + tiempo mínimo de 3 s
+   entre carga y envío. Al honeypot se le responde **exactamente lo mismo que a un envío bueno**.
+   El tiempo lo mide el cliente (`_t`, sin desfase de reloj); sin JS llega vacío y no se puede
+   comprobar (solo actúa el honeypot). Un envío a <3 s recibe un error recuperable, no un éxito
+   falso: un humano con autorrelleno podría llegar ahí. Además se rechaza un `Origin` ajeno.
+   **Límite conocido:** un bot que haga POST directo, sin JS y sin tocar el honeypot, pasa; no hay
+   limitación por IP (exigiría guardar estado). Si aparece spam, medir antes de añadir nada.
+4. **Accesibilidad.** `<label for>` reales (sin placeholders); obligatorio/opcional dicho con texto;
+   errores con `aria-invalid` + `aria-describedby` y foco al primer campo con error; confirmación
+   en un contenedor `role="status" aria-live="polite"` al que se mueve el foco; errores generales
+   en `role="alert"`; el enlace a `/aviso-legal/#privacidad` sin `target="_blank"`. Campos de 48px y
+   texto ≥18px; borde de 2px con contraste ≥3:1; el error usa `--color-error` (>7:1) más texto e icono.
+5. **No persiste nada.** Ni base de datos, ni archivos, ni log de envíos. El único registro es
+   `error_log()` cuando `mail()` falla, sin datos del visitante.
+
+**Texto legal:** actualizado en `contacto` y `aviso-legal`: Hostinger figura como **encargado de
+tratamiento técnico** (aloja la web y el buzón) y se dice explícitamente que el formulario no guarda
+nada (sin base de datos ni registro de envíos). Queda una nota `<!-- PENDIENTE -->` mucho más
+estrecha, que ya no es de implementación sino del asesor/cliente: denominación social exacta del
+encargado y contrato de encargo (DPA) aceptado en la cuenta de hosting.
+
+**Verificación en el dominio real (PENDIENTE — no se puede hacer en local).** En local se ha probado
+el manejador con PHP 8.3 real y un receptor SMTP que captura lo que emite `mail()` (cabeceras, inyección,
+honeypot, tiempos, validación) y el formulario completo con Playwright (con y sin JS, escritorio y
+móvil). **Pero PHP en Windows compone `mail()` distinto que en Linux y no hay DKIM ni SPF locales:**
+la cadena de entrega solo se comprueba enviando de verdad.
+1. Poner temporalmente `contact.form.to` a una cuenta de **Gmail** (`data/site.yaml`), build y subir.
+2. Enviar desde `https://opticasfausto.com/contacto/` (con JS y, si se puede, sin JS).
+3. Gmail → ⋮ → *Mostrar original*: **SPF: PASS**, **DKIM: PASS**, **DMARC: PASS**, con dominio
+   `opticasfausto.com`.
+4. Repetir con una cuenta de **Outlook** y abrir el origen del mensaje (*Ver → Ver origen del mensaje*):
+   buscar `Authentication-Results:` con `spf=pass … smtp.mailfrom=opticasfausto.com`,
+   `dkim=pass header.d=opticasfausto.com`, `dmarc=pass header.from=opticasfausto.com`.
+5. **Alineación:** `smtp.mailfrom` (Return-Path) y `header.d` (DKIM) deben ser el mismo dominio que el
+   `From:`. Si SPF pasa pero con un dominio de Hostinger, el `-f` no se está aplicando: revisar.
+6. Comprobar que **no cae en Spam** y que «Responder» contesta al correo del visitante (`Reply-To`).
+7. Restaurar `contact.form.to`, build, subir y probar una última vez al buzón real.
 
 **Email del dominio, verificado (6 sep):** DONE 17 set - SPF
 (`v=spf1 include:_spf.mail.hostinger.com...`) y DKIM (3 CNAME
@@ -435,7 +511,9 @@ Hostinger, comprobar sobre el dominio real:
   se vea la página bonita: mirar el código de estado.
 - **Redirecciones 301** (una vez publicado el nuevo dominio) del dominio viejo y de los 4 subdominios (tarea 8), comprobando que la cadena no pasa por un 302 intermedio.
 - **Formulario**: envío real y que el correo llegue a bandeja, no a spam
-  (tarea 5). Probar desde Gmail y desde Outlook, que filtran distinto.
+  (tarea 5). Probar desde Gmail y desde Outlook, que filtran distinto, y leer
+  `Authentication-Results` (`spf=pass`, `dkim=pass`, `dmarc=pass` y alineación con el
+  dominio del `From`). Procedimiento completo en la tarea 5.
 - **Certificado SSL** válido en `opticasfausto.com` y en `www.` (los CAA
   aplicados el 10 sep limitan qué autoridades pueden emitirlo).
 - **PageSpeed Insights móvil** contra la URL real, no local: el objetivo >85

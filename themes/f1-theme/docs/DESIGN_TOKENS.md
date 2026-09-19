@@ -46,6 +46,7 @@ todos los bugs de contraste que hemos tenido.
 --color-control-bg: var(--color-bg-over);
 --color-control-border: rgba(0,0,0,.15);
 --color-overlay-base: 27,42,56;    /* RGB suelto, para rgba() del overlay */
+--color-error: #a3001d;            /* texto y borde de un error de formulario (>7:1 sobre --color-bg) */
 --color-backdrop: rgba(15,20,25,.85);
 ```
 
