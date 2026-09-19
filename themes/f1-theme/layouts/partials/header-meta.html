@@ -15,8 +15,15 @@
                      que nadie muestre la barra, el coste es que la barra no
                      aparece (un incordio), nunca contenido oculto.
        Sin JS este script no corre y la barra es visible siempre. Si main.js no
-       carga, el onerror de su <script> (baseof.html) quita esta clase. */}}
-<script>document.documentElement.classList.add("js-boot")</script>
+       carga, el onerror de su <script> (baseof.html) quita esta clase.
+
+       El onerror NO cubre un error de sintaxis en main.js: ahí el script se
+       descarga bien y falla al parsearse, así que js-boot se quedaría puesta y
+       la barra no aparecería nunca. Un fallo de parseo sí dispara un evento
+       error en window, y de ahí el listener. Se condiciona a que html.js no
+       esté puesta: si main.js ya corrió, una excepción posterior de cualquier
+       otra cosa no tiene por qué dejar la barra fija a la vista sobre el hero. */}}
+<script>document.documentElement.classList.add("js-boot");addEventListener("error",function(){var d=document.documentElement;if(!d.classList.contains("js"))d.classList.remove("js-boot")})</script>
 {{ partial "seo.html" . }}
 {{ partial "og.html" . }}
 {{ partial "schema.html" . }}

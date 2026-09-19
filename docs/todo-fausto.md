@@ -70,8 +70,8 @@ Sin subcarpetas para `hero/` `gallery` (solo `og/` y `cards/`) — el prefijo de
 **Media:**
 | # | Tarea |
 |---|---|
-| C7 | `_redirects` Cloudflare Pages: dominio viejo → nuevo (301), 4 subdominios landing, mapeo URLs WordPress |
-| C8 | Verificar 404 en Cloudflare Pages: HTTP 404 real + `noindex` al `<head>` |
+| C7 | `.htaccess` Hostinger (Apache, `Redirect 301`): dominio viejo → nuevo, 4 subdominios landing, mapeo de URLs WordPress a partir del sitemap del sitio viejo recuperado de Wayback Machine. **Ahora mismo en 302 a propósito**, a la espera de lanzar el sitio nuevo; al lanzar se pasan a 301 |
+| C8 | Verificar 404 en Hostinger: `ErrorDocument 404 /404.html` en el `.htaccess` para que devuelva HTTP 404 real (sin eso Apache lo sirve con 200 y Google lo trata como soft 404) + `noindex` al `<head>` |
 | C9 | Tipografía con `clamp()` y espaciados en `em` |
 | C10 | Indicador de scroll en heros + botón volver-arriba global (coordinar con sticky footer) |
 

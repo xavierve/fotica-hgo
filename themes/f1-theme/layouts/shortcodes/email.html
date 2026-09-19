@@ -1,0 +1,28 @@
+{{- /*
+  {{< email >}} — correo de contacto desde data/site.yaml (contact.email).
+
+  Existe para que el correo no se escriba a mano en el cuerpo de ninguna
+  página. Ya pasó una vez: aviso-legal y contacto publicaban direcciones
+  distintas y una era del dominio viejo, con el agravante de que la de
+  contacto era la dirección para ejercer derechos RGPD. Un 301 redirige web,
+  no correo.
+
+  Accesor ESTRECHO a propósito: NO hacer un {{< site-data key="..." >}}
+  genérico. Un accesor genérico acaba metiendo cualquier campo del yaml en
+  cualquier página y se pierde el control de qué página depende de qué dato.
+  Mismo criterio que {{< hours >}}.
+
+  Por defecto pinta un enlace mailto.
+  {{< email link="false" >}} pinta solo el texto, para cuando ya va dentro
+  de otro enlace o en un contexto donde el mailto sobra.
+*/ -}}
+{{- $contact := (hugo.Data.site | default dict).contact | default dict -}}
+{{- with $contact.email -}}
+  {{- if eq ($.Get "link") "false" -}}
+    {{- . -}}
+  {{- else -}}
+    <a href="{{ printf "mailto:%s" . | safeURL }}">{{ . }}</a>
+  {{- end -}}
+{{- else -}}
+  {{- errorf "shortcode email: falta contact.email en data/site.yaml" -}}
+{{- end -}}

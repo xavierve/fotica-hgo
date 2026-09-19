@@ -1,7 +1,9 @@
 {{ define "main" }}
 {{/*
   404 personalizada — spec o1:
-  · HTTP 404 real: Cloudflare Pages sirve /404.html con estado 404 automáticamente.
+  · HTTP 404 real: lo tiene que dar el SERVIDOR, el tema no puede garantizarlo.
+    En Apache: ErrorDocument 404 /404.html en el .htaccess. Sin eso la página se
+    sirve con HTTP 200 y Google la trata como soft 404 (ver C8 en el TODO).
   · noindex (abajo, vía .Store para header-meta o meta directa).
   · Sin breadcrumb. Header y footer completos (los aporta baseof).
   · Sin redirección automática (decisión: desorienta al público 75+).

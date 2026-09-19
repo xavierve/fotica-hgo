@@ -20,7 +20,7 @@ Esta página web es propiedad de **Ana Isabel Santaolalla Gámez**, con CIF <spa
 <!-- IMPLEMENTACIÓN (Claude Code): ofuscación frontend de CIF y domicilio vía JS
      sobre los spans data-obf — anti-scraping. El dato real lo aporta el cliente. -->
 
-Para cualquier consulta o propuesta, contacta con nosotros en contacto@opticasfausto.com.
+Para cualquier consulta o propuesta, contacta con nosotros en {{< email >}}.
 
 Esta página web se rige por la normativa aplicable en España, quedando sometidos a ella tanto los usuarios nacionales como extranjeros que la utilicen.
 
@@ -77,7 +77,7 @@ Puedes ejercer en cualquier momento tu derecho a:
 - Oponerte al tratamiento de tus datos.
 - Solicitar la portabilidad de tus datos, cuando aplique.
 
-Para ejercer estos derechos, escribe a contacto@opticasfausto.com indicando la referencia «Datos Personales» y especificando el derecho que deseas ejercer. Si tienes alguna discrepancia con el tratamiento de tus datos, puedes presentar una reclamación ante la Agencia Española de Protección de Datos (www.aepd.es).
+Para ejercer estos derechos, escribe a {{< email >}} indicando la referencia «Datos Personales» y especificando el derecho que deseas ejercer. Si tienes alguna discrepancia con el tratamiento de tus datos, puedes presentar una reclamación ante la Agencia Española de Protección de Datos (www.aepd.es).
 
 ### 5. Seguridad de tus datos personales
 

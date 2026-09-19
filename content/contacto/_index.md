@@ -67,7 +67,7 @@ sections:
      de envío una vez implementado (PHP mail() en Hostinger, 6 sep — ya no
      Resend). Si el hosting SÍ interviene como encargado de tratamiento
      técnico, ajustar esta frase en consecuencia; no dejarla sin revisar. -->
-- **Derechos:** puedes acceder, rectificar o suprimir tus datos, así como ejercer el resto de derechos reconocidos por la normativa, escribiendo a info@opticafausto.com.
+- **Derechos:** puedes acceder, rectificar o suprimir tus datos, así como ejercer el resto de derechos reconocidos por la normativa, escribiendo a {{< email >}}.
 
 ☐ He leído y acepto la [Política de Privacidad](/aviso-legal/).
 
