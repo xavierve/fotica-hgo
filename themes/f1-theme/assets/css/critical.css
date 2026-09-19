@@ -259,6 +259,21 @@ a {
   max-width: 78ch;
 }
 
+/* overlay: la banda se alinea con logo, nav y breadcrumb como stacked y split;
+   la medida de linea (78ch) baja al copy, que es donde debe estar. Sobre el
+   .container, max-width + margin-inline:auto centraba el bloque entero y el
+   texto del overlay quedaba desalineado del resto del sitio. El tope de linea
+   NO sube a --hero-width: el texto va encima de la foto, donde leer ya cuesta
+   mas, y a 1440 saldrian renglones de ~200 caracteres. */
+.hero-overlay .hero-inner {
+  width: min(var(--hero-width), calc(100% - 2rem));
+  max-width: none;
+}
+
+.hero-overlay .hero-copy {
+  max-width: 78ch;
+}
+
 /* <figure> trae margen del navegador (~40px laterales): sin esta regla la foto
    del hero queda encogida y descentrada respecto al texto de al lado. */
 .hero-media {
@@ -368,6 +383,24 @@ a {
 
 .hero-stacked .hero-inner {
   grid-template-columns: 1fr;
+}
+
+/* split: columnas al 50/50 y gap mas corto. El reparto 1.1fr/.9fr del hero
+   generico dejaba la foto en ~605px sobre una banda de 1440; al 50/50 son
+   ~672px. Cambiar el reparto vale mas ancho (+67px) que vaciar el gap entero
+   (+32px), y el gap sigue haciendo falta: sin el, el texto toca el borde de
+   la foto y se lee como error de maquetacion.
+   El padding inferior baja del clamp global (hasta 7rem): en split la altura
+   la marca la foto, y 112px muertos debajo descuadran el copy largo. */
+@media(min-width:821px) {
+  .hero-split .hero-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+}
+
+.hero-split {
+  padding-bottom: clamp(2rem, 5vw, 4rem);
 }
 
 /* H1 mas contenido que el global (clamp 5vw / 4.75rem): en media columna de

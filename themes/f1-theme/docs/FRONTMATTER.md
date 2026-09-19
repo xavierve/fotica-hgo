@@ -107,6 +107,10 @@ Sin imagen utilizable el hero degrada a solo texto (clase `hero-plain`).
 Parámetros propios del hero:
 
 - `layout`: `stacked` | `overlay` | `split`.
+- `mediaFirst`: (`split`) saca la figura antes del copy en el DOM. No se
+  reordena por CSS (`order`/`grid-column`) a proposito: eso dejaria el orden
+  visual distinto del orden del DOM, que es WCAG 1.3.2. En movil pasa a apilar
+  foto -> texto, igual que `stacked`.
 - `imagePosition`: (`stacked`) `object-position` de la foto, ej. `"center 30%"`, `"top"`. Cada foto tiene su punto de interés; por defecto `center`.
 - `imageAlt`: alt de la foto. Si se omite queda `alt=""` (decorativa).
 - `scrim`: (`overlay`) `false` desactiva el degradado direccional, que va activo por defecto.
