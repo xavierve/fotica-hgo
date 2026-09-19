@@ -537,25 +537,31 @@ a {
    aparte (position:fixed, z-index 20 sobre el 15 de la barra), no un hijo.
    Comparten tres custom properties, para que ninguna medida se escriba dos
    veces y cambiar una no descoloque a la otra:
-     --sticky-cta-h      alto de la barra (0 en desktop: no hay barra)
+     --sticky-cta-h      alto de la barra (3.5rem; 0 en desktop: no hay barra)
      --back-to-top-size  lado del boton (44px, minimo tactil)
      --back-to-top-gap   margen entre el boton y el borde derecho
    La barra reserva el hueco del boton con padding-right = size + gap.
    Van en critical.css porque son visibles sin desplazarse.
 
+   MOBILE-FIRST, como el resto del tema (todos sus breakpoints son min-width):
+   el estado base es el de movil y desktop (>=821px) es la excepcion, que
+   apaga la barra y devuelve al boton su posicion flotante.
+
    El alto de la barra NO incluye el safe-area inferior (el notch de un iPhone):
    ese se suma aparte en cada regla que lo usa. Asi el token sigue siendo "lo
    que mide la barra" en cualquier dispositivo, con notch o sin el. */
 :root {
-  --sticky-cta-h: 0px;
+  --sticky-cta-h: 3.5rem; /* 0px desde 821px: alli no hay barra */
   --back-to-top-size: 2.75rem;
   --back-to-top-gap: .25rem;
 }
 
 .back-to-top {
   position: fixed;
-  right: 1rem;
-  bottom: calc(var(--sticky-cta-h) + env(safe-area-inset-bottom, 0px) + .75rem);
+  /* Base (movil): dentro de la barra, pegado a su esquina derecha y centrado en
+     vertical en la parte util (la que queda sobre el safe-area). */
+  right: var(--back-to-top-gap);
+  bottom: calc(env(safe-area-inset-bottom, 0px) + (var(--sticky-cta-h) - var(--back-to-top-size)) / 2);
   z-index: 20;
   width: var(--back-to-top-size);  /* 44px: minimo tactil */
   height: var(--back-to-top-size);
@@ -622,71 +628,76 @@ html:not(.js) .back-to-top {
   outline-offset: 3px;
 }
 
+/* Barra fija (base = movil). El area tactil de cada item es la columna entera
+   por la altura completa de la barra, no el glifo. */
 .sticky-cta {
-  display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 15;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  height: calc(var(--sticky-cta-h) + env(safe-area-inset-bottom, 0px));
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  background: var(--color-bg-over);
+  border-top: 1px solid rgba(0, 0, 0, .12);
 }
 
-@media(max-width:820px) {
+/* Solo iconos. */
+.sticky-cta a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-link);
+}
+
+/* rem y no em: sin etiqueta, el font-size del enlace ya no manda nada. */
+.sticky-cta .icon {
+  width: 1.35rem;
+  height: 1.35rem;
+  margin: 0;
+}
+
+/* Hueco reservado para el volver-arriba: PERMANENTE, tambien con el boton
+   oculto. Si se colapsara, los tres iconos se moverian cada vez que se cruza
+   el hero; se prefiere el hueco fijo al salto. Solo con JS: sin JS el boton no
+   se pinta y el hueco no tendria sentido. El filete vertical separa los tres
+   CTAs (contacto) del boton (navegacion). */
+html.js .sticky-cta {
+  padding-right: calc(var(--back-to-top-size) + var(--back-to-top-gap) * 2);
+}
+
+html.js .sticky-cta::after {
+  content: "";
+  position: absolute;
+  right: calc(var(--back-to-top-size) + var(--back-to-top-gap) * 2);
+  top: .75rem;
+  height: calc(var(--sticky-cta-h) - 1.5rem);
+  width: 1px;
+  background: rgba(0, 0, 0, .18);
+}
+
+/* El contenido del final de la pagina (footer) tiene que poder verse entero por
+   encima de la barra, que lo taparia. Sin override en desktop: alli el token
+   vale 0 y el calc() resuelve a 0 por si solo. */
+body {
+  padding-bottom: calc(var(--sticky-cta-h) + env(safe-area-inset-bottom, 0px));
+}
+
+/* Desktop: la excepcion. Sin barra (el header ya lleva los botones de contacto)
+   y el boton vuelve a flotar en la esquina. */
+@media(min-width:821px) {
   :root {
-    --sticky-cta-h: 3.5rem;
-  }
-  /* Volver-arriba dentro de la barra: mismo elemento, otras coordenadas. Se
-     centra en vertical en la parte util de la barra (la que queda sobre el
-     safe-area). Conserva sus 44px y el anillo doble. En desktop no entra aqui
-     y conserva su posicion flotante. */
-  .back-to-top {
-    right: var(--back-to-top-gap);
-    bottom: calc(env(safe-area-inset-bottom, 0px) + (var(--sticky-cta-h) - var(--back-to-top-size)) / 2);
+    --sticky-cta-h: 0px;
   }
   .sticky-cta {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 15;
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: 1fr;
-    height: calc(var(--sticky-cta-h) + env(safe-area-inset-bottom, 0px));
-    padding-bottom: env(safe-area-inset-bottom, 0px);
-    background: var(--color-bg-over);
-    border-top: 1px solid rgba(0, 0, 0, .12);
+    display: none;
   }
-  /* Solo iconos. El area tactil de cada item es la columna entera por la
-     altura completa de la barra, no el glifo. */
-  .sticky-cta a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-link);
-  }
-  /* rem y no em: sin etiqueta, el font-size del enlace ya no manda nada. */
-  .sticky-cta .icon {
-    width: 1.35rem;
-    height: 1.35rem;
-    margin: 0;
-  }
-  /* Hueco reservado para el volver-arriba: PERMANENTE, tambien con el boton
-     oculto. Si se colapsara, los tres iconos se moverian cada vez que se
-     cruza el hero; se prefiere el hueco fijo al salto. Solo con JS: sin JS el
-     boton no se pinta y el hueco no tendria sentido. El filete vertical separa
-     los tres CTAs (contacto) del boton (navegacion). */
-  html.js .sticky-cta {
-    padding-right: calc(var(--back-to-top-size) + var(--back-to-top-gap) * 2);
-  }
-  html.js .sticky-cta::after {
-    content: "";
-    position: absolute;
-    right: calc(var(--back-to-top-size) + var(--back-to-top-gap) * 2);
-    top: .75rem;
-    height: calc(var(--sticky-cta-h) - 1.5rem);
-    width: 1px;
-    background: rgba(0, 0, 0, .18);
-  }
-  /* El contenido del final de la pagina (footer) tiene que poder verse entero
-     por encima de la barra, que lo taparia. */
-  body {
-    padding-bottom: calc(var(--sticky-cta-h) + env(safe-area-inset-bottom, 0px));
+  .back-to-top {
+    right: 1rem;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + .75rem);
   }
 }
 
