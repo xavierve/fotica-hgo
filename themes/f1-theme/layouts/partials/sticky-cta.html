@@ -5,20 +5,48 @@
   Datos desde data/site.yaml (nunca escritos a mano) e iconos desde icons.html.
   Oculta desde 821px: en desktop el header ya lleva los dos botones de contacto.
 
-  Destino de "Ubicacion": hay DOS centros, asi que apunta a la pagina de
-  contacto (las dos sedes con su mapa) en vez de elegir una. Se puede cambiar
-  con contact.locationUrl en site.yaml.
+  SOLO ICONOS: no hay texto visible. El nombre accesible de cada enlace es su
+  aria-label (mismas cadenas i18n que antes se pintaban); sin el, un enlace
+  con solo un SVG aria-hidden se queda sin nombre.
+
+  El volver-arriba (back-to-top.html) es un cuarto elemento en la esquina
+  derecha de esta barra, pero NO es hijo de ella: sigue siendo position:fixed
+  y solo cambia de coordenadas. La barra le reserva el hueco con padding-right
+  (ver critical.css).
+
+  Destino de "Ubicacion": una sede concreta, no la pagina de contacto. Cadena
+  de resolucion, para que el tema siga sirviendo a proyectos sin sedes:
+    1. contact.locationId -> mapUrl de esa entrada de locations[] (fuente
+       unica: la URL NO se duplica en contact)
+    2. contact.locationUrl -> URL suelta
+    3. /contacto/
+  Como con locationId el enlace va a una sede concreta y a un dominio externo,
+  su aria-label la nombra (i18n "locationTo" con locations[].name). Sin
+  target="_blank": en movil abre la app de mapas, y una pestana nueva solo
+  rompe el boton "atras". Con los fallbacks 2 y 3 no hay sede que nombrar y
+  el aria-label es el generico "Ubicacion".
 */ -}}
 {{- $site := hugo.Data.site | default dict -}}
 {{- $contact := $site.contact | default dict -}}
 {{- $wa := replace ($contact.whatsapp | default "") "+" "" -}}
-{{- $locUrl := $contact.locationUrl | default "/contacto/" -}}
+{{- $locUrl := "/contacto/" -}}
+{{- $locLabel := i18n "location" -}}
+{{- with $contact.locationUrl }}{{ $locUrl = . }}{{ end -}}
+{{- with $contact.locationId -}}
+  {{- $id := . -}}
+  {{- range $site.locations -}}
+    {{- if and (eq .id $id) .mapUrl -}}
+      {{- $locUrl = .mapUrl -}}
+      {{- $locLabel = i18n "locationTo" (dict "Name" .name) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
 {{- with $contact.phone }}
 <nav class="sticky-cta" aria-label="{{ i18n "quickContact" }}">
-  <a href="{{ printf "tel:%s" . | safeURL }}">{{ partial "icons.html" "phone" }}<span>{{ i18n "call" }}</span></a>
+  <a href="{{ printf "tel:%s" . | safeURL }}" aria-label="{{ i18n "call" }}">{{ partial "icons.html" "phone" }}</a>
   {{- with $wa }}
-  <a href="https://wa.me/{{ . }}">{{ partial "icons.html" "whatsapp" }}<span>{{ i18n "whatsapp" }}</span></a>
+  <a href="https://wa.me/{{ . }}" aria-label="{{ i18n "whatsapp" }}">{{ partial "icons.html" "whatsapp" }}</a>
   {{- end }}
-  <a href="{{ $locUrl | safeURL }}">{{ partial "icons.html" "location" }}<span>{{ i18n "location" }}</span></a>
+  <a href="{{ $locUrl | safeURL }}" aria-label="{{ $locLabel }}">{{ partial "icons.html" "location" }}</a>
 </nav>
 {{- end }}

@@ -36,6 +36,10 @@ contact:
   phoneLabel: "717 77 00 90"
   whatsapp: "+34717770090"
   email: "info@opticafausto.com"
+  # Destino del icono Ubicacion de la barra fija movil: id de una entrada de
+  # locations[] (usa su mapUrl; no repetir la URL aqui). Sin locationId el tema
+  # cae a contact.locationUrl y, si tampoco existe, a /contacto/.
+  locationId: "andalucia"
 
   # HORARIOS — fuente única para footer, página de contacto y schema.org.
   # Temporada invierno (oct–may): 17:30–21:00 · Temporada verano (jun–sep): revisar con cliente.

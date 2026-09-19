@@ -1,5 +1,20 @@
 # F1 Theme · Changelog
 
+## Sin versión — barra fija solo iconos, volver-arriba dentro de la barra, Ubicación a una sede
+
+- `sticky-cta.html`: sin texto visible; las cadenas i18n pasan a `aria-label`
+  de cada enlace. Iconos en `rem` (1.35rem); el área táctil sigue siendo la
+  columna entera por el alto de la barra.
+- El volver-arriba pasa a ser el cuarto elemento de la barra (esquina derecha,
+  centrado en vertical) sin dejar de ser `position: fixed`. La barra le reserva
+  el hueco con `padding-right`, permanente y solo con `html.js`; filete vertical
+  separa contacto de navegación. Tokens nuevos `--back-to-top-size` y
+  `--back-to-top-gap`.
+- Ubicación: `contact.locationId` (id de `locations[]`) → `mapUrl` de esa sede;
+  cadena de fallbacks locationId → locationUrl → `/contacto/`. Con sede, el
+  `aria-label` la nombra (i18n `locationTo`, parametrizada con
+  `locations[].name`); sin `target="_blank"`.
+
 ## Sin versión — barra fija de contacto en móvil y botón volver-arriba
 
 - `sticky-cta.html`: barra fija con Llamar / WhatsApp / Ubicación desde

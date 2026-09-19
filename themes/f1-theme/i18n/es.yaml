@@ -17,4 +17,5 @@ carousel: { other: "Carrusel" }
 allRightsReserved: { other: "Todos los derechos reservados" }
 backToTop: { other: "Volver arriba" }
 location: { other: "Ubicación" }
+locationTo: { other: "Cómo llegar a {{ .Name }}, abre el mapa" }
 quickContact: { other: "Contacto rápido" }

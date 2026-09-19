@@ -18,8 +18,11 @@
   mas de lo que ayuda en una pagina que ya se desplaza sola. El href="#top"
   queda como red de seguridad.
 
-  En movil se situa POR ENCIMA de la barra sticky (--sticky-cta-h), no dentro
-  ni solapada. Ese alto es una custom property compartida: si cambia la barra,
-  el boton la sigue sin tocar nada aqui.
+  En movil es el cuarto elemento de la barra sticky: pegado a su esquina
+  derecha y centrado en vertical, DENTRO de ella (la barra le reserva el hueco
+  con padding-right). Sigue siendo un elemento aparte y position:fixed, no un
+  hijo de la barra; solo cambian sus coordenadas por debajo de 821px. Su
+  posicion sale de las custom properties compartidas (--sticky-cta-h,
+  --back-to-top-size, --back-to-top-gap): si cambia la barra, el boton la sigue.
 */ -}}
 <a class="back-to-top" href="#top" aria-label="{{ i18n "backToTop" }}">{{ partial "icons.html" "arrow-up" }}</a>

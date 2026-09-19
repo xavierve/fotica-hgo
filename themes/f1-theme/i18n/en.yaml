@@ -15,4 +15,5 @@ carousel: { other: "Carousel" }
 allRightsReserved: { other: "All rights reserved" }
 backToTop: { other: "Back to top" }
 location: { other: "Location" }
+locationTo: { other: "Directions to {{ .Name }}, opens the map" }
 quickContact: { other: "Quick contact" }

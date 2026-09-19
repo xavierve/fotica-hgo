@@ -200,18 +200,28 @@ En `:root` (`critical.css`). Los usan el hero `stacked` y, en móvil, el `overla
 
 Padding superior del hero, por clase emitida por el partial: `hero-stacked` → 0 (la banda toca el header o el breadcrumb); `hero-split` / `hero-plain` → `clamp(2rem, 8vw, 7rem)`; `hero-overlay` → el `clamp(4rem, 8vw, 7rem)` base de `.hero`.
 
-### 1.3.2 Token de la barra fija
+### 1.3.2 Tokens de la barra fija y el volver-arriba
 
-`--sticky-cta-h` (en `:root`, `critical.css`) es el alto de la barra fija de
-contacto: `0px` por defecto y `3.5rem` por debajo de 821px, que es donde la
-barra existe. Lo comparten tres reglas: la altura de la propia barra, el
-`padding-bottom` del `body` (para que la barra no tape el final del footer) y
-la posición del botón volver-arriba, que se coloca **encima** de la barra
-sumándolo. Cambiar el alto de la barra en un solo sitio mueve las tres.
+En `:root` (`critical.css`). En móvil el botón volver-arriba es el **cuarto
+elemento de la barra**: pegado a su esquina derecha, centrado en vertical y
+dentro de ella. Sigue siendo un elemento aparte (`position: fixed`, no hijo de
+la barra); por debajo de 821px solo cambian sus coordenadas.
 
-No incluye el `safe-area-inset-bottom` (el notch): ese se suma aparte en cada
-una de las tres reglas, para que el token siga significando «lo que mide la
-barra» en cualquier dispositivo.
+| Token | Valor | Qué controla |
+|---|---|---|
+| `--sticky-cta-h` | `0px`; `3.5rem` por debajo de 821px | Alto de la barra. Lo leen la propia barra, el `padding-bottom` del `body` (para que no tape el footer) y el centrado vertical del botón. |
+| `--back-to-top-size` | `2.75rem` | Lado del botón (44px, mínimo táctil). |
+| `--back-to-top-gap` | `.25rem` | Margen del botón al borde derecho. |
+
+La barra reserva el hueco con `padding-right = size + 2 × gap`, **siempre**,
+también con el botón oculto: si se colapsara, los tres iconos se desplazarían
+cada vez que se cruza el hero. Solo con `html.js` (sin JS el botón no se pinta
+y el hueco no tendría sentido). Un filete vertical separa los tres CTAs
+(contacto) del botón (navegación).
+
+El `safe-area-inset-bottom` (el notch) no entra en `--sticky-cta-h`: se suma
+aparte en cada regla, para que el token siga significando «lo que mide la
+barra».
 
 ### 1.4 Clases modificadoras (`class:`)
 
