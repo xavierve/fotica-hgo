@@ -19,16 +19,17 @@ schema:
 # ============ HERO con todo: eyebrow, bg desktop+móvil, tinte, preset contact ============
 hero:
   eyebrow: "hero · bg + bgMobile + bgColor + class: scrim"
-  title: "0- Hero con fondo responsive y CTA de contacto"
+  title: "0.1- Hero Layout Overlay que se apila en móvil"
   subtitle: "Redimensiona la ventana: por debajo de 820px carga la imagen bgMobile. El overlay toma el tinte de bgColor vía color-mix."
-  bg: "https://picsum.photos/seed/fausto-hero/1600/700"
+#  bg: "https://picsum.photos/seed/fausto-hero/1600/700"
+  image: "https://picsum.photos/seed/faussto-hero/1600/700"
   bgMobile: "https://picsum.photos/seed/fausto-hero-m/700/900"
-  bgColor: "var(--bg-color2)"
+  # bgColor: "var(--bg-color2)"
   preset: contact
   labelCall: "Llamar ahora"
-  layout: overlay          # opt-in: texto sobre la foto (>=821px); en movil se apila. Sin layout = stacked
-  class: "scrim"           # activo aquí — comparar con los 3 CTA de abajo (scrim/overlay-strong/panel)
-  
+  layout: split          # acepta: split | stacked (default | overlay (texto sobre la foto (>=821px); en movil se apila)
+  class: "bg-color2 scrim"           # activo aquí — comparar con los 3 CTA de abajo (scrim/overlay-strong/panel)
+
 sections:
   # ============ TRUSTBAR usada como CATÁLOGO DE ICONOS ============
   # Cada item muestra el icono y, como texto, su nombre exacto de invocación:
