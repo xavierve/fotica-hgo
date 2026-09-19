@@ -81,6 +81,7 @@ Sin subcarpetas para `hero/` `gallery` (solo `og/` y `cards/`) — el prefijo de
 | C11 | Sección equipo en Nosotros: fotos integradas + `employee`/`Person` en schema Organization |
 | C12 | `memberOf` (Sociedad Española de Baja Visión) y `hasCredential` (Centro Auditivo Homologado) en Organization |
 | C13 | CSS crítico inline en home; objetivo PageSpeed móvil >85 |
+| C14 | Medir el contraste del foco de teclado de `.btn:focus-visible` (`color-mix(currentColor 45%, transparent)`, `outline-offset: 2px`). Se dibuja sobre el fondo de la página, no sobre el botón, y probablemente no llegue a 3:1 (WCAG 2.4.11 / 1.4.11) en varios contextos (bandas de color, hero, footer). Medir con foco de teclado real sobre los mismos 8 fondos que se usaron para el anillo del volver-arriba (crema, blanco, beige, footer, navy, verde, dorado, gris medio). Si falla, la técnica de dos capas (clara por dentro, oscura por fuera) está en `critical.css`, `.back-to-top:focus-visible`. Detectado al corregir el foco de la barra fija móvil; fuera de su alcance. |
 
 ### FASE D — Revisión visual y pre-lanzamiento
 

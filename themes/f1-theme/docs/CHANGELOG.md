@@ -1,5 +1,19 @@
 # F1 Theme · Changelog
 
+## Sin versión — anillos de foco de la barra fija y del volver-arriba, por contexto
+
+- El dorado (`--color-accent`) daba 2.28:1 sobre el blanco de la barra, por debajo
+  de 3:1 (WCAG 2.4.11/1.4.11). El alcance era local: solo estaba en estos dos
+  selectores; el resto del tema usa el `color-mix` de `.btn:focus-visible`.
+- `.sticky-cta a:focus-visible`: viven siempre sobre el fondo claro de la barra →
+  anillo navy (11.6:1), por dentro (`outline-offset: -3px`).
+- `.back-to-top:focus-visible`: flota sobre fondos que no controla → dos capas,
+  clara por dentro y oscura por fuera (0-2px oscura, 2-4px clara, 4-6px oscura;
+  6px en total, como antes). Contra 8 fondos (crema, blanco, beige, footer, navy,
+  verde, dorado, gris medio) el mejor anillo va de 4.05:1 a 15.98:1. Sigue
+  siendo un outline real (en alto contraste forzado los box-shadow desaparecen).
+- `.btn:focus-visible` NO se toca aquí; anotado como C14 en `docs/todo-fausto.md`.
+
 ## Sin versión — la barra fija aparece cuando el hero sale del viewport
 
 - La barra comparte la señal del volver-arriba: un solo IntersectionObserver,

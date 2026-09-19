@@ -610,9 +610,6 @@ html:not(.js) .back-to-top {
   display: none;
 }
 
-/* Foco de teclado: el boton no es un .btn, asi que no hereda su :focus-visible.
-   Dorado y no currentColor (blanco): el anillo tiene que verse tanto sobre el
-   footer oscuro como sobre el fondo claro de una pagina. */
 /* Destino de "volver arriba" (partials/back-to-top.html): un elemento vacio al
    principio del documento que recibe el foco por script. No es interactivo, asi
    que no lleva anillo de foco (no hay nada que senalar). */
@@ -622,17 +619,39 @@ html:not(.js) .back-to-top {
   outline: none;
 }
 
-.back-to-top:focus-visible,
+/* Foco de teclado. Ni el boton ni los enlaces de la barra son un .btn, asi que no
+   heredan su :focus-visible, y cada uno vive sobre un fondo distinto: se tratan
+   por separado. (Antes ambos usaban el dorado --color-accent, que sobre el blanco
+   de la barra da 2.28:1, por debajo del 3:1 de WCAG 2.4.11/1.4.11.) */
+
+/* Enlaces de la barra: viven SIEMPRE sobre el fondo claro de la barra, asi que
+   basta un anillo oscuro (navy sobre blanco: 11.4:1). Van pegados al borde del
+   viewport (izquierda y abajo) y entre si: un anillo por fuera se cortaria 6px,
+   asi que se dibuja por dentro, con el offset igual al grosor. */
 .sticky-cta a:focus-visible {
-  outline: 3px solid var(--color-accent);
-  outline-offset: 3px;
+  outline: 3px solid var(--bg-color2);
+  outline-offset: -3px;
 }
 
-/* Los enlaces de la barra van pegados al borde del viewport (izquierda y abajo)
-   y entre si: un anillo por fuera se corta 6px. Se dibuja por dentro, igual al
-   grosor, para que se vea entero por los cuatro lados. */
-.sticky-cta a:focus-visible {
-  outline-offset: -3px;
+/* Boton volver-arriba: en desktop FLOTA sobre fondos que no controla (footer
+   oscuro, bandas de color, fotos del hero), asi que tiene el mismo problema que
+   ya resolvio su cuerpo: un solo color de anillo siempre falla contra alguno de
+   esos fondos. Misma tecnica, dos capas, clara por dentro y oscura por fuera:
+   sobre fondo oscuro se ve la clara, sobre fondo claro la oscura.
+     0-2px  oscura  (el anillo exterior del propio boton)
+     2-4px  clara   (el outline)
+     4-6px  oscura  (box-shadow con spread 6px)
+   Total 6px, igual que antes: --back-to-top-gap (8px) y los 6px sobrantes del
+   alto de la barra (56px - 44px) lo absorben sin salirse del viewport.
+   Se mantiene un outline real (no solo box-shadow): en modo de alto contraste
+   forzado los box-shadow se eliminan y el outline no. */
+.back-to-top:focus-visible {
+  outline: 2px solid var(--color-bg-over);
+  outline-offset: 2px;
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 255, 255, .92),
+    0 0 0 6px var(--color-dark),
+    0 2px 10px 2px rgba(0, 0, 0, .28);
 }
 
 /* Barra fija (base = movil). El area tactil de cada item es la columna entera
