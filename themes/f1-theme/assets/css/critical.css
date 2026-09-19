@@ -357,9 +357,16 @@ a {
 
 /* Ancho "wide" (--container-wide): H1 y subtitulo son largos en todos los
    heros del sitio y a 1120px en dos columnas no caben. wide, y no 100vw:
-   mantiene la alineacion con logo, nav y breadcrumb. */
-.hero-stacked .hero-inner {
+   mantiene la alineacion con logo, nav y breadcrumb.
+   Aplica a stacked Y split: split es literalmente dos columnas, asi que el
+   .container por defecto (1120px) le dejaba ~580px de texto y ~480px de foto.
+   overlay no entra: usa .hero-inner.no-media, con su propio tope de 78ch. */
+.hero-stacked .hero-inner,
+.hero-split .hero-inner {
   width: min(var(--hero-width), calc(100% - 2rem));
+}
+
+.hero-stacked .hero-inner {
   grid-template-columns: 1fr;
 }
 

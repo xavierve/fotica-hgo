@@ -29,6 +29,7 @@ hero:
   preset: contact
   labelCall: "Cuéntanos tu caso"
   image: "/images/214-baja_vision-hero.webp"
+  imageAlt: "Una óptico-optometrista muestra una lupa de mano a una paciente mayor durante una consulta de baja visión"
 
 sections:
   - type: faq

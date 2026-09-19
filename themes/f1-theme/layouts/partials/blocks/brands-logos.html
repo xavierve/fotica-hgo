@@ -2,7 +2,7 @@
   <div class="container">
     {{ with .title }}<h2>{{ . }}</h2>{{ end }}
     <div class="logo-grid">
-      {{ range .items }}<figure>{{ partial "responsive-img.html" (dict "src" .image "alt" .imageAlt "sizes" "160px") }}{{ with .text }}<figcaption>{{ . }}</figcaption>{{ end }}</figure>{{ end }}
+      {{ range .items }}<figure>{{ partial "img-responsive.html" (dict "src" .image "alt" .imageAlt "sizes" "160px") }}{{ with .text }}<figcaption>{{ . }}</figcaption>{{ end }}</figure>{{ end }}
     </div>
   </div>
 </section>

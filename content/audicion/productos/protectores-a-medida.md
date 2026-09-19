@@ -26,6 +26,7 @@ hero:
   subtitle: "Los ronquidos de quien duerme a tu lado. El bullicio del taller. El agua de la piscina en un oído delicado. Unos **moldes a medida, fabricados según la forma exacta de tu oído**, son mucho más cómodos y eficaces que cualquier tapón genérico de farmacia — porque el genérico está hecho para un oído promedio, y el tuyo no lo es."
   preset: contact
   image: "/images/323-protectores_audicion_ruidos.webp"
+  imageAlt: "Una mujer se tapa los oídos con la almohada mientras el hombre que duerme a su lado ronca"
 
 sections:
   - type: faq

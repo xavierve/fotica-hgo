@@ -26,6 +26,7 @@ hero:
   subtitle: "Vivimos en uno de los rincones con más horas de sol de Europa — y a la vez pasamos el día mirando pantallas. Dos exposiciones distintas, dos protecciones distintas. En Ópticas Fausto evaluamos tu caso con nuestro equipo de exploración óptica para recomendarte el filtro que se adapta a tu día a día: conducir, estar al aire libre o pasar horas ante el ordenador o el móvil."
   preset: contact
   image: "/images/224-filtros_hero.webp"
+  imageAlt: "Varias gafas con filtros de color ámbar, naranja y rojo apiladas sobre fondo oscuro"
 
 sections:
   - type: faq

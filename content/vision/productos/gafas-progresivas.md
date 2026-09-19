@@ -26,6 +26,7 @@ hero:
   subtitle: "Leer el móvil, mirar el ordenador, conducir, saludar a alguien al otro lado de la calle — sin cambiar de gafas y sin pensar en ello. Eso es una **lente progresiva** bien elegida y bien adaptada: el todoterreno de la visión a partir de los 40."
   preset: contact
   image: "/images/222-progresivas_hero.webp"
+  imageAlt: "Una mujer con gafas progresivas consulta el móvil sentada en el sofá junto a la ventana"
 
 sections:
   - type: faq

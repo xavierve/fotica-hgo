@@ -27,6 +27,7 @@ hero:
   subtitle: "Un niño que ve borroso no se queja: para él, el mundo siempre se ha visto así. Por eso los problemas visuales infantiles pasan desapercibidos hasta que aparecen en forma de malas notas, dolores de cabeza o falta de atención. **Las anomalías visuales están detrás de al menos una tercera parte del fracaso escolar** — y la mayoría tienen solución si se detectan a tiempo."
   preset: contact
   image: "/images/212-vision_infantil_hero.webp"
+  imageAlt: "Anabel, óptico-optometrista, tapa un ojo a una niña con un oclusor durante una revisión visual infantil"
 
 sections:
   - type: faq

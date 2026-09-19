@@ -20,6 +20,7 @@ hero:
   subtitle: "Hay conversaciones que no queremos perdernos: la risa de un nieto, una charla de sobremesa, una canción que trae recuerdos. Cuando el oído empieza a fallar, no solo perdemos sonido — perdemos trozos de esos momentos sin darnos cuenta, porque la pérdida auditiva suele llegar poco a poco. Dar el paso de hacerse una revisión auditiva no es fácil. Pero es solo eso: una revisión, sin compromiso de nada más. En Ópticas Fausto somos **Centro Auditivo Homologado** y llevamos 44 años, desde 1982, acompañando a las familias de Torre del Mar en este camino — sin prisas y sin presión."
   preset: contact
   image: "/images/300-audicion_hero.webp"
+  imageAlt: "Una pareja mayor baila abrazada y sonriente en el salón de su casa"
 
 sections:
   - type: faq

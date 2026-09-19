@@ -27,6 +27,7 @@ hero:
   subtitle: "Decidir dar el paso hacia un audífono no siempre es fácil. Por eso en Fausto lo hemos organizado para que **la decisión la tome tu vida diaria, no un comercial**: lo usas, lo pruebas en casa, en la calle, en una conversación real — y solo entonces decides. Sin ningún compromiso."
   preset: contact
   image: "/images/312-audifonos_hero.webp"
+  imageAlt: "Un audioprotesista muestra los resultados en pantalla a una paciente, con varios modelos de audífono expuestos sobre la mesa"
 
 sections:
   - type: faq

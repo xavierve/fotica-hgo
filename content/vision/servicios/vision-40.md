@@ -27,6 +27,7 @@ hero:
   subtitle: "A los 40 y algo empieza a pasar, y casi nadie quiere reconocerlo: el WhatsApp se aleja un poco más del brazo, la carta del restaurante de repente «está mal iluminada», las letras pequeñas del periódico se amontonan. No es que tus ojos fallen — es la **vista cansada**, y le pasa prácticamente a todo el mundo a partir de esta edad. La buena noticia: tiene solución, y **cuanto antes la abordes, menos te costará adaptarte.**"
   preset: contact
   image: "/images/215_vision_40_hero.webp"
+  imageAlt: "Una óptica muestra varias monturas a una pareja sentada en la mesa de atención"
 
 sections:
   - type: faq

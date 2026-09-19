@@ -18,7 +18,7 @@
 {{/* La foto va en <img> real (no background-image): sin texto encima no hay
      motivo para background-attachment, y se gana srcset/sizes, fetchpriority
      y object-position. El <picture> con <source media> para la variante "_m"
-     lo emite responsive-img.html por convencion; aqui no se monta a mano. */}}
+     lo emite img-responsive.html por convencion; aqui no se monta a mano. */}}
 {{ $pos := "" }}{{ with .imagePosition }}{{ $pos = printf "object-position:%s" . }}{{ end }}
 {{/* El color de fondo va en el <section>, no solo en el bloque de texto: con la
      banda limitada de ancho (--hero-band-max), los laterales de la foto tienen
@@ -29,7 +29,7 @@
   {{- with .textColor }}{{ $styles = $styles | append (printf "--section-text-color:%s" .) }}{{ end -}}
   {{- with $styles }} style="{{ delimit . ";" | safeCSS }}"{{ end }}>
   <figure class="hero-band">
-    {{ partial "responsive-img.html" (dict "src" $cfg.src "alt" (.imageAlt | default "") "sizes" $cfg.sizes "loading" "eager" "fetchpriority" "high" "style" $pos) }}
+    {{ partial "img-responsive.html" (dict "src" $cfg.src "alt" (.imageAlt | default "") "sizes" $cfg.sizes "loading" "eager" "fetchpriority" "high" "style" $pos) }}
   </figure>
   <div class="hero-body">
     <div class="container hero-inner">
@@ -61,7 +61,7 @@
 <section class="hero hero-{{ $layout }}{{ with .class }} {{ . }}{{ end }}">
   <div class="container hero-inner{{ if eq $layout "plain" }} no-media{{ end }}">
     {{ partial "hero-copy.html" . }}
-    {{ if eq $layout "split" }}<figure class="hero-media">{{ partial "responsive-img.html" (dict "src" $cfg.src "alt" (.imageAlt | default "") "sizes" $cfg.sizes "loading" "eager" "fetchpriority" "high") }}</figure>{{ end }}
+    {{ if eq $layout "split" }}<figure class="hero-media">{{ partial "img-responsive.html" (dict "src" $cfg.src "alt" (.imageAlt | default "") "sizes" $cfg.sizes "loading" "eager" "fetchpriority" "high") }}</figure>{{ end }}
   </div>
 </section>
 {{ end }}

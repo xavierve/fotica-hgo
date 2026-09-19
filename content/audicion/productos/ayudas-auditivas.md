@@ -26,6 +26,7 @@ hero:
   subtitle: "Más allá del audífono, existen pequeñas ayudas técnicas que cambian el día a día: **oír el despertador, disfrutar de la televisión sin discutir por el volumen, saber cuándo llaman a la puerta.** En Fausto tenemos un catálogo de ayudas pensado para las situaciones más habituales de la vida cotidiana — y las pruebas en tienda antes de llevártelas."
   preset: contact
   image: "/images/322-ayudas_auditivas_hero.webp"
+  imageAlt: "Ayudas auditivas de aviso: despertador vibrador, avisadores de timbre y de humo, y auriculares para televisión"
 
 sections:
   - type: faq

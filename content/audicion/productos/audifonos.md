@@ -26,6 +26,7 @@ hero:
   subtitle: "Tenemos la solución para tu pérdida auditiva: una amplia gama de audífonos, **desde el más económico hasta el más sofisticado tecnológicamente**. Nuestro equipo especializado en audioprótesis — somos **Centro Auditivo Homologado** — evalúa tu pérdida y te recomienda el audífono que mejor se adapta a tus necesidades funcionales y estéticas. Y queremos que estés totalmente convencido: **lo usas y lo pruebas en tu vida diaria antes de comprarlo, sin ningún compromiso.**"
   preset: contact
   image: "/images/321-audifonos_hero.webp"
+  imageAlt: "Modelo de audífono retroauricular sostenido ante una persona sonriente desenfocada al fondo"
 
 sections:
   - type: faq

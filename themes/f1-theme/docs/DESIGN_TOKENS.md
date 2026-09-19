@@ -147,8 +147,12 @@ es manual — por eso viven pegados en `:root`.
 
 ### 1.3 Parámetros de fondo y color
 
-Cinco parámetros, disponibles en hero, cta y banner (los que aceptan imagen de
+Cinco parámetros, disponibles en cta y banner (los que aceptan imagen de
 fondo). `bgColor`/`textColor`/`class` están además en el resto de bloques.
+
+> **El hero no usa `bg` ni `bgMobile`.** Su foto sale siempre de `hero.image`,
+> y la variante móvil se detecta por convención `_m` (ver FRONTMATTER.md).
+> `bgColor`, `textColor` y `class` sí funcionan igual en el hero.
 
 | Parámetro | Qué hace |
 |---|---|
@@ -394,7 +398,7 @@ Convención: `foto.webp` (1x) + `foto_hd.webp` (2x, doble de ancho).
 La variante `_hd` es **siempre opcional** — si no existe, se sirve la normal sin
 error.
 
-- **`<img>` reales** → `partials/responsive-img.html`. Lee el ancho real del
+- **`<img>` reales** → `partials/img-responsive.html`. Lee el ancho real del
   archivo con `images.Config` (no hay que declararlo), genera `srcset` con
   descriptor `w` + `sizes` para que el navegador elija según tamaño de
   renderizado **y** densidad. Conectado en: cards, team, gallery, slider,

@@ -15,9 +15,8 @@
 
 | Uso | Clave front matter | Base | `_hd` (2x) | Proporción | Formato |
 |---|---|---|---|---|---|
-| **Hero** | `hero.bg` | 1440×960 | 1920×1280 *(solo cámara)* | 3:2 | WebP |
-| **Hero móvil** | `hero.bgMobile` | **768×420** ⚠ | 1536×840 | **3:2** ⚠ | WebP |
-| **Hero figura** | `hero.image` | 1440 ancho | 2880 | libre | WebP |
+| **Hero** (los tres layouts) | `hero.image` | 1440×960 | `_hd` 1920×1280 *(solo cámara)* | 3:2 | WebP |
+| **Hero móvil** | *(sin clave: `_m` por convención)* | **768×420** ⚠ | `_m_hd` 1536×840 | **3:2** ⚠ | WebP |
 | **OG / Social** | `og.image` | 1200×630 | — | 1.91:1 | **JPG** |
 | **Cards** | `card.image` | **800×600** | 1600×1200 | **4:3** | WebP |
 | **Equipo** | `team.items[].image` | **750×750** | 1500×1500 | **1:1 cuadrado** | WebP |
@@ -26,8 +25,8 @@
 | **Slider** | `slider.items[].image` | **780 ancho** | — | libre | WebP |
 | **Logos de marca** | `brands.items[].image` | 320 ancho | — | libre | WebP/SVG |
 
-> ⚠ **Los heros están PENDIENTES de cerrar.** Las medidas de `hero.bg` y
-> `hero.bgMobile` de esta tabla son provisionales: dependen de la altura real
+> ⚠ **Los heros están PENDIENTES de cerrar.** Las medidas de esta tabla son
+> provisionales: dependen de la altura real
 > de la banda en el layout `stacked`, que **todavía no está implementado** en
 > `partials/hero.html` (hoy solo existen el split de dos columnas y la columna
 > única con fondo detrás). No reencuadrar heros hasta entonces — se harían dos
@@ -169,7 +168,8 @@ Reencuadrar 24 imágenes contra una especificación teórica significa
 reencuadrarlas dos veces.
 
 **Inventario actual** (salida de `scripts/recoge-imagenes-hero.ps1`):
-24 `bg` · 3 `bgMobile` · 1 `image` · solo 2 con variante `_hd`.
+25 `hero.image` (tras unificar: ya no hay `hero.bg`) · 3 variantes `_m` ·
+solo 2 con variante `_hd`.
 
 **Dos cosas cambian con el apilado y no estaban contempladas antes:**
 

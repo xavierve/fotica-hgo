@@ -1,5 +1,35 @@
 # F1 Theme · Changelog
 
+## Sin versión — hero: una sola clave `image`, variante móvil `_m` por convención
+
+- **`hero.bg` y `hero.bgMobile` desaparecen.** La foto sale de `hero.image` en
+  los tres layouts; `layout` decide cómo se pinta (`background-image` en
+  `overlay`, `<img>` en `stacked` y `split`), no de qué clave se lee. Antes una
+  página con `layout: split` y solo `bg` degradaba a `plain` en silencio.
+  Migradas las 24 páginas con hero, más el archetype y la demo. `cta` y
+  `banner` conservan `bg`/`bgMobile`: son otra API.
+- **Variante móvil por convención `_m`** (`foto.webp` → `foto_m.webp`), igual
+  que `_hd`, en vez de declararse en el front matter. Partial nuevo
+  `img-mobile.html`. Funciona en cualquier bloque que pase por
+  `img-responsive.html`, no solo en el hero, y el `<picture>` se emite **solo
+  si el `_m` existe**. `_hd` resuelve densidad (`srcset` w); `_m` resuelve
+  encuadre (`<source media>`): `srcset` no puede hacer lo segundo porque elige
+  candidato por ancho y DPR, no por composición.
+- `responsive-img.html` → **`img-responsive.html`**, para que los tres partials
+  de imagen sean la misma familia (`img-responsive`, `img-srcset`,
+  `img-mobile`). Acepta `noMobile: true` para quien monte su propio `<picture>`.
+  `hero.html` ya no construye el `<picture>` de `stacked` a mano.
+- **`.hero` deja de pintar un degradado.** `background: linear-gradient(...)` es
+  un `background-image`, y un `background-image` se pinta SIEMPRE por encima del
+  `background-color`: tapaba el navy de `.bg-color2/3` pasara lo que pasara en
+  la cascada. Pasa a `background-color: var(--bg-color1)`, que además es lo que
+  el degradado parecía (`#fffdf8` → `#f5efe5`, imperceptible a ese tamaño).
+- **`split` usa `--hero-width` (1440px) como `stacked`**, en vez del
+  `--container` de 1120px: en dos columnas, 1120 dejaba el texto en ~580px y la
+  foto en ~480px. Su `sizes` pasa a `620px` por encima de 1440, el ancho real
+  de la segunda columna del grid.
+- Los 24 heros llevan ya su `imageAlt`.
+
 ## Sin versión — hero: layouts `stacked` (defecto), `overlay` y `split`
 
 - `hero.html` pasa de dos modos superpuestos (`bg` de sección completa / `image`
@@ -13,8 +43,8 @@
   `hero-preload.html` (preload LCP no bloqueante, solo con imagen, con
   `imagesrcset` y un preload por breakpoint si hay `bgMobile`) e
   `img-srcset.html` (la lógica de `_hd` que vivía dentro de
-  `responsive-img.html`, extraída; salida idéntica).
-- `responsive-img.html`: parámetros nuevos `fetchpriority` y `style`.
+  `img-responsive.html`, extraída; salida idéntica).
+- `img-responsive.html`: parámetros nuevos `fetchpriority` y `style`.
 - Nuevos tokens `--hero-band-h` y `--hero-width`; `hero.imagePosition`
   (`object-position` en `stacked`) y `hero.scrim`.
 - Padding superior del hero por modo (`hero-stacked` 0, `hero-split`/

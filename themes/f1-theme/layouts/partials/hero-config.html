@@ -40,8 +40,10 @@
 {{- $bandMax := 1440 -}}{{- /* = --hero-band-max */ -}}
 {{- $sizes := "100vw" -}}
 {{- if eq $layout "stacked" -}}{{- $sizes = printf "(min-width:%dpx) %dpx, 100vw" $bandMax $bandMax -}}{{- end -}}
-{{- /* split: la figura ocupa el 45% de la banda, y la banda no pasa de $bandMax */ -}}
-{{- if eq $layout "split" -}}{{- $sizes = printf "(min-width:%dpx) %dpx, (min-width:821px) 45vw, 100vw" $bandMax (int (mul $bandMax 0.45)) -}}{{- end -}}
+{{- /* split: la figura es la 2a columna del grid (minmax(280px,.9fr) de
+       1.1fr+.9fr), dentro de una banda con tope $bandMax y gap de 4rem.
+       (1440 - 32 padding - 64 gap) * .9/2 = 605px -> se declara 620. */ -}}
+{{- if eq $layout "split" -}}{{- $sizes = printf "(min-width:%dpx) 620px, (min-width:821px) 45vw, 100vw" $bandMax -}}{{- end -}}
 {{- if not $src -}}{{- $layout = "plain" -}}{{- $mobile = "" -}}{{- end -}}
 {{- if not .Params.hero -}}{{- $layout = "" -}}{{- end -}}
 {{- return (dict "layout" $layout "src" $src "mobile" $mobile "sizes" $sizes) -}}

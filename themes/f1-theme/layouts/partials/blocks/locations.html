@@ -30,7 +30,7 @@
       <article class="location-card">
         {{ if and (not $compact) $loc.image }}
         <a class="location-media" href="{{ $loc.mapUrl | safeURL }}">
-          {{ partial "responsive-img.html" (dict "src" $loc.image "alt" ($loc.imageAlt | default (printf "Ubicación de %s en el mapa" $loc.name)) "sizes" "(min-width:821px) 50vw, 100vw") }}
+          {{ partial "img-responsive.html" (dict "src" $loc.image "alt" ($loc.imageAlt | default (printf "Ubicación de %s en el mapa" $loc.name)) "sizes" "(min-width:821px) 50vw, 100vw") }}
         </a>
         {{ end }}
         <h3 class="location-name">{{ $loc.name }}</h3>

@@ -28,6 +28,7 @@ hero:
   subtitle: "A tu servicio en Torre del Mar desde 1982. Tres generaciones de la misma familia, el mismo compromiso: conocerte de verdad y seguir aquí cuando vuelvas."
   preset: contact
   image: "/images/100-instalaciones_fausto_duque_fachada.webp"
+  imageAlt: "Fachada de Ópticas Fausto en la avenida Duque de Ahumada, con el rótulo verde y el escaparate de monturas"
   imagePosition: "center top"   # fachada vertical: ancla arriba para no cortar el rotulo
 
 sections:
