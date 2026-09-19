@@ -866,12 +866,6 @@ h2.fs-xs {
     border-radius: 0;
   }
 }
-/* En hero con imagen, evitar que el texto se extienda bajo la zona “ocupada” de la foto */
-/* Límite de línea solo al subtítulo (párrafo largo), nunca al H1 ni al contenedor */
-.hero-subtitle {
-  max-width: 60ch;
-}
-
 /* === Breakout: permite a un bloque (sección o shortcode) escapar del ancho
    de un ancestro más estrecho — imprescindible para width:wide/full cuando el
    bloque vive dentro de .prose (72ch) en vez de ser hermano de página. Ancla

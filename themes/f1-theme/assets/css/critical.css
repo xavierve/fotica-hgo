@@ -287,6 +287,14 @@ a {
   border-radius: var(--radius);
 }
 
+/* Limite de linea solo al subtitulo (parrafo largo), nunca al H1 ni al
+   contenedor. Vive aqui, con el resto de la geometria del hero, y no en
+   main.css: es medida de linea del bloque que abre la pagina, asi que se
+   resuelve en el mismo sitio que los anchos de banda y de columna. */
+.hero-subtitle {
+  max-width: 60ch;
+}
+
 .hero h1 {
   font-size: clamp(2.25rem, 5vw, 4.75rem);
   line-height: 1.05;
