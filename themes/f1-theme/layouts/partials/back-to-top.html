@@ -1,0 +1,17 @@
+{{- /*
+  partials/back-to-top.html
+
+  Boton global "volver arriba". Es un <a href="#top">, no un <button>: el salto
+  al inicio del documento es comportamiento nativo del fragmento "#top" y
+  funciona sin JS; el desplazamiento suave lo pone el CSS (scroll-behavior,
+  anulado con prefers-reduced-motion). El JS solo decide CUANDO se ve
+  (IntersectionObserver, nunca un listener de scroll) -- ver main.js.
+
+  Sin JS no se muestra (html:not(.js)): un boton flotante permanente estorba
+  mas de lo que ayuda en una pagina que ya se desplaza sola.
+
+  En movil se situa POR ENCIMA de la barra sticky (--sticky-cta-h), no dentro
+  ni solapada. Ese alto es una custom property compartida: si cambia la barra,
+  el boton la sigue sin tocar nada aqui.
+*/ -}}
+<a class="back-to-top" href="#top" aria-label="{{ i18n "backToTop" }}">{{ partial "icons.html" "arrow-up" }}</a>

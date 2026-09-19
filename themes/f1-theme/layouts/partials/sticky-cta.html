@@ -1,0 +1,24 @@
+{{- /*
+  partials/sticky-cta.html
+
+  Barra fija de acciones en movil: Llamar / WhatsApp / Ubicacion (ap8.1).
+  Datos desde data/site.yaml (nunca escritos a mano) e iconos desde icons.html.
+  Oculta desde 821px: en desktop el header ya lleva los dos botones de contacto.
+
+  Destino de "Ubicacion": hay DOS centros, asi que apunta a la pagina de
+  contacto (las dos sedes con su mapa) en vez de elegir una. Se puede cambiar
+  con contact.locationUrl en site.yaml.
+*/ -}}
+{{- $site := hugo.Data.site | default dict -}}
+{{- $contact := $site.contact | default dict -}}
+{{- $wa := replace ($contact.whatsapp | default "") "+" "" -}}
+{{- $locUrl := $contact.locationUrl | default "/contacto/" -}}
+{{- with $contact.phone }}
+<nav class="sticky-cta" aria-label="{{ i18n "quickContact" }}">
+  <a href="{{ printf "tel:%s" . | safeURL }}">{{ partial "icons.html" "phone" }}<span>{{ i18n "call" }}</span></a>
+  {{- with $wa }}
+  <a href="https://wa.me/{{ . }}">{{ partial "icons.html" "whatsapp" }}<span>{{ i18n "whatsapp" }}</span></a>
+  {{- end }}
+  <a href="{{ $locUrl | safeURL }}">{{ partial "icons.html" "location" }}<span>{{ i18n "location" }}</span></a>
+</nav>
+{{- end }}

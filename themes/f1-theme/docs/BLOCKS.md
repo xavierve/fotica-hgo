@@ -15,6 +15,8 @@ Los partials globales viven en `themes/f1-theme/layouts/partials/` y no son bloq
 - `hero.html` (+ `hero-config.html`, `hero-copy.html`, `hero-preload.html`, `img-srcset.html`)
 - `section-renderer.html`
 - `footer.html`
+- `back-to-top.html`
+- `sticky-cta.html`
 
 Todos los bloques renderizables viven exclusivamente en:
 

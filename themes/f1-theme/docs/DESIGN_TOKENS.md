@@ -200,6 +200,19 @@ En `:root` (`critical.css`). Los usan el hero `stacked` y, en móvil, el `overla
 
 Padding superior del hero, por clase emitida por el partial: `hero-stacked` → 0 (la banda toca el header o el breadcrumb); `hero-split` / `hero-plain` → `clamp(2rem, 8vw, 7rem)`; `hero-overlay` → el `clamp(4rem, 8vw, 7rem)` base de `.hero`.
 
+### 1.3.2 Token de la barra fija
+
+`--sticky-cta-h` (en `:root`, `critical.css`) es el alto de la barra fija de
+contacto: `0px` por defecto y `3.5rem` por debajo de 821px, que es donde la
+barra existe. Lo comparten tres reglas: la altura de la propia barra, el
+`padding-bottom` del `body` (para que la barra no tape el final del footer) y
+la posición del botón volver-arriba, que se coloca **encima** de la barra
+sumándolo. Cambiar el alto de la barra en un solo sitio mueve las tres.
+
+No incluye el `safe-area-inset-bottom` (el notch): ese se suma aparte en cada
+una de las tres reglas, para que el token siga significando «lo que mide la
+barra» en cualquier dispositivo.
+
 ### 1.4 Clases modificadoras (`class:`)
 
 **Legibilidad sobre imagen** — las fotos reales no son predecibles; estas clases

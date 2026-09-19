@@ -530,3 +530,132 @@ a {
     clip: auto;
   }
 }
+
+/* === Barra fija de contacto (movil) y boton volver-arriba ===
+   Las dos piezas comparten esquina, asi que comparten token: --sticky-cta-h es
+   el alto de la barra y el boton se coloca SOBRE ella sumandolo. Si la barra
+   cambia de alto, el boton la sigue solo. En desktop el token vale 0 (no hay
+   barra) y el boton cae a su margen normal. Van en critical.css porque ambas
+   son visibles sin desplazarse: en main.css entrarian con un salto.
+
+   El alto de la barra NO incluye el safe-area inferior (el notch de un iPhone):
+   ese se suma aparte como padding de la propia barra, y el boton lo vuelve a
+   sumar. Asi el token sigue siendo "lo que mide la barra" en cualquier
+   dispositivo, con notch o sin el. */
+:root {
+  --sticky-cta-h: 0px;
+}
+
+.back-to-top {
+  position: fixed;
+  right: 1rem;
+  bottom: calc(var(--sticky-cta-h) + env(safe-area-inset-bottom, 0px) + .75rem);
+  z-index: 20;
+  width: 2.75rem;  /* 44px: minimo tactil */
+  height: 2.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--bg-color2);
+  color: var(--color-text-inverse);
+  /* Filete blanco ademas de la sombra: el boton flota sobre fondos que no
+     controla y el footer es oscuro (navy sobre #25211d da 1.4:1, por debajo del
+     3:1 que WCAG pide a un control). El filete lo separa de cualquier fondo
+     oscuro; sobre fondo claro el contraste ya lo da el propio navy. Mismo
+     recurso que .has-bg-image .btn-fill. */
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .92), 0 2px 10px rgba(0, 0, 0, .28);
+  /* Oculto y no enfocable hasta que el JS lo activa: visibility, no solo
+     opacity, para que no reciba foco con el tabulador estando invisible. */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(.5rem);
+  transition: opacity .2s ease, transform .2s ease, visibility .2s;
+}
+
+.back-to-top .icon {
+  width: 1.4em;
+  height: 1.4em;
+  margin: 0;
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+/* Sin JS no hay quien lo muestre ni lo oculte: mejor no ponerlo. El enlace
+   funcionaria (#top es nativo), pero un boton flotante permanente estorba. */
+html:not(.js) .back-to-top {
+  display: none;
+}
+
+/* Foco de teclado: el boton no es un .btn, asi que no hereda su :focus-visible.
+   Dorado y no currentColor (blanco): el anillo tiene que verse tanto sobre el
+   footer oscuro como sobre el fondo claro de una pagina. */
+.back-to-top:focus-visible,
+.sticky-cta a:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.sticky-cta {
+  display: none;
+}
+
+@media(max-width:820px) {
+  :root {
+    --sticky-cta-h: 3.5rem;
+  }
+  .sticky-cta {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 15;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    height: calc(var(--sticky-cta-h) + env(safe-area-inset-bottom, 0px));
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    background: var(--color-bg-over);
+    border-top: 1px solid rgba(0, 0, 0, .12);
+  }
+  .sticky-cta a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .1em;
+    text-decoration: none;
+    color: var(--color-link);
+    font-size: .8rem;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+  .sticky-cta .icon {
+    width: 1.35em;
+    height: 1.35em;
+    margin: 0;
+  }
+  /* El contenido del final de la pagina (footer) tiene que poder verse entero
+     por encima de la barra, que lo taparia. */
+  body {
+    padding-bottom: calc(var(--sticky-cta-h) + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* Desplazamiento suave para #top y para cualquier ancla del sitio (FAQ,
+   #privacidad y #cookies de aviso-legal). Se anula con movimiento reducido. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .back-to-top {
+    transition: none;
+  }
+}

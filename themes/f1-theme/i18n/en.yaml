@@ -13,3 +13,6 @@ close: { other: "Close" }
 enlargeImage: { other: "Enlarge image" }
 carousel: { other: "Carousel" }
 allRightsReserved: { other: "All rights reserved" }
+backToTop: { other: "Back to top" }
+location: { other: "Location" }
+quickContact: { other: "Quick contact" }

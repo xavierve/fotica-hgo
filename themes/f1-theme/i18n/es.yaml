@@ -15,3 +15,6 @@ close: { other: "Cerrar" }
 enlargeImage: { other: "Ampliar imagen" }
 carousel: { other: "Carrusel" }
 allRightsReserved: { other: "Todos los derechos reservados" }
+backToTop: { other: "Volver arriba" }
+location: { other: "Ubicación" }
+quickContact: { other: "Contacto rápido" }

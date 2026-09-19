@@ -155,3 +155,30 @@ document.querySelectorAll('.block-gallery').forEach(function (bloque) {
     if (e.key === 'Escape') cerrar();
   });
 })();
+
+/* === Boton volver-arriba: cuando mostrarlo ===
+   IntersectionObserver, no un listener de scroll: el observer solo dispara al
+   cruzar el umbral, sin trabajo en cada pixel de desplazamiento.
+
+   Umbral: que el HERO salga del viewport. En las ~30 paginas internas sin hero
+   no hay nada que observar, asi que se crea un centinela invisible de un
+   viewport de alto y se observa ese. El efecto es el mismo en los dos casos:
+   el boton aparece cuando ya se ha bajado una pantalla larga. === */
+(function () {
+  var boton = document.querySelector('.back-to-top');
+  if (!boton || !('IntersectionObserver' in window)) return;
+
+  var objetivo = document.querySelector('.hero');
+  if (!objetivo) {
+    objetivo = document.createElement('div');
+    objetivo.className = 'scroll-sentinel';
+    objetivo.setAttribute('aria-hidden', 'true');
+    objetivo.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:100svh;pointer-events:none;visibility:hidden';
+    document.body.appendChild(objetivo);
+  }
+
+  new IntersectionObserver(function (entries) {
+    // isIntersecting = el hero (o el centinela) sigue a la vista -> sin boton
+    boton.classList.toggle('is-visible', !entries[0].isIntersecting);
+  }, { threshold: 0 }).observe(objetivo);
+})();

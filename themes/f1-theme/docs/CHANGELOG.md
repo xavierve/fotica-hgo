@@ -1,5 +1,22 @@
 # F1 Theme · Changelog
 
+## Sin versión — barra fija de contacto en móvil y botón volver-arriba
+
+- `sticky-cta.html`: barra fija con Llamar / WhatsApp / Ubicación desde
+  `data/site.yaml` e `icons.html`, solo por debajo de 821px. «Ubicación»
+  apunta a `/contacto/` (hay dos centros; `contact.locationUrl` lo cambia).
+- `back-to-top.html`: `<a href="#top">` (el salto funciona sin JS; el suave lo
+  pone `scroll-behavior`, anulado con `prefers-reduced-motion`). Aparece
+  cuando el hero sale del viewport vía IntersectionObserver — sin listener de
+  scroll; en las páginas sin hero observa un centinela de un viewport de alto.
+  44px de lado, `aria-label` desde i18n.
+- Token compartido `--sticky-cta-h`: el botón se sitúa **sobre** la barra, no
+  dentro ni solapada, y el `body` reserva ese espacio para que la barra no
+  tape el footer.
+- Nuevas cadenas i18n: `backToTop`, `location`, `quickContact`.
+- `scroll-behavior: smooth` global (afecta también a las anclas de FAQ y
+  `aviso-legal`).
+
 ## Sin versión — hero: una sola clave `image`, variante móvil `_m` por convención
 
 - **`hero.bg` y `hero.bgMobile` desaparecen.** La foto sale de `hero.image` en
