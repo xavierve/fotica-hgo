@@ -24,11 +24,11 @@ Cuando dos documentos se contradigan, el orden de autoridad es:
 1. **El código y los datos** — `data/site.yaml`, los partials del tema, el front
    matter de `content/`. Lo que hace el build es lo que es.
 2. **Este `CLAUDE.md`** y los docs del tema (`themes/f1-theme/docs/`).
-3. **`/docs/`** — carpeta ignorada por git, no se publica. Es **histórico y
-   contexto humano**: brief, TODO, notas de estructura. **No prevalece.** Si
+3. **`/docs/`** — brief, TODO, **si contradice algo, No prevalece.** Si
    algo de `/docs/` contradice al código o a una decisión posterior tomada en
    conversación, gana lo nuevo — y lo correcto es actualizar el documento de
    `/docs/`, no seguirlo.
+4. `/draft-docs/` es carpeta ignorada por git, no se publica. Es **histórico y contexto humano**. No leas pues puede llevarte a errores o actuaciones desactualizadas
 
 No crear copias de este archivo en `/docs/` ni en ningún otro sitio: dos
 CLAUDE.md divergen, y la copia vieja acaba dictando convenciones muertas.
