@@ -559,12 +559,19 @@ a {
   border-radius: 999px;
   background: var(--bg-color2);
   color: var(--color-text-inverse);
-  /* Filete blanco ademas de la sombra: el boton flota sobre fondos que no
-     controla y el footer es oscuro (navy sobre #25211d da 1.4:1, por debajo del
-     3:1 que WCAG pide a un control). El filete lo separa de cualquier fondo
-     oscuro; sobre fondo claro el contraste ya lo da el propio navy. Mismo
-     recurso que .has-bg-image .btn-fill. */
-  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .92), 0 2px 10px rgba(0, 0, 0, .28);
+  /* Anillo DOBLE: claro por dentro, oscuro por fuera. El boton flota sobre
+     fondos que no controla (footer oscuro, fondo crema, bandas de color, fotos
+     de las cards) y, con un solo anillo, cada fondo lo salvaba un unico
+     elemento: el blanco sobre el footer (13.6:1) o el navy sobre el crema
+     (11.4:1), pero el blanco sobre crema da 1.16:1 y el navy sobre el footer
+     1.37:1. Con los dos, el borde exterior contrasta siempre con algo: sobre
+     oscuro se ve el anillo claro, sobre claro el oscuro (WCAG 1.4.11, 3:1).
+     El anillo exterior es box-shadow, no ocupa layout: el area tactil sigue
+     siendo de 44px. */
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 255, 255, .92),
+    0 0 0 2px var(--color-dark),
+    0 2px 10px 2px rgba(0, 0, 0, .28);
   /* Oculto y no enfocable hasta que el JS lo activa: visibility, no solo
      opacity, para que no reciba foco con el tabulador estando invisible. */
   opacity: 0;
@@ -594,6 +601,15 @@ html:not(.js) .back-to-top {
 /* Foco de teclado: el boton no es un .btn, asi que no hereda su :focus-visible.
    Dorado y no currentColor (blanco): el anillo tiene que verse tanto sobre el
    footer oscuro como sobre el fondo claro de una pagina. */
+/* Destino de "volver arriba" (partials/back-to-top.html): un elemento vacio al
+   principio del documento que recibe el foco por script. No es interactivo, asi
+   que no lleva anillo de foco (no hay nada que senalar). */
+#top {
+  display: block;
+  height: 0;
+  outline: none;
+}
+
 .back-to-top:focus-visible,
 .sticky-cta a:focus-visible {
   outline: 3px solid var(--color-accent);
@@ -657,5 +673,18 @@ html:not(.js) .back-to-top {
 @media (prefers-reduced-motion: reduce) {
   .back-to-top {
     transition: none;
+  }
+}
+
+/* Impresion: la barra y el boton son controles de pantalla. Impresos no hacen
+   nada, y los dos son position:fixed, que en papel se repite en cada pagina. El
+   padding que reserva el sitio de la barra tambien se anula. */
+@media print {
+  .back-to-top,
+  .sticky-cta {
+    display: none !important;
+  }
+  body {
+    padding-bottom: 0;
   }
 }

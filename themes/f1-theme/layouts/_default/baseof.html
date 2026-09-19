@@ -4,6 +4,7 @@
     {{ partial "header-meta.html" . }}
   </head>
   <body class="page page-{{ .Params.page_type | default "standard" }} content-{{ .Params.content_type | default "page" }}">
+    <span id="top" tabindex="-1"></span>
     {{ partial "header.html" . }}
     <main id="main-content">
       {{ block "main" . }}{{ end }}

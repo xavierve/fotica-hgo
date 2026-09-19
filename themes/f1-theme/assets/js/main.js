@@ -181,4 +181,17 @@ document.querySelectorAll('.block-gallery').forEach(function (bloque) {
     // isIntersecting = el hero (o el centinela) sigue a la vista -> sin boton
     boton.classList.toggle('is-visible', !entries[0].isIntersecting);
   }, { threshold: 0 }).observe(objetivo);
+
+  /* El clic NO navega al ancla: un <a href="#top"> deja #top en la URL y una
+     entrada de historial por pulsacion, y el boton "atras" acaba dando saltos
+     en la misma pagina. Se desplaza a mano y se mueve el foco al destino real
+     (#top, tabindex=-1) para que el teclado siga desde arriba. behavior no se
+     fija: manda el CSS (scroll-behavior:smooth, o auto con movimiento reducido).
+     preventScroll evita que el foco provoque un segundo desplazamiento. */
+  boton.addEventListener('click', function (e) {
+    e.preventDefault();
+    window.scrollTo({ top: 0 });
+    var destino = document.getElementById('top');
+    if (destino) destino.focus({ preventScroll: true });
+  });
 })();

@@ -14,6 +14,7 @@
   dentro ni solapada, y el `body` reserva ese espacio para que la barra no
   tape el footer.
 - Nuevas cadenas i18n: `backToTop`, `location`, `quickContact`.
+- Revisión posterior: el clic del botón ya no navega al ancla (no escribe `#top` ni añade historial; mueve el foco a `<span id="top" tabindex="-1">`); anillo doble claro+oscuro (mín. 3.6:1 sobre cualquier fondo probado, teórico ~4:1 en el peor caso); `@media print` oculta barra y botón.
 - `scroll-behavior: smooth` global (afecta también a las anclas de FAQ y
   `aviso-legal`).
 

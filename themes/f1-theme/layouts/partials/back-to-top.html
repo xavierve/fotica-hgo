@@ -1,14 +1,22 @@
 {{- /*
   partials/back-to-top.html
 
-  Boton global "volver arriba". Es un <a href="#top">, no un <button>: el salto
-  al inicio del documento es comportamiento nativo del fragmento "#top" y
-  funciona sin JS; el desplazamiento suave lo pone el CSS (scroll-behavior,
-  anulado con prefers-reduced-motion). El JS solo decide CUANDO se ve
-  (IntersectionObserver, nunca un listener de scroll) -- ver main.js.
+  Boton global "volver arriba". Enlace a #top (el destino real esta en
+  baseof.html, un <span id="top" tabindex="-1"> al principio del documento).
+
+  El JS (main.js) intercepta el clic y NO deja que el enlace navegue: un
+  <a href="#top"> sin interceptar escribe #top en la URL y anade una entrada al
+  historial en cada pulsacion, con lo que el boton "atras" del navegador se
+  queda saltando en la misma pagina en vez de salir de ella. En su lugar el JS
+  hace scrollTo(0) y mueve el foco al destino, para que el teclado y los
+  lectores de pantalla continuen desde arriba y no desde donde estaban.
+  El desplazamiento suave lo sigue poniendo el CSS (scroll-behavior, anulado
+  con prefers-reduced-motion). Cuando SE MUESTRA lo decide el
+  IntersectionObserver de main.js, nunca un listener de scroll.
 
   Sin JS no se muestra (html:not(.js)): un boton flotante permanente estorba
-  mas de lo que ayuda en una pagina que ya se desplaza sola.
+  mas de lo que ayuda en una pagina que ya se desplaza sola. El href="#top"
+  queda como red de seguridad.
 
   En movil se situa POR ENCIMA de la barra sticky (--sticky-cta-h), no dentro
   ni solapada. Ese alto es una custom property compartida: si cambia la barra,
