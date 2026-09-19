@@ -26,7 +26,7 @@ hero:
   title: "La prueba que mide, con precisión, cómo oyes"
   subtitle: "El volumen de la televisión que sube poco a poco. Las conversaciones en grupo que cuestan más que antes. El «¿qué?» que se repite sin que le demos importancia. El oído cambia tan despacio que es casi imposible notarlo desde dentro — pero medirlo es rápido, indoloro y te saca de dudas en una sola visita."
   preset: contact
-  bg: "/images/311-audiometriia_hero.webp"
+  image: "/images/311-audiometriia_hero.webp"
 
 sections:
   - type: faq

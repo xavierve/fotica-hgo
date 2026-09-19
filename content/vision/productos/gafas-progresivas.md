@@ -25,7 +25,7 @@ hero:
   title: "Una sola gafa para toda tu vida diaria"
   subtitle: "Leer el móvil, mirar el ordenador, conducir, saludar a alguien al otro lado de la calle — sin cambiar de gafas y sin pensar en ello. Eso es una **lente progresiva** bien elegida y bien adaptada: el todoterreno de la visión a partir de los 40."
   preset: contact
-  bg: "/images/222-progresivas_hero.webp"
+  image: "/images/222-progresivas_hero.webp"
 
 sections:
   - type: faq

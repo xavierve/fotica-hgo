@@ -18,12 +18,11 @@ schema:
 
 # ============ HERO con todo: eyebrow, bg desktop+móvil, tinte, preset contact ============
 hero:
-  eyebrow: "hero · bg + bgMobile + bgColor + class: scrim"
+  eyebrow: "hero · image + variante _m + bgColor + class: scrim"
   title: "0.1- Hero Layout Overlay que se apila en móvil"
-  subtitle: "Redimensiona la ventana: por debajo de 820px carga la imagen bgMobile. El overlay toma el tinte de bgColor vía color-mix."
-#  bg: "https://picsum.photos/seed/fausto-hero/1600/700"
-  image: "https://picsum.photos/seed/faussto-hero/1600/700"
-  bgMobile: "https://picsum.photos/seed/fausto-hero-m/700/900"
+  subtitle: "Una sola clave `image` en los tres layouts. Redimensiona la ventana: por debajo de 820px carga `212-vision_infantil_hero_m.webp`, que existe junto al archivo base — la variante móvil se detecta por convención `_m`, no se declara. El overlay toma el tinte de bgColor vía color-mix."
+  image: "/images/212-vision_infantil_hero.webp"
+  imageAlt: "Anabel, óptico-optometrista, tapa un ojo a una niña con un oclusor durante una revisión visual infantil"
   # bgColor: "var(--bg-color2)"
   preset: contact
   labelCall: "Llamar ahora"

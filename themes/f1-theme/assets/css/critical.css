@@ -233,9 +233,18 @@ a {
   display: inline-flex;
 }
 
+/* Fondo por defecto del hero sin imagen ni color de paleta.
+   Va como background-COLOR, nunca como background-image: un background-image
+   (y un linear-gradient lo es) se pinta SIEMPRE por encima del
+   background-color, asi que el degradado que habia aqui tapaba el navy de
+   .bg-color2/3 pasara lo que pasara en la cascada.
+   Depende del orden de carga: critical.css va inlinado en <head> ANTES del
+   <link> de main.css (ver header-meta.html), asi que .bg-color* -- misma
+   especificidad, una clase -- gana por orden. Si algun dia se bundlean al
+   reves, esta regla empieza a ganar y hay que revisarla. */
 .hero {
   padding: clamp(4rem, 8vw, 7rem) 0;
-  background: linear-gradient(135deg, var(--color-bg), var(--bg-color1));
+  background-color: var(--bg-color1);
 }
 
 .hero-inner {

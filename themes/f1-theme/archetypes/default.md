@@ -27,11 +27,12 @@ hero:
   eyebrow: ""
   title: ""
   subtitle: ""
-  image: ""
-  imageAlt: ""
-  bg: ""            # imagen de fondo desktop (opcional)
-  bgMobile: ""      # variante móvil (opcional)
+  layout: ""        # stacked (defecto) | overlay | split; sin image -> plain
+  image: ""         # única clave de imagen, en los tres layouts
+  imageAlt: ""      # obligatorio si hay image
   bgColor: ""       # color plano o tinte del overlay (opcional)
+  # Variante móvil: NO se declara. Si existe "<nombre>_m.<ext>" junto al
+  # archivo, se sirve por <source media> hasta 820px. Igual que "_hd" para 2x.
   primaryCTA:
     text: ""
     url: ""

@@ -25,7 +25,7 @@ hero:
   title: "El sol y las pantallas no dañan igual tus ojos. Cada uno necesita su protección."
   subtitle: "Vivimos en uno de los rincones con más horas de sol de Europa — y a la vez pasamos el día mirando pantallas. Dos exposiciones distintas, dos protecciones distintas. En Ópticas Fausto evaluamos tu caso con nuestro equipo de exploración óptica para recomendarte el filtro que se adapta a tu día a día: conducir, estar al aire libre o pasar horas ante el ordenador o el móvil."
   preset: contact
-  bg: "/images/224-filtros_hero.webp"
+  image: "/images/224-filtros_hero.webp"
 
 sections:
   - type: faq

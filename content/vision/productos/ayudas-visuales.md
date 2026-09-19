@@ -25,7 +25,7 @@ hero:
   title: "Una pequeña ayuda para lograr un gran cambio"
   subtitle: "Volver a leer el periódico. Ver la televisión sin adivinar. Enhebrar una aguja. Cuando una patología visual limita el día a día, la ayuda adecuada puede devolver actividades que parecían perdidas. En Ópticas Fausto contamos con **especialistas en Baja Visión, miembros de la Sociedad Española de Baja Visión**, que evalúan tu caso y te acompañan hasta dar con la solución que funciona."
   preset: contact
-  bg: "/images/225-ayudas_visuales_hero.webp"
+  image: "/images/225-ayudas_visuales_hero.webp"
 
 sections:
   - type: faq

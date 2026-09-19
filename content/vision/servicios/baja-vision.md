@@ -28,7 +28,7 @@ hero:
   subtitle: "Hay pérdidas de visión que no se corrigen con gafas, lentillas, medicamentos ni cirugía. Leer, coser, ver la televisión o reconocer una cara se vuelven cuesta arriba — y es fácil rendirse y abandonar actividades que daban sentido al día a día. **No hace falta rendirse.** El objetivo de la baja visión es aprovechar al máximo el resto visual que se conserva, con ayudas concretas para cada actividad."
   preset: contact
   labelCall: "Cuéntanos tu caso"
-  bg: "/images/214-baja_vision-hero.webp"
+  image: "/images/214-baja_vision-hero.webp"
 
 sections:
   - type: faq

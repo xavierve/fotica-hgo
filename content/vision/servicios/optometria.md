@@ -26,7 +26,7 @@ hero:
   title: "El examen visual que detecta lo que tú todavía no notas"
   subtitle: "Muchos problemas de visión avanzan en silencio: no duelen, no avisan, y el cerebro se adapta hasta que un día te das cuenta de que llevas meses forzando la vista. Una evaluación optométrica completa los detecta a tiempo — y en la mayoría de los casos, la solución es más sencilla de lo que imaginas."
   preset: contact
-  bg: "/images/211-optometria_D3A0064.webp"
+  image: "/images/211-optometria_D3A0064.webp"
 
 sections:
   - type: faq

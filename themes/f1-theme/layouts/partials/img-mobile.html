@@ -1,0 +1,25 @@
+{{- /*
+  partials/img-mobile.html
+
+  Resuelve la variante movil de una imagen por convencion: foto.webp ->
+  foto_m.webp, misma idea que "_hd" en img-srcset.html. Devuelve la ruta si el
+  archivo existe, o "" si no. Nunca da error.
+
+  "_hd" y "_m" resuelven cosas distintas y no se sustituyen:
+    _hd -> MISMA foto con mas pixeles     -> densidad   -> srcset w
+    _m  -> OTRO encuadre para vertical    -> art direction -> <source media>
+  srcset no puede hacer lo segundo: el navegador elige candidato por ancho y
+  DPR, y dos archivos con el mismo aspecto y distinto recorte le resultan
+  intercambiables. Por eso hace falta <picture>.
+
+  Entrada: la ruta publica de la imagen (string).
+  Devuelve: la ruta de la variante movil, o "".
+*/ -}}
+{{- $src := . -}}
+{{- $out := "" -}}
+{{- $ext := path.Ext $src -}}
+{{- if and $ext (not (strings.HasPrefix $src "http")) -}}
+  {{- $cand := replace $src $ext (printf "_m%s" $ext) 1 -}}
+  {{- if os.FileExists (printf "static%s" $cand) -}}{{- $out = $cand -}}{{- end -}}
+{{- end -}}
+{{- return $out -}}

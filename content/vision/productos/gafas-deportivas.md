@@ -25,7 +25,7 @@ hero:
   title: "Ver bien mientras haces deporte no es un lujo. Es seguridad."
   subtitle: "Un balonazo, una pala que se escapa, el reflejo del sol en el agua: el deporte pone a prueba tus ojos de formas que la vida diaria no. Y jugar sin tu graduación — o con tus gafas de diario, que no están hechas para eso — resta rendimiento y suma riesgo. Hay solución específica para cada deporte, con y sin graduación."
   preset: contact
-  bg: "/images/227-gafas_proteccion_y_deportivas_hero.webp"
+  image: "/images/227-gafas_proteccion_y_deportivas_hero.webp"
 
 sections:
   - type: faq

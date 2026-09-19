@@ -2,7 +2,7 @@
   partials/hero-config.html
 
   Resuelve, a partir del front matter `hero:` de una pagina, QUE layout se
-  renderiza y con QUE imagen. Lo usan hero.html (markup) y header-meta.html
+  renderiza y con QUE imagen. Lo usan hero.html (markup) y hero-preload.html
   (preload LCP): una sola fuente de verdad, para que el preload nunca apunte
   a una imagen que el hero no usa.
 
@@ -15,30 +15,33 @@
     split               -> texto + figura en dos columnas (Home).
   Sin imagen utilizable el hero degrada a "plain" (solo texto).
 
-  Origen de la imagen: split -> `image`. stacked/overlay -> `bg`, y si falta,
-  `image` (una pagina que declare image sin layout sigue teniendo foto).
+  Origen de la imagen: SIEMPRE `hero.image`, en los tres layouts. `layout`
+  decide como se pinta (background-image en overlay, <img> en stacked y split),
+  no de que clave sale la foto. Antes habia dos claves -- `bg` para
+  stacked/overlay e `image` para split -- y una pagina con `layout: split` y
+  solo `bg` degradaba a "plain" en silencio.
 
-  Devuelve dict: layout, src, mobile ("" si no hay bgMobile), sizes.
+  Variante movil: por convencion "_m" junto al archivo (ver img-mobile.html),
+  no por front matter. Aplica a los tres layouts.
+
+  Devuelve dict: layout, src, mobile ("" si no hay "_m"), sizes.
 
   sizes: el atributo sizes de la imagen (y del preload), calculado UNA vez para
-  que markup y preload nunca diverjan. En stacked la banda tiene tope de ancho
-  (--hero-band-max en critical.css): por encima de eso la foto no crece, asi que
-  el navegador no debe pedir un archivo mayor. $bandMax y el token CSS van a la vez.
+  que markup y preload nunca diverjan. Tanto en stacked como en split la banda
+  tiene tope de ancho (--hero-band-max en critical.css): por encima de ese
+  ancho la foto ya no crece, asi que el navegador no debe pedir un archivo
+  mayor. $bandMax y el token CSS van a la vez.
 */ -}}
 {{- $h := .Params.hero | default dict -}}
 {{- $layout := $h.layout | default "stacked" -}}
-{{- $src := "" -}}
-{{- if eq $layout "split" -}}
-  {{- $src = $h.image | default "" -}}
-{{- else -}}
-  {{- $src = $h.bg | default ($h.image | default "") -}}
-{{- end -}}
+{{- $src := $h.image | default "" -}}
 {{- $mobile := "" -}}
-{{- if ne $layout "split" -}}{{- $mobile = $h.bgMobile | default "" -}}{{- end -}}
+{{- if $src -}}{{- $mobile = partial "img-mobile.html" $src -}}{{- end -}}
 {{- $bandMax := 1440 -}}{{- /* = --hero-band-max */ -}}
 {{- $sizes := "100vw" -}}
 {{- if eq $layout "stacked" -}}{{- $sizes = printf "(min-width:%dpx) %dpx, 100vw" $bandMax $bandMax -}}{{- end -}}
-{{- if eq $layout "split" -}}{{- $sizes = "(min-width:821px) 45vw, 100vw" -}}{{- end -}}
+{{- /* split: la figura ocupa el 45% de la banda, y la banda no pasa de $bandMax */ -}}
+{{- if eq $layout "split" -}}{{- $sizes = printf "(min-width:%dpx) %dpx, (min-width:821px) 45vw, 100vw" $bandMax (int (mul $bandMax 0.45)) -}}{{- end -}}
 {{- if not $src -}}{{- $layout = "plain" -}}{{- $mobile = "" -}}{{- end -}}
 {{- if not .Params.hero -}}{{- $layout = "" -}}{{- end -}}
 {{- return (dict "layout" $layout "src" $src "mobile" $mobile "sizes" $sizes) -}}
