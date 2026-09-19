@@ -38,7 +38,6 @@
   gap a `clamp(1.5rem, 3vw, 2.5rem)` y `padding-bottom` a
   `clamp(2rem, 5vw, 4rem)`. Sobre una banda de 1440 la foto pasa de ~605 a
   ~672px.
-- `hero.mediaFirst` (solo `split`): figura antes del copy **en el DOM**.
 
 ## Sin versión — hero: layouts `stacked` (defecto), `overlay` y `split`
 

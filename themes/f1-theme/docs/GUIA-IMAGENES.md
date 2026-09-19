@@ -208,6 +208,51 @@ llamada y WhatsApp.
 - Fijar el `hero.imagePosition` de cada imagen: es un juicio visual sobre el
   recorte real, no un cálculo.
 
+## DECISIÓN ABIERTA · nitidez de los heros en desktop
+
+Ninguna de estas tres opciones está tomada. La página de inicio ya va en
+`split`; las 24 páginas de contenido son `stacked` por defecto.
+
+**El problema, en una línea:** en `stacked` la banda mide 1440px, así que un
+portátil retina pide 2880 y el archivo que existe es de 1440. Esas 24 páginas
+se sirven a 1x. En `split` la figura mide ~672px y el mismo archivo de 1440 da
+2.1x de sobra. La nitidez, con la fototeca actual, solo se cobra en `split`.
+
+**El conflicto:** los subtítulos de esas 24 páginas son largos (el de Audición
+ronda los 460 caracteres). En `split` el copy supera en altura a la foto, que
+es lo que descartó poner la foto a la izquierda. `stacked` absorbe el texto
+largo sin desequilibrio.
+
+| Opción | Qué cuesta | Qué se gana | Qué se pierde |
+|---|---|---|---|
+| **A. Dejar `stacked` a 1x** | nada | cero trabajo | heros suaves en retina, en las 24 |
+| **B. Bajar `--hero-band-max`** de 1440 a ~1200 | una línea en `critical.css` | el estiramiento pasa de 2x a 1.66x | heros más estrechos en desktop; no resuelve, atenúa |
+| **C. Pasar páginas a `split`** | acortar el subtítulo de cada una y mover el resto al primer bloque de texto | 2.1x real, sin regenerar ni una imagen | trabajo de copy página a página |
+| **D. Regenerar a 2880** | pedir o rehacer 24 fotos | `stacked` nítido | coste y, en las de IA, no siempre es posible |
+
+Si se va a C no hace falta hacerlo de golpe: `layout` es por página.
+
+### ¿Queda mal variar el layout del hero según la página?
+
+Depende de si hay regla o no la hay.
+
+Variar **por tipo de página** es un sistema, y se lee como intención: inicio en
+`split`, páginas de servicio y producto en `stacked`, alguna portada de sección
+en `overlay` si la foto tiene espacio negativo. El visitante percibe jerarquía,
+no desorden, y quien edite mañana sabe qué poner sin preguntar.
+
+Variar **caso a caso**, según qué quedó mejor ese día, sí queda mal: con un
+público de 45-75 años la previsibilidad de la página es parte de la
+accesibilidad, y en un tema pensado para reutilizarse deja una decisión
+implícita que nadie puede reconstruir.
+
+La regla, si se adopta C, debería quedar escrita en PAGE_TYPES.md como «layout
+de hero por tipo de página», no elegirse página a página. Y el criterio que
+decide no es estético sino de contenido: **`split` mientras el subtítulo quepa
+en la altura de la foto; `stacked` cuando no quepa.**
+
+---
+
 ## Las `_hd` no miden el doble (aviso de auditoría)
 
 `img-srcset.html` lee el ancho real de la base y de la `_hd` y declara ambos en el `srcset` (antes asumía `_hd` = 2× la base y sobredeclaraba). Al hacerlo salió que **ninguna `_hd` del sitio mide 2×**: van de 1.1× a 1.6×, y hay casos peores:

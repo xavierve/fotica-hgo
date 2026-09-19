@@ -58,18 +58,16 @@
 
 {{ else }}
 {{/* split (texto + figura) y plain (solo texto).
-     mediaFirst: true saca la figura ANTES del copy en el DOM -- no con order ni
-     grid-column. Reordenar por CSS deja el orden visual distinto del orden del
-     DOM (WCAG 1.3.2): quien navega con teclado o lector recibe la secuencia al
-     reves que quien mira. Como efecto, en movil tambien apila foto -> texto,
-     que es lo mismo que hace stacked. */}}
+     La figura va DESPUES del copy, y no hay opcion para invertirlo: probado, la
+     altura del copy excede la de la foto y con la foto a la izquierda el
+     desbordamiento cae en el lado por el que se empieza a leer. Con el copy
+     primero, la foto se centra verticalmente y el desajuste queda a la derecha,
+     donde no estorba. Si algun dia se invierte, se mueve el <figure> en el DOM:
+     nunca con order ni grid-column (orden visual != orden del DOM es WCAG 1.3.2). */}}
 <section class="hero hero-{{ $layout }}{{ with .class }} {{ . }}{{ end }}">
   <div class="container hero-inner{{ if eq $layout "plain" }} no-media{{ end }}">
-    {{- $media := "" }}
-    {{- if eq $layout "split" }}{{ $media = printf "<figure class=\"hero-media\">%s</figure>" (partial "img-responsive.html" (dict "src" $cfg.src "alt" (.imageAlt | default "") "sizes" $cfg.sizes "loading" "eager" "fetchpriority" "high")) }}{{ end }}
-    {{- if .mediaFirst }}{{ $media | safeHTML }}{{ end }}
     {{ partial "hero-copy.html" . }}
-    {{- if not .mediaFirst }}{{ $media | safeHTML }}{{ end }}
+    {{ if eq $layout "split" }}<figure class="hero-media">{{ partial "img-responsive.html" (dict "src" $cfg.src "alt" (.imageAlt | default "") "sizes" $cfg.sizes "loading" "eager" "fetchpriority" "high") }}</figure>{{ end }}
   </div>
 </section>
 {{ end }}
