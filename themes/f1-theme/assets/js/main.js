@@ -9,11 +9,14 @@ document.documentElement.classList.add('js');
 /* === Barra fija y boton volver-arriba: cuando mostrarlos ===
    UNA sola senal para las dos piezas: un IntersectionObserver (no un listener
    de scroll: solo dispara al cruzar el umbral, sin trabajo en cada pixel).
-   Aparecen juntas, cuando el HERO sale del viewport.
+   Alternan JUNTAS, como una unidad: sobre el hero no hay ni barra ni boton;
+   fuera del hero aparecen las dos. Misma clase (is-visible), mismo callback. Si
+   solo alternara el boton, al volver al hero quedaria la barra con 60px
+   reservados y un filete sin nada dentro.
 
-   - El boton alterna: se oculta al volver al hero.
-   - La barra solo se AÑADE: una vez mostrada no se vuelve a ocultar al subir
-     (su hueco de 44px esta reservado, asi que nada se mueve).
+   El criterio es POSICIONAL y determinista (el hero esta o no en el viewport),
+   no un patron de "ocultar segun la direccion del scroll": el mismo scroll da
+   siempre el mismo estado.
 
    Sin hero (paginas futuras; hoy las 28 lo llevan) se observa un centinela
    invisible de un viewport de alto: mismo umbral, mismo efecto.
@@ -43,7 +46,7 @@ document.documentElement.classList.add('js');
     // isIntersecting = el hero (o el centinela) sigue a la vista
     var fuera = !entries[0].isIntersecting;
     if (boton) boton.classList.toggle('is-visible', fuera);
-    if (fuera && barra) barra.classList.add('is-visible');
+    if (barra) barra.classList.toggle('is-visible', fuera);
   }, { threshold: 0 }).observe(objetivo);
 
   if (!boton) return;

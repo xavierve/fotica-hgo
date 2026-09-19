@@ -3,9 +3,11 @@
 ## Sin versión — la barra fija aparece cuando el hero sale del viewport
 
 - La barra comparte la señal del volver-arriba: un solo IntersectionObserver,
-  una sola clase (`is-visible`); aparecen juntos. El botón alterna; la barra
-  solo se añade (una vez mostrada no se oculta; su hueco está reservado y no
-  se mueve nada). En páginas sin hero, el centinela de siempre.
+  una sola clase (`is-visible`) y un solo callback. **Alternan juntos**: sobre
+  el hero no hay barra ni botón; fuera del hero aparece la unidad entera (así
+  no queda a la vista el hueco reservado con el filete vacío). El criterio es
+  posicional y determinista, no de dirección de scroll. En páginas sin hero, el
+  centinela de siempre.
 - Progresivo: la barra es **visible por defecto** y solo se oculta bajo
   `html.js`; el botón sigue con `html:not(.js){display:none}`. Sin
   IntersectionObserver se muestra ya. Transición opacity + translateY, anulada
