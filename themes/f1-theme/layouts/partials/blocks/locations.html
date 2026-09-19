@@ -52,7 +52,7 @@
       <h3>Común a ambos centros</h3>
       <p class="locations-common-links">
         {{ with $contact.whatsapp }}<a href="{{ printf "https://wa.me/%s" (replace . "+" "") | safeURL }}">{{ partial "icons.html" "whatsapp" }}<span>Móvil / WhatsApp: {{ $contact.phoneLabel | default . }}</span></a>{{ end }}
-        {{ with $contact.email }}<a href="{{ printf "mailto:%s" . | safeURL }}">{{ partial "icons.html" "email" }}<span>{{ . }}</span></a>{{ end }}
+        {{ partial "email-link.html" (dict "inner" (partial "icons.html" "email")) }}
       </p>
       {{ partial "hours.html" . }}
     </div>

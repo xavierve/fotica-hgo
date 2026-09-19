@@ -1,28 +1,21 @@
 {{- /*
-  {{< email >}} — correo de contacto desde data/site.yaml (contact.email).
+  {{< email >}} — correo de contacto en el cuerpo de una pagina.
 
-  Existe para que el correo no se escriba a mano en el cuerpo de ninguna
-  página. Ya pasó una vez: aviso-legal y contacto publicaban direcciones
-  distintas y una era del dominio viejo, con el agravante de que la de
-  contacto era la dirección para ejercer derechos RGPD. Un 301 redirige web,
-  no correo.
+  Envoltorio fino de partials/email-link.html, que es donde esta la logica y la
+  explicacion. Existe porque el markdown no puede llamar a un partial.
 
-  Accesor ESTRECHO a propósito: NO hacer un {{< site-data key="..." >}}
-  genérico. Un accesor genérico acaba metiendo cualquier campo del yaml en
-  cualquier página y se pierde el control de qué página depende de qué dato.
-  Mismo criterio que {{< hours >}}.
+  La direccion NO se escribe a mano en ninguna pagina. Ya paso una vez: aviso
+  legal y contacto publicaban direcciones distintas y una era del dominio
+  viejo, con el agravante de que era la de ejercicio de derechos RGPD. Un 301
+  redirige web, no correo.
 
-  Por defecto pinta un enlace mailto.
-  {{< email link="false" >}} pinta solo el texto, para cuando ya va dentro
-  de otro enlace o en un contexto donde el mailto sobra.
+  Accesor ESTRECHO a proposito: NO hacer un {{< site-data key="..." >}}
+  generico, que acaba metiendo cualquier campo del yaml en cualquier pagina y
+  se pierde el control de que pagina depende de que dato.
+
+  Ya NO admite link="false": pintar la direccion como texto plano sin senuelos
+  la deja legible para cualquier harvester y anulaba el resto del trabajo. Si
+  alguna vez hace falta el literal en build (no en HTML), se usa el partial
+  email-addr.html directamente.
 */ -}}
-{{- $contact := (hugo.Data.site | default dict).contact | default dict -}}
-{{- with $contact.email -}}
-  {{- if eq ($.Get "link") "false" -}}
-    {{- . -}}
-  {{- else -}}
-    <a href="{{ printf "mailto:%s" . | safeURL }}">{{ . }}</a>
-  {{- end -}}
-{{- else -}}
-  {{- errorf "shortcode email: falta contact.email en data/site.yaml" -}}
-{{- end -}}
+{{- partial "email-link.html" (dict "class" (.Get "class")) -}}

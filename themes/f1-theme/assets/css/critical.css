@@ -532,6 +532,17 @@ a {
   }
 }
 
+/* Senuelos de la direccion de correo (partials/email-link.html): texto basura
+   intercalado en la direccion visible para que el fuente no contenga ninguna
+   cadena con forma de correo. display:none y NO visibility/font-size:0: asi el
+   senuelo no se copia al portapapeles ni lo leen los lectores de pantalla, y
+   quien copia o escucha la direccion recibe la correcta. Va en critical.css
+   porque este CSS se inserta EN LINEA en el <head>: no puede fallar la carga y
+   dejar "BORRA-ESTO" a la vista del visitante. */
+.eml-x {
+  display: none;
+}
+
 /* === Barra fija de contacto (movil) y boton volver-arriba ===
    En movil el boton es el CUARTO ELEMENTO de la barra: pegado a su esquina
    derecha y centrado en vertical, dentro de ella. Sigue siendo un elemento

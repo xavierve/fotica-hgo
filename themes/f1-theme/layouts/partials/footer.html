@@ -47,7 +47,7 @@
         {{ end }}
         {{ with .phone }}<a href="{{ printf "tel:%s" . | safeURL }}">{{ partial "icons.html" "phone" }}{{ $location.phoneLabel | default . }}</a>{{ end }}
         {{ with .whatsapp }} · <a href="{{ printf "https://wa.me/%s" (replace . "+" "") | safeURL }}">WhatsApp</a>{{ end }}
-        {{ with .email }} · <a href="{{ printf "mailto:%s" . | safeURL }}">{{ . }}</a>{{ end }}
+        {{ with .email }} · {{ partial "email-link.html" . }}{{ end }}
       </address>
       {{ else }}
       <address>
@@ -57,7 +57,7 @@
         {{ end }}
         {{ with $contact.phone }}<a href="{{ printf "tel:%s" . | safeURL }}">{{ partial "icons.html" "phone" }}{{ $contact.phoneLabel | default . }}</a>{{ end }}
         {{ with $contact.whatsapp }} · <a href="{{ printf "https://wa.me/%s" (replace . "+" "") | safeURL }}">WhatsApp</a>{{ end }}
-        {{ with $contact.email }} · <a href="{{ printf "mailto:%s" . | safeURL }}">{{ . }}</a>{{ end }}
+        · {{ partial "email-link.html" . }}
       </address>
       {{ end }}
       {{ partial "hours.html" . }}

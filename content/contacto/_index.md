@@ -56,7 +56,7 @@ sections:
 - **Legitimación:** tu consentimiento al enviar el formulario.
 - **Destinatarios:** tu mensaje se envía desde el servidor de nuestro proveedor de alojamiento web, Hostinger, hasta nuestro buzón de correo, que también está alojado en Hostinger. Hostinger actúa como encargado del tratamiento de carácter técnico: aloja la web y el buzón. No usamos ningún otro servicio de envío de correo y no cedemos tus datos a ningún otro tercero.
 - **Sin base de datos ni registros:** el formulario no guarda tu mensaje en ninguna base de datos ni lleva registro de envíos. Tu mensaje solo llega a nuestro buzón de correo.
-- **Derechos:** puedes acceder, rectificar o suprimir tus datos, así como ejercer el resto de derechos reconocidos por la normativa, escribiendo a {{< email link="false" >}}.
+- **Derechos:** puedes acceder, rectificar o suprimir tus datos, así como ejercer el resto de derechos reconocidos por la normativa, escribiendo a {{< email >}}.
 {{< /contact-form >}}
 
 <!-- PENDIENTE (asesor legal / cliente, no de implementación): confirmar la

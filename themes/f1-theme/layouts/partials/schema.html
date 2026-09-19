@@ -37,7 +37,9 @@
 {{- with $brand.description }}{{ $org = merge $org (dict "description" .) }}{{ end -}}
 {{- with $brand.logo }}{{ $org = merge $org (dict "logo" (. | absURL)) }}{{ end -}}
 {{- with $contact.phone }}{{ $org = merge $org (dict "telephone" .) }}{{ end -}}
-{{- with $contact.email }}{{ $org = merge $org (dict "email" .) }}{{ end -}}
+{{/* email: NO se publica en el JSON-LD. Es opcional en schema.org y es la fuga mas
+     barata que hay: el JSON-LD sale en crudo y no admite ni CSS ni codificacion.
+     Telefono y direccion ya identifican al negocio. */}}
 {{- if $sameAs }}{{ $org = merge $org (dict "sameAs" $sameAs) }}{{ end -}}
 {{- $graph = $graph | append $org -}}
 

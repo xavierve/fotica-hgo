@@ -35,7 +35,12 @@ contact:
   phone: "+34717770090"
   phoneLabel: "717 77 00 90"
   whatsapp: "+34717770090"
-  email: "contacto@opticasfausto.com"
+  # Direccion de contacto CODIFICADA: base64 de la cadena invertida. Este repo es
+  # publico, y una direccion en claro aqui se recolecta igual que en una pagina.
+  # La decodifica partials/email-addr.html; para pintarla se usa email-link.html.
+  # Para cambiarla:
+  #   python -c "import base64;print(base64.b64encode('LA@DIRECCION.COM'[::-1].encode()).decode())"
+  emailEnc: "bW9jLm90c3VhZnNhY2l0cG9Ab3RjYXRub2M="
   # Destino del icono Ubicacion de la barra fija movil: id de una entrada de
   # locations[] (usa su mapUrl; no repetir la URL aqui). Sin locationId el tema
   # cae a contact.locationUrl y, si tampoco existe, a /contacto/.

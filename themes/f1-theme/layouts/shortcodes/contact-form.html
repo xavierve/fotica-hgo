@@ -25,7 +25,7 @@
 {{- $contact := $site.contact | default dict -}}
 {{- $form := $contact.form | default dict -}}
 {{- $from := $form.from | default "" -}}
-{{- $to := $form.to | default $contact.email | default "" -}}
+{{- $to := $form.to | default (partial "email-addr.html" .) | default "" -}}
 {{- if or (not $from) (not $to) -}}
   {{- errorf "contact-form: faltan contact.form.from y/o el destinatario (contact.form.to o contact.email) en data/site.yaml" -}}
 {{- end -}}
@@ -75,7 +75,7 @@
 
   <div class="cf-main">
     {{- /* Movil: el correo es la accion principal y el formulario queda colapsado. */}}
-    {{ with $contact.email }}<p class="cf-mailto"><a class="btn btn-fill" href="mailto:{{ . }}">{{ partial "icons.html" "mail" }}{{ i18n "cfMailto" }}</a></p>{{ end }}
+    <p class="cf-mailto">{{ partial "email-link.html" (dict "class" "btn btn-fill" "inner" (partial "icons.html" "mail") "label" (i18n "cfMailto")) }}</p>
 
     <details class="cf-details">
       <summary>{{ i18n "cfSummary" }}</summary>
@@ -140,6 +140,6 @@
     </details>
 
     {{- /* Desktop: el formulario esta a la vista y el correo queda como alternativa debajo. */}}
-    {{ with $contact.email }}<p class="cf-alt">{{ i18n "cfAlt" }} <a href="mailto:{{ . }}">{{ . }}</a></p>{{ end }}
+    <p class="cf-alt">{{ i18n "cfAlt" }} {{ partial "email-link.html" . }}</p>
   </div>
 </div>

@@ -1,0 +1,26 @@
+{{- /*
+  email-addr.html — devuelve la direccion de contacto EN CLARO.
+
+  La direccion no esta en claro en data/site.yaml: esta en contact.emailEnc,
+  como base64 de la cadena invertida. El motivo no son los harvesters de la web
+  (de eso se ocupa email-link.html), sino que este repositorio es PUBLICO en
+  GitHub: una direccion en claro en el yaml se recolecta ahi igual de facil que
+  en una pagina.
+
+  No es criptografia y no lo pretende. Es que la cadena no encaje en un patron
+  generico: base64 a secas lo prueba cualquier recolector medianamente serio,
+  base64 de la cadena invertida ya no cae en ese patron.
+
+  USO: solo donde hace falta la direccion literal y NO va a aparecer en el HTML
+  publicado — hoy, generar public/contacto/config.php. Para pintarla en una
+  pagina se usa SIEMPRE partials/email-link.html, nunca esto.
+
+  Si el dia de manana hay que cambiar la direccion:
+    python -c "import base64;print(base64.b64encode('LA@DIRECCION.COM'[::-1].encode()).decode())"
+*/ -}}
+{{- $contact := (hugo.Data.site | default dict).contact | default dict -}}
+{{- $enc := $contact.emailEnc -}}
+{{- if not $enc -}}
+  {{- errorf "email-addr: falta contact.emailEnc en data/site.yaml (base64 de la direccion invertida). Si ves contact.email en claro, es de antes del cambio: hay que codificarla." -}}
+{{- end -}}
+{{- delimit (collections.Reverse (split ($enc | base64Decode) "")) "" -}}
