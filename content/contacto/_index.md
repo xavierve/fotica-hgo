@@ -47,12 +47,11 @@ sections:
 ---
 ## ¿Prefieres escribirnos? Cuéntanos en qué podemos ayudarte
 
-<!-- IMPLEMENTACIÓN (Claude Code): formulario dual según dispositivo (ap7.5).
+<!-- IMPLEMENTACIÓN (Claude Code): formulario dual según dispositivo .
      Móvil: CTA principal mailto + formulario colapsado bajo "¿Prefieres escribirnos aquí?"
      Desktop: formulario visible, email como alternativa debajo.
      Campos: Nombre · Teléfono · Mensaje breve.
-     Backend: PHP mail() (hosting Hostinger — cambio de decisión, 6 sep: ya
-     no es Cloudflare Worker + Resend, ver Contexto del proyecto en CLAUDE.md).
+     Backend: PHP mail() (hosting Hostinger , ver Contexto del proyecto en CLAUDE.md).
      Microcopy botón: "Te respondemos lo antes posible dentro de nuestro horario de tienda."
      Confirmación sin redirección: "¡Recibido! Te contactaremos muy pronto.
      Si es urgente, llámanos o ven directamente a la tienda." -->
