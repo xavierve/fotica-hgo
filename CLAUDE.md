@@ -53,12 +53,12 @@ CLAUDE.md divergen, y la copia vieja acaba dictando convenciones muertas.
 
 ## Estado actual (verificado con build)
 
-Hecho y validado: `schema.html` v02 (@graph completo, BreadcrumbList, FAQPage — 127 preguntas en el sitio), `breadcrumb.html` corregido, `site.yaml` v03 (legal unificada), 30 páginas de contenido migradas, shortcodes + iconos + `cta` v2 (bg/bgMobile/bgColor/preset/microcopy), `404.html`, attributes de Goldmark activados, CSS de utilidades (`fs-xs/s/l`, `has-bg-image/color`, banner). Hero con `bg`/`bgMobile` real en las 4 páginas principales (falta Contacto — no lleva hero). Las 21 páginas de servicio/producto tienen `card.image` apuntando a un archivo real existente (verificado, ninguna en fallback).
-
+Hecho y validado: `schema.html` v02 (@graph completo, BreadcrumbList, FAQPage — 127 preguntas en el sitio), `breadcrumb.html` corregido, `site.yaml` v03 (legal unificada), 30 páginas de contenido migradas, shortcodes + iconos + `cta` v2 (bg/bgMobile/bgColor/preset/microcopy), `404.html`, attributes de Goldmark activados, CSS de utilidades (`fs-xs/s/l`, `has-bg-image/color`, banner). Hero con `image`. Las 21 páginas de servicio/producto tienen `card.image` apuntando a un archivo real existente (verificado, ninguna en fallback).
 Shortcodes añadidos (validados con `hugo build` real, sin warnings):
 - `testimonial` (cita suelta con wrapper propio), `testimonials` + `testimonial-item` (grid de citas anidadas, reutiliza `.cards-grid`/`.block-testimonials` — mismo CSS que el bloque `type: testimonials` de `sections:`).
 - `text-split` + `text-split-item`: grid simétrico 2 columnas para pares texto+texto (o texto+vídeo a futuro — Goldmark `unsafe=true` ya permite HTML embebido sin tratamiento especial). Reutiliza la mecánica de `.image-text-inner` (1fr → 1fr 1fr en desktop). Modificadores por item: `textSize` (reutiliza `block-text-*`), `align` (reutiliza `block-align-*`), `pad` (tokens propios `has-pad-s/m/l` sobre `--space-s/m/l`, más pequeños que el pad de sección), `margin` (CSS libre vía `safeCSS`, sin tokens — como `bgColor`). El wrapper admite `width="wide|full"` como cualquier bloque.
 - Sección equipo en `/nosotros/`: completa con 7 personas, fotos y bios (el bio se despliega con `<details>`, nunca modal). Schema `Person` de los 7 generado desde el array `team:`, con `hasCredential`/`licenseNumber` leídos del front matter — sin nombres hardcodeados en el tema.
+imagenes ya definidas. ultimando diseño y funcionalidades con Claude Code.
 
 ## TAREAS PENDIENTES (Claude Code)
 
@@ -66,7 +66,7 @@ Orden fijado por Foco (10 sep). Las tareas 1-3 son de layout y comparten
 zona de pantalla: conviene hacerlas seguidas y en este orden, porque la 2 y
 la 3 tienen que coordinar posiciones entre sí.
 
-### 1. Layout del hero — `stacked` (defecto) y `overlay` (opt-in)
+### 1. Layout del hero — `stacked` (defecto) , `overlay` y `split` (opt-in)
 
 **Qué está decidido y no se reabre:** el hero nunca lleva texto encima de la
 imagen en móvil. Motivo: legibilidad para el público 45-75+ (sesión 21 ago).
@@ -101,16 +101,17 @@ variantes hermanas con nombres parecidos.
 pasan a apilado solas, sin migrar ni un `.md`. Solo se añade
 `layout: overlay` donde se quiera la excepción.
 
-**Punto de partida real:** `hero.html` tiene hoy dos modos que conviven — (a)
-`bg`/`bgMobile` como `background-image` de sección completa (Nosotros, Visión,
-Audición), y (b) `.image` como `<img>` real en split a dos columnas (Home). El
-(a) queda sustituido por `stacked` + `overlay`. **Pendiente de decidir con
-Foco:** qué pasa con el (b) — si el split de Home se absorbe dentro de
-`stacked` como variante, o sigue siendo un tercer modo. No asumir, preguntar.
+**Punto de partida real:** `hero.html` tiene hoy 3 modos de layout que conviven 
+— (a) `overlay` : `image` como `background-image` de sección completa 
+- (b) `stacked` : `image` como `<img>` real apilada arriba y `hero-copy` abajo
+- (c)  `splitp` : `image` es <img> y va en la columna de la derecha.
+ **Pendiente de decidir con Foco:** cuál utilizar
+el fichero definido en image: foto.webp , busca foto_hd.webp en pantallas desktop con alto DPI y busca foto_m.webp en móvil.
 
-**Spec de `stacked`** (la variante que mejor funcionó en las pruebas):
+**Spec de `stacked`** (necesita fotos _hd de 1440 x 2 = 2880 px0 , que no hay)
+La opción es perder calidad en desktop avanzados, o pasar a modo `split`
 
-- **Banda de foto arriba**, a sangre completa. Altura por `aspect-ratio`, no
+- (XXX REVISAR) **Banda de foto arriba**, a sangre completa. Altura por `aspect-ratio`, no
   `min-height` fijo, para que escale con el ancho (el prototipo usaba
   `min-height:500px` y se quedaba igual en cualquier pantalla). Recorte
   configurable: el prototipo necesitó `center 30%` para no cortar caras, así
@@ -217,35 +218,6 @@ subtítulo visibles sin scroll en un móvil estándar; en desktop el contenido
 alinea con la rejilla del resto de la página y el H1 no deja huérfanos.
 Verificar con la skill `visual-qa`, no a ojo.
 
-### 2. Indicador de scroll + botón volver-arriba
-
-(a) En heros de landings (home, `/vision/`, `/audicion/`, progresivas,
-lentes-de-contacto, gafas-infantiles): indicador de scroll con
-`icon: arrow-down` (`icons.html`), animación sutil, dentro de `<a>`/`<button>`
-con `aria-label`.
-
-(b) Botón global "volver arriba" con `arrow-up`, visible solo tras ~1.5
-viewports de scroll, `aria-label="Volver arriba"`, desplazamiento suave vía
-CSS `scroll-behavior: smooth` (respetando `prefers-reduced-motion`).
-
-**También en móvil** (corregido 13 sep — el 10 sep se había descartado por
-miedo al solape con el sticky footer, pero Foco aportó una referencia real que
-lo desmiente: Instituto Levilaser). Conviven bien si el botón es un círculo
-pequeño en la esquina inferior derecha, **por encima** de la barra, no dentro
-de ella. Ojo a un detalle visible en esa misma referencia: el botón tapaba
-parcialmente la etiqueta "Ubicación" del último ítem del sticky footer. Dejar
-holgura suficiente o reservar espacio en la propia barra para que nada quede
-cubierto. Verificar con la skill `visual-qa` a 359px de ancho, que es donde
-más aprieta.
-
-### 3. Sticky footer móvil
-
-Llamada / WhatsApp / Ubicación (requisito ap8.1), usando `icons.html` y datos
-de `site.yaml`. Coordinar con el botón volver-arriba de la tarea 2.
-
-Referencia útil: el header ya resolvió problemas equivalentes (iconos-solo en
-pantallas estrechas, breakpoints medidos, `white-space:nowrap` en `.btn` para
-que el número no parta el botón). Mirar `critical.css` antes de reinventar.
 
 ### 4. Optimización de imágenes
 
@@ -358,16 +330,11 @@ Spans marcados con `data-obf` en el contenido, render vía JS en cliente
 ### 7. Verificar 404 en Hostinger
 
 `/404.html` debe servirse con estado HTTP 404 real — comprobar cómo lo
-resuelve Hostinger (Cloudflare Pages lo hacía por defecto; hosting tradicional
-puede necesitar `ErrorDocument 404` en `.htaccess`). El template ya lleva
-`noindex`, pero el meta se emite dentro de `main` — moverlo al `<head>` vía
-mecanismo del tema (p. ej. `.Store` leído en `header-meta.html`).
+resuelve Hostinger (hosting tradicional puede necesitar `ErrorDocument 404` en `.htaccess`). El template ya lleva `noindex`, pero el meta se emite dentro de `main` — moverlo al `<head>` vía mecanismo del tema (p. ej. `.Store` leído en `header-meta.html`).
 
 ### 8. Redirecciones
 
-En Hostinger es `.htaccess` (Apache, `RewriteRule`/`Redirect 301`), no el
-`_redirects` de Cloudflare Pages. Del dominio viejo → nuevo, incluyendo los 4
-subdominios landing (`audicion.`, `lentes-graduadas.` →
+En Hostinger es `.htaccess` (Apache, `RewriteRule`/`Redirect 301`),  Del dominio viejo → nuevo, incluyendo los 4 subdominios landing (`audicion.`, `lentes-graduadas.` →
 `/vision/productos/gafas-progresivas/`, `lentillas.` →
 `/vision/productos/lentes-de-contacto/`, `vueltaalcole.` →
 `/vision/productos/gafas-infantiles/`) y el mapeo de URLs del WordPress
@@ -466,8 +433,7 @@ Hostinger, comprobar sobre el dominio real:
 
 - **HTTP 404 de verdad** en una URL inexistente (tarea 7) — no basta con que
   se vea la página bonita: mirar el código de estado.
-- **Redirecciones 301** del dominio viejo y de los 4 subdominios (tarea 8),
-  comprobando que la cadena no pasa por un 302 intermedio.
+- **Redirecciones 301** (una vez publicado el nuevo dominio) del dominio viejo y de los 4 subdominios (tarea 8), comprobando que la cadena no pasa por un 302 intermedio.
 - **Formulario**: envío real y que el correo llegue a bandeja, no a spam
   (tarea 5). Probar desde Gmail y desde Outlook, que filtran distinto.
 - **Certificado SSL** válido en `opticasfausto.com` y en `www.` (los CAA
