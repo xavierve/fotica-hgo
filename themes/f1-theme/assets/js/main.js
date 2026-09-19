@@ -1,5 +1,65 @@
 document.documentElement.classList.add('js');
 
+/* Este bloque va PRIMERO a proposito: la barra fija es una accion de contacto y
+   esta oculta bajo html.js hasta que este codigo la muestre. Si algo anterior
+   (slider, galeria, contador) lanzara una excepcion, el resto del script no se
+   ejecutaria y la barra se quedaria oculta para siempre. Los fallos de CARGA de
+   main.js los cubre el onerror del <script> en baseof.html. */
+/* === Barra fija y boton volver-arriba: cuando mostrarlos ===
+   UNA sola senal para las dos piezas: un IntersectionObserver (no un listener
+   de scroll: solo dispara al cruzar el umbral, sin trabajo en cada pixel).
+   Aparecen juntas, cuando el HERO sale del viewport.
+
+   - El boton alterna: se oculta al volver al hero.
+   - La barra solo se AÑADE: una vez mostrada no se vuelve a ocultar al subir
+     (su hueco de 44px esta reservado, asi que nada se mueve).
+
+   Sin hero (paginas futuras; hoy las 28 lo llevan) se observa un centinela
+   invisible de un viewport de alto: mismo umbral, mismo efecto.
+
+   Sin IntersectionObserver no hay senal: la barra es una accion de contacto,
+   asi que se muestra ya en lugar de quedarse oculta bajo html.js. === */
+(function () {
+  var boton = document.querySelector('.back-to-top');
+  var barra = document.querySelector('.sticky-cta');
+  if (!boton && !barra) return;
+
+  if (!('IntersectionObserver' in window)) {
+    if (barra) barra.classList.add('is-visible');
+    return;
+  }
+
+  var objetivo = document.querySelector('.hero');
+  if (!objetivo) {
+    objetivo = document.createElement('div');
+    objetivo.className = 'scroll-sentinel';
+    objetivo.setAttribute('aria-hidden', 'true');
+    objetivo.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:100svh;pointer-events:none;visibility:hidden';
+    document.body.appendChild(objetivo);
+  }
+
+  new IntersectionObserver(function (entries) {
+    // isIntersecting = el hero (o el centinela) sigue a la vista
+    var fuera = !entries[0].isIntersecting;
+    if (boton) boton.classList.toggle('is-visible', fuera);
+    if (fuera && barra) barra.classList.add('is-visible');
+  }, { threshold: 0 }).observe(objetivo);
+
+  if (!boton) return;
+  /* El clic NO navega al ancla: un <a href="#top"> deja #top en la URL y una
+     entrada de historial por pulsacion, y el boton "atras" acaba dando saltos
+     en la misma pagina. Se desplaza a mano y se mueve el foco al destino real
+     (#top, tabindex=-1) para que el teclado siga desde arriba. behavior no se
+     fija: manda el CSS (scroll-behavior:smooth, o auto con movimiento reducido).
+     preventScroll evita que el foco provoque un segundo desplazamiento. */
+  boton.addEventListener('click', function (e) {
+    e.preventDefault();
+    window.scrollTo({ top: 0 });
+    var destino = document.getElementById('top');
+    if (destino) destino.focus({ preventScroll: true });
+  });
+})();
+
 /* === Slider: desplazar una tarjeta por clic. Sin JS, la pista sigue siendo
    scrollable por arrastre/rueda (scroll-snap CSS). === */
 document.querySelectorAll('.block-slider').forEach(function (bloque) {
@@ -153,45 +213,5 @@ document.querySelectorAll('.block-gallery').forEach(function (bloque) {
   });
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') cerrar();
-  });
-})();
-
-/* === Boton volver-arriba: cuando mostrarlo ===
-   IntersectionObserver, no un listener de scroll: el observer solo dispara al
-   cruzar el umbral, sin trabajo en cada pixel de desplazamiento.
-
-   Umbral: que el HERO salga del viewport. En las ~30 paginas internas sin hero
-   no hay nada que observar, asi que se crea un centinela invisible de un
-   viewport de alto y se observa ese. El efecto es el mismo en los dos casos:
-   el boton aparece cuando ya se ha bajado una pantalla larga. === */
-(function () {
-  var boton = document.querySelector('.back-to-top');
-  if (!boton || !('IntersectionObserver' in window)) return;
-
-  var objetivo = document.querySelector('.hero');
-  if (!objetivo) {
-    objetivo = document.createElement('div');
-    objetivo.className = 'scroll-sentinel';
-    objetivo.setAttribute('aria-hidden', 'true');
-    objetivo.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:100svh;pointer-events:none;visibility:hidden';
-    document.body.appendChild(objetivo);
-  }
-
-  new IntersectionObserver(function (entries) {
-    // isIntersecting = el hero (o el centinela) sigue a la vista -> sin boton
-    boton.classList.toggle('is-visible', !entries[0].isIntersecting);
-  }, { threshold: 0 }).observe(objetivo);
-
-  /* El clic NO navega al ancla: un <a href="#top"> deja #top en la URL y una
-     entrada de historial por pulsacion, y el boton "atras" acaba dando saltos
-     en la misma pagina. Se desplaza a mano y se mueve el foco al destino real
-     (#top, tabindex=-1) para que el teclado siga desde arriba. behavior no se
-     fija: manda el CSS (scroll-behavior:smooth, o auto con movimiento reducido).
-     preventScroll evita que el foco provoque un segundo desplazamiento. */
-  boton.addEventListener('click', function (e) {
-    e.preventDefault();
-    window.scrollTo({ top: 0 });
-    var destino = document.getElementById('top');
-    if (destino) destino.focus({ preventScroll: true });
   });
 })();

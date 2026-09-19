@@ -1,5 +1,23 @@
 # F1 Theme · Changelog
 
+## Sin versión — la barra fija aparece cuando el hero sale del viewport
+
+- La barra comparte la señal del volver-arriba: un solo IntersectionObserver,
+  una sola clase (`is-visible`); aparecen juntos. El botón alterna; la barra
+  solo se añade (una vez mostrada no se oculta; su hueco está reservado y no
+  se mueve nada). En páginas sin hero, el centinela de siempre.
+- Progresivo: la barra es **visible por defecto** y solo se oculta bajo
+  `html.js`; el botón sigue con `html:not(.js){display:none}`. Sin
+  IntersectionObserver se muestra ya. Transición opacity + translateY, anulada
+  con `prefers-reduced-motion`. El `padding-bottom` del body no se toca.
+- La clase `js` se pone ahora desde un `<script>` inline en el `<head>`:
+  medido con `main.js` tardando 1,5 s, poner `js` desde `main.js` (diferido)
+  dejaba ver la barra a ancho completo y sin hueco 88 frames antes de ocultarla.
+  El `<script>` de `main.js` lleva `onerror` que quita la clase (si no carga,
+  se vuelve al estado sin JS con la barra visible), y el bloque de la barra va
+  el primero de `main.js` para que una excepción en código posterior no lo deje
+  sin ejecutar.
+
 ## Sin versión — barra fija: anillos de foco enteros y `text-decoration`
 
 - `--back-to-top-gap` sube a `.5rem`: con `.25rem` el anillo de foco del

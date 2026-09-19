@@ -689,6 +689,30 @@ html.js .sticky-cta::after {
   background: rgba(0, 0, 0, .18);
 }
 
+/* La barra aparece cuando el hero sale del viewport, con la MISMA senal que el
+   volver-arriba (una sola clase, is-visible, puesta por main.js). En la primera
+   pantalla no aporta: el hero ya lleva sus propios CTAs (preset: contact) y la
+   barra se comeria 56px de un hero que ya no cabe.
+   Progresivo, y AQUI las dos piezas no se comportan igual: el boton sin JS no se
+   pinta (no hay quien lo muestre), pero la barra es una accion de contacto y sin
+   JS tiene que verse siempre. Por eso es visible por defecto y solo se oculta
+   bajo html.js. Una vez mostrada no se vuelve a ocultar (main.js solo AÑADE la
+   clase); el boton si se oculta al volver al hero, y no pasa nada porque su
+   hueco esta reservado. El padding-bottom del body no se alterna con esto: esta
+   al final del documento, donde la barra ya lleva rato visible. */
+html.js .sticky-cta {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(.5rem);
+  transition: opacity .2s ease, transform .2s ease, visibility .2s;
+}
+
+html.js .sticky-cta.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
 /* El contenido del final de la pagina (footer) tiene que poder verse entero por
    encima de la barra, que lo taparia. Sin override en desktop: alli el token
    vale 0 y el calc() resuelve a 0 por si solo. */
@@ -720,7 +744,8 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .back-to-top {
+  .back-to-top,
+  html.js .sticky-cta {
     transition: none;
   }
 }

@@ -1,3 +1,11 @@
+{{/* Clase js ANTES del primer pintado. main.js tambien la pone, pero es diferido y
+     llega despues de que el navegador ya haya pintado: con la barra fija visible
+     por defecto (y oculta solo bajo html.js), esperar a main.js dejaba ver la barra
+     a ancho completo, sin hueco reservado, hasta que llegaba el JS (medido: 88
+     frames con main.js tardando 1,5 s), y luego se desvanecia. Patron estandar
+     para estados iniciales que dependen de JS. Sin JS este script no corre y la
+     barra sigue visible. */}}
+<script>document.documentElement.classList.add("js")</script>
 {{ partial "seo.html" . }}
 {{ partial "og.html" . }}
 {{ partial "schema.html" . }}
