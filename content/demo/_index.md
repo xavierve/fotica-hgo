@@ -23,7 +23,6 @@ hero:
   subtitle: "Una sola clave `image` en los tres layouts. Redimensiona la ventana: por debajo de 820px carga `212-vision_infantil_hero_m.webp`, que existe junto al archivo base — la variante móvil se detecta por convención `_m`, no se declara. El overlay toma el tinte de bgColor vía color-mix."
   image: "/images/212-vision_infantil_hero.webp"
   imageAlt: "Anabel, óptico-optometrista, tapa un ojo a una niña con un oclusor durante una revisión visual infantil"
-  # bgColor: "var(--bg-color2)"
   preset: contact
   labelCall: "Llamar ahora"
   layout: split          # acepta: split | stacked (default | overlay (texto sobre la foto (>=821px); en movil se apila)
@@ -104,6 +103,39 @@ sections:
     title: "2.7- textSize: s · align: right"
     text: "La escala mínima de bloque y alineación derecha. Para letra pequeña editorial."
     image: "https://picsum.photos/seed/it7/640/420"
+    imageAlt: "Demo"
+
+  # ============ IMAGE_TEXT — valign (solo visible >=821px y con alturas distintas) ============
+  - type: image-text
+    valign: top
+    title: "2.8a- valign: top — añade is-top"
+    text: "Copy deliberadamente largo para que la columna de texto sea más alta que la imagen: es el único escenario en el que `valign` se nota. Si el copy fuese más corto que la foto, los tres valores darían el mismo resultado visual. Compara 2.8, 2.9 y 2.10 mirando **dónde queda la imagen**, no el texto. Recuerda que por debajo de 821px el grid colapsa a una columna y `valign` deja de tener efecto: en móvil los tres bloques son idénticos."
+    image: "https://picsum.photos/seed/it8/640/300"
+    imageAlt: "Demo"
+  - type: image-text
+    valign: center
+    title: "2.8b- valign: center — xx xx-xxx"
+    text: "Copy deliberadamente largo para que la columna de texto sea más alta que la imagen: es el único escenario en el que `valign` se nota. Si el copy fuese más corto que la foto, los tres valores darían el mismo resultado visual. Compara 2.8, 2.9 y 2.10 mirando **dónde queda la imagen**, no el texto. Recuerda que por debajo de 821px el grid colapsa a una columna y `valign` deja de tener efecto: en móvil los tres bloques son idénticos."
+    image: "https://picsum.photos/seed/it8/640/300"
+    imageAlt: "Demo"
+  - type: image-text
+    valign: bottom
+    title: "2.8c- valign: bottom — is-bottom"
+    text: "Copy deliberadamente largo para que la columna de texto sea más alta que la imagen: es el único escenario en el que `valign` se nota. Si el copy fuese más corto que la foto, los tres valores darían el mismo resultado visual. Compara 2.8, 2.9 y 2.10 mirando **dónde queda la imagen**, no el texto. Recuerda que por debajo de 821px el grid colapsa a una columna y `valign` deja de tener efecto: en móvil los tres bloques son idénticos."
+    image: "https://picsum.photos/seed/it8/640/300"
+    imageAlt: "Demo"
+  - type: image-text
+    valign: center
+    title: "2.9- valign: center — el default, NO emite clase"
+    text: "Copy deliberadamente largo para que la columna de texto sea más alta que la imagen: es el único escenario en el que `valign` se nota. Si el copy fuese más corto que la foto, los tres valores darían el mismo resultado visual. Escribirlo explícitamente equivale a omitirlo: compara el HTML de 2.8 y 2.9 mirando **dónde queda la imagen**, no el texto. Recuerda que por debajo de 821px el grid colapsa a una columna y `valign` deja de tener efecto: en móvil los tres bloques son idénticos."
+    image: "https://picsum.photos/seed/it9/640/300"
+    imageAlt: "Demo"
+  - type: image-text
+    valign: bottom
+    reverse: true
+    title: "2.10- valign: bottom + reverse — añade is-bottom"
+    text: "Copy deliberadamente largo para que la columna de texto sea más alta que la imagen: es el único escenario en el que `valign` se nota. Si el copy fuese más corto que la foto, los tres valores darían el mismo resultado visual. Compara 2.8, 2.9 y 2.10 mirando **dónde queda la imagen**, no el texto. Recuerda que por debajo de 821px el grid colapsa a una columna y `valign` deja de tener efecto: en móvil los tres bloques son idénticos."
+    image: "https://picsum.photos/seed/it10/640/300"
     imageAlt: "Demo"
 
   # ============ COUNTER — con y sin fondo ============

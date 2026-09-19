@@ -3,6 +3,15 @@
 {{/* Sin imagen el grid de dos columnas dejaba la derecha vacia y el texto
      ocupando solo media pagina. is-textonly lo colapsa a una columna. */}}
 {{ if not .image }}{{ $extra = $extra | append "is-textonly" }}{{ end }}
+{{/* valign: alineacion vertical de las dos columnas. "center" es el default y
+     NO emite clase -- se acepta como valor explicito para poder escribirlo en
+     el front matter sin ensuciar el DOM con una clase que no hace nada. */}}
+{{ with .valign }}
+  {{ if not (in (slice "top" "center" "bottom") .) }}
+    {{ errorf "image-text: valign admite top|center|bottom, recibido %q" . }}
+  {{ end }}
+  {{ if ne . "center" }}{{ $extra = $extra | append (printf "is-%s" .) }}{{ end }}
+{{ end }}
 <section class="{{ partial "block-classes.html" (dict "name" "image-text" "context" . "extra" $extra) }}">
   <div class="container image-text-inner has-cols">
     <div class="image-text-copy">

@@ -94,9 +94,20 @@ sections:
     image:
     imageAlt:
     reverse: true
+    valign: top       # top | center (default) | bottom
 ```
 
 Si `reverse: true`, añade `is-reverse`.
+
+`valign` alinea verticalmente **las dos columnas** del grid cuando una es más
+alta que la otra: `top` → `is-top`, `bottom` → `is-bottom`, ambas con
+`align-items` sobre `.image-text-inner`. El default es `center` (el elemento más
+corto queda centrado contra el más alto) y **no emite clase** — escribir
+`valign: center` es válido y equivale a omitirlo. Solo tiene efecto a partir de
+821px: por debajo el grid es de una columna. Un valor fuera de la terna aborta
+el build con `errorf`.
+
+No confundir con `align` de Campos Comunes, que es `text-align` (horizontal).
 
 ## Text Split
 

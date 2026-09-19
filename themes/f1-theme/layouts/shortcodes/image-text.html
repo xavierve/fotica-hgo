@@ -31,6 +31,9 @@
     variant   — default | soft | featured | contrast
     width     — default | wide | full
     reverse   — "true" → imagen a la izquierda / copy a la derecha (añade is-reverse)
+    valign    — top | center | bottom. Alineación vertical de AMBAS columnas
+                cuando una es más alta que la otra. Default center (no emite
+                clase). Solo tiene efecto a partir de 821px.
     class, pad, textSize, align — mismos modificadores genéricos que cualquier block
 */ -}}
 
@@ -48,6 +51,7 @@
     "variant"  (.Get "variant")
     "width"    (.Get "width")
     "reverse"  (eq (.Get "reverse") "true")
+    "valign"   (.Get "valign")
     "class"    (.Get "class")
     "pad"      (.Get "pad")
     "textSize" (.Get "textSize")

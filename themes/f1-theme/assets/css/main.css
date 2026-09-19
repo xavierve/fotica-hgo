@@ -224,6 +224,19 @@
   gap: clamp(1rem, 3vw, 1.75rem);
   align-items: center
 }
+/* El h2 de image-text no es hijo directo de .container ni vive en .prose, asi
+   que no le alcanza ninguna regla de tamano del tema: hereda el default del UA
+   (1.5em de cuerpo y .83em de margen). Ese 1.5em SI escala con textSize, porque
+   block-text-* pone font-size en la <section>; por eso el margen inferior va en
+   em y no en rem. Arriba a cero: en movil el h2 queda contra el padding del
+   bloque, y en desktop ese margen solo engordaba la caja del grid item.
+   Abajo .45em en vez de .83em: los copys son largos y el titular respiraba de
+   mas. No hay colapso que lo compense -- .prose :first-child ya va a cero --,
+   asi que este valor ES el hueco completo entre titular y primer parrafo. */
+.image-text-copy>h2 {
+  margin-top: 0;
+  margin-bottom: .45em
+}
 .cards-grid,
 .gallery-grid,
 .logo-grid {
@@ -545,6 +558,17 @@ address {
   /* sin imagen no hay segunda columna que rellenar */
   .block-image-text.is-textonly .image-text-inner {
     grid-template-columns: 1fr
+  }
+  /* valign: alineacion vertical de las DOS columnas, no solo del copy. Con el
+     copy mas alto que la imagen, is-top lleva tambien la imagen al borde
+     superior; por defecto (sin clase) el mas corto queda centrado. Solo a
+     partir de 821px: por debajo el grid es de una columna y align-items no
+     tiene efecto. */
+  .block-image-text.is-top .image-text-inner {
+    align-items: start
+  }
+  .block-image-text.is-bottom .image-text-inner {
+    align-items: end
   }
   .footer-grid {
     grid-template-columns: 1fr 1fr 1.35fr

@@ -57,6 +57,7 @@ sections:
     image: ""
     imageAlt: ""
     reverse: false
+    valign: top
   - type: cards
     columns: 3
     title: ""
@@ -82,7 +83,9 @@ Todos los bloques de `sections` aceptan:
 - `width`: `default`, `wide`, `full`
 - `variant`: `default`, `soft`, `featured`, `contrast`
 - `textSize`: `xs`, `s`, `m`, `l`, `xl` — solo bloques/shortcodes de bloque (no confundir con la utilidad CSS fs-*, para texto suelto en prosa; ver "Talla de bloque vs talla de prosa" más abajo)
-- `align`: `left`, `center`, `right`
+- `align`: `left`, `center`, `right` — es `text-align`, horizontal. La
+  alineación vertical no es un campo común: solo la declaran los bloques de dos
+  columnas (`image-text`, vía `valign`; ver BLOCKS.md)
 - `class`: string opcional
 
 ## Hero: layouts
