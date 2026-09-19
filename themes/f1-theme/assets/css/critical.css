@@ -696,18 +696,23 @@ html.js .sticky-cta::after {
    Progresivo, y AQUI las dos piezas no se comportan igual: el boton sin JS no se
    pinta (no hay quien lo muestre), pero la barra es una accion de contacto y sin
    JS tiene que verse siempre. Por eso es visible por defecto y solo se oculta
-   bajo html.js. Una vez mostrada no se vuelve a ocultar (main.js solo AÑADE la
+   bajo html.js-boot, una clase propia y estrecha que pone un script inline del
+   <head> (header-meta.html) y que consume SOLO esta regla. NO se usa html.js: esa
+   la pone main.js y significa "el codigo que muestra cosas esta corriendo"
+   (.js .reveal, .js .slider-nav); ponerla antes de saberlo puede dejar contenido
+   oculto para siempre si main.js falla. Con js-boot el peor caso es que la barra
+   no aparezca. Una vez mostrada no se vuelve a ocultar (main.js solo AÑADE la
    clase); el boton si se oculta al volver al hero, y no pasa nada porque su
    hueco esta reservado. El padding-bottom del body no se alterna con esto: esta
    al final del documento, donde la barra ya lleva rato visible. */
-html.js .sticky-cta {
+html.js-boot .sticky-cta {
   opacity: 0;
   visibility: hidden;
   transform: translateY(.5rem);
   transition: opacity .2s ease, transform .2s ease, visibility .2s;
 }
 
-html.js .sticky-cta.is-visible {
+html.js-boot .sticky-cta.is-visible {
   opacity: 1;
   visibility: visible;
   transform: none;
@@ -745,7 +750,7 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .back-to-top,
-  html.js .sticky-cta {
+  html.js-boot .sticky-cta {
     transition: none;
   }
 }

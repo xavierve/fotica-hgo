@@ -1,7 +1,8 @@
 document.documentElement.classList.add('js');
 
 /* Este bloque va PRIMERO a proposito: la barra fija es una accion de contacto y
-   esta oculta bajo html.js hasta que este codigo la muestre. Si algo anterior
+   esta oculta bajo html.js-boot (clase puesta en el <head>) hasta que este codigo
+   la muestre. Si algo anterior
    (slider, galeria, contador) lanzara una excepcion, el resto del script no se
    ejecutaria y la barra se quedaria oculta para siempre. Los fallos de CARGA de
    main.js los cubre el onerror del <script> en baseof.html. */

@@ -12,6 +12,6 @@
     {{ partial "footer.html" . }}
     {{ partial "back-to-top.html" . }}
     {{ partial "sticky-cta.html" . }}
-    {{ $js := resources.Get "js/main.js" }}{{ if $js }}<script src="{{ $js.RelPermalink }}" defer onerror="document.documentElement.classList.remove('js')"></script>{{ end }}
+    {{ $js := resources.Get "js/main.js" }}{{ if $js }}<script src="{{ $js.RelPermalink }}" defer onerror="document.documentElement.classList.remove('js-boot')"></script>{{ end }}
   </body>
 </html>

@@ -10,13 +10,15 @@
   `html.js`; el botón sigue con `html:not(.js){display:none}`. Sin
   IntersectionObserver se muestra ya. Transición opacity + translateY, anulada
   con `prefers-reduced-motion`. El `padding-bottom` del body no se toca.
-- La clase `js` se pone ahora desde un `<script>` inline en el `<head>`:
-  medido con `main.js` tardando 1,5 s, poner `js` desde `main.js` (diferido)
+- Dos señales de JS, con significados distintos: `html.js` la pone `main.js`
+  (línea 1) y sigue gobernando `.js .reveal` y `.js .slider-nav`; `html.js-boot`
+  la pone un `<script>` inline en el `<head>` y la consume **solo** la regla que
+  oculta la barra. Medido con `main.js` tardando 1,5 s, esperar a `main.js`
   dejaba ver la barra a ancho completo y sin hueco 88 frames antes de ocultarla.
-  El `<script>` de `main.js` lleva `onerror` que quita la clase (si no carga,
-  se vuelve al estado sin JS con la barra visible), y el bloque de la barra va
-  el primero de `main.js` para que una excepción en código posterior no lo deje
-  sin ejecutar.
+  Si `js-boot` se queda puesta sin que nadie muestre la barra, el coste es que
+  la barra no aparece, nunca contenido oculto. El `<script>` de `main.js` lleva
+  `onerror` que quita `js-boot` (si no carga, se vuelve al estado sin JS con la
+  barra visible), y el bloque de la barra va el primero de `main.js`.
 
 ## Sin versión — barra fija: anillos de foco enteros y `text-decoration`
 

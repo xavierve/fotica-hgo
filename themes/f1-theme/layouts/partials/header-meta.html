@@ -1,11 +1,22 @@
-{{/* Clase js ANTES del primer pintado. main.js tambien la pone, pero es diferido y
-     llega despues de que el navegador ya haya pintado: con la barra fija visible
-     por defecto (y oculta solo bajo html.js), esperar a main.js dejaba ver la barra
-     a ancho completo, sin hueco reservado, hasta que llegaba el JS (medido: 88
-     frames con main.js tardando 1,5 s), y luego se desvanecia. Patron estandar
-     para estados iniciales que dependen de JS. Sin JS este script no corre y la
-     barra sigue visible. */}}
-<script>document.documentElement.classList.add("js")</script>
+{{/* DOS senales de JS, con significados distintos a proposito:
+
+       html.js       la pone main.js (linea 1) = "el codigo que anade .is-visible
+                     esta corriendo". La consumen .js .reveal (opacity:0 hasta que
+                     un observer lo revele) y .js .slider-nav. NO se pone aqui: si
+                     se pusiera antes de saber que main.js funciona, una excepcion
+                     dejaria contenido oculto sin nadie que lo muestre.
+
+       html.js-boot  la pone ESTE script, antes del primer pintado. La consume
+                     SOLO la regla que oculta la barra fija hasta que salga el
+                     hero. Hace falta temprana: con la barra visible por defecto,
+                     esperar a main.js (diferido) dejaba verla a ancho completo y
+                     sin hueco reservado hasta que llegaba (medido: 88 frames con
+                     main.js tardando 1,5 s). Si esta clase se queda puesta sin
+                     que nadie muestre la barra, el coste es que la barra no
+                     aparece (un incordio), nunca contenido oculto.
+       Sin JS este script no corre y la barra es visible siempre. Si main.js no
+       carga, el onerror de su <script> (baseof.html) quita esta clase. */}}
+<script>document.documentElement.classList.add("js-boot")</script>
 {{ partial "seo.html" . }}
 {{ partial "og.html" . }}
 {{ partial "schema.html" . }}
