@@ -540,7 +540,7 @@ a {
      --sticky-cta-h      alto de la barra (3.5rem; 0 en desktop: no hay barra)
      --back-to-top-size  lado del boton (44px, minimo tactil)
      --back-to-top-gap   margen entre el boton y el borde derecho
-   La barra reserva el hueco del boton con padding-right = size + gap.
+   La barra reserva el hueco del boton con padding-right = size + 2 x gap.
    Van en critical.css porque son visibles sin desplazarse.
 
    MOBILE-FIRST, como el resto del tema (todos sus breakpoints son min-width):
@@ -553,7 +553,7 @@ a {
 :root {
   --sticky-cta-h: 3.5rem; /* 0px desde 821px: alli no hay barra */
   --back-to-top-size: 2.75rem;
-  --back-to-top-gap: .25rem;
+  --back-to-top-gap: .5rem; /* >= el anillo de foco (3px + 3px de offset = 6px): con menos se sale del viewport */
 }
 
 .back-to-top {
@@ -628,6 +628,13 @@ html:not(.js) .back-to-top {
   outline-offset: 3px;
 }
 
+/* Los enlaces de la barra van pegados al borde del viewport (izquierda y abajo)
+   y entre si: un anillo por fuera se corta 6px. Se dibuja por dentro, igual al
+   grosor, para que se vea entero por los cuatro lados. */
+.sticky-cta a:focus-visible {
+  outline-offset: -3px;
+}
+
 /* Barra fija (base = movil). El area tactil de cada item es la columna entera
    por la altura completa de la barra, no el glifo. */
 .sticky-cta {
@@ -651,6 +658,9 @@ html:not(.js) .back-to-top {
   align-items: center;
   justify-content: center;
   color: var(--color-link);
+  /* El tema no tiene reset de enlaces (la unica regla global es a{color:inherit}):
+     el subrayado del navegador vuelve en cuanto el enlace contenga texto. */
+  text-decoration: none;
 }
 
 /* rem y no em: sin etiqueta, el font-size del enlace ya no manda nada. */

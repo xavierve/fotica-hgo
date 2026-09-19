@@ -211,7 +211,7 @@ la barra); por debajo de 821px solo cambian sus coordenadas.
 |---|---|---|
 | `--sticky-cta-h` | `0px`; `3.5rem` por debajo de 821px | Alto de la barra. Lo leen la propia barra, el `padding-bottom` del `body` (para que no tape el footer) y el centrado vertical del botón. |
 | `--back-to-top-size` | `2.75rem` | Lado del botón (44px, mínimo táctil). |
-| `--back-to-top-gap` | `.25rem` | Margen del botón al borde derecho. |
+| `--back-to-top-gap` | `.5rem` | Margen del botón al borde derecho. Debe ser ≥ 6px (anillo de foco de 3px + 3px de offset), o el anillo se sale del viewport. |
 
 La barra reserva el hueco con `padding-right = size + 2 × gap`, **siempre**,
 también con el botón oculto: si se colapsara, los tres iconos se desplazarían

@@ -1,5 +1,17 @@
 # F1 Theme · Changelog
 
+## Sin versión — barra fija: anillos de foco enteros y `text-decoration`
+
+- `--back-to-top-gap` sube a `.5rem`: con `.25rem` el anillo de foco del
+  botón (3px + 3px de offset) se salía 2px del viewport por la derecha.
+  Padding, filete y posición son función del token y se recolocan solos.
+- Los enlaces de la barra dibujan el anillo por dentro (`outline-offset: -3px`):
+  van pegados a los bordes del viewport y su anillo se cortaba 6px por abajo (y
+  por la izquierda el primero).
+- `.sticky-cta a` recupera `text-decoration: none` (el tema no tiene reset).
+- `sticky-cta.html`: `where` + `index` en vez de `range` sin corte para
+  resolver `contact.locationId`.
+
 ## Sin versión — barra fija solo iconos, volver-arriba dentro de la barra, Ubicación a una sede
 
 - `sticky-cta.html`: sin texto visible; las cadenas i18n pasan a `aria-label`

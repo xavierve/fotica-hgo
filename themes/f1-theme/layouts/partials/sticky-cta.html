@@ -33,11 +33,11 @@
 {{- $locLabel := i18n "location" -}}
 {{- with $contact.locationUrl }}{{ $locUrl = . }}{{ end -}}
 {{- with $contact.locationId -}}
-  {{- $id := . -}}
-  {{- range $site.locations -}}
-    {{- if and (eq .id $id) .mapUrl -}}
-      {{- $locUrl = .mapUrl -}}
-      {{- $locLabel = i18n "locationTo" (dict "Name" .name) -}}
+  {{- with where ($site.locations | default slice) "id" . -}}
+    {{- $loc := index . 0 -}}
+    {{- with $loc.mapUrl -}}
+      {{- $locUrl = . -}}
+      {{- $locLabel = i18n "locationTo" (dict "Name" $loc.name) -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
