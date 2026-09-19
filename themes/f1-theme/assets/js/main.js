@@ -120,29 +120,41 @@ document.querySelectorAll('.block-gallery').forEach(function (bloque) {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   if (!('IntersectionObserver' in window)) return;
 
-  var STAGGER = ['.card', '.counter-item', '.team-card', '.testimonial', '.timeline-list li'];
+  /* Preparacion y cableado, en try/catch. Todo lo que hay entre añadir la clase
+     .reveal (que el CSS oculta bajo .js: opacity:0) y cablear el observer que
+     luego añade .is-visible es una ventana en la que una excepcion dejaria el
+     contenido oculto para siempre: el CSS lo esconde y nadie lo muestra. Si algo
+     falla ahi, se marcan TODOS los .reveal como visibles: .js .reveal.is-visible
+     y .js .reveal.is-visible .reveal-child ya devuelven opacity:1, asi que
+     perdemos la animacion, no el contenido. */
+  try {
+    var STAGGER = ['.card', '.counter-item', '.team-card', '.testimonial', '.timeline-list li'];
 
-  // preparar objetivos: cada bloque + su interior escalonado
-  document.querySelectorAll('.block, .hero-copy').forEach(function (el) {
-    el.classList.add('reveal');
-    STAGGER.forEach(function (sel) {
-      el.querySelectorAll(sel).forEach(function (hijo, i) {
-        hijo.classList.add('reveal-child');
-        hijo.style.setProperty('--reveal-delay', Math.min(i * 90, 450) + 'ms');
+    // preparar objetivos: cada bloque + su interior escalonado
+    document.querySelectorAll('.block, .hero-copy').forEach(function (el) {
+      el.classList.add('reveal');
+      STAGGER.forEach(function (sel) {
+        el.querySelectorAll(sel).forEach(function (hijo, i) {
+          hijo.classList.add('reveal-child');
+          hijo.style.setProperty('--reveal-delay', Math.min(i * 90, 450) + 'ms');
+        });
       });
     });
-  });
 
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add('is-visible');
-      if (entry.target.matches('.block-counter.is-animated')) contar(entry.target);
-      io.unobserve(entry.target); // una sola vez: sin re-animar al hacer scroll arriba
-    });
-  }, { rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        if (entry.target.matches('.block-counter.is-animated')) contar(entry.target);
+        io.unobserve(entry.target); // una sola vez: sin re-animar al hacer scroll arriba
+      });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
 
-  document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+  } catch (e) {
+    document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('is-visible'); });
+    if (window.console) console.error('reveal: fallo al preparar la animacion, contenido mostrado sin ella', e);
+  }
 
   /* Counter: cuenta de 0 al valor, conservando el formato original
      (separador de miles, sufijos como “+”). */

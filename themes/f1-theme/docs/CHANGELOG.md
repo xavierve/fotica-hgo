@@ -1,5 +1,15 @@
 # F1 Theme · Changelog
 
+## Sin versión — reveal: el contenido nunca se queda oculto si el JS falla
+
+- `main.js`: la preparación y el cableado del *reveal* (desde `var STAGGER` hasta
+  `io.observe`) van en `try/catch`. Entre añadir `.reveal` (que el CSS oculta bajo
+  `.js`) y cablear el observer que añade `.is-visible` había una ventana en la
+  que una excepción dejaba 9 bloques y el hero en `opacity: 0` para siempre. El
+  `catch` marca todos los `.reveal` como `.is-visible` (con lo que sus
+  `.reveal-child` también vuelven a `opacity: 1`) y registra el fallo con
+  `console.error`: se pierde la animación, no el contenido.
+
 ## Sin versión — anillos de foco de la barra fija y del volver-arriba, por contexto
 
 - El dorado (`--color-accent`) daba 2.28:1 sobre el blanco de la barra, por debajo
