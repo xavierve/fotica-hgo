@@ -329,11 +329,11 @@ Medidas, proporciones y criterios: `themes/f1-theme/docs/GUIA-IMAGENES.md`.
   el JSON de `.items`, sin pasar por Hugo — para que la vista ampliada use
   `_hd` habría que tocar ese JS. Valorar si compensa.
 
-### 5. Formulario de contacto (`/contacto/`)
+### 5. º de contacto (`/contacto/`)
 
 Backend: **PHP `mail()`** servido por el propio hosting (Hostinger). Campos:
 nombre, teléfono, mensaje. Dual por dispositivo (spec en comentario HTML de
-`content/contacto/_index.md` y ap7.5 del proyecto): móvil = mailto principal +
+`content/contacto/_index.md` y ap7.5 del proyecto): móvil = mailto contacto@opticasfausto.com +
 formulario colapsado; desktop = formulario principal. Confirmación inline sin
 redirección. Checkbox RGPD → `/aviso-legal/`.
 
@@ -342,7 +342,7 @@ redirección. Checkbox RGPD → `/aviso-legal/`.
 redacción exacta una vez el mecanismo esté implementado de verdad. Si el
 hosting interviene como encargado de tratamiento técnico, hay que ajustarla.
 
-**Email del dominio, verificado (6 sep):** SPF
+**Email del dominio, verificado (6 sep):** DONE 17 set - SPF
 (`v=spf1 include:_spf.mail.hostinger.com...`) y DKIM (3 CNAME
 `hostingermail-a/b/c.dkim...`) ya configurados — listos para que `mail()` no
 caiga en spam. DMARC en modo monitor:
