@@ -47,29 +47,23 @@ sections:
 ---
 ## ¿Prefieres escribirnos? Cuéntanos en qué podemos ayudarte
 
-<!-- IMPLEMENTACIÓN (Claude Code): formulario dual según dispositivo .
-     Móvil: CTA principal mailto + formulario colapsado bajo "¿Prefieres escribirnos aquí?"
-     Desktop: formulario visible, email como alternativa debajo.
-     Campos: Nombre · Teléfono · Mensaje breve.
-     Backend: PHP mail() (hosting Hostinger , ver Contexto del proyecto en CLAUDE.md).
-     Microcopy botón: "Te respondemos lo antes posible dentro de nuestro horario de tienda."
-     Confirmación sin redirección: "¡Recibido! Te contactaremos muy pronto.
-     Si es urgente, llámanos o ven directamente a la tienda." -->
-
+{{< contact-form >}}
 **Información sobre protección de datos**
 
 - **Responsable:** Ana Isabel Santaolalla Gámez.
 - **Finalidad:** responder a tu solicitud de contacto.
+- **Datos que nos envías:** nombre, teléfono, mensaje y, si quieres, tu correo electrónico.
 - **Legitimación:** tu consentimiento al enviar el formulario.
-- **Destinatarios:** tu mensaje se envía directamente desde nuestro servidor de hosting a nuestro correo electrónico, sin pasar por ningún servicio externo de envío de emails. No se ceden tus datos a ningún tercero.
+- **Destinatarios:** tu mensaje se envía desde el servidor de nuestro proveedor de alojamiento web, Hostinger, hasta nuestro buzón de correo, que también está alojado en Hostinger. Hostinger actúa como encargado del tratamiento de carácter técnico: aloja la web y el buzón. No usamos ningún otro servicio de envío de correo y no cedemos tus datos a ningún otro tercero.
+- **Sin base de datos ni registros:** el formulario no guarda tu mensaje en ninguna base de datos ni lleva registro de envíos. Tu mensaje solo llega a nuestro buzón de correo.
+- **Derechos:** puedes acceder, rectificar o suprimir tus datos, así como ejercer el resto de derechos reconocidos por la normativa, escribiendo a {{< email link="false" >}}.
+{{< /contact-form >}}
 
-<!-- PENDIENTE Claude Code: confirmar redacción exacta con el mecanismo real
-     de envío una vez implementado (PHP mail() en Hostinger, 6 sep — ya no
-     Resend). Si el hosting SÍ interviene como encargado de tratamiento
-     técnico, ajustar esta frase en consecuencia; no dejarla sin revisar. -->
-- **Derechos:** puedes acceder, rectificar o suprimir tus datos, así como ejercer el resto de derechos reconocidos por la normativa, escribiendo a {{< email >}}.
-
-☐ He leído y acepto la [Política de Privacidad](/aviso-legal/).
+<!-- PENDIENTE (asesor legal / cliente, no de implementación): confirmar la
+     denominación social exacta del encargado (Hostinger) y que el contrato de
+     encargo de tratamiento (DPA) está aceptado en la cuenta de hosting. Lo
+     técnico ya está fijado: mail() no persiste nada y el buzón está en el mismo
+     Hostinger. Mantener esta lista sincronizada con /aviso-legal/#privacidad. -->
 
 ## ¿Estás de paso por Torre del Mar?
 

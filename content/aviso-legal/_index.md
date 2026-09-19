@@ -56,16 +56,19 @@ Ana Isabel Santaolalla Gámez (ver datos en el encabezamiento de este Aviso Lega
 - **Legitimación:** tu consentimiento, al enviar el formulario.
 - **Conservación:** una vez resuelta tu consulta, tus datos se conservan únicamente el tiempo necesario para gestionarla, salvo que exista una obligación legal de conservación mayor.
 
-El suministro de datos personales requiere una edad mínima de 14 años, o disponer de capacidad jurídica suficiente. Si no nos facilitas los datos solicitados (nombre, teléfono y mensaje), no podremos atender tu consulta.
+El suministro de datos personales requiere una edad mínima de 14 años, o disponer de capacidad jurídica suficiente. Si no nos facilitas los datos solicitados (nombre, teléfono y mensaje; el correo electrónico es opcional), no podremos atender tu consulta.
 
 ### 3. Destinatarios de tus datos
 
-Tu mensaje se envía directamente desde nuestro servidor de hosting a nuestro correo electrónico, sin pasar por ningún servicio externo de envío de emails. No cedemos tus datos a ningún tercero, salvo obligación legal.
+Tu mensaje se envía desde el servidor de nuestro proveedor de alojamiento web, Hostinger, hasta nuestro buzón de correo electrónico, que también está alojado en Hostinger. Hostinger actúa, por tanto, como **encargado del tratamiento** de carácter técnico: aloja la web y el buzón, y trata tus datos únicamente para prestarnos ese servicio. No utilizamos ningún otro servicio externo de envío de correo y no cedemos tus datos a ningún otro tercero, salvo obligación legal.
 
-<!-- PENDIENTE Claude Code: confirmar redacción exacta con el mecanismo real
-     de envío una vez implementado (PHP mail() en Hostinger, 6 sep — ya no
-     Resend). Si el hosting SÍ interviene como encargado de tratamiento
-     técnico, ajustar esta frase en consecuencia; no dejarla sin revisar. -->
+**El formulario no guarda nada.** El envío se realiza por correo directo, sin base de datos ni registro de envíos: tu mensaje solo llega a nuestro buzón de correo, donde se conserva conforme a lo indicado en el apartado 2.
+
+<!-- PENDIENTE (asesor legal / cliente, no de implementación): confirmar la
+     denominación social exacta del encargado (Hostinger) y que el contrato de
+     encargo de tratamiento (DPA) está aceptado en la cuenta de hosting. Lo
+     técnico ya está fijado: mail() no persiste nada y el buzón está en el mismo
+     Hostinger. Mantener sincronizado con la lista de /contacto/. -->
 
 ### 4. Derechos en relación con tus datos personales
 
