@@ -204,6 +204,12 @@ a {
   border: 0;
 }
 
+/* El margen de .btn .icon es para icono + texto. Con el texto oculto
+   descentraba el icono y ensanchaba el boton por la derecha. */
+.header-actions .btn .icon {
+  margin-right: 0;
+}
+
 .nav-toggle {
   display: inline-flex;
   align-items: center;
@@ -522,6 +528,9 @@ a {
     height: auto;
     padding: .85rem 1.15rem;
     gap: .5rem;
+  }
+  .header-actions .btn .icon {
+    margin-right: .45em;
   }
   .btn-label {
     position: static;
