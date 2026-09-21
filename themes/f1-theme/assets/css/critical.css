@@ -478,6 +478,8 @@ a {
     display: flex;
     position: static;
     flex-direction: row;
+    flex-grow: 1;
+    justify-content: space-evenly;
     gap: 1rem;
     padding: 0;
     border: 0;
