@@ -143,11 +143,23 @@ a {
   padding: .8rem 0;
 }
 
+.site-logo {
+  flex: 0 1 auto;
+  min-width: 0;
+}
+
 .site-logo img,
 .site-logo svg {
   max-height: 48px;
+  max-width: 100%;
   width: auto;
+  height: auto;
   display: block;
+}
+
+.header-actions,
+.nav-toggle {
+  flex-shrink: 0;
 }
 
 /* Móvil: panel desplegable bajo el header, oculto salvo .is-open (JS).
