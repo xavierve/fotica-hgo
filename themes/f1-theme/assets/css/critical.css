@@ -239,6 +239,12 @@ a {
   margin-right: 0;
 }
 
+.header-actions .btn {
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+}
+
 .nav-toggle {
   display: inline-flex;
   align-items: center;
