@@ -525,7 +525,7 @@ a {
    DESIGN_TOKENS.md 3.1): logo + 5 enlaces de nav + 2 botones (icono-solo,
    círculo compacto) no caben antes de esto. Medido con Playwright, no a
    ojo: desborda hasta 835px, cabe desde 840px. */
-@media(min-width:840px) {
+@media(min-width:821px) {
   .site-nav {
     display: flex;
     position: static;
