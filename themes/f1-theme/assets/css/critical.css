@@ -29,6 +29,17 @@
   --bg-color2-text: var(--color-text-inverse);
   --bg-color3-text: var(--color-text-inverse);
   --bg-color4-text: var(--color-text);
+  /* Capa EXTERIOR del anillo de foco doble: claro por dentro (outline real) y
+     oscuro por fuera (esta sombra). Con las dos capas, sobre cualquier fondo
+     del sitio (crema, blanco, navy, dorado, foto) al menos una de las fronteras
+     del anillo supera 3:1 (WCAG 1.4.11 / 2.4.11); un anillo de un solo color
+     siempre falla sobre alguno.
+     La usan .back-to-top (critical.css) y .btn (main.css): un unico valor para
+     que no puedan divergir.
+     OJO: va en box-shadow. Cualquier regla que ponga box-shadow: none sobre un
+     :focus-visible borra esta capa y deja el anillo sin contraste en fondos
+     claros. Ya paso con prefers-reduced-motion en main.css. */
+  --focus-ring-outer: 0 0 0 6px var(--color-dark);
   --container: 1120px;
   --container-wide: 1440px;
   --space-s: clamp(1rem, 2vw, 1.5rem);
@@ -718,7 +729,7 @@ html:not(.js) .back-to-top {
   outline-offset: 2px;
   box-shadow:
     inset 0 0 0 2px rgba(255, 255, 255, .92),
-    0 0 0 6px var(--color-dark),
+    var(--focus-ring-outer),
     0 2px 10px 2px rgba(0, 0, 0, .28);
 }
 

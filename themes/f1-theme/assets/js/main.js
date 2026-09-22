@@ -47,21 +47,71 @@ aislar('barra fija y volver-arriba', function () {
     return;
   }
 
-  var objetivo = document.querySelector('.hero');
-  if (!objetivo) {
-    objetivo = document.createElement('div');
-    objetivo.className = 'scroll-sentinel';
-    objetivo.setAttribute('aria-hidden', 'true');
-    objetivo.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:100svh;pointer-events:none;visibility:hidden';
-    document.body.appendChild(objetivo);
+  /* DOS SENALES, porque barra y boton no viven igual en todos los anchos:
+
+     - asoma: el elemento que sigue al hero ya ensena 40px. Es la de MOVIL
+       (< 821px): alli barra y boton son una unidad dentro de la barra, y si
+       uno apareciera sin el otro quedaria el hueco reservado vacio. La barra
+       entra antes que con la salida del hero, cuando empieza lo siguiente.
+     - salida: el hero ha salido por arriba. Es la del boton en ESCRITORIO
+       (>= 821px), donde no hay barra. Alli no vale "asoma": en los heros que
+       caben en pantalla (split) lo siguiente ya se ve al cargar, y el boton
+       saldria estando arriba del todo.
+
+     Efecto aceptado: en movil, una pagina cuyo hero quepa en la primera
+     pantalla muestra la barra al cargar, porque lo siguiente ya asoma. */
+  var escritorio = window.matchMedia('(min-width: 821px)');
+  var asoma = false;
+  var salida = false;
+
+  function aplicar() {
+    if (barra) barra.classList.toggle('is-visible', asoma);
+    if (boton) boton.classList.toggle('is-visible', escritorio.matches ? salida : asoma);
+  }
+  if (escritorio.addEventListener) escritorio.addEventListener('change', aplicar);
+  else if (escritorio.addListener) escritorio.addListener(aplicar);
+
+  var hero = document.querySelector('.hero');
+
+  if (!hero) {
+    // Sin hero: centinela de un viewport de alto. Las dos senales son la misma.
+    var centinela = document.createElement('div');
+    centinela.className = 'scroll-sentinel';
+    centinela.setAttribute('aria-hidden', 'true');
+    centinela.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:100svh;pointer-events:none;visibility:hidden';
+    document.body.appendChild(centinela);
+    new IntersectionObserver(function (entries) {
+      salida = asoma = !entries[0].isIntersecting;
+      aplicar();
+    }, { threshold: 0 }).observe(centinela);
+    return;
   }
 
+  // Primer hermano CON ALTURA tras el hero: un elemento vacio u oculto tiene
+  // la caja a cero y nunca llegaria a intersectar.
+  var siguiente = hero.nextElementSibling;
+  while (siguiente && siguiente.offsetHeight === 0) siguiente = siguiente.nextElementSibling;
+
   new IntersectionObserver(function (entries) {
-    // isIntersecting = el hero (o el centinela) sigue a la vista
-    var fuera = !entries[0].isIntersecting;
-    if (boton) boton.classList.toggle('is-visible', fuera);
-    if (barra) barra.classList.toggle('is-visible', fuera);
-  }, { threshold: 0 }).observe(objetivo);
+    // El hero solo puede salir por arriba: no intersectar = ya lo has pasado.
+    salida = !entries[0].isIntersecting;
+    if (!siguiente) asoma = salida;
+    aplicar();
+  }, { threshold: 0 }).observe(hero);
+
+  if (siguiente) {
+    new IntersectionObserver(function (entries) {
+      var e = entries[0];
+      /* A diferencia del hero, "no intersecta" significa aqui dos cosas
+         opuestas: aun no ha llegado (esta por debajo) o ya lo has pasado (esta
+         por encima). Sin mirar la posicion, la barra desapareceria al seguir
+         bajando. Por encima de la pantalla cuenta como asomado.
+         rootMargin -40px abajo: salta cuando el borde superior del elemento ha
+         subido 40px por encima del borde inferior de la pantalla. */
+      asoma = e.isIntersecting || e.boundingClientRect.top < 0;
+      aplicar();
+    }, { rootMargin: '0px 0px -40px 0px', threshold: 0 }).observe(siguiente);
+  }
 
   if (!boton) return;
   /* El clic NO navega al ancla: un <a href="#top"> deja #top en la URL y una

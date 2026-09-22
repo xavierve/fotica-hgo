@@ -6,9 +6,11 @@
   Oculta desde 821px: en desktop el header ya lleva los dos botones de contacto.
 
   APARICION: no esta en la primera pantalla. main.js la muestra (clase
-  is-visible) cuando el hero sale del viewport y la oculta al volver a el, con
-  la misma senal y el mismo callback que el volver-arriba: son una unidad. Sin
-  JS es visible siempre.
+  is-visible) cuando el elemento que sigue al hero ya ensena 40px, y la oculta
+  al volver por encima de ese punto. En movil comparte senal y callback con el
+  volver-arriba: son una unidad. Sin JS es visible siempre. Detalle de las dos
+  senales (movil / escritorio) en el bloque 'barra fija y volver-arriba' de
+  main.js.
 
   SOLO ICONOS: no hay texto visible. El nombre accesible de cada enlace es su
   aria-label (mismas cadenas i18n que antes se pintaban); sin el, un enlace

@@ -1,5 +1,21 @@
 # F1 Theme · Changelog
 
+## Sin versión — anillo de foco de `.btn` y aparición de la barra fija
+
+- Nuevo token `--focus-ring-outer` en `:root`: capa exterior oscura del anillo de
+  foco doble. La comparten `.back-to-top` y `.btn`, para que no puedan divergir.
+- `.btn:focus-visible` pasa al anillo doble (claro por dentro con `outline`,
+  oscuro por fuera con el token). El anterior, `currentColor` al 45 %, se pintaba
+  sobre el fondo de la página y daba ≈1,1:1 sobre crema (QA visual, defecto 2 / C14).
+- `prefers-reduced-motion`: el bloque que anula la elevación de `.btn` también
+  borraba la capa exterior del anillo. Ahora se devuelve el anillo sin sombra.
+- La barra fija móvil aparece cuando el elemento que sigue al hero enseña 40px,
+  no cuando el hero sale. Dos señales en `main.js`: por debajo de 821px barra y
+  volver-arriba comparten la nueva; desde 821px el volver-arriba sigue con la
+  salida del hero, porque en los heros que caben en pantalla lo siguiente ya se
+  ve al cargar. El nuevo observer distingue por posición "aún no ha llegado" de
+  "ya lo has pasado", que un `isIntersecting` solo no separa.
+
 ## Sin versión — formulario de contacto (shortcode `contact-form`)
 
 - Nuevo shortcode `contact-form` + `static/contacto/enviar.php` (PHP `mail()`). `From` fijo del

@@ -1165,9 +1165,16 @@ h2.fs-xs {
   transform: translateY(0);
   box-shadow: 0 2px 6px rgba(0, 0, 0, .15)
 }
+/* Anillo de foco doble, el mismo patron que .back-to-top: claro por dentro
+   (outline real, que sobrevive al modo de alto contraste forzado) y oscuro por
+   fuera (--focus-ring-outer, en :root). El anterior, currentColor al 45%, se
+   pintaba sobre el fondo de la pagina y en crema daba ~1,1:1 (QA visual,
+   defecto 2 / C14). La sombra de elevacion va incluida porque esta regla
+   sustituye entera a la de :hover. */
 .btn:focus-visible {
-  outline: 3px solid color-mix(in srgb, currentColor 45%, transparent);
-  outline-offset: 2px
+  outline: 2px solid var(--color-bg-over);
+  outline-offset: 2px;
+  box-shadow: var(--focus-ring-outer), 0 6px 16px rgba(0, 0, 0, .18);
 }
 .btn-outline:hover,
 .btn-outline:focus-visible {
@@ -1190,6 +1197,12 @@ h2.fs-xs {
   .btn-outline:hover {
     transform: none;
     box-shadow: none
+  }
+  /* La regla de arriba quita la elevacion, pero con ella se llevaba la capa
+     exterior del anillo de foco: justo quien pide menos movimiento se quedaba
+     sin contraste en fondos claros. Se devuelve el anillo, sin sombra. */
+  .btn:focus-visible {
+    box-shadow: var(--focus-ring-outer);
   }
   .has-bg-image .btn-fill:hover,
   .has-bg-color:not(.bg-claro) .btn-fill:hover,
