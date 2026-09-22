@@ -1,7 +1,7 @@
 ---
 # 3.1.4 — Mantenimiento de audífonos
 title: "Mantenimiento de audífonos multimarca en Torre del Mar | Ópticas Fausto"
-linkTitle: "Mantenimiento de Audífonos"
+linkTitle: "Mantenimiento Audífonos"
 description: "Servicio Técnico Multimarca: limpieza, filtros, secado profesional, diagnóstico y readaptación de tu audífono, lo compraras donde lo compraras. Sin cita en la mayoría de los casos."
 page_id: "3.1.4"
 weight: 40

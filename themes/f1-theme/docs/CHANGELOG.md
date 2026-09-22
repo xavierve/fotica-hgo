@@ -1,5 +1,15 @@
 # F1 Theme · Changelog
 
+## Sin versión — guiones en columnas estrechas de rejilla
+
+- `.cards-grid > *` (cards, testimonios, equipo) pasa a ser contenedor de
+  consulta (`columna-card`). En esas columnas, por debajo de 25rem, `p` y `li`
+  usan `hyphens: auto` con el diccionario del `lang` del documento. Consulta de
+  contenedor y no de viewport porque una card de rejilla de 3 columnas en
+  escritorio es tan estrecha como en móvil. Los títulos no se dividen.
+- `body` lleva `overflow-wrap: break-word` como red de seguridad contra el
+  desbordamiento horizontal por cadenas sin huecos (URL, correo, código).
+
 ## Sin versión — anillo de foco de `.btn` y aparición de la barra fija
 
 - Nuevo token `--focus-ring-outer` en `:root`: capa exterior oscura del anillo de

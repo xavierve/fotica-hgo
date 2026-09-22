@@ -244,6 +244,44 @@
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1rem
 }
+
+/* Division silabica con guion en el texto de cards, testimonios y equipo cuando
+   la COLUMNA es estrecha, no la pantalla: una card en rejilla de 3 columnas en
+   escritorio mide ~350px, tan estrecha como en movil, y una media query de
+   viewport no la ve. Por eso consulta de contenedor.
+   - Solo p y li. Los titulos no se dividen: una palabra que no quepa la parte
+     sin guion el overflow-wrap de body (critical.css).
+   - Contenedor = cada hijo directo de .cards-grid (.card, .testimonial,
+     .team-card). Es seguro porque su ancho lo fija la pista del grid (fr), no su
+     contenido: container-type aplica contencion de tamano, y en un elemento
+     dimensionado por contenido hundiria el ancho a cero. NO poner container-type
+     en elementos de ancho automatico (logo, nav, botones, inline-block).
+   - La contencion tambien hace del contenedor el bloque contenedor de sus
+     descendientes posicionados. Sin efecto aqui: .card ya es position:relative
+     (el ::after del stretched-link se ancla a ella) y no hay position:fixed.
+   - Espanol porque <html lang="es-ES">; el idioma elige el diccionario.
+   - Sin soporte (iOS < 16) no hay guiones; el overflow-wrap sigue actuando.
+   - hyphenate-limit-chars: no partir palabras de menos de 6 letras ni dejar
+     fragmentos de menos de 3. Lo respetan Chrome/Edge; Safari y Firefox lo
+     ignoran y parten algo mas. */
+.cards-grid > * {
+  container: columna-card / inline-size;
+}
+
+.cards-grid > * p,
+.cards-grid > * li {
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  hyphenate-limit-chars: 6 3 3;
+}
+
+@container columna-card (min-width: 25rem) {
+  .cards-grid > * p,
+  .cards-grid > * li {
+    -webkit-hyphens: manual;
+    hyphens: manual;
+  }
+}
 /* Card en columna: el pie (.card-link) se ancla abajo con margin-top:auto, igual
    que en .testimonial, para que los "Ver más" queden alineados aunque las
    descripciones midan distinto. */
