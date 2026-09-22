@@ -152,17 +152,6 @@ a {
   justify-content: space-between;
   padding: .8rem 0;
   gap: .5rem;
-  /* Por debajo de 350px, logo + boton + hamburguesa no caben con los margenes
-     del contenedor: se sacrifican los de la cabecera. Anchos de supervivencia. */
-  margin-inline: 0;
-  width: 100%;
-}
-/* Si cambia los 2rem de la definición de width de .container, hay que cambiarlo también aquí */
-@media(min-width:350px) {
-  .header-inner {
-    margin-inline: auto;
-    width: min(var(--container), calc(100% - 2rem));
-  }
 }
 
 @media(min-width:840px) {
@@ -227,6 +216,7 @@ a {
 .header-actions {
   display: flex;
   gap: .5rem;
+  margin-inline-start: auto;
 }
 
 /* Móvil: el botón de llamada va icono-solo (evita que el número se parta en
@@ -512,6 +502,11 @@ a {
 
 .header-actions .header-action2 {
   display: none;
+}
+@media(min-width:393px) {
+.header-actions .header-action2 {
+  display: inline-flex;
+  }
 }
 
 @media(min-width:821px) {
