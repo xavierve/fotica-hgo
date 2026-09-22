@@ -503,7 +503,8 @@ a {
 .header-actions .header-action2 {
   display: none;
 }
-@media(min-width:393px) {
+
+@media(min-width:393px) {
 .header-actions .header-action2 {
   display: inline-flex;
   }
