@@ -488,7 +488,7 @@ botón que se deformaba solo entre dos breakpoints concretos.
 Usar la skill **`visual-qa`** (`.claude/skills/visual-qa/SKILL.md`): mide el
 resultado renderizado con Playwright en varios anchos en lugar de comprobarlo
 a ojo, e incluye el método para elegir un breakpoint midiendo dónde rompe de
-verdad — de ahí salieron los del header (840/1100px).
+verdad — de ahí salieron los del header (1100px; el de 840 se unificó con el genérico de 821 en sep 2026).
 
 Primera vez en una máquina nueva:
 

@@ -83,6 +83,12 @@ body {
   color: var(--color-text);
   background: var(--color-bg);
   line-height: 1.6;
+  /* Red de seguridad: una cadena sin huecos (URL, correo, codigo, un typo como
+     el del QA en /demo/) se parte en vez de desbordar la pagina. Sin guion; solo
+     actua cuando no hay otro punto de corte. break-word y NO anywhere: anywhere
+     cambia el min-content y dejaria encoger los enlaces del nav partiendolos a
+     mitad de palabra en vez de encoger el logo. */
+  overflow-wrap: break-word;
 }
 
 img {
@@ -151,13 +157,11 @@ a {
   align-items: center;
   justify-content: space-between;
   padding: .8rem 0;
+  /* Hueco MINIMO entre logo, nav y botones, igual en todos los anchos. No se
+     sube en escritorio a proposito: alli el nav tiene flex-grow y reparte con
+     space-evenly, asi que cada px de este gap sale del aire entre enlaces (o
+     del logo, si va justo). A 821 subirlo a 1rem se veia peor, no mejor. */
   gap: .5rem;
-}
-
-@media(min-width:840px) {
-  .header-inner {
-    gap: 1rem;
-  }
 }
 
 .site-logo {
@@ -504,9 +508,17 @@ a {
   display: none;
 }
 
+/* WhatsApp en la cabecera movil a partir de 393px: es donde caben, con los
+   margenes del contenedor, el logo a su tamano NATURAL + los dos circulos +
+   la hamburguesa. Por debajo el logo encogeria (85% a 360, 65% a 320) y el
+   lema dejaria de leerse, asi que ahi va solo el telefono y WhatsApp queda en
+   la barra fija en cuanto se pasa el hero.
+   OJO: 393 es un numero DE ESTE LOGO (208px de ancho natural). Si cambia el
+   logo, hay que recalcularlo: 32 margenes + 16 huecos + 96 botones + 40
+   hamburguesa + ancho del logo. */
 @media(min-width:393px) {
-.header-actions .header-action2 {
-  display: inline-flex;
+  .header-actions .header-action2 {
+    display: inline-flex;
   }
 }
 
@@ -516,11 +528,13 @@ a {
   }
 }
 
-/* El header tiene su propio breakpoint, distinto del genérico de 821px del
-   resto del tema (mismo motivo que cta-layout-split a 641px — ver
-   DESIGN_TOKENS.md 3.1): logo + 5 enlaces de nav + 2 botones (icono-solo,
-   círculo compacto) no caben antes de esto. Medido con Playwright, no a
-   ojo: desborda hasta 835px, cabe desde 840px. */
+/* Nav de escritorio. Usa el breakpoint generico del tema (821px), el mismo de
+   la barra fija: asi no queda ningun rango sin WhatsApp (antes la barra se
+   ocultaba en 821 y el boton de cabecera no entraba hasta 840).
+   Historia: hasta sep 2026 el header tenia su propio corte en 840px, medido con
+   Playwright con el logo a tamano fijo (desbordaba hasta 835). Desde que
+   .site-logo tiene flex-shrink y min-width:0, el deficit lo absorbe el logo en
+   vez de desbordar; a 821 queda a su tamano natural con holgura. */
 @media(min-width:821px) {
   .site-nav {
     display: flex;

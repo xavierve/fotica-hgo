@@ -450,7 +450,7 @@ Segundo párrafo, tras un espacio grande. (`s`, `m`, `l` disponibles.)
 
 {{< banner bg="/images/100-instalaciones_fausto_duque_fachada.webp" width="wide" textSize="s" pad="l" class="panel bg-color3" >}}p4.3- Banner con `bg` (imagen de fondo) + `class= panel` (background-color en el copy) y `bg-color` (hace un mix de tinte en overlay `width=wide` `pad=l`.{{< /banner >}}
 
-{{< banner textSize="xl" align="center" class="bg-color1" >}}p4.4- Banner con `textSize="xl"`class="bg-color1" y alineado al centro.{{< /banner >}}
+{{< banner textSize="xl" align="center" class="bg-color1" >}}p4.4- Banner con `textSize="xl"`, `class="bg-color1"` y alineado al centro.{{< /banner >}}
 
 ### p5- Shortcode {{</* cta */>}}
 
