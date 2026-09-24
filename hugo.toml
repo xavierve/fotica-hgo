@@ -4,7 +4,8 @@ defaultContentLanguage = 'es'
 title = 'Ópticas Fausto · Centro Óptico y Auditivo en Torre del Mar'
 theme = 'f1-theme'
 enableRobotsTXT = true
-disableKinds = ['taxonomy', 'term']
+# Sin feeds RSS (no hay blog) ni taxonomías.
+disableKinds = ['rss', 'taxonomy', 'term']
 
 [markup]
   [markup.goldmark]

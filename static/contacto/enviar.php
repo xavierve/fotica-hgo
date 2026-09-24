@@ -154,6 +154,8 @@ $origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
 if ($origin !== '' && $origin !== 'null') {
     $oh = strtolower((string) parse_url($origin, PHP_URL_HOST));
     if ($oh !== $host && $oh !== 'www.' . $host) {
+        // Sin datos del visitante: solo el host desde el que se cargo el formulario.
+        error_log('contacto/enviar.php: 403, Origin no permitido: ' . $oh . ' (se esperaba ' . $host . ')');
         cf_error($cfg, $json, 403, array(), $msg['errGeneric']);
     }
 }
@@ -170,6 +172,7 @@ $campos = array();
 foreach (array('nombre', 'telefono', 'email', 'mensaje', 'acepto', '_t') as $k) {
     $v = isset($_POST[$k]) ? $_POST[$k] : '';
     if (!is_string($v)) {
+        error_log('contacto/enviar.php: 400, campo con tipo no valido: ' . $k);
         cf_error($cfg, $json, 400, array(), $msg['errGeneric']);
     }
     $campos[$k] = trim($v);

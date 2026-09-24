@@ -279,56 +279,6 @@ aislar('reveal y contador', function () {
 /* === Menú móvil: toggle accesible (aria-expanded, cierre con Escape y al
    navegar). Sin él, .site-nav queda inalcanzable por debajo de 821px — no es
    decorativo, es el único acceso a la navegación en móvil. === */
-/* TEMPORAL — panel de diagnostico de la barra fija. Se activa SOLO con
-   ?debug=bar en la URL, asi que no afecta a ningun visitante. Sirve para leer en
-   el propio movil que pasa en cada navegador (Chrome, Firefox, DuckDuckGo) sin
-   depuracion remota. BORRAR cuando se cierre el caso. */
-aislar('debug barra', function () {
-  if (location.search.indexOf('debug=bar') === -1) return;
-
-  var barra = document.querySelector('.sticky-cta');
-  var hero = document.querySelector('.hero');
-  var siguiente = hero && hero.nextElementSibling;
-  while (siguiente && siguiente.offsetHeight === 0) siguiente = siguiente.nextElementSibling;
-
-  // Sonda para leer el valor REAL de env(safe-area-inset-bottom).
-  var sonda = document.createElement('div');
-  sonda.style.cssText = 'position:fixed;left:-9999px;height:env(safe-area-inset-bottom,0px)';
-  document.body.appendChild(sonda);
-
-  var panel = document.createElement('pre');
-  panel.style.cssText = 'position:fixed;top:0;left:0;z-index:9999;margin:0;padding:.4rem;' +
-    'font:11px/1.35 monospace;background:rgba(0,0,0,.82);color:#0f0;white-space:pre;' +
-    'pointer-events:none;max-width:100vw';
-  document.body.appendChild(panel);
-
-  function pinta() {
-    var cs = barra ? getComputedStyle(barra) : null;
-    var r = barra ? barra.getBoundingClientRect() : null;
-    var vv = window.visualViewport;
-    var sig = siguiente ? siguiente.getBoundingClientRect() : null;
-    panel.textContent =
-      'innerHeight      ' + window.innerHeight + '\n' +
-      'clientHeight     ' + document.documentElement.clientHeight + '\n' +
-      'visualViewport   ' + (vv ? Math.round(vv.height) + ' off ' + Math.round(vv.offsetTop) : '-') + '\n' +
-      'safe-area-bottom ' + getComputedStyle(sonda).height + '\n' +
-      'barra height CSS ' + (cs ? cs.height : '-') + '\n' +
-      'barra pad-bottom ' + (cs ? cs.paddingBottom : '-') + '\n' +
-      'barra rect h     ' + (r ? r.height.toFixed(1) : '-') + '  top ' + (r ? r.top.toFixed(0) : '-') + '\n' +
-      'barra is-visible ' + (barra ? barra.classList.contains('is-visible') : '-') + '\n' +
-      'siguiente top    ' + (sig ? sig.top.toFixed(0) : 'SIN ELEMENTO') + '\n' +
-      'scrollY          ' + Math.round(window.scrollY);
-  }
-
-  pinta();
-  addEventListener('scroll', pinta, { passive: true });
-  addEventListener('resize', pinta);
-  if (window.visualViewport) {
-    visualViewport.addEventListener('resize', pinta);
-    visualViewport.addEventListener('scroll', pinta);
-  }
-});
-
 aislar('menu movil', function () {
   var toggle = document.querySelector('.nav-toggle');
   var nav = document.getElementById('site-nav');

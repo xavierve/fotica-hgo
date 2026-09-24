@@ -827,7 +827,10 @@ html.js-boot .sticky-cta.is-visible {
   visibility: visible;
   transform: none;
 }
-
+.sticky-cta,
+.back-to-top {
+  will-change: transform;
+}
 /* El contenido del final de la pagina (footer) tiene que poder verse entero por
    encima de la barra, que lo taparia. Sin override en desktop: alli el token
    vale 0 y el calc() resuelve a 0 por si solo. */
