@@ -1,5 +1,16 @@
 # F1 Theme · Changelog
 
+## Sin versión — barra fija sin safe-area y main.js con huella
+
+- Fuera los cinco `env(safe-area-inset-bottom)` de la barra fija, el volver-arriba
+  y el `padding-bottom` de `body`. Se dieron por inofensivos (sin
+  `viewport-fit=cover` deberían valer 0), pero Firefox para Android devuelve
+  40,8px con su barra de direcciones visible: la barra fija pasaba de 56 a
+  96,8px con los iconos arriba. Medido en dispositivo real.
+- `main.js` se sirve con `fingerprint`, como ya se hacía con `main.css`. Sin
+  huella, la URL era la misma en cada despliegue y los navegadores con caché
+  seguían ejecutando el JS anterior junto al CSS nuevo.
+
 ## Sin versión — guiones en columnas estrechas de rejilla
 
 - `.cards-grid > *` (cards, testimonios, equipo) pasa a ser contenedor de

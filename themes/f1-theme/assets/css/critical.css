@@ -626,19 +626,18 @@ a {
    el estado base es el de movil y desktop (>=821px) es la excepcion, que
    apaga la barra y devuelve al boton su posicion flotante.
 
-   El alto de la barra NO incluye el safe-area inferior (el notch de un iPhone):
-   ese se suma aparte en cada regla que lo usa. Asi el token sigue siendo "lo
-   que mide la barra" en cualquier dispositivo, con notch o sin el.
-
-   NO AÑADIR viewport-fit=cover a la meta viewport (header-meta.html). Sin cover,
-   iOS EXCLUYE las areas seguras del viewport: un elemento fixed con bottom:0 ya
-   queda por encima del indicador de inicio, que es el comportamiento correcto.
-   Por eso env(safe-area-inset-bottom) vale 0 en la practica y los env() de este
-   bloque son codigo muerto INOFENSIVO: se dejan a proposito, no son un error.
-   Anadir cover cambiaria el render del sitio ENTERO en esos dispositivos (todo
-   el contenido pasaria a pintarse bajo el notch y el indicador) sin ganar nada
-   aqui. Si algun dia hiciera falta por otro motivo, entonces estos env() pasan
-   a ser necesarios y ya estan puestos. */
+   SIN env(safe-area-inset-bottom), a proposito. La meta viewport NO lleva
+   viewport-fit=cover (header-meta.html), asi que el navegador ya excluye las
+   areas seguras del viewport y un fixed con bottom:0 queda por encima del
+   indicador de inicio sin ayuda. Sumar el inset seria contarlo dos veces.
+   Y no es teoria: hasta sep 2026 estos calculos llevaban el env() "por si
+   acaso", documentado como inofensivo porque valdria 0. Medido en un Android
+   real: Firefox devuelve 40,8px con su barra de direcciones visible (y lo anima
+   hasta 0 al ocultarla) aunque la pagina no pida cover. La barra pasaba de 56 a
+   96,8px con los iconos arriba: una "segunda linea" que aparecia y desaparecia
+   con el scroll. Chrome devuelve 0, por eso alli no se veia.
+   NO ANADIR viewport-fit=cover: cambiaria el render del sitio entero (todo se
+   pintaria bajo el notch y el indicador) y obligaria a volver a los env(). */
 :root {
   --sticky-cta-h: 3.5rem; /* 0px desde 821px: alli no hay barra */
   --back-to-top-size: 2.75rem;
@@ -650,7 +649,7 @@ a {
   /* Base (movil): dentro de la barra, pegado a su esquina derecha y centrado en
      vertical en la parte util (la que queda sobre el safe-area). */
   right: var(--back-to-top-gap);
-  bottom: calc(env(safe-area-inset-bottom, 0px) + (var(--sticky-cta-h) - var(--back-to-top-size)) / 2);
+  bottom: calc((var(--sticky-cta-h) - var(--back-to-top-size)) / 2);
   z-index: 20;
   width: var(--back-to-top-size);  /* 44px: minimo tactil */
   height: var(--back-to-top-size);
@@ -754,8 +753,7 @@ html:not(.js) .back-to-top {
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: 1fr;
-  height: calc(var(--sticky-cta-h) + env(safe-area-inset-bottom, 0px));
-  padding-bottom: env(safe-area-inset-bottom, 0px);
+  height: var(--sticky-cta-h);
   background: var(--color-bg-over);
   border-top: 1px solid rgba(0, 0, 0, .12);
 }
@@ -834,7 +832,7 @@ html.js-boot .sticky-cta.is-visible {
    encima de la barra, que lo taparia. Sin override en desktop: alli el token
    vale 0 y el calc() resuelve a 0 por si solo. */
 body {
-  padding-bottom: calc(var(--sticky-cta-h) + env(safe-area-inset-bottom, 0px));
+  padding-bottom: var(--sticky-cta-h);
 }
 
 /* Desktop: la excepcion. Sin barra (el header ya lleva los botones de contacto)
@@ -848,7 +846,7 @@ body {
   }
   .back-to-top {
     right: 1rem;
-    bottom: calc(env(safe-area-inset-bottom, 0px) + .75rem);
+    bottom: .75rem;
   }
 }
 
