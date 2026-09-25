@@ -17,8 +17,6 @@ backToTop: { other: "Back to top" }
 location: { other: "Location" }
 locationTo: { other: "Directions to {{ .Name }}, opens the map" }
 quickContact: { other: "Quick contact" }
-cfSummary: { other: "Prefer to write to us here?" }
-cfMailto: { other: "Send us an email" }
 cfAlt: { other: "You can also write to us at" }
 cfName: { other: "Name" }
 cfPhone: { other: "Phone" }

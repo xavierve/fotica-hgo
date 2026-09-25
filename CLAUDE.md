@@ -349,9 +349,10 @@ de él. `config.php` también acaba en `public/`. Consecuencias:
    la confirmación se muestra con `:target` (así un F5 no reenvía). Errores → página HTML
    autocontenida (422) con el motivo, enlace de vuelta y llamar/WhatsApp. El JS solo intercepta el
    submit (`fetch` con `Accept: application/json`), valida y pinta la confirmación en su sitio.
-   El colapso en móvil es un `<details>`, sin JS. Escritorio: el formulario a la vista vía
-   `::details-content`; main.js abre el `<details>` por semántica y para los navegadores sin ese
-   soporte (allí la pestaña se queda visible y sigue funcionando).
+   El formulario va siempre a la vista, también en móvil (sep 2026: el plegado en `<details>`
+   tras un botón `mailto:` se descartó; con este público no se veía, y el `mailto:` depende de
+   tener app de correo). Escritorio: dos columnas, datos | primera capa legal + casilla + enviar,
+   con el HTML en ese orden para que teclado y lector lean la información antes de consentir.
 3. **Antispam sin captcha.** Honeypot (`sitio_web`, fuera de pantalla) + tiempo mínimo de 3 s
    entre carga y envío. Al honeypot se le responde **exactamente lo mismo que a un envío bueno**.
    El tiempo lo mide el cliente (`_t`, sin desfase de reloj); sin JS llega vacío y no se puede

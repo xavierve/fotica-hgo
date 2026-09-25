@@ -386,15 +386,17 @@ Cuando existe un bloque `type: faq`, `schema.html` genera automáticamente `FAQP
 
 ## Shortcode `contact-form` (formulario de contacto)
 
-`{{< contact-form >}} …markdown… {{< /contact-form >}}`. El markdown de dentro (la información
-sobre protección de datos) se pinta sobre la casilla RGPD. Sin parámetros; los textos salen de i18n
+`{{< contact-form >}} …markdown… {{< /contact-form >}}`. El markdown de dentro es la **primera
+capa** de protección de datos (una línea por epígrafe + enlace a la política completa) y se pinta
+sobre la casilla RGPD. Sin parámetros; los textos salen de i18n
 (`cf*`, `err*`, `mail*`).
 
 - **Backend:** `static/contacto/enviar.php` (PHP `mail()`). El propio shortcode **genera**
   `public/contacto/config.php` en cada build desde `data/site.yaml` → `contact.form.from` /
-  `contact.form.to` (por defecto `contact.email`) / `contact.form.fromName` y desde i18n: el PHP no
+  `contact.form.to` (por defecto la dirección decodificada de `contact.emailEnc`) / `contact.form.fromName` y desde i18n: el PHP no
   duplica ningún dato.
 - **El build falla** si el dominio de `contact.form.from` no está alineado con `baseURL` (SPF/DKIM).
 - Funciona **sin JS** (POST normal → 303 a `#recibido`) y con JS (`fetch`, validación accesible,
-  confirmación inline con `aria-live` y foco). En móvil se colapsa en un `<details>`.
+  confirmación inline con `aria-live` y foco). Siempre a la vista, también en móvil. Escritorio:
+  dos columnas, datos | información + casilla + enviar, con el HTML en ese orden.
 - Detalle de diseño, despliegue y verificación: tarea 5 de `CLAUDE.md`.

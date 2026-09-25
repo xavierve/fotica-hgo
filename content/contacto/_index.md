@@ -48,22 +48,24 @@ sections:
 ## ¿Prefieres escribirnos? Cuéntanos en qué podemos ayudarte
 
 {{< contact-form >}}
-**Información sobre protección de datos**
+**Información básica sobre protección de datos**
 
 - **Responsable:** Ana Isabel Santaolalla Gámez.
-- **Finalidad:** responder a tu solicitud de contacto.
-- **Datos que nos envías:** nombre, teléfono, mensaje y, si quieres, tu correo electrónico.
-- **Legitimación:** tu consentimiento al enviar el formulario.
-- **Destinatarios:** tu mensaje se envía desde el servidor de nuestro proveedor de alojamiento web, Hostinger, hasta nuestro buzón de correo, que también está alojado en Hostinger. Hostinger actúa como encargado del tratamiento de carácter técnico: aloja la web y el buzón. No usamos ningún otro servicio de envío de correo y no cedemos tus datos a ningún otro tercero.
-- **Sin base de datos ni registros:** el formulario no guarda tu mensaje en ninguna base de datos ni lleva registro de envíos. Tu mensaje solo llega a nuestro buzón de correo.
-- **Derechos:** puedes acceder, rectificar o suprimir tus datos, así como ejercer el resto de derechos reconocidos por la normativa, escribiendo a {{< email >}}.
+- **Finalidad:** responder a tu consulta.
+- **Legitimación:** tu consentimiento.
+- **Destinatarios:** no cedemos tus datos. Hostinger aloja la web y el correo como encargado del tratamiento.
+- **Derechos:** acceder, rectificar y suprimir tus datos, así como otros derechos, como se explica en la información adicional.
+- **Información adicional:** en nuestra [Política de privacidad](/aviso-legal/#privacidad).
 {{< /contact-form >}}
 
-<!-- PENDIENTE (asesor legal / cliente, no de implementación): confirmar la
-     denominación social exacta del encargado (Hostinger) y que el contrato de
-     encargo de tratamiento (DPA) está aceptado en la cuenta de hosting. Lo
-     técnico ya está fijado: mail() no persiste nada y el buzón está en el mismo
-     Hostinger. Mantener esta lista sincronizada con /aviso-legal/#privacidad. -->
+<!-- PRIMERA CAPA de protección de datos (modelo por capas de la AEPD): una línea
+     por epígrafe, identidad del responsable (sus datos de contacto van en la segunda
+     capa) y enlace a la información adicional. La SEGUNDA CAPA, con el detalle (cómo
+     viaja el mensaje, sin base de datos, conservación, correo para ejercer derechos),
+     es /aviso-legal/#privacidad: si cambia el tratamiento, se actualizan las dos.
+     PENDIENTE (asesor legal / cliente, no de implementación): validar este resumen,
+     confirmar la denominación social exacta del encargado (Hostinger) y que el
+     contrato de encargo de tratamiento (DPA) está aceptado en la cuenta de hosting. -->
 
 ## ¿Estás de paso por Torre del Mar?
 

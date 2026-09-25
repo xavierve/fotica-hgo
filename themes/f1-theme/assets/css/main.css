@@ -1734,34 +1734,27 @@ h2.fs-xs {
   margin-top: 0;
 }
 
-/* Movil: el correo es la accion principal y el formulario va colapsado en un <details>. */
-.cf-mailto {
-  margin: 0 0 1rem;
-}
+/* El correo, alternativa secundaria bajo el formulario, en todos los anchos. */
 .cf-alt {
-  display: none;
-}
-.cf-details > summary {
-  display: flex;
-  align-items: center;
-  min-height: 3rem;
-  cursor: pointer;
-  font-weight: 600;
-  color: var(--color-link);
-  text-decoration: underline;
-}
-.cf-details > summary:focus-visible {
-  outline: 3px solid var(--bg-color2);
-  outline-offset: 2px;
-}
-.cf-details[open] > summary {
-  margin-bottom: .5rem;
+  margin-top: 1.25rem;
 }
 
+/* Movil: una columna. .cf-col agrupa (datos | informacion + casilla + enviar) solo para
+   poder ponerlos en dos columnas en escritorio; en movil se apilan en el orden del HTML. */
 .cf-form {
   display: grid;
   gap: 1.25rem;
   max-width: 40rem;
+}
+.cf-col {
+  display: grid;
+  gap: 1.25rem;
+  align-content: start;
+  min-width: 0;
+}
+.cf-accion {
+  display: grid;
+  gap: 1.25rem;
 }
 .cf-field label {
   display: block;
@@ -1828,10 +1821,19 @@ h2.fs-xs {
   grid-column: 1 / -1;
 }
 
+/* Primera capa de proteccion de datos (modelo por capas de la AEPD): una linea por
+   epigrafe y enlace a la segunda capa. Un punto por debajo del cuerpo, pero NO menos de
+   16px: el RGPD pide que sea inteligible y de facil acceso en el momento de dar los datos,
+   y con este publico un texto diminuto no lo es. */
 .cf-legal {
   padding: 1rem 1.25rem;
   border-left: 4px solid var(--bg-color1);
   background: var(--color-bg-over);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.cf-legal p {
+  margin: 0;
 }
 .cf-legal ul {
   margin-block: .5rem 0;
@@ -1868,23 +1870,23 @@ h2.fs-xs {
   color: var(--color-muted);
 }
 
-/* Desktop: el formulario esta a la vista y el correo queda como alternativa debajo.
-   ::details-content permite mostrar el <details> cerrado sin JS; sin soporte se deja la
-   pestana visible (el formulario sigue siendo alcanzable) y main.js lo abre. */
+/* Escritorio: dos columnas. Izquierda los datos; derecha la informacion, la casilla y el
+   boton. La columna derecha se estira a la altura de la izquierda y .cf-accion baja al
+   fondo con margin-top:auto: el boton queda a la altura del final del mensaje, que es
+   donde termina la lectura, y la informacion legal arriba, junto al primer campo. */
 @media (min-width: 821px) {
-  .cf-mailto {
-    display: none;
+  .cf-form {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    column-gap: clamp(2rem, 4vw, 3.5rem);
+    max-width: none;
+    align-items: stretch;
   }
-  .cf-alt {
-    display: block;
-    margin-top: 1.25rem;
+  .cf-envio {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
   }
-  @supports selector(::details-content) {
-    .cf-details > summary {
-      display: none;
-    }
-    .cf-details::details-content {
-      content-visibility: visible;
-    }
+  .cf-accion {
+    margin-top: auto;
   }
 }

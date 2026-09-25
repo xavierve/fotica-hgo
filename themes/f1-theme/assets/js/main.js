@@ -309,19 +309,10 @@ aislar('formulario de contacto', function () {
   var ok = document.getElementById('recibido');
   var alerta = document.getElementById('cf-alert');
   var boton = form.querySelector('.cf-submit');
-  var details = document.querySelector('.cf-details');
   var CAMPOS = ['nombre', 'telefono', 'email', 'mensaje', 'acepto'];
   var t0 = Date.now();
   var enviando = false;
 
-  // Desktop: el <details> abierto (el CSS ya lo muestra en navegadores modernos; esto fija la
-  // semantica para los lectores de pantalla y cubre los que no soportan ::details-content).
-  if (details && window.matchMedia) {
-    var mq = window.matchMedia('(min-width: 821px)');
-    var abrir = function () { if (mq.matches) details.open = true; };
-    abrir();
-    if (mq.addEventListener) mq.addEventListener('change', abrir);
-  }
   if (ok && location.hash === '#recibido') ok.focus();
 
   // Con JS se valida aqui, con mensajes propios y accesibles; sin JS queda la validacion nativa.

@@ -74,20 +74,25 @@
   </div>
 
   <div class="cf-main">
-    {{- /* Movil: el correo es la accion principal y el formulario queda colapsado. */}}
-    <p class="cf-mailto">{{ partial "email-link.html" (dict "class" "btn btn-fill" "inner" (partial "icons.html" "mail") "label" (i18n "cfMailto")) }}</p>
+    {{- /* El formulario va SIEMPRE a la vista, tambien en movil. Hasta sep 2026 en movil se
+           plegaba en un <details> tras un boton de mailto; con publico 45-75+ el enlace para
+           desplegarlo no se veia, y el mailto depende de tener una app de correo configurada
+           (mucha gente mayor solo usa WhatsApp). Llamar y WhatsApp ya estan en la barra fija.
 
-    <details class="cf-details">
-      <summary>{{ i18n "cfSummary" }}</summary>
+           Dos columnas en escritorio (>=821px): datos a la izquierda; a la derecha la
+           informacion basica de proteccion de datos, la casilla y el boton. ORDEN DEL HTML:
+           campos -> informacion -> casilla -> enviar. Quien navega con teclado o lector de
+           pantalla lee la informacion ANTES de consentir; la rejilla solo la coloca al lado.
+           No invertirlo poniendo el boton antes del texto legal. */}}
+    <form class="cf-form" method="post" action="/contacto/enviar.php"
+      data-msg-nombre="{{ i18n "errNombre" }}" data-msg-telefono="{{ i18n "errTelefono" }}"
+      data-msg-email="{{ i18n "errEmail" }}" data-msg-mensaje="{{ i18n "errMensaje" }}"
+      data-msg-acepto="{{ i18n "errAcepto" }}" data-msg-lineas="{{ i18n "errLineas" }}"
+      data-msg-network="{{ i18n "errNetwork" }}" data-msg-send="{{ i18n "errSend" }}"
+      data-msg-generic="{{ i18n "errGeneric" }}"
+      data-label-send="{{ i18n "cfSend" }}" data-label-sending="{{ i18n "cfSending" }}">
 
-      <form class="cf-form" method="post" action="/contacto/enviar.php"
-        data-msg-nombre="{{ i18n "errNombre" }}" data-msg-telefono="{{ i18n "errTelefono" }}"
-        data-msg-email="{{ i18n "errEmail" }}" data-msg-mensaje="{{ i18n "errMensaje" }}"
-        data-msg-acepto="{{ i18n "errAcepto" }}" data-msg-lineas="{{ i18n "errLineas" }}"
-        data-msg-network="{{ i18n "errNetwork" }}" data-msg-send="{{ i18n "errSend" }}"
-        data-msg-generic="{{ i18n "errGeneric" }}"
-        data-label-send="{{ i18n "cfSend" }}" data-label-sending="{{ i18n "cfSending" }}">
-
+      <div class="cf-col cf-datos">
         <div class="cf-field">
           <label for="cf-nombre">{{ i18n "cfName" }} <span class="cf-req">{{ i18n "cfRequired" }}</span></label>
           <input type="text" id="cf-nombre" name="nombre" autocomplete="name" maxlength="100" required>
@@ -119,27 +124,31 @@
         </div>
         {{- /* Tiempo entre carga y envio (ms). Lo rellena main.js al enviar; sin JS va vacio. */}}
         <input type="hidden" name="_t" value="">
+      </div>
 
+      <div class="cf-col cf-envio">
         {{- with .Inner }}
         <div class="cf-legal">{{ . | $.Page.RenderString (dict "display" "block") }}</div>
         {{- end }}
 
-        <div class="cf-field cf-consent">
-          <input type="checkbox" id="cf-acepto" name="acepto" value="1" required>
-          <label for="cf-acepto">{{ i18n "cfConsentPre" }} <a href="/aviso-legal/#privacidad">{{ i18n "cfPrivacy" }}</a></label>
-          <p class="cf-error" id="cf-acepto-error" hidden></p>
+        <div class="cf-accion">
+          <div class="cf-field cf-consent">
+            <input type="checkbox" id="cf-acepto" name="acepto" value="1" required>
+            <label for="cf-acepto">{{ i18n "cfConsentPre" }} <a href="/aviso-legal/#privacidad">{{ i18n "cfPrivacy" }}</a></label>
+            <p class="cf-error" id="cf-acepto-error" hidden></p>
+          </div>
+
+          {{- /* Errores generales (red, servidor). Siempre presente, vacio hasta que hace falta:
+                 una region role=alert que aparece ya con texto no siempre se anuncia. */}}
+          <div class="cf-alert" id="cf-alert" role="alert"></div>
+
+          <button type="submit" class="btn btn-fill cf-submit">{{ i18n "cfSend" }}</button>
+          <p class="cf-microcopy">{{ i18n "cfMicrocopy" }}</p>
         </div>
+      </div>
+    </form>
 
-        {{- /* Errores generales (red, servidor). Siempre presente, vacio hasta que hace falta:
-               una region role=alert que aparece ya con texto no siempre se anuncia. */}}
-        <div class="cf-alert" id="cf-alert" role="alert"></div>
-
-        <button type="submit" class="btn btn-fill cf-submit">{{ i18n "cfSend" }}</button>
-        <p class="cf-microcopy">{{ i18n "cfMicrocopy" }}</p>
-      </form>
-    </details>
-
-    {{- /* Desktop: el formulario esta a la vista y el correo queda como alternativa debajo. */}}
+    {{- /* El correo, como alternativa secundaria y en todos los anchos. */}}
     <p class="cf-alt">{{ i18n "cfAlt" }} {{ partial "email-link.html" . }}</p>
   </div>
 </div>

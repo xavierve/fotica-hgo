@@ -19,8 +19,6 @@ backToTop: { other: "Volver arriba" }
 location: { other: "Ubicación" }
 locationTo: { other: "Cómo llegar a {{ .Name }}, abre el mapa" }
 quickContact: { other: "Contacto rápido" }
-cfSummary: { other: "¿Prefieres escribirnos aquí?" }
-cfMailto: { other: "Escríbenos un correo" }
 cfAlt: { other: "También puedes escribirnos a" }
 cfName: { other: "Nombre" }
 cfPhone: { other: "Teléfono" }

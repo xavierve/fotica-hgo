@@ -1,5 +1,14 @@
 # F1 Theme · Changelog
 
+## Sin versión — formulario siempre visible y en dos columnas
+
+- `contact-form`: fuera el `<details>` que plegaba el formulario en móvil tras un botón
+  `mailto:`. El formulario va siempre a la vista; el correo queda como alternativa bajo él.
+- Escritorio (≥821px): dos columnas, `.cf-datos` | `.cf-envio` (primera capa legal +
+  casilla + enviar). El botón baja a la altura del final del mensaje. El HTML mantiene el
+  orden campos → información → casilla → enviar.
+- `.cf-legal` a 16px (1rem), nunca menos. Fuera las cadenas i18n `cfSummary` y `cfMailto`.
+
 ## Sin versión — barra fija sin safe-area y main.js con huella
 
 - Fuera los cinco `env(safe-area-inset-bottom)` de la barra fija, el volver-arriba
