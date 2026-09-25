@@ -75,8 +75,8 @@ contact:
       opens: "10:00"
       closes: "13:30"
     - days: ["Monday","Tuesday","Wednesday","Thursday","Friday"]
-      opens: "17:30"
-      closes: "21:00"
+      opens: "17:00"
+      closes: "20:30"
     - days: ["Saturday"]
       opens: "10:00"
       closes: "13:30"
@@ -108,7 +108,7 @@ locations:
     location: "Torre del Mar"
     phone: "+34952540964"
     phoneLabel: "952 54 09 64"
-    mapUrl: "https://share.google/lt3s0XecMBnpr3exH"
+    mapUrl: "https://maps.google.com/?cid=9248588007090896676"    # Avenida
     image: "/images/400-fausto_andalucia_mapa.webp"
     imageAlt: "Fachada y ubicación de Fausto Andalucía en Google Maps"
   - id: "duque"
@@ -117,7 +117,7 @@ locations:
     location: "Torre del Mar"
     phone: "+34952547090"
     phoneLabel: "952 54 70 90"
-    mapUrl: "https://share.google/uotnWlZFT0nfpuVoP"
+    mapUrl: "https://maps.google.com/?cid=12933472947538996195"   # Duque
     image: "/images/400-fausto_duque_mapa.webp"
     imageAlt: "Fachada y ubicación de Fausto Duque en Google Maps"
 

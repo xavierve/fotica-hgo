@@ -93,8 +93,8 @@ Sin subcarpetas para `hero/` `gallery` (solo `og/` y `cards/`) — el prefijo de
 | D3 | Verificar 0 hrefs a rutas inexistentes en `/public/` | Claude Code | — |
 | D4 | Prueba en móvil iOS y Android (Chrome + Safari): CTA clickable, texto ≥18px, sin modales | Cliente | Tras D0 |
 | D5 | Google Search Console: añadir propiedad, verificar, enviar sitemap | Cliente | — |
-| D6 | Google Business Profile: actualizar URL + horarios en ambos perfiles | Cliente | Horarios ya confirmados |
-| D7 | Auditoría NAP: citaciones en directorios locales apuntan al dominio correcto | Cliente | — |
+| D6 | Google Business Profile: actualizar URL + horarios en ambos perfiles. **Unificar el nombre de cada centro**: las fichas se llaman "Óptica Fausto" (Av. Andalucía) y "Ópticas Fausto" (Duque), y la web "Centro Fausto Andalucía" / "Centro Fausto Duque": tres nombres para el mismo negocio. El cliente decide el oficial de cada centro y se aplica igual en las fichas, en la web (`site.yaml` → `locations[].name`, que también alimenta el schema) y en los directorios (D7). Según las directrices de Google, el nombre de la ficha debe coincidir con el del rótulo; no añadir la calle si no forma parte del nombre real. Enlaces de la web a las fichas por CID: Avenida `9248588007090896676`, Duque `12933472947538996195` (si una ficha se recrea o se fusiona, cambia y hay que actualizar `mapUrl`) | Cliente | Horarios ya confirmados; nombre pendiente |
+| D7 | Auditoría NAP: citaciones en directorios locales apuntan al dominio correcto, **con el mismo nombre, dirección y teléfono que las fichas (D6)** | Cliente | Depende del nombre de D6 |
 | D8 | Deploy en Cloudflare Pages: dominio, variables de entorno Worker (API key Resend) | Cliente + Claude Code | — |
 | D9 | Activar redirect 301 opticafausto.com → opticasfausto.com | Cliente | — |
 
