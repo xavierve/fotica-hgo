@@ -62,7 +62,7 @@ contact:
   # Temporada invierno (oct–may): 17:30–21:00 · Temporada verano (jun–sep): revisar con cliente.
   # Formato legible → consumed by footer.html y contacto shortcode/partial
   hours:
-    weekdays: "Lunes a viernes: 10:00–13:30 y 17:30–21:00"
+    weekdays: "Lunes a viernes: 10:00–13:30 y 17:00–20:30"
     saturday: "Sábados: 10:00–13:30"
     sunday: ""   # vacío = cerrado, footer no lo muestra
 
