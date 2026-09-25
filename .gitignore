@@ -2,9 +2,10 @@
 /imagenes/
 # Ignorar documentos borrador del proyecto
 /draft-docs/
-
 # web producida
 /public/
+# web desarrollo
+/.dev/
 
 # parches de trabajo
 *.diff

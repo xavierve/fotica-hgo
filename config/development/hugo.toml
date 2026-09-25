@@ -1,0 +1,8 @@
+# Entorno DEVELOPMENT: lo usa `hugo server` automaticamente.
+# Se combina con el hugo.toml de la raiz; aqui solo lo que cambia al trabajar.
+#
+# `hugo server` (Hugo >= 0.123) escribe a DISCO por defecto. Sin esta linea lo
+# hacia en public/, con baseURL localhost y el script de recarga en vivo, y eso
+# acabo subido por FTP (sep 2026). Asi escribe en .dev/, que esta en .gitignore
+# y NUNCA se sube.
+publishDir = '.dev'

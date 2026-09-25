@@ -1,0 +1,11 @@
+# Entorno PRODUCTION: lo usa `hugo` a secas automaticamente.
+# Se combina con el hugo.toml de la raiz; aqui solo lo propio de publicar.
+
+# Vacia public/ antes de compilar: sin restos de compilaciones anteriores
+# (paginas borradas, main.*.js viejos, feeds desactivados).
+cleanDestinationDir = true
+
+# HTML, CSS, JS, XML y SVG minificados. Solo en produccion: al trabajar con
+# `hugo server` el codigo se sigue viendo legible.
+[minify]
+  minifyOutput = true
