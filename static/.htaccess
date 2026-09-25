@@ -1,0 +1,34 @@
+# .htaccess de opticasfausto.com (Hostinger, servidor LiteSpeed).
+# Vive en static/ para que Hugo lo copie a public/ en CADA compilacion: no
+# editarlo a mano en el servidor, se pisaria en la siguiente subida.
+#
+# COMPRESION: no se configura aqui. LiteSpeed comprime por su cuenta, a nivel de
+# servidor: Brotli por HTTPS si el navegador lo admite y gzip si no. Comprobarlo
+# en DevTools > Red > cabecera de respuesta "content-encoding: br".
+
+# --- Pagina 404 propia (C8) -------------------------------------------------
+# Sin esto el servidor sirve su 404 generico y no la del tema.
+ErrorDocument 404 /404.html
+
+# --- Cache del navegador ------------------------------------------------------
+<IfModule mod_headers.c>
+  # HTML: revalidar siempre. Cada subida se ve al momento, y como cada HTML
+  # apunta al CSS/JS por su nombre con huella, nunca se mezcla CSS nuevo con JS
+  # viejo (el fallo que vimos antes de poner la huella a main.js).
+  <FilesMatch "\.(html|xml)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+
+  # CSS y JS con huella (hash de 64 caracteres en el nombre): su contenido NUNCA
+  # cambia, un cambio genera otro nombre. Un ano de cache e "immutable".
+  <FilesMatch "\.[0-9a-f]{64}\.(css|js)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # Imagenes y fuentes SIN huella: un mes. Si se reemplaza una imagen con el
+  # MISMO nombre, algun visitante puede ver la antigua hasta 30 dias; para un
+  # cambio visible, subirla con otro nombre.
+  <FilesMatch "\.(webp|avif|jpe?g|png|gif|svg|ico|woff2?)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+</IfModule>
