@@ -50,12 +50,7 @@ sections:
 {{< contact-form >}}
 **Información básica sobre protección de datos**
 
-- **Responsable:** Ana Isabel Santaolalla Gámez.
-- **Finalidad:** responder a tu consulta.
-- **Legitimación:** tu consentimiento.
-- **Destinatarios:** no cedemos tus datos. Hostinger aloja la web y el correo como encargado del tratamiento.
-- **Derechos:** acceder, rectificar y suprimir tus datos, así como otros derechos, como se explica en la información adicional.
-- **Información adicional:** en nuestra [Política de privacidad](/aviso-legal/#privacidad).
+**Responsable:** Ana Isabel Santaolalla Gámez. **Finalidad:** responder a tu consulta. **Legitimación:** tu consentimiento. **Destinatarios:** no cedemos tus datos a terceros ni hay transferencias fuera de la UE. **Derechos:** acceder, rectificar y suprimir tus datos, entre otros. Toda la información, en nuestra [Política de privacidad](/aviso-legal/#privacidad).
 {{< /contact-form >}}
 
 <!-- PRIMERA CAPA de protección de datos (modelo por capas de la AEPD): una línea
