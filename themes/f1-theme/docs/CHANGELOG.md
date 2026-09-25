@@ -1,5 +1,11 @@
 # F1 Theme · Changelog
 
+## Sin versión — ancho de bloque `narrow`
+
+- Nuevo valor `width: narrow` para cualquier bloque o shortcode de bloque: tope en
+  `--container-narrow` (860px), centrado. En móvil no cambia nada. Primer uso: las dos
+  sedes de /contacto/, que a 1120px mostraban las imágenes a casi 600px cada una.
+
 ## Sin versión — utilidades de visibilidad y línea de urgencia en el formulario
 
 - Nuevas utilidades `.solo-movil` / `.solo-escritorio` (critical.css, breakpoint 821px). Solo

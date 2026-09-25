@@ -42,7 +42,7 @@ sections:
 
 ## Nuestros dos centros en Torre del Mar
 
-{{< locations showCommon="true" >}}
+{{< locations showCommon="true" width="narrow" >}}
 
 ---
 ## ¿Prefieres escribirnos? Cuéntanos en qué podemos ayudarte

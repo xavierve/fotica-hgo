@@ -44,7 +44,7 @@ Todos los `type:` usan guión alto, nunca guión bajo (`image-text`, no
 
 Todos los bloques aceptan:
 
-- `width`: `default`, `wide`, `full`
+- `width`: `narrow` (860px, `--container-narrow`), `default`, `wide`, `full`
 - `variant`: `default`, `soft`, `featured`, `contrast`
 - `textSize`: `xs`, `s`, `m`, `l`, `xl` — ver "Talla de bloque vs talla de prosa" en FRONTMATTER.md
 - `align`: `left`, `center`, `right`
@@ -155,7 +155,7 @@ bloque suelto.
 ```yaml
 sections:
   - type: text
-    width: default      # default | wide | full
+    width: default      # narrow | default | wide | full
     variant: default     # default | soft | featured | contrast
     textSize: m          # xs | s | m | l | xl
     align: left           # left | center | right

@@ -80,7 +80,7 @@ sections:
 
 Todos los bloques de `sections` aceptan:
 
-- `width`: `default`, `wide`, `full`
+- `width`: `narrow` (860px, `--container-narrow`), `default`, `wide`, `full`
 - `variant`: `default`, `soft`, `featured`, `contrast`
 - `textSize`: `xs`, `s`, `m`, `l`, `xl` — solo bloques/shortcodes de bloque (no confundir con la utilidad CSS fs-*, para texto suelto en prosa; ver "Talla de bloque vs talla de prosa" más abajo)
 - `align`: `left`, `center`, `right` — es `text-align`, horizontal. La

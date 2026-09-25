@@ -358,7 +358,7 @@ por eso `.block-banner{padding}` tuvo que moverse *antes* de los modificadores
 ## 3. Espaciado y medidas
 
 ```css
---container: 1120px;        --container-wide: 1440px;
+--container-narrow: 860px;  --container: 1120px;        --container-wide: 1440px;
 --space-s: clamp(1rem,2vw,1.5rem);
 --space-m: clamp(2rem,4vw,3rem);
 --space-l: clamp(3rem,7vw,5rem);

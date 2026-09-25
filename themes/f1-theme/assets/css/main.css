@@ -498,6 +498,12 @@ address {
 .block-width-default>.container {
   max-width: var(--container)
 }
+/* width:narrow -- solo REDUCE, asi que basta max-width (al reves que wide, que
+   tiene que redeclarar width). Centrado por el margin-inline:auto de .container.
+   Por debajo de --container-narrow no cambia nada: en movil es identico a default. */
+.block-width-narrow>.container {
+  max-width: var(--container-narrow)
+}
 /* ── width:wide ────────────────────────────────────────────────────────────
    El breakout de .prose ya ensancha la <section> hasta --container-wide, pero
    el .container interno seguía topado por su propio width:min(--container,…).

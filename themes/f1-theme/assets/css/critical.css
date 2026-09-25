@@ -41,6 +41,9 @@
      claros. Ya paso con prefers-reduced-motion en main.css. */
   --focus-ring-outer: 0 0 0 6px var(--color-dark);
   --container: 1120px;
+  /* Ancho "narrow" de bloque (width: narrow): contenido que no gana nada ocupando
+     las 1120 enteras (dos tarjetas de sedes, un formulario corto). */
+  --container-narrow: 860px;
   --container-wide: 1440px;
   --space-s: clamp(1rem, 2vw, 1.5rem);
   --space-m: clamp(2rem, 4vw, 3rem);
