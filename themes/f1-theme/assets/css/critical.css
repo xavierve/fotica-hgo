@@ -880,3 +880,33 @@ body {
     padding-bottom: 0;
   }
 }
+
+/* === Utilidades de visibilidad por ancho ======================================
+   .solo-movil       visible por debajo de 821px, oculto desde 821px
+   .solo-escritorio  oculto por debajo de 821px, visible desde 821px
+   Para contenido suelto o puntual. Un componente que se reorganiza por ancho
+   sigue ocultando sus piezas en su propio bloque; esto no lo sustituye.
+
+   Por que asi y no mobile-first puro: ocultar se puede escribir con min-width,
+   pero VOLVER A MOSTRAR exigiria saber el display original de cada elemento
+   (block, flex, grid...), y `display: revert` lo devolveria al valor del
+   navegador, rompiendo cualquier flex o grid. Por eso la utilidad solo OCULTA,
+   nunca muestra, y el rango "por debajo de 821" se escribe como
+   `not all and (min-width: 821px)`: el mismo numero que el resto del tema, sin
+   un 820 que mantener aparte, y con soporte en cualquier navegador.
+
+   !important a proposito: una utilidad existe para ganar a la regla del
+   componente, venga en el orden que venga (ver DESIGN_TOKENS.md, 3.3).
+   display:none tambien lo oculta a los lectores de pantalla: es para contenido
+   que sobra en ese ancho, no para texto accesible oculto (ese es .btn-label). */
+@media not all and (min-width: 821px) {
+  .solo-escritorio {
+    display: none !important;
+  }
+}
+
+@media (min-width: 821px) {
+  .solo-movil {
+    display: none !important;
+  }
+}

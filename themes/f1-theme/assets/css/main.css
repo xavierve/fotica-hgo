@@ -1835,6 +1835,9 @@ h2.fs-xs {
 .cf-legal p {
   margin: 0;
 }
+.cf-legal p + p {
+  margin-top: .5rem;
+}
 .cf-legal ul {
   margin-block: .5rem 0;
   padding-left: 1.25rem;
@@ -1865,9 +1868,17 @@ h2.fs-xs {
   opacity: .7;
   cursor: progress;
 }
-.cf-microcopy {
+.cf-urgente {
   margin: 0;
-  color: var(--color-muted);
+}
+.cf-urgente a {
+  color: var(--color-link);
+  text-decoration: underline;
+  text-underline-offset: .2em;
+}
+/* El numero de telefono nunca se parte entre dos lineas. */
+.cf-nowrap {
+  white-space: nowrap;
 }
 
 /* Escritorio: dos columnas. Izquierda los datos; derecha la informacion, la casilla y el

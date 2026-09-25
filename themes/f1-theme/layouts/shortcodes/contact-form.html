@@ -143,7 +143,14 @@
           <div class="cf-alert" id="cf-alert" role="alert"></div>
 
           <button type="submit" class="btn btn-fill cf-submit">{{ i18n "cfSend" }}</button>
-          <p class="cf-microcopy">{{ i18n "cfMicrocopy" }}</p>
+          {{- /* Para lo urgente, el telefono y WhatsApp justo en el punto de decision. Va DESPUES
+                 del boton: no retrasa el envio y en movil no empuja nada. Visible tambien en
+                 movil a proposito: la barra fija tiene estos canales solo con iconos, y aqui van
+                 con texto y el numero a la vista. Para mostrarla solo en escritorio, anadir la
+                 utilidad: class="cf-urgente solo-escritorio". */}}
+          {{- with $contact.phone }}
+          <p class="cf-urgente">{{ i18n "cfUrgente" }} <a class="cf-nowrap" href="{{ printf "tel:%s" . | safeURL }}">{{ $contact.phoneLabel | default . }}</a>{{ with $wa }} {{ i18n "cfUrgenteWa" }} <a href="https://wa.me/{{ . }}">WhatsApp</a>{{ end }}.</p>
+          {{- end }}
         </div>
       </div>
     </form>

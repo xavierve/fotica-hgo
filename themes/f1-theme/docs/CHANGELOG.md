@@ -1,5 +1,13 @@
 # F1 Theme · Changelog
 
+## Sin versión — utilidades de visibilidad y línea de urgencia en el formulario
+
+- Nuevas utilidades `.solo-movil` / `.solo-escritorio` (critical.css, breakpoint 821px). Solo
+  ocultan; documentadas en DESIGN_TOKENS.md 3.3.
+- `contact-form`: la línea "te respondemos en horario de tienda" pasa a "¿Es urgente? Llámanos
+  al … o escríbenos por WhatsApp", con los datos de `site.yaml`. Fuera `cfMicrocopy`.
+- `.cf-legal p + p`: separación entre el título y el texto de la primera capa.
+
 ## Sin versión — formulario siempre visible y en dos columnas
 
 - `contact-form`: fuera el `<details>` que plegaba el formulario en móvil tras un botón

@@ -30,7 +30,8 @@ cfConsentPre: { other: "He leído y acepto la" }
 cfPrivacy: { other: "Política de Privacidad" }
 cfSend: { other: "Enviar mensaje" }
 cfSending: { other: "Enviando…" }
-cfMicrocopy: { other: "Te respondemos lo antes posible dentro de nuestro horario de tienda." }
+cfUrgente: { other: "¿Es urgente? Llámanos al" }
+cfUrgenteWa: { other: "o escríbenos por" }
 cfOkTitle: { other: "¡Recibido!" }
 cfOkText: { other: "Te contactaremos muy pronto. Si es urgente, llámanos o ven directamente a la tienda." }
 cfHoneypot: { other: "Si eres una persona, deja este campo vacío" }

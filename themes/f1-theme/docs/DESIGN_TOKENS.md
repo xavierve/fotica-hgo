@@ -420,6 +420,31 @@ quedaría perdido en el centro de una franja enorme. `html{overflow-x:clip}`
 
 ---
 
+### 3.3 Mostrar u ocultar según el ancho
+
+Dos utilidades, en `critical.css`, con el breakpoint general del tema (821px):
+
+| Clase | Por debajo de 821px | Desde 821px |
+|---|---|---|
+| `.solo-movil` | visible | oculto |
+| `.solo-escritorio` | oculto | visible |
+
+En plantillas: `class="cf-urgente solo-escritorio"`. En markdown, con el attribute de Goldmark:
+
+```markdown
+Llámanos y te atendemos al momento. {.solo-movil}
+```
+
+**Solo ocultan, nunca muestran.** Volver a mostrar exigiría conocer el `display` de cada
+elemento, y `display: revert` lo devuelve al del navegador y rompe cualquier flex o grid. El
+rango inferior se escribe `not all and (min-width: 821px)`, no `max-width: 820px`: mismo número
+que el resto del tema y soporte universal. Llevan `!important` porque su trabajo es ganar a la
+regla del componente sin depender del orden de carga.
+
+**Cuándo NO usarlas:** un componente que se reorganiza por ancho oculta sus piezas en su propio
+bloque (barra fija, cabecera). Y `display: none` también lo oculta a los lectores de pantalla:
+para texto accesible que no se ve, el patrón es `.btn-label`.
+
 ## 4. Imágenes responsive
 
 Convención: `foto.webp` (1x) + `foto_hd.webp` (2x, doble de ancho).
