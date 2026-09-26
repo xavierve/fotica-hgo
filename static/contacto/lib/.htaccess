@@ -1,0 +1,3 @@
+# Libreria PHPMailer: solo la incluye enviar.php. Ningun fichero de aqui se sirve ni se
+# ejecuta por URL directa.
+Require all denied

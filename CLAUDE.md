@@ -301,10 +301,13 @@ Medidas, proporciones y criterios: `themes/f1-theme/docs/GUIA-IMAGENES.md`.
   el JSON de `.items`, sin pasar por Hugo — para que la vista ampliada use
   `_hd` habría que tocar ese JS. Valorar si compensa.
 
-### 5. Formulario de contacto (`/contacto/`) — implementado; falta verificar en Hostinger
+### 5. Formulario de contacto (`/contacto/`) — implementado; envío SMTP pendiente de verificar en real
 
-Backend: **PHP `mail()`** del propio hosting, sin PHPMailer ni credenciales SMTP
-guardadas (SPF y DKIM ya alineados, ver abajo). Campos: nombre, teléfono, **correo
+Backend: **SMTP autenticado** contra `smtp.hostinger.com` con **PHPMailer**, cuenta
+`formulario@opticasfausto.com`. **No `mail()`**: medido en real (sep 2026), `mail()` en el
+alojamiento compartido de Hostinger ignora `-f`, reescribe el remitente del sobre
+(`noreply@srvXXXX.main-hosting.eu`) y no firma DKIM; DMARC falla y Hostinger lo marca `X-Spam`.
+Por SMTP autenticado sale como desde el webmail: DKIM de `opticasfausto.com`, SPF y DMARC en pass. Campos: nombre, teléfono, **correo
 (opcional)** y mensaje, más la casilla RGPD. El correo es opcional a propósito: sin
 él no hay `Reply-To`, pero el teléfono sigue siendo obligatorio.
 
@@ -316,6 +319,8 @@ guardadas (SPF y DKIM ya alineados, ver abajo). Campos: nombre, teléfono, **cor
 | Config | `public/contacto/config.php` | **Generado en cada build** por el shortcode `contact-form` desde `data/site.yaml` (`contact.form.from`, `contact.form.to`, teléfonos) e i18n. No está en git. |
 | Formulario | shortcode `{{< contact-form >}}…{{< /contact-form >}}` | El markdown de dentro (info RGPD) se pinta sobre la casilla. |
 | Front | `main.css` (`.cf-*`), bloque `aislar('formulario de contacto')` de `main.js` | |
+| PHPMailer | `static/contacto/lib/PHPMailer/` | 6.10.0, solo `PHPMailer.php`, `SMTP.php`, `Exception.php`, sin modificar. `lib/.htaccess` niega el acceso directo. |
+| Credenciales SMTP | **`/home/u204505935/domains/opticasfausto.com/smtp.php`** | **FUERA del repo y FUERA de `public_html`.** Devuelve `['user' => ..., 'pass' => ...]`. Se sube a mano una vez, permisos 600. La sincronización de `public/` no lo toca. **NUNCA se commitea: el repo es público.** Si falta, el formulario responde 500 y lo dice en el log. |
 
 **Despliegue: dónde vive el `.php`.** Va en `static/` para que Hugo lo copie a
 `public/` y suba con el resto: forma parte del ciclo de despliegue, no está fuera
@@ -329,10 +334,11 @@ de él. `config.php` también acaba en `public/`. Consecuencias:
   porque están dentro de `public/`.
 - Cambiar destinatario o remitente = editar `data/site.yaml` + build + subir.
 - Si `config.php` no llega, `enviar.php` responde 500 y no envía nada (falla cerrado).
-- **A confirmar por Foco:** el método de despliegue no está documentado en el repo (no hay
-  script ni workflow). Confirmar cómo se sube `public/` y que incluye los `.php`.
-- Requisitos del hosting: PHP ≥ 7.4 con `mbstring`, `mail()` habilitado y el buzón
-  `web@opticasfausto.com` existente (recibe los rebotes).
+- **Despliegue:** WinSCP, sincronización en modo espejo de `public/` → `public_html/`, en
+  binario, con borrado y máscara `| error_log; .well-known/`. Antes de subir, `public/` tiene que
+  venir de `hugo` (producción): `grep -rl "localhost:1313" public/` no debe devolver nada.
+- Requisitos del hosting: PHP ≥ 7.4 con `mbstring` y `openssl`, y el buzón
+  `formulario@opticasfausto.com` existente, con reenvío a `web@` para los rebotes.
 
 **Decisiones de diseño (no reabrir sin motivo)**
 
@@ -340,7 +346,8 @@ de él. `config.php` también acaba en `public/`. Consecuencias:
    dominio; **nunca** la del visitante (rompería la alineación SPF/DKIM y sería suplantación).
    El correo del visitante va en `Reply-To:` (solo la dirección, sin nombre). El **build
    falla** si el dominio de `from` no está alineado con `baseURL` (en localhost no se
-   comprueba). El sobre (`-f`) usa el mismo remitente.
+   comprueba). El remitente del sobre es el mismo (`setFrom()` de PHPMailer), que además
+   es la cuenta SMTP autenticada: por eso `from` tiene que ser un buzón real.
    `nombre`, `teléfono` y `correo` pueden acabar en una cabecera (`Subject`, `Reply-To`): cualquier
    carácter de control, en particular `\r` o `\n`, **rechaza el envío** (400); no se filtra en
    silencio. El asunto va codificado (RFC 2047). El mensaje sí admite saltos de línea (van al
@@ -354,7 +361,9 @@ de él. `config.php` también acaba en `public/`. Consecuencias:
    tener app de correo). Escritorio: dos columnas, datos | primera capa legal + casilla + enviar,
    con el HTML en ese orden para que teclado y lector lean la información antes de consentir.
 3. **Antispam sin captcha.** Honeypot (`sitio_web`, fuera de pantalla) + tiempo mínimo de 3 s
-   entre carga y envío. Al honeypot se le responde **exactamente lo mismo que a un envío bueno**.
+   entre carga y envío. Al honeypot se le responde **exactamente lo mismo que a un envío bueno**, y deja
+   una línea en el log: si aparece con envíos de personas reales, el autorrelleno del navegador
+   está rellenando el campo.
    El tiempo lo mide el cliente (`_t`, sin desfase de reloj); sin JS llega vacío y no se puede
    comprobar (solo actúa el honeypot). Un envío a <3 s recibe un error recuperable, no un éxito
    falso: un humano con autorrelleno podría llegar ahí. Además se rechaza un `Origin` ajeno.

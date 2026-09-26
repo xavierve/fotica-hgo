@@ -54,9 +54,12 @@ contact:
   #         direccion del visitante (esa va en Reply-To). Conviene que exista como
   #         buzon, para recibir los rebotes.
   form:
-    from: "web@opticasfausto.com"
+    # Buzon EXCLUSIVO del formulario y cuenta SMTP autenticada: el From tiene que coincidir
+    # con la cuenta con la que enviar.php se identifica. Su contrasena NO esta en el repo: va en
+    # smtp.php, fuera de public_html (CLAUDE.md, tarea 5). Tiene reenvio a web@ para los rebotes.
+    from: "formulario@opticasfausto.com"
     fromName: "Ópticas Fausto (web)"
-    # to: "contacto@opticasfausto.com"   # por defecto, contact.email
+    # to: "contacto@opticasfausto.com"   # por defecto, la direccion decodificada de contact.emailEnc
 
   # HORARIOS — fuente única para footer, página de contacto y schema.org.
   # Temporada invierno (oct–may): 17:30–21:00 · Temporada verano (jun–sep): revisar con cliente.

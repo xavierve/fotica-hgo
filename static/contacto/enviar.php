@@ -12,15 +12,30 @@
  *   - Sin JS: POST normal del <form> -> 303 a /contacto/#recibido (la pagina estatica
  *     muestra la confirmacion con :target) o, si hay errores, una pagina HTML propia.
  *
- * Envio: mail() de PHP, sin PHPMailer ni credenciales SMTP guardadas. SPF y DKIM ya
- * estan configurados en el dominio, y con el From alineado bastan.
+ * Envio: SMTP AUTENTICADO contra smtp.hostinger.com con PHPMailer (lib/PHPMailer/).
+ * NO mail(): medido en real (sep 2026), mail() en el alojamiento compartido de Hostinger
+ * ignora -f, reescribe el remitente del sobre (noreply@srvXXXX.main-hosting.eu) y no firma
+ * DKIM, asi que DMARC falla y el propio Hostinger lo marca X-Spam. Por SMTP autenticado el
+ * mensaje sale igual que desde el webmail: DKIM de opticasfausto.com, SPF y DMARC en pass.
  *
- * NO PERSISTE NADA: ni base de datos, ni archivos, ni log de envios. El unico log es
- * error_log() cuando mail() falla, sin datos del visitante.
+ * CREDENCIALES: fuera del repo y fuera de public_html, en CF_SMTP_FILE (ver abajo). Nunca en
+ * config.php (lo genera Hugo desde un repo publico) ni en ningun fichero versionado.
+ *
+ * NO PERSISTE NADA: ni base de datos, ni archivos, ni log de envios; el envio por SMTP no
+ * guarda copia en el buzon remitente. Los error_log() dicen el motivo de un rechazo o de un
+ * fallo, nunca datos del visitante ni la contrasena.
  */
 
 /** Tiempo minimo, en ms, entre que se carga la pagina y se envia. Lo mide el cliente. */
 const CF_MIN_MS = 3000;
+
+/**
+ * Credenciales SMTP: un PHP que devuelve ['user' => ..., 'pass' => ...], FUERA de public_html:
+ *   /home/<usuario>/domains/opticasfausto.com/smtp.php   (dos niveles por encima de este fichero)
+ * Se sube a mano una vez y la sincronizacion de public/ no lo toca. Claves opcionales, con estos
+ * valores por defecto: 'host' => 'smtp.hostinger.com', 'port' => 465, 'secure' => 'ssl'.
+ */
+define('CF_SMTP_FILE', dirname(__DIR__, 2) . '/smtp.php');
 
 /** Longitud maxima de cada campo, en caracteres. */
 const CF_LIM = array('nombre' => 100, 'telefono' => 30, 'email' => 254, 'mensaje' => 2000);
@@ -117,18 +132,6 @@ function cf_exito($json)
     exit;
 }
 
-/** Cabecera de texto con caracteres no ASCII (palabra codificada MIME, RFC 2047). */
-function cf_cabecera_texto($texto)
-{
-    if (preg_match('/^[\x20-\x7E]*$/', $texto)) {
-        return $texto;
-    }
-    if (function_exists('mb_encode_mimeheader')) {
-        return mb_encode_mimeheader($texto, 'UTF-8', 'B', "\r\n");
-    }
-    return '=?UTF-8?B?' . base64_encode($texto) . '?=';
-}
-
 // ---------------------------------------------------------------------------
 // Peticion
 // ---------------------------------------------------------------------------
@@ -164,6 +167,9 @@ if ($origin !== '' && $origin !== 'null') {
 // se le responde EXACTAMENTE lo mismo que a un envio bueno, y no se envia nada.
 $hp = isset($_POST['sitio_web']) ? $_POST['sitio_web'] : '';
 if (is_array($hp) || trim((string) $hp) !== '') {
+    // Sin datos del visitante. Si esto aparece con envios de personas reales, el autorrelleno
+    // del navegador esta rellenando el campo: cambiarle nombre y etiqueta.
+    error_log('contacto/enviar.php: honeypot relleno, envio descartado');
     cf_exito($json);
 }
 
@@ -244,17 +250,6 @@ $from = $cfg['from'];
 // escriba el visitante: con el correo del visitante en From, SPF y DKIM dejan de estar alineados
 // y el mensaje pasa a ser suplantacion a ojos del receptor. El visitante va en Reply-To.
 $fromNombre = isset($cfg['fromName']) ? $cfg['fromName'] : '';
-$cabeceras = array();
-$cabeceras[] = 'From: ' . ($fromNombre !== '' ? cf_cabecera_texto($fromNombre) . ' <' . $from . '>' : $from);
-if ($e !== '') {
-    $cabeceras[] = 'Reply-To: ' . $e; // ya validado; solo la direccion, sin nombre visible
-}
-$cabeceras[] = 'MIME-Version: 1.0';
-$cabeceras[] = 'Content-Type: text/plain; charset=UTF-8';
-$cabeceras[] = 'Content-Transfer-Encoding: quoted-printable';
-$cabeceras[] = 'Message-ID: <' . bin2hex(random_bytes(12)) . '@' . $host . '>';
-
-$asunto = cf_cabecera_texto($msg['mailSubject'] . ': ' . $n);
 
 $cuerpo = $msg['mailIntro'] . "\n\n"
     . $msg['mailName'] . ': ' . $n . "\n"
@@ -262,15 +257,50 @@ $cuerpo = $msg['mailIntro'] . "\n\n"
     . $msg['mailEmail'] . ': ' . ($e !== '' ? $e : $msg['mailNone']) . "\n\n"
     . $msg['mailMessage'] . ":\n" . $m . "\n\n--\n"
     . $msg['mailFooter'] . "\n";
-$cuerpo = str_replace(array("\r\n", "\r", "\n"), "\r\n", $cuerpo);
-$cuerpo = quoted_printable_encode($cuerpo);
 
-// El 5.o parametro (-f) fija el remitente del sobre (Return-Path) al mismo dominio.
-$ok = @mail($to, $asunto, $cuerpo, implode("\r\n", $cabeceras), '-f' . $from);
+// Credenciales. Si faltan, falla cerrado: sin ellas no hay envio autenticado, y un envio sin
+// autenticar (mail()) es justo lo que se ha eliminado. NO hay respaldo con mail().
+$smtp = is_readable(CF_SMTP_FILE) ? include CF_SMTP_FILE : null;
+if (!is_array($smtp) || empty($smtp['user']) || empty($smtp['pass'])) {
+    error_log('contacto/enviar.php: faltan o no se pueden leer las credenciales SMTP en ' . CF_SMTP_FILE);
+    cf_error($cfg, $json, 500, array(), $msg['errSend']);
+}
 
-if (!$ok) {
-    // Sin datos del visitante: solo el hecho del fallo.
-    error_log('contacto/enviar.php: mail() devolvio false');
+require __DIR__ . '/lib/PHPMailer/Exception.php';
+require __DIR__ . '/lib/PHPMailer/PHPMailer.php';
+require __DIR__ . '/lib/PHPMailer/SMTP.php';
+
+$correo = new \PHPMailer\PHPMailer\PHPMailer(true);
+try {
+    $correo->isSMTP();
+    $correo->Host = isset($smtp['host']) ? $smtp['host'] : 'smtp.hostinger.com';
+    $correo->Port = isset($smtp['port']) ? (int) $smtp['port'] : 465;
+    $correo->SMTPSecure = isset($smtp['secure']) ? $smtp['secure'] : 'ssl'; // TLS implicito
+    $correo->SMTPAuth = true;
+    $correo->Username = $smtp['user'];
+    $correo->Password = $smtp['pass'];
+    $correo->Timeout = 15; // una peticion web no puede quedarse colgada los 300 s por defecto
+
+    $correo->CharSet = 'UTF-8';
+    $correo->Encoding = 'quoted-printable';
+    $correo->isHTML(false);
+    $correo->MessageID = '<' . bin2hex(random_bytes(12)) . '@' . $host . '>';
+
+    // From = la cuenta autenticada, siempre del propio dominio y salida de la config, NUNCA lo que
+    // escriba el visitante. setFrom() fija tambien el remitente del sobre. El visitante va en
+    // Reply-To, solo la direccion (ya validada arriba).
+    $correo->setFrom($from, $fromNombre);
+    $correo->addAddress($to);
+    if ($e !== '') {
+        $correo->addReplyTo($e);
+    }
+    $correo->Subject = $msg['mailSubject'] . ': ' . $n; // PHPMailer lo codifica (RFC 2047)
+    $correo->Body = $cuerpo;
+
+    $correo->send();
+} catch (\Exception $ex) {
+    // ErrorInfo es la respuesta del servidor SMTP: sin datos del visitante ni la contrasena.
+    error_log('contacto/enviar.php: fallo SMTP: ' . substr((string) $correo->ErrorInfo, 0, 300));
     cf_error($cfg, $json, 500, array(), $msg['errSend']);
 }
 
