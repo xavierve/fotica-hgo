@@ -53,4 +53,6 @@ mailPhone: { other: "Phone" }
 mailEmail: { other: "Email" }
 mailNone: { other: "not provided" }
 mailMessage: { other: "Message" }
-mailFooter: { other: "Reply to this email to answer the visitor (only if they left an email); otherwise call the phone number given." }
+mailFooter: { other: "Reply to this email to answer the person." }
+mailSubjectCall: { other: "CALL, no email" }
+mailNoEmailTop: { other: "THIS PERSON LEFT NO EMAIL: do not reply to this message, call them on" }

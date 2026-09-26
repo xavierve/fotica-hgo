@@ -55,4 +55,6 @@ mailPhone: { other: "Teléfono" }
 mailEmail: { other: "Correo" }
 mailNone: { other: "no indicado" }
 mailMessage: { other: "Mensaje" }
-mailFooter: { other: "Responde a este correo para contestar al visitante (solo si dejó un correo); si no, llámale al teléfono indicado." }
+mailFooter: { other: "Responde a este correo para contestar a la persona." }
+mailSubjectCall: { other: "LLAMAR, sin correo" }
+mailNoEmailTop: { other: "ESTA PERSONA NO DEJÓ CORREO: no respondas a este mensaje, llámala al" }

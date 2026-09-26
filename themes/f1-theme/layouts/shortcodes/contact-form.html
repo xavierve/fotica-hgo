@@ -40,7 +40,7 @@
 
 {{- /* Cadenas: UNA sola fuente (i18n) para el PHP, el JS y el HTML */ -}}
 {{- $mensajes := dict -}}
-{{- range slice "errNombre" "errTelefono" "errEmail" "errMensaje" "errAcepto" "errLineas" "errTiempo" "errSend" "errGeneric" "errNetwork" "errPageTitle" "errBack" "errOrCall" "mailSubject" "mailIntro" "mailName" "mailPhone" "mailEmail" "mailNone" "mailMessage" "mailFooter" -}}
+{{- range slice "errNombre" "errTelefono" "errEmail" "errMensaje" "errAcepto" "errLineas" "errTiempo" "errSend" "errGeneric" "errNetwork" "errPageTitle" "errBack" "errOrCall" "mailSubject" "mailIntro" "mailName" "mailPhone" "mailEmail" "mailNone" "mailMessage" "mailFooter" "mailSubjectCall" "mailNoEmailTop" -}}
   {{- $mensajes = merge $mensajes (dict . (i18n .)) -}}
 {{- end -}}
 

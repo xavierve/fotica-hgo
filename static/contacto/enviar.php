@@ -251,12 +251,22 @@ $from = $cfg['from'];
 // y el mensaje pasa a ser suplantacion a ojos del receptor. El visitante va en Reply-To.
 $fromNombre = isset($cfg['fromName']) ? $cfg['fromName'] : '';
 
-$cuerpo = $msg['mailIntro'] . "\n\n"
+// Sin correo del visitante, "Responder" no le llega nunca: iria a la cuenta del formulario. Por
+// eso ese caso se marca donde el empleado lo ve ANTES de contestar: al principio del asunto (la
+// bandeja muestra el asunto, no el cuerpo) y en la primera linea del mensaje, con el telefono.
+// No se pone un Reply-To de relleno (contacto@, noreply@): contestar parece funcionar y se pierde.
+$sinCorreo = ($e === '');
+
+$cuerpo = ($sinCorreo ? $msg['mailNoEmailTop'] . ' ' . $t . "\n\n" : '')
+    . $msg['mailIntro'] . "\n\n"
     . $msg['mailName'] . ': ' . $n . "\n"
     . $msg['mailPhone'] . ': ' . $t . "\n"
-    . $msg['mailEmail'] . ': ' . ($e !== '' ? $e : $msg['mailNone']) . "\n\n"
-    . $msg['mailMessage'] . ":\n" . $m . "\n\n--\n"
-    . $msg['mailFooter'] . "\n";
+    . $msg['mailEmail'] . ': ' . ($sinCorreo ? $msg['mailNone'] : $e) . "\n\n"
+    . $msg['mailMessage'] . ":\n" . $m . "\n"
+    . ($sinCorreo ? '' : "\n--\n" . $msg['mailFooter'] . "\n");
+// Saltos de linea CRLF antes de codificar: con \n sueltos, quoted-printable los codifica como
+// "=0A" en vez de saltos reales, y la norma (RFC 2045) pide saltos reales en el texto.
+$cuerpo = str_replace(array("\r\n", "\r", "\n"), "\r\n", $cuerpo);
 
 // Credenciales. Si faltan, falla cerrado: sin ellas no hay envio autenticado, y un envio sin
 // autenticar (mail()) es justo lo que se ha eliminado. NO hay respaldo con mail().
@@ -294,7 +304,7 @@ try {
     if ($e !== '') {
         $correo->addReplyTo($e);
     }
-    $correo->Subject = $msg['mailSubject'] . ': ' . $n; // PHPMailer lo codifica (RFC 2047)
+    $correo->Subject = ($sinCorreo ? $msg['mailSubjectCall'] . ' · ' : '') . $msg['mailSubject'] . ': ' . $n; // PHPMailer lo codifica (RFC 2047)
     $correo->Body = $cuerpo;
 
     $correo->send();
