@@ -270,7 +270,12 @@ $cuerpo = str_replace(array("\r\n", "\r", "\n"), "\r\n", $cuerpo);
 
 // Credenciales. Si faltan, falla cerrado: sin ellas no hay envio autenticado, y un envio sin
 // autenticar (mail()) es justo lo que se ha eliminado. NO hay respaldo con mail().
+// En un bufer que se descarta: si smtp.php tuviera algo antes de "<?php" (espacios, un BOM de
+// UTF-8 que meten algunos editores de Windows), eso saldria como salida y las cabeceras de la
+// respuesta ya no se podrian enviar: un fallo responderia 200 y el JS mostraria "enviado".
+ob_start();
 $smtp = is_readable(CF_SMTP_FILE) ? include CF_SMTP_FILE : null;
+ob_end_clean();
 if (!is_array($smtp) || empty($smtp['user']) || empty($smtp['pass'])) {
     error_log('contacto/enviar.php: faltan o no se pueden leer las credenciales SMTP en ' . CF_SMTP_FILE);
     cf_error($cfg, $json, 500, array(), $msg['errSend']);
@@ -289,7 +294,12 @@ try {
     $correo->SMTPAuth = true;
     $correo->Username = $smtp['user'];
     $correo->Password = $smtp['pass'];
-    $correo->Timeout = 15; // una peticion web no puede quedarse colgada los 300 s por defecto
+    // DOS limites distintos en PHPMailer, y hacen falta los dos. Timeout solo cubre la CONEXION.
+    // La espera de cada respuesta del servidor usa SMTP::Timelimit, que por defecto vale 300 s y se
+    // duplica a 600 s durante DATA. Medido: con solo Timeout, un servidor que acepta la conexion y
+    // no contesta dejaba la peticion colgada indefinidamente. Con Timelimit corta con error limpio.
+    $correo->Timeout = 15;
+    $correo->getSMTPInstance()->Timelimit = 15;
 
     $correo->CharSet = 'UTF-8';
     $correo->Encoding = 'quoted-printable';
