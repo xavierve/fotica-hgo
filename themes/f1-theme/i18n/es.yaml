@@ -40,6 +40,7 @@ errTelefono: { other: "Escribe un teléfono válido: solo números, espacios y e
 errEmail: { other: "Este correo no parece válido. Revísalo o déjalo en blanco." }
 errMensaje: { other: "Cuéntanos brevemente en qué podemos ayudarte (entre 5 y 2000 caracteres)." }
 errAcepto: { other: "Marca la casilla para poder enviar tu mensaje." }
+errEnlaces: { other: "Por seguridad no se admiten enlaces (direcciones web). Quítalos y vuelve a enviar; si necesitas pasarnos uno, llámanos o escríbenos por WhatsApp." }
 errLineas: { other: "Este campo solo admite una línea, sin saltos de línea ni caracteres especiales." }
 errTiempo: { other: "Has enviado el formulario demasiado rápido. Espera un momento y vuelve a pulsar «Enviar mensaje»." }
 errSend: { other: "No hemos podido enviar tu mensaje. Inténtalo de nuevo o llámanos: te atendemos enseguida." }

@@ -224,6 +224,21 @@ $m = $campos['mensaje'];
 if (cf_len($m) < 5 || cf_len($m) > CF_LIM['mensaje']) {
     $errores['mensaje'] = $msg['errMensaje'];
 }
+// Enlaces en nombre y mensaje (contact.form.maxLinks en site.yaml; 0 = ninguno, -1 = sin limite).
+// El spam casi siempre los lleva y un cliente de una optica casi nunca. Error VISIBLE y
+// recuperable, no exito falso: si un cliente real pego un enlace, lo quita y reenvia. Solo cuenta
+// lo que es inequivocamente un enlace; un correo (pepe@gmail.com) no.
+$maxEnlaces = isset($cfg['maxLinks']) ? (int) $cfg['maxLinks'] : 0;
+if ($maxEnlaces >= 0) {
+    foreach (array('nombre', 'mensaje') as $k) {
+        $cuantos = preg_match_all('~https?://|www\.|\[url|<a\s~i', $campos[$k]);
+        if ($cuantos > $maxEnlaces && !isset($errores[$k])) {
+            $errores[$k] = $msg['errEnlaces'];
+            // Sin datos del visitante: solo el campo y cuantos. Sirve para medir el spam.
+            error_log('contacto/enviar.php: 422, ' . $cuantos . ' enlace(s) en ' . $k);
+        }
+    }
+}
 if (!in_array(strtolower($campos['acepto']), array('1', 'on', 'si', 'true'), true)) {
     $errores['acepto'] = $msg['errAcepto'];
 }

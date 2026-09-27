@@ -346,12 +346,19 @@ aislar('formulario de contacto', function () {
     return !!primero;
   }
   // Misma validacion que el servidor (enviar.php), que es el que manda.
+  // Enlaces: mismo patron y mismo limite que enviar.php (contact.form.maxLinks, -1 = sin limite).
+  var MAX_ENLACES = parseInt(form.getAttribute('data-max-enlaces'), 10);
+  function enlaces(v) { var r = v.match(/https?:\/\/|www\.|\[url|<a\s/gi); return r ? r.length : 0; }
   function validar() {
     var e = {}, tel = valor('telefono'), m = valor('mensaje').length;
     if (!valor('nombre')) e.nombre = texto('nombre');
     if (!/^[0-9+()\s.\-]{6,30}$/.test(tel) || tel.replace(/\D/g, '').length < 6) e.telefono = texto('telefono');
     if (valor('email') && !/^[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$/.test(valor('email'))) e.email = texto('email');
     if (m < 5 || m > 2000) e.mensaje = texto('mensaje');
+    if (MAX_ENLACES >= 0) {
+      if (!e.nombre && enlaces(valor('nombre')) > MAX_ENLACES) e.nombre = texto('enlaces');
+      if (!e.mensaje && enlaces(valor('mensaje')) > MAX_ENLACES) e.mensaje = texto('enlaces');
+    }
     if (!form.elements.acepto.checked) e.acepto = texto('acepto');
     return e;
   }

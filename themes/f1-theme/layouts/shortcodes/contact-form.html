@@ -19,13 +19,14 @@
   Sin JS funciona igual: <form method="post"> normal; el PHP responde con un 303 a
   #recibido (la confirmacion se muestra con :target) o con una pagina de errores.
   El JS de main.js solo intercepta el submit, valida y pinta la confirmacion en su
-  sitio. El colapso en movil es un <details>, no un toggle por JS.
+  sitio. El formulario va siempre a la vista, tambien en movil.
 */ -}}
 {{- $site := hugo.Data.site | default dict -}}
 {{- $contact := $site.contact | default dict -}}
 {{- $form := $contact.form | default dict -}}
 {{- $from := $form.from | default "" -}}
 {{- $to := $form.to | default (partial "email-addr.html" .) | default "" -}}
+{{- $maxLinks := int ($form.maxLinks | default 0) -}}
 {{- if or (not $from) (not $to) -}}
   {{- errorf "contact-form: faltan contact.form.from y/o el destinatario (contact.form.to o contact.email) en data/site.yaml" -}}
 {{- end -}}
@@ -40,7 +41,7 @@
 
 {{- /* Cadenas: UNA sola fuente (i18n) para el PHP, el JS y el HTML */ -}}
 {{- $mensajes := dict -}}
-{{- range slice "errNombre" "errTelefono" "errEmail" "errMensaje" "errAcepto" "errLineas" "errTiempo" "errSend" "errGeneric" "errNetwork" "errPageTitle" "errBack" "errOrCall" "mailSubject" "mailIntro" "mailName" "mailPhone" "mailEmail" "mailNone" "mailMessage" "mailFooter" "mailSubjectCall" "mailNoEmailTop" -}}
+{{- range slice "errNombre" "errTelefono" "errEmail" "errMensaje" "errAcepto" "errLineas" "errTiempo" "errSend" "errGeneric" "errNetwork" "errEnlaces" "errPageTitle" "errBack" "errOrCall" "mailSubject" "mailIntro" "mailName" "mailPhone" "mailEmail" "mailNone" "mailMessage" "mailFooter" "mailSubjectCall" "mailNoEmailTop" -}}
   {{- $mensajes = merge $mensajes (dict . (i18n .)) -}}
 {{- end -}}
 
@@ -54,6 +55,7 @@
     "phone" ($contact.phone | default "")
     "phoneLabel" ($contact.phoneLabel | default "")
     "whatsapp" ($contact.whatsapp | default "")
+    "maxLinks" $maxLinks
     "msg" $mensajes -}}
 {{- $php := printf "<?php\n// GENERADO por Hugo (layouts/shortcodes/contact-form.html) desde data/site.yaml en cada\n// build. NO editar a mano: se pierde en el siguiente build. Lo lee static/contacto/enviar.php.\nif (basename(__FILE__) === basename($_SERVER['SCRIPT_FILENAME'] ?? '')) { http_response_code(404); exit; }\nreturn json_decode(<<<'JSON'\n%s\nJSON\n, true);\n" ($cfg | jsonify) -}}
 {{- $cfgRes := resources.FromString "contacto/config.php" $php -}}
@@ -89,7 +91,8 @@
       data-msg-email="{{ i18n "errEmail" }}" data-msg-mensaje="{{ i18n "errMensaje" }}"
       data-msg-acepto="{{ i18n "errAcepto" }}" data-msg-lineas="{{ i18n "errLineas" }}"
       data-msg-network="{{ i18n "errNetwork" }}" data-msg-send="{{ i18n "errSend" }}"
-      data-msg-generic="{{ i18n "errGeneric" }}"
+      data-msg-generic="{{ i18n "errGeneric" }}" data-msg-enlaces="{{ i18n "errEnlaces" }}"
+      data-max-enlaces="{{ $maxLinks }}"
       data-label-send="{{ i18n "cfSend" }}" data-label-sending="{{ i18n "cfSending" }}">
 
       <div class="cf-col cf-datos">
