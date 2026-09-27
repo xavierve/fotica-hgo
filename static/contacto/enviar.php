@@ -273,9 +273,25 @@ $cuerpo = str_replace(array("\r\n", "\r", "\n"), "\r\n", $cuerpo);
 // En un bufer que se descarta: si smtp.php tuviera algo antes de "<?php" (espacios, un BOM de
 // UTF-8 que meten algunos editores de Windows), eso saldria como salida y las cabeceras de la
 // respuesta ya no se podrian enviar: un fallo responderia 200 y el JS mostraria "enviado".
-ob_start();
-$smtp = is_readable(CF_SMTP_FILE) ? include CF_SMTP_FILE : null;
-ob_end_clean();
+// Ademas: si se cuela algo, se AVISA en el log (numero de bytes, nunca el contenido), para que el
+// fichero no se quede mal para siempre sin que nadie lo sepa; y un error de sintaxis al editarlo
+// da un 500 limpio con la linea en el log, no una respuesta fatal a medias. Lo que vaya detras de
+// un cierre de PHP final nunca se imprime: el return termina el fichero incluido.
+$smtp = null;
+if (is_readable(CF_SMTP_FILE)) {
+    ob_start();
+    try {
+        $smtp = include CF_SMTP_FILE;
+    } catch (\Throwable $ex) {
+        $smtp = null;
+        error_log('contacto/enviar.php: smtp.php no se puede cargar: ' . get_class($ex) . ' en la linea ' . $ex->getLine());
+    }
+    $sobrante = strlen((string) ob_get_contents());
+    ob_end_clean();
+    if ($sobrante > 0) {
+        error_log('contacto/enviar.php: aviso: smtp.php imprime ' . $sobrante . ' bytes antes de la etiqueta PHP (espacios, BOM o texto); descartados, corrige el fichero');
+    }
+}
 if (!is_array($smtp) || empty($smtp['user']) || empty($smtp['pass'])) {
     error_log('contacto/enviar.php: faltan o no se pueden leer las credenciales SMTP en ' . CF_SMTP_FILE);
     cf_error($cfg, $json, 500, array(), $msg['errSend']);
