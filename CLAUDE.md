@@ -301,7 +301,7 @@ Medidas, proporciones y criterios: `themes/f1-theme/docs/GUIA-IMAGENES.md`.
   el JSON de `.items`, sin pasar por Hugo — para que la vista ampliada use
   `_hd` habría que tocar ese JS. Valorar si compensa.
 
-### 5. Formulario de contacto (`/contacto/`) — implementado; envío SMTP pendiente de verificar en real
+### 5. Formulario de contacto (`/contacto/`) — ✅ implementado y verificado en producción (27 sep 2026)
 
 Backend: **SMTP autenticado** contra `smtp.hostinger.com` con **PHPMailer**, cuenta
 `formulario@opticasfausto.com`. **No `mail()`**: medido en real (sep 2026), `mail()` en el
@@ -383,22 +383,29 @@ nada (sin base de datos ni registro de envíos). Queda una nota `<!-- PENDIENTE 
 estrecha, que ya no es de implementación sino del asesor/cliente: denominación social exacta del
 encargado y contrato de encargo (DPA) aceptado en la cuenta de hosting.
 
-**Verificación en el dominio real (PENDIENTE — no se puede hacer en local).** En local se ha probado
-el manejador con PHP 8.3 real y un receptor SMTP que captura lo que emite `mail()` (cabeceras, inyección,
-honeypot, tiempos, validación) y el formulario completo con Playwright (con y sin JS, escritorio y
-móvil). **Pero PHP en Windows compone `mail()` distinto que en Linux y no hay DKIM ni SPF locales:**
-la cadena de entrega solo se comprueba enviando de verdad.
-1. Poner temporalmente `contact.form.to` a una cuenta de **Gmail** (`data/site.yaml`), build y subir.
-2. Enviar desde `https://opticasfausto.com/contacto/` (con JS y, si se puede, sin JS).
-3. Gmail → ⋮ → *Mostrar original*: **SPF: PASS**, **DKIM: PASS**, **DMARC: PASS**, con dominio
-   `opticasfausto.com`.
-4. Repetir con una cuenta de **Outlook** y abrir el origen del mensaje (*Ver → Ver origen del mensaje*):
-   buscar `Authentication-Results:` con `spf=pass … smtp.mailfrom=opticasfausto.com`,
-   `dkim=pass header.d=opticasfausto.com`, `dmarc=pass header.from=opticasfausto.com`.
-5. **Alineación:** `smtp.mailfrom` (Return-Path) y `header.d` (DKIM) deben ser el mismo dominio que el
-   `From:`. Si SPF pasa pero con un dominio de Hostinger, el `-f` no se está aplicando: revisar.
-6. Comprobar que **no cae en Spam** y que «Responder» contesta al correo del visitante (`Reply-To`).
-7. Restaurar `contact.form.to`, build, subir y probar una última vez al buzón real.
+**✅ Verificado en el dominio real (26-27 sep 2026).** Cabeceras de un envío real del formulario,
+en `contacto@`: `dkim=pass header.d=opticasfausto.com header.s=hostingermail-a`,
+`spf=pass smtp.mailfrom=formulario@opticasfausto.com`, `dmarc=pass`, y
+`Authenticated sender: formulario@opticasfausto.com`. Con y sin correo del visitante (el caso sin
+correo llega con «LLAMAR, sin correo» en el asunto). Probado también: servidor SMTP mudo (corta a
+los 15 s), credenciales ausentes o con BOM/espacios/error de sintaxis (ver comentarios de
+`enviar.php`).
+
+**Spam en el buzón propio:** `X-Spam` lo pone el filtro de entrada de Hostinger (Cloudmark, cabeceras
+`X-CM-*`), por **contenido**, no por autenticación: aun con todo en pass, un mensaje de prueba cayó
+en spam por parecerse a otro anterior que sí era dudoso. Resuelto con `formulario@opticasfausto.com`
+en la **lista blanca** de `contacto@` (webmail de Hostinger). **Si el buzón de destino cambia, repetir
+la lista blanca en el nuevo.** El riesgo de que alguien falsifique ese remitente se cierra al pasar
+el DMARC de `p=none` a `p=quarantine` (pendiente: cuando los informes que llegan a `web@` salgan
+limpios unas semanas).
+
+**Para volver a verificar tras un cambio en el envío:** enviar el formulario y abrir el mensaje
+original en `contacto@` (o, para ver cómo lo trata un tercero, poner temporalmente
+`contact.form.to` en una cuenta de Gmail, build, subir, *Mostrar original*, y restaurar). Tienen que
+salir `dkim=pass` con `header.d=opticasfausto.com`, `spf=pass` con
+`smtp.mailfrom=formulario@opticasfausto.com`, `dmarc=pass` y la línea «Authenticated sender». Si el
+remitente del sobre sale como `noreply@srv….main-hosting.eu`, el mensaje ha salido por `mail()` y no
+por SMTP: revisar.
 
 **Email del dominio, verificado (6 sep):** DONE 17 set - SPF
 (`v=spf1 include:_spf.mail.hostinger.com...`) y DKIM (3 CNAME
@@ -520,10 +527,8 @@ Hostinger, comprobar sobre el dominio real:
 - **HTTP 404 de verdad** en una URL inexistente (tarea 7) — no basta con que
   se vea la página bonita: mirar el código de estado.
 - **Redirecciones 301** (una vez publicado el nuevo dominio) del dominio viejo y de los 4 subdominios (tarea 8), comprobando que la cadena no pasa por un 302 intermedio.
-- **Formulario**: envío real y que el correo llegue a bandeja, no a spam
-  (tarea 5). Probar desde Gmail y desde Outlook, que filtran distinto, y leer
-  `Authentication-Results` (`spf=pass`, `dkim=pass`, `dmarc=pass` y alineación con el
-  dominio del `From`). Procedimiento completo en la tarea 5.
+- ✅ **Formulario**: verificado el 26-27 sep 2026 (tarea 5): DKIM, SPF y DMARC en pass,
+  alineados con el `From`, y en bandeja gracias a la lista blanca de `contacto@`.
 - **Certificado SSL** válido en `opticasfausto.com` y en `www.` (los CAA
   aplicados el 10 sep limitan qué autoridades pueden emitirlo).
 - **PageSpeed Insights móvil** contra la URL real, no local: el objetivo >85

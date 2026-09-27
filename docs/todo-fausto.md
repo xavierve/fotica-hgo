@@ -52,7 +52,7 @@ Sin subcarpetas para `hero/` `gallery` (solo `og/` y `cards/`) — el prefijo de
 | B1.1 | ✅ Nosotros (100): equipo (7 individuales + grupo) y locales (2 fachadas + 2 interiores) resueltos, empaquetados en `ASSETS-nosotros.zip`. Pendiente solo subir a rutas finales | Cliente | Hecho |
 | B1.2 | Páginas de servicio con hero asignado (211-215, 227, 300, 311-312, 314-315, 321): heroes generados con IA con la cara del equipo — **decisión pendiente de confirmar** si se publica así o se sustituye por fotografía real, dado el principio de marca "fotos reales, no stock" | Foco | Hecho |
 | B1.3 | Páginas de producto puro sin foto nueva (216, 222-226, 322-323): se quedan con stock antiguo de la web previa, por decisión explícita — sin acción pendiente salvo homogeneización visual en D0 | — | Cerrado por decisión |
-| B1.4 | Página Contacto (400): patrón de card definido (fachada 50% sup. + captura de mapa auto-alojada 50% inf., ambas `<img>` separadas dentro de un único `<a>` a Google Maps; teléfono fuera del enlace). Pendiente: aspect ratio/recorte final, y decidir servicio de captura de mapa (riesgo ToS de atribución con Google Maps — alternativa OSM/Mapbox si el logo obligatorio molesta) mágenes de sedes (400-fausto_*_mapa.webp): las dos con las mismas medidas exactas, ≥900px de ancho (se muestran a unos 410px; el doble para pantallas retina), y sin elementos de interfaz capturados: botones de cerrar, controles de Google Maps. | Foco | Hecho |
+| B1.4 | Página Contacto (400): patrón de card definido (fachada 50% sup. + captura de mapa auto-alojada 50% inf., ambas `<img>` separadas dentro de un único `<a>` a Google Maps; teléfono fuera del enlace). Pendiente: aspect ratio/recorte final, y decidir servicio de captura de mapa (riesgo ToS de atribución con Google Maps — alternativa OSM/Mapbox si el logo obligatorio molesta). Imágenes de sedes (400-fausto_*_mapa.webp): las dos con las mismas medidas exactas, ≥900px de ancho (se muestran a unos 410px; el doble para pantallas retina), y sin elementos de interfaz capturados: botones de cerrar, controles de Google Maps. | Foco | Hecho |
 | B2 | Optimizar imágenes para web: WebP, tamaños responsive, lazy loading | Claude Code | Media |
 
 ### FASE C — Desarrollo técnico (Claude Code · sesión separada)
@@ -60,10 +60,10 @@ Sin subcarpetas para `hero/` `gallery` (solo `og/` y `cards/`) — el prefijo de
 **Alta:**
 | # | Tarea |
 |---|---|
-| C1 | Formulario de contacto: php Hostinger. Dual móvil/desktop. Confirmación inline. Checkbox RGPD → `/aviso-legal/` |
+| C1 | ✅ Formulario de contacto: php Hostinger. Dual móvil/desktop. Confirmación inline. Checkbox RGPD → `/aviso-legal/` **Hecho y verificado en producción (27 sep 2026):** SMTP autenticado (PHPMailer, `formulario@`), DKIM/SPF/DMARC en pass, formulario siempre visible, dos columnas en escritorio. Detalle en CLAUDE.md, tarea 5. |
 | C2 | Ofuscación JS de CIF (52582059B) y domicilio en `/aviso-legal/` — spans con `data-obf` |
-| C3 | `.gitignore`: excluir `public/` y `resources/_gen/` |
-| C4 | Sticky footer móvil: Llamada / WhatsApp / Ubicación con icons.html y datos de site.yaml |
+| C3 | ✅ `.gitignore`: excluir `public/` y `resources/_gen/` **Hecho.** |
+| C4 | ✅ Sticky footer móvil: Llamada / WhatsApp / Ubicación con icons.html y datos de site.yaml **Hecho:** solo iconos, con el volver-arriba integrado; aparece cuando asoma el elemento siguiente al hero. |
 | C5 | Hero responsive: variante móvil `bgMobile` (replicar patrón de cta) |
  Falta: (1) `footer.html` lea `contact.hours`; (2) `schema.html` cambie `$loc.hoursSpec` por `or $loc.hoursSpec $contact.hoursSpec`; (3) crear shortcode `{{< hours >}}` y sustituir el horario hardcoded del body de Contacto. Objetivo: cambiar horario de verano/invierno editando solo site.yaml |
 
@@ -71,9 +71,9 @@ Sin subcarpetas para `hero/` `gallery` (solo `og/` y `cards/`) — el prefijo de
 | # | Tarea |
 |---|---|
 | C7 | `.htaccess` Hostinger (Apache, `Redirect 301`): dominio viejo → nuevo, 4 subdominios landing, mapeo de URLs WordPress a partir del sitemap del sitio viejo recuperado de Wayback Machine. **Ahora mismo en 302 a propósito**, a la espera de lanzar el sitio nuevo; al lanzar se pasan a 301 |
-| C8 | Verificar 404 en Hostinger: `ErrorDocument 404 /404.html` en el `.htaccess` para que devuelva HTTP 404 real (sin eso Apache lo sirve con 200 y Google lo trata como soft 404) + `noindex` al `<head>` |
+| C8 | ✅ Verificar 404 en Hostinger: `ErrorDocument 404 /404.html` en el `.htaccess` para que devuelva HTTP 404 real (sin eso Apache lo sirve con 200 y Google lo trata como soft 404) + `noindex` al `<head>` **Hecho:** `ErrorDocument` en `static/.htaccess`, comprobado en el servidor. |
 | C9 | Tipografía con `clamp()` y espaciados en `em` |
-| C10 | Indicador de scroll en heros + botón volver-arriba global (coordinar con sticky footer) |
+| C10 | ✅ Indicador de scroll en heros + botón volver-arriba global (coordinar con sticky footer) **Hecho el volver-arriba. El indicador de scroll se descartó** tras medir que el hero no cabe en casi ninguna landing. |
 
 **Baja / al recibir material:**
 | # | Tarea |
