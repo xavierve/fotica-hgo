@@ -1,5 +1,5 @@
 {{- /*
-  partials/bg-image-style.html
+  partials/img-bg-style.html
 
   Dado un src de imagen de fondo y el nombre de variable CSS a rellenar,
   devuelve el fragmento "--var:url(...)" listo para concatenar en un
@@ -9,8 +9,13 @@
 
   Uso (dentro de un bloque que ya construye $styles como slice):
     {{- with .bg }}{{ $styles = $styles | append
-        (partial "bg-image-style.html" (dict "src" . "varName" "section-bg"))
+        (partial "img-bg-style.html" (dict "src" . "varName" "section-bg"))
       }}{{ end -}}
+
+  Lo usan cta y banner (background-image a proposito: conservan la opcion de
+  background-attachment:fixed). El hero ya no: desde oct 2026 sus tres
+  layouts pintan la foto con <img> (img-responsive.html). Antes se llamaba
+  bg-image-style.html; se renombro a la familia img-*.
 
   Parametros (dict):
     src      -> ruta publica de la imagen (obligatorio)

@@ -56,7 +56,7 @@ foreach ($r in $rutas.Keys) {
         $copiadas++
         $resumen[$rol] = 1 + $(if ($resumen.ContainsKey($rol)) { $resumen[$rol] } else { 0 })
 
-        # variante _hd: la usan tanto responsive-img.html como bg-image-style.html
+        # variante _hd: la usan tanto responsive-img.html como img-bg-style.html
         $dir  = Split-Path -Parent $src
         $base = [IO.Path]::GetFileNameWithoutExtension($src)
         $ext  = [IO.Path]::GetExtension($src)

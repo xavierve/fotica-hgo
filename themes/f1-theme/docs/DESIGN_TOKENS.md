@@ -187,7 +187,7 @@ ya trae el par fondo+texto resuelto.
 
 ### 1.3.1 Tokens del hero
 
-En `:root` (`critical.css`). Los usan el hero `stacked` y, en móvil, el `overlay`.
+En `:root` (`critical.css`). Los usan el hero `stacked` y el `overlay` apilado en móvil (`params.hero.mobileOverlay = false`, clase `is-stacked-mobile`).
 
 | Token | Valor | Qué controla |
 |---|---|---|
@@ -199,7 +199,9 @@ En `:root` (`critical.css`). Los usan el hero `stacked` y, en móvil, el `overla
 
 **Por qué se queda el `max-height: 60svh` de la banda en desktop.** Con el ancho capado el `aspect-ratio 3/1` da como mucho 480px, pero en una ventana ancha y baja (proporción mayor de 1.8:1, p. ej. 1440×700) esos 480px son más del 60% del alto y sacan el H1 de la primera pantalla. Es una red de seguridad: en 1366×768 o 1920×1080 no interviene.
 
-Padding superior del hero, por clase emitida por el partial: `hero-stacked` → 0 (la banda toca el header o el breadcrumb); `hero-split` / `hero-plain` → `clamp(2rem, 8vw, 7rem)`; `hero-overlay` → el `clamp(4rem, 8vw, 7rem)` base de `.hero`.
+Padding superior del hero, por clase emitida por el partial: `hero-stacked` → 0 (la banda toca el header o el breadcrumb); `hero-split` / `hero-plain` → `clamp(2rem, 8vw, 7rem)`; `hero-overlay` → el `clamp(4rem, 8vw, 7rem)` base de `.hero`, salvo apilado en móvil (`is-stacked-mobile`) → 0, como `stacked`.
+
+**Banda móvil y proporción del `_m`.** La banda mide `100vw × 40svh`, así que su proporción depende del teléfono: ~1.6:1 en 360×640, ~1.5:1 en 390×844 (Safari, con barras), ~1.35:1 en 412×915 (Chrome). En el emulador de DevTools `svh` es el alto entero de la pantalla, sin barras del navegador, y la banda sale más alta (~1.1–1.4:1) de lo que se verá en un móvil real. Por eso el `_m` se entrega en **3:2**: es el centro del rango real, y lo que `cover` recorta se queda por debajo del ~15% del total (a los lados en las bandas más altas, arriba y abajo en las más bajas). Un `_m` cuadrado pierde entre un 25 y un 40% del alto.
 
 ### 1.3.2 Tokens de la barra fija y el volver-arriba
 
@@ -243,7 +245,7 @@ son las palancas para que el texto se lea sin cambiar la foto:
 
 | Clase | Efecto |
 |---|---|
-| `bg-top` | `background-position:top center` — evita que un recorte alto corte cabezas o rótulos. Para `background-image` (cta, banner, hero `overlay`); el hero `stacked` usa `hero.imagePosition`. |
+| `bg-top` | `background-position:top center` — evita que un recorte alto corte cabezas o rótulos. Para `background-image` (cta, banner). El hero no usa `background-image` en ningún layout: su encuadre va por `hero.imagePosition`. |
 
 **Contraste de fondo claro:**
 
@@ -455,8 +457,9 @@ error.
   archivo con `images.Config` (no hay que declararlo), genera `srcset` con
   descriptor `w` + `sizes` para que el navegador elija según tamaño de
   renderizado **y** densidad. Conectado en: cards, team, gallery, slider,
-  testimonials, brands-logos, image-text, hero (modo split).
-- **`background-image`** → `partials/bg-image-style.html`. Genera `image-set()`
+  testimonials, brands-logos, image-text, hero (los tres layouts).
+- **`background-image`** → `partials/img-bg-style.html` (antes
+  `bg-image-style.html`). Genera `image-set()`
   con descriptor `1x`/`2x` (sólo densidad: no existe equivalente CSS a `sizes`).
   Usado en banner y cta, que se quedan en `background-image` a propósito para
   conservar la opción de `background-attachment:fixed`, que no existe para

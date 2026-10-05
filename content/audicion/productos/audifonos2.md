@@ -22,12 +22,11 @@ schema:
   includeBreadcrumb: true
 
 hero:
-  title: "Audífonos discretos: nadie lo ve, tú lo oyes todo"
-  subtitle: "Una amplia gama de audífonos, desde el más económico hasta el más pequeño y sofisticado, para volver a conectar con quienes más quieres."
+  title: "Un paso adelante para volver a conectar con quienes más quieres"
+  subtitle: "Tenemos la solución para tu pérdida auditiva: una amplia gama de audífonos, **desde el más económico hasta el más sofisticado tecnológicamente**. Nuestro equipo especializado en audioprótesis — somos **Centro Auditivo Homologado** — evalúa tu pérdida y te recomienda el audífono que mejor se adapta a tus necesidades funcionales y estéticas. Y queremos que estés totalmente convencido: **lo usas y lo pruebas en tu vida diaria antes de comprarlo, sin ningún compromiso.**"
   preset: contact
-  image: "/images/321-audifono_que_no_se_ve.webp"
+  image: "/images/321-audifonos_hero.webp"
   imageAlt: "Modelo de audífono avanzado, muy pequeño y discreto, que pasaría desapercibido"
-  layout: overlay
 
 sections:
   - type: faq

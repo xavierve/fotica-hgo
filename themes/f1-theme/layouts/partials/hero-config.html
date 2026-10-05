@@ -9,31 +9,50 @@
   Entrada: la pagina (.). Sin `hero:` devuelve layout "" (y sin src).
 
   hero.layout:
-    (ausente) | stacked -> foto a sangre arriba, bloque de color debajo. DEFECTO.
-    overlay             -> texto sobre la imagen (solo desde 821px; en movil se
-                           apila igualmente: nunca hay texto sobre foto en movil).
-    split               -> texto + figura en dos columnas (Home).
+    stacked -> foto a sangre arriba, bloque de color debajo.
+    overlay -> texto sobre la foto.
+    split   -> texto + figura en dos columnas.
   Sin imagen utilizable el hero degrada a "plain" (solo texto).
 
-  Origen de la imagen: SIEMPRE `hero.image`, en los tres layouts. `layout`
-  decide como se pinta (background-image en overlay, <img> en stacked y split),
-  no de que clave sale la foto. Antes habia dos claves -- `bg` para
-  stacked/overlay e `image` para split -- y una pagina con `layout: split` y
-  solo `bg` degradaba a "plain" en silencio.
+  Defectos: los pone el SITIO, no el tema. Cada sitio declara su politica en
+  su hugo.toml, y la pagina solo escribe hero.layout cuando es una excepcion:
+
+    [params.hero]
+      layout = "stacked"      # layout cuando la pagina no declara hero.layout
+      mobileOverlay = false   # false: overlay se apila en movil (< 821px)
+
+  Sin [params.hero], el tema usa overlay en todos los anchos: el hero clasico,
+  que es lo neutro. Lo de Fausto (apilado por defecto, nunca texto sobre foto
+  en movil) es una decision de ESE sitio por su publico y vive en su hugo.toml.
+  mobileOverlay solo afecta a overlay: stacked ya es apilado, y split en movil
+  es una columna (texto y luego foto) por construccion.
+
+  Origen de la imagen: SIEMPRE `hero.image`, en los tres layouts, y siempre
+  como <img> (img-responsive.html): alt, srcset w con _hd, <picture> con _m,
+  object-position y un solo camino de preload. `layout` decide donde se
+  coloca la foto, no de que clave sale ni con que tecnica se pinta.
 
   Variante movil: por convencion "_m" junto al archivo (ver img-mobile.html),
   no por front matter. Aplica a los tres layouts.
 
-  Devuelve dict: layout, src, mobile ("" si no hay "_m"), sizes.
+  Devuelve dict: layout, mobileOverlay, src, mobile ("" si no hay "_m"), sizes.
 
   sizes: el atributo sizes de la imagen (y del preload), calculado UNA vez para
   que markup y preload nunca diverjan. Tanto en stacked como en split la banda
   tiene tope de ancho (--hero-band-max en critical.css): por encima de ese
   ancho la foto ya no crece, asi que el navegador no debe pedir un archivo
-  mayor. $bandMax y el token CSS van a la vez.
+  mayor. $bandMax y el token CSS van a la vez. overlay va a sangre y sin tope:
+  100vw (en movil apilado, la banda tambien mide 100vw).
 */ -}}
 {{- $h := .Params.hero | default dict -}}
-{{- $layout := $h.layout | default "stacked" -}}
+{{- $site := site.Params.hero | default dict -}}
+{{- $layout := $h.layout | default ($site.layout | default "overlay") -}}
+{{- if not (in (slice "stacked" "overlay" "split") $layout) -}}
+  {{- errorf "hero.layout %q no valido en %s (stacked | overlay | split)" $layout .RelPermalink -}}
+{{- end -}}
+{{- /* Booleano: `default` no sirve (trata false como vacio y devolveria true). */ -}}
+{{- $mobileOverlay := true -}}
+{{- if isset $site "mobileoverlay" -}}{{- $mobileOverlay = index $site "mobileoverlay" -}}{{- end -}}
 {{- $src := $h.image | default "" -}}
 {{- $mobile := "" -}}
 {{- if $src -}}{{- $mobile = partial "img-mobile.html" $src -}}{{- end -}}
@@ -42,8 +61,8 @@
 {{- if eq $layout "stacked" -}}{{- $sizes = printf "(min-width:%dpx) %dpx, 100vw" $bandMax $bandMax -}}{{- end -}}
 {{- /* split: la figura es la 2a columna del grid (minmax(280px,.9fr) de
        1.1fr+.9fr), dentro de una banda con tope $bandMax y gap de 4rem.
-       (1440 - 32 padding - 64 gap) * .9/2 = 605px -> se declara 620. */ -}}
+       (1440 - 32 padding - 64 gap) * .9/2 = 605px -> se declara 620. -- CHANGED 1fr/1fr */ -}}
 {{- if eq $layout "split" -}}{{- $sizes = printf "(min-width:%dpx) 620px, (min-width:821px) 45vw, 100vw" $bandMax -}}{{- end -}}
 {{- if not $src -}}{{- $layout = "plain" -}}{{- $mobile = "" -}}{{- end -}}
 {{- if not .Params.hero -}}{{- $layout = "" -}}{{- end -}}
-{{- return (dict "layout" $layout "src" $src "mobile" $mobile "sizes" $sizes) -}}
+{{- return (dict "layout" $layout "mobileOverlay" $mobileOverlay "src" $src "mobile" $mobile "sizes" $sizes) -}}

@@ -90,33 +90,64 @@ Todos los bloques de `sections` aceptan:
 
 ## Hero: layouts
 
-Un solo bloque, tres presentaciones. `hero.layout` elige; si se omite, es
-`stacked`. El contenido (eyebrow, H1, subtítulo, CTAs) y sus parámetros son
-los mismos en las tres.
+Un solo bloque, tres presentaciones. `hero.layout` elige. El contenido
+(eyebrow, H1, subtítulo, CTAs) y sus parámetros son los mismos en las tres, y
+la foto es **siempre un `<img>`** (`img-responsive.html`): `alt`, `srcset` con
+`_hd`, `<picture>` con `_m` y `object-position` funcionan igual en las tres.
 
-| `layout` | Qué es | Imagen | Cuándo |
-|---|---|---|---|
-| `stacked` (**defecto**) | Banda de foto a sangre arriba; debajo, bloque `bg-color2` con H1 a la izquierda y subtítulo + CTAs a la derecha (una columna en móvil). | `<img>` | La norma. |
-| `overlay` | Texto sobre la foto (`background-image` + `scrim`). **Solo desde 821px**: en móvil se apila igual que `stacked` — nunca hay texto sobre foto en móvil. | `background-image` | Excepción, con fotos de espacio negativo. |
-| `split` | Texto y figura en dos columnas (una en móvil, texto primero). | `<img>` | Home. |
+| `layout` | Qué es | Dónde va la foto |
+|---|---|---|
+| `stacked` | Banda de foto a sangre arriba; debajo, bloque `bg-color2` con H1 a la izquierda y subtítulo + CTAs a la derecha (una columna en móvil). | `<figure class="hero-band">`, en el flujo |
+| `overlay` | Texto sobre la foto, con velo y `scrim`. | `<figure class="hero-bg">`, detrás del copy (posición absoluta) |
+| `split` | Texto y figura en dos columnas (una en móvil, texto primero). | `<figure class="hero-media">`, segunda columna |
 
-La foto sale **siempre de `hero.image`**. `layout` decide cómo se pinta, no de
-qué clave se lee. Las claves `bg` y `bgMobile` ya no existen en el hero (sí en
-`cta` y `banner`, que son otra API): una página con `layout: split` y solo `bg`
-degradaba a `plain` sin avisar.
+### Defectos: los decide el sitio, no el tema
+
+El tema no impone ninguna política de hero. Cada sitio la declara en su
+`hugo.toml`, y la página solo escribe `hero.layout` cuando es una excepción:
+
+```toml
+[params.hero]
+  layout = "stacked"      # layout de las páginas que no declaran hero.layout
+  mobileOverlay = false   # false: overlay se apila en móvil (< 821px)
+```
+
+| Parámetro de sitio | Valores | Sin declarar |
+|---|---|---|
+| `params.hero.layout` | `stacked` \| `overlay` \| `split` | `overlay` |
+| `params.hero.mobileOverlay` | `true` \| `false` | `true` |
+
+`mobileOverlay` solo afecta a `overlay`: `stacked` ya es apilado y `split` en
+móvil es una columna por construcción. Con `false`, la foto de un `overlay`
+pasa en móvil a ser la misma banda que en `stacked` (`--hero-band-h`, recorte
+con `object-fit: cover`) y el texto va debajo sobre color liso (`bgColor` si
+se da; si no, `bg-color2`). Es una política de sitio, no de página: no existe
+`hero.mobileOverlay` en el front matter.
+
+**Ópticas Fausto** declara `layout = "stacked"` y `mobileOverlay = false`:
+público 45-75+, nunca texto sobre foto en móvil (decisión del 21 ago) y
+apilado por defecto en todos los anchos (10 sep). Esas decisiones son del
+sitio; hasta oct 2026 estaban escritas en el código del tema.
+
+Un valor de `layout` fuera de los tres aborta el build (`errorf`) en vez de
+degradar en silencio.
+
+La foto sale **siempre de `hero.image`**. `layout` decide dónde se coloca, no
+de qué clave se lee ni con qué técnica se pinta. Las claves `bg` y `bgMobile`
+no existen en el hero (sí en `cta` y `banner`, que son otra API).
 
 Sin imagen utilizable el hero degrada a solo texto (clase `hero-plain`).
 
 Parámetros propios del hero:
 
-- `layout`: `stacked` | `overlay` | `split`.
-- `imagePosition`: (`stacked`) `object-position` de la foto, ej. `"center 30%"`, `"top"`. Cada foto tiene su punto de interés; por defecto `center`.
-- `imageAlt`: alt de la foto. Si se omite queda `alt=""` (decorativa).
+- `layout`: `stacked` | `overlay` | `split`. Si se omite, el del sitio.
+- `imagePosition`: `object-position` de la foto, ej. `"center 30%"`, `"top"`. Cada foto tiene su punto de interés; por defecto `center`. Vale en `stacked` y `overlay`, y se aplica también al `_m` (es el mismo `<img>`) (en `overlay` sustituye a la antigua clase `bg-top`, que ya no afecta al hero).
+- `imageAlt`: alt de la foto. Si se omite queda `alt=""` (decorativa). En `overlay` también se emite: antes, con `background-image`, se perdía.
 - `scrim`: (`overlay`) `false` desactiva el degradado direccional, que va activo por defecto.
-- `bgColor` / `textColor`: en `stacked` sustituyen el color del bloque de texto (por defecto `bg-color2`); en `overlay` tiñen el velo.
-- `class`: clases extra en el `<section>`. `panel`, `overlay-strong` y `bg-top` son de `overlay`; en `stacked` el encuadre va por `imagePosition`.
+- `bgColor` / `textColor`: en `stacked` sustituyen el color del bloque de texto (por defecto `bg-color2`); en `overlay` tiñen el velo, y con `mobileOverlay = false` son el fondo del bloque de texto en móvil.
+- `class`: clases extra en el `<section>`. `panel` y `overlay-strong` son de `overlay`.
 
-En `stacked` la banda tiene un ancho máximo de 1440px (`--hero-band-max`): en pantallas más anchas la foto no se amplía y los laterales toman el color del bloque de texto. `overlay` no lleva tope: es una excepción a sangre. `stacked` y `split` comparten el ancho `--hero-width` (= `--container-wide`, 1440px) en vez del `--container` de 1120px: en dos columnas, 1120 deja el texto en ~580px y la foto en ~480px.
+En `stacked` la banda tiene un ancho máximo de 1440px (`--hero-band-max`): en pantallas más anchas la foto no se amplía y los laterales toman el color del bloque de texto. `overlay` no lleva tope: es una excepción a sangre (`sizes="100vw"`). `stacked` y `split` comparten el ancho `--hero-width` (= `--container-wide`, 1440px) en vez del `--container` de 1120px: en dos columnas, 1120 deja el texto en ~580px y la foto en ~480px.
 
 ### Variantes de imagen: `_hd` y `_m`
 
@@ -125,8 +156,8 @@ las dos son opcionales: si el archivo no está, el markup cae limpio.
 
 | Sufijo | Qué es | Para qué | Cómo se sirve |
 |---|---|---|---|
-| `foto_hd.webp` | la MISMA foto con más píxeles | densidad (retina) | `srcset` w en `stacked`/`split`, `image-set()` en `overlay` |
-| `foto_m.webp` | OTRO encuadre, vertical | art direction en móvil | `<source media="(max-width:820px)">` |
+| `foto_hd.webp` | la MISMA foto con más píxeles | densidad (retina) | `srcset` w, en los tres layouts |
+| `foto_m.webp` | OTRO encuadre para móvil | art direction en móvil | `<source media="(max-width:820px)">` |
 
 No son intercambiables. `srcset` elige candidato por ancho y DPR, así que dos
 archivos con el mismo aspecto y distinto recorte le resultan equivalentes y
@@ -150,10 +181,11 @@ páginas que la tienen, con un preload por breakpoint si existe el `_m`.
 | `img-responsive.html` | emite el `<img>`, y el `<picture>` si hay `_m`. Es el que llaman los bloques. |
 | `img-srcset.html` | resuelve el `_hd` y devuelve el `srcset` w con los anchos reales. |
 | `img-mobile.html` | resuelve el `_m` y devuelve su ruta, o `""`. |
+| `img-bg-style.html` | lo mismo para `background-image` (`cta`, `banner`): variables CSS con `url()` y `image-set()` si hay `_hd`. Antes `bg-image-style.html`. |
 
 `img-responsive.html` acepta `noMobile: true` para quien monte su propio
 `<picture>`. (Antes se llamaba `responsive-img.html`; se renombró para que los
-tres partials sean la misma familia `img-*`.)
+partials de imagen sean la misma familia `img-*`.)
 
 ## Reglas
 

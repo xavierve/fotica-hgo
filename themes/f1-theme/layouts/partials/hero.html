@@ -1,25 +1,26 @@
 {{- /*
   partials/hero.html
 
-  Un solo bloque, tres presentaciones (hero.layout; la resolucion vive en
-  hero-config.html):
-    stacked (defecto) -> foto a sangre arriba, bloque de color debajo
-    overlay           -> texto sobre la foto (background-image + scrim), solo
-                         desde 821px; en movil se apila como stacked
-    split             -> texto + figura en dos columnas
+  Un solo bloque, tres presentaciones (hero.layout; la resolucion y los
+  defectos del sitio viven en hero-config.html):
+    stacked -> foto a sangre arriba, bloque de color debajo
+    overlay -> texto sobre la foto (<img> detras + scrim); con
+               params.hero.mobileOverlay = false se apila en movil
+    split   -> texto + figura en dos columnas
+  La foto es SIEMPRE un <img> via img-responsive.html, en los tres.
   Sin imagen: "plain" (solo texto). El contenido (eyebrow, H1, subtitulo,
   CTAs) es el mismo en todas: hero-copy.html. Parametros: docs/FRONTMATTER.md.
 */ -}}
 {{ with .Params.hero }}
 {{ $cfg := partial "hero-config.html" $ }}
 {{ $layout := $cfg.layout }}
+{{ $pos := "" }}{{ with .imagePosition }}{{ $pos = printf "object-position:%s" . }}{{ end }}
 
 {{ if eq $layout "stacked" }}
 {{/* La foto va en <img> real (no background-image): sin texto encima no hay
      motivo para background-attachment, y se gana srcset/sizes, fetchpriority
      y object-position. El <picture> con <source media> para la variante "_m"
      lo emite img-responsive.html por convencion; aqui no se monta a mano. */}}
-{{ $pos := "" }}{{ with .imagePosition }}{{ $pos = printf "object-position:%s" . }}{{ end }}
 {{/* El color de fondo va en el <section>, no solo en el bloque de texto: con la
      banda limitada de ancho (--hero-band-max), los laterales de la foto tienen
      que ser el mismo color para que el conjunto se lea como un marco. */}}
@@ -39,18 +40,27 @@
 </section>
 
 {{ else if eq $layout "overlay" }}
-{{/* Sigue en background-image a proposito: es el camino que ejercita
-     bg-image-style.html (image-set con _hd, --section-bg-mobile). scrim por defecto (hero.scrim: false lo desactiva). */}}
+{{/* La foto es un <img> real detras del copy (.hero-bg, posicion absoluta),
+     no background-image: un fondo CSS no tiene alt, y aqui la foto suele ser
+     parte del mensaje. Se gana ademas srcset w con _hd, <picture> con _m,
+     object-position (hero.imagePosition) y el mismo preload que stacked.
+     has-bg-image se mantiene: es el gancho de contraste (texto claro, velo
+     ::before, scrim, panel, botones) que comparte con cta y banner.
+     is-stacked-mobile: con params.hero.mobileOverlay = false, en movil la
+     figura vuelve al flujo como banda (--hero-band-h) y el texto va debajo.
+     scrim por defecto (hero.scrim: false lo desactiva). */}}
 {{ $extra := slice "hero-overlay" "has-bg-image" }}
+{{ if not $cfg.mobileOverlay }}{{ $extra = $extra | append "is-stacked-mobile" }}{{ end }}
 {{ if and (ne .scrim false) (not (in (.class | default "") "scrim")) }}{{ $extra = $extra | append "scrim" }}{{ end }}
 {{ if .bgColor }}{{ $extra = $extra | append "has-bg-color" }}{{ end }}
 <section class="hero {{ delimit $extra " " }}{{ with .class }} {{ . }}{{ end }}"
   {{- $styles := slice -}}
-  {{- $styles = $styles | append (partial "bg-image-style.html" (dict "src" $cfg.src "varName" "section-bg")) -}}
-  {{- with $cfg.mobile }}{{ $styles = $styles | append (partial "bg-image-style.html" (dict "src" . "varName" "section-bg-mobile")) }}{{ end -}}
   {{- with .bgColor }}{{ $styles = $styles | append (printf "--section-bg-color:%s" .) }}{{ end -}}
   {{- with .textColor }}{{ $styles = $styles | append (printf "--section-text-color:%s" .) }}{{ end -}}
   {{- with $styles }} style="{{ delimit . ";" | safeCSS }}"{{ end }}>
+  <figure class="hero-bg">
+    {{ partial "img-responsive.html" (dict "src" $cfg.src "alt" (.imageAlt | default "") "sizes" $cfg.sizes "loading" "eager" "fetchpriority" "high" "style" $pos) }}
+  </figure>
   <div class="container hero-inner no-media">
     {{ partial "hero-copy.html" . }}
   </div>

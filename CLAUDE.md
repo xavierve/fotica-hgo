@@ -88,6 +88,11 @@ ninguna — y son la mayoría del sitio.
 | `stacked` (**defecto**, `hero.layout` ausente) | La norma | Foto sola arriba, bloque de color debajo con el texto. Mismo patrón en móvil y desktop. |
 | `overlay` (opt-in, `hero.layout: overlay`) | Excepción puntual | Texto sobre la imagen, con `scrim` (degradado solo sobre el lado del texto) en vez de overlay plano. `.scrim` ya existe. Previsto para Contacto y quizá alguna otra. |
 
+> Desde oct 2026 «defecto» significa el `params.hero.layout = "stacked"` del
+> `hugo.toml` de Fausto, y el «nunca texto sobre foto en móvil» es su
+> `params.hero.mobileOverlay = false`. El tema, sin esa configuración, usa
+> `overlay` en todos los anchos. Ver FRONTMATTER.md, «Hero: layouts».
+
 **Un solo bloque `hero`, no dos.** Son la misma pieza (imagen + H1 +
 subtítulo + CTAs, con su schema) en dos presentaciones: eso es un parámetro
 de layout, igual que `cta-layout-split` es una variante de `cta`. Duplicar el
@@ -190,21 +195,23 @@ foto en `stacked` es justo donde `<picture>`/`<img>` con `object-fit:cover` +
 mejor que `background-image`: no hay texto encima, así que no hay motivo para
 conservar `background-attachment`, y se gana `srcset`/`sizes` real. Si Code
 prefiere `background-image` por coherencia con banner/CTA,
-`bg-image-style.html` ya da `image-set()`. Cualquiera vale: que elija con
+`img-bg-style.html` ya da `image-set()`. Cualquiera vale: que elija con
 criterio y lo documente.
 
 **CTA y Banner se quedan en `background-image` a propósito** — ya tienen
-`image-set()` vía `_hd` (`partials/bg-image-style.html`) y así conservan la
+`image-set()` vía `_hd` (`partials/img-bg-style.html`) y así conservan la
 opción de `background-attachment:fixed`, que no existe para `<img>`.
 
-**`bg-image-style.html` NO se retira ni se deja morir.** Aunque `stacked` use
-`<img>`, el tratamiento responsive de `background-image` (`image-set()` con
-`_hd`, más `--section-bg-mobile` para el recorte vertical) tiene que seguir
-**funcional y probado**, porque lo usa el modo `overlay` — y porque el tema es
-reutilizable: otro proyecto puede elegir `overlay` como defecto. Si `stacked`
-deja de invocarlo, asegurarse igualmente de que `overlay` lo sigue
-ejercitando, y de que la página de demo cubre ese caso. No dar por muerta una
-rama solo porque este proyecto la use poco.
+**`img-bg-style.html` (antes `bg-image-style.html`) NO se retira ni se deja
+morir.** Desde oct 2026 el hero no lo usa en ningún layout (`overlay` pasó a
+`<img>`: con `background-image` perdía el `alt` y, apilado en móvil, estiraba
+la foto), pero `cta` y `banner` sí, con `image-set()` + `_hd` y
+`--section-bg-mobile`. Tiene que seguir funcional y cubierto en la demo. No
+dar por muerta una rama solo porque este proyecto la use poco.
+
+**Política del hero = configuración del sitio, no código del tema.**
+`params.hero.layout` y `params.hero.mobileOverlay` en `hugo.toml`. Fausto:
+`stacked` y `false`. Sin declarar, el tema usa `overlay` en todos los anchos.
 
 **Cuestiones abiertas para Code:** (a) si las dos columnas de `stacked` deben
 ser automáticas o un parámetro aparte; (b) proporción 50/50 vs 40/60 — con
@@ -293,7 +300,7 @@ Medidas, proporciones y criterios: `themes/f1-theme/docs/GUIA-IMAGENES.md`.
 - `responsive-img.html` usa `w`+`sizes`, pero solo genera **dos peldaños**
   (base y `_hd`). Ampliarlo a escalera descendente es lo que desbloquea el
   ahorro de la tabla de arriba.
-- `bg-image-style.html` (overlay, banner, CTA) usa `image-set(... 1x, ... 2x)`,
+- `img-bg-style.html` (banner, CTA) usa `image-set(... 1x, ... 2x)`,
   descriptores de **densidad pura**: un móvil con DPR3 se descarga el archivo
   2x entero aunque necesite mucho menos. Para afinarlo hacen falta media
   queries por ancho, no solo por densidad.

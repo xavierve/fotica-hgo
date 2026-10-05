@@ -16,7 +16,7 @@
 | Uso | Clave front matter | Base | `_hd` (2x) | Proporción | Formato |
 |---|---|---|---|---|---|
 | **Hero** (los tres layouts) | `hero.image` | 1440×960 | `_hd` 1920×1280 *(solo cámara)* | 3:2 | WebP |
-| **Hero móvil** | *(sin clave: `_m` por convención)* | **768×420** ⚠ | `_m_hd` 1536×840 | **3:2** ⚠ | WebP |
+| **Hero móvil** | *(sin clave: `_m` por convención)* | 768×512 | `_m_hd` 1536×1024 | 3:2 | WebP |
 | **OG / Social** | `og.image` | 1200×630 | — | 1.91:1 | **JPG** |
 | **Cards** | `card.image` | **800×600** | 1600×1200 | **4:3** | WebP |
 | **Equipo** | `team.items[].image` | **750×750** | 1500×1500 | **1:1 cuadrado** | WebP |
@@ -25,13 +25,13 @@
 | **Slider** | `slider.items[].image` | **780 ancho** | — | libre | WebP |
 | **Logos de marca** | `brands.items[].image` | 320 ancho | — | libre | WebP/SVG |
 
-> ⚠ **Los heros están PENDIENTES de cerrar.** Las medidas de esta tabla son
-> provisionales: dependen de la altura real
-> de la banda en el layout `stacked`, que **todavía no está implementado** en
-> `partials/hero.html` (hoy solo existen el split de dos columnas y la columna
-> única con fondo detrás). No reencuadrar heros hasta entonces — se harían dos
-> veces. Qué sí se puede adelantar y qué no: ver «Heros: pendiente del layout
-> apilado» más abajo.
+> **Hero móvil (`_m`).** La banda móvil es `100vw × 40svh` en `stacked` y en
+> `overlay` apilado, con `object-fit: cover`: el CSS no fuerza una proporción,
+> la proporción la pone el teléfono (~1.35:1 a ~1.7:1 en navegadores reales).
+> 3:2 es el centro de ese rango; dejar el sujeto y lo que importe (en 3.2.1, la
+> mano con el audífono) dentro del 85% central. Detalle en DESIGN_TOKENS.md,
+> 1.3.1. La fila anterior decía 768×420 con 3:2, que no cuadraba: 768×420 es
+> 1.83:1.
 
 > El prefijo `100-` agrupa cosas distintas: solo las `100-equipo_<nombre>` son
 > fichas de equipo. `100-equipo_fausto_completo` es el hero de la home y las
@@ -146,7 +146,7 @@ original, nunca ampliando el WebP ya reducido. Techo razonable: 1920px.
 
 | Ancho de pantalla | Banda (ancho × alto) | Proporción |
 |---|---|---|
-| Móvil 359–390 | 359–390 × 256–338 (`40svh` de 640–844) | ~1.4:1 a 1.15:1 |
+| Móvil 359–390 | 359–390 × 256–338 (`40svh` de 640–844) | ~1.4:1 a 1.15:1 (emulador; en un móvil real ~1.35:1 a ~1.7:1, ver nota de la tabla de formatos) |
 | 821 | 821 × 288 | ~2.85:1 |
 | 1024 | 1024 × 341 | 3:1 |
 | 1440 | 1440 × 480 | 3:1 |
@@ -158,9 +158,10 @@ original, nunca ampliando el WebP ya reducido. Techo razonable: 1920px.
 - **Inventario de `hero.bg` (stacked):** 25 imágenes, anchos de 700 a 2508px. **10 miden menos de 1440** (1200–1402px; la más estrecha es `322-ayudas_auditivas_hero`, 1200), así que ya se amplían un poco en un 1440 sin retina. **4 miden más** (1680, 1920, 2400, 2508): el tope les quita nitidez que sí tienen. Solo 3 tienen `_hd`.
 - El `srcset` usa el ancho **real** de cada archivo, no «el doble de la base» (ver más abajo).
 
-Con `object-fit: cover`, la foto se recorta arriba y abajo (desktop) o a los
-lados (móvil, casi cuadrada). Ese es el recorte que hay que mirar al
-reencuadrar; `hero.imagePosition` fija el punto de interés.
+Con `object-fit: cover`, la foto se recorta arriba y abajo en desktop; en
+móvil, a los lados o arriba y abajo según el teléfono (ver la nota de la tabla
+de formatos). Ese es el recorte que hay que mirar al reencuadrar;
+`hero.imagePosition` fija el punto de interés.
 
 **Antes de implementar el layout se decía:** no reencuadrar ni regenerar heros
 todavía, porque el recorte final depende de la proporción de la banda.

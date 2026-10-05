@@ -906,28 +906,24 @@ h2.fs-xs {
     background: rgba(20, 30, 40, .72);
   }
 }
-/* overlay (hero.layout: overlay): texto sobre la foto SOLO desde 821px. En movil
-   el hero nunca lleva texto encima de la imagen (decision del 21 ago, no se
-   reabre): la misma background-image pasa a ser una banda (--hero-band-h) arriba y el
-   texto queda debajo sobre color liso. Sigue siendo background-image, asi que
-   se ejercita el image-set/_hd y --section-bg-mobile de bg-image-style.html.
-   Va aqui, tras el bloque .has-bg-image, para ganar por orden. */
-@media(max-width:820px) {
-  .hero-overlay.has-bg-image {
+/* overlay apilado en movil (clase is-stacked-mobile, ver hero-config.html):
+   la geometria vive en critical.css; aqui, lo que deshace el contexto "texto
+   sobre imagen". El texto va debajo de la foto sobre color liso: sin velo,
+   sin sombras de texto y sin caja de panel. El fondo es --section-bg-color si
+   la pagina lo da, o bg-color2. Va aqui, tras el bloque .has-bg-image, para
+   ganar por orden ademas de por especificidad. */
+@media not all and (min-width: 821px) {
+  .hero-overlay.is-stacked-mobile.has-bg-image {
     background-color: var(--section-bg-color, var(--bg-color2));
-    background-repeat: no-repeat;
-    background-position: center top;
-    background-size: 100% var(--hero-band-h);
-    padding: calc(var(--hero-band-h) + clamp(2rem, 4.5vw, 3.5rem)) 0 clamp(2.8rem, 5.6vw, 4.9rem);
   }
-  .hero-overlay.has-bg-image::before {
+  .is-stacked-mobile.has-bg-image::before {
     display: none;
   }
-  .hero-overlay .hero-copy,
-  .hero-overlay .eyebrow {
+  .is-stacked-mobile .hero-copy,
+  .is-stacked-mobile .eyebrow {
     text-shadow: none;
   }
-  .hero-overlay.has-bg-image.panel .hero-copy {
+  .is-stacked-mobile.has-bg-image.panel .hero-copy {
     background: none;
     backdrop-filter: none;
     padding: 0;

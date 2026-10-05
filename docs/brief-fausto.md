@@ -262,7 +262,7 @@ recorte físicamente distinto:
 
 Variante de alta densidad: **`nombre_hd.webp`**, sin punto antes del guion bajo
 (`foto._hd.webp` no la encuentra el tema). La usan `responsive-img.html` y
-también `bg-image-style.html` para los fondos vía `image-set()`.
+también `img-bg-style.html` para los fondos vía `image-set()`.
 
 `draft-images/` en la raíz del repo (hermana de `static/`) para candidatas sin
 elegir — Hugo no la ve. Al elegir una, se mueve con `mv` a `static/images/`.

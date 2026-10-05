@@ -1,5 +1,30 @@
 # F1 Theme · Changelog
 
+## Sin versión — hero: política de sitio, overlay con `<img>` y `img-bg-style`
+
+- **Los defectos del hero salen del tema.** El layout por defecto y si
+  `overlay` se apila en móvil pasan a `params.hero.layout` y
+  `params.hero.mobileOverlay` en el `hugo.toml` del sitio. Sin declararlos, el
+  tema usa `overlay` en todos los anchos. Ópticas Fausto declara
+  `layout = "stacked"` y `mobileOverlay = false`, así que su HTML no cambia
+  (verificado: las 28 páginas generadas son idénticas salvo el CSS).
+- **`overlay` pinta la foto con `<img>`** (`<figure class="hero-bg">` detrás del
+  copy) en vez de `background-image`. Arregla tres cosas: en móvil apilado la
+  foto se **estiraba** (`background-size: 100% 40svh` no recorta, deforma);
+  `imageAlt` no se emitía; y `hero.imagePosition` no tenía efecto. Gana además
+  `srcset` w con `_hd` y el mismo preload que `stacked`.
+- El apilado en móvil va por la clase `is-stacked-mobile` y
+  `@media not all and (min-width: 821px)`: fuera el último `max-width:820px`
+  del hero en `main.css`.
+- `hero.layout` con un valor desconocido aborta el build (`errorf`). Antes
+  caía en la rama de `split` con una clase inventada.
+- `hero-preload.html`: sin rama de densidad para `overlay`; los tres layouts
+  precargan con `imagesrcset` + `imagesizes`.
+- **`bg-image-style.html` → `img-bg-style.html`**, para que los partials de
+  imagen sean una sola familia `img-*`. Lo siguen usando `cta` y `banner`.
+- GUIA-IMAGENES: el `_m` del hero pasa a 768×512 / 1536×1024 (3:2). La fila
+  decía 768×420, que es 1.83:1.
+
 ## Sin versión — ancho de bloque `narrow`
 
 - Nuevo valor `width: narrow` para cualquier bloque o shortcode de bloque: tope en

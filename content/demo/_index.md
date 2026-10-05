@@ -25,7 +25,7 @@ hero:
   imageAlt: "Anabel, óptico-optometrista, tapa un ojo a una niña con un oclusor durante una revisión visual infantil"
   preset: contact
   labelCall: "Llamar ahora"
-  layout: split          # acepta: split | stacked (default | overlay (texto sobre la foto (>=821px); en movil se apila)
+  layout: split          # acepta: stacked | overlay | split. Sin layout: params.hero.layout del sitio (Fausto: stacked). overlay en movil: params.hero.mobileOverlay (Fausto: false, se apila)
   class: "bg-color2 scrim"           # activo aquí — comparar con los 3 CTA de abajo (scrim/overlay-strong/panel)
 
 sections:

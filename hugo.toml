@@ -19,6 +19,14 @@ disableKinds = ['rss', 'taxonomy', 'term']
   siteName = 'Ópticas Fausto'
   defaultOgImage = '/images/og/0-inicio.jpg'
 
+  # Politica del hero de ESTE sitio (el tema, sin esto, usa overlay en todos
+  # los anchos). Publico 45-75+: foto arriba y texto debajo por defecto, y
+  # nunca texto sobre foto en movil. Una pagina puede pedir hero.layout:
+  # overlay o split como excepcion. Ver FRONTMATTER.md, "Hero: layouts".
+  [params.hero]
+    layout = 'stacked'
+    mobileOverlay = false
+
 # public/contacto/config.php lo genera el shortcode contact-form (ver el shortcode);
 # .php necesita su tipo de medio para que Hugo lo publique.
 [mediaTypes]

@@ -408,18 +408,62 @@ a {
   overflow: hidden;
 }
 
-.hero-band picture {
+.hero-band picture,
+.hero-bg picture {
   display: block;
   height: 100%;
 }
 
-.hero-band img {
+.hero-band img,
+.hero-bg img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center; /* hero.imagePosition lo sobreescribe inline */
   border-radius: 0;
+}
+
+/* overlay: la foto es un <img> detras del copy (.hero-bg), no background-image
+   (ver partials/hero.html). isolation crea el contexto de apilado del
+   <section>, asi que z-index:-1 deja la figura POR ENCIMA del fondo de la
+   seccion y POR DEBAJO del velo (::before de .has-bg-image) y del copy
+   (.container, z-index:1). Sin isolation, el -1 la mandaria detras del fondo.
+   La altura la sigue marcando el copy, como con background-image + cover.
+   position: relative aqui y no solo en .has-bg-image (main.css): main.css
+   carga despues, y sin esto la figura se posicionaria contra la pagina
+   hasta que llegue. */
+.hero-overlay {
+  position: relative;
+  isolation: isolate;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  margin: 0;
+}
+
+/* overlay apilado en movil (params.hero.mobileOverlay = false -> clase
+   is-stacked-mobile): la figura vuelve al flujo como la banda de stacked, a
+   sangre y con --hero-band-h, y el copy queda debajo con el aire de
+   .hero-body. Antes era un background-image con background-size:100% 40svh,
+   que estiraba la foto en vez de recortarla. "Por debajo de 821" se escribe
+   como en .solo-escritorio: sin un 820 que mantener aparte. Colores, velo y
+   sombras del modo apilado: main.css, junto a .has-bg-image. */
+@media not all and (min-width: 821px) {
+  .hero-overlay.is-stacked-mobile {
+    padding: 0 0 clamp(2.8rem, 5.6vw, 4.9rem);
+  }
+  .is-stacked-mobile .hero-bg {
+    position: static;
+    height: var(--hero-band-h);
+    overflow: hidden;
+  }
+  .is-stacked-mobile .hero-inner {
+    padding-top: clamp(2rem, 4.5vw, 3.5rem);
+  }
 }
 
 /* Bloque de texto. Bajo la foto el aire superior es corto; el inferior es el
