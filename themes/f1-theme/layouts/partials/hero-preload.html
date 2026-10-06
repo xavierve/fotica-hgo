@@ -16,7 +16,7 @@
   {{- $sizes := $cfg.sizes -}}
   {{- $entries := slice (dict "src" $cfg.src "media" "") -}}
   {{- if $cfg.mobile -}}
-    {{- $entries = slice (dict "src" $cfg.mobile "media" "(max-width:820px)") (dict "src" $cfg.src "media" "(min-width:821px)") -}}
+    {{- $entries = slice (dict "src" $cfg.mobile "media" "(width <= 51.25em)") (dict "src" $cfg.src "media" "(width > 51.25em)") -}}
   {{- end -}}
   {{- range $entries -}}
     {{- $set := partial "img-srcset.html" .src -}}

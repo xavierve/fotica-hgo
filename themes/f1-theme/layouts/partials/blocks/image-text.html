@@ -18,6 +18,6 @@
       {{ with .title }}<h2>{{ . }}</h2>{{ end }}
       {{ with .text }}<div class="prose">{{ . | markdownify }}</div>{{ end }}
     </div>
-    {{ with .image }}<figure class="image-text-media">{{ partial "img-responsive.html" (dict "src" . "alt" $.imageAlt "sizes" "(min-width:821px) 50vw, 100vw") }}{{ with $.caption }}<figcaption class="image-text-caption">{{ . | markdownify }}</figcaption>{{ end }}</figure>{{ end }}
+    {{ with .image }}<figure class="image-text-media">{{ partial "img-responsive.html" (dict "src" . "alt" $.imageAlt "sizes" "(width > 51.25em) 50vw, 100vw") }}{{ with $.caption }}<figcaption class="image-text-caption">{{ . | markdownify }}</figcaption>{{ end }}</figure>{{ end }}
   </div>
 </section>

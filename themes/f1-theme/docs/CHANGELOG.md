@@ -1,5 +1,38 @@
 # F1 Theme · Changelog
 
+## Sin versión — letra del usuario: body en `rem`, breakpoints en `em` con sintaxis de rango
+
+Medido con la letra por defecto del navegador a 16, 20 y 24px (28 páginas, anchos de
+320 a 1440, y un barrido de la cabecera de 780 a 1720).
+
+- **`body` en `rem`:** `clamp(1.125rem, 0.25vw + 1.09375rem, 1.25rem)`. A 16px da
+  18-20px, igual que antes; con 20px por defecto, 22,5-25px (antes, 20px fijos:
+  el texto ignoraba la preferencia del usuario).
+- **Breakpoints en `em` y sintaxis de rango:** 820px → `51.25em` (`width > 51.25em`
+  escritorio, `width <= 51.25em` móvil, complementarios sin hueco), 1100px →
+  `width >= 68.75em`, 393px → `width > 24.5em`. Mismo número en las 27 media
+  queries del CSS, `<source media>`, preload del hero, `sizes` y `matchMedia`
+  de `main.js`. Los `sizes` que describen un tope en px (`min-width:1440px`) no se tocan.
+  Compatibilidad: Safari/iOS < 16.4 no entiende la sintaxis de rango y descarta
+  esas reglas (ven el layout móvil en cualquier ancho; `.solo-movil` y
+  `.solo-escritorio` se ven las dos).
+- **Cabecera:** `.header-inner` con ancho `min(max(var(--container), 70rem), 100% - 2rem)`.
+  Con letra grande el nav y los botones con texto crecen, y un contenedor fijo en
+  1120px comprimía el logo a menos de 190px a partir de 68.75em.
+- **`main .btn` parte la etiqueta** (`white-space: normal`) si no cabe en la fila.
+  Corrige un fallo que ya existía con la letra por defecto: en el home a 320px,
+  «Ver soluciones de audición» medía 322px en 288 y se salía de la pantalla.
+  Cabecera, barra fija y footer conservan `nowrap`.
+- **Antes (px) → después, con 20px por defecto:** cabecera con el nav o el logo
+  comprimido en 840-860px y 1100-1720px → ninguno; 24px: 840-900px y 1100-1720px →
+  ninguno. Páginas con desborde horizontal: 0 → 0 (en el paso intermedio, solo con
+  `body` y breakpoints convertidos, aparecieron 1 página a 20px y 6 a 24px, por los
+  botones `nowrap` y el contenedor fijo).
+- **Con 16px el resultado es idéntico** en 168 combinaciones de página y ancho, salvo
+  el home a 320px (los dos botones de arriba).
+- **Pendiente:** `hyphens: manual` en los titulares: a 150% y 320px una palabra
+  larga de un H1 se parte a mitad de palabra, sin guion.
+
 ## Sin versión — `brands-logos` con formato fijo
 
 - Cada logo va en una caja 2:1 de 160×80 como máximo (`aspect-ratio`,

@@ -58,7 +58,7 @@
    sigue centrado en el viewport). Los shortcodes/bloques embebidos no se ven
    afectados: este margin-left va solo en los elementos tipográficos sueltos
    (p/h2/h3/h4/ul/ol/blockquote/table), nunca en .block ni en .container.prose. */
-@media(min-width:821px) {
+@media (width > 51.25em) {
   .container.prose>p,
   .container.prose>h2,
   .container.prose>h3,
@@ -120,7 +120,7 @@
 /* En movil el auto-fit con minmax(150px) daba dos columnas, asi que con tres
    datos el tercero quedaba descolgado en la fila de abajo y su etiqueta partia
    a dos lineas. Una sola columna: los tres se leen como una lista. */
-@media(max-width:820px) {
+@media (width <= 51.25em) {
   .counter-grid {
     grid-template-columns: 1fr;
     gap: 1.25rem
@@ -174,7 +174,7 @@
    dejaba filas de 3 + 2 + 1 con sangrias distintas; en rejilla los iconos
    comparten dos ejes verticales y el bloque entero se centra. Un item impar
    suelto al final ocupa las dos columnas y se centra. */
-@media(min-width:821px) {
+@media (width > 51.25em) {
   .trustbar-inner {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, auto));
@@ -198,7 +198,7 @@
     margin-right: 0;
   }
 }
-@media(max-width:820px) {
+@media (width <= 51.25em) {
   .trustbar-inner {
     flex-direction: column;
     align-items: stretch;
@@ -371,7 +371,7 @@
   color: var(--color-muted);
   font-weight: 600
 }
-@media(min-width:821px) {
+@media (width > 51.25em) {
   .block-testimonials .cards-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: clamp(1rem, 2.5vw, 1.75rem)
@@ -625,7 +625,7 @@ address {
   cursor: pointer;
   font-weight: 800
 }
-@media(min-width:821px) {
+@media (width > 51.25em) {
   .image-text-inner {
     grid-template-columns: 1fr 1fr;
     gap: clamp(2rem, 5vw, 4rem)
@@ -636,9 +636,9 @@ address {
   }
   /* valign: alineacion vertical de las DOS columnas, no solo del copy. Con el
      copy mas alto que la imagen, is-top lleva tambien la imagen al borde
-     superior; por defecto (sin clase) el mas corto queda centrado. Solo a
-     partir de 821px: por debajo el grid es de una columna y align-items no
-     tiene efecto. */
+     superior; por defecto (sin clase) el mas corto queda centrado. Solo en
+     escritorio (> 51.25em): por debajo el grid es de una columna y align-items
+     no tiene efecto. */
   .block-image-text.is-top .image-text-inner {
     align-items: start
   }
@@ -753,7 +753,7 @@ h2.fs-xs {
   --btn-text: var(--color-text);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .85);
 }
-@media(min-width:821px) {
+@media (width > 51.25em) {
   .has-bg-image {
     background-image: var(--section-bg)
   }
@@ -792,7 +792,7 @@ h2.fs-xs {
 }
 /* En movil, la foto llega a borde: el margen lateral del .container solo
    aporta aire donde ya sobra y encoge la imagen justo donde menos espacio hay. */
-@media(max-width:820px) {
+@media (width <= 51.25em) {
   /* Breakout a ancho de viewport. Un bloque insertado en el prose vive dentro
      de .container.prose, que ya recorta 2rem — quitar solo su propio margen no
      basta, hay que romper el contenedor padre. Solo en movil: en desktop el
@@ -823,7 +823,7 @@ h2.fs-xs {
     padding-inline: 1.25rem
   }
 }
-@media(min-width:821px) {
+@media (width > 51.25em) {
   .block-banner.has-bg-image,
   .block-cta.has-bg-image {
     min-height: 420px
@@ -966,7 +966,7 @@ h2.fs-xs {
    sin sombras de texto y sin caja de panel. El fondo es --section-bg-color si
    la pagina lo da, o bg-color2. Va aqui, tras el bloque .has-bg-image, para
    ganar por orden ademas de por especificidad. */
-@media not all and (min-width: 821px) {
+@media (width <= 51.25em) {
   .hero-overlay.is-stacked-mobile.has-bg-image {
     background-color: var(--section-bg-color, var(--bg-color2));
   }
@@ -1008,7 +1008,7 @@ h2.fs-xs {
 /* Última fila incompleta con un solo elemento (p.ej. 7 cards en 3 columnas = 3+3+1):
    se centra en vez de quedar pegado a la izquierda con hueco vacío al lado.
    Cubre resto=1 en columns 2 y 3 (el caso habitual en este proyecto). */
-@media(min-width:821px) {
+@media (width > 51.25em) {
   .block-cards.cards-columns-3 .cards-grid> :last-child:nth-child(3n+1) {
     grid-column: 2;
   }
@@ -1418,7 +1418,7 @@ h2.fs-xs {
 .cta-layout-split.has-bg-color:not(.bg-claro) .cta-subtitle {
   color: var(--color-subtitle)
 }
-@media(min-width:821px) {
+@media (width > 51.25em) {
   /* En fila, flex-basis controla el ANCHO y reparte texto/botones. En movil
      (columna) controlaria la ALTURA, reservando 22rem de alto en vacio — por
      eso solo vive aqui. Mismo breakpoint que el resto del tema. */
@@ -1558,7 +1558,7 @@ h2.fs-xs {
   margin-inline: auto;
   line-height: 1.2
 }
-@media(min-width:821px) {
+@media (width > 51.25em) {
   .text-split-inner {
     grid-template-columns: 1fr 1fr
   }
@@ -1670,7 +1670,7 @@ h2.fs-xs {
 .block-align-center .hours {
   justify-content: center;
 }
-@media(min-width:821px) {
+@media (width > 51.25em) {
   .locations-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1725,7 +1725,7 @@ h2.fs-xs {
 }
 /* El texto se aparta para dejarle sitio; con text-align:center del bloque,
    queda centrado en el espacio restante, no bajo el dibujo. */
-@media(min-width:821px) {
+@media (width > 51.25em) {
   .cta-ornamento-ojo .cta-inner {
     padding-left: 30%
   }
@@ -1748,7 +1748,7 @@ h2.fs-xs {
    para que no dependa de --block-pad ni lo corte el overflow:hidden.
    Centrado, no a la izquierda: el titular y el subtitulo van centrados por
    text-align del bloque, y un icono pegado al borde rompe ese eje. */
-@media(max-width:820px) {
+@media (width <= 51.25em) {
   .cta-ornamento .cta-inner {
     --ornamento-alto: clamp(48px, 13vw, 64px);
     padding-top: calc(var(--ornamento-alto) + .65rem)
@@ -1954,7 +1954,7 @@ h2.fs-xs {
    boton. La columna derecha se estira a la altura de la izquierda y .cf-accion baja al
    fondo con margin-top:auto: el boton queda a la altura del final del mensaje, que es
    donde termina la lectura, y la informacion legal arriba, junto al primer campo. */
-@media (min-width: 821px) {
+@media (width > 51.25em) {
   .cf-form {
     grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
     column-gap: clamp(2rem, 4vw, 3.5rem);

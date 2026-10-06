@@ -20,7 +20,7 @@ schema:
 hero:
   eyebrow: "hero · image + variante _m + bgColor + class: scrim"
   title: "0.1- Hero Layout Overlay que se apila en móvil"
-  subtitle: "Una sola clave `image` en los tres layouts. Redimensiona la ventana: por debajo de 820px carga `212-vision_infantil_hero_m.webp`, que existe junto al archivo base — la variante móvil se detecta por convención `_m`, no se declara. El overlay toma el tinte de bgColor vía color-mix."
+  subtitle: "Una sola clave `image` en los tres layouts. Redimensiona la ventana: en móvil (<= 51.25em, 820px con la letra por defecto) carga `212-vision_infantil_hero_m.webp`, que existe junto al archivo base — la variante móvil se detecta por convención `_m`, no se declara. El overlay toma el tinte de bgColor vía color-mix."
   image: "/images/212-vision_infantil_hero.webp"
   imageAlt: "Anabel, óptico-optometrista, tapa un ojo a una niña con un oclusor durante una revisión visual infantil"
   preset: contact
@@ -105,7 +105,7 @@ sections:
     image: "https://picsum.photos/seed/it7/640/420"
     imageAlt: "Demo"
 
-  # ============ IMAGE_TEXT — valign (solo visible >=821px y con alturas distintas) ============
+  # ============ IMAGE_TEXT — valign (solo visible en escritorio, > 51.25em, y con alturas distintas) ============
   - type: image-text
     valign: top
     title: "2.8a- valign: top — añade is-top"
@@ -252,7 +252,7 @@ sections:
       - text: "## «H2 Una cita grande, centrada»"
         textSize: xl
         align: center
-      - text: "Un párrafo normal al lado, con su propio `pad: m` y `margin` de ajuste fino. El grid es 1fr en móvil, 1fr 1fr desde 821px — reduce la ventana para comprobarlo."
+      - text: "Un párrafo normal al lado, con su propio `pad: m` y `margin` de ajuste fino. El grid es 1fr en móvil, 1fr 1fr en escritorio (> 51.25em) — reduce la ventana para comprobarlo."
         pad: m
         margin: "0 0 1rem 0"
   - type: text-split
@@ -293,7 +293,7 @@ sections:
     preset: contact
   - type: cta
     title: "15.5- cta · bg con variante _m por convención + class Scrim & Panel"
-    subtitle: "Reduce la ventana por debajo de 821px: carga 314-mantenim...webp, que existe junto al archivo. No se declara: no hay clave bgMobile."
+    subtitle: "Reduce la ventana a móvil (<= 51.25em): carga 314-mantenim...webp, que existe junto al archivo. No se declara: no hay clave bgMobile."
     bg: "/images/314-mantenimiento_audifonos_hero.webp"
     class: "scrim panel"
     preset: contact

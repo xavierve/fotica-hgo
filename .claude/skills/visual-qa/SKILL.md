@@ -62,6 +62,45 @@ Si se toca un breakpoint existente, volver a medir: el valor correcto
 cambia en cuanto cambia cualquier otra cosa del header. Al hacer el
 `nowrap` efectivo de verdad, el corte real subió de 1020 a 1090.
 
+**`scrollWidth` no lo ve todo.** El tema lleva `html{overflow-x:clip}`: un
+elemento que se sale de la pantalla queda recortado y `scrollWidth` sigue
+igual a `clientWidth`. Así pasó con dos botones del home a 320px (322px en una
+columna de 288) durante meses. Para detectar desbordes de verdad, comparar el
+borde derecho de cada elemento con el viewport, ignorando los que viven dentro
+de un contenedor con scroll o recorte propio (slider, galería):
+
+```python
+page.evaluate("""() => { const cw = document.documentElement.clientWidth;
+  const clipped = e => { let a = e.parentElement; while (a && a !== document.body)
+    { if (/(hidden|auto|scroll|clip)/.test(getComputedStyle(a).overflowX)) return true; a = a.parentElement } return false };
+  return [...document.querySelectorAll('body *')]
+    .filter(e => e.getBoundingClientRect().right > cw + 1 && !clipped(e)).length }""")
+```
+
+## Probar con otra letra por defecto
+
+Quien sube el tamaño de letra del navegador (no el zoom) no cambia el ancho del
+viewport: crece el texto y todo lo que va en `rem`/`em`, y los breakpoints en
+`em` se desplazan. Chromium lo simula con un flag al lanzar:
+
+```python
+b = p.chromium.launch(args=['--blink-settings=defaultFontSize=20'])   # 125%
+# 24 = 150%. Comprobar: getComputedStyle(document.documentElement).fontSize
+```
+
+Qué barrer, con 16, 20 y 24: (1) desbordes en todas las páginas a 320, 359, 390,
+820, 821, 1100 y 1440; (2) la cabecera en un barrido fino de 780 a 1720 de 20
+en 20: nav partido en dos líneas, logo comprimido (`.site-logo` por debajo de
+su ancho natural, 208px) o hijos fuera de `.header-inner`; (3) a 16px, que una
+instantánea de geometría y color de todos los elementos sea idéntica a la
+anterior al cambio (así se comprueba que una refactorización de unidades no
+mueve nada). Con 16px no debe cambiar nada; con 20 y 24, ninguna página
+desborda ni la cabecera se comprime.
+
+Al reescribir comentarios en `critical.css`: un `*/` dentro del texto cierra el
+comentario y el resto se lee como CSS roto, que se lleva por delante la regla
+siguiente (pasó con el nav de escritorio). Comprobar `/*` y `*/` balanceados.
+
 ## Interacción: probar con clic real
 
 `aria-expanded` y las clases de estado se comprueban pulsando, no leyendo

@@ -12,7 +12,7 @@
   Parametros (dict):
     src           -> ruta publica, ej "/images/211-optometria_D3A0068.webp" (obligatorio)
     alt           -> texto alternativo (obligatorio)
-    sizes         -> atributo sizes, ej "(min-width:821px) 33vw, 100vw" (opcional;
+    sizes         -> atributo sizes, ej "(width > 51.25em) 33vw, 100vw" (opcional;
                      por defecto, el ancho real del archivo en px -> tamano fijo)
     class         -> clase css opcional
     loading       -> "lazy" (defecto) | "eager"
@@ -26,7 +26,7 @@
 {{- if not .noMobile -}}{{- $m = partial "img-mobile.html" .src -}}{{- end -}}
 {{- if $m -}}
 {{- $mset := partial "img-srcset.html" $m -}}
-<picture><source media="(max-width:820px)" srcset="{{ if $mset.hasHd }}{{ $mset.srcset }}{{ else }}{{ $m }}{{ end }}"{{ if $mset.hasHd }} sizes="100vw"{{ end }}>
+<picture><source media="(width <= 51.25em)" srcset="{{ if $mset.hasHd }}{{ $mset.srcset }}{{ else }}{{ $m }}{{ end }}"{{ if $mset.hasHd }} sizes="100vw"{{ end }}>
 {{- end -}}
 <img src="{{ .src }}"
   {{- if $set.hasHd }}

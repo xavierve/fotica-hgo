@@ -4,7 +4,7 @@ document.documentElement.classList.add('js');
    una excepcion, se registra y los demas siguen. Sin esto, una excepcion (p.ej. el
    JSON.parse de la galeria) abortaba el resto del script y arrastraba bloques
    que no tienen nada que ver: el menu movil, que es el UNICO acceso a la
-   navegacion por debajo de 821px, esta el ultimo de todos.
+   navegacion en movil (<= 51.25em), esta el ultimo de todos.
    No cubre los errores de SINTAXIS (el script entero no se parsea y nada corre):
    de esos protege `node -c themes/f1-theme/assets/js/main.js` antes de commitear. */
 function aislar(nombre, fn) {
@@ -50,17 +50,17 @@ aislar('barra fija y volver-arriba', function () {
   /* DOS SENALES, porque barra y boton no viven igual en todos los anchos:
 
      - asoma: el elemento que sigue al hero ya ensena 40px. Es la de MOVIL
-       (< 821px): alli barra y boton son una unidad dentro de la barra, y si
+       (<= 51.25em): alli barra y boton son una unidad dentro de la barra, y si
        uno apareciera sin el otro quedaria el hueco reservado vacio. La barra
        entra antes que con la salida del hero, cuando empieza lo siguiente.
      - salida: el hero ha salido por arriba. Es la del boton en ESCRITORIO
-       (>= 821px), donde no hay barra. Alli no vale "asoma": en los heros que
+       (> 51.25em), donde no hay barra. Alli no vale "asoma": en los heros que
        caben en pantalla (split) lo siguiente ya se ve al cargar, y el boton
        saldria estando arriba del todo.
 
      Efecto aceptado: en movil, una pagina cuyo hero quepa en la primera
      pantalla muestra la barra al cargar, porque lo siguiente ya asoma. */
-  var escritorio = window.matchMedia('(min-width: 821px)');
+  var escritorio = window.matchMedia('(width > 51.25em)');
   var asoma = false;
   var salida = false;
 
@@ -277,7 +277,7 @@ aislar('reveal y contador', function () {
 });
 
 /* === Menú móvil: toggle accesible (aria-expanded, cierre con Escape y al
-   navegar). Sin él, .site-nav queda inalcanzable por debajo de 821px — no es
+   navegar). Sin él, .site-nav queda inalcanzable en movil (<= 51.25em) — no es
    decorativo, es el único acceso a la navegación en móvil. === */
 aislar('menu movil', function () {
   var toggle = document.querySelector('.nav-toggle');

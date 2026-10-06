@@ -95,7 +95,7 @@ tope de 1440px en escritorio) y bloque `bg-color2` debajo; en escritorio, dos
 columnas 50/50, alineadas arriba, automáticas (si no hay subtítulo ni CTAs,
 el H1 ocupa todo). Contenedor `--hero-width` (1440), `text-wrap: balance` en
 el H1, padding superior por clase del partial (`hero-stacked` → 0). Imagen
-con `_hd` por `srcset` w, `_m` por `<picture>` (breakpoint 821px), preload
+con `_hd` por `srcset` w, `_m` por `<picture>` (breakpoint `51.25em`, 820px con la letra por defecto), preload
 con `imagesrcset`/`imagesizes` solo en páginas con hero, `imagePosition` para
 el encuadre. Medido en el QA visual de oct 2026 (`QA-visual-fausto-v2.md`).
 
@@ -324,9 +324,18 @@ antiguo. Revisar logs de 404 tras el lanzamiento: cada 404 recurrente es una
 
 ### 9. Espaciados internos de blocks en `em`
 
-No rem/px, para que `fs-s`/`fs-l` y `textSize` escalen el bloque completo.
-La tipografía base ya va con `clamp()` (body 18-20px). Los espaciados de
-bloque siguen en `rem` (`--block-pad*`, `--space-*` en `critical.css`).
+**Hecho (oct 2026):** la tipografía base va en `rem` con `clamp()` (body
+1.125-1.25rem = 18-20px con la letra por defecto) y los breakpoints en `em` con
+sintaxis de rango (ver DESIGN_TOKENS.md, 2.1 y 3). Medido con la letra del
+navegador a 16, 20 y 24px.
+
+**Pendiente, decidido con Foco:** `rem` para el ritmo entre bandas
+(`--block-pad*`, separación entre bloques; `--space-*` de `critical.css`) y `em`
+para el **interior** de los bloques (gap de rejillas, margen entre H2, subtítulo y
+contenido, padding de cards y paneles, `has-pad-*`), para que `fs-s`/`fs-l` y
+`textSize` escalen el bloque completo sin alterar el ritmo de la página. Hoy
+`main.css` tiene ~133 declaraciones en `rem` frente a ~59 en `em`: revisión
+pieza a pieza, midiendo antes y después como se hizo con la letra.
 
 ### 10. `title`/`description` de 214 (Baja Visión)
 
@@ -395,7 +404,7 @@ botón que se deformaba solo entre dos breakpoints concretos.
 Usar la skill **`visual-qa`** (`.claude/skills/visual-qa/SKILL.md`): mide el
 resultado renderizado con Playwright en varios anchos en lugar de comprobarlo
 a ojo, e incluye el método para elegir un breakpoint midiendo dónde rompe de
-verdad — de ahí salieron los del header (1100px; el de 840 se unificó con el genérico de 821 en sep 2026).
+verdad — de ahí salieron los del header (1100px, hoy `68.75em`; el de 840 se unificó con el genérico de 820 en sep 2026).
 
 Primera vez en una máquina nueva:
 

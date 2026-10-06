@@ -120,8 +120,8 @@ Si `reverse: true`, añade `is-reverse`.
 alta que la otra: `top` → `is-top`, `bottom` → `is-bottom`, ambas con
 `align-items` sobre `.image-text-inner`. El default es `center` (el elemento más
 corto queda centrado contra el más alto) y **no emite clase** — escribir
-`valign: center` es válido y equivale a omitirlo. Solo tiene efecto a partir de
-821px: por debajo el grid es de una columna. Un valor fuera de la terna aborta
+`valign: center` es válido y equivale a omitirlo. Solo tiene efecto en escritorio
+(> 51.25em): por debajo el grid es de una columna. Un valor fuera de la terna aborta
 el build con `errorf`.
 
 No confundir con `align` de Campos Comunes, que es `text-align` (horizontal).
@@ -298,7 +298,7 @@ falta una segunda exportación para el resto.
 
 **Dos presentaciones, un archivo:**
 
-| | Desktop (≥821px) | Móvil (<821px) |
+| | Desktop (> 51.25em) | Móvil (<= 51.25em) |
 |---|---|---|
 | Rol | marca de agua | icono |
 | Tamaño | 130% de `.cta-inner` ≈ 70% de la banda | `clamp(48px, 13vw, 64px)` |

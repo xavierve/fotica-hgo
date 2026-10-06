@@ -32,7 +32,7 @@ hero:
   imageAlt: ""      # obligatorio si hay image
   bgColor: ""       # color plano o tinte del overlay (opcional)
   # Variante móvil: NO se declara. Si existe "<nombre>_m.<ext>" junto al
-  # archivo, se sirve por <source media> hasta 820px. Igual que "_hd" para 2x.
+  # archivo, se sirve por <source media> en móvil (<= 51.25em, 820px). Igual que "_hd" para 2x.
   primaryCTA:
     text: ""
     url: ""

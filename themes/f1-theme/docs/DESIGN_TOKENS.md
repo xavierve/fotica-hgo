@@ -178,7 +178,7 @@ de fondo). `bgColor`/`textColor`/`class` están además en el resto de bloques.
 
 | Parámetro | Qué hace |
 |---|---|
-| `bg` | Imagen de fondo. Si existe `foto_m.webp` junto al archivo, en móvil (< 821px) se usa ese recorte; si existe `foto_hd.webp` / `foto_m_hd.webp`, se sirven en pantallas 2x. Nada de eso se declara. |
+| `bg` | Imagen de fondo. Si existe `foto_m.webp` junto al archivo, en móvil (<= 51.25em) se usa ese recorte; si existe `foto_hd.webp` / `foto_m_hd.webp`, se sirven en pantallas 2x. Nada de eso se declara. |
 | `bgColor` | Color de fondo plano. Con `bg`, tiñe el overlay en vez de pintar el fondo. |
 | `textColor` | Color del texto, a juego con un `bgColor` puntual. |
 | `class` | Clases modificadoras (ver 1.3). |
@@ -227,11 +227,11 @@ Padding superior del hero, por clase emitida por el partial: `hero-stacked` → 
 En `:root` (`critical.css`). En móvil el botón volver-arriba es el **cuarto
 elemento de la barra**: pegado a su esquina derecha, centrado en vertical y
 dentro de ella. Sigue siendo un elemento aparte (`position: fixed`, no hijo de
-la barra); por debajo de 821px solo cambian sus coordenadas.
+la barra); en móvil (<= 51.25em) solo cambian sus coordenadas.
 
 | Token | Valor | Qué controla |
 |---|---|---|
-| `--sticky-cta-h` | `0px`; `3.5rem` por debajo de 821px | Alto de la barra. Lo leen la propia barra, el `padding-bottom` del `body` (para que no tape el footer) y el centrado vertical del botón. |
+| `--sticky-cta-h` | `0px`; `3.5rem` en móvil (<= 51.25em) | Alto de la barra. Lo leen la propia barra, el `padding-bottom` del `body` (para que no tape el footer) y el centrado vertical del botón. |
 | `--back-to-top-size` | `2.75rem` | Lado del botón (44px, mínimo táctil). |
 | `--back-to-top-gap` | `.5rem` | Margen del botón al borde derecho. Debe ser ≥ 6px (anillo de foco de 3px + 3px de offset), o el anillo se sale del viewport. |
 
@@ -300,14 +300,34 @@ sobre fondo oscuro o imagen.
 ### 2.1 Base
 
 ```css
-body { font-size: clamp(18px, 0.25vw + 17.5px, 20px); }
+body { font-size: clamp(1.125rem, 0.25vw + 1.09375rem, 1.25rem); }
 ```
 
 Va en `body`, **no en `html`**, y es deliberado: `rem` sólo mira a `html`, así
 que los headings (en `rem`) quedan fijos mientras el cuerpo de texto escala. Si
 se moviera a `html`, los titulares se amplificarían de golpe.
 
-El suelo de 18px cumple el requisito de legibilidad del proyecto (ap8.1).
+**En `rem`, no en `px`** (oct 2026). Con la letra por defecto del navegador
+(16px) da exactamente 18-20px, igual que antes; con otra, crece en la misma
+proporción. En `px` el texto ignoraba la preferencia de «letra grande» del
+usuario, que en un público de 45-75+ años no es un caso raro. El suelo de 18px
+cumple el requisito de legibilidad del proyecto (ap8.1) con la letra por defecto.
+
+**Letra grande: qué se midió y qué se arregló.** Con la letra por defecto del
+navegador a 20px (125%) y 24px (150%), en 28 páginas y anchos de 320 a 1440:
+- Los breakpoints van en `em` (ver 3), así que el layout cambia cuando el texto
+  deja de caber. Con `px`, el nav de escritorio a 840-880px y los botones con
+  texto desde 1100px ya comprimían el logo a menos de 190px.
+- La cabecera usa un ancho en `rem` (`70rem` = `--container` a 16px): su contenido
+  crece con la letra, su caja también.
+- Un botón del contenido (`main .btn`) parte su etiqueta en dos líneas si no cabe
+  en la fila. Con 16px también arreglaba el home a 320px: «Ver soluciones de
+  audición» medía 322px en una columna de 288 y se salía de la pantalla.
+- Residuo conocido: a 150% y 320px, una palabra larga de un H1 se parte a mitad
+  de palabra (`overflow-wrap: anywhere`, sin guion) en vez de desbordar.
+
+Cómo reproducirlo: sección «Probar con otra letra por defecto» de la skill
+`visual-qa`.
 
 ### 2.2 Dos sistemas paralelos, no mezclar
 
@@ -390,10 +410,34 @@ por eso `.block-banner{padding}` tuvo que moverse *antes* de los modificadores
 --radius: 18px;
 ```
 
-**Breakpoint único: `821px`** (`min-width:821px` / `max-width:820px`). Es la
-frontera "apilado ↔ dos columnas" en todo el tema. No introducir otros: tener
-componentes que cambian de layout antes que el resto crea zonas intermedias
-inconsistentes y difíciles de recordar.
+**Breakpoint único: `51.25em`** (820px con la letra por defecto de 16px). Es la
+frontera "apilado ↔ dos columnas" en todo el tema: escritorio es
+`@media (width > 51.25em)` y móvil `@media (width <= 51.25em)`, complementarios
+sin hueco. No introducir otros: tener componentes que cambian de layout antes
+que el resto crea zonas intermedias inconsistentes y difíciles de recordar.
+
+Dos cortes más, solo de la cabecera (medidos, ver `visual-qa`): `24.5em` (392px;
+`width > 24.5em` muestra WhatsApp en la cabecera móvil) y `68.75em` (1100px;
+`width >= 68.75em` da texto a los botones del header).
+
+**Por qué `em` y por qué `>`**
+- **`em` en una media query vale siempre el tamaño de letra por defecto del
+  navegador** (no el de `html` ni el de `body`). 51.25em son 820px con 16px y
+  1025px con 20px: el layout cambia de modo cuando el texto ocupa más. Es lo que
+  hacen Bootstrap y Foundation.
+- **`>` (y no `>=`) en el de escritorio:** «más ancho que 820px». Deja el iPad
+  vertical (820) en móvil y evita el hueco entre `max-width: 820px` y
+  `min-width: 821px` a anchos fraccionarios (zoom).
+- **Sintaxis de rango** (`width > 51.25em`): Baseline desde 2023, *widely
+  available* desde sept 2025. Safari/iOS < 16.4 no la entiende y descarta la
+  regla: las de escritorio no se aplican (esos navegadores ven el layout móvil
+  en cualquier ancho) y las de solo-móvil tampoco (pierden esos retoques, y
+  `.solo-movil`/`.solo-escritorio` se ven las dos).
+- **Mismo número en todas partes que mire el layout:** CSS, `<source media>` de
+  `img-responsive.html`, `media` del preload del hero, `sizes` de las imágenes y
+  `matchMedia` en `main.js`. Los `sizes` que describen un tope en px del hueco
+  (`(min-width:1440px) 1440px` de la banda del hero) se quedan en px: no
+  dependen de la letra.
 
 ### 3.1 Separación vs presencia
 
@@ -427,7 +471,7 @@ ya recorta `calc(100% - 2rem)`. Quitarle su propio margen **no basta**: hay que
 romper el contenedor padre.
 
 ```css
-@media(max-width:820px){
+@media (width <= 51.25em){
   .block-banner.has-bg-image,
   .block-cta.has-bg-image,
   .block-image-text{width:100vw;margin-left:calc(50% - 50vw);max-width:none}
@@ -443,9 +487,9 @@ quedaría perdido en el centro de una franja enorme. `html{overflow-x:clip}`
 
 ### 3.3 Mostrar u ocultar según el ancho
 
-Dos utilidades, en `critical.css`, con el breakpoint general del tema (821px):
+Dos utilidades, en `critical.css`, con el breakpoint general del tema (`51.25em`):
 
-| Clase | Por debajo de 821px | Desde 821px |
+| Clase | Hasta 51.25em (móvil) | Por encima (escritorio) |
 |---|---|---|
 | `.solo-movil` | visible | oculto |
 | `.solo-escritorio` | oculto | visible |
@@ -457,9 +501,10 @@ Llámanos y te atendemos al momento. {.solo-movil}
 ```
 
 **Solo ocultan, nunca muestran.** Volver a mostrar exigiría conocer el `display` de cada
-elemento, y `display: revert` lo devuelve al del navegador y rompe cualquier flex o grid. El
-rango inferior se escribe `not all and (min-width: 821px)`, no `max-width: 820px`: mismo número
-que el resto del tema y soporte universal. Llevan `!important` porque su trabajo es ganar a la
+elemento, y `display: revert` lo devuelve al del navegador y rompe cualquier flex o grid. Con la
+sintaxis de rango, «móvil» y «escritorio» son `width <= 51.25em` y `width > 51.25em`:
+el mismo número, complementarios (antes `not all and (min-width: 821px)`, por soporte
+universal; ahora los navegadores sin sintaxis de rango muestran las dos versiones). Llevan `!important` porque su trabajo es ganar a la
 regla del componente sin depender del orden de carga.
 
 **Cuándo NO usarlas:** un componente que se reorganiza por ancho oculta sus piezas en su propio

@@ -87,7 +87,12 @@ html {
 body {
   margin: 0;
   font-family: var(--font-base);
-  font-size: clamp(18px, 0.25vw + 17.5px, 20px);
+  /* En rem, no en px: con px el texto ignora el tamano de letra que el usuario
+     fija en su navegador. Con la letra por defecto (16px) da exactamente 18-20px
+     (1.125rem = 18px, 1.09375rem = 17.5px, 1.25rem = 20px); con 20px por
+     defecto, 22,5-25px. Los breakpoints van en em por lo mismo: cambian de
+     layout cuando el texto deja de caber, no a un ancho fijo en px. */
+  font-size: clamp(1.125rem, 0.25vw + 1.09375rem, 1.25rem);
   color: var(--color-text);
   background: var(--color-bg);
   line-height: 1.6;
@@ -154,6 +159,18 @@ a {
   font-size: .9rem;
 }
 
+/* Boton del CONTENIDO (main): si su etiqueta no cabe en la fila -- letra grande
+   en un movil estrecho: "Enviar mensaje" a 27px mide 300px y la fila 272 -- se
+   parte en dos lineas en vez de desbordar la pagina. Solo en main: en la
+   cabecera, la barra fija y el footer el nowrap es a proposito (un telefono
+   partido en dos lineas no se lee). Con letra normal ninguna etiqueta llega al
+   ancho de su fila: sin cambio. */
+main .btn {
+  white-space: normal;
+  text-align: center;
+  max-width: 100%;
+}
+
 /* .btn-fill: variante rellena. No necesita reglas propias aqui (hereda .btn),
    existe como clase para que los repintados por contexto sean un selector
    simple: .bg-color2 .btn-fill en vez de .bg-color2 .btn:not(.btn-outline). */
@@ -174,6 +191,12 @@ a {
 
 .header-inner {
   position: relative;
+  /* Ancho en rem, no en px: nav y botones con texto crecen con la letra del
+     usuario, asi que su caja tambien. 70rem = --container (1120px) con la letra
+     por defecto de 16px, donde no cambia nada; con 20px por defecto, 1400px.
+     Sin esto, a partir de 68.75em el logo se comprimia a <190px contra un
+     contenedor fijo (medido, oct 2026). max() conserva un --container mayor. */
+  width: min(max(var(--container), 70rem), calc(100% - 2rem));
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -205,7 +228,7 @@ a {
 }
 
 /* Móvil: panel desplegable bajo el header, oculto salvo .is-open (JS).
-   Desktop (821px+): vuelve a fila inline, sin panel. */
+   Desktop (> 51.25em): vuelve a fila inline, sin panel. */
 .site-nav {
   display: none;
   flex-direction: column;
@@ -469,10 +492,10 @@ a {
    is-stacked-mobile): la figura vuelve al flujo como la banda de stacked, a
    sangre y con --hero-band-h, y el copy queda debajo con el aire de
    .hero-body. Antes era un background-image con background-size:100% 40svh,
-   que estiraba la foto en vez de recortarla. "Por debajo de 821" se escribe
-   como en .solo-escritorio: sin un 820 que mantener aparte. Colores, velo y
-   sombras del modo apilado: main.css, junto a .has-bg-image. */
-@media not all and (min-width: 821px) {
+   que estiraba la foto en vez de recortarla. "Por debajo del escritorio" es
+   el complemento exacto de `width > 51.25em`: sin hueco entre los dos modos.
+   Colores, velo y sombras del modo apilado: main.css, junto a .has-bg-image. */
+@media (width <= 51.25em) {
   .hero-overlay.is-stacked-mobile {
     padding: 0 0 clamp(2.8rem, 5.6vw, 4.9rem);
   }
@@ -514,7 +537,7 @@ a {
    la foto y se lee como error de maquetacion.
    El padding inferior baja del clamp global (hasta 7rem): en split la altura
    la marca la foto, y 112px muertos debajo descuadran el copy largo. */
-@media(min-width:821px) {
+@media (width > 51.25em) {
   .hero-split .hero-inner {
     grid-template-columns: 1fr 1fr;
     gap: clamp(1.5rem, 3vw, 2.5rem);
@@ -538,7 +561,7 @@ a {
   margin-top: 0;
 }
 
-@media(min-width:821px) {
+@media (width > 51.25em) {
   .hero-band {
     width: 100%; /* sin esto, max-height + aspect-ratio encogen tambien el ancho */
     height: auto;
@@ -575,34 +598,41 @@ a {
   display: none;
 }
 
-/* WhatsApp en la cabecera movil a partir de 393px: es donde caben, con los
+/* WhatsApp en la cabecera movil a partir de 24.5em (392px con letra de 16px): es donde caben, con los
    margenes del contenedor, el logo a su tamano NATURAL + los dos circulos +
    la hamburguesa. Por debajo el logo encogeria (85% a 360, 65% a 320) y el
    lema dejaria de leerse, asi que ahi va solo el telefono y WhatsApp queda en
    la barra fija en cuanto se pasa el hero.
-   OJO: 393 es un numero DE ESTE LOGO (208px de ancho natural). Si cambia el
+   OJO: 24.5em es un numero DE ESTE LOGO (208px de ancho natural). Si cambia el
    logo, hay que recalcularlo: 32 margenes + 16 huecos + 96 botones + 40
-   hamburguesa + ancho del logo. */
-@media(min-width:393px) {
+   hamburguesa + ancho del logo, y dividir entre 16. En em, con letra grande el
+   corte se aleja a la vez que crecen botones y margenes; el logo no crece, asi
+   que sobra margen (error por el lado seguro). */
+@media (width > 24.5em) {
   .header-actions .header-action2 {
     display: inline-flex;
   }
 }
 
-@media(min-width:821px) {
+@media (width > 51.25em) {
   .hero-inner {
     grid-template-columns: minmax(0, 1.1fr) minmax(280px, .9fr);
   }
 }
 
-/* Nav de escritorio. Usa el breakpoint generico del tema (821px), el mismo de
+/* Nav de escritorio. Usa el breakpoint generico del tema (> 51.25em), el mismo de
    la barra fija: asi no queda ningun rango sin WhatsApp (antes la barra se
    ocultaba en 821 y el boton de cabecera no entraba hasta 840).
+   Breakpoints en em, no en px: 51.25em = 820px y 68.75em = 1100px con la letra
+   por defecto de 16px, pero se alejan si el usuario fija una letra mayor, que
+   es cuando el nav y los botones ocupan mas (medido, oct 2026). `>` y no `>=`:
+   "mas ancho que 820px" deja el iPad vertical (820) en movil y es el
+   complemento exacto de `width <= 51.25em`.
    Historia: hasta sep 2026 el header tenia su propio corte en 840px, medido con
    Playwright con el logo a tamano fijo (desbordaba hasta 835). Desde que
    .site-logo tiene flex-shrink y min-width:0, el deficit lo absorbe el logo en
    vez de desbordar; a 821 queda a su tamano natural con holgura. */
-@media(min-width:821px) {
+@media (width > 51.25em) {
   .site-nav {
     display: flex;
     position: static;
@@ -644,8 +674,8 @@ a {
 /* Los botones recuperan texto + forma de pastilla: aquí sí hace falta medir
    con margen, porque nav + 2 botones con texto es lo más ancho que pide el
    header (ver historial de Playwright en el repo — desborda justo en el
-   borde, 1090-1095px, por eso 1100px y no un número más ajustado). */
-@media(min-width:1100px) {
+   borde, 1090-1095px, por eso 1100px (68.75em) y no un número más ajustado). */
+@media (width >= 68.75em) {
   .header-actions .btn {
     width: auto;
     height: auto;
@@ -690,7 +720,7 @@ a {
    Van en critical.css porque son visibles sin desplazarse.
 
    MOBILE-FIRST, como el resto del tema (todos sus breakpoints son min-width):
-   el estado base es el de movil y desktop (>=821px) es la excepcion, que
+   el estado base es el de movil y desktop (> 51.25em) es la excepcion, que
    apaga la barra y devuelve al boton su posicion flotante.
 
    SIN env(safe-area-inset-bottom), a proposito. La meta viewport NO lleva
@@ -706,7 +736,7 @@ a {
    NO ANADIR viewport-fit=cover: cambiaria el render del sitio entero (todo se
    pintaria bajo el notch y el indicador) y obligaria a volver a los env(). */
 :root {
-  --sticky-cta-h: 3.5rem; /* 0px desde 821px: alli no hay barra */
+  --sticky-cta-h: 3.5rem; /* 0px en escritorio (> 51.25em): alli no hay barra */
   --back-to-top-size: 2.75rem;
   --back-to-top-gap: .5rem; /* >= el anillo de foco (3px + 3px de offset = 6px): con menos se sale del viewport */
 }
@@ -907,7 +937,7 @@ body {
 
 /* Desktop: la excepcion. Sin barra (el header ya lleva los botones de contacto)
    y el boton vuelve a flotar en la esquina. */
-@media(min-width:821px) {
+@media (width > 51.25em) {
   :root {
     --sticky-cta-h: 0px;
   }
@@ -949,8 +979,8 @@ body {
 }
 
 /* === Utilidades de visibilidad por ancho ======================================
-   .solo-movil       visible por debajo de 821px, oculto desde 821px
-   .solo-escritorio  oculto por debajo de 821px, visible desde 821px
+   .solo-movil       visible hasta 51.25em (820px), oculto por encima
+   .solo-escritorio  oculto hasta 51.25em (820px), visible por encima
    Para contenido suelto o puntual. Un componente que se reorganiza por ancho
    sigue ocultando sus piezas en su propio bloque; esto no lo sustituye.
 
@@ -958,21 +988,22 @@ body {
    pero VOLVER A MOSTRAR exigiria saber el display original de cada elemento
    (block, flex, grid...), y `display: revert` lo devolveria al valor del
    navegador, rompiendo cualquier flex o grid. Por eso la utilidad solo OCULTA,
-   nunca muestra, y el rango "por debajo de 821" se escribe como
-   `not all and (min-width: 821px)`: el mismo numero que el resto del tema, sin
-   un 820 que mantener aparte, y con soporte en cualquier navegador.
+   nunca muestra. Con la sintaxis de rango, "por debajo" y "por encima" son
+   `width <= 51.25em` y `width > 51.25em`: el mismo numero, complementarios.
+   Navegadores sin sintaxis de rango (Safari < 16.4) ignoran las dos reglas y
+   muestran las dos versiones.
 
    !important a proposito: una utilidad existe para ganar a la regla del
    componente, venga en el orden que venga (ver DESIGN_TOKENS.md, 3.3).
    display:none tambien lo oculta a los lectores de pantalla: es para contenido
    que sobra en ese ancho, no para texto accesible oculto (ese es .btn-label). */
-@media not all and (min-width: 821px) {
+@media (width <= 51.25em) {
   .solo-escritorio {
     display: none !important;
   }
 }
 
-@media (min-width: 821px) {
+@media (width > 51.25em) {
   .solo-movil {
     display: none !important;
   }

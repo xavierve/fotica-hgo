@@ -72,3 +72,20 @@ cambia de posición horizontal, ancho o alto.
   `bg-color4`, 2,44:1). El texto del botón se lee (blanco sobre verde, 5,58:1)
   y WCAG 1.4.11 no exige contraste del borde cuando la etiqueta identifica el
   control; se anota por si se quiere el mismo tratamiento que el outline.
+
+---
+
+## Anexo (oct 2026): letra grande y botones a 320px
+
+Medido con la letra por defecto del navegador a 16, 20 y 24px.
+
+- **Botones del home a 320px (con la letra normal).** «Ver soluciones de visión»
+  (294px) y «Ver soluciones de audición» (322px) eran más anchos que su columna
+  (288px); el segundo terminaba en x=321 y se cortaba en el borde. `html` lleva
+  `overflow-x: clip`, así que `scrollWidth` no lo detectaba. Resuelto: `main .btn`
+  parte la etiqueta en dos líneas.
+- **Letra a 20 y 24px.** Con `px`, la cabecera comprimía el logo a menos de 190px
+  en 840-880px y de 1100px en adelante. Resuelto con `rem`/`em` (ver CHANGELOG);
+  desde entonces, 0 desbordes y 0 fallos de cabecera a 16, 20 y 24px.
+- **Residuo:** a 24px (150%) y 320px, una palabra larga de un H1 se parte a mitad de
+  palabra (sin guion) en vez de desbordar.

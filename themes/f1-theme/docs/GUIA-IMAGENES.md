@@ -59,8 +59,8 @@ archivo necesario. No son cifras redondas elegidas a ojo.
 |---|---|---|---|---|
 | Hero (stacked) | `(min-width:1440px) 1440px, 100vw` | hasta 1440px (banda con tope) | 2880px | — |
 | Cards / Equipo | `(min-width:1100px) 33vw, (min-width:600px) 50vw, 100vw` | ~370px desktop · ~400px móvil | ~740px | ~1200px |
-| image-text | `(min-width:821px) 50vw, 100vw` | 528px (`m`) · 688px (`wide`) · ~704px (`full`) | ~1056-1408px | — |
-| Hero split (Home) | `(min-width:821px) 45vw, 100vw` | ~475px (columna `.9fr`) | ~950px | — |
+| image-text | `(width > 51.25em) 50vw, 100vw` | 528px (`m`) · 688px (`wide`) · ~704px (`full`) | ~1056-1408px | — |
+| Hero split (Home) | `(min-width:1440px) 620px, (width > 51.25em) 45vw, 100vw` | ~475px (columna `.9fr`) | ~950px | — |
 | Slider | `min(80vw, 420px)` | 388px (420 − 32 de padding) | ~776px | — |
 | Logos | `160px` | 160px | 320px | — |
 | Avatar testimonio | `56px` | 56px | 112px | — |
@@ -194,7 +194,7 @@ solo 2 con variante `_hd`.
 
 ```css
 .hero-band { height: clamp(200px, 55vw, 280px); }            /* móvil  */
-@media(min-width:821px){ .hero-band{ height: clamp(260px, 26vw, 380px); } }
+@media (width > 51.25em){ .hero-band{ height: clamp(260px, 26vw, 380px); } }
 ```
 
 Sale de restar a la altura útil del viewport el header (~72px desktop, ~60

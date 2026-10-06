@@ -109,7 +109,7 @@ El tema no impone ninguna política de hero. Cada sitio la declara en su
 ```toml
 [params.hero]
   layout = "stacked"      # layout de las páginas que no declaran hero.layout
-  mobileOverlay = false   # false: overlay se apila en móvil (< 821px)
+  mobileOverlay = false   # false: overlay se apila en móvil (<= 51.25em)
 ```
 
 | Parámetro de sitio | Valores | Sin declarar |
@@ -156,7 +156,7 @@ las dos son opcionales: si el archivo no está, el markup cae limpio.
 | Sufijo | Qué es | Para qué | Cómo se sirve |
 |---|---|---|---|
 | `foto_hd.webp` | la MISMA foto con más píxeles | densidad (retina) | `srcset` w, en los tres layouts |
-| `foto_m.webp` | OTRO encuadre para móvil | art direction en móvil | `<source media="(max-width:820px)">` |
+| `foto_m.webp` | OTRO encuadre para móvil | art direction en móvil | `<source media="(width <= 51.25em)">` |
 
 No son intercambiables. `srcset` elige candidato por ancho y DPR, así que dos
 archivos con el mismo aspecto y distinto recorte le resultan equivalentes y
