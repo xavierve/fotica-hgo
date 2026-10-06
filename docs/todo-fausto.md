@@ -48,12 +48,13 @@ Sin subcarpetas para `hero/` `gallery` (solo `og/` y `cards/`) — el prefijo de
 
 | # | Tarea | Quién | Prioridad |
 |---|---|---|---|
-| B1 | Fotografías reales disponibles — organizar y nombrar según rutas del front matter: `/images/cards/*.webp` · `/images/og/*.webp` · `/images/*.webp` · `/images/*.webp` | Hecho | **Alta — desbloquea D0** |
+| B1 | ✅ Fotografías reales disponibles — organizar y nombrar según rutas del front matter: `/images/cards/*.webp` · `/images/og/*.webp` · `/images/*.webp` · `/images/*.webp` | **Alta — desbloquea D0** | Hecho |
 | B1.1 | ✅ Nosotros (100): equipo (7 individuales + grupo) y locales (2 fachadas + 2 interiores) resueltos, empaquetados en `ASSETS-nosotros.zip`. Pendiente solo subir a rutas finales | Cliente | Hecho |
-| B1.2 | Páginas de servicio con hero asignado (211-215, 227, 300, 311-312, 314-315, 321): heroes generados con IA con la cara del equipo — **decisión pendiente de confirmar** si se publica así o se sustituye por fotografía real, dado el principio de marca "fotos reales, no stock" | Foco | Hecho |
-| B1.3 | Páginas de producto puro sin foto nueva (216, 222-226, 322-323): se quedan con stock antiguo de la web previa, por decisión explícita — sin acción pendiente salvo homogeneización visual en D0 | — | Cerrado por decisión |
-| B1.4 | Página Contacto (400): patrón de card definido (fachada 50% sup. + captura de mapa auto-alojada 50% inf., ambas `<img>` separadas dentro de un único `<a>` a Google Maps; teléfono fuera del enlace). Pendiente: aspect ratio/recorte final, y decidir servicio de captura de mapa (riesgo ToS de atribución con Google Maps — alternativa OSM/Mapbox si el logo obligatorio molesta). Imágenes de sedes (400-fausto_*_mapa.webp): las dos con las mismas medidas exactas, ≥900px de ancho (se muestran a unos 410px; el doble para pantallas retina), y sin elementos de interfaz capturados: botones de cerrar, controles de Google Maps. | Foco | Hecho |
-| B2 | Optimizar imágenes para web: WebP, tamaños responsive, lazy loading | Claude Code | Media |
+| B1.2 | ✅ Páginas de servicio con hero asignado (211-215, 227, 300, 311-312, 314-315, 321): heroes generados con IA con la cara del equipo | Foco | Hecho |
+| B1.3 | ✅ Páginas de producto puro con foto stock (216, 222-226, 322-323) | — | Cerrado por decisión |
+| B1.4 | ✅ Página Contacto (400): patrón de card definido (fachada 50% sup. + captura de mapa auto-alojada 50% inf., ambas `<img>` separadas dentro de un único `<a>` a Google Maps; teléfono fuera del enlace). Pendiente: aspect ratio/recorte final, y decidir servicio de captura de mapa (riesgo ToS de atribución con Google Maps — alternativa OSM/Mapbox si el logo obligatorio molesta). Imágenes de sedes (400-fausto_*_mapa.webp): las dos con las mismas medidas exactas, ≥900px de ancho (se muestran a unos 410px; el doble para pantallas retina), y sin elementos de interfaz capturados: botones de cerrar, controles de Google Maps. | Foco | Hecho |
+| B2 | ✅ Optimizar imágenes para web: WebP, tamaños responsive, lazy loading | Foco | Media |
+| B3 | Optimizar imágenes de Hero foto y foto_m foto_hd  | Foco | Media |
 
 ### FASE C — Desarrollo técnico (Claude Code · sesión separada)
 
@@ -65,14 +66,14 @@ Sin subcarpetas para `hero/` `gallery` (solo `og/` y `cards/`) — el prefijo de
 | C3 | ✅ `.gitignore`: excluir `public/` y `resources/_gen/` **Hecho.** |
 | C4 | ✅ Sticky footer móvil: Llamada / WhatsApp / Ubicación con icons.html y datos de site.yaml **Hecho:** solo iconos, con el volver-arriba integrado; aparece cuando asoma el elemento siguiente al hero. |
 | C5 | ✅ Hero responsive: variante móvil **Hecho:** por convención `_m` junto al archivo (`img-mobile.html`), no con `bgMobile`; en los tres layouts. |
- Falta: (1) `footer.html` lea `contact.hours`; (2) `schema.html` cambie `$loc.hoursSpec` por `or $loc.hoursSpec $contact.hoursSpec`; (3) crear shortcode `{{< hours >}}` y sustituir el horario hardcoded del body de Contacto. Objetivo: cambiar horario de verano/invierno editando solo site.yaml |
+| C6 | ✅ `footer.html` lea `contact.hours`; (2) `schema.html` cambie `$loc.hoursSpec` por `or $loc.hoursSpec $contact.hoursSpec`; (3) crear shortcode `{{< hours >}}` y sustituir el horario hardcoded del body de Contacto. Objetivo: cambiar horario de verano/invierno editando solo site.yaml |
 
 **Media:**
 | # | Tarea |
 |---|---|
-| C7 | `.htaccess` Hostinger (Apache, `Redirect 301`): dominio viejo → nuevo, 4 subdominios landing, mapeo de URLs WordPress a partir del sitemap del sitio viejo recuperado de Wayback Machine. **Ahora mismo en 302 a propósito**, a la espera de lanzar el sitio nuevo; al lanzar se pasan a 301 |
+| C7 | `.htaccess` Hostinger (Apache, `Redirect 301`): dominio viejo → nuevo, 4 subdominios landing, mapeo de URLs WordPress a partir del sitemap del sitio viejo recuperado de Wayback Machine. **Ahora mismo en 302 a propósito**, a la espera de lanzar el sitio nuevo; al lanzar se pasan a 301 <br> foco says: creo que la estructura era opticafausto.com/servicios/vision/ opticafausto.com/servicios/audicion/ opticafausto.com/productos/vision/ opticafausto.com/productos/audicion/ |
 | C8 | ✅ Verificar 404 en Hostinger: `ErrorDocument 404 /404.html` en el `.htaccess` para que devuelva HTTP 404 real (sin eso Apache lo sirve con 200 y Google lo trata como soft 404) + `noindex` al `<head>` **Hecho:** `ErrorDocument` en `static/.htaccess`, comprobado en el servidor. |
-| C9 | Tipografía con `clamp()` y espaciados en `em` |
+| C9 | ✅ Tipografía con `clamp()` y espaciados en `em` |
 | C10 | ✅ Indicador de scroll en heros + botón volver-arriba global (coordinar con sticky footer) **Hecho el volver-arriba. El indicador de scroll se descartó** tras medir que el hero no cabe en casi ninguna landing. |
 
 **Baja / al recibir material:**
@@ -95,8 +96,7 @@ Sin subcarpetas para `hero/` `gallery` (solo `og/` y `cards/`) — el prefijo de
 | D5 | Google Search Console: añadir propiedad, verificar, enviar sitemap | Cliente | — |
 | D6 | Google Business Profile: actualizar URL + horarios en ambos perfiles. **Unificar el nombre de cada centro**: las fichas se llaman "Óptica Fausto" (Av. Andalucía) y "Ópticas Fausto" (Duque), y la web "Centro Fausto Andalucía" / "Centro Fausto Duque": tres nombres para el mismo negocio. El cliente decide el oficial de cada centro y se aplica igual en las fichas, en la web (`site.yaml` → `locations[].name`, que también alimenta el schema) y en los directorios (D7). Según las directrices de Google, el nombre de la ficha debe coincidir con el del rótulo; no añadir la calle si no forma parte del nombre real. Enlaces de la web a las fichas por CID: Avenida `9248588007090896676`, Duque `12933472947538996195` (si una ficha se recrea o se fusiona, cambia y hay que actualizar `mapUrl`) | Cliente | Horarios ya confirmados; nombre pendiente |
 | D7 | Auditoría NAP: citaciones en directorios locales apuntan al dominio correcto, **con el mismo nombre, dirección y teléfono que las fichas (D6)** | Cliente | Depende del nombre de D6 |
-| D8 | Deploy en Cloudflare Pages: dominio, variables de entorno Worker (API key Resend) | Cliente + Claude Code | — |
-| D9 | Activar redirect 301 opticafausto.com → opticasfausto.com | Cliente | — |
+| D8 | Activar redirect 301 opticafausto.com → opticasfausto.com | Cliente | — |
 
 ### FASE E — Post-lanzamiento (Fase 2, cuando se active SEM/Meta Ads)
 
@@ -126,6 +126,6 @@ Redirects (C7) + GBP (D6) + NAP (D7) ──────────→ DEPLOY
 
 ## SIGUIENTE ACCIÓN
 
-**Cliente:** subir `ASSETS-nosotros.zip` a las rutas finales (B1.1); decidir B1.2 (¿heroes IA se publican o se sustituyen?) y B1.4 (aspect ratio + servicio de mapa para Contacto).
-**Claude Code:** C1 (formulario) + C4 (sticky footer) + C6 (horarios desde site.yaml — spec ya detallada arriba) — una sesión.
+**Cliente:** revisión del sitio. modificar textos. cambio fotos. **ALTA** definir estructura para cerrar el Redirect 301.
+
 **Claude Proyecto:** D0 revisión visual con skill frontend en cuanto estén B1 + C1 + C4. CSS cover-fit de cards/team ya entregado, no bloquea D0.
