@@ -323,8 +323,10 @@ navegador a 20px (125%) y 24px (150%), en 28 páginas y anchos de 320 a 1440:
 - Un botón del contenido (`main .btn`) parte su etiqueta en dos líneas si no cabe
   en la fila. Con 16px también arreglaba el home a 320px: «Ver soluciones de
   audición» medía 322px en una columna de 288 y se salía de la pantalla.
-- Residuo conocido: a 150% y 320px, una palabra larga de un H1 se parte a mitad
-  de palabra (`overflow-wrap: anywhere`, sin guion) en vez de desbordar.
+- Residuo conocido y **decidido**: a 150% y 320px, una palabra larga de un H1 se
+  parte a mitad de palabra (`overflow-wrap: anywhere`, sin guion) en vez de
+  desbordar. No se usa `hyphens: auto` en titulares: el guion ocupa ancho justo
+  donde menos sobra, y en un titular grande cuesta más que el corte.
 
 Cómo reproducirlo: sección «Probar con otra letra por defecto» de la skill
 `visual-qa`.
@@ -429,15 +431,57 @@ Dos cortes más, solo de la cabecera (medidos, ver `visual-qa`): `24.5em` (392px
   vertical (820) en móvil y evita el hueco entre `max-width: 820px` y
   `min-width: 821px` a anchos fraccionarios (zoom).
 - **Sintaxis de rango** (`width > 51.25em`): Baseline desde 2023, *widely
-  available* desde sept 2025. Safari/iOS < 16.4 no la entiende y descarta la
-  regla: las de escritorio no se aplican (esos navegadores ven el layout móvil
-  en cualquier ancho) y las de solo-móvil tampoco (pierden esos retoques, y
-  `.solo-movil`/`.solo-escritorio` se ven las dos).
+  available* desde sept 2025. Safari/iOS < 16.4 no la entiende, así que cada
+  consulta lleva un **respaldo** con la sintaxis antigua (ver «Respaldo y
+  equivalencias» más abajo).
 - **Mismo número en todas partes que mire el layout:** CSS, `<source media>` de
   `img-responsive.html`, `media` del preload del hero, `sizes` de las imágenes y
   `matchMedia` en `main.js`. Los `sizes` que describen un tope en px del hueco
   (`(min-width:1440px) 1440px` de la banda del hero) se quedan en px: no
   dependen de la letra.
+
+### Respaldo y equivalencias
+
+Cada consulta de ancho lleva, detrás de una coma, la versión antigua:
+
+```css
+@media (width > 51.25em), (min-width: 51.3125em) { /* escritorio: > 820px */
+@media (width <= 51.25em), (max-width: 51.25em) { /* movil: <= 820px */
+```
+
+La coma es «o» y es sintaxis de siempre. Un navegador nuevo cumple la primera; uno
+sin sintaxis de rango la descarta como inválida y decide la segunda (no se usa la
+palabra `or`: también es nivel 4 y un Safari antiguo descartaría la consulta
+entera). El respaldo va en `em`, no en `px`, para que en esos navegadores el
+breakpoint también siga a la letra. Lo llevan el CSS, el `matchMedia` de `main.js`,
+los `<source media>` y el `media` del preload.
+
+| Con letra de 16px | Escritorio / «más de» | Móvil / «hasta» | Respaldo |
+|---|---|---|---|
+| `51.25em` = **820px** | `width > 51.25em` | `width <= 51.25em` | `min-width: 51.3125em` (821px) / `max-width: 51.25em` |
+| `68.75em` = **1100px** (botones con texto) | `width >= 68.75em` | — | `min-width: 68.75em` |
+| `24.5em` = **392px** (WhatsApp en la cabecera móvil) | `width > 24.5em` | — | `min-width: 24.5625em` (393px) |
+
+Los `sizes` **no** llevan respaldo (una lista de `sizes` no admite listas de
+consultas por entrada, y duplicarlas no compensa): son una pista, no layout. En un
+Safari < 16.4 la entrada se descarta y el navegador asume `100vw`, es decir, baja el
+candidato mayor (`_hd`). Efecto lateral: si base y `_hd` tienen distinta proporción,
+la imagen cambia de alto según el archivo elegido. Hoy son 5 parejas
+(`100-atencion_personalizada`, `226-infantil`, `215-vision_40` y dos de
+`100-instalaciones_*`, estas últimas dentro de la galería, que fuerza 4:3).
+
+**Cuando Safari < 16.4 deje de importar**, quitar el respaldo es una línea
+(probado: el resultado es idéntico en 28 páginas × 6 anchos):
+
+```bash
+cd themes/f1-theme
+sed -i -E 's/, \((min|max)-width: [0-9.]+em\)//g' \
+  assets/css/critical.css assets/css/main.css assets/js/main.js \
+  layouts/partials/hero-preload.html layouts/partials/img-responsive.html
+```
+
+El patrón solo toca respaldos en `em`: los `sizes` con `(min-width:1100px)` en px no
+coinciden. Los comentarios `/* escritorio: > 820px */` se pueden dejar.
 
 ### 3.1 Separación vs presencia
 

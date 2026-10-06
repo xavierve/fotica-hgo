@@ -1,5 +1,23 @@
 # F1 Theme · Changelog
 
+## Sin versión — respaldo `min-width`/`max-width` en las consultas de ancho
+
+- Las 27 media queries de ancho del CSS, el `matchMedia` de `main.js`, los
+  `<source media>` y el `media` del preload del hero llevan detrás de una coma la
+  versión antigua, en `em`: `@media (width > 51.25em), (min-width: 51.3125em)`. Un
+  navegador sin sintaxis de rango (Safari/iOS < 16.4) descarta la primera y decide la
+  segunda, así que conserva el layout de escritorio, los retoques de móvil y
+  `.solo-movil`/`.solo-escritorio`. Cada consulta lleva un comentario con su
+  equivalencia en px (`/* escritorio: > 820px */`); tabla en DESIGN_TOKENS.md, 3.
+- Medido: en un navegador moderno el resultado es idéntico al anterior; en un
+  «navegador viejo» simulado (la parte moderna invalidada en CSS, JS y `media=`) es
+  idéntico al moderno. 28 páginas × 6 anchos, incluidos 820 y 821.
+- Los `sizes` no llevan respaldo. En esos navegadores se descarta la entrada y se
+  baja el candidato mayor; si base y `_hd` tienen distinta proporción (5 parejas hoy),
+  la imagen cambia de alto según el archivo.
+- Receta para eliminar el respaldo cuando deje de hacer falta: un `sed` en
+  DESIGN_TOKENS.md, «Respaldo y equivalencias».
+
 ## Sin versión — letra del usuario: body en `rem`, breakpoints en `em` con sintaxis de rango
 
 Medido con la letra por defecto del navegador a 16, 20 y 24px (28 páginas, anchos de
@@ -13,9 +31,7 @@ Medido con la letra por defecto del navegador a 16, 20 y 24px (28 páginas, anch
   `width >= 68.75em`, 393px → `width > 24.5em`. Mismo número en las 27 media
   queries del CSS, `<source media>`, preload del hero, `sizes` y `matchMedia`
   de `main.js`. Los `sizes` que describen un tope en px (`min-width:1440px`) no se tocan.
-  Compatibilidad: Safari/iOS < 16.4 no entiende la sintaxis de rango y descarta
-  esas reglas (ven el layout móvil en cualquier ancho; `.solo-movil` y
-  `.solo-escritorio` se ven las dos).
+  Compatibilidad con Safari/iOS < 16.4: ver «respaldo» en la entrada siguiente.
 - **Cabecera:** `.header-inner` con ancho `min(max(var(--container), 70rem), 100% - 2rem)`.
   Con letra grande el nav y los botones con texto crecen, y un contenedor fijo en
   1120px comprimía el logo a menos de 190px a partir de 68.75em.
@@ -30,8 +46,8 @@ Medido con la letra por defecto del navegador a 16, 20 y 24px (28 páginas, anch
   botones `nowrap` y el contenedor fijo).
 - **Con 16px el resultado es idéntico** en 168 combinaciones de página y ancho, salvo
   el home a 320px (los dos botones de arriba).
-- **Pendiente:** `hyphens: manual` en los titulares: a 150% y 320px una palabra
-  larga de un H1 se parte a mitad de palabra, sin guion.
+- **Decidido:** sin guiones en los titulares. A 150% y 320px una palabra larga de un
+  H1 se parte a mitad de palabra; el guion ocupa ancho donde menos sobra.
 
 ## Sin versión — `brands-logos` con formato fijo
 

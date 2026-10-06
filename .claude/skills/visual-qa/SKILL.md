@@ -97,6 +97,20 @@ anterior al cambio (así se comprueba que una refactorización de unidades no
 mueve nada). Con 16px no debe cambiar nada; con 20 y 24, ninguna página
 desborda ni la cabecera se comprime.
 
+**Simular un navegador sin sintaxis de rango.** El tema escribe cada consulta de
+ancho como `(width > 51.25em), (min-width: 51.3125em)`: la segunda es el respaldo
+para Safari < 16.4. Para comprobar que ese respaldo basta, tomar el build, invalidar
+solo la parte moderna en CSS, JS y atributos `media=` (nunca en `sizes`, que no
+lleva respaldo y cambia qué archivo se baja) y quitar el `integrity` de los
+`<link>` (la edición rompe el SRI):
+
+```python
+re.sub(r'\(width\s*(>=|<=|>|<)', r'(widthx \1', texto)   # (widthx > ...) no existe
+```
+
+La instantánea de geometría debe ser idéntica a la del build moderno. Chromium trata
+una consulta desconocida de una lista como falsa, igual que Safari antiguo.
+
 Al reescribir comentarios en `critical.css`: un `*/` dentro del texto cierra el
 comentario y el resto se lee como CSS roto, que se lleva por delante la regla
 siguiente (pasó con el nav de escritorio). Comprobar `/*` y `*/` balanceados.

@@ -87,5 +87,6 @@ Medido con la letra por defecto del navegador a 16, 20 y 24px.
 - **Letra a 20 y 24px.** Con `px`, la cabecera comprimía el logo a menos de 190px
   en 840-880px y de 1100px en adelante. Resuelto con `rem`/`em` (ver CHANGELOG);
   desde entonces, 0 desbordes y 0 fallos de cabecera a 16, 20 y 24px.
-- **Residuo:** a 24px (150%) y 320px, una palabra larga de un H1 se parte a mitad de
-  palabra (sin guion) en vez de desbordar.
+- **Residuo, decidido:** a 24px (150%) y 320px, una palabra larga de un H1 se parte a
+  mitad de palabra (sin guion) en vez de desbordar. Sin `hyphens` en titulares: el
+  guion ocupa ancho donde menos sobra.

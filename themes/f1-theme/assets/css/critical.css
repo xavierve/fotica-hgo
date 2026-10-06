@@ -495,7 +495,7 @@ main .btn {
    que estiraba la foto en vez de recortarla. "Por debajo del escritorio" es
    el complemento exacto de `width > 51.25em`: sin hueco entre los dos modos.
    Colores, velo y sombras del modo apilado: main.css, junto a .has-bg-image. */
-@media (width <= 51.25em) {
+@media (width <= 51.25em), (max-width: 51.25em) { /* movil: <= 820px */
   .hero-overlay.is-stacked-mobile {
     padding: 0 0 clamp(2.8rem, 5.6vw, 4.9rem);
   }
@@ -537,7 +537,7 @@ main .btn {
    la foto y se lee como error de maquetacion.
    El padding inferior baja del clamp global (hasta 7rem): en split la altura
    la marca la foto, y 112px muertos debajo descuadran el copy largo. */
-@media (width > 51.25em) {
+@media (width > 51.25em), (min-width: 51.3125em) { /* escritorio: > 820px */
   .hero-split .hero-inner {
     grid-template-columns: 1fr 1fr;
     gap: clamp(1.5rem, 3vw, 2.5rem);
@@ -561,7 +561,7 @@ main .btn {
   margin-top: 0;
 }
 
-@media (width > 51.25em) {
+@media (width > 51.25em), (min-width: 51.3125em) { /* escritorio: > 820px */
   .hero-band {
     width: 100%; /* sin esto, max-height + aspect-ratio encogen tambien el ancho */
     height: auto;
@@ -608,13 +608,13 @@ main .btn {
    hamburguesa + ancho del logo, y dividir entre 16. En em, con letra grande el
    corte se aleja a la vez que crecen botones y margenes; el logo no crece, asi
    que sobra margen (error por el lado seguro). */
-@media (width > 24.5em) {
+@media (width > 24.5em), (min-width: 24.5625em) { /* > 392px */
   .header-actions .header-action2 {
     display: inline-flex;
   }
 }
 
-@media (width > 51.25em) {
+@media (width > 51.25em), (min-width: 51.3125em) { /* escritorio: > 820px */
   .hero-inner {
     grid-template-columns: minmax(0, 1.1fr) minmax(280px, .9fr);
   }
@@ -628,11 +628,17 @@ main .btn {
    es cuando el nav y los botones ocupan mas (medido, oct 2026). `>` y no `>=`:
    "mas ancho que 820px" deja el iPad vertical (820) en movil y es el
    complemento exacto de `width <= 51.25em`.
+   RESPALDO: cada consulta lleva detras de la coma la version antigua
+   (`min-width`/`max-width`), para navegadores sin sintaxis de rango (Safari <
+   16.4): los nuevos usan la primera, los viejos descartan la primera y usan la
+   segunda. Cuando esos navegadores dejen de importar, se borra la segunda
+   (receta en DESIGN_TOKENS.md, 3). Equivalencias a 16px: 51.25em = 820px,
+   51.3125em = 821px, 68.75em = 1100px, 24.5em = 392px, 24.5625em = 393px.
    Historia: hasta sep 2026 el header tenia su propio corte en 840px, medido con
    Playwright con el logo a tamano fijo (desbordaba hasta 835). Desde que
    .site-logo tiene flex-shrink y min-width:0, el deficit lo absorbe el logo en
    vez de desbordar; a 821 queda a su tamano natural con holgura. */
-@media (width > 51.25em) {
+@media (width > 51.25em), (min-width: 51.3125em) { /* escritorio: > 820px */
   .site-nav {
     display: flex;
     position: static;
@@ -675,7 +681,7 @@ main .btn {
    con margen, porque nav + 2 botones con texto es lo más ancho que pide el
    header (ver historial de Playwright en el repo — desborda justo en el
    borde, 1090-1095px, por eso 1100px (68.75em) y no un número más ajustado). */
-@media (width >= 68.75em) {
+@media (width >= 68.75em), (min-width: 68.75em) { /* >= 1100px */
   .header-actions .btn {
     width: auto;
     height: auto;
@@ -937,7 +943,7 @@ body {
 
 /* Desktop: la excepcion. Sin barra (el header ya lleva los botones de contacto)
    y el boton vuelve a flotar en la esquina. */
-@media (width > 51.25em) {
+@media (width > 51.25em), (min-width: 51.3125em) { /* escritorio: > 820px */
   :root {
     --sticky-cta-h: 0px;
   }
@@ -989,21 +995,21 @@ body {
    (block, flex, grid...), y `display: revert` lo devolveria al valor del
    navegador, rompiendo cualquier flex o grid. Por eso la utilidad solo OCULTA,
    nunca muestra. Con la sintaxis de rango, "por debajo" y "por encima" son
-   `width <= 51.25em` y `width > 51.25em`: el mismo numero, complementarios.
-   Navegadores sin sintaxis de rango (Safari < 16.4) ignoran las dos reglas y
-   muestran las dos versiones.
+   `width <= 51.25em` y `width > 51.25em`: el mismo numero, complementarios. El
+   respaldo de cada consulta (ver "RESPALDO" en el nav de escritorio) mantiene
+   las dos utilidades funcionando en Safari < 16.4.
 
    !important a proposito: una utilidad existe para ganar a la regla del
    componente, venga en el orden que venga (ver DESIGN_TOKENS.md, 3.3).
    display:none tambien lo oculta a los lectores de pantalla: es para contenido
    que sobra en ese ancho, no para texto accesible oculto (ese es .btn-label). */
-@media (width <= 51.25em) {
+@media (width <= 51.25em), (max-width: 51.25em) { /* movil: <= 820px */
   .solo-escritorio {
     display: none !important;
   }
 }
 
-@media (width > 51.25em) {
+@media (width > 51.25em), (min-width: 51.3125em) { /* escritorio: > 820px */
   .solo-movil {
     display: none !important;
   }

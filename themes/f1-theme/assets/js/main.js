@@ -60,7 +60,7 @@ aislar('barra fija y volver-arriba', function () {
 
      Efecto aceptado: en movil, una pagina cuyo hero quepa en la primera
      pantalla muestra la barra al cargar, porque lo siguiente ya asoma. */
-  var escritorio = window.matchMedia('(width > 51.25em)');
+  var escritorio = window.matchMedia('(width > 51.25em), (min-width: 51.3125em)');
   var asoma = false;
   var salida = false;
 
