@@ -239,10 +239,26 @@
 }
 .cards-grid,
 .gallery-grid,
+/* brands-logos: cada logo en una caja de formato fijo 2:1 (como mucho 160x80,
+   el mismo 160px del sizes del partial), con object-fit:contain. El archivo
+   viene ya en ese lienzo (320x160, logo centrado; ver GUIA-IMAGENES), asi que
+   logos de proporciones muy distintas pesan visualmente lo mismo, y la caja
+   tiene alto conocido antes de cargar la imagen (sin salto de layout, aunque
+   sea SVG sin width/height). 8rem minimo de columna: dos por fila a 320px. */
 .logo-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1rem
+  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+  gap: clamp(1.5rem, 4vw, 2.5rem) 1.5rem;
+  align-items: start
+}
+.logo-grid figure {
+  margin: 0;
+  text-align: center
+}
+.logo-grid figcaption {
+  margin-top: .5rem;
+  font-size: .9em;
+  color: var(--color-muted)
 }
 
 /* Division silabica con guion en el texto de cards, testimonios y equipo cuando
@@ -362,9 +378,13 @@
   }
 }
 .logo-grid img {
-  max-height: 40px;
-  width: auto;
-  object-fit: contain
+  display: block;
+  width: 100%;
+  max-width: 160px;
+  height: auto;
+  aspect-ratio: 2 / 1;
+  object-fit: contain;
+  margin-inline: auto
 }
 .card {
   position: relative;

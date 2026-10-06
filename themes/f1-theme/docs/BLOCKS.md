@@ -200,6 +200,28 @@ tramo con un modificador distinto al resto de la prosa (p. ej. un párrafo
 `align="center"` en medio de texto alineado a la izquierda), sin tener que
 mover todo el contenido a `sections:`.
 
+## Brands Logos
+
+Rejilla de logos (marcas que se trabajan, certificaciones, colaboradores).
+
+```yaml
+- type: brands-logos
+  title: "Marcas con las que trabajamos"   # opcional
+  items:
+    - image: "/images/321-marca_phonak.svg"
+      imageAlt: "Phonak"                   # el nombre de la marca: el logo ES el texto
+      text: "Phonak"                       # opcional, pie bajo el logo
+```
+
+- **Formato fijo:** cada logo va en una caja 2:1 de 160×80 como máximo, con
+  `object-fit: contain`. El archivo se entrega en lienzo 320×160 con el logo
+  centrado (detalle en GUIA-IMAGENES.md). Alto conocido antes de cargar: sin
+  salto de layout aunque sea SVG.
+- Columnas automáticas (`minmax(8rem, 1fr)`): dos por fila a 320px, hasta
+  siete en escritorio; con pocos logos, las columnas se reparten el ancho.
+- `imageAlt` es obligatorio en la práctica: un logo sin alt es una marca que
+  el lector de pantalla no nombra.
+
 ## Cards
 
 Bloque genérico para servicios, productos o listados editoriales.

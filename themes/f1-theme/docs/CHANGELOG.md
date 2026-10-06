@@ -1,5 +1,17 @@
 # F1 Theme · Changelog
 
+## Sin versión — `brands-logos` con formato fijo
+
+- Cada logo va en una caja 2:1 de 160×80 como máximo (`aspect-ratio`,
+  `object-fit: contain`), centrada, con pie opcional en `--color-muted`.
+  Antes: `max-height: 40px` sin ancho fijo, así que cada logo medía según su
+  proporción y la caja no tenía alto hasta cargar la imagen.
+- Columnas `minmax(8rem, 1fr)`: dos por fila a 320px (antes, `minmax(240px)`
+  dejaba una sola columna en cualquier móvil).
+- Formato de archivo en GUIA-IMAGENES: lienzo 320×160, logo centrado, SVG
+  preferente. Documentado en BLOCKS.md (no tenía entrada). Demo 9 actualizada,
+  con un caso de archivo cuadrado.
+
 ## Sin versión — subtítulo y eyebrow como tokens con par `-inverse`
 
 - `--subtitle-color` y `--eyebrow-color` (variables de contexto definidas solo

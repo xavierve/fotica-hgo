@@ -203,12 +203,13 @@ sections:
 
   # ============ BRANDS-LOGOS ============
   - type: brands-logos
-    title: "9- brands_logos"
+    title: "9- brands-logos · lienzo 2:1 (320×160), caja de 160×80 como máximo"
     items:
-      - { image: "https://picsum.photos/seed/b1/240/120", imageAlt: "Demo", text: "Marca A" }
-      - { image: "https://picsum.photos/seed/b2/240/120", imageAlt: "Demo", text: "Marca B" }
-      - { image: "https://picsum.photos/seed/b3/240/120", imageAlt: "Demo" }
-      - { image: "https://picsum.photos/seed/b4/240/120", imageAlt: "Demo" }
+      - { image: "https://picsum.photos/seed/b1/320/160", imageAlt: "Demo", text: "Marca A" }
+      - { image: "https://picsum.photos/seed/b2/320/160", imageAlt: "Demo", text: "Marca B" }
+      - { image: "https://picsum.photos/seed/b3/320/160", imageAlt: "Demo" }
+      - { image: "https://picsum.photos/seed/b4/320/160", imageAlt: "Demo" }
+      - { image: "https://picsum.photos/seed/b5/200/200", imageAlt: "Demo", text: "Archivo cuadrado: contain, no se deforma" }
 
   # ============ TESTIMONIALS ============
   - type: testimonials

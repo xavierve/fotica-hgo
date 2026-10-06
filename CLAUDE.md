@@ -53,178 +53,57 @@ CLAUDE.md divergen, y la copia vieja acaba dictando convenciones muertas.
 
 ## Estado actual (verificado con build)
 
-Hecho y validado: `schema.html` v02 (@graph completo, BreadcrumbList, FAQPage — 127 preguntas en el sitio), `breadcrumb.html` corregido, `site.yaml` v03 (legal unificada), 30 páginas de contenido migradas, shortcodes + iconos + `cta` v2 (bg/bgColor/preset/microcopy; recorte móvil por convención `_m`), `404.html`, attributes de Goldmark activados, CSS de utilidades (`fs-xs/s/l`, `has-bg-image/color`, banner). Hero con `image`. Las 21 páginas de servicio/producto tienen `card.image` apuntando a un archivo real existente (verificado, ninguna en fallback).
+Hecho y validado: `schema.html` v02 (@graph completo, BreadcrumbList, FAQPage — 127 preguntas en el sitio), `breadcrumb.html` corregido, `site.yaml` v03 (legal unificada), 30 páginas de contenido migradas, shortcodes + iconos + `cta` v2 (bg/bgColor/preset/microcopy; recorte móvil por convención `_m`), `404.html`, attributes de Goldmark activados, CSS de utilidades (`fs-xs/s/l`, `has-bg-image/color`, banner). Hero con `image` en tres layouts (ver tarea 1). Formulario en producción (tarea 5). QA visual de oct 2026 resuelto (`QA-visual-fausto-v2.md`). Las 21 páginas de servicio/producto tienen `card.image` apuntando a un archivo real existente (verificado, ninguna en fallback).
 Shortcodes añadidos (validados con `hugo build` real, sin warnings):
 - `testimonial` (cita suelta con wrapper propio), `testimonials` + `testimonial-item` (grid de citas anidadas, reutiliza `.cards-grid`/`.block-testimonials` — mismo CSS que el bloque `type: testimonials` de `sections:`).
 - `text-split` + `text-split-item`: grid simétrico 2 columnas para pares texto+texto (o texto+vídeo a futuro — Goldmark `unsafe=true` ya permite HTML embebido sin tratamiento especial). Reutiliza la mecánica de `.image-text-inner` (1fr → 1fr 1fr en desktop). Modificadores por item: `textSize` (reutiliza `block-text-*`), `align` (reutiliza `block-align-*`), `pad` (tokens propios `has-pad-s/m/l` sobre `--space-s/m/l`, más pequeños que el pad de sección), `margin` (CSS libre vía `safeCSS`, sin tokens — como `bgColor`). El wrapper admite `width="wide|full"` como cualquier bloque.
 - Sección equipo en `/nosotros/`: completa con 7 personas, fotos y bios (el bio se despliega con `<details>`, nunca modal). Schema `Person` de los 7 generado desde el array `team:`, con `hasCredential`/`licenseNumber` leídos del front matter — sin nombres hardcodeados en el tema.
 imagenes ya definidas. ultimando diseño y funcionalidades con Claude Code.
 
-## TAREAS PENDIENTES (Claude Code)
+## TAREAS (Claude Code)
 
-Orden fijado por Foco (10 sep). Las tareas 1-3 son de layout y comparten
-zona de pantalla: conviene hacerlas seguidas y en este orden, porque la 2 y
-la 3 tienen que coordinar posiciones entre sí.
+Numeración histórica: el TODO y otros documentos citan «tarea 5», «tarea 7»…,
+así que los números no se reasignan. Las cerradas quedan resumidas con lo que
+sigue vigente de ellas; el estado al día de todo el proyecto está en
+`docs/todo-fausto.md`. Faltan la 2 y la 3: ya cerradas.
 
-### 1. Layout del hero — `stacked` (defecto) , `overlay` y `split` (opt-in)
+### 1. Hero — ✅ hecho (sep-oct 2026)
 
-**Qué está decidido y no se reabre:** el hero nunca lleva texto encima de la
-imagen en móvil. Motivo: legibilidad para el público 45-75+ (sesión 21 ago).
+**Decisiones que no se reabren:**
+- **Nunca texto sobre foto en móvil** (público 45-75+, sesión 21 ago) y
+  **apilado por defecto en todos los anchos** (10 sep). El diagnóstico: el
+  problema no es la técnica del overlay sino la foto. Para que el texto se
+  lea sobre zonas claras hay que oscurecer tanto que la foto muere, y las
+  fotos reales de sesión, con sujetos por todo el encuadre (ej.
+  `215_vision_40_hero.webp`), no aguantan ninguno. `overlay` queda como
+  excepción por página, con `scrim` activo por defecto (`hero.scrim: false`
+  lo quita).
+- **Es política del sitio, no código del tema** (oct 2026):
+  `params.hero.layout = "stacked"` y `params.hero.mobileOverlay = false` en el
+  `hugo.toml` de Fausto. Sin esa configuración, el tema usa `overlay` en todos
+  los anchos. No hay `layoutMobile` por página.
+- **Un solo bloque `hero`** con `hero.layout: stacked | overlay | split`, no
+  bloques hermanos (10 sep): duplicarlo duplicaría preload LCP,
+  `img-responsive`, `preset` y la variante `_m`.
+- **La foto es siempre `<img>`** en los tres layouts, también en `overlay`
+  (oct 2026): un `background-image` no tiene `alt`, apilado en móvil estiraba
+  la foto, y no admite `srcset` por ancho.
 
-**Qué cambió el 10 sep:** originalmente apilado era solo para móvil y desktop
-siempre iba con overlay. Tras 4 pruebas visuales en desktop, **apilado pasa a
-ser el modo por defecto en todos los anchos**, y overlay queda como excepción
-puntual. El diagnóstico que lo justifica: el problema no es la técnica de
-overlay, es la foto. Un overlay tiene que oscurecer lo suficiente para que el
-texto se lea sobre las zonas claras, y con eso la foto muere; no hay opacidad
-que sirva a las dos cosas, y ninguna técnica hace que un H1 viva bien encima
-de una cara. Las fotos con espacio negativo (las generadas con IA, que se
-pidieron así) aguantan overlay ligero; las fotos reales de sesión, con
-sujetos por todo el encuadre (ej. `215_vision_40_hero.webp`), no aguantan
-ninguna — y son la mayoría del sitio.
+**Cómo quedó** (detalle en FRONTMATTER.md, «Hero: layouts», y DESIGN_TOKENS.md):
+`stacked` = banda de foto a sangre (`40svh` en móvil, `aspect-ratio 3/1` con
+tope de 1440px en escritorio) y bloque `bg-color2` debajo; en escritorio, dos
+columnas 50/50, alineadas arriba, automáticas (si no hay subtítulo ni CTAs,
+el H1 ocupa todo). Contenedor `--hero-width` (1440), `text-wrap: balance` en
+el H1, padding superior por clase del partial (`hero-stacked` → 0). Imagen
+con `_hd` por `srcset` w, `_m` por `<picture>` (breakpoint 821px), preload
+con `imagesrcset`/`imagesizes` solo en páginas con hero, `imagePosition` para
+el encuadre. Medido en el QA visual de oct 2026 (`QA-visual-fausto-v2.md`).
 
-| Modo | Cuándo | Cómo |
-|---|---|---|
-| `stacked` (**defecto**, `hero.layout` ausente) | La norma | Foto sola arriba, bloque de color debajo con el texto. Mismo patrón en móvil y desktop. |
-| `overlay` (opt-in, `hero.layout: overlay`) | Excepción puntual | Texto sobre la imagen, con `scrim` (degradado solo sobre el lado del texto) en vez de overlay plano. `.scrim` ya existe. Previsto para Contacto y quizá alguna otra. |
-
-> Desde oct 2026 «defecto» significa el `params.hero.layout = "stacked"` del
-> `hugo.toml` de Fausto, y el «nunca texto sobre foto en móvil» es su
-> `params.hero.mobileOverlay = false`. El tema, sin esa configuración, usa
-> `overlay` en todos los anchos. Ver FRONTMATTER.md, «Hero: layouts».
-
-**Un solo bloque `hero`, no dos.** Son la misma pieza (imagen + H1 +
-subtítulo + CTAs, con su schema) en dos presentaciones: eso es un parámetro
-de layout, igual que `cta-layout-split` es una variante de `cta`. Duplicar el
-bloque duplicaría el mantenimiento del preload LCP, `img-responsive`,
-`preset` y la variante `_m`. Decidido con Foco (10 sep) al plantear si convenía
-separarlos de cara a reutilizar el tema: no conviene — un tema reutilizable
-mejora por tener pocas piezas con parámetros claros, no por acumular
-variantes hermanas con nombres parecidos.
-
-**Ventaja del defecto:** ninguna página declara hoy `layout:`, así que todas
-pasan a apilado solas, sin migrar ni un `.md`. Solo se añade
-`layout: overlay` donde se quiera la excepción.
-
-**Punto de partida real:** `hero.html` tiene hoy 3 modos de layout que conviven 
-— (a) `overlay` : `image` como `background-image` de sección completa 
-- (b) `stacked` : `image` como `<img>` real apilada arriba y `hero-copy` abajo
-- (c)  `splitp` : `image` es <img> y va en la columna de la derecha.
- **Pendiente de decidir con Foco:** cuál utilizar
-el fichero definido en image: foto.webp , busca foto_hd.webp en pantallas desktop con alto DPI y busca foto_m.webp en móvil.
-
-**Spec de `stacked`** (necesita fotos _hd de 1440 x 2 = 2880 px0 , que no hay)
-La opción es perder calidad en desktop avanzados, o pasar a modo `split`
-
-- (XXX REVISAR) **Banda de foto arriba**, a sangre completa. Altura por `aspect-ratio`, no
-  `min-height` fijo, para que escale con el ancho (el prototipo usaba
-  `min-height:500px` y se quedaba igual en cualquier pantalla). Recorte
-  configurable: el prototipo necesitó `center 30%` para no cortar caras, así
-  que hace falta un parámetro (`hero.imagePosition` o similar) — el punto de
-  interés cambia con cada foto.
-- **Altura de la banda en móvil:** no usar el `70svh` de presencia de
-  banner/CTA. Con esa altura la imagen empuja H1 y subtítulo fuera del
-  viewport inicial, y hay que hacer scroll para ver el titular de la propia
-  página. Punto de partida: `50svh`, con fallback `50vh` (mismo motivo que en
-  banner/CTA — ver 3.1 en `DESIGN_TOKENS.md`), a ajustar mirando el conjunto
-  imagen+H1+subtítulo+botones en un móvil real.
-- **Bloque de color debajo**, `bg-color2` (navy), a sangre completa. Dentro,
-  contenido en **dos columnas** (flex) en desktop: H1 a la izquierda
-  (`flex-basis` ~50%), subtítulo + CTAs a la derecha, `gap` ~3em. Reduce el
-  bloque de ~800px (una columna) a ~500px y elimina el muro vacío de la
-  derecha. En móvil colapsa a una columna: foto, H1, subtítulo, botones.
-- **Ancho del contenedor: `wide` (`--container-wide`, 1440px)**, no el
-  default de 1120px. Motivo: el H1 y el subtítulo son largos en **todos** los
-  heros del sitio (es el tono de la marca, no un caso puntual), y en 1120px a
-  dos columnas no caben con dignidad. El prototipo usó `width:100vw` (full) —
-  **eso hay que evitarlo**: saca el H1 de la rejilla (arrancaba a 22px del
-  borde mientras logo, nav, breadcrumb y H2 alinean a ~340px) y parece un
-  descuido. `wide` mantiene la alineación con el resto de la página (los
-  `cards` de los hubs ya usan `width="wide"`). Si Code ve motivo para `full`,
-  que el contenido interior siga en `.container` aunque el fondo vaya a sangre.
-- **`text-wrap: balance` en el H1.** Al ganar ancho la columna, el titular
-  parte dejando un "que" colgando tras los dos puntos y "lince" huérfano en
-  la última línea. `balance` lo reparte sin tocar el texto, y es mejora
-  progresiva (quien no lo soporta lo ignora). Alternativa: `max-width` en el H1.
-- **Padding inferior del bloque navy: recortar ~30%** — quedaban ~150px de
-  navy vacío bajo los botones.
-- **Padding SUPERIOR del hero: depende del modo, no es un valor único.**
-  Hoy `.hero` usa `clamp(4rem, 8vw, 7rem)` siempre, y ese aire está pensado
-  para el hero CON fondo: separa el texto del borde de la foto para que el
-  titular no parezca pegado al recorte. Sin fondo no separa nada — son 64px
-  de página vacía entre el header y el eyebrow, y en móvil se pagan caros:
-  con ellos el eyebrow arranca hacia los 90px y los botones de Llamar y
-  WhatsApp aterrizan sobre los 540, justo en el filo del pliegue de un iPhone
-  SE. En la home, donde el hero ES la conversión, eso no es estético.
-  Los tres casos, que pide una clase emitida por el partial (mismo patrón que
-  `has-surface` o `is-textonly`, no un `clamp` retocado):
-  - **banda apilada arriba** → `0`. Una banda a sangre debe tocar el header.
-  - **solo texto, sin fondo** (home hoy) → aire corto, ~32-40px en móvil;
-    en desktop el valor actual sobra de sitio y sí aporta.
-  - **fondo detrás del texto** (`overlay`) → el `clamp` actual, sin tocar.
-  Detectado el 17 sep sobre la home. NO tocarlo antes de implementar
-  `stacked`: cambiar el `clamp` ahora obliga a cambiarlo otra vez después.
-- Alineación vertical de las dos columnas: el prototipo las alinea arriba y
-  queda aire bajo el H1 (la derecha es más alta). `align-items:center` es la
-  alternativa. Decidir a propósito, no por defecto — a Foco le vale como está.
-
-**Aviso de color de texto (bug real, detectado revisando `.hero-subtitle`):**
-`.has-bg-image` aplica hoy `color:#fff`/`--color-subtitle-inverse` a TODA la sección,
-sin distinguir si el texto está encima de la foto o no. En `stacked` el texto
-ya no está sobre la imagen — si hereda ese blanco, queda blanco sobre fondo
-claro, invisible. El bloque de texto necesita color explícito propio, con
-independencia de si la sección padre tiene `has-bg-image`.
-
-**Mecanismos a reutilizar, no reinventar:**
-- Densidad `_hd` vía `os.FileExists` sobre la ruta física — mismo patrón que
-  `partials/img-responsive.html`. Nunca debe dar error si falta la variante.
-- Descriptor `w` + `sizes` (no `x`): el hero es candidato a LCP, aquí la
-  precisión de tamaño de renderizado importa más que en ningún otro bloque.
-- Recorte distinto móvil/desktop (convención `_m`) → `<picture>` con
-  `<source media>`. Breakpoint: el tema usa **821px** de forma consistente;
-  la nota vieja de "768×400px" es de la sesión del 21 ago y queda descartada.
-- Preload no bloqueante (`<link rel="preload" as="image" fetchpriority="high">`)
-  solo en páginas que tengan hero — condicional en el `<head>`, nunca
-  precargar algo que la página no use. Con `srcset`, evaluar
-  `imagesrcset`/`imagesizes`; Safari va por detrás, degrada al `href` simple.
-
-**Sobre el prototipo de Foco:** lo hizo con estilos inline y
-`background-image` para probar rápido — no es la implementación. La banda de
-foto en `stacked` es justo donde `<picture>`/`<img>` con `object-fit:cover` +
-`object-position` (equivalente al `background-position` del prototipo) encaja
-mejor que `background-image`: no hay texto encima, así que no hay motivo para
-conservar `background-attachment`, y se gana `srcset`/`sizes` real. Si Code
-prefiere `background-image` por coherencia con banner/CTA,
-`img-bg-style.html` ya da `image-set()`. Cualquiera vale: que elija con
-criterio y lo documente.
-
-**CTA, Banner y Counter se quedan en `background-image` a propósito** — ya tienen
-`image-set()` vía `_hd` (`partials/img-bg-style.html`) y así conservan la
-opción de `background-attachment:fixed`, que no existe para `<img>`.
-
-**`img-bg-style.html` (antes `bg-image-style.html`) NO se retira ni se deja
-morir.** Desde oct 2026 el hero no lo usa en ningún layout (`overlay` pasó a
-`<img>`: con `background-image` perdía el `alt` y, apilado en móvil, estiraba
-la foto), pero `cta`, `banner` y `counter` sí, con `image-set()` + `_hd` y
-`--section-bg-mobile`. Tiene que seguir funcional y cubierto en la demo. No
-dar por muerta una rama solo porque este proyecto la use poco.
-
-**Política del hero = configuración del sitio, no código del tema.**
-`params.hero.layout` y `params.hero.mobileOverlay` en `hugo.toml`. Fausto:
-`stacked` y `false`. Sin declarar, el tema usa `overlay` en todos los anchos.
-
-**Cuestiones abiertas para Code:** (a) si las dos columnas de `stacked` deben
-ser automáticas o un parámetro aparte; (b) proporción 50/50 vs 40/60 — con
-40/60 el subtítulo respira más y el H1 sigue en 2-3 líneas; (c) si `scrim`
-debe ser el tratamiento por defecto de `overlay` o seguir siendo opt-in.
-
-**Criterio de aceptación:** build limpio con y sin variantes `_hd`/recortes
-móvil; ninguna imagen rota si falta un archivo opcional; el texto se lee bien
-en todos los anchos, sin heredar blanco donde ya no hay foto detrás; H1 y
-subtítulo visibles sin scroll en un móvil estándar; en desktop el contenido
-alinea con la rejilla del resto de la página y el H1 no deja huérfanos.
-Verificar con la skill `visual-qa`, no a ojo.
-
+**CTA, Banner y Counter siguen en `background-image` a propósito:** conservan
+la opción de `background-attachment:fixed`. Usan `img-bg-style.html` (antes
+`bg-image-style.html`), que resuelve `_hd` y `_m` por convención (la clave
+`bgMobile` ya no existe). No retirarlo ni dejarlo morir porque el hero ya no
+lo use: tiene que seguir funcional y cubierto en la demo.
 
 ### 4. Optimización de imágenes
 
@@ -241,10 +120,10 @@ Medidas, proporciones y criterios: `themes/f1-theme/docs/GUIA-IMAGENES.md`.
   la mitad del contenedor, no su ancho completo (528px en `m`, 688px en
   `wide`) — ver la tabla de la guía.
 
-**No aplica en Fausto:**
-- **Slider** (780 de ancho) y **logos de marca** (320) — el sitio no usa hoy
-  ninguno de los dos bloques. Las medidas quedan en la guía para otros
-  proyectos del theme; aquí no hay nada que optimizar.
+**No aplica en Fausto (por ahora):**
+- **Slider** (780 de ancho) y **logos de marca** (lienzo 2:1, 320×160) — el
+  sitio no usa hoy ninguno de los dos bloques. Los formatos están definidos en
+  la guía; si se usan logos (p. ej. marcas de audífonos), ver allí.
 
 **Hecho (16 sep):**
 - **Galería** — los 4 `100-instalaciones_*` optimizados, con `_hd` a 2400×1800
@@ -261,12 +140,9 @@ Medidas, proporciones y criterios: `themes/f1-theme/docs/GUIA-IMAGENES.md`.
   `.gallery-open img`, puesto para no cortar los rótulos de fachada.
 
 **Pendiente:**
-- **Heros** — ⏸ **EN PAUSA, no tocar.** Decisión 16 sep: el recorte depende de
-  la altura de banda del layout `stacked`, que aún no está implementado en
-  `partials/hero.html`. Reencuadrar ahora significaría hacerlo dos veces.
-  Se retoma cuando el layout esté en el tema y la banda se pueda medir en el
-  inspector. Ver «Heros: pendiente del layout apilado» en GUIA-IMAGENES.md.
-  Lo que sigue es el análisis de pesos, válido pero aplazado:
+- **Heros** — desbloqueado: el layout `stacked` ya existe y la banda se mide
+  (ver GUIA-IMAGENES.md y DESIGN_TOKENS.md, «Banda móvil y proporción del
+  `_m`»). Lo que sigue es el análisis de pesos, todavía sin aplicar:
 
   Aquí la ganancia está en generar variantes **más
   pequeñas**, no un `_hd` mayor: la mayoría son imágenes de IA a ~1440px y esa
@@ -291,10 +167,12 @@ Medidas, proporciones y criterios: `themes/f1-theme/docs/GUIA-IMAGENES.md`.
   Excepción: las fotos con código de cámara (`D3A####`) tienen original en alta
   calidad — para esas sí cabe un `_hd` real, generado desde el original (nunca
   ampliando el WebP ya reducido), con techo de 1920px.
-- **Arte móvil (`_m`)** — recortes verticales solo donde el encuadre de
-  escritorio no funcione (caras cortadas, sujeto descentrado). Hoy solo
-  `215_vision_40_hero_m.webp` y `314-mantenimiento_audifonos_hero_m.webp`.
-  **Qué imágenes lo necesitan es juicio visual, no automatizable.**
+- **Arte móvil (`_m`)** — recortes en **3:2** (768×512), solo donde el
+  encuadre de escritorio no funcione (caras cortadas, sujeto descentrado). Los
+  que hay hoy son verticales de 843×1264, de antes de que existiera la banda, y
+  hay que reencuadrarlos. Ojo: el `_m` de una foto también lo usa un `cta` o
+  `banner` con esa misma foto de fondo. **Qué imágenes lo necesitan es juicio
+  visual, no automatizable.**
 
 **Cambios de theme que faltan para aprovechar todo esto:**
 - `img-responsive.html` usa `w`+`sizes`, pero solo genera **dos peldaños**
@@ -304,9 +182,6 @@ Medidas, proporciones y criterios: `themes/f1-theme/docs/GUIA-IMAGENES.md`.
   descriptores de **densidad pura**: un móvil con DPR3 se descarga el archivo
   2x entero aunque necesite mucho menos. Para afinarlo hacen falta media
   queries por ancho, no solo por densidad.
-- No bloqueante: el lightbox de `gallery.html` rellena el `<img>` vía JS desde
-  el JSON de `.items`, sin pasar por Hugo — para que la vista ampliada use
-  `_hd` habría que tocar ese JS. Valorar si compensa.
 
 ### 5. Formulario de contacto (`/contacto/`) — ✅ implementado y verificado en producción (27 sep 2026)
 
@@ -382,7 +257,7 @@ de él. `config.php` también acaba en `public/`. Consecuencias:
    en `role="alert"`; el enlace a `/aviso-legal/#privacidad` sin `target="_blank"`. Campos de 48px y
    texto ≥18px; borde de 2px con contraste ≥3:1; el error usa `--color-error` (>7:1) más texto e icono.
 5. **No persiste nada.** Ni base de datos, ni archivos, ni log de envíos. El único registro es
-   `error_log()` cuando `mail()` falla, sin datos del visitante.
+   `error_log()` cuando el envío falla, sin datos del visitante.
 
 **Texto legal:** actualizado en `contacto` y `aviso-legal`: Hostinger figura como **encargado de
 tratamiento técnico** (aloja la web y el buzón) y se dice explícitamente que el formulario no guarda
@@ -425,15 +300,21 @@ agregados y solo entonces decidir si se sube a `p=quarantine`/`p=reject`.
 ### 6. Ofuscación JS de CIF y domicilio en `/aviso-legal/`
 
 Spans marcados con `data-obf` en el contenido, render vía JS en cliente
-(anti-scraping). El CIF real lo aporta el cliente (placeholder actual).
+(anti-scraping). **Pendiente de implementar:** los spans ya están en
+`content/aviso-legal/_index.md` (el del CIF con un placeholder) y el CIF ya
+está confirmado (TODO, C2), pero `main.js` todavía no los procesa.
 
-### 7. Verificar 404 en Hostinger
+### 7. 404 — ✅ HTTP 404 real; pendiente el `noindex` en el `<head>`
 
-`/404.html` debe servirse con estado HTTP 404 real — comprobar cómo lo
-resuelve Hostinger (hosting tradicional puede necesitar `ErrorDocument 404` en `.htaccess`). El template ya lleva `noindex`, pero el meta se emite dentro de `main` — moverlo al `<head>` vía mecanismo del tema (p. ej. `.Store` leído en `header-meta.html`).
+✅ `ErrorDocument 404 /404.html` en `static/.htaccess`, comprobado en el
+servidor (TODO, C8). **Pendiente:** el `<meta name="robots" content="noindex">`
+se emite todavía dentro de `main` (`layouts/404.html`); moverlo al `<head>`
+con un mecanismo del tema (p. ej. `.Store` leído en `header-meta.html`).
 
 ### 8. Redirecciones
 
+**Hoy en 302 a propósito**, hasta lanzar el sitio nuevo; al lanzar se pasan a
+301 (TODO, C7, que lleva el mapeo de URLs del WordPress antiguo).
 En Hostinger es `.htaccess` (Apache, `RewriteRule`/`Redirect 301`),  Del dominio viejo → nuevo, incluyendo los 4 subdominios landing (`audicion.`, `lentes-graduadas.` →
 `/vision/productos/gafas-progresivas/`, `lentillas.` →
 `/vision/productos/lentes-de-contacto/`, `vueltaalcole.` →
@@ -444,7 +325,8 @@ antiguo. Revisar logs de 404 tras el lanzamiento: cada 404 recurrente es una
 ### 9. Espaciados internos de blocks en `em`
 
 No rem/px, para que `fs-s`/`fs-l` y `textSize` escalen el bloque completo.
-Revisar de paso la escala tipográfica base hacia `clamp()`.
+La tipografía base ya va con `clamp()` (body 18-20px). Los espaciados de
+bloque siguen en `rem` (`--block-pad*`, `--space-*` en `critical.css`).
 
 ### 10. `title`/`description` de 214 (Baja Visión)
 
@@ -492,7 +374,8 @@ Reglas que siguen vigentes para cualquier imagen nueva:
 ## Cómo verificar
 
 ```bash
-hugo build          # debe compilar sin errores ni warnings
+hugo                # producción: debe compilar sin errores ni warnings
+hugo server         # desarrollo, escribe en .dev/ e INCLUYE borradores (/demo/)
 node -c themes/f1-theme/assets/js/main.js   # el build NO detecta JS roto
 # JSON-LD: validar una página de cada tipo en https://validator.schema.org
 # Enlaces internos: no debe haber hrefs a rutas inexistentes en public/

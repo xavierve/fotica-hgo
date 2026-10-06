@@ -23,7 +23,16 @@
 | **Galería** | `gallery.items[].image` | 1200×900 | 2400×1800 | **4:3** | WebP |
 | **image-text** | en el shortcode | **700 ancho** | 1400 | libre | WebP |
 | **Slider** | `slider.items[].image` | **780 ancho** | — | libre | WebP |
-| **Logos de marca** | `brands.items[].image` | 320 ancho | — | libre | WebP/SVG |
+| **Logos de marca** | `items[].image` (bloque `brands-logos`) | **320×160** | 640×320 | **2:1** | **SVG** o WebP con transparencia |
+
+> **Logos de marca.** Todos en el mismo lienzo 2:1 (320×160), fondo
+> transparente, logo centrado y dentro de una zona segura de ~80% del ancho y
+> ~70% del alto. Así un logo apaisado y uno cuadrado pesan lo mismo en la
+> rejilla: el CSS los muestra en una caja 2:1 de 160×80 como máximo con
+> `object-fit: contain`, y un archivo en otra proporción no se deforma, pero
+> queda más pequeño. Mejor SVG (no necesita `_hd`); en WebP, `_hd` a 640×320
+> solo si el logo tiene detalle fino. Los logos son marcas registradas: usar
+> los que facilite el fabricante o el distribuidor, no capturas de su web.
 
 > **Hero móvil (`_m`).** La banda móvil es `100vw × 40svh` en `stacked` y en
 > `overlay` apilado, con `object-fit: cover`: el CSS no fuerza una proporción,
