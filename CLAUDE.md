@@ -96,8 +96,8 @@ ninguna — y son la mayoría del sitio.
 **Un solo bloque `hero`, no dos.** Son la misma pieza (imagen + H1 +
 subtítulo + CTAs, con su schema) en dos presentaciones: eso es un parámetro
 de layout, igual que `cta-layout-split` es una variante de `cta`. Duplicar el
-bloque duplicaría el mantenimiento del preload LCP, `responsive-img`,
-`preset` y `bgMobile`. Decidido con Foco (10 sep) al plantear si convenía
+bloque duplicaría el mantenimiento del preload LCP, `img-responsive`,
+`preset` y la variante `_m`. Decidido con Foco (10 sep) al plantear si convenía
 separarlos de cara a reutilizar el tema: no conviene — un tema reutilizable
 mejora por tener pocas piezas con parámetros claros, no por acumular
 variantes hermanas con nombres parecidos.
@@ -177,7 +177,7 @@ independencia de si la sección padre tiene `has-bg-image`.
 
 **Mecanismos a reutilizar, no reinventar:**
 - Densidad `_hd` vía `os.FileExists` sobre la ruta física — mismo patrón que
-  `partials/responsive-img.html`. Nunca debe dar error si falta la variante.
+  `partials/img-responsive.html`. Nunca debe dar error si falta la variante.
 - Descriptor `w` + `sizes` (no `x`): el hero es candidato a LCP, aquí la
   precisión de tamaño de renderizado importa más que en ningún otro bloque.
 - Recorte distinto móvil/desktop (hoy `bg`/`bgMobile`) → `<picture>` con
@@ -198,14 +198,14 @@ prefiere `background-image` por coherencia con banner/CTA,
 `img-bg-style.html` ya da `image-set()`. Cualquiera vale: que elija con
 criterio y lo documente.
 
-**CTA y Banner se quedan en `background-image` a propósito** — ya tienen
+**CTA, Banner y Counter se quedan en `background-image` a propósito** — ya tienen
 `image-set()` vía `_hd` (`partials/img-bg-style.html`) y así conservan la
 opción de `background-attachment:fixed`, que no existe para `<img>`.
 
 **`img-bg-style.html` (antes `bg-image-style.html`) NO se retira ni se deja
 morir.** Desde oct 2026 el hero no lo usa en ningún layout (`overlay` pasó a
 `<img>`: con `background-image` perdía el `alt` y, apilado en móvil, estiraba
-la foto), pero `cta` y `banner` sí, con `image-set()` + `_hd` y
+la foto), pero `cta`, `banner` y `counter` sí, con `image-set()` + `_hd` y
 `--section-bg-mobile`. Tiene que seguir funcional y cubierto en la demo. No
 dar por muerta una rama solo porque este proyecto la use poco.
 
@@ -297,10 +297,10 @@ Medidas, proporciones y criterios: `themes/f1-theme/docs/GUIA-IMAGENES.md`.
   **Qué imágenes lo necesitan es juicio visual, no automatizable.**
 
 **Cambios de theme que faltan para aprovechar todo esto:**
-- `responsive-img.html` usa `w`+`sizes`, pero solo genera **dos peldaños**
+- `img-responsive.html` usa `w`+`sizes`, pero solo genera **dos peldaños**
   (base y `_hd`). Ampliarlo a escalera descendente es lo que desbloquea el
   ahorro de la tabla de arriba.
-- `img-bg-style.html` (banner, CTA) usa `image-set(... 1x, ... 2x)`,
+- `img-bg-style.html` (banner, CTA, counter) usa `image-set(... 1x, ... 2x)`,
   descriptores de **densidad pura**: un móvil con DPR3 se descarga el archivo
   2x entero aunque necesite mucho menos. Para afinarlo hacen falta media
   queries por ancho, no solo por densidad.

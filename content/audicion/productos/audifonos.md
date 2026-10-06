@@ -26,7 +26,7 @@ hero:
   subtitle: "Una amplia gama de audífonos, desde el más económico hasta el más pequeño y sofisticado, para volver a conectar con quienes más quieres."
   preset: contact
   image: "/images/321-audifono_que_no_se_ve.webp"
-  imageAlt: "Modelo de audífono avanzado, muy pequeño y discreto, que pasaría desapercibido"
+  imageAlt: "Mujer muestra en su mano un modelo de audífono avanzado, muy pequeño y discreto, que pasaría desapercibido"
   layout: overlay
 
 sections:
@@ -78,6 +78,10 @@ Recomendarte un audífono sin medir antes tu oído sería vender a ciegas. Por e
 
 Con todos los datos, te explicamos tu caso y te aconsejamos la solución **más adecuada, cómoda y estética para tus necesidades** — no la que toca vender este mes.
 
+<img src="/images/321-audifonos_tipos.webp" alt="Gama de tipos de audífonos, de retroauricular a intracanal, de mayor a menor tamaño" style="width:100%;border-radius:var(--radius);display:block;margin:1.5rem 0">
+
+¿Cuál es el tuyo? Depende de tu pérdida, la anatomía de tu oído, tu destreza manual y tus prioridades (discreción, autonomía, conectividad). Justo lo que valoramos contigo en el estudio.
+
 ## Los tipos de audífono, explicados sin catálogo
 
 - **Retroauriculares (BTE)** — se colocan detrás de la oreja, con un molde hecho a la medida de tu canal auditivo. Indicados para pérdidas **leves, moderadas y severas**: los todoterreno.
@@ -85,9 +89,6 @@ Con todos los datos, te explicamos tu caso y te aconsejamos la solución **más 
 - **RITE** — retroauriculares con el auricular dentro del conducto auditivo: más pequeños y estéticos, adaptables a pérdidas **moderadas y severas**. El equilibrio discreción/potencia.
 - **Intracanal (ITE/ITC/CIC)** — van completamente dentro del oído, en una carcasa personalizada, sin nada detrás del pabellón. Distintos tamaños, para pérdidas **leves, moderadas y severas**: los más invisibles.
 
-<img src="/images/321-audifonos_tipos.webp" alt="Gama de tipos de audífonos, de retroauricular a intracanal, de mayor a menor tamaño" style="width:100%;border-radius:var(--radius);display:block;margin:1.5rem 0">
-
-¿Cuál es el tuyo? Depende de tu pérdida, la anatomía de tu oído, tu destreza manual y tus prioridades (discreción, autonomía, conectividad). Justo lo que valoramos contigo en el estudio.
 
 {{< image-text image="/images/321-audifonos_nueva_vida.webp" imageAlt="Pareja mayor riendo en una terraza, él le habla al oído, ella con audífono discreto" >}}
 Discreto de verdad es que ni en un susurro al oído se note. Eso es lo que buscamos cuando te lo adaptamos.

@@ -64,7 +64,7 @@ Sin subcarpetas para `hero/` `gallery` (solo `og/` y `cards/`) — el prefijo de
 | C2 | Ofuscación JS de CIF (52582059B) y domicilio en `/aviso-legal/` — spans con `data-obf` |
 | C3 | ✅ `.gitignore`: excluir `public/` y `resources/_gen/` **Hecho.** |
 | C4 | ✅ Sticky footer móvil: Llamada / WhatsApp / Ubicación con icons.html y datos de site.yaml **Hecho:** solo iconos, con el volver-arriba integrado; aparece cuando asoma el elemento siguiente al hero. |
-| C5 | Hero responsive: variante móvil `bgMobile` (replicar patrón de cta) |
+| C5 | ✅ Hero responsive: variante móvil **Hecho:** por convención `_m` junto al archivo (`img-mobile.html`), no con `bgMobile`; en los tres layouts. |
  Falta: (1) `footer.html` lea `contact.hours`; (2) `schema.html` cambie `$loc.hoursSpec` por `or $loc.hoursSpec $contact.hoursSpec`; (3) crear shortcode `{{< hours >}}` y sustituir el horario hardcoded del body de Contacto. Objetivo: cambiar horario de verano/invierno editando solo site.yaml |
 
 **Media:**

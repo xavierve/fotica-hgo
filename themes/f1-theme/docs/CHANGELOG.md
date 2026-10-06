@@ -1,5 +1,14 @@
 # F1 Theme · Changelog
 
+## Sin versión — counter con `img-bg-style`
+
+- `counter` montaba `--section-bg` y `--section-bg-mobile` a mano, sin pasar por
+  `img-bg-style.html`: nunca recibía la variante `_hd` (ni de `bg` ni de
+  `bgMobile`). Ahora usa el partial, igual que `cta` y `banner`.
+- FRONTMATTER: la lista de bloques donde funciona la convención `_m` incluía
+  `cta` y `banner`, que no pasan por `img-responsive.html` (usan `bgMobile`).
+  Corregida, con los bloques que sí la usan.
+
 ## Sin versión — hero: política de sitio, overlay con `<img>` y `img-bg-style`
 
 - **Los defectos del hero salen del tema.** El layout por defecto y si

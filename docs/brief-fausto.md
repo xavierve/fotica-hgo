@@ -15,7 +15,7 @@
 Dos centros: **Centro Fausto Andalucía** (Av. Andalucía, 84 B) · **Centro Fausto Duque** (Av. Duque de Ahumada, 1C).
 Tres generaciones: Fausto → Leonor y Anabel → Juan, más cuatro auxiliares con años de antigüedad.
 **Anabel** y **Leito** son los nombres que aparecen en el copy (los clientes los conocen).
-M�s de 27.000 clientes. Centro Auditivo Homologado.
+Más de 27.000 clientes. Centro Auditivo Homologado.
 Atienden en español, inglés y alemán.
 
 ---
@@ -82,7 +82,7 @@ content/
 
 El contenido de cada página se estructura en **tres capas**:
 
-1. **`hero:`** en front matter → título, subtítulo, imagen de fondo, CTA
+1. **`hero:`** en front matter → título, subtítulo, imagen (`hero.image`), CTA
 2. **Body markdown** → texto largo (con shortcodes intercalados)
 3. **`sections:`** en front matter → bloques renderizados por `section-renderer.html`
 
@@ -171,8 +171,9 @@ hero:
   title: "H1 de la página"
   subtitle: "Párrafo intro del hero"
   preset: contact
-  bg: "/images/211-optometria_D3A0064.webp"   # opcional
-  # bgMobile: "/images/211-optometria_m.webp"
+  image: "/images/211-optometria_D3A0064.webp"   # opcional; recorte móvil: mismo nombre + _m, junto al archivo
+  imageAlt: "Descripción de la foto"
+  # layout: overlay   # solo como excepción; el defecto lo pone params.hero.layout (stacked)
 
 sections:
   - type: faq
@@ -261,8 +262,12 @@ recorte físicamente distinto:
 ```
 
 Variante de alta densidad: **`nombre_hd.webp`**, sin punto antes del guion bajo
-(`foto._hd.webp` no la encuentra el tema). La usan `responsive-img.html` y
+(`foto._hd.webp` no la encuentra el tema). La usan `img-responsive.html` y
 también `img-bg-style.html` para los fondos vía `image-set()`.
+
+Recorte móvil del hero (y de cualquier bloque con `<img>`): **`nombre_m.webp`**
+junto al archivo, en 3:2 para el hero (768×512). Medidas en
+`themes/f1-theme/docs/GUIA-IMAGENES.md`.
 
 `draft-images/` en la raíz del repo (hermana de `static/`) para candidatas sin
 elegir — Hugo no la ve. Al elegir una, se mueve con `mv` a `static/images/`.

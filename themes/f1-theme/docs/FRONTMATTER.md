@@ -134,7 +134,7 @@ degradar en silencio.
 
 La foto sale **siempre de `hero.image`**. `layout` decide dónde se coloca, no
 de qué clave se lee ni con qué técnica se pinta. Las claves `bg` y `bgMobile`
-no existen en el hero (sí en `cta` y `banner`, que son otra API).
+no existen en el hero (sí en `cta`, `banner` y `counter`, que son otra API).
 
 Sin imagen utilizable el hero degrada a solo texto (clase `hero-plain`).
 
@@ -164,9 +164,15 @@ archivos con el mismo aspecto y distinto recorte le resultan equivalentes y
 serviría cualquiera: el cambio de **encuadre** solo lo resuelve `<picture>`.
 
 `_m` funciona en cualquier bloque que pase por `img-responsive.html`, no solo
-en el hero: `cta`, `banner`, `image-text`, `cards`, `gallery`, `team`. El
-`<picture>` se emite **solo si el `_m` existe**, así que las imágenes sin
-variante móvil no pagan markup de más.
+en el hero: `image-text`, `cards`, `gallery`, `team`, `slider`,
+`testimonials`, `brands-logos`, `locations`. El `<picture>` se emite **solo si
+el `_m` existe**, así que las imágenes sin variante móvil no pagan markup de
+más.
+
+`cta`, `banner` y `counter` no: pintan la foto con `background-image` y su
+recorte móvil se declara con la clave `bgMobile`, no por convención `_m`. El
+`_hd` sí les llega, por `img-bg-style.html`, tanto para `bg` como para
+`bgMobile`.
 
 Ninguna de las dos funciona con URLs externas: la detección es `os.FileExists`
 sobre `static/`.
@@ -181,7 +187,7 @@ páginas que la tienen, con un preload por breakpoint si existe el `_m`.
 | `img-responsive.html` | emite el `<img>`, y el `<picture>` si hay `_m`. Es el que llaman los bloques. |
 | `img-srcset.html` | resuelve el `_hd` y devuelve el `srcset` w con los anchos reales. |
 | `img-mobile.html` | resuelve el `_m` y devuelve su ruta, o `""`. |
-| `img-bg-style.html` | lo mismo para `background-image` (`cta`, `banner`): variables CSS con `url()` y `image-set()` si hay `_hd`. Antes `bg-image-style.html`. |
+| `img-bg-style.html` | lo mismo para `background-image` (`cta`, `banner`, `counter`): variables CSS con `url()` y `image-set()` si hay `_hd`. Antes `bg-image-style.html`. |
 
 `img-responsive.html` acepta `noMobile: true` para quien monte su propio
 `<picture>`. (Antes se llamaba `responsive-img.html`; se renombró para que los

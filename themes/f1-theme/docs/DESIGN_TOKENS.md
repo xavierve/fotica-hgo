@@ -148,8 +148,8 @@ es manual — por eso viven pegados en `:root`.
 
 ### 1.3 Parámetros de fondo y color
 
-Cinco parámetros, disponibles en cta y banner (los que aceptan imagen de
-fondo). `bgColor`/`textColor`/`class` están además en el resto de bloques.
+Cinco parámetros, disponibles en cta, banner y counter (los que aceptan imagen
+de fondo). `bgColor`/`textColor`/`class` están además en el resto de bloques.
 
 > **El hero no usa `bg` ni `bgMobile`.** Su foto sale siempre de `hero.image`,
 > y la variante móvil se detecta por convención `_m` (ver FRONTMATTER.md).
@@ -245,7 +245,7 @@ son las palancas para que el texto se lea sin cambiar la foto:
 
 | Clase | Efecto |
 |---|---|
-| `bg-top` | `background-position:top center` — evita que un recorte alto corte cabezas o rótulos. Para `background-image` (cta, banner). El hero no usa `background-image` en ningún layout: su encuadre va por `hero.imagePosition`. |
+| `bg-top` | `background-position:top center` — evita que un recorte alto corte cabezas o rótulos. Para `background-image` (cta, banner, counter). El hero no usa `background-image` en ningún layout: su encuadre va por `hero.imagePosition`. |
 
 **Contraste de fondo claro:**
 
@@ -461,7 +461,7 @@ error.
 - **`background-image`** → `partials/img-bg-style.html` (antes
   `bg-image-style.html`). Genera `image-set()`
   con descriptor `1x`/`2x` (sólo densidad: no existe equivalente CSS a `sizes`).
-  Usado en banner y cta, que se quedan en `background-image` a propósito para
+  Usado en cta, banner y counter, que se quedan en `background-image` a propósito para
   conservar la opción de `background-attachment:fixed`, que no existe para
   `<img>`.
 
