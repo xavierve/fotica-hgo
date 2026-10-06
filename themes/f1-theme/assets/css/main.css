@@ -418,13 +418,24 @@
   flex-direction: column;
   gap: .5rem
 }
+/* Cada enlace, 44x44 (el estandar del sitio: telefono de cabecera,
+   volver-arriba, barra fija). El icono no cambia; crece la zona tactil. El
+   margen negativo devuelve el primer icono al borde de la columna, alineado con
+   el texto de encima: (2.75rem - 1.6em) / 2 es el aire que la caja anade a cada
+   lado del icono. */
 .social-links {
   margin-top: 1rem;
+  margin-inline-start: calc((1.6em - 2.75rem) / 2);
   display: flex;
-  gap: 1rem
+  gap: .25rem
 }
-.social-links a {
-  display: inline-flex
+.site-footer .social-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  margin: 0
 }
 .social-links .icon {
   width: 1.6em;
@@ -654,7 +665,11 @@ h2.fs-xs {
 .icon {
   width: 1.1em;
   height: 1.1em;
-  vertical-align: -.18em
+  vertical-align: -.18em;
+  /* En una fila flex (icono + texto) el icono nunca encoge: con
+     overflow-wrap:anywhere en main y footer, el texto largo (un correo) puede
+     encoger y partirse, y sin esto el deficit se lo comia tambien el icono. */
+  flex-shrink: 0
 }
 .btn .icon {
   width: 1.1em;
@@ -700,6 +715,12 @@ h2.fs-xs {
 .bg-color2 .btn-outline,
 .bg-color3 .btn-outline {
   color: var(--color-link-inverse);
+  border-color: currentColor
+}
+/* Sobre dorado (bg-color4, fondo CLARO de texto oscuro) el verde de enlace da
+   2,44:1. El outline toma el texto de la pareja: --bg-color4-text, 7,6:1. */
+.bg-color4 .btn-outline {
+  color: var(--bg-color4-text);
   border-color: currentColor
 }
 /* Botón primario sobre fondo oscuro: pasa a dorado (el verde sobre navy o sobre
@@ -806,10 +827,26 @@ h2.fs-xs {
 .has-bg-image,
 .has-bg-color:not(.bg-claro) {
   color: var(--section-text-color, var(--color-text-inverse));
+}
+
+/* Contextos oscuros: UN solo sitio donde los colores "secundarios" del texto
+   (atenuado, subtitulo, eyebrow) pasan a su version para fondo oscuro. Los
+   fondos siguen en pareja (bg-colorN + bg-colorN-text): no hay un tercer token
+   por fondo. Lo que cambia es el contexto, y el contexto se declara aqui.
+   --color-muted se reasigna a su par --color-muted-inverse (:root), igual que
+   text/text-inverse y link/link-inverse. Antes .bg-color2/.bg-color3 repetian
+   subtitulo y eyebrow pero no muted: .section-subtitle (cards, text, team,
+   locations, testimonials...) quedaba gris sobre navy, a 1,78:1 (QA oct 2026).
+   La lista asume que 2 y 3 son fondos oscuros, como dicen sus -text. */
+.has-bg-image,
+.has-bg-color:not(.bg-claro),
+.bg-color2,
+.bg-color3,
+.block-variant-contrast,
+.block-counter {
+  --color-muted: var(--color-muted-inverse);
   --subtitle-color: rgba(255, 255, 255, .94);
   --eyebrow-color: var(--color-text-inverse);
-  --color-muted: rgba(255, 255, 255, .90);
-  /* por si algún bloque usa muted dentro */
 }
 /* Escotilla para bgColor CLAROS (dorado, crema…): texto oscuro normal.
    Uso: class: "bg-claro" junto a bgColor. */
@@ -832,14 +869,10 @@ h2.fs-xs {
 .bg-color2 {
   background-color: var(--bg-color2);
   color: var(--bg-color2-text);
-  --subtitle-color: rgba(255, 255, 255, .94);
-  --eyebrow-color: var(--color-text-inverse);
 }
 .bg-color3 {
   background-color: var(--bg-color3);
   color: var(--bg-color3-text);
-  --subtitle-color: rgba(255, 255, 255, .94);
-  --eyebrow-color: var(--color-text-inverse);
 }
 .bg-color4 {
   background-color: var(--bg-color4);
@@ -1256,6 +1289,16 @@ h2.fs-xs {
    (A nivel de página las sections NO llevan margin: las bandas deben tocarse.) */
 .prose .block {
   margin-block: clamp(1.5rem, 4vw, 2.5rem)
+}
+/* Un bloque dentro del prose ya hereda el margen lateral del .container.prose
+   padre. Su propio .container restaba OTRO 1rem por lado: en movil el texto del
+   bloque empezaba en x=32 y el de la prosa en x=16 (QA oct 2026). Sin fondo
+   propio, el .container del bloque ocupa el ancho del padre, alineado con el
+   texto; max-width (default/narrow) sigue limitando y centrando. CON fondo
+   (.has-surface) se conserva: alli ese margen es el aire entre el borde del
+   fondo y el texto. wide/full tienen su propio breakout. */
+.prose .block:not(.has-surface, .block-width-wide, .block-width-full)>.container {
+  width: 100%
 }
 
 /* === Ritmo vertical entre bloques de página ==============================
@@ -1809,9 +1852,12 @@ h2.fs-xs {
   column-gap: .75rem;
   align-items: start;
 }
+/* 2rem (32px): mas visible para el publico 45-75+. El objetivo tactil real es
+   el <label> asociado, que tambien marca la casilla y mide toda la frase
+   (excepcion "Equivalent" de WCAG 2.5.5/2.5.8). */
 .cf-consent input[type="checkbox"] {
-  width: 1.6rem;
-  height: 1.6rem;
+  width: 2rem;
+  height: 2rem;
   margin: .1rem 0 0;
   accent-color: var(--color-link);
 }

@@ -50,6 +50,21 @@ Todos los bloques aceptan:
 - `align`: `left`, `center`, `right`
 - `class`: string opcional
 
+**Bloques dentro del body (shortcodes).** Un bloque intercalado en el texto
+vive dentro de `.container.prose`, que ya pone el margen lateral. Sin fondo
+propio, su contenido se alinea con el texto de la prosa (su `.container` ocupa
+el ancho del padre; `default`/`narrow` siguen limitando con `max-width`). Con
+fondo (`.has-surface`) conserva 1rem por lado entre el borde del fondo y el
+texto. Hasta oct 2026 se restaba ese margen dos veces y en móvil el contenido
+quedaba 16px hacia dentro respecto al texto.
+
+**Cadenas largas.** `main` y el footer llevan `overflow-wrap: anywhere`: un
+correo, una URL o un nombre de archivo se parte antes que desbordar, también
+dentro de filas flex o grid (`break-word` no reduce el ancho mínimo de un
+item; `anywhere` sí). El header queda en `break-word`: ahí encoge el logo. Los
+`.icon` llevan `flex-shrink: 0` para que el que se parte sea el texto, no el
+icono.
+
 Estos campos generan clases:
 
 ```text

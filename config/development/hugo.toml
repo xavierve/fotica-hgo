@@ -6,3 +6,8 @@
 # acabo subido por FTP (sep 2026). Asi escribe en .dev/, que esta en .gitignore
 # y NUNCA se sube.
 publishDir = '.dev'
+
+# Borradores (draft: true) tambien en desarrollo: la pagina /demo/ (guia de
+# bloques) es draft y no salia en .dev/ con `hugo server` a secas. Solo aqui:
+# produccion (`hugo`) no lee este archivo y nunca publica borradores.
+buildDrafts = true

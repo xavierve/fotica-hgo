@@ -8,13 +8,14 @@
   --color-text: #1c1a17;                 /* texto base */
   --color-text-inverse: #ffffff;         /* texto base sobre fondo oscuro */
   --color-muted: #625d55;                /* texto de menor relevancia: pies, ayudas */
+  --color-muted-inverse: rgba(255, 255, 255, .90); /* lo mismo sobre fondo oscuro (ver "contextos oscuros" en main.css) */
   --color-link: #08783e;                 /* ACCION sobre fondo claro: enlaces, fondo de boton primario, borde de btn-outline, item activo del nav. Verde de marca. */
   --color-link-inverse: var(--color-text-inverse); /* lo mismo sobre fondo oscuro (el verde no contrasta ahi); lo distingue el subrayado, no el color */
   --color-bg: #fffdf8;                   /* fondo de pagina */
   --color-bg-over: #fff;                 /* fondo de lo elevado: cards, controles */
   --color-dark: #25211d;                 /* negro suavizado: footer, bloques contrast */
   --color-accent: #C9A84C;               /* dorado: FONDO de boton sobre fondo oscuro y ornamentos (filetes, bordes decorativos) */
-  --color-accent-text: #8a6d20;          /* dorado como TEXTO sobre fondo claro: eyebrow */
+  --color-accent-text: #7f6418;          /* dorado como TEXTO sobre fondo claro: eyebrow. 4,9:1 sobre bg-color1, 5,5:1 sobre --color-bg (antes #8a6d20: 4,28:1 sobre crema, QA oct 2026) */
   --color-control-bg: var(--color-bg-over);   /* fondo de campos de formulario y controles */
   --color-control-border: rgba(0, 0, 0, .15); /* borde de esos controles; negro translucido para funcionar sobre cualquier fondo claro */
   --color-error: #a3001d;                /* texto y borde de un error de formulario (mas de 7:1 sobre --color-bg) */
@@ -88,10 +89,23 @@ body {
   line-height: 1.6;
   /* Red de seguridad: una cadena sin huecos (URL, correo, codigo, un typo como
      el del QA en /demo/) se parte en vez de desbordar la pagina. Sin guion; solo
-     actua cuando no hay otro punto de corte. break-word y NO anywhere: anywhere
-     cambia el min-content y dejaria encoger los enlaces del nav partiendolos a
-     mitad de palabra en vez de encoger el logo. */
+     actua cuando no hay otro punto de corte. En body, break-word y NO anywhere:
+     anywhere cambia el min-content y dejaria encoger los enlaces del nav
+     partiendolos a mitad de palabra en vez de encoger el logo. El contenido
+     (main y footer) si lleva anywhere: ver abajo. */
   overflow-wrap: break-word;
+}
+
+/* Contenido: anywhere, no break-word. break-word solo parte cuando la linea ya
+   no cabe, pero NO reduce el min-content: un flex o grid item con una cadena
+   larga (el correo de un bloque locations, un nombre de archivo en un cta)
+   crece hasta su palabra mas larga y desborda la pagina igual (QA oct 2026:
+   /contacto/ a 320px). anywhere tambien cuenta para el min-content, asi que
+   el item encoge y la cadena se parte. El header queda fuera a proposito (ver
+   body): alli preferimos que encoja el logo. */
+main,
+.site-footer {
+  overflow-wrap: anywhere;
 }
 
 img {
@@ -253,12 +267,15 @@ a {
   padding: 0;
 }
 
+/* 44px de alto siempre. De ancho, 44 solo donde cabe sin encoger el logo: por
+   debajo de 344px (medido, ver la media query siguiente) se queda en 40,
+   porque a 320px el header va al limite y cada px lo pierde el logo. */
 .nav-toggle {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2.75rem;
+  height: 2.75rem;
   padding: 0;
   border: 0;
   background: none;

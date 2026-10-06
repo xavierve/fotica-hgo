@@ -81,7 +81,7 @@ Sin subcarpetas para `hero/` `gallery` (solo `og/` y `cards/`) — el prefijo de
 | C11 | Sección equipo en Nosotros: fotos integradas + `employee`/`Person` en schema Organization |
 | C12 | `memberOf` (Sociedad Española de Baja Visión) y `hasCredential` (Centro Auditivo Homologado) en Organization |
 | C13 | CSS crítico inline en home; objetivo PageSpeed móvil >85 |
-| C14 | ~~Anillo de foco de `.btn:focus-visible` sin contraste~~ **Confirmado por el QA visual (≈1,1:1 sobre crema) y corregido**: anillo doble como el del volver-arriba, con la capa exterior en el token `--focus-ring-outer`, compartido por los dos. **Pendiente: medirlo** con foco de teclado real sobre los 8 fondos (crema, blanco, beige, footer, navy, verde, dorado, gris medio), también con `prefers-reduced-motion: reduce`, que antes borraba la capa exterior. |
+| C14 | ✅ ~~Anillo de foco de `.btn:focus-visible` sin contraste~~ **Confirmado por el QA visual (≈1,1:1 sobre crema) y corregido**: anillo doble como el del volver-arriba, con la capa exterior en el token `--focus-ring-outer`, compartido por los dos. **Medido (oct 2026)** con foco de teclado real sobre 9 fondos y con `prefers-reduced-motion: reduce`: la capa que contrasta va de 4,05:1 (gris medio) a 16:1; idéntico con reduced-motion. ✅ |
 
 ### FASE D — Revisión visual y pre-lanzamiento
 

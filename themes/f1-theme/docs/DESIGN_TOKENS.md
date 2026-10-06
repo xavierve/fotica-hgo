@@ -36,13 +36,14 @@ todos los bugs de contraste que hemos tenido.
 --color-text: #1c1a17;             /* texto normal del body */
 --color-text-inverse: #ffffff;     /* texto sobre fondo oscuro */
 --color-muted: #625d55;            /* texto secundario: captions, ayudas */
+--color-muted-inverse: rgba(255,255,255,.90);  /* lo mismo sobre fondo oscuro */
 --color-dark: #25211d;             /* negro suavizado: footer, bloques contrast */
 --color-bg: #fffdf8;               /* fondo del LIENZO (body), blanco roto */
 --color-bg-over: #fff;             /* fondo de lo que va ENCIMA: cards, controles */
 --color-link: #08783e;             /* ACCIÓN sobre fondo claro (ver 1.1.1) */
 --color-link-inverse: var(--color-text-inverse);  /* acción sobre fondo oscuro */
 --color-accent: #C9A84C;           /* dorado: fondo de botón sobre oscuro + ornamentos */
---color-accent-text: #8a6d20;      /* dorado como TEXTO sobre fondo claro: eyebrow */
+--color-accent-text: #7f6418;      /* dorado como TEXTO sobre fondo claro: eyebrow (antes #8a6d20) */
 --color-control-bg: var(--color-bg-over);
 --color-control-border: rgba(0,0,0,.15);
 --color-overlay-base: 27,42,56;    /* RGB suelto, para rgba() del overlay */
@@ -91,6 +92,15 @@ y `--color-accent` (fondo del botón primario, con filete blanco). El repintado
 vive en una sola regla de `main.css`, la que agrupa
 `.has-bg-image`, `.has-bg-color:not(.bg-claro)`, `.bg-color2` y `.bg-color3`.
 
+**Contextos oscuros.** Los colores secundarios del texto (atenuado, subtítulo,
+eyebrow) también se reasignan en una sola regla de `main.css`, que lista los
+contextos oscuros: `.has-bg-image`, `.has-bg-color:not(.bg-claro)`,
+`.bg-color2`, `.bg-color3`, `.block-variant-contrast` y `.block-counter`. Allí
+`--color-muted` pasa a `--color-muted-inverse`, el mismo patrón `-inverse` que
+`text` y `link`. Los fondos siguen en pareja (`bg-colorN` + `bg-colorN-text`):
+no hay un tercer token por fondo. Si un proyecto hace claro `--bg-color2` o
+`--bg-color3`, tiene que sacarlos de esa lista.
+
 **`--color-accent` vs `--color-accent-text`:** son dos tokens porque el dorado
 hace dos trabajos incompatibles. Como **fondo de botón** necesita ser claro (para
 que el texto oscuro encima se lea); como **texto** necesita ser oscuro (para
@@ -98,14 +108,20 @@ leerse sobre fondos claros). Un solo token no puede cumplir ambos — usar
 `--color-accent` como color de texto fue un bug real en `.card-link` y en
 `.btn-outline` (2.25:1 sobre crema).
 
-**Contrastes medidos** (sobre `--color-bg` #fffdf8 salvo indicación):
+**Contrastes medidos.** "Fondo" es `--color-bg` (#fffdf8, el lienzo) y "crema"
+es `--bg-color1` (#f5efe5). No son el mismo color: la tabla anterior llamaba
+"crema" al fondo, y así pasó el eyebrow a 4,28:1 sobre la crema real (QA oct
+2026).
 
 | Combinación | Ratio | Uso |
 |---|---|---|
-| `--color-link` sobre crema | 5.48:1 | Texto y botón: AA ✅ |
+| `--color-link` sobre fondo / crema | 5.48:1 / 4.87:1 | Texto y botón: AA ✅ |
 | Blanco sobre `--color-link` | 5.58:1 | Texto dentro del botón verde |
-| `--color-accent` sobre crema | 2.25:1 | ❌ nunca como texto ni borde |
-| `--color-accent-text` sobre crema | 4.82:1 | Eyebrow: AA ✅ |
+| `--color-accent` sobre fondo / crema | 2.25:1 / 2.0:1 | ❌ nunca como texto ni borde |
+| `--color-accent-text` sobre fondo / crema | 5.53:1 / 4.91:1 | Eyebrow: AA ✅ |
+| `--color-muted` sobre fondo / crema | 6.42:1 / 5.71:1 | Texto secundario: AA ✅ |
+| `--color-muted-inverse` sobre navy / verde / `--color-dark` | 9.72:1 / 4.85:1 / 13.16:1 | Secundario en contextos oscuros: AA ✅ |
+| `--bg-color4-text` sobre `--bg-color4` | 7.6:1 | `.btn-outline` sobre dorado (el verde daba 2.44:1) |
 | `--color-text` sobre `--color-accent` | 7.6:1 | Texto dentro del botón dorado |
 | `--color-accent` sobre `--bg-color2` | 5.09:1 | Botón dorado sobre navy |
 | `--color-accent` sobre `--bg-color3` | 2.44:1 | Necesita el filete blanco |

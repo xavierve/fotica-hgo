@@ -1,6 +1,6 @@
 ---
 # DEMO / STYLE GUIDE — todos los bloques, modificadores y shortcodes del f1-theme.
-# draft:true → NUNCA se publica en producción. Visualizar con: hugo server -D
+# draft:true → NUNCA se publica en producción. Se ve con `hugo server` (config/development activa buildDrafts).
 # Imágenes: picsum.photos (requieren conexión al visualizar; no se descargan al build).
 draft: true
 title: "Demo de bloques — f1-theme"
@@ -283,7 +283,7 @@ sections:
     preset: contact
   - type: cta
     title: "15.3- cta · class: bg-color4 (claro, texto oscuro ya resuelto)"
-    subtitle: "Las clases de paleta ya traen el color de texto correcto — no hace falta ningún interruptor aparte."
+    subtitle: "Las clases de paleta ya traen el color de texto correcto — no hace falta ningún interruptor aparte. El botón outline (WhatsApp) toma el texto de la pareja, --bg-color4-text: el verde de enlace sobre dorado daba 2,44:1."
     class: "bg-color4"
     preset: contact
   - type: cta
@@ -381,7 +381,7 @@ sections:
 
 ## P1- El prose: body markdown {.demo}
 
-> Esta página es `draft: true`: se ve con `hugo server -D` y nunca se publica.
+> Esta página es `draft: true`: se ve con `hugo server` (el entorno development activa `buildDrafts`) y nunca se publica.
 
 Todo lo que sigue es **body markdown** dentro del contenedor `prose`: títulos, listas, tablas, imágenes y shortcodes intercalados.
 

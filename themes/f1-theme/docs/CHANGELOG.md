@@ -1,5 +1,32 @@
 # F1 Theme · Changelog
 
+## Sin versión — QA visual (oct 2026): desbordes, márgenes, contraste y zonas táctiles
+
+Medido con Playwright antes y después, 28 páginas × 6 anchos (320 a 1440).
+
+- **Desbordes.** `main` y `.site-footer` pasan a `overflow-wrap: anywhere`. Con
+  `break-word` en body, el correo del bloque `locations` desbordaba `/contacto/`
+  a 320px: un flex item no encoge por debajo de su palabra más larga. Ahora no
+  desborda ninguna página en ningún ancho. El header sigue en `break-word`.
+- **`.icon { flex-shrink: 0 }`.** Al medirlo salió un fallo previo: el reloj del
+  horario del footer se aplastaba (13×20 a 320px, 19,7×22 en escritorio).
+- **Margen doble en bloques dentro del body.** Un bloque sin fondo dentro de
+  `.prose` restaba otra vez 1rem por lado; ahora su contenido se alinea con el
+  texto. Los que tienen fondo (`.has-surface`) conservan ese aire interior.
+- **`--color-muted-inverse`** (nuevo token) y una sola regla de "contextos
+  oscuros" para muted, subtítulo y eyebrow. `.bg-color2`/`.bg-color3` ya no
+  repiten esas variables. Arregla `.section-subtitle` sobre navy (1,78:1 →
+  9,7:1), y `.block-variant-contrast` y `.block-counter` heredan lo mismo.
+- **Eyebrow:** `--color-accent-text` #8a6d20 → #7f6418 (4,28 → 4,91:1 sobre
+  `--bg-color1`). DESIGN_TOKENS distinguía mal "fondo" y "crema"; corregido.
+- **`.bg-color4 .btn-outline`** toma `--bg-color4-text` (2,44 → 7,6:1). Demo 15.3.
+- **Zonas táctiles:** hamburguesa a 44 de alto siempre, y a 44 de ancho desde
+  344px (medido: por debajo, esos 4px se los quitaría al logo). Iconos sociales
+  del footer en cajas de 44×44, con el primer icono alineado con la columna.
+  Casilla RGPD a 2rem.
+- **Desarrollo:** `config/development` activa `buildDrafts`: `/demo/` (draft)
+  sale con `hugo server` a secas, en `.dev/`. Producción no cambia.
+
 ## Sin versión — `bgMobile` desaparece: `_m` por convención también en fondos
 
 - `img-bg-style.html` detecta la variante móvil por convención (`foto_m.webp`
