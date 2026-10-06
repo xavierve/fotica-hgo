@@ -203,7 +203,7 @@ llamada y WhatsApp.
   `_hd` real hasta 1920) y cuáles de IA (nativos a ~1440, no se suben).
 
 **Qué queda bloqueado hasta el layout:**
-- Reencuadrar los 3 `bgMobile`: hoy son 843×1264 (retrato 2:3), formato pensado
+- Reencuadrar las 3 variantes `_m` del hero: hoy son 843×1264 (retrato 2:3), formato pensado
   para texto **encima** del fondo. Con el texto debajo, esa proporción se come
   el viewport antes del H1.
 - Fijar el `hero.imagePosition` de cada imagen: es un juicio visual sobre el

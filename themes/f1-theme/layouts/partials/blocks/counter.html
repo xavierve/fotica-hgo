@@ -1,3 +1,4 @@
+{{- if .bgMobile -}}{{- errorf "counter: la clave bgMobile ya no existe; el recorte movil se detecta por convencion (foto_m.webp junto a bg)" -}}{{- end -}}
 {{ with .items }}
 {{ $extra := slice }}
 {{ if $.animated }}{{ $extra = $extra | append "is-animated" }}{{ end }}
@@ -5,8 +6,7 @@
 {{ if $.bgColor }}{{ $extra = $extra | append "has-bg-color" }}{{ end }}
 <section class="{{ partial "block-classes.html" (dict "name" "counter" "context" $ "extra" $extra) }}"
   {{- $styles := slice -}}
-  {{- with $.bg }}{{ $styles = $styles | append (partial "img-bg-style.html" (dict "src" . "varName" "section-bg")) }}{{ end -}}
-  {{- with $.bgMobile }}{{ $styles = $styles | append (partial "img-bg-style.html" (dict "src" . "varName" "section-bg-mobile")) }}{{ end -}}
+  {{- with $.bg }}{{ $styles = $styles | append (partial "img-bg-style.html" (dict "src" .)) }}{{ end -}}
   {{- with $.bgColor }}{{ $styles = $styles | append (printf "--section-bg-color:%s" .) }}{{ end -}}
   {{- with $.textColor }}{{ $styles = $styles | append (printf "--section-text-color:%s" .) }}{{ end -}}
   {{- with $styles }} style="{{ delimit . ";" | safeCSS }}"{{ end }}>

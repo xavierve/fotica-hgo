@@ -1,35 +1,54 @@
 {{- /*
   partials/img-bg-style.html
 
-  Dado un src de imagen de fondo y el nombre de variable CSS a rellenar,
-  devuelve el fragmento "--var:url(...)" listo para concatenar en un
-  style="", añadiendo ademas "--var-hd:image-set(...)" si existe la variante
-  "_hd" -- misma convencion que img-responsive.html (os.FileExists sobre la
-  ruta fisica, nunca error si falta, ignora URLs externas sin extension).
+  Dado el src de una imagen de fondo, devuelve las variables CSS listas para
+  concatenar en un style="" -- el equivalente, para background-image, de lo
+  que img-responsive.html hace para <img>. Todo por convencion de nombre,
+  nada por front matter:
+
+    --section-bg:url(foto.webp)                    siempre
+    --section-bg-hd:image-set(...)                 si existe foto_hd.webp
+    --section-bg-mobile:url(foto_m.webp)           si existe foto_m.webp
+    --section-bg-mobile-hd:image-set(...)          si existe foto_m_hd.webp
+
+  Las lee .has-bg-image en main.css (la cadena de fallbacks movil -> desktop
+  ya existia). El _m lo resuelve img-mobile.html, el mismo que usa el hero:
+  una sola convencion en todo el tema. Mismas reglas que el resto de la
+  familia img-*: os.FileExists sobre la ruta fisica, nunca error si falta,
+  URLs externas sin variantes (ni _hd ni _m).
+
+  Hasta oct 2026 el recorte movil se declaraba a mano con la clave bgMobile
+  (cta, banner, counter). Esa clave ya no existe: los bloques abortan el
+  build si la encuentran, en vez de ignorarla en silencio.
+
+  Lo usan cta, banner y counter (background-image a proposito: conservan la
+  opcion de background-attachment:fixed). El hero no: sus tres layouts pintan
+  la foto con <img>. Antes se llamaba bg-image-style.html.
 
   Uso (dentro de un bloque que ya construye $styles como slice):
     {{- with .bg }}{{ $styles = $styles | append
-        (partial "img-bg-style.html" (dict "src" . "varName" "section-bg"))
-      }}{{ end -}}
-
-  Lo usan cta, banner y counter (background-image a proposito: conservan la opcion de
-  background-attachment:fixed). El hero ya no: desde oct 2026 sus tres
-  layouts pintan la foto con <img> (img-responsive.html). Antes se llamaba
-  bg-image-style.html; se renombro a la familia img-*.
+        (partial "img-bg-style.html" (dict "src" .)) }}{{ end -}}
 
   Parametros (dict):
     src      -> ruta publica de la imagen (obligatorio)
-    varName  -> nombre de la variable CSS sin "--", ej "section-bg" o
-                "section-bg-mobile" (obligatorio)
+    varName  -> prefijo de las variables sin "--" (opcional, "section-bg");
+                la movil es <varName>-mobile
 */ -}}
 {{- $src := .src -}}
-{{- $varName := .varName -}}
-{{- $ext := path.Ext $src -}}
-{{- $out := slice (printf "--%s:url(%s)" $varName $src) -}}
-{{- if and $ext (not (strings.HasPrefix $src "http")) -}}
-  {{- $hd := replace $src $ext (printf "_hd%s" $ext) 1 -}}
-  {{- if os.FileExists (printf "static%s" $hd) -}}
-    {{- $out = $out | append (printf "--%s-hd:image-set(url(%s) 1x,url(%s) 2x)" $varName $src $hd) -}}
+{{- $varName := .varName | default "section-bg" -}}
+{{- $entries := slice (dict "src" $src "var" $varName) -}}
+{{- with partial "img-mobile.html" $src -}}
+  {{- $entries = $entries | append (dict "src" . "var" (printf "%s-mobile" $varName)) -}}
+{{- end -}}
+{{- $out := slice -}}
+{{- range $entries -}}
+  {{- $out = $out | append (printf "--%s:url(%s)" .var .src) -}}
+  {{- $ext := path.Ext .src -}}
+  {{- if and $ext (not (strings.HasPrefix .src "http")) -}}
+    {{- $hd := replace .src $ext (printf "_hd%s" $ext) 1 -}}
+    {{- if os.FileExists (printf "static%s" $hd) -}}
+      {{- $out = $out | append (printf "--%s-hd:image-set(url(%s) 1x,url(%s) 2x)" .var .src $hd) -}}
+    {{- end -}}
   {{- end -}}
 {{- end -}}
 {{- delimit $out ";" -}}

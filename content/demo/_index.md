@@ -291,10 +291,9 @@ sections:
     bg: "https://picsum.photos/seed/cta1/1600/500"
     preset: contact
   - type: cta
-    title: "15.5- cta · bg + bgMobile + class Scrim & Panel"
-    subtitle: "Reduce la ventana para ver la imagen móvil."
-    bg: "https://picsum.photos/seed/cta2/1600/500"
-    bgMobile: "https://picsum.photos/seed/cta2m/700/800"
+    title: "15.5- cta · bg con variante _m por convención + class Scrim & Panel"
+    subtitle: "Reduce la ventana por debajo de 821px: carga 314-mantenimiento_audifonos_hero_m.webp, que existe junto al archivo. No se declara: no hay clave bgMobile."
+    bg: "/images/314-mantenimiento_audifonos_hero.webp"
     class: "scrim panel"
     preset: contact
     labelCall: "Llamar ahora"

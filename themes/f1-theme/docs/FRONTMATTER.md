@@ -133,8 +133,7 @@ Un valor de `layout` fuera de los tres aborta el build (`errorf`) en vez de
 degradar en silencio.
 
 La foto sale **siempre de `hero.image`**. `layout` decide dónde se coloca, no
-de qué clave se lee ni con qué técnica se pinta. Las claves `bg` y `bgMobile`
-no existen en el hero (sí en `cta`, `banner` y `counter`, que son otra API).
+de qué clave se lee ni con qué técnica se pinta. La clave `bg` no existe en el hero (sí en `cta`, `banner` y `counter`, que son otra API); `bgMobile` no existe en ningún bloque: el recorte móvil es siempre la convención `_m`.
 
 Sin imagen utilizable el hero degrada a solo texto (clase `hero-plain`).
 
@@ -169,10 +168,16 @@ en el hero: `image-text`, `cards`, `gallery`, `team`, `slider`,
 el `_m` existe**, así que las imágenes sin variante móvil no pagan markup de
 más.
 
-`cta`, `banner` y `counter` no: pintan la foto con `background-image` y su
-recorte móvil se declara con la clave `bgMobile`, no por convención `_m`. El
-`_hd` sí les llega, por `img-bg-style.html`, tanto para `bg` como para
-`bgMobile`.
+`cta`, `banner` y `counter` siguen la misma convención, aunque pintan la foto
+con `background-image`: `img-bg-style.html` detecta `_m` (y `_hd`, y
+`_m_hd`) junto al archivo de `bg` y los pasa como variables CSS
+(`--section-bg-mobile`, `-hd`). No hay `<picture>`: el cambio lo hace la media
+query de `.has-bg-image`. La clave `bgMobile` ya no existe: si un bloque o
+shortcode la recibe, el build se detiene con un mensaje.
+
+Ojo con reutilizar una misma foto en dos bloques: su `_m` es uno solo. Si
+sirve de hero (banda 3:2) y de fondo de un `cta` (sección más alta), el mismo
+recorte móvil tiene que funcionar en las dos cajas.
 
 Ninguna de las dos funciona con URLs externas: la detección es `os.FileExists`
 sobre `static/`.
@@ -187,7 +192,7 @@ páginas que la tienen, con un preload por breakpoint si existe el `_m`.
 | `img-responsive.html` | emite el `<img>`, y el `<picture>` si hay `_m`. Es el que llaman los bloques. |
 | `img-srcset.html` | resuelve el `_hd` y devuelve el `srcset` w con los anchos reales. |
 | `img-mobile.html` | resuelve el `_m` y devuelve su ruta, o `""`. |
-| `img-bg-style.html` | lo mismo para `background-image` (`cta`, `banner`, `counter`): variables CSS con `url()` y `image-set()` si hay `_hd`. Antes `bg-image-style.html`. |
+| `img-bg-style.html` | lo mismo para `background-image` (`cta`, `banner`, `counter`): variables CSS con `url()`, `image-set()` si hay `_hd`, y la variante móvil si hay `_m`. Antes `bg-image-style.html`. |
 
 `img-responsive.html` acepta `noMobile: true` para quien monte su propio
 `<picture>`. (Antes se llamaba `responsive-img.html`; se renombró para que los

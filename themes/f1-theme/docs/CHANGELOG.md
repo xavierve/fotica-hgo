@@ -1,5 +1,20 @@
 # F1 Theme · Changelog
 
+## Sin versión — `bgMobile` desaparece: `_m` por convención también en fondos
+
+- `img-bg-style.html` detecta la variante móvil por convención (`foto_m.webp`
+  junto al `bg`, vía `img-mobile.html`) y emite `--section-bg-mobile` y, si
+  existe `foto_m_hd.webp`, `--section-bg-mobile-hd`. Una sola llamada por
+  bloque: `(dict "src" .bg)`; `varName` pasa a opcional.
+- **Fuera la clave `bgMobile`** en `cta`, `banner` y `counter` (bloques y
+  shortcodes). Si aparece, el build se detiene con un `errorf` que explica la
+  convención, en vez de ignorarla en silencio. El hero ya funcionaba así.
+- Demo 15.5 migrada: ya no usa picsum con `bgMobile` (las URLs externas no
+  tienen variantes), sino `314-mantenimiento_audifonos_hero.webp`, que tiene
+  `_m` junto al archivo.
+- En el contenido real no había ningún `bgMobile`: el HTML de todas las
+  páginas, salvo la demo, es idéntico.
+
 ## Sin versión — counter con `img-bg-style`
 
 - `counter` montaba `--section-bg` y `--section-bg-mobile` a mano, sin pasar por

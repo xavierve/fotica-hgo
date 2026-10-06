@@ -148,17 +148,16 @@ es manual — por eso viven pegados en `:root`.
 
 ### 1.3 Parámetros de fondo y color
 
-Cinco parámetros, disponibles en cta, banner y counter (los que aceptan imagen
+Cuatro parámetros, disponibles en cta, banner y counter (los que aceptan imagen
 de fondo). `bgColor`/`textColor`/`class` están además en el resto de bloques.
 
-> **El hero no usa `bg` ni `bgMobile`.** Su foto sale siempre de `hero.image`,
-> y la variante móvil se detecta por convención `_m` (ver FRONTMATTER.md).
-> `bgColor`, `textColor` y `class` sí funcionan igual en el hero.
+> **El hero no usa `bg`.** Su foto sale siempre de `hero.image`. La variante
+> móvil, en el hero y aquí, se detecta igual: por convención `_m` (ver
+> FRONTMATTER.md). `bgColor`, `textColor` y `class` sí funcionan igual en el hero.
 
 | Parámetro | Qué hace |
 |---|---|
-| `bg` | Imagen de fondo (desktop, y móvil si no hay `bgMobile`). |
-| `bgMobile` | Imagen de fondo sólo en móvil — recorte distinto, no sólo tamaño. |
+| `bg` | Imagen de fondo. Si existe `foto_m.webp` junto al archivo, en móvil (< 821px) se usa ese recorte; si existe `foto_hd.webp` / `foto_m_hd.webp`, se sirven en pantallas 2x. Nada de eso se declara. |
 | `bgColor` | Color de fondo plano. Con `bg`, tiñe el overlay en vez de pintar el fondo. |
 | `textColor` | Color del texto, a juego con un `bgColor` puntual. |
 | `class` | Clases modificadoras (ver 1.3). |
@@ -168,10 +167,9 @@ de la paleta. Para los colores de marca no se usan: va `class: "bg-colorN"`, que
 ya trae el par fondo+texto resuelto.
 
 ```yaml
-# imagen de fondo, con recorte propio para móvil
+# imagen de fondo; si existe 300-audicion_hero_m.webp, es el recorte móvil
 - type: cta
   bg: "/images/300-audicion_hero.webp"
-  bgMobile: "/images/300-audicion_hero_m.webp"
 
 # imagen + tinte de color sobre el overlay
 - type: cta

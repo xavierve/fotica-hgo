@@ -1,9 +1,11 @@
 {{- /*
   {{< banner >}}Texto destacado con **markdown**{{< /banner >}}
   Frase destacada / guiño de confianza intercalado en el prose.
-  Parámetros opcionales: class, variant, bg, bgMobile, bgColor, textColor, textSize, align
+  Parámetros opcionales: class, variant, bg, bgColor, textColor, textSize, align
+  Recorte móvil de bg: foto_m.webp junto al archivo, por convención.
 */ -}}
 {{- $bg := .Get "bg" -}}
+{{- if .Get "bgMobile" -}}{{- errorf "{{< banner >}}: bgMobile ya no existe; el recorte movil se detecta por convencion (foto_m.webp junto a bg). En %s" .Position -}}{{- end -}}
 {{- $extra := slice -}}
 {{- if $bg }}{{ $extra = $extra | append "has-bg-image" }}{{ end -}}
 {{- if .Get "bgColor" }}{{ $extra = $extra | append "has-bg-color" }}{{ end -}}
@@ -16,8 +18,7 @@
       "pad" (.Get "pad")
     ) "extra" $extra) }}"
   {{- $styles := slice -}}
-  {{- with $bg }}{{ $styles = $styles | append (partial "img-bg-style.html" (dict "src" . "varName" "section-bg")) }}{{ end -}}
-  {{- with .Get "bgMobile" }}{{ $styles = $styles | append (partial "img-bg-style.html" (dict "src" . "varName" "section-bg-mobile")) }}{{ end -}}
+  {{- with $bg }}{{ $styles = $styles | append (partial "img-bg-style.html" (dict "src" .)) }}{{ end -}}
   {{- with .Get "bgColor" }}{{ $styles = $styles | append (printf "--section-bg-color:%s" .) }}{{ end -}}
   {{- with .Get "textColor" }}{{ $styles = $styles | append (printf "--section-text-color:%s" .) }}{{ end -}}
   {{- with $styles }} style="{{ delimit . ";" | safeCSS }}"{{ end }}>

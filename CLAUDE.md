@@ -53,7 +53,7 @@ CLAUDE.md divergen, y la copia vieja acaba dictando convenciones muertas.
 
 ## Estado actual (verificado con build)
 
-Hecho y validado: `schema.html` v02 (@graph completo, BreadcrumbList, FAQPage — 127 preguntas en el sitio), `breadcrumb.html` corregido, `site.yaml` v03 (legal unificada), 30 páginas de contenido migradas, shortcodes + iconos + `cta` v2 (bg/bgMobile/bgColor/preset/microcopy), `404.html`, attributes de Goldmark activados, CSS de utilidades (`fs-xs/s/l`, `has-bg-image/color`, banner). Hero con `image`. Las 21 páginas de servicio/producto tienen `card.image` apuntando a un archivo real existente (verificado, ninguna en fallback).
+Hecho y validado: `schema.html` v02 (@graph completo, BreadcrumbList, FAQPage — 127 preguntas en el sitio), `breadcrumb.html` corregido, `site.yaml` v03 (legal unificada), 30 páginas de contenido migradas, shortcodes + iconos + `cta` v2 (bg/bgColor/preset/microcopy; recorte móvil por convención `_m`), `404.html`, attributes de Goldmark activados, CSS de utilidades (`fs-xs/s/l`, `has-bg-image/color`, banner). Hero con `image`. Las 21 páginas de servicio/producto tienen `card.image` apuntando a un archivo real existente (verificado, ninguna en fallback).
 Shortcodes añadidos (validados con `hugo build` real, sin warnings):
 - `testimonial` (cita suelta con wrapper propio), `testimonials` + `testimonial-item` (grid de citas anidadas, reutiliza `.cards-grid`/`.block-testimonials` — mismo CSS que el bloque `type: testimonials` de `sections:`).
 - `text-split` + `text-split-item`: grid simétrico 2 columnas para pares texto+texto (o texto+vídeo a futuro — Goldmark `unsafe=true` ya permite HTML embebido sin tratamiento especial). Reutiliza la mecánica de `.image-text-inner` (1fr → 1fr 1fr en desktop). Modificadores por item: `textSize` (reutiliza `block-text-*`), `align` (reutiliza `block-align-*`), `pad` (tokens propios `has-pad-s/m/l` sobre `--space-s/m/l`, más pequeños que el pad de sección), `margin` (CSS libre vía `safeCSS`, sin tokens — como `bgColor`). El wrapper admite `width="wide|full"` como cualquier bloque.
@@ -180,7 +180,7 @@ independencia de si la sección padre tiene `has-bg-image`.
   `partials/img-responsive.html`. Nunca debe dar error si falta la variante.
 - Descriptor `w` + `sizes` (no `x`): el hero es candidato a LCP, aquí la
   precisión de tamaño de renderizado importa más que en ningún otro bloque.
-- Recorte distinto móvil/desktop (hoy `bg`/`bgMobile`) → `<picture>` con
+- Recorte distinto móvil/desktop (convención `_m`) → `<picture>` con
   `<source media>`. Breakpoint: el tema usa **821px** de forma consistente;
   la nota vieja de "768×400px" es de la sesión del 21 ago y queda descartada.
 - Preload no bloqueante (`<link rel="preload" as="image" fetchpriority="high">`)

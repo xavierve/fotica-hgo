@@ -2,7 +2,8 @@
   blocks/cta.html - v2
   Compatibilidad: button1/button2 ({url,text}) siguen funcionando.
   Nuevo:
-    bg / bgMobile   -> imagen de fondo responsive (desktop / movil)
+    bg              -> imagen de fondo; recorte movil por convencion (foto_m.webp
+                       junto al archivo) y _hd, via img-bg-style.html
     bgColor         -> color de fondo plano puntual, o tinte del overlay si hay imagen (para la paleta, usar class: "bg-color1".."bg-color4")
     textColor       -> color de texto puntual a juego con bgColor
     preset: contact -> par de botones Llamar + WhatsApp desde data/site.yaml
@@ -11,6 +12,7 @@
     variant/class/textSize/align/width -> modificadores estandar de bloque
 */ -}}
 {{ $bg := .bg }}
+{{- if .bgMobile -}}{{- errorf "cta: la clave bgMobile ya no existe; el recorte movil se detecta por convencion (foto_m.webp junto a bg)" -}}{{- end -}}
 {{ $extra := slice }}
 {{ if $bg }}{{ $extra = $extra | append "has-bg-image" }}{{ end }}
 {{ if .bgColor }}{{ $extra = $extra | append "has-bg-color" }}{{ end }}
@@ -35,8 +37,7 @@
 
 <section class="{{ partial "block-classes.html" (dict "name" "cta" "context" . "extra" $extra) }}"
   {{- $styles := slice -}}
-  {{- with $bg }}{{ $styles = $styles | append (partial "img-bg-style.html" (dict "src" . "varName" "section-bg")) }}{{ end -}}
-  {{- with .bgMobile }}{{ $styles = $styles | append (partial "img-bg-style.html" (dict "src" . "varName" "section-bg-mobile")) }}{{ end -}}
+  {{- with $bg }}{{ $styles = $styles | append (partial "img-bg-style.html" (dict "src" .)) }}{{ end -}}
   {{- with .bgColor }}{{ $styles = $styles | append (printf "--section-bg-color:%s" .) }}{{ end -}}
   {{- with .textColor }}{{ $styles = $styles | append (printf "--section-text-color:%s" .) }}{{ end -}}
   {{- with $styles }} style="{{ delimit . ";" | safeCSS }}"{{ end }}>

@@ -1,7 +1,8 @@
 {{- /*
   Frase destacada / guiño de confianza como SECCION de pagina completa.
   Equivalente en bloque del shortcode {{< banner >}} — misma logica de
-  bg/bgMobile/bgColor/textColor que cta/hero. Sin botones: para eso usa `cta`.
+  bg/bgColor/textColor que cta y counter (recorte movil: foto_m.webp junto a bg,
+  por convencion). Sin botones: para eso usa `cta`.
 
   sections:
     - type: banner
@@ -10,13 +11,13 @@
       textSize: m            # xs | s | m | l | xl
       align: center          # left | center | right
       pad:                   # compact | default | spacious (o s/m/l)
-      bg:                    # imagen de fondo (desktop)
-      bgMobile:               # imagen de fondo (movil), opcional
+      bg:                    # imagen de fondo; movil: foto_m.webp junto al archivo, si existe
       bgColor:                # color de fondo plano puntual, o tinte del overlay si hay bg (para la paleta, usar class: "bg-color1".."bg-color4")
       textColor:               # color de texto puntual a juego con bgColor
       text: "Frase destacada en **markdown**."
 */ -}}
 {{- $bg := .bg -}}
+{{- if .bgMobile -}}{{- errorf "banner: la clave bgMobile ya no existe; el recorte movil se detecta por convencion (foto_m.webp junto a bg)" -}}{{- end -}}
 {{- $extra := slice -}}
 {{- if $bg }}{{ $extra = $extra | append "has-bg-image" }}{{ end -}}
 {{- if .bgColor }}{{ $extra = $extra | append "has-bg-color" }}{{ end -}}
@@ -29,8 +30,7 @@
       "class" .class
     ) "extra" $extra) }}"
   {{- $styles := slice -}}
-  {{- with $bg }}{{ $styles = $styles | append (partial "img-bg-style.html" (dict "src" . "varName" "section-bg")) }}{{ end -}}
-  {{- with .bgMobile }}{{ $styles = $styles | append (partial "img-bg-style.html" (dict "src" . "varName" "section-bg-mobile")) }}{{ end -}}
+  {{- with $bg }}{{ $styles = $styles | append (partial "img-bg-style.html" (dict "src" .)) }}{{ end -}}
   {{- with .bgColor }}{{ $styles = $styles | append (printf "--section-bg-color:%s" .) }}{{ end -}}
   {{- with .textColor }}{{ $styles = $styles | append (printf "--section-text-color:%s" .) }}{{ end -}}
   {{- with $styles }} style="{{ delimit . ";" | safeCSS }}"{{ end }}>

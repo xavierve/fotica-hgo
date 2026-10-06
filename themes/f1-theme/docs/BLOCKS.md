@@ -66,7 +66,7 @@ sections:
       - number: "44+"
         label: "años de experiencia"
     text:
-    bg:            # + bgMobile, bgColor (sistema unificado de fondos)
+    bg:            # + bgColor (sistema unificado de fondos; recorte movil por convencion _m)
 ```
 
 Si `animated: true`, añade `is-animated`.
@@ -214,8 +214,7 @@ sections:
   - type: cta
     title:
     subtitle:
-    bg:                  # imagen de fondo (desktop)
-    bgMobile:              # imagen de fondo (movil), opcional
+    bg:                  # imagen de fondo; movil: foto_m.webp junto al archivo, si existe
     bgColor:                # color de fondo plano puntual, o tinte del overlay si hay bg
                               # (para la paleta, usar class: "bg-color1".."bg-color4")
     textColor:                # color de texto puntual a juego con bgColor
@@ -299,7 +298,8 @@ El color de acción del sitio es `--color-link` (verde) sobre fondo claro y
 ## Banner
 
 Frase destacada / guiño de confianza, sin botones — para eso usa `cta`. Mismo
-mecanismo `bg`/`bgMobile`/`bgColor`/`textColor` que `cta`/`hero`. Existe como
+mecanismo `bg`/`bgColor`/`textColor` que `cta` y `counter` (recorte móvil por
+convención `_m`). Existe como
 bloque (`type: banner`, sección de página completa) y como shortcode
 (`{{< banner >}}`, intercalado dentro del body markdown) — misma lógica en
 ambos.
@@ -307,8 +307,7 @@ ambos.
 ```yaml
 sections:
   - type: banner
-    bg:
-    bgMobile:
+    bg:             # movil: foto_m.webp junto al archivo, si existe
     bgColor:
     textColor:
     textSize: m     # xs | s | m | l | xl — m por defecto
