@@ -17,11 +17,11 @@ fondo opaco. Foco con teclado real (Tab), no con `.focus()`.
 
 | # | Hallazgo v1 | Estado | Medida actual |
 |---|---|---|---|
-| 1 | Hamburguesa deformada < 390px | ✅ Resuelto (antes de oct) | 40×44 a 320–343px, 44×44 desde 344px |
+| 1 | Hamburguesa deformada < 390px | ✅ Resuelto (antes de oct) | 44×44 en todos los anchos; a 320px encoge el logo |
 | 2 | Anillo de foco de `.btn` invisible (C14) | ✅ Resuelto y medido | Capa que contrasta: 4,05:1 (gris medio) a 16:1; igual con `prefers-reduced-motion: reduce` |
 | 3 | `/demo/` desborda a 359px | ✅ Resuelto | Ninguna página desborda en ningún ancho (antes: `/contacto/` y `/demo/` a 320) |
 | 4 | Eyebrow a 4,28:1 | ✅ Resuelto | `--color-accent-text` #7f6418: 4,91:1 sobre crema, 5,53:1 sobre el fondo |
-| 5 | Objetivos táctiles < 44px | ✅ Resuelto, con una excepción asumida | Teléfono de cabecera 44×44; iconos sociales 44×44; hamburguesa 40×44 solo por debajo de 344px |
+| 5 | Objetivos táctiles < 44px | ✅ Resuelto | Teléfono de cabecera, hamburguesa e iconos sociales: 44×44 |
 | 6 | Casilla RGPD 25,6px | ✅ Resuelto | 32×32; el `<label>` asociado (244×59 a 320px) también la marca |
 | 7 | `.bg-color4 .btn-outline` 2,44:1 | ✅ Resuelto | 7,6:1 (`--bg-color4-text`). Demo 15.3 |
 | 8 | `.section-subtitle` sobre oscuro 1,78:1 | ✅ Resuelto | 9,7:1 sobre navy. **Corrección a v1:** no era una clase de la demo; la usan `cards`, `text`, `text-split`, `team`, `locations` y `testimonials` |
@@ -57,15 +57,13 @@ no lee ese archivo: comprobado que `hugo` no genera `/demo/`.
 
 La comparación antes/después solo muestra los cambios esperados: elementos de
 bloques sin fondo dentro de la prosa (+32px de ancho), el footer (iconos
-sociales, reloj del horario), el header entre 344 y 820px (los botones se
+sociales, reloj del horario), el header por debajo de 821px (los botones se
 desplazan 4px por la hamburguesa de 44), la casilla RGPD y el eyebrow
 (único cambio de color en las páginas de producción). Ningún otro elemento
 cambia de posición horizontal, ancho o alto.
 
 ## Pendiente o asumido
 
-- **Hamburguesa 40×44 entre 320 y 343px.** Decisión: a esos anchos el header
-  va al límite y cada px de más lo pierde el logo. Pasa WCAG 2.5.8 (24px).
 - **Correo partido en dos líneas a 320px** en `/contacto/`. Preferible a
   desbordar; no hay ancho para más.
 - **Anillo de foco sobre fondos con foto** (`.has-bg-image`): no medido; la

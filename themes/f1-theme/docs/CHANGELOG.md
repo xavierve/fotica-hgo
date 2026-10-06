@@ -1,5 +1,17 @@
 # F1 Theme · Changelog
 
+## Sin versión — subtítulo y eyebrow como tokens con par `-inverse`
+
+- `--subtitle-color` y `--eyebrow-color` (variables de contexto definidas solo
+  en `main.css`, con el valor claro como fallback en cada consumidor) pasan a
+  tokens de `:root`: `--color-subtitle` / `--color-subtitle-inverse` y
+  `--color-eyebrow` / `--color-eyebrow-inverse`, como `--color-muted`. La regla
+  de contextos oscuros solo reasigna cada rol a su `-inverse`. Refactor puro:
+  geometría y color idénticos en 28 páginas × 6 anchos.
+- Hamburguesa: 44×44 en todos los anchos (decisión de Foco tras probarla a
+  320px; el logo encoge y absorbe los px). Retira el corte de 344px de la
+  entrada anterior.
+
 ## Sin versión — QA visual (oct 2026): desbordes, márgenes, contraste y zonas táctiles
 
 Medido con Playwright antes y después, 28 páginas × 6 anchos (320 a 1440).

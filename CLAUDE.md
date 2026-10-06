@@ -169,7 +169,7 @@ La opción es perder calidad en desktop avanzados, o pasar a modo `split`
   alternativa. Decidir a propósito, no por defecto — a Foco le vale como está.
 
 **Aviso de color de texto (bug real, detectado revisando `.hero-subtitle`):**
-`.has-bg-image` aplica hoy `color:#fff`/`--subtitle-color` a TODA la sección,
+`.has-bg-image` aplica hoy `color:#fff`/`--color-subtitle-inverse` a TODA la sección,
 sin distinguir si el texto está encima de la foto o no. En `stacked` el texto
 ya no está sobre la imagen — si hereda ese blanco, queda blanco sobre fondo
 claro, invisible. El bloque de texto necesita color explícito propio, con

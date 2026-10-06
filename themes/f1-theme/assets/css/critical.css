@@ -9,6 +9,10 @@
   --color-text-inverse: #ffffff;         /* texto base sobre fondo oscuro */
   --color-muted: #625d55;                /* texto de menor relevancia: pies, ayudas */
   --color-muted-inverse: rgba(255, 255, 255, .90); /* lo mismo sobre fondo oscuro (ver "contextos oscuros" en main.css) */
+  --color-subtitle: var(--color-text);   /* subtitulo de hero y cta */
+  --color-subtitle-inverse: rgba(255, 255, 255, .94);
+  --color-eyebrow: var(--color-accent-text);  /* antetitulo (.eyebrow) */
+  --color-eyebrow-inverse: var(--color-text-inverse);
   --color-link: #08783e;                 /* ACCION sobre fondo claro: enlaces, fondo de boton primario, borde de btn-outline, item activo del nav. Verde de marca. */
   --color-link-inverse: var(--color-text-inverse); /* lo mismo sobre fondo oscuro (el verde no contrasta ahi); lo distingue el subrayado, no el color */
   --color-bg: #fffdf8;                   /* fondo de pagina */
@@ -267,9 +271,8 @@ a {
   padding: 0;
 }
 
-/* 44px de alto siempre. De ancho, 44 solo donde cabe sin encoger el logo: por
-   debajo de 344px (medido, ver la media query siguiente) se queda en 40,
-   porque a 320px el header va al limite y cada px lo pierde el logo. */
+/* 44x44 en todos los anchos (objetivo tactil del sitio). A 320px cabe: el
+   logo tiene flex-shrink y absorbe los px que faltan. */
 .nav-toggle {
   display: inline-flex;
   align-items: center;
@@ -370,14 +373,14 @@ a {
 
 .hero-subtitle {
   font-size: clamp(1.1rem, 2vw, 1.35rem);
-  color: var(--subtitle-color, var(--color-text));
+  color: var(--color-subtitle);
 }
 
 .eyebrow {
   text-transform: uppercase;
   letter-spacing: .12em;
   font-weight: 800;
-  color: var(--eyebrow-color, var(--color-accent-text));
+  color: var(--color-eyebrow);
   font-size: .85rem;
 }
 

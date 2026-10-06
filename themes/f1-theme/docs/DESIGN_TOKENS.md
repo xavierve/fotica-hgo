@@ -37,6 +37,10 @@ todos los bugs de contraste que hemos tenido.
 --color-text-inverse: #ffffff;     /* texto sobre fondo oscuro */
 --color-muted: #625d55;            /* texto secundario: captions, ayudas */
 --color-muted-inverse: rgba(255,255,255,.90);  /* lo mismo sobre fondo oscuro */
+--color-subtitle: var(--color-text);           /* subtitulo de hero y cta */
+--color-subtitle-inverse: rgba(255,255,255,.94);
+--color-eyebrow: var(--color-accent-text);     /* antetitulo (.eyebrow) */
+--color-eyebrow-inverse: var(--color-text-inverse);
 --color-dark: #25211d;             /* negro suavizado: footer, bloques contrast */
 --color-bg: #fffdf8;               /* fondo del LIENZO (body), blanco roto */
 --color-bg-over: #fff;             /* fondo de lo que va ENCIMA: cards, controles */
@@ -96,8 +100,9 @@ vive en una sola regla de `main.css`, la que agrupa
 eyebrow) también se reasignan en una sola regla de `main.css`, que lista los
 contextos oscuros: `.has-bg-image`, `.has-bg-color:not(.bg-claro)`,
 `.bg-color2`, `.bg-color3`, `.block-variant-contrast` y `.block-counter`. Allí
-`--color-muted` pasa a `--color-muted-inverse`, el mismo patrón `-inverse` que
-`text` y `link`. Los fondos siguen en pareja (`bg-colorN` + `bg-colorN-text`):
+cada rol pasa a su par `-inverse` (`--color-muted`, `--color-subtitle`,
+`--color-eyebrow`), el mismo patrón que `text` y `link`. Los valores viven en
+`:root` (`critical.css`); la regla de `main.css` solo reasigna. Los fondos siguen en pareja (`bg-colorN` + `bg-colorN-text`):
 no hay un tercer token por fondo. Si un proyecto hace claro `--bg-color2` o
 `--bg-color3`, tiene que sacarlos de esa lista.
 

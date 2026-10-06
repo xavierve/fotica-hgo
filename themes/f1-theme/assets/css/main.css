@@ -833,8 +833,9 @@ h2.fs-xs {
    (atenuado, subtitulo, eyebrow) pasan a su version para fondo oscuro. Los
    fondos siguen en pareja (bg-colorN + bg-colorN-text): no hay un tercer token
    por fondo. Lo que cambia es el contexto, y el contexto se declara aqui.
-   --color-muted se reasigna a su par --color-muted-inverse (:root), igual que
-   text/text-inverse y link/link-inverse. Antes .bg-color2/.bg-color3 repetian
+   Cada rol se reasigna a su par -inverse de :root (critical.css): muted,
+   subtitle y eyebrow, igual que text/text-inverse y link/link-inverse. Aqui
+   solo se cambia el contexto; los valores viven en los tokens. Antes .bg-color2/.bg-color3 repetian
    subtitulo y eyebrow pero no muted: .section-subtitle (cards, text, team,
    locations, testimonials...) quedaba gris sobre navy, a 1,78:1 (QA oct 2026).
    La lista asume que 2 y 3 son fondos oscuros, como dicen sus -text. */
@@ -845,8 +846,8 @@ h2.fs-xs {
 .block-variant-contrast,
 .block-counter {
   --color-muted: var(--color-muted-inverse);
-  --subtitle-color: rgba(255, 255, 255, .94);
-  --eyebrow-color: var(--color-text-inverse);
+  --color-subtitle: var(--color-subtitle-inverse);
+  --color-eyebrow: var(--color-eyebrow-inverse);
 }
 /* Escotilla para bgColor CLAROS (dorado, crema…): texto oscuro normal.
    Uso: class: "bg-claro" junto a bgColor. */
@@ -1395,7 +1396,7 @@ h2.fs-xs {
 /* sobre fondo oscuro, el subtítulo hereda el color claro del sistema de contraste */
 .cta-layout-split.has-bg-image .cta-subtitle,
 .cta-layout-split.has-bg-color:not(.bg-claro) .cta-subtitle {
-  color: var(--subtitle-color)
+  color: var(--color-subtitle)
 }
 @media(min-width:821px) {
   /* En fila, flex-basis controla el ANCHO y reparte texto/botones. En movil
