@@ -207,6 +207,7 @@ Rejilla de logos (marcas que se trabajan, certificaciones, colaboradores).
 ```yaml
 - type: brands-logos
   title: "Marcas con las que trabajamos"   # opcional
+  subtitle:                                # opcional
   items:
     - image: "/images/321-marca_phonak.svg"
       imageAlt: "Phonak"                   # el nombre de la marca: el logo ES el texto
@@ -221,6 +222,22 @@ Rejilla de logos (marcas que se trabajan, certificaciones, colaboradores).
   siete en escritorio; con pocos logos, las columnas se reparten el ancho.
 - `imageAlt` es obligatorio en la práctica: un logo sin alt es una marca que
   el lector de pantalla no nombra.
+
+**También existe como shortcode** (`{{< brands-logos >}}` +
+`{{< brands-logos-item >}}` anidados, este último sin cierre), con los mismos
+parámetros: `title`, `subtitle` y los campos comunes en el wrapper; `image`,
+`imageAlt` y `text` en cada item. El markup de cada logo sale de un único
+partial (`partials/brands-logos-item.html`) que usan bloque y shortcode.
+
+```
+{{</* brands-logos title="Marcas con las que trabajamos" */>}}
+{{</* brands-logos-item image="/images/logos/phonak.svg" imageAlt="Phonak" */>}}
+{{</* brands-logos-item image="/images/logos/widex.svg" imageAlt="Widex" */>}}
+{{</* /brands-logos */>}}
+```
+
+El item fuera del wrapper o sin `image` corta el build con la línea exacta;
+sin `imageAlt`, aviso (`WARN`).
 
 ## Cards
 

@@ -1,0 +1,30 @@
+{{- /*
+  {{< brands-logos title="..." subtitle="..." >}}
+  {{< brands-logos-item image="/images/logos/phonak.svg" imageAlt="Phonak" >}}
+  {{< brands-logos-item image="/images/logos/widex.svg" imageAlt="Widex" text="Pie opcional" >}}
+  {{< /brands-logos >}}
+
+  Equivalente shortcode del bloque `type: brands-logos`, para intercalar la
+  rejilla de logos en el body markdown. Mismo wrapper (block-brands-logos +
+  .logo-grid) y mismo markup por logo (partials/brands-logos-item.html): cero
+  CSS nuevo. Como en testimonials, el "array" son las llamadas anidadas a
+  brands-logos-item, en el orden en que las escribas.
+
+  Parámetros: title, subtitle, class, variant, textSize, align, width, pad
+*/ -}}
+<section class="{{ partial "block-classes.html" (dict "name" "brands-logos" "context" (dict
+      "variant" (.Get "variant")
+      "class" (.Get "class")
+      "textSize" (.Get "textSize")
+      "align" (.Get "align")
+      "width" (.Get "width")
+      "pad" (.Get "pad")
+    )) }}">
+  <div class="container">
+    {{ with .Get "title" }}<h2>{{ . }}</h2>{{ end }}
+    {{ with .Get "subtitle" }}<p class="section-subtitle">{{ . }}</p>{{ end }}
+    <div class="logo-grid">
+      {{ .Inner }}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,25 @@
+{{- /*
+  Uso EXCLUSIVO anidado dentro de {{< brands-logos >}}...{{< /brands-logos >}}.
+  Sin cierre: no lleva contenido interior.
+
+  {{< brands-logos-item image="/images/logos/phonak.svg" imageAlt="Phonak" text="Pie opcional" >}}
+
+  Parámetros: image (obligatorio), imageAlt (el nombre de la marca), text
+
+  Los avisos citan la posición del wrapper: Hugo da a los shortcodes anidados
+  una .Position relativa al .Inner (siempre 1:1), que no sirve para localizar.
+*/ -}}
+{{- if or (not .Parent) (ne .Parent.Name "brands-logos") -}}
+  {{- errorf "{{< brands-logos-item >}} va siempre dentro de {{< brands-logos >}}...{{< /brands-logos >}}. En %s" .Position -}}
+{{- end -}}
+{{- if not (.Get "image") -}}
+  {{- errorf "{{< brands-logos-item >}}: falta image (item %d del brands-logos de %s)" (add .Ordinal 1) .Parent.Position -}}
+{{- end -}}
+{{- if not (trim (.Get "imageAlt" | default "") " ") -}}
+  {{- warnf "{{< brands-logos-item >}} %q sin imageAlt: el lector de pantalla no nombra la marca (brands-logos de %s)" (.Get "image") .Parent.Position -}}
+{{- end -}}
+{{ partial "brands-logos-item.html" (dict
+      "image" (.Get "image")
+      "imageAlt" (.Get "imageAlt")
+      "text" (.Get "text")
+) }}

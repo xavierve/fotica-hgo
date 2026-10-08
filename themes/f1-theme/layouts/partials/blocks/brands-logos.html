@@ -1,8 +1,23 @@
+{{- /*
+  Rejilla de logos (marcas, certificaciones, colaboradores). Equivalente en
+  bloque del shortcode {{< brands-logos >}} + {{< brands-logos-item >}}: el
+  markup de cada logo sale de partials/brands-logos-item.html en los dos.
+
+  sections:
+    - type: brands-logos
+      title:                 # opcional
+      subtitle:              # opcional
+      items:
+        - image: "/images/logos/phonak.svg"   # lienzo 320×160, logo centrado
+          imageAlt: "Phonak"                   # el nombre de la marca
+          text:                                # pie opcional
+*/ -}}
 <section class="{{ partial "block-classes.html" (dict "name" "brands-logos" "context" .) }}">
   <div class="container">
     {{ with .title }}<h2>{{ . }}</h2>{{ end }}
+    {{ with .subtitle }}<p class="section-subtitle">{{ . }}</p>{{ end }}
     <div class="logo-grid">
-      {{ range .items }}<figure>{{ partial "img-responsive.html" (dict "src" .image "alt" .imageAlt "sizes" "160px") }}{{ with .text }}<figcaption>{{ . }}</figcaption>{{ end }}</figure>{{ end }}
+      {{ range .items }}{{ partial "brands-logos-item.html" . }}{{ end }}
     </div>
   </div>
 </section>

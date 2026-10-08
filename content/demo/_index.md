@@ -210,6 +210,7 @@ sections:
       - { image: "https://picsum.photos/seed/b3/320/160", imageAlt: "Demo" }
       - { image: "https://picsum.photos/seed/b4/320/160", imageAlt: "Demo" }
       - { image: "https://picsum.photos/seed/b5/200/200", imageAlt: "Demo", text: "Archivo cuadrado: contain, no se deforma" }
+      - { image: "/images/logos/interton.svg", imageAlt: "Audífonos ", text: "xxxxx" }
 
   # ============ TESTIMONIALS ============
   - type: testimonials
@@ -586,6 +587,24 @@ que `sunday: ""` desaparece solo. Lo usan el footer, el bloque `locations` con
 
 Para el `schema.org` **no** se usa este partial: los datos salen de
 `contact.hoursSpec` (clave `days`), que cada sede hereda salvo que defina el suyo.
+
+### p14- Shortcode {{</* brands-logos */>}} + {{</* brands-logos-item */>}}
+
+Misma rejilla que el bloque 9 de `sections:` (mismo partial por logo, mismo CSS),
+intercalada en el prose. El orden de los items es el orden visual:
+
+{{< brands-logos title="p14.1- brands-logos en el prose" subtitle="Lienzo 2:1 (320×160), caja de 160×80 como máximo." >}}
+{{< brands-logos-item image="https://picsum.photos/seed/b1/320/160" imageAlt="Demo" text="Marca A" >}}
+{{< brands-logos-item image="https://picsum.photos/seed/b2/320/160" imageAlt="Demo" text="Marca B" >}}
+{{< brands-logos-item image="https://picsum.photos/seed/b3/320/160" imageAlt="Demo" >}}
+{{< brands-logos-item image="https://picsum.photos/seed/b4/320/160" imageAlt="Demo" >}}
+{{< /brands-logos >}}
+
+{{< brands-logos class="bg-color1" align="center" title="p14.2- Con class: bg-color1 y align: center" >}}
+{{< brands-logos-item image="https://picsum.photos/seed/b5/200/200" imageAlt="Demo" text="Archivo cuadrado: contain" >}}
+{{< brands-logos-item image="https://picsum.photos/seed/b6/320/160" imageAlt="Demo" >}}
+{{< brands-logos-item image="https://picsum.photos/seed/b7/320/160" imageAlt="Demo" >}}
+{{< /brands-logos >}}
 
 ---
 

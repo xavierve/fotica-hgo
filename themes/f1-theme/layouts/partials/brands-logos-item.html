@@ -1,0 +1,13 @@
+{{- /*
+  partials/brands-logos-item.html
+
+  Un logo de la rejilla brands-logos. Fuente única del markup: lo usan el
+  bloque `type: brands-logos` (por cada item de sections:) y el shortcode
+  {{< brands-logos-item >}}, así que bloque y shortcode no pueden divergir.
+
+  Parámetros (dict):
+    image     -> ruta del logo, lienzo 320×160 (obligatorio)
+    imageAlt  -> nombre de la marca: el logo ES el texto (obligatorio en la práctica)
+    text      -> pie opcional bajo el logo
+*/ -}}
+<figure>{{ partial "img-responsive.html" (dict "src" .image "alt" .imageAlt "sizes" "160px") }}{{ with .text }}<figcaption>{{ . }}</figcaption>{{ end }}</figure>

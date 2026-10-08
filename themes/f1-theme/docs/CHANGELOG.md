@@ -1,5 +1,18 @@
 # F1 Theme · Changelog
 
+## Sin versión — shortcode `brands-logos` + `brands-logos-item`
+
+- Nuevo shortcode para intercalar la rejilla de logos en el body markdown, con
+  el mismo nombre que el bloque (`type: brands-logos` ↔ `{{< brands-logos >}}`).
+  Patrón wrapper + items anidados, como `testimonials`; el item no lleva cierre.
+- El `<figure>` de cada logo pasa a un partial único,
+  `partials/brands-logos-item.html`, que usan el bloque y el shortcode: la
+  paridad HTML es estructural, no copiada. Sin CSS nuevo (`.logo-grid`).
+- El bloque gana `subtitle` (`.section-subtitle`), como el resto de bloques con rejilla.
+- Validación: item fuera de `{{< brands-logos >}}` o sin `image` → error de
+  build con la posición; sin `imageAlt` → `WARN`.
+- Demo p14 en el prose (dos variantes: por defecto y `bg-color1` centrado).
+
 ## Sin versión — respaldo `min-width`/`max-width` en las consultas de ancho
 
 - Las 27 media queries de ancho del CSS, el `matchMedia` de `main.js`, los
