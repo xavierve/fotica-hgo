@@ -555,6 +555,45 @@ regla del componente sin depender del orden de carga.
 bloque (barra fija, cabecera). Y `display: none` también lo oculta a los lectores de pantalla:
 para texto accesible que no se ve, el patrón es `.btn-label`.
 
+### 3.4 Espaciados: `rem` para el ritmo, `em` para el interior
+
+`textSize` (`xs`…`xl`) pone el `font-size` de la `<section>` entre 0,8 y 1,6 veces el
+del cuerpo. Todo lo que va en `em` dentro del bloque lo sigue; lo que va en `rem`, no.
+De ahí el reparto:
+
+**Va en `rem` (el ritmo de la página):**
+- `--block-pad*` y `.section` (padding de sección) y el margen entre bloques del prose (`.prose .block`).
+- Márgenes laterales del contenedor y `block-width-*`.
+- Cabecera, nav, breadcrumb, footer (incluido `.hours`) y barra fija.
+- Formulario (`.cf-*`) y botones (`.btn`): no son bloques con `textSize`.
+- Los tokens `--space-s/m/l` (padding del item de `text-split`, altura de `spacer`).
+
+**Va en `em` (el interior del bloque):**
+- Huecos de rejillas: `.cards-grid`, `.gallery-grid`, `.logo-grid`, `.locations-grid`,
+  `.text-split-inner`, `.image-text-inner`, `.counter-grid`, `.trustbar-inner`, `.slider-track`.
+- Padding de tarjetas, testimonios, equipo, FAQ, slides y paneles (`.panel`).
+- Márgenes entre titular, texto, pie y enlaces (`.cta-*`, `.location-*`,
+  `.team-card details`, `.image-text-caption`…).
+
+**Calibrado.** El `1em` de un bloque en `textSize: m` es el tamaño del cuerpo
+(18-20px según el ancho), no 16px: pasar `1rem` a `1em` ensancharía todo un 12-25%.
+Por eso cada espaciado se escribe ×0,85 respecto al `rem` que sustituye (`1rem` →
+`.85em`, `1.5rem` → `1.25em`, `2rem` → `1.65em`), a pasos de `.05em`. Un elemento con
+letra propia (el eyebrow del CTA, el `h3` de una ubicación, un pie de foto) se
+calcula contra **su** tamaño, no contra el del bloque. Los `clamp(…, 4vw, …)`
+conservan el `vw` central: solo se convierten los extremos.
+
+**Medido** (Playwright, antes y después, 168 combinaciones página × ancho):
+- Con `textSize: m`, cada espaciado en píxeles queda entre −5% y +6% del anterior;
+  la altura de las páginas varía de media un 0,18% (máximo 0,83%). Cabecera y footer, sin cambio.
+- Con `xs`…`xl`, la relación espaciado/letra es constante (hueco de rejilla 1,25×,
+  padding de FAQ 0,85×); antes era un valor fijo en px. El ritmo entre bloques sigue
+  en 96px para los cinco tamaños.
+- Los `clamp` con `vw` limitan el crecimiento en `l`/`xl` en pantallas grandes.
+
+**Para un espaciado nuevo:** si separa un bloque de otro, `rem`; si está dentro de un
+bloque, `em` (×0,85 del `rem` que habrías escrito).
+
 ## 4. Imágenes responsive
 
 Convención: `foto.webp` (1x) + `foto_hd.webp` (2x, doble de ancho).

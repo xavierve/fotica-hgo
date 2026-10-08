@@ -1,5 +1,22 @@
 # F1 Theme · Changelog
 
+## Sin versión — espaciados: `rem` para el ritmo, `em` para el interior de los bloques
+
+- 49 declaraciones de `main.css` pasan de `rem` a `em`: huecos de rejillas (cards,
+  gallery, logos, locations, text-split, image-text, counter, trustbar, slider),
+  padding de tarjetas, testimonios, equipo, FAQ, slides y paneles, y márgenes entre
+  titular, texto, pie y enlaces. Así `textSize` escala el interior del bloque, no solo
+  la letra. Se quedan en `rem`: `--block-pad*`, `.section`, margen entre bloques del
+  prose, contenedor, cabecera, footer (incl. `.hours`), formulario y botones.
+- **Calibrado ×0,85:** el `1em` de un bloque es el cuerpo (18-20px), no 16px; cada valor
+  se escribe 0,85 veces el `rem` anterior, a pasos de `.05em`. Los elementos con letra
+  propia (`.cta-eyebrow`, `h3` de ubicaciones, pies) se calculan contra su tamaño.
+- **Medido:** con `textSize: m`, espaciados entre −5% y +6% de los anteriores; altura de
+  página, de media un 0,18% (máx. 0,83%); cabecera y footer sin cambio. Con `xs`…`xl` la
+  relación espaciado/letra es constante, y el ritmo entre bloques, 96px en los cinco.
+  Sin desbordes ni fallos de cabecera con la letra por defecto a 16, 20 y 24px.
+- Comentario de convención al inicio de `main.css`; DESIGN_TOKENS.md, 3.4. Demo 4.1 y 4.2.
+
 ## Sin versión — shortcode `brands-logos` + `brands-logos-item`
 
 - Nuevo shortcode para intercalar la rejilla de logos en el body markdown, con

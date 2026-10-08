@@ -167,6 +167,22 @@ sections:
       - { title: "Card B", description: "Segunda card del grid.", image: "https://picsum.photos/seed/c2/480/320", imageAlt: "Demo", link: "/audicion/" }
       - { title: "Card C", description: "Tercera card del grid.", image: "https://picsum.photos/seed/c3/480/320", imageAlt: "Demo", link: "/nosotros/" }
 
+  - type: cards
+    title: "4.1- cards · textSize: xl — el interior escala"
+    subtitle: "Hueco entre tarjetas y padding crecen con la letra del bloque; el aire entre bloques (rem) no cambia. Compara con 4.2."
+    textSize: xl
+    columns: 2
+    cards:
+      - { title: "Card A", description: "Padding y huecos en em.", link: "/vision/" }
+      - { title: "Card B", description: "Siguen a textSize.", link: "/audicion/" }
+  - type: cards
+    title: "4.2- cards · textSize: xs"
+    textSize: xs
+    columns: 2
+    cards:
+      - { title: "Card A", description: "Mismo bloque, letra pequeña: interior más compacto.", link: "/vision/" }
+      - { title: "Card B", description: "El aire entre bloques es el mismo.", link: "/audicion/" }
+
   # ============ SLIDER ============
   - type: slider
     title: "5- slider"

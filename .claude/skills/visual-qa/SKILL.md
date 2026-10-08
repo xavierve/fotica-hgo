@@ -111,6 +111,21 @@ re.sub(r'\(width\s*(>=|<=|>|<)', r'(widthx \1', texto)   # (widthx > ...) no exi
 La instantánea de geometría debe ser idéntica a la del build moderno. Chromium trata
 una consulta desconocida de una lista como falsa, igual que Safari antiguo.
 
+## Cambiar unidades de espaciado: medir el valor efectivo por regla
+
+Al pasar espaciados de `rem` a `em` (o al contrario) el CSS ya no dice cuánto
+miden: depende del `font-size` de cada elemento. Comprobar en píxeles, antes y después,
+por regla y no por página: para cada selector, `getComputedStyle(el).rowGap`,
+`paddingTop`… a 390 y 1440, y el cociente nuevo/antes junto al `font-size` del
+elemento. Los elementos con letra propia (eyebrows, `h3`, pies) son los que se
+desvían: su valor en `em` hay que calcularlo contra su tamaño, no contra el del bloque.
+Complementos: (1) una página de prueba con el mismo bloque en `textSize` xs, s, m, l y
+xl, midiendo espaciado / letra (debe ser constante) y el `margin` de la `<section>`
+(el ritmo; debe ser idéntico en los cinco); (2) la altura total de cada página en 28
+páginas × 6 anchos (aquí, media 0,18%, máx. 0,83%); (3) cabecera y footer, sin cambio.
+Cuidado: `document.querySelector('footer')` devuelve el `<footer>` del primer
+testimonio, no el del sitio; usar `.site-footer`.
+
 Al reescribir comentarios en `critical.css`: un `*/` dentro del texto cierra el
 comentario y el resto se lee como CSS roto, que se lleva por delante la regla
 siguiente (pasó con el nav de escritorio). Comprobar `/*` y `*/` balanceados.

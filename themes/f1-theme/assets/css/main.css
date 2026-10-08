@@ -1,3 +1,19 @@
+/* === Espaciados: rem para el RITMO, em para el INTERIOR ======================
+   rem  ritmo de pagina: padding/margen de seccion (--block-pad*, .section), margen
+        lateral del contenedor, separacion entre bloques del prose, cabecera,
+        footer, breadcrumb, formulario. No cambian con textSize: la pagina conserva
+        su compas aunque un bloque lleve letra grande.
+   em   interior de un bloque: huecos de rejillas, padding de tarjetas, FAQ,
+        slider y paneles, margenes entre titular, texto y enlaces. Siguen al
+        font-size del bloque (block-text-*), asi que textSize escala el bloque
+        entero y no solo la letra.
+   CALIBRADO: el 1em de un bloque es el tamano del cuerpo (18-20px), no 16px. Los
+   valores en em se escriben x0.85 respecto al rem que sustituyen (1rem -> .85em,
+   1.5rem -> 1.25em), a pasos de .05em, para que con textSize m la pagina no cambie
+   de aspecto (medido: +-6%). Un elemento con letra propia (.cta-eyebrow, un h3,
+   un pie) se calcula contra SU tamano, no contra el del bloque. Un espaciado
+   nuevo: si ordena bloques entre si, rem; si esta dentro de uno, em.
+   ============================================================================ */
 .prose :is(p, li, td, blockquote) a:not(.btn) {
   color: var(--color-link);
   text-decoration: underline;
@@ -106,7 +122,7 @@
 .counter-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 1rem;
+  gap: .85em;
   text-align: center
 }
 .counter-item strong {
@@ -123,7 +139,7 @@
 @media (width <= 51.25em), (max-width: 51.25em) { /* movil: <= 820px */
   .counter-grid {
     grid-template-columns: 1fr;
-    gap: 1.25rem
+    gap: 1.05em
   }
   .counter-item strong {
     font-size: clamp(2.25rem, 11vw, 3rem)
@@ -146,15 +162,14 @@
   font-style: italic;
   opacity: .78;
   max-width: 46ch;
-  margin: clamp(2rem, 6vw, 3rem) auto 0
-}
+  margin: clamp(1.9em, 6vw, 2.85em) auto 0}
 .trustbar {
   background: var(--bg-color1);
   padding: 1rem 0
 }
 .trustbar-inner {
   display: flex;
-  gap: 1rem;
+  gap: .85em;
   flex-wrap: wrap;
   justify-content: center;
   font-weight: 700;
@@ -180,8 +195,8 @@
     grid-template-columns: repeat(2, minmax(0, auto));
     justify-content: center;
     align-items: start;
-    column-gap: clamp(1.5rem, 4vw, 3rem);
-    row-gap: 1rem;
+    column-gap: clamp(1.25em, 4vw, 2.5em);
+    row-gap: .85em;
     text-align: left;
   }
   .trustbar-inner>li {
@@ -205,7 +220,7 @@
     width: fit-content;
     max-width: 100%;
     margin-inline: auto;
-    gap: .85rem;
+    gap: .7em;
     text-align: left
   }
   .trustbar-inner>li {
@@ -221,7 +236,7 @@
 .image-text-inner {
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(1rem, 3vw, 1.75rem);
+  gap: clamp(.85em, 3vw, 1.45em);
   align-items: center
 }
 /* El h2 de image-text no es hijo directo de .container ni vive en .prose, asi
@@ -248,7 +263,7 @@
 .logo-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
-  gap: clamp(1.5rem, 4vw, 2.5rem) 1.5rem;
+  gap: clamp(1.25em, 4vw, 2.1em) 1.25em;
   align-items: start
 }
 .logo-grid figure {
@@ -256,7 +271,7 @@
   text-align: center
 }
 .logo-grid figcaption {
-  margin-top: .5rem;
+  margin-top: .45em;
   font-size: .9em;
   color: var(--color-muted)
 }
@@ -315,7 +330,7 @@
 }
 .card-link {
   margin-top: auto;
-  padding-top: .6rem;
+  padding-top: .5em;
 }
 
 .card,
@@ -333,7 +348,7 @@
   border-radius: 50%;
   object-fit: cover;
   vertical-align: middle;
-  margin-right: .5rem
+  margin-right: .4em
 }
 
 /* === Testimonios ==========================================================
@@ -360,21 +375,21 @@
    medio, así que la separación la pone el salto de línea. */
 .testimonial footer {
   margin-top: auto;
-  padding-top: .9rem
+  padding-top: .75em
 }
 .testimonial footer strong {
   display: block
 }
 .testimonial footer span {
   display: block;
-  margin-top: .15rem;
+  margin-top: .15em;
   color: var(--color-muted);
   font-weight: 600
 }
 @media (width > 51.25em), (min-width: 51.3125em) { /* escritorio: > 820px */
   .block-testimonials .cards-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(1rem, 2.5vw, 1.75rem)
+    gap: clamp(.85em, 2.5vw, 1.45em)
   }
 }
 .logo-grid img {
@@ -402,7 +417,7 @@
 .card-body,
 .testimonial,
 .team-card {
-  padding: 1.25rem
+  padding: 1.05em
 }
 .card-link {
   font-weight: 800;
@@ -416,8 +431,8 @@
   background: var(--color-bg-over);
   border: 1px solid rgba(0, 0, 0, .08);
   border-radius: 12px;
-  padding: 1rem;
-  margin: .75rem 0
+  padding: .85em;
+  margin: .65em 0
 }
 .faq summary {
   cursor: pointer;
@@ -495,7 +510,7 @@ address {
 }
 .slider-track {
   display: flex;
-  gap: 1rem;
+  gap: .85em;
   overflow: auto;
   scroll-snap-type: x mandatory
 }
@@ -504,7 +519,7 @@ address {
   scroll-snap-align: start;
   background: var(--color-bg-over);
   border-radius: var(--radius);
-  padding: 1rem
+  padding: .85em
 }
 .timeline-list {
   list-style: none;
@@ -512,7 +527,7 @@ address {
 }
 .timeline-list li {
   border-left: 3px solid var(--color-accent);
-  padding: 0 0 1.5rem 1rem
+  padding: 0 0 1.25em .85em
 }
 .block {
   padding: var(--block-pad) 0
@@ -618,8 +633,8 @@ address {
   background: var(--color-bg-over);
   border: 1px solid rgba(0, 0, 0, .08);
   border-radius: 12px;
-  padding: 1rem;
-  margin: .75rem 0
+  padding: .85em;
+  margin: .65em 0
 }
 .block-faq summary {
   cursor: pointer;
@@ -628,7 +643,7 @@ address {
 @media (width > 51.25em), (min-width: 51.3125em) { /* escritorio: > 820px */
   .image-text-inner {
     grid-template-columns: 1fr 1fr;
-    gap: clamp(2rem, 5vw, 4rem)
+    gap: clamp(1.65em, 5vw, 3.35em)
   }
   /* sin imagen no hay segunda columna que rellenar */
   .block-image-text.is-textonly .image-text-inner {
@@ -764,7 +779,7 @@ h2.fs-xs {
   }
 }
 .cta-microcopy {
-  margin-top: .9rem;
+  margin-top: .85em;
   font-size: .875em;
   opacity: .85
 }
@@ -950,7 +965,7 @@ h2.fs-xs {
 .has-bg-image.panel .cta-inner {
   background: rgba(20, 30, 40, .55);
   backdrop-filter: blur(3px);
-  padding: clamp(1.2rem, 3vw, 2rem);
+  padding: clamp(1em, 3vw, 1.65em);
   border-radius: var(--radius);
   text-shadow: none;
 }
@@ -1028,9 +1043,9 @@ h2.fs-xs {
 /* === Slider: controles (solo visibles con JS activo) === */
 .slider-nav {
   display: none;
-  gap: .5rem;
+  gap: .4em;
   justify-content: flex-end;
-  margin-bottom: .75rem
+  margin-bottom: .65em
 }
 .js .slider-nav {
   display: flex
@@ -1059,7 +1074,7 @@ h2.fs-xs {
 
 /* === Gallery: retícula uniforme === */
 .gallery-grid {
-  gap: 1rem
+  gap: .85em
 }
 .gallery-grid figure {
   margin: 0
@@ -1088,8 +1103,7 @@ h2.fs-xs {
 .gallery-grid figcaption {
   font-size: .875em;
   color: var(--color-muted);
-  padding: .4rem .2rem
-}
+  padding: .4em .2em}
 
 /* === Lightbox === */
 .gallery-lightbox {
@@ -1345,7 +1359,7 @@ h2.fs-xs {
 
 /* Leyenda de imagen en image-text (figcaption) */
 .image-text-caption {
-  margin-top: .55rem;
+  margin-top: .55em;
   text-align: center;
   font-size: .85em;
   line-height: 1.45;
@@ -1385,7 +1399,7 @@ h2.fs-xs {
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-  gap: clamp(1.5rem, 4vw, 3rem);
+  gap: clamp(1.25em, 4vw, 2.5em);
 }
 .cta-layout-split .cta-text {
   flex: 1 1 auto
@@ -1397,7 +1411,7 @@ h2.fs-xs {
   margin: 0;
 }
 .cta-layout-split .cta-subtitle {
-  margin: .5rem 0 0;
+  margin: .5em 0 0;
   font-size: 1.05rem;
   color: var(--color-muted);
   max-width: 48ch;
@@ -1411,8 +1425,7 @@ h2.fs-xs {
   margin-top: 0
 }
 .cta-layout-split .cta-microcopy {
-  margin: .6rem 0 0
-}
+  margin: .55em 0 0}
 /* sobre fondo oscuro, el subtítulo hereda el color claro del sistema de contraste */
 .cta-layout-split.has-bg-image .cta-subtitle,
 .cta-layout-split.has-bg-color:not(.bg-claro) .cta-subtitle {
@@ -1439,13 +1452,12 @@ h2.fs-xs {
 
 /* Antetítulo (eyebrow) dentro del CTA: promesa de marca sobre el título */
 .cta-eyebrow {
-  margin: 0 0 .5rem
-}
+  margin: 0 0 .6em}
 /* CTA centrado (por defecto, sin layout:split): la fila de botones es flex,
    así que text-align:center del bloque NO la centra — hay que centrar el flex. */
 .block-cta:not(.cta-layout-split) .cta-row {
   justify-content: center;
-  margin-top: 1.25rem
+  margin-top: 1.05em
 }
 /* En split, el microcopy se centra bajo su grupo de botones (no colgando a la derecha) */
 .cta-layout-split .cta-microcopy {
@@ -1475,7 +1487,7 @@ h2.fs-xs {
    borde de .block-faq (aquí sería ruido, no una pregunta que resolver). Nunca
    modal: el público 45-75+ lo abandona (ap8.1) -- por eso <details> nativo. */
 .team-card details {
-  margin: .5rem 0 0;
+  margin: .4em 0 0;
   border: 0;
   padding: 0;
   background: none
@@ -1500,7 +1512,7 @@ h2.fs-xs {
   transform: rotate(90deg)
 }
 .team-card details p {
-  margin: .6rem 0 0;
+  margin: .65em 0 0;
   font-size: .9rem;
   color: var(--color-muted)
 }
@@ -1529,7 +1541,7 @@ h2.fs-xs {
 .text-split-inner {
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(2rem, 5vw, 4rem);
+  gap: clamp(1.65em, 5vw, 3.35em);
   align-items: center
 }
 .text-split-col.has-pad-s {
@@ -1572,11 +1584,11 @@ h2.fs-xs {
 .locations-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(1.5rem, 4vw, 2.5rem);
+  gap: clamp(1.25em, 4vw, 2.1em);
 }
 .location-media {
   display: block;
-  margin-bottom: .9rem;
+  margin-bottom: .75em;
   border-radius: 12px;
   overflow: hidden;
 }
@@ -1586,20 +1598,20 @@ h2.fs-xs {
   height: auto;
 }
 .location-name {
-  margin: 0 0 .4rem;
+  margin: 0 0 .3em;
   font-size: 1.15em;
 }
 .location-meta {
   display: flex;
   flex-direction: column;
-  gap: .35rem;
+  gap: .3em;
   font-style: normal;
 }
 .location-meta a {
   display: inline-grid;
   grid-template-columns: 1.1em 1fr;
   align-items: baseline;
-  column-gap: .45rem;
+  column-gap: .4em;
   color: var(--color-link);
   font-weight: 600;
   text-decoration: none
@@ -1607,7 +1619,7 @@ h2.fs-xs {
 .locations-common-links a {
   display: inline-flex;
   align-items: center;
-  gap: .45rem;
+  gap: .4em;
   color: var(--color-link);
   font-weight: 600;
   text-decoration: none;
@@ -1617,16 +1629,16 @@ h2.fs-xs {
   text-decoration: underline;
 }
 .locations-common {
-  margin-top: clamp(1.75rem, 4vw, 2.5rem);
+  margin-top: clamp(1.45em, 4vw, 2.1em);
 }
 .locations-common h3 {
-  margin: 0 0 .6rem;
+  margin: 0 0 .45em;
 }
 .locations-common-links {
   display: flex;
   flex-wrap: wrap;
-  gap: .4rem 1.5rem;
-  margin: 0 0 .6rem;
+  gap: .35em 1.25em;
+  margin: 0 0 .5em;
 }
 /* Horario — partial hours.html, usado en footer, contacto y locations */
 .hours {

@@ -323,20 +323,16 @@ En Hostinger es `.htaccess` (Apache, `RewriteRule`/`Redirect 301`),  Del dominio
 antiguo. Revisar logs de 404 tras el lanzamiento: cada 404 recurrente es una
 301 pendiente.
 
-### 9. Espaciados internos de blocks en `em`
+### 9. Espaciados: `rem` para el ritmo, `em` para el interior — ✅ hecho (oct 2026)
 
-**Hecho (oct 2026):** la tipografía base va en `rem` con `clamp()` (body
-1.125-1.25rem = 18-20px con la letra por defecto) y los breakpoints en `em` con
-sintaxis de rango (ver DESIGN_TOKENS.md, 2.1 y 3). Medido con la letra del
-navegador a 16, 20 y 24px.
-
-**Pendiente, decidido con Foco:** `rem` para el ritmo entre bandas
-(`--block-pad*`, separación entre bloques; `--space-*` de `critical.css`) y `em`
-para el **interior** de los bloques (gap de rejillas, margen entre H2, subtítulo y
-contenido, padding de cards y paneles, `has-pad-*`), para que `fs-s`/`fs-l` y
-`textSize` escalen el bloque completo sin alterar el ritmo de la página. Hoy
-`main.css` tiene ~133 declaraciones en `rem` frente a ~59 en `em`: revisión
-pieza a pieza, midiendo antes y después como se hizo con la letra.
+Tipografía base en `rem` con `clamp()`; breakpoints en `em`. El **interior** de los
+bloques (huecos de rejillas, padding de tarjetas/FAQ/slider/paneles, márgenes entre
+titular, texto y enlaces) va en `em`, para que `textSize`, `fs-s`/`fs-l` escalen el
+bloque entero; el **ritmo** entre bandas (`--block-pad*`, `.section`, margen entre
+bloques del prose, contenedor, cabecera, footer, formulario) se queda en `rem`.
+Detalle, calibrado (×0,85 respecto al `rem`: el `1em` de un bloque es el cuerpo, 18-20px)
+y mediciones en DESIGN_TOKENS.md, 3.4. Regla para CSS nuevo: si separa bloques, `rem`;
+si está dentro de uno, `em`.
 
 ### 10. `title`/`description` de 214 (Baja Visión)
 
