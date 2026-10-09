@@ -437,6 +437,19 @@ sections:
 
 Cuando existe un bloque `type: faq`, `schema.html` genera automáticamente `FAQPage`.
 
+## Shortcode `obf` (dato ofuscado en línea)
+
+`{{< obf text="52582059B" >}}` · `{{< obf text="..." fallback="escríbenos y te lo facilitamos" >}}`.
+Para datos que no deben salir como texto en el HTML (CIF, domicilio en `/aviso-legal/`): el build
+guarda el dato en base64 dentro de `<span data-obf="…">` y `main.js` (bloque «datos ofuscados») lo
+decodifica y lo escribe con `textContent`. Anti-scraping básico, no cifrado.
+
+- `text` (obligatorio, error de build si falta): texto plano, se escapa al insertarlo.
+- `fallback`: lo que se lee **sin JavaScript** (por defecto «[activa JavaScript para ver este dato]»).
+  Para datos de identificación legal, poner una vía alternativa.
+- Un base64 inválido deja el texto de reserva y registra el error en consola; no afecta al resto.
+- No es un bloque de `sections:` (es en línea), así que no tiene equivalente en front matter.
+
 ## Shortcode `contact-form` (formulario de contacto)
 
 `{{< contact-form >}} …markdown… {{< /contact-form >}}`. El markdown de dentro es la **primera

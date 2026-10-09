@@ -15,10 +15,7 @@ hero:
   title: "Aviso Legal"
 ---
 
-Esta página web es propiedad de **Ana Isabel Santaolalla Gámez**, con CIF <span data-obf="cif">[pendiente de ofuscación JS]</span> y domicilio en <span data-obf="dom">Duque de Ahumada, 1C, Torre del Mar (29740), Málaga</span>.
-
-<!-- IMPLEMENTACIÓN (Claude Code): ofuscación frontend de CIF y domicilio vía JS
-     sobre los spans data-obf — anti-scraping. El dato real lo aporta el cliente. -->
+Esta página web es propiedad de **Ana Isabel Santaolalla Gámez**, con CIF {{< obf text="52582059B" fallback="consúltalo escribiéndonos" >}} y domicilio en {{< obf text="Duque de Ahumada, 1C, Torre del Mar (29740), Málaga" fallback="consúltalo escribiéndonos" >}}.
 
 Para cualquier consulta o propuesta, contacta con nosotros en {{< email >}}.
 

@@ -1,5 +1,16 @@
 # F1 Theme · Changelog
 
+## Sin versión — shortcode `obf` + `data-obf` en `main.js`; `noindex` de la 404 en el `<head>`
+
+- **Shortcode `{{< obf text="…" fallback="…" >}}`:** el dato sale del build en base64 dentro de
+  `data-obf`, no como texto; `main.js` lo decodifica (UTF-8) y lo escribe con `textContent`
+  (bloque `aislar('datos ofuscados')`). Sin JS se lee el `fallback`. Falta `text` → error de build.
+  Aplicado al CIF y al domicilio de `/aviso-legal/`; ejemplo en la demo (p15).
+- **404:** `partials/seo.html` emite `noindex` cuando `.Kind` es `404` (un `robots` en el front
+  matter sigue ganando). Antes la página llevaba dos `robots` (`index, follow` en el `<head>` y
+  `noindex` suelto dentro de `<main>`). No se usa `.Store`: `baseof` pinta el `<head>` antes de
+  ejecutar `main`, así que un valor puesto desde `404.html` llegaría tarde.
+
 ## Sin versión — espaciados: `rem` para el ritmo, `em` para el interior de los bloques
 
 - 49 declaraciones de `main.css` pasan de `rem` a `em`: huecos de rejillas (cards,

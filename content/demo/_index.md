@@ -622,6 +622,12 @@ intercalada en el prose. El orden de los items es el orden visual:
 {{< brands-logos-item image="https://picsum.photos/seed/b7/320/160" imageAlt="Demo" >}}
 {{< /brands-logos >}}
 
+### p15- Shortcode {{</* obf */>}} (dato ofuscado en línea)
+
+El dato no está en el HTML como texto: va en base64 en `data-obf` y `main.js` lo escribe al cargar.
+Con JS se lee «{{< obf text="Dato de ejemplo 123" >}}»; sin JS, el texto de reserva. Con `fallback`
+propio: «{{< obf text="Otro dato de ejemplo" fallback="escríbenos y te lo facilitamos" >}}».
+
 ---
 
 **Fin del `PROSE` de la demo. AHORA SE PROCESAN LAS SECTIONS**

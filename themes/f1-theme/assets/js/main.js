@@ -401,3 +401,20 @@ aislar('formulario de contacto', function () {
       .then(terminar);
   });
 });
+
+/* === Datos ofuscados: <span data-obf="BASE64"> (shortcode {{< obf >}}) ===
+   El HTML solo lleva el dato en base64 (UTF-8); aqui se decodifica y se escribe
+   como TEXTO (textContent, nunca innerHTML: lo que venga en el atributo no se
+   interpreta como HTML). Si el base64 no es valido se deja el texto de reserva
+   que ya trae el span; un dato roto no tumba al resto de la pagina. */
+aislar('datos ofuscados', function () {
+  document.querySelectorAll('[data-obf]').forEach(function (el) {
+    try {
+      var bin = atob(el.getAttribute('data-obf'));
+      var bytes = Uint8Array.from(bin, function (c) { return c.charCodeAt(0); });
+      el.textContent = new TextDecoder('utf-8').decode(bytes);
+    } catch (e) {
+      if (window.console) console.error('main.js: data-obf no valido, se deja el texto de reserva', e);
+    }
+  });
+});

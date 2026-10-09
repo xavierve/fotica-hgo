@@ -15,7 +15,7 @@ seo:
   title: "Meta title"
   description: "Meta description"
   canonical: ""
-  robots: "index, follow"
+  robots: "index, follow"   # por defecto; la 404 sale siempre "noindex" (partials/seo.html)
 
 og:
   title: "Open Graph title"

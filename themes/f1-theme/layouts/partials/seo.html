@@ -1,7 +1,10 @@
 {{ $title := or .Params.seo.title .Params.title .Title site.Title }}
 {{ $description := or .Params.seo.description .Params.description site.Params.description }}
 {{ $canonical := or .Params.seo.canonical .Params.canonical .Permalink }}
-{{ $robots := or .Params.seo.robots .Params.robots "index, follow" }}
+{{/* La 404 va siempre noindex (el servidor da el HTTP 404, ver layouts/404.html).
+     Se decide por .Kind y no con .Store desde 404.html: baseof pinta el <head>
+     ANTES de ejecutar el block "main", así que un .Store puesto en main llega tarde. */}}
+{{ $robots := or .Params.seo.robots .Params.robots (cond (eq .Kind "404") "noindex" "index, follow") }}
 <title>{{ $title }}</title>
 {{ with $description }}<meta name="description" content="{{ . }}">{{ end }}
 <meta name="robots" content="{{ $robots }}">

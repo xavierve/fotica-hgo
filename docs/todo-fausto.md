@@ -62,7 +62,7 @@ Sin subcarpetas para `hero/` `gallery` (solo `og/` y `cards/`) — el prefijo de
 | # | Tarea |
 |---|---|
 | C1 | ✅ Formulario de contacto: php Hostinger. Dual móvil/desktop. Confirmación inline. Checkbox RGPD → `/aviso-legal/` **Hecho y verificado en producción (27 sep 2026):** SMTP autenticado (PHPMailer, `formulario@`), DKIM/SPF/DMARC en pass, formulario siempre visible, dos columnas en escritorio. Detalle en CLAUDE.md, tarea 5. |
-| C2 | Ofuscación JS de CIF (52582059B) y domicilio en `/aviso-legal/` — spans con `data-obf` |
+| C2 | ✅ Ofuscación JS de CIF (52582059B) y domicilio en `/aviso-legal/` **Hecho:** shortcode `{{< obf >}}` + bloque en `main.js`; sin JS se lee un texto de reserva. El domicilio ya está en claro en footer y schema. |
 | C3 | ✅ `.gitignore`: excluir `public/` y `resources/_gen/` **Hecho.** |
 | C4 | ✅ Sticky footer móvil: Llamada / WhatsApp / Ubicación con icons.html y datos de site.yaml **Hecho:** solo iconos, con el volver-arriba integrado; aparece cuando asoma el elemento siguiente al hero. |
 | C5 | ✅ Hero responsive: variante móvil **Hecho:** por convención `_m` junto al archivo (`img-mobile.html`), no con `bgMobile`; en los tres layouts. |
@@ -72,7 +72,7 @@ Sin subcarpetas para `hero/` `gallery` (solo `og/` y `cards/`) — el prefijo de
 | # | Tarea |
 |---|---|
 | C7 | `.htaccess` Hostinger (Apache, `Redirect 301`): dominio viejo → nuevo, 4 subdominios landing, mapeo de URLs WordPress a partir del sitemap del sitio viejo recuperado de Wayback Machine. **Ahora mismo en 302 a propósito**, a la espera de lanzar el sitio nuevo; al lanzar se pasan a 301 <br> foco says: creo que la estructura era opticafausto.com/servicios/vision/ opticafausto.com/servicios/audicion/ opticafausto.com/productos/vision/ opticafausto.com/productos/audicion/ |
-| C8 | ✅ Verificar 404 en Hostinger: `ErrorDocument 404 /404.html` en el `.htaccess` para que devuelva HTTP 404 real (sin eso Apache lo sirve con 200 y Google lo trata como soft 404) + `noindex` al `<head>` **Hecho:** `ErrorDocument` en `static/.htaccess`, comprobado en el servidor. |
+| C8 | ✅ Verificar 404 en Hostinger: `ErrorDocument 404 /404.html` en el `.htaccess` para que devuelva HTTP 404 real (sin eso Apache lo sirve con 200 y Google lo trata como soft 404) + `noindex` al `<head>` **Hecho:** `ErrorDocument` en `static/.htaccess`, comprobado en el servidor; `noindex` en el `<head>` desde `partials/seo.html` (`.Kind` 404). |
 | C9 | ✅ Tipografía con `clamp()` (en `rem`, oct 2026) y espaciados: `rem` para el ritmo entre bandas, `em` para el interior de los bloques (DESIGN_TOKENS.md, 3.4) |
 | C10 | ✅ Indicador de scroll en heros + botón volver-arriba global (coordinar con sticky footer) **Hecho el volver-arriba. El indicador de scroll se descartó** tras medir que el hero no cabe en casi ninguna landing. |
 

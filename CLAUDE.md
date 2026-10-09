@@ -57,6 +57,7 @@ Hecho y validado: `schema.html` v02 (@graph completo, BreadcrumbList, FAQPage �
 Shortcodes añadidos (validados con `hugo build` real, sin warnings):
 - `testimonial` (cita suelta con wrapper propio), `testimonials` + `testimonial-item` (grid de citas anidadas, reutiliza `.cards-grid`/`.block-testimonials` — mismo CSS que el bloque `type: testimonials` de `sections:`).
 - `brands-logos` + `brands-logos-item` (rejilla de logos en el prose; el `<figure>` de cada logo sale de `partials/brands-logos-item.html`, compartido con el bloque `type: brands-logos`).
+- `obf` (dato en línea ofuscado: base64 en `data-obf`, lo escribe `main.js`; tarea 6).
 - `text-split` + `text-split-item`: grid simétrico 2 columnas para pares texto+texto (o texto+vídeo a futuro — Goldmark `unsafe=true` ya permite HTML embebido sin tratamiento especial). Reutiliza la mecánica de `.image-text-inner` (1fr → 1fr 1fr en desktop). Modificadores por item: `textSize` (reutiliza `block-text-*`), `align` (reutiliza `block-align-*`), `pad` (tokens propios `has-pad-s/m/l` sobre `--space-s/m/l`, más pequeños que el pad de sección), `margin` (CSS libre vía `safeCSS`, sin tokens — como `bgColor`). El wrapper admite `width="wide|full"` como cualquier bloque.
 - Sección equipo en `/nosotros/`: completa con 7 personas, fotos y bios (el bio se despliega con `<details>`, nunca modal). Schema `Person` de los 7 generado desde el array `team:`, con `hasCredential`/`licenseNumber` leídos del front matter — sin nombres hardcodeados en el tema.
 imagenes ya definidas. ultimando diseño y funcionalidades con Claude Code.
@@ -298,19 +299,20 @@ caiga en spam. DMARC en modo monitor:
 pieza:** `p=none` es solo el arranque — monitorizar ~1 mes los informes
 agregados y solo entonces decidir si se sube a `p=quarantine`/`p=reject`.
 
-### 6. Ofuscación JS de CIF y domicilio en `/aviso-legal/`
+### 6. Ofuscación JS de CIF y domicilio en `/aviso-legal/` — ✅ hecho (oct 2026)
 
-Spans marcados con `data-obf` en el contenido, render vía JS en cliente
-(anti-scraping). **Pendiente de implementar:** los spans ya están en
-`content/aviso-legal/_index.md` (el del CIF con un placeholder) y el CIF ya
-está confirmado (TODO, C2), pero `main.js` todavía no los procesa.
+Shortcode `{{< obf text="…" fallback="…" >}}` (BLOCKS.md): el HTML lleva el dato en
+base64 en `data-obf` y `main.js` lo escribe al cargar (anti-scraping básico; quien
+ejecute JS lo obtiene). Sin JS se lee el `fallback` («consúltalo escribiéndonos»).
+**Ojo:** el domicilio ya sale en claro en el footer y en el JSON-LD (`streetAddress`),
+así que ofuscarlo en el aviso legal no lo protege; el CIF sí queda fuera del HTML.
 
-### 7. 404 — ✅ HTTP 404 real; pendiente el `noindex` en el `<head>`
+### 7. 404 — ✅ HTTP 404 real y `noindex` en el `<head>`
 
 ✅ `ErrorDocument 404 /404.html` en `static/.htaccess`, comprobado en el
-servidor (TODO, C8). **Pendiente:** el `<meta name="robots" content="noindex">`
-se emite todavía dentro de `main` (`layouts/404.html`); moverlo al `<head>`
-con un mecanismo del tema (p. ej. `.Store` leído en `header-meta.html`).
+servidor (TODO, C8). ✅ `partials/seo.html` emite `noindex` cuando `.Kind` es
+`404`. No se usa `.Store`: `baseof` pinta el `<head>` antes de ejecutar el block
+`main`, así que un valor puesto desde `404.html` llega tarde.
 
 ### 8. Redirecciones
 

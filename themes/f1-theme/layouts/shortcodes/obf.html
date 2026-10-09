@@ -1,0 +1,24 @@
+{{- /*
+  {{< obf text="52582059B" >}}
+  {{< obf text="Duque de Ahumada, 1C, Torre del Mar" fallback="Escríbenos y te lo facilitamos" >}}
+
+  Dato en línea que NO sale en el HTML como texto: el build lo guarda en base64
+  dentro de `data-obf` y main.js lo escribe en el span al cargar. Un scraper que
+  solo lee el HTML (el caso común) no ve el dato; el navegador y el lector de
+  pantalla sí. Es anti-scraping básico, no cifrado: quien ejecute JS lo obtiene.
+
+  Parámetros:
+    text      el dato (obligatorio). Texto plano: se escapa al insertarlo.
+    fallback  lo que se lee SIN JavaScript. Por defecto, un aviso genérico.
+
+  Sin JS el dato no aparece. Si es un dato de identificación legal (LSSI art. 10),
+  poner en `fallback` una vía alternativa ("escríbenos y te lo facilitamos"), no
+  dejar el aviso genérico.
+
+  Si falta `text`, error de build.
+*/ -}}
+{{- $text := .Get "text" -}}
+{{- if not $text -}}
+  {{- errorf "{{< obf >}}: falta text. En %s" .Position -}}
+{{- end -}}
+<span data-obf="{{ $text | base64Encode }}">{{ .Get "fallback" | default "[activa JavaScript para ver este dato]" }}</span>
