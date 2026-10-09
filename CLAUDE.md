@@ -53,7 +53,7 @@ CLAUDE.md divergen, y la copia vieja acaba dictando convenciones muertas.
 
 ## Estado actual (verificado con build)
 
-Hecho y validado: `schema.html` v02 (@graph completo, BreadcrumbList, FAQPage — 127 preguntas en el sitio), `breadcrumb.html` corregido, `site.yaml` v03 (legal unificada), 30 páginas de contenido migradas, shortcodes + iconos + `cta` v2 (bg/bgColor/preset/microcopy; recorte móvil por convención `_m`), `404.html`, attributes de Goldmark activados, CSS de utilidades (`fs-xs/s/l`, `has-bg-image/color`, banner). Hero con `image` en tres layouts (ver tarea 1). Formulario en producción (tarea 5). QA visual de oct 2026 resuelto (`QA-visual-fausto-v2.md`). Las 21 páginas de servicio/producto tienen `card.image` apuntando a un archivo real existente (verificado, ninguna en fallback).
+Hecho y validado: `schema.html` v02 (@graph completo, BreadcrumbList, FAQPage — 127 preguntas en el sitio), `breadcrumb.html` corregido, `site.yaml` v03 (legal unificada), 30 páginas de contenido migradas, shortcodes + iconos + `cta` v2 (bg/bgColor/preset/microcopy; recorte móvil por convención `_m`), `404.html`, attributes de Goldmark activados, CSS de utilidades (`fs-xs/s/l`, `has-bg-image/color`, banner). Hero con `image` en tres layouts (ver tarea 1). Formulario en producción (tarea 5). QA visual de oct 2026 resuelto; lo que queda abierto o asumido está en `docs/todo-fausto.md` (C15–C17). Las 21 páginas de servicio/producto tienen `card.image` apuntando a un archivo real existente (verificado, ninguna en fallback).
 Shortcodes añadidos (validados con `hugo build` real, sin warnings):
 - `testimonial` (cita suelta con wrapper propio), `testimonials` + `testimonial-item` (grid de citas anidadas, reutiliza `.cards-grid`/`.block-testimonials` — mismo CSS que el bloque `type: testimonials` de `sections:`).
 - `brands-logos` + `brands-logos-item` (rejilla de logos en el prose; el `<figure>` de cada logo sale de `partials/brands-logos-item.html`, compartido con el bloque `type: brands-logos`).
@@ -99,7 +99,7 @@ el H1 ocupa todo). Contenedor `--hero-width` (1440), `text-wrap: balance` en
 el H1, padding superior por clase del partial (`hero-stacked` → 0). Imagen
 con `_hd` por `srcset` w, `_m` por `<picture>` (breakpoint `51.25em`, 820px con la letra por defecto), preload
 con `imagesrcset`/`imagesizes` solo en páginas con hero, `imagePosition` para
-el encuadre. Medido en el QA visual de oct 2026 (`QA-visual-fausto-v2.md`).
+el encuadre. Medido en el QA visual de oct 2026.
 
 **CTA, Banner y Counter siguen en `background-image` a propósito:** conservan
 la opción de `background-attachment:fixed`. Usan `img-bg-style.html` (antes

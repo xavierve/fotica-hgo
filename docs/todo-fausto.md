@@ -83,6 +83,9 @@ Sin subcarpetas para `hero/` `gallery` (solo `og/` y `cards/`) — el prefijo de
 | C12 | `memberOf` (Sociedad Española de Baja Visión) y `hasCredential` (Centro Auditivo Homologado) en Organization |
 | C13 | CSS crítico inline en home; objetivo PageSpeed móvil >85 |
 | C14 | ✅ ~~Anillo de foco de `.btn:focus-visible` sin contraste~~ **Confirmado por el QA visual (≈1,1:1 sobre crema) y corregido**: anillo doble como el del volver-arriba, con la capa exterior en el token `--focus-ring-outer`, compartido por los dos. **Medido (oct 2026)** con foco de teclado real sobre 9 fondos y con `prefers-reduced-motion: reduce`: la capa que contrasta va de 4,05:1 (gris medio) a 16:1; idéntico con reduced-motion. ✅ |
+| C15 | Anillo de foco sobre fondos con foto (`.has-bg-image`): **sin medir**. La medida de C14 fue sobre fondos planos; sobre foto depende de la imagen. Medir con Playwright en los CTA, banners y counters que llevan foto. |
+| C16 | Contraste de la forma de `.btn-fill` sobre dorado (`bg-color4`): verde sobre dorado, 2,44:1. **Asumido:** el texto del botón se lee (blanco sobre verde, 5,58:1) y WCAG 1.4.11 no exige contraste del borde cuando la etiqueta identifica el control. Si se quiere el mismo tratamiento que el outline, cambiar solo ese caso. |
+| C17 | Residuos de QA **asumidos**: (a) el correo se parte en dos líneas a 320px en `/contacto/` (preferible a desbordar); (b) a letra de 24px (150%) y 320px una palabra larga de un H1 se parte a mitad de palabra: sin `hyphens` en titulares, por decisión. |
 
 ### FASE D — Revisión visual y pre-lanzamiento
 
