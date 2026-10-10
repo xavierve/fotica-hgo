@@ -78,22 +78,22 @@ Medido con Playwright (oct 2026):
 |---|---|---|---|
 | `default` | 1120px | **~510px** (no cambia: el texto no llega a 640) | ~1020px |
 | `wide` | 1440px | 592px a 1280 · **701px** a 1440 · **733px** desde 1472 | ~1470px |
-| `full` | ventana − 4vw por lado | 557px a 1280 · 629px a 1440 · 765px a 1600 · **1059px** a 1920 · 1693px a 2560 | ~2120px a 1920 |
+| `full` | ventana − 4vw por lado, **tope 1920** | 557px a 1280 · 629px a 1440 · 765px a 1600 · **1059px** a 1920 · ~1055px desde ahí | ~2120px |
 
 `sizes` del partial, por `width` (solo media queries y `calc()`; `min()`/`max()`
 dentro de `sizes` no tienen el mismo soporte en todos los navegadores):
 
 - `default`: `(width > 51.25em) 50vw, 100vw` (sobrestima: pide ~720px donde se pintan ~510)
 - `wide`: `(width > 92em) 735px, (width > 86em) calc(100vw - 46rem), (width > 51.25em) 50vw, 100vw`
-- `full`: `(width > 125em) calc(100vw - 54rem), (width > 91.5em) calc(92vw - 44rem), (width > 51.25em) 50vw, 100vw`
+- `full`: `(width > 120em) 1060px, (width > 91.5em) calc(92vw - 44rem), (width > 51.25em) 50vw, 100vw`
 
-Medido de 1280 a 2560: el `sizes` da como mucho 3px más que el ancho pintado y nunca
+Medido de 1280 a 3440: el `sizes` da como mucho 3px más que el ancho pintado y nunca
 menos (entre 1380 y 1465, en `full`, sobrestima ~90px: el tramo 1:1 se describe con `50vw`).
 
 Con **700 de ancho base y 1400 en `_hd`**: `default` queda cubierto también a
 DPR2. En `wide`, DPR1 siempre, y DPR2 se queda un ~10% corto en pantallas
 grandes (1400 para ~1470): aceptable. **En `full`**, a 1920 con DPR2 harían falta
-~2120px. Si la foto tiene original de cámara (`D3A####`), conviene un `_hd` de
+~2120px (el contenedor de `full` se para en 1920, así que es el máximo). Si la foto tiene original de cámara (`D3A####`), conviene un `_hd` de
 2000-2200 generado desde el original; nunca ampliando el WebP. Hoy usa `full`
 solo `/nosotros/` (las dos fotos de equipo, `_hd` de 1440).
 En móvil el bloque colapsa a una columna y la imagen pasa a ~100vw; ahí el

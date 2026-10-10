@@ -696,6 +696,15 @@ address {
    (order:2), asi que la plantilla se invierte. El sizes de la imagen sigue a
    esta regla (blocks/image-text.html). --it-gap: el mismo gap, con nombre, para
    poder restarlo en la plantilla. */
+/* image-text full: el FONDO va a sangre, el CONTENIDO se para en 120rem (1920px con la
+   letra por defecto; el padding lateral va dentro). Sin tope, desde 1920 la imagen crecia
+   sin limite (2573px a 3440, x1,79 su _hd de 1440: se veia blanda y mas alta que la
+   pantalla) y el texto, fijo en --measure-col, quedaba flotando en una columna enorme.
+   Hasta 1920 no cambia nada; por encima, el bloque es identico al de 1920 y centrado. */
+.block-image-text.block-width-full>.container {
+  max-width: 120rem;
+  margin-inline: auto
+}
 @media (width > 51.25em), (min-width: 51.3125em) { /* escritorio: > 820px */
   .block-image-text:not(.is-textonly) .image-text-inner {
     --it-gap: clamp(1.65em, 5vw, 3.35em);

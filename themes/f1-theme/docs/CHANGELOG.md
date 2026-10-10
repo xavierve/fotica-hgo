@@ -1,5 +1,24 @@
 # F1 Theme · Changelog
 
+## Sin versión — image-text `full`: el contenido se para en 120rem
+
+- **Problema (medido):** por encima de 1920 la columna de texto ya estaba fija
+  (`--measure-col`), pero la imagen crecía sin límite. A 2560: 1693px (×1,18 su `_hd` de
+  1440) y 78% del alto de la pantalla. A 3440: 2573px (×1,79) y 119% del alto, sin caber.
+  El texto quedaba flotando en el centro de una columna de 1100-1700px de alto.
+- **Arreglo:** `.block-image-text.block-width-full>.container { max-width: 120rem;
+  margin-inline: auto }`. El fondo de la sección sigue a sangre; el contenido se queda en
+  1920 (padding incluido) y centrado. Hasta 1920 no cambia nada.
+- **Medido** a 1440, 1745, 1920, 2000, 2560, 3440 y 3840: idéntico hasta 1920; desde ahí,
+  imagen fija en 1053px (sin ampliar), sin desbordes. `sizes` de `full`:
+  `(width > 120em) 1060px`.
+- **Barrido del resto de bloques** a 1920/2560/3440: ninguno más crece sin límite (los demás
+  contenedores se paran en 1120/1440, y `cta`/`banner` `full` usan la foto de fondo). Queda
+  fuera: el hero `layout: overlay` (`/audicion/productos/audifonos/`, archivo de 1671px
+  pintado a 2560-3440).
+- Docs: DESIGN_TOKENS.md 3.5 (incluye por qué una `<img>` con `max-width:100%` se amplía),
+  GUIA-IMAGENES.md, BLOCKS.md, demo 2.12.
+
 ## Sin versión — `--measure-col` de 30em a 32em
 
 - **Motivo (revisión de Foco en `/nosotros/`, 1920 al 110%):** con 30em (600px) la columna

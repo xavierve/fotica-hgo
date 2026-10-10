@@ -627,11 +627,24 @@ hacía saltar la columna de 65 a 52 caracteres en 20px de ventana.
 |---|---|---|---|
 | `default` | ~510px (no llega al tope) | ~510px | nunca actúa |
 | `wide` | 640px | 701px a 1440, 733px desde 1472 | ~1380px |
-| `full` | 640px | 765px a 1600, 1059px a 1920, 1693px a 2560 | ~1465px |
+| `full` | 640px | 765px a 1600, 1059px a 1920; **tope ~1055px** desde 1920 | ~1465px |
 
 Antes, a 1:1: `wide` 671-687px de texto (64-71 car.), `full` 850px a 1920 (89 car.) y
 1167px a 2560 (95 car.). `--it-gap` es el mismo `gap` de escritorio con nombre, para
 poder restarlo en la plantilla.
+
+**`full` se para en 120rem.** El fondo de la sección sigue a sangre, pero el contenedor de
+`image-text` `full` no pasa de 120rem (1920px con la letra por defecto, padding incluido).
+Sin tope, la imagen crecía sin límite: 1693px a 2560 y 2573px a 3440, es decir, ×1,18 y
+×1,79 su `_hd` de 1440 (blanda, y en un ultrapanorámico más alta que la pantalla), con el
+texto flotando en una columna enorme. Por encima de 1920 el bloque es idéntico al de 1920,
+centrado.
+
+**Por qué la imagen crece aunque haya `img { max-width: 100% }`:** `max-width` solo pone un
+tope. `.image-text-media img` (como `.prose-figure img`, `.gallery-open img` y el hero) lleva
+también `width: 100%`, que obliga a llenar el contenedor aunque el archivo sea más pequeño:
+el navegador lo amplía. Es a propósito (si no, una foto pequeña dejaría hueco y bordes
+desalineados), así que lo que se controla es el **ancho del contenedor**, no el de la imagen.
 
 **text-split: el tope va en el texto.** La rejilla es simétrica por diseño, así que aquí
 el `max-width` va en `p`/`ul`/`ol` de la columna, centrado o a la derecha según el
@@ -639,7 +652,7 @@ el `max-width` va en `p`/`ul`/`ol` de la columna, centrado o a la derecha según
 cualquier prosa (sin esto, `/nosotros/` crecía 63px a 820). La cita (`is-quote`)
 conserva su `36ch`.
 
-**`sizes`:** los cortes de `sizes` de `image-text` (86/92em en `wide`, 91.5/125em en
+**`sizes`:** los cortes de `sizes` de `image-text` (86/92em en `wide`, 91.5/120em en
 `full`) no son breakpoints de layout: describen dónde cambia la fórmula del ancho de la
 imagen. Ver `blocks/image-text.html` y GUIA-IMAGENES.md.
 

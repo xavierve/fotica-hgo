@@ -19,13 +19,14 @@
        wide: columnas iguales hasta ~1380px · luego 100vw - 640 - gap - 32 de
              margen (701px a 1440) · tope 733px desde 1472 (contenedor 1440)
        full: columnas iguales hasta ~1465px · luego 92vw - 640 - gap (padding
-             4vw por lado; 1059px a 1920) · desde 2000 el padding se queda en 80px
+             4vw por lado; 1059px a 1920) · desde 1920 el contenido se para en
+             120rem (main.css) y la imagen se queda en ~1055px
      Solo condiciones de media y calc(): min()/max() dentro de sizes no tienen
      el mismo soporte en todos los navegadores. default no cambia: su columna
      de texto no llega a 32em. */}}
 {{ $sizes := "(width > 51.25em) 50vw, 100vw" }}
 {{ if eq .width "wide" }}{{ $sizes = "(width > 92em) 735px, (width > 86em) calc(100vw - 46rem), (width > 51.25em) 50vw, 100vw" }}{{ end }}
-{{ if eq .width "full" }}{{ $sizes = "(width > 125em) calc(100vw - 54rem), (width > 91.5em) calc(92vw - 44rem), (width > 51.25em) 50vw, 100vw" }}{{ end }}
+{{ if eq .width "full" }}{{ $sizes = "(width > 120em) 1060px, (width > 91.5em) calc(92vw - 44rem), (width > 51.25em) 50vw, 100vw" }}{{ end }}
 <section class="{{ partial "block-classes.html" (dict "name" "image-text" "context" . "extra" $extra) }}">
   <div class="container image-text-inner has-cols">
     <div class="image-text-copy">

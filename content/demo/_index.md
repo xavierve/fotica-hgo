@@ -150,7 +150,7 @@ sections:
     width: full
     reverse: true
     title: "2.12- width: full + reverse · letra por defecto"
-    text: "En full el contenedor sigue creciendo con la ventana, así que es donde más se nota: a 1:1, a 1920px la columna llegaba a ~89 caracteres por línea y a 2560 a ~95. Con reverse la plantilla se invierte: la columna estrecha es la segunda, la del texto. El `sizes` de la imagen cambia según el `width` del bloque (ver blocks/image-text.html)."
+    text: "En full el contenedor sigue creciendo con la ventana, así que es donde más se nota: a 1:1, a 1920px la columna llegaba a ~89 caracteres por línea y a 2560 a ~95. Por encima de 1920 el contenido se para en 120rem (el fondo sigue a sangre) y el bloque queda igual que a 1920. Con reverse la plantilla se invierte: la columna estrecha es la segunda, la del texto. El `sizes` de la imagen cambia según el `width` del bloque (ver blocks/image-text.html)."
     image: "/images/100-equipo_fausto_completo.webp"
     imageAlt: "Demo"
 
