@@ -1364,19 +1364,35 @@ h2.fs-xs {
   margin-block: var(--block-pad-spacious)
 }
 
-/* Leyenda de imagen en image-text (figcaption) */
-.image-text-caption {
+/* Leyenda de imagen en image-text y en {{< figure >}} (figcaption): una sola
+   regla para que las leyendas del tema no puedan divergir. */
+.image-text-caption,
+.prose-figure-caption {
   margin-top: .55em;
   text-align: center;
   font-size: .85em;
   line-height: 1.45;
   color: var(--color-muted)
 }
-.image-text-caption p {
+.image-text-caption p,
+.prose-figure-caption p {
   margin: 0
 }
-.image-text-caption strong {
+.image-text-caption strong,
+.prose-figure-caption strong {
   color: inherit
+}
+/* {{< figure >}}: imagen suelta del prose. El margen separa bloques del prose,
+   asi que va en rem (ritmo), como el resto de bloques intercalados. Antes era
+   un style="" en linea dentro de cada .md. */
+.prose-figure {
+  margin: 1.5rem 0
+}
+.prose-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius)
 }
 .has-surface .image-text-caption {
   color: inherit;

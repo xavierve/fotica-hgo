@@ -73,7 +73,7 @@ La diferencia entre una progresiva básica y una de gama alta no es la marca del
 
 **Con cada lente entregamos el certificado de autenticidad del fabricante**, que acredita la gama y calidad exactas que has comprado. Cuando compares ofertas — incluida la nuestra — pide siempre ese certificado: es la única forma de saber qué calidad de lente hay realmente dentro de un 2×1.
 
-<img src="/images/222-lentes_progresivas_calidades.webp" alt="Comparativa de campo de visión entre gama económica, premium y gama alta en lentes progresivas" style="width:100%;border-radius:var(--radius);display:block;margin:1.5rem 0">
+{{< figure src="/images/222-lentes_progresivas_calidades.webp" alt="Comparativa de campo de visión entre gama económica, premium y gama alta en lentes progresivas" caption="Campo de visión según la gama de la lente" >}}
 
 *La diferencia entre gamas no es solo el nombre del estuche: se nota en cuánto puedes ver con nitidez sin mover la cabeza. Por eso te decimos la gama exacta antes de que decidas, no después.*
 

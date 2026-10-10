@@ -449,6 +449,10 @@ Texto con **negrita**, *cursiva*, un [enlace interno](/vision/) y `código inlin
 
 ![Imagen demo insertada con markdown estándar](https://picsum.photos/seed/prose/900/400)
 
+p2.1- Con el shortcode `figure`: `srcset` con el `_hd` (base 800 + `_hd` 1469), `aspect-ratio` leído del archivo (sin salto al cargar), `loading="lazy"` y leyenda en `<figcaption>`. Es la forma de poner una imagen suelta en el prose; no escribir `<img>` en HTML crudo.
+
+{{< figure src="/images/321-audifonos_tipos.webp" alt="Gama de tipos de audífonos, de retroauricular a intracanal" caption="p2.1- Leyenda con **markdown** en línea" >}}
+
 ### p3- Shortcode {{</* spacer */>}}
 
 Espaciado puntual entre dos párrafos. Debajo va un `spacer size="l"`:

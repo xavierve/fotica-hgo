@@ -437,6 +437,27 @@ sections:
 
 Cuando existe un bloque `type: faq`, `schema.html` genera automáticamente `FAQPage`.
 
+## Shortcode `figure` (imagen suelta en el prose)
+
+`{{< figure src="/images/foto.webp" alt="…" caption="Leyenda con **markdown**" >}}`
+
+Imagen a todo el ancho del prose (hasta 1120px), con leyenda opcional en `<figcaption>`.
+Es la forma de intercalar una imagen suelta en el body: **no escribir `<img>` en HTML crudo**
+en un `.md`, que sale sin `srcset`, sin dimensiones y con el estilo en línea.
+
+- `src` y `alt` obligatorios (error de build si faltan). `_hd` y `_m` por convención, vía
+  `img-responsive.html`, como cualquier imagen del tema. Medidas: GUIA-IMAGENES.md.
+- `caption`: markdown en línea. Aporta el dato que la imagen no dice sola, no repite el `alt`.
+- `class`: clase extra en el `<figure>`.
+- El `aspect-ratio` se lee del archivo base: el navegador reserva el hueco antes de descargar
+  (sin salto de layout). Si hay `_m`, no se fija, porque la variante móvil tiene otra proporción.
+- `sizes`: `(width > 72em) 1120px, calc(100vw - 2rem)` (medido: 343px a 375 de ancho, 1120px
+  desde 1152).
+- Leyenda: misma regla CSS que `.image-text-caption`.
+- Sustituye al shortcode interno `figure` de Hugo (mismo nombre a propósito).
+- Solo existe como shortcode: en `sections:` las imágenes van dentro de su bloque.
+- Demo: p2.1.
+
 ## Shortcode `obf` (dato ofuscado en línea)
 
 `{{< obf text="52582059B" >}}` · `{{< obf text="..." fallback="escríbenos y te lo facilitamos" >}}`.

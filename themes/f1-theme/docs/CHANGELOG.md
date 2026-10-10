@@ -1,5 +1,22 @@
 # F1 Theme · Changelog
 
+## Sin versión — shortcode `figure`: imagen suelta del prose, responsive y con leyenda
+
+- **Antes:** dos `.md` (`audifonos`, `gafas-progresivas`) metían la imagen como `<img>` en HTML
+  crudo, con `style=""` en línea: sin `srcset`, sin dimensiones (salto de layout al cargar) y
+  el mismo archivo para todos los dispositivos.
+- **Shortcode `{{< figure src alt caption class >}}`:** `<figure class="prose-figure">` con la
+  imagen de `img-responsive.html` (`_hd`/`_m` por convención) y `<figcaption>` opcional
+  (markdown en línea). `aspect-ratio` leído del archivo base, salvo si hay `_m`. `src` y `alt`
+  obligatorios. Sustituye al `figure` interno de Hugo.
+- **CSS:** `.prose-figure` (margen `1.5rem`, ritmo entre bloques) e imagen al 100% con
+  `--radius`. La leyenda comparte regla con `.image-text-caption`.
+- **Imágenes:** el original pasa a `_hd` sin recomprimir y se genera una base de 800 a calidad
+  78. En móvil DPR2: progresivas de 95 a 33 KB, audífonos de 29 a 7 KB.
+- **Contenido:** leyendas «Campo de visión según la gama de la lente» y «Diferentes formatos de
+  audífonos» (aprobadas por Foco).
+- Docs: BLOCKS.md («Shortcode `figure`»), GUIA-IMAGENES.md (fila y criterio). Demo p2.1.
+
 ## Sin versión — prosa de bloques con su `<p>`: `partials/md-block.html`
 
 - **Defecto:** `markdownify` renderiza en modo inline y quita el `<p>` cuando el resultado es

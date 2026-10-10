@@ -22,6 +22,7 @@
 | **Equipo** | `team.items[].image` | **750×750** | 1500×1500 | **1:1 cuadrado** | WebP |
 | **Galería** | `gallery.items[].image` | 1200×900 | 2400×1800 | **4:3** | WebP |
 | **image-text** | en el shortcode | **700 ancho** | 1400 | libre | WebP |
+| **Imagen suelta en el prose** | shortcode `figure` | **800 ancho** | hasta 2240 *(el original, sin ampliar)* | libre | WebP |
 | **Slider** | `slider.items[].image` | **780 ancho** | — | libre | WebP |
 | **Logos de marca** | `items[].image` (bloque `brands-logos`) | **320×160** | 640×320 | **2:1** | **SVG** o WebP con transparencia |
 
@@ -61,6 +62,7 @@ archivo necesario. No son cifras redondas elegidas a ojo.
 | Cards / Equipo | `(min-width:1100px) 33vw, (min-width:600px) 50vw, 100vw` | ~370px desktop · ~400px móvil | ~740px | ~1200px |
 | image-text | `(width > 51.25em) 50vw, 100vw` | 528px (`m`) · 688px (`wide`) · ~704px (`full`) | ~1056-1408px | — |
 | Hero split (Home) | `(min-width:1440px) 620px, (width > 51.25em) 45vw, 100vw` | ~475px (columna `.9fr`) | ~950px | — |
+| Imagen del prose (`figure`) | `(width > 72em) 1120px, calc(100vw - 2rem)` | 343px (móvil 375) · 1120px (escritorio) | ~690px · 2240px | ~1075px |
 | Slider | `min(80vw, 420px)` | 388px (420 − 32 de padding) | ~776px | — |
 | Logos | `160px` | 160px | 320px | — |
 | Avatar testimonio | `56px` | 56px | 112px | — |
@@ -90,6 +92,20 @@ sobre 1120px: ~475px, no los ~500 que daría un 45vw teórico.
 3 columnas (~350px cada una), pero en móvil ocupan una sola columna a casi
 todo el ancho: en un iPhone de 430px con DPR3 son ~1200px. Por eso el `_hd` de
 cards es 1600 y no 700 — lo justifica el teléfono, no el monitor.
+
+**Imagen suelta en el prose (`figure`): base 800 para el móvil.** Ocupa el
+ancho del prose: 343px en un móvil de 375 y 1120px en escritorio. Con dos
+peldaños, la base de 800 cubre el móvil DPR2 (~690px) y todo lo demás tira del
+`_hd`. Para el `_hd` sirve el original **tal cual** (renombrado a `_hd`, sin
+recomprimir ni ampliar). La base sale de él reduciendo a calidad 78. Medido
+(oct 2026): `222-lentes_progresivas_calidades` baja de 95 a 33 KB en móvil y
+`321-audifonos_tipos` de 29 a 7 KB.
+
+**Ojo con las imágenes que llevan texto dentro** (infografías, comparativas
+con rótulos): a 343px de ancho, una tira apaisada se queda en ~90px de alto y
+el texto deja de leerse. Para esas hace falta un `_m` recompuesto (los paneles
+apilados en vertical), no una base más pequeña. Caso abierto:
+`222-lentes_progresivas_calidades` (1812×476, tres paneles con rótulos).
 
 **Equipo: cuadrado, no vertical.** El CSS aplica `aspect-ratio:1/1` +
 `object-fit:cover` + `object-position:top center`. Recortar el cuadrado **en el

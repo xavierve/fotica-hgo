@@ -1,0 +1,39 @@
+{{- /*
+  {{< figure src="/images/foto.webp" alt="..." caption="Leyenda **opcional**" >}}
+
+  Imagen suelta en el body markdown, a todo el ancho del prose, con leyenda
+  opcional. Sustituye al <img> en HTML crudo dentro del .md, que salia sin
+  srcset (todos los dispositivos bajaban el mismo archivo), sin dimensiones
+  (la pagina saltaba al cargar) y con el estilo escrito en linea.
+
+  Sustituye (a proposito) al shortcode interno `figure` de Hugo: mismo nombre,
+  porque es lo que es, y con la mecanica de imagen del tema.
+
+  Parametros:
+    src      — ruta publica (obligatorio). `_hd` y `_m` por convencion, via
+               partials/img-responsive.html, como cualquier imagen del tema.
+    alt      — texto alternativo (obligatorio). Describe la imagen; no repite
+               la leyenda.
+    caption  — leyenda (<figcaption>), markdown en linea. Aporta el dato que
+               la imagen no dice sola; no es un segundo alt.
+    class    — clase extra en el <figure>.
+
+  Dimensiones: el aspect-ratio sale del archivo base (images.Config), asi el
+  navegador reserva el hueco antes de descargar. Si existe `_m` (otra
+  composicion, otra proporcion) no se fija: un ratio unico seria falso en
+  uno de los dos anchos.
+*/ -}}
+{{- $src := .Get "src" -}}
+{{- $alt := .Get "alt" -}}
+{{- if not $src -}}{{- errorf "{{< figure >}}: falta src en %s" .Position -}}{{- end -}}
+{{- if not $alt -}}{{- errorf "{{< figure >}}: falta alt en %s" .Position -}}{{- end -}}
+{{- $style := "" -}}
+{{- if and (not (partial "img-mobile.html" $src)) (os.FileExists (printf "static%s" $src)) -}}
+  {{- with images.Config (printf "static%s" $src) -}}
+    {{- $style = printf "aspect-ratio:%d/%d" .Width .Height -}}
+  {{- end -}}
+{{- end -}}
+<figure class="prose-figure{{ with .Get "class" }} {{ . }}{{ end }}">
+  {{- partial "img-responsive.html" (dict "src" $src "alt" $alt "style" $style "sizes" "(width > 72em) 1120px, calc(100vw - 2rem)") -}}
+  {{- with .Get "caption" }}<figcaption class="prose-figure-caption">{{ . | markdownify }}</figcaption>{{ end -}}
+</figure>

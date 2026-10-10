@@ -78,7 +78,7 @@ Recomendarte un audífono sin medir antes tu oído sería vender a ciegas. Por e
 
 Con todos los datos, te explicamos tu caso y te aconsejamos la solución **más adecuada, cómoda y estética para tus necesidades** — no la que toca vender este mes.
 
-<img src="/images/321-audifonos_tipos.webp" alt="Gama de tipos de audífonos, de retroauricular a intracanal, de mayor a menor tamaño" style="width:100%;border-radius:var(--radius);display:block;margin:1.5rem 0">
+{{< figure src="/images/321-audifonos_tipos.webp" alt="Gama de tipos de audífonos, de retroauricular a intracanal, de mayor a menor tamaño" caption="Diferentes formatos de audífonos" >}}
 
 ¿Cuál es el tuyo? Depende de tu pérdida, la anatomía de tu oído, tu destreza manual y tus prioridades (discreción, autonomía, conectividad). Justo lo que valoramos contigo en el estudio.
 
