@@ -29,10 +29,10 @@
   margin   — valor CSS libre, ej. "0 0 1rem 0" (como bgColor, sin validar
              contra una lista cerrada — para casos puntuales de ajuste fino)
 
-  Nota: si el resultado final es un único párrafo, Hugo elimina el <p> que lo
-  envuelve (comportamiento estándar de markdownify, no un bug de este
-  shortcode) — el texto queda como nodo directo dentro del div, sin problema
-  visual porque los modificadores apuntan al div, no al <p>.
+  Nota: el contenido se renderiza en modo bloque (RenderString display=block),
+  así que un único párrafo conserva su <p>. Con `markdownify` (modo inline)
+  Hugo lo eliminaba y el texto quedaba suelto dentro del div. El bloque
+  `text-split` de front matter usa el mismo modo vía partials/md-block.html.
 */ -}}
 {{- $textSize := .Get "textSize" -}}
 {{- $align := .Get "align" -}}

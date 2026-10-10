@@ -22,6 +22,13 @@
 .prose :first-child {
   margin-top: 0
 }
+/* Prosa de bloque con UN solo parrafo (image-text, faq, text, banner): antes
+   salia sin <p> (markdownify lo quitaba) y por tanto sin margen inferior; ahora
+   lleva <p> (partials/md-block.html). Sin esta regla cada bloque creceria ~1em.
+   Con varios parrafos no se toca: el ultimo conserva su margen como siempre. */
+.block .prose>p:only-child {
+  margin-bottom: 0
+}
 /* El límite de lectura va en los elementos, no en el contenedor: así .prose mide lo mismo que cualquier .container de página (1120px), y un bloque/shortcode insertado entre párrafos no queda atrapado en 72ch — solo el TEXTO se recorta. */
 .prose>p,
 .prose>h2,
@@ -1543,6 +1550,10 @@ h2.fs-xs {
   grid-template-columns: 1fr;
   gap: clamp(1.65em, 5vw, 3.35em);
   align-items: center
+}
+/* Paridad con el shortcode: dentro de .prose el primer elemento ya pierde su margen superior (.prose :first-child); la version de front matter (sections:) no vive en .prose y su <p> arrancaba con 1em de margen. */
+.text-split-col>:first-child {
+  margin-top: 0
 }
 .text-split-col.has-pad-s {
   padding: var(--space-s)

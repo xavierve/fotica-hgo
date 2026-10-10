@@ -34,7 +34,7 @@
         {{- with $item.align }}{{ $classes = $classes | append (printf "block-align-%s" .) }}{{ end -}}
         {{- with $item.pad }}{{ $classes = $classes | append (printf "has-pad-%s" .) }}{{ end -}}
         <div class="{{ delimit $classes " " }}"{{ with $item.margin }} style="margin:{{ . | safeCSS }}"{{ end }}>
-          {{ $item.text | markdownify }}
+          {{ partial "md-block.html" $item.text }}
         </div>
       {{ end }}
     </div>

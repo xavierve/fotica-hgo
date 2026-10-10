@@ -30,6 +30,6 @@
   <div class="container">
     {{ with .title }}<h2>{{ . }}</h2>{{ end }}
     {{ with .subtitle }}<p class="section-subtitle">{{ . }}</p>{{ end }}
-    <div class="prose">{{ .text | markdownify }}</div>
+    <div class="prose">{{ partial "md-block.html" .text }}</div>
   </div>
 </section>

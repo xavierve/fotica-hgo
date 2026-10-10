@@ -1,5 +1,32 @@
 # F1 Theme · Changelog
 
+## Sin versión — prosa de bloques con su `<p>`: `partials/md-block.html`
+
+- **Defecto:** `markdownify` renderiza en modo inline y quita el `<p>` cuando el resultado es
+  un único párrafo. Los shortcodes ya se habían corregido (ver «`banner`, `testimonial`…» más
+  abajo), pero los bloques de `sections:` seguían con `markdownify`: un copy de un solo párrafo
+  salía como texto suelto en el `<div>` (sin `<p>` semántico para lectores de pantalla y modo
+  lector, y sin el estilo de enlace de `.prose :is(p, …) a`). Los mismos campos con dos párrafos
+  sí llevaban `<p>`, así que el HTML dependía de la longitud del texto.
+- **Arreglo:** nuevo `partials/md-block.html` (`page.RenderString (dict "display" "block")`),
+  usado por `blocks/image-text`, `text`, `text-split`, `banner` y `faq`. Paridad HTML con los
+  shortcodes. Los `markdownify` que quedan están dentro de un `<p>` o `<figcaption>`
+  (`cta` y `hero` subtitle, `image-text` caption), donde el modo inline es lo correcto.
+- **Alcance medido (build real):** 26 de las 30 páginas tenían texto suelto en `image-text` y/o
+  en las 134 respuestas de FAQ; tras el cambio, 0. Los enlaces dentro de una respuesta de FAQ
+  ahora reciben el color y el subrayado de enlace del prose (antes solo el subrayado, en el
+  color del texto).
+- **CSS (2 reglas):** `.block .prose>p:only-child { margin-bottom: 0 }` — el párrafo único
+  conserva el espaciado que tenía sin `<p>` (si no, cada `image-text` y cada FAQ crecería ~1em);
+  con varios párrafos nada cambia. `.text-split-col>:first-child { margin-top: 0 }` — paridad con
+  el shortcode, que dentro de `.prose` ya lo tenía.
+- **Medido** (Playwright, 28 páginas × 375/820/1280px, imágenes cargadas, con control de ruido):
+  misma altura de página que antes en todas, sin desbordes. Cambia solo `/demo/` (±11px a
+  375/820, +43px a 1280, por las columnas de `text-split` de `sections:`). Con la FAQ abierta,
+  alguna respuesta larga pasa a una línea más en pantallas anchas: ahora respeta el `72ch` de
+  `.prose>p`, como cualquier otro párrafo.
+- `shortcodes/text-split-item.html`: comentario corregido (decía que el `<p>` único se eliminaba).
+
 ## Sin versión — shortcode `obf` + `data-obf` en `main.js`; `noindex` de la 404 en el `<head>`
 
 - **Shortcode `{{< obf text="…" fallback="…" >}}`:** el dato sale del build en base64 dentro de

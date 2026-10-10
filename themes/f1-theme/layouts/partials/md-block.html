@@ -1,0 +1,24 @@
+{{- /*
+  Markdown -> HTML en modo BLOQUE, para prosa de bloques (image-text, text,
+  text-split, banner, faq).
+
+  Por que existe: `markdownify` renderiza en modo inline y, si el resultado es un
+  UNICO parrafo, le quita el <p>. Con dos o mas parrafos si los conserva. El
+  mismo campo producia por tanto HTML distinto segun su longitud, y los copys de
+  un solo parrafo quedaban como texto suelto dentro del <div>: sin <p> semantico
+  (lectores de pantalla, modo lector), sin los margenes del tema y sin el estilo
+  de enlace de `.prose :is(p, ...) a`. En modo bloque el <p> se emite siempre.
+  Es lo mismo que ya hacian los shortcodes (`.Inner | $.Page.RenderString
+  (dict "display" "block")`): este partial da la paridad a las secciones de
+  front matter.
+
+  Uso:   {{ partial "md-block.html" .text }}
+  Sirve para texto de varios parrafos, listas o encabezados. NO usarlo dentro de
+  un <p> ni de un <figcaption> (ahi el modo inline de `markdownify` es lo
+  correcto: un <p> dentro de un <p> es HTML invalido).
+
+  `page` es el Page que se esta renderizando; los bloques reciben un dict sin
+  .Page, de ahi que no se pueda usar `.Page.RenderString`.
+*/ -}}
+{{- $s := . | default "" | string -}}
+{{- return (page.RenderString (dict "display" "block") $s) -}}

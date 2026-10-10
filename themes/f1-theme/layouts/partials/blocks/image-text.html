@@ -16,7 +16,7 @@
   <div class="container image-text-inner has-cols">
     <div class="image-text-copy">
       {{ with .title }}<h2>{{ . }}</h2>{{ end }}
-      {{ with .text }}<div class="prose">{{ . | markdownify }}</div>{{ end }}
+      {{ with .text }}<div class="prose">{{ partial "md-block.html" . }}</div>{{ end }}
     </div>
     {{ with .image }}<figure class="image-text-media">{{ partial "img-responsive.html" (dict "src" . "alt" $.imageAlt "sizes" "(width > 51.25em) 50vw, 100vw") }}{{ with $.caption }}<figcaption class="image-text-caption">{{ . | markdownify }}</figcaption>{{ end }}</figure>{{ end }}
   </div>

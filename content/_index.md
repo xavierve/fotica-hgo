@@ -54,12 +54,14 @@ sections:
         text: "Seguimiento después de la compra"
   - type: image-text
     title: "Nos conocemos de toda la vida. Y eso se nota."
+    width: wide
     text: "Ópticas Fausto no es solo una óptica ni solo un centro auditivo. Es un lugar al que muchas personas vuelven porque se sienten conocidas, escuchadas y acompañadas. La continuidad del equipo nos permite saber quién vuelve por la puerta, qué necesita y cómo le fue con su última revisión, sus gafas o sus audífonos. Esa confianza se construye con años de cercanía real y con la tranquilidad de no empezar de cero en cada visita."
     image: "/images/100-atencion_personalizada.webp"
     imageAlt: "Leonor atendiendo a una clienta y su hija en el Centro Fausto Andalucía"
     caption: "**Leonor** en Centro Fausto Andalucía"
   - type: image-text
     title: "Atención humana, seguimiento real"
+    width: wide
     text: "La relación no termina cuando alguien compra unas gafas o un audífono. Seguimos acompañando en la adaptación, resolvemos dudas, ajustamos, revisamos y estamos pendientes de la evolución de cada persona. Preferimos asesorar con honestidad, recomendar lo que realmente encaja y atender sin prisas, porque cuidar la visión y la audición también significa estar cerca después de la compra."
     image: "/images/100-atencion-duque.webp"
     imageAlt: "Anabel atendiendo a una pareja en el Centro Fausto Duque"

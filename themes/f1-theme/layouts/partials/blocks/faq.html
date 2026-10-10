@@ -3,7 +3,7 @@
   <div class="container">
     <h2>{{ $.title | default (i18n "faqTitle") }}</h2>
     <div class="faq-list">
-      {{ range . }}<details><summary>{{ .question }}</summary><div class="prose">{{ .answer | markdownify }}</div></details>{{ end }}
+      {{ range . }}<details><summary>{{ .question }}</summary><div class="prose">{{ partial "md-block.html" .answer }}</div></details>{{ end }}
     </div>
   </div>
 </section>

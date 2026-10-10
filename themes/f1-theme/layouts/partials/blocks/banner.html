@@ -35,6 +35,6 @@
   {{- with .textColor }}{{ $styles = $styles | append (printf "--section-text-color:%s" .) }}{{ end -}}
   {{- with $styles }} style="{{ delimit . ";" | safeCSS }}"{{ end }}>
   <div class="container banner-inner">
-    {{ with .text }}{{ . | markdownify }}{{ end }}
+    {{ with .text }}{{ partial "md-block.html" . }}{{ end }}
   </div>
 </aside>
