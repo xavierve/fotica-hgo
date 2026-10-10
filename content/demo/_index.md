@@ -274,6 +274,32 @@ sections:
     title: "11.3- text · class: bg-color4 (fondo + texto resueltos solos)"
     text: "Las clases de paleta (`bg-color1`..`bg-color4`) ya traen el color de texto correcto emparejado — no hace falta `bgColor` ni ningún interruptor aparte."
 
+  # ============ TEXT — interlineado por textSize (mismo párrafo, cinco tamaños) ============
+  - type: text
+    textSize: xs
+    pad: compact
+    title: "11.4a- textSize: xs · line-height 1.6"
+    text: &lh "Interlineado: el ratio baja a medida que sube la letra, para que la distancia real entre líneas crezca poco de un escalón al siguiente. Con el cuerpo a 20px quedan 25,6 · 27 · 30 · 31 · 40px de xs a xl. Antes, textSize l tenía más interlínea que el cuerpo (33,4 frente a 32px), y por eso se veía más suelto. Lee dos o tres líneas de cada bloque y compara la mancha del párrafo."
+  - type: text
+    textSize: s
+    pad: compact
+    title: "11.4b- textSize: s · line-height 1.55"
+    text: *lh
+  - type: text
+    pad: compact
+    title: "11.4c- textSize: m (cuerpo) · line-height 1.5"
+    text: *lh
+  - type: text
+    textSize: l
+    pad: compact
+    title: "11.4d- textSize: l · line-height 1.35"
+    text: *lh
+  - type: text
+    textSize: xl
+    pad: compact
+    title: "11.4e- textSize: xl · line-height 1.25"
+    text: *lh
+
   - type: banner
     class: "bg-color2"
     text: "**12.1-** type: banner · class: bg-color2 — frase destacada como sección de página completa, sin botones, bg/bgColor igual a cta."

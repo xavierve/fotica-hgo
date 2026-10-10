@@ -103,7 +103,11 @@ body {
   font-size: clamp(1.125rem, 0.25vw + 1.09375rem, 1.25rem);
   color: var(--color-text);
   background: var(--color-bg);
-  line-height: 1.6;
+  /* 1.5 y no 1.6 (oct 2026): con el cuerpo a 20px, 1.6 dejaba 12px de aire entre
+     lineas y el parrafo se deshilachaba. 1.5 es el minimo de WCAG 1.4.8 (AAA) para
+     parrafos: no bajar de aqui con este publico. Los textSize llevan su propio
+     ratio, decreciente con la letra (main.css, block-text-*). */
+  line-height: 1.5;
   /* Red de seguridad: una cadena sin huecos (URL, correo, codigo, un typo como
      el del QA en /demo/) se parte en vez de desbordar la pagina. Sin guion; solo
      actua cuando no hay otro punto de corte. En body, break-word y NO anywhere:

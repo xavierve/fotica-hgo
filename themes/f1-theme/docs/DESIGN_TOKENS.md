@@ -331,6 +331,33 @@ navegador a 20px (125%) y 24px (150%), en 28 páginas y anchos de 320 a 1440:
 Cómo reproducirlo: sección «Probar con otra letra por defecto» de la skill
 `visual-qa`.
 
+**Interlineado (oct 2026).** `body { line-height: 1.5 }` (antes 1.6), y cada `textSize`
+con su propio ratio, **decreciente con la letra**, para que la interlínea real crezca poco
+de un escalón al siguiente:
+
+| `textSize` | Letra (cuerpo 20px) | `line-height` | Interlínea |
+|---|---|---|---|
+| `xs` | 16px | 1.6 | 25,6px |
+| `s` | 17,5px | 1.55 | 27px |
+| `m` / body | 20px | **1.5** | 30px (móvil, 18px: 27px) |
+| `l` | 23px | **1.35** (antes 1.45) | 31px |
+| `xl` | 32px | 1.25 | 40px |
+
+- **Por qué:** a 20px, 1.6 dejaba 12px de aire entre líneas y el párrafo se deshilachaba.
+  `l` estaba peor: con 1.45 a 23px salían 33,4px, **más** interlínea que el cuerpo (32).
+- **Suelo: 1.5 en el cuerpo** = mínimo de WCAG 1.4.8 (AAA) para párrafos. No bajar con un
+  público de 45-75+ años.
+- **Ratios sin unidad, a propósito.** Un `line-height` con unidades (p. ej.
+  `calc(1em + .625rem)`, que ajustaría todos los tamaños con una sola regla) se hereda ya
+  calculado en px: un párrafo `fs-l` dentro de un bloque `m` heredaría los 30px del padre.
+  Para que funcionara habría que declararlo en cada elemento de texto y pisaría los valores
+  propios de componentes (pies de foto, citas, `cta`). Sin unidad, cada elemento lo recalcula.
+- No cambian titulares, botones ni los componentes con `line-height` propio.
+- **Medido** (28 páginas, 375-1920): páginas entre un 1,1% y un 4,6% más cortas, sin
+  desbordes. Campos del formulario de 56 a 54px y botón de escritorio de 50 a 49px, por
+  encima de los 48 del proyecto; botones en móvil y barra fija, sin cambio (44 y 55px).
+  Demo 11.4 (mismo párrafo en los cinco tamaños).
+
 ### 2.2 Dos sistemas paralelos, no mezclar
 
 **`fs-*` — utilidades para prose (body markdown).** Se aplican con attributes de

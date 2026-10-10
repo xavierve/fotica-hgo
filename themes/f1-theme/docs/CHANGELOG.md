@@ -1,5 +1,23 @@
 # F1 Theme · Changelog
 
+## Sin versión — interlineado: body 1.5 y ratio decreciente por `textSize`
+
+- **Problema (revisión de Foco):** con el cuerpo a 20px, `line-height: 1.6` se veía suelto
+  (12px de aire entre líneas). En `textSize: l`, 1.45 a 23px daba 33,4px, más interlínea
+  que el propio cuerpo (32).
+- **Cambio:** `body` 1.6 → **1.5** (mínimo WCAG 1.4.8 AAA). `block-text-xs` 1.6 y
+  `block-text-s` 1.55 explícitos (antes heredaban el 1.6 del body); `block-text-l` 1.45 →
+  **1.35**; `xl` sin cambio (1.25). Interlínea a 20px: 25,6 / 27 / 30 / 31 / 40px.
+- Ratios sin unidad a propósito (un valor con unidades se hereda ya en px; ver
+  DESIGN_TOKENS.md 2.1).
+- **Medido** (28 páginas, 375/820/1440/1920): todas entre −1,1% y −4,6% de alto (media
+  −2,4% en escritorio, −3,3% en móvil), sin desbordes. Campos del formulario 56 → 54px,
+  `.btn` de escritorio 50 → 49px (mínimo del proyecto: 48); `.btn` móvil (44) y barra fija
+  (55), sin cambio. Cabecera de escritorio 77 → 75px; nada depende de su altura.
+- **Visto de paso (sin tocar):** en FAQ solo es pulsable la línea del `summary` (28px);
+  el padding está en el `<details>`.
+- Docs: DESIGN_TOKENS.md 2.1, FRONTMATTER.md. Demo 11.4.
+
 ## Sin versión — image-text `full`: el contenido se para en 120rem
 
 - **Problema (medido):** por encima de 1920 la columna de texto ya estaba fija

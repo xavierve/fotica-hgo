@@ -266,6 +266,9 @@ block-text-xs|s|m|l|xl directamente. Los nombres largos (small, default,
 large) ya no son válidos — no producen ninguna clase con CSS asociado, así
 que el bloque se queda sin talla aplicada, sin error visible en el build.
 
+Cada talla trae también su interlineado (ratio decreciente: xs 1.6 · s 1.55 · m 1.5 ·
+l 1.35 · xl 1.25). Detalle en DESIGN_TOKENS.md, 2.1.
+
 **textSize es exclusivo de bloques y shortcodes-de-bloque** (sections: y
 {{< banner >}}/{{< text >}}/etc.). Para **texto suelto dentro de un párrafo**
 **o encabezado en prosa** (markdown body), usa la **utilidad CSS class="fs-" fs-xs|fs-s|fs-l|fs-xl**

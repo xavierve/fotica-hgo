@@ -572,19 +572,26 @@ address {
   max-width: none;
   padding-inline: clamp(1rem, 4vw, 5rem)
 }
-/* block-text-*: talla de BLOQUE/shortcode-de-bloque, via textSize (xs|s|m|l|xl) en block-classes.html. Escala independiente de fs- -- mismas letras, valores distintos a proposito. */
+/* block-text-*: talla de BLOQUE/shortcode-de-bloque, via textSize (xs|s|m|l|xl) en block-classes.html. Escala independiente de fs- -- mismas letras, valores distintos a proposito.
+   line-height: ratio SIN UNIDAD y decreciente con la letra, para que la interlinea
+   absoluta crezca poco entre escalones (a 20px de cuerpo: 25,6 / 27 / 30 / 31 / 40px).
+   Antes l (1.45 a 23px = 33,4px) tenia MAS interlinea que el cuerpo (1.6 a 20px =
+   32px). Sin unidad a proposito: un valor con unidades (calc(1em + ...)) se hereda
+   ya calculado en px, y un parrafo con otra letra heredaria la interlinea del padre. */
 .block-text-xs {
-  font-size: .8em
+  font-size: .8em;
+  line-height: 1.6
 }
 .block-text-s {
-  font-size: .875em
+  font-size: .875em;
+  line-height: 1.55
 }
 .block-text-m {
   font-size: 1em
 }
 .block-text-l {
   font-size: 1.15em;
-  line-height: 1.45;
+  line-height: 1.35;
   font-weight: 300
 }
 .block-text-xl {
