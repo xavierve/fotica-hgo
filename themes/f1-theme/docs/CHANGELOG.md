@@ -1,5 +1,22 @@
 # F1 Theme · Changelog
 
+## Sin versión — `--measure-col` de 30em a 32em
+
+- **Motivo (revisión de Foco en `/nosotros/`, 1920 al 110%):** con 30em (600px) la columna
+  de texto de `image-text` se leía estrecha frente a la foto. El titular iba en tres líneas
+  y el texto quedaba 200px más alto que la imagen (827 frente a 625).
+- **Comparado** en ese bloque, a 1745px CSS: 30em → 3 líneas de titular y 827px de texto;
+  **32em → 2 líneas, 752px, ~70 caracteres en Segoe UI**; 34em y 36em → 688px los dos (el
+  bloque ya no baja) con líneas de ~74-78 caracteres.
+- **Medido con 32em:** texto a 640px, 58-68 caracteres por línea con Inter. Imagen de 701px
+  (a 1440) a 733px en `wide`, y 1059px a 1920 en `full`. Actúa desde ~1380px (`wide`) y
+  ~1465px (`full`); por debajo, sin cambios.
+- `sizes` de image-text recalculado (`wide`: `735px` / `calc(100vw - 46rem)`; `full`:
+  `calc(100vw - 54rem)` / `calc(92vw - 44rem)`). Medido de 1280 a 2560: como mucho 3px
+  por encima del ancho real, nunca por debajo.
+- Docs al día: DESIGN_TOKENS.md 3.5 (incluye por qué 32em), GUIA-IMAGENES.md, BLOCKS.md,
+  CLAUDE.md y la demo 2.11.
+
 ## Sin versión — medida de lectura en columnas: `--measure-col` en image-text y text-split
 
 - **Problema (medido):** a 1:1, la columna de texto de `image-text` en `wide` llegaba a

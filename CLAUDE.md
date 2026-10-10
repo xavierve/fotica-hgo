@@ -120,8 +120,8 @@ Medidas, proporciones y criterios: `themes/f1-theme/docs/GUIA-IMAGENES.md`.
 **Hecho (16 sep):**
 - **image-text** — completado. Base 700 de ancho, `_hd` 1400. La imagen no
   ocupa el contenedor: hasta ~510px en `default`; en `wide`/`full`, desde oct
-  2026 el texto se para en `--measure-col` y la imagen crece (773px en `wide`,
-  1099px en `full` a 1920) — ver la tabla de la guía.
+  2026 el texto se para en `--measure-col` y la imagen crece (733px en `wide`,
+  1059px en `full` a 1920) — ver la tabla de la guía.
 
 **No aplica en Fausto (por ahora):**
 - **Slider** (780 de ancho) y **logos de marca** (lienzo 2:1, 320×160) — el

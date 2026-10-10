@@ -691,7 +691,7 @@ address {
    a --measure-col; desde ahi se queda quieto y la imagen se lleva todo el ancho
    extra. Sin punto de corte: el cambio es continuo (con un breakpoint, a 80em la
    columna saltaba de 65 a 52 caracteres en 20px de ventana). En default (1120px)
-   no actua nunca: la columna mide ~510px. Con textSize grande, 30em crece con la
+   no actua nunca: la columna mide ~510px. Con textSize grande, 32em crece con la
    letra y deja de actuar antes. En is-reverse el copy va en la segunda columna
    (order:2), asi que la plantilla se invierte. El sizes de la imagen sigue a
    esta regla (blocks/image-text.html). --it-gap: el mismo gap, con nombre, para

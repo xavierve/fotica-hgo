@@ -141,7 +141,7 @@ sections:
   - type: image-text
     width: wide
     title: "2.11- width: wide · letra por defecto — medida de lectura"
-    text: "La columna de texto no pasa de `--measure-col` (30em, unos 62-65 caracteres por línea). Hasta que la mitad del espacio llega a esa medida, las dos columnas son iguales; desde ahí el texto se queda quieto y la imagen se lleva todo el ancho extra, sin salto. Compáralo ensanchando la ventana de 1280 a 1920: el texto deja de crecer hacia 1300px y la foto sigue ganando hasta el tope del contenedor wide (1440). Por debajo de ~1300px el bloque es idéntico al de siempre."
+    text: "La columna de texto no pasa de `--measure-col` (32em, unos 66-70 caracteres por línea). Hasta que la mitad del espacio llega a esa medida, las dos columnas son iguales; desde ahí el texto se queda quieto y la imagen se lleva todo el ancho extra, sin salto. Compáralo ensanchando la ventana de 1280 a 1920: el texto deja de crecer hacia 1380px y la foto sigue ganando hasta el tope del contenedor wide (1440). Por debajo de ~1380px el bloque es idéntico al de siempre."
     image: "/images/100-atencion_personalizada.webp"
     imageAlt: "Demo"
     caption: "2.11- La imagen crece; el texto, no"
