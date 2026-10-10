@@ -138,6 +138,22 @@ sections:
     image: "https://picsum.photos/seed/it10/640/300"
     imageAlt: "Demo"
 
+  - type: image-text
+    width: wide
+    title: "2.11- width: wide · letra por defecto — medida de lectura"
+    text: "La columna de texto no pasa de `--measure-col` (30em, unos 62-65 caracteres por línea). Hasta que la mitad del espacio llega a esa medida, las dos columnas son iguales; desde ahí el texto se queda quieto y la imagen se lleva todo el ancho extra, sin salto. Compáralo ensanchando la ventana de 1280 a 1920: el texto deja de crecer hacia 1300px y la foto sigue ganando hasta el tope del contenedor wide (1440). Por debajo de ~1300px el bloque es idéntico al de siempre."
+    image: "/images/100-atencion_personalizada.webp"
+    imageAlt: "Demo"
+    caption: "2.11- La imagen crece; el texto, no"
+
+  - type: image-text
+    width: full
+    reverse: true
+    title: "2.12- width: full + reverse · letra por defecto"
+    text: "En full el contenedor sigue creciendo con la ventana, así que es donde más se nota: a 1:1, a 1920px la columna llegaba a ~89 caracteres por línea y a 2560 a ~95. Con reverse la plantilla se invierte: la columna estrecha es la segunda, la del texto. El `sizes` de la imagen cambia según el `width` del bloque (ver blocks/image-text.html)."
+    image: "/images/100-equipo_fausto_completo.webp"
+    imageAlt: "Demo"
+
   # ============ COUNTER — con y sin fondo ============
   - type: counter
     text: "3.1- counter · sin fondo · animated: true"

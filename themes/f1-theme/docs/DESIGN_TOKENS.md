@@ -410,6 +410,7 @@ por eso `.block-banner{padding}` tuvo que moverse *antes* de los modificadores
 --block-pad-spacious: clamp(4rem,9vw,8rem);
 --fs-highlight: clamp(1.52em,2.7vw,1.8em);
 --radius: 18px;
+--measure-col: 30em;        /* medida de lectura de una columna de texto, ver 3.5 */
 ```
 
 **Breakpoint único: `51.25em`** (820px con la letra por defecto de 16px). Es la
@@ -593,6 +594,47 @@ conservan el `vw` central: solo se convierten los extremos.
 
 **Para un espaciado nuevo:** si separa un bloque de otro, `rem`; si está dentro de un
 bloque, `em` (×0,85 del `rem` que habrías escrito).
+
+### 3.5 Medida de lectura: `--measure-col` (oct 2026)
+
+`--measure-col: 30em` es el ancho máximo de una **columna** de texto en los bloques de
+dos columnas: `image-text` y `text-split`. Son unos 62-65 caracteres reales por línea.
+
+**En `em`, no en `ch`.** Con `system-ui`, `1ch` (el ancho del «0») vale ~0,63em, y la
+letra media de un texto en castellano ~0,46-0,49em. El `72ch` de `.prose>p` son por
+tanto ~92 caracteres, no 72. Medido a 20px: 30em = 600px = 62 caracteres con Inter
+(Linux, macOS parecido) y ~65 con Segoe UI (Windows, ~5% más estrecha; dato de Foco,
+75 frente a 71 caracteres en la misma columna de 687px). Al ir en `em`, la medida en
+caracteres no cambia con `textSize`: con `l`/`xl` el tope crece con la letra y en la
+práctica deja de actuar.
+
+**image-text: el tope va en la columna, no en el párrafo.** Un `max-width` en el `<p>`
+deja un hueco entre texto y foto. La plantilla es
+`min(var(--measure-col), (100% - var(--it-gap)) / 2)` para el texto y `1fr` para la
+imagen. Hasta que la mitad del espacio llega a 30em, eso equivale a `1fr 1fr`; a partir
+de ahí el texto se queda en 600px y la imagen se lleva todo el ancho extra. **Sin punto
+de corte nuevo**: el cambio es continuo. Una primera versión con breakpoint a 80em
+hacía saltar la columna de 65 a 52 caracteres en 20px de ventana.
+
+| Bloque | Texto | Imagen | Desde |
+|---|---|---|---|
+| `default` | ~510px (no llega al tope) | ~510px | nunca actúa |
+| `wide` | 600px | 741px a 1440, 773px desde 1472 | ~1300px |
+| `full` | 600px | 1099px a 1920, 1733px a 2560 | ~1380px |
+
+Antes, a 1:1: `wide` 671-687px de texto (64-71 car.), `full` 850px a 1920 (89 car.) y
+1167px a 2560 (95 car.). `--it-gap` es el mismo `gap` de escritorio con nombre, para
+poder restarlo en la plantilla.
+
+**text-split: el tope va en el texto.** La rejilla es simétrica por diseño, así que aquí
+el `max-width` va en `p`/`ul`/`ol` de la columna, centrado o a la derecha según el
+`align` del item. Solo en escritorio: en una columna, el texto sigue la regla de
+cualquier prosa (sin esto, `/nosotros/` crecía 63px a 820). La cita (`is-quote`)
+conserva su `36ch`.
+
+**`sizes`:** los cortes de `sizes` de `image-text` (81/92em en `wide`, 86/125em en
+`full`) no son breakpoints de layout: describen dónde cambia la fórmula del ancho de la
+imagen. Ver `blocks/image-text.html` y GUIA-IMAGENES.md.
 
 ## 4. Imágenes responsive
 

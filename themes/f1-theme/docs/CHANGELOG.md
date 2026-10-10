@@ -1,5 +1,28 @@
 # F1 Theme · Changelog
 
+## Sin versión — medida de lectura en columnas: `--measure-col` en image-text y text-split
+
+- **Problema (medido):** a 1:1, la columna de texto de `image-text` en `wide` llegaba a
+  64-71 caracteres por línea desde 1440, y en `full` a 89 (1920) y 95 (2560). El `72ch`
+  de `.prose>p` no actuaba (con `system-ui`, `72ch` ≈ 92 caracteres, 908px a 20px).
+- **Token** `--measure-col: 30em` (critical.css): ~62 caracteres con Inter, ~65 con
+  Segoe UI. En `em` para que la medida en caracteres no dependa de `textSize`.
+- **image-text:** plantilla `min(var(--measure-col), (100% - var(--it-gap)) / 2) 1fr`
+  (invertida en `is-reverse`), en escritorio y para todos los `width`. Hasta que la
+  mitad del espacio llega a 30em equivale a `1fr 1fr`; después el texto se queda en 600px
+  y la imagen absorbe el resto. Continuo, sin breakpoint nuevo; en `default` no actúa
+  nunca. `--it-gap` = el gap de escritorio de siempre, con nombre.
+- **text-split:** `max-width: var(--measure-col)` en `p`/`ul`/`ol` de la columna (no en
+  la cita), centrado o a la derecha según `align`. Solo en escritorio.
+- **`sizes` de image-text según `width`** (`wide`, `full`), calculado contra el CSS y
+  confirmado midiendo: 741/773px en `wide`, 1099px en `full` a 1920. Solo media
+  queries y `calc()`.
+- **Medido** (Playwright, 28 páginas, 375-1920): sin cambios por debajo de ~1300px y sin
+  desbordes. Cambian la home (+78px a 1440, +96 a 1920) y `/nosotros/` (+75 / +401: la
+  foto de equipo pasa de 850 a 1099px a 1920). Texto en `wide`/`full`: 56-65 caracteres.
+- Docs: DESIGN_TOKENS.md 3.5, GUIA-IMAGENES.md (tabla de anchos y `sizes`; `_hd` de
+  2000-2200 recomendado para `full`), BLOCKS.md, CLAUDE.md (tarea 4).
+
 ## Sin versión — shortcode `figure`: imagen suelta del prose, responsive y con leyenda
 
 - **Antes:** dos `.md` (`audifonos`, `gafas-progresivas`) metían la imagen como `<img>` en HTML

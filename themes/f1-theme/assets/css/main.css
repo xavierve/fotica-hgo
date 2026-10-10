@@ -684,6 +684,29 @@ address {
   }
 }
 
+/* image-text: la columna de texto no pasa de la medida de lectura. A 1:1, en
+   wide y full la columna de texto crece con la ventana (a 1920 en full, ~89
+   caracteres por linea), y un max-width en el <p> dejaria un hueco entre texto
+   y foto. Aqui el texto ocupa la mitad del espacio, como siempre, hasta llegar
+   a --measure-col; desde ahi se queda quieto y la imagen se lleva todo el ancho
+   extra. Sin punto de corte: el cambio es continuo (con un breakpoint, a 80em la
+   columna saltaba de 65 a 52 caracteres en 20px de ventana). En default (1120px)
+   no actua nunca: la columna mide ~510px. Con textSize grande, 30em crece con la
+   letra y deja de actuar antes. En is-reverse el copy va en la segunda columna
+   (order:2), asi que la plantilla se invierte. El sizes de la imagen sigue a
+   esta regla (blocks/image-text.html). --it-gap: el mismo gap, con nombre, para
+   poder restarlo en la plantilla. */
+@media (width > 51.25em), (min-width: 51.3125em) { /* escritorio: > 820px */
+  .block-image-text:not(.is-textonly) .image-text-inner {
+    --it-gap: clamp(1.65em, 5vw, 3.35em);
+    gap: var(--it-gap);
+    grid-template-columns: minmax(0, min(var(--measure-col), (100% - var(--it-gap)) / 2)) minmax(0, 1fr)
+  }
+  .block-image-text.is-reverse:not(.is-textonly) .image-text-inner {
+    grid-template-columns: minmax(0, 1fr) minmax(0, min(var(--measure-col), (100% - var(--it-gap)) / 2))
+  }
+}
+
 /* === v02: utilidades fs, iconos btn, fondos CTA responsive, banner === */
 /* fs-*: talla para TEXTO SUELTO EN PROSA (headings/parrafos via {.fs-s} en markdown body). NO usar en class: de un bloque/shortcode -- para eso esta textSize (ver block-text-*). */
 .fs-xs {
@@ -1596,6 +1619,25 @@ h2.fs-xs {
   max-width: 36ch;
   margin-inline: auto;
   line-height: 1.2
+}
+/* Medida de lectura en la columna: la rejilla es simetrica por diseno, asi que
+   aqui (al reves que en image-text) el tope va en el texto, no en la columna.
+   Solo actua cuando la columna supera --measure-col (wide/full en pantallas
+   anchas). En em: con textSize grande el tope crece con la letra y no llega a
+   actuar; con xs/s si, y mantiene los mismos caracteres por linea. La cita
+   (is-quote) tiene su propio 36ch. Solo en escritorio: por debajo la rejilla
+   es de una columna y el texto sigue la regla de cualquier prosa (medido: sin
+   esto, /nosotros/ crecia 63px a 820). */
+@media (width > 51.25em), (min-width: 51.3125em) { /* escritorio: > 820px */
+  .text-split-col:not(.is-quote)>:is(p, ul, ol) {
+    max-width: var(--measure-col)
+  }
+  .text-split-col.block-align-center>:is(p, ul, ol) {
+    margin-inline: auto
+  }
+  .text-split-col.block-align-right>:is(p, ul, ol) {
+    margin-left: auto
+  }
 }
 @media (width > 51.25em), (min-width: 51.3125em) { /* escritorio: > 820px */
   .text-split-inner {

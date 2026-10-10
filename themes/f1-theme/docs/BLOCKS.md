@@ -126,6 +126,12 @@ el build con `errorf`.
 
 No confundir con `align` de Campos Comunes, que es `text-align` (horizontal).
 
+**Ancho de las columnas (escritorio):** la columna de texto no pasa de la medida de
+lectura (`--measure-col`, 30em ≈ 62-65 caracteres). Hasta ahí las dos columnas son
+iguales; a partir de ahí la imagen se lleva el ancho extra. En `default` no llega a
+actuar; en `wide`, desde ~1300px; en `full`, desde ~1380px. El `sizes` de la imagen
+depende de `width` por eso. Detalle y medidas: DESIGN_TOKENS.md 3.5 y GUIA-IMAGENES.md.
+
 ## Text Split
 
 ```yaml
@@ -154,6 +160,11 @@ mismos que Campos Comunes) — no son clases nuevas. `pad` usa tokens propios
 del item (`--space-s/m/l`, más pequeños que el pad de sección). Si el texto
 usa `textSize: l` o `xl`, se limita automáticamente a `26ch` de ancho y se
 centra — evita líneas demasiado largas en una cita grande.
+
+En escritorio, el texto de cada columna (`p`, `ul`, `ol`) no pasa de
+`--measure-col` (30em ≈ 62-65 caracteres), alineado según el `align` del item.
+Solo actúa en columnas anchas (`wide`/`full` en pantallas grandes, o `textSize`
+pequeño); con letra grande el tope crece con ella. DESIGN_TOKENS.md 3.5.
 
 **Solo 2 items por bloque** — el grid no reflowea a más columnas si añades un
 tercero, simplemente lo apila fuera de la fila. Para 3+ elementos en grid, usar

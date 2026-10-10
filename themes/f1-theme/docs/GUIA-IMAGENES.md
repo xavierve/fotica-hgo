@@ -21,7 +21,7 @@
 | **Cards** | `card.image` | **800×600** | 1600×1200 | **4:3** | WebP |
 | **Equipo** | `team.items[].image` | **750×750** | 1500×1500 | **1:1 cuadrado** | WebP |
 | **Galería** | `gallery.items[].image` | 1200×900 | 2400×1800 | **4:3** | WebP |
-| **image-text** | en el shortcode | **700 ancho** | 1400 | libre | WebP |
+| **image-text** | en el shortcode | **700 ancho** | 1400 *(`full`: 2000-2200 si hay original)* | libre | WebP |
 | **Imagen suelta en el prose** | shortcode `figure` | **800 ancho** | hasta 2240 *(el original, sin ampliar)* | libre | WebP |
 | **Slider** | `slider.items[].image` | **780 ancho** | — | libre | WebP |
 | **Logos de marca** | `items[].image` (bloque `brands-logos`) | **320×160** | 640×320 | **2:1** | **SVG** o WebP con transparencia |
@@ -60,27 +60,41 @@ archivo necesario. No son cifras redondas elegidas a ojo.
 |---|---|---|---|---|
 | Hero (stacked) | `(min-width:1440px) 1440px, 100vw` | hasta 1440px (banda con tope) | 2880px | — |
 | Cards / Equipo | `(min-width:1100px) 33vw, (min-width:600px) 50vw, 100vw` | ~370px desktop · ~400px móvil | ~740px | ~1200px |
-| image-text | `(width > 51.25em) 50vw, 100vw` | 528px (`m`) · 688px (`wide`) · ~704px (`full`) | ~1056-1408px | — |
+| image-text | por `width` (ver abajo; `blocks/image-text.html`) | 510px (`default`) · hasta 773px (`wide`) · hasta 1099px a 1920 (`full`) | ~1020-2200px | — |
 | Hero split (Home) | `(min-width:1440px) 620px, (width > 51.25em) 45vw, 100vw` | ~475px (columna `.9fr`) | ~950px | — |
 | Imagen del prose (`figure`) | `(width > 72em) 1120px, calc(100vw - 2rem)` | 343px (móvil 375) · 1120px (escritorio) | ~690px · 2240px | ~1075px |
 | Slider | `min(80vw, 420px)` | 388px (420 − 32 de padding) | ~776px | — |
 | Logos | `160px` | 160px | 320px | — |
 | Avatar testimonio | `56px` | 56px | 112px | — |
 
-**image-text no ocupa el ancho del contenedor: ocupa la mitad.** Son dos
-columnas `1fr 1fr` con un `gap` de hasta 64px, así que la imagen mide
-aproximadamente la mitad del contenedor menos medio gap (medido por Foco en el
-inspector, 14 sep, y confirmado con el CSS):
+**image-text no ocupa el ancho del contenedor, y desde oct 2026 tampoco la
+mitad exacta.** Son dos columnas con un `gap` de hasta 67px. La de texto se
+para en la medida de lectura (`--measure-col`, 600px con la letra de 20px) y
+la imagen se lleva todo el ancho que sobre (DESIGN_TOKENS.md, 3.5). Hasta que
+la mitad del espacio llega a 600px, las dos columnas siguen siendo iguales.
+Medido con Playwright (oct 2026):
 
 | `width` del bloque | Contenedor | Imagen | DPR2 necesita |
 |---|---|---|---|
-| default (`m`) | 1120px | **528px** | ~1056px |
-| `wide` | 1440px | **688px** | ~1376px |
-| `full` | según ventana | ~704px | ~1408px |
+| `default` | 1120px | **~510px** (no cambia: el texto no llega a 600) | ~1020px |
+| `wide` | 1440px | 592px a 1280 · **741px** a 1440 · **773px** desde 1472 | ~1550px |
+| `full` | ventana − 4vw por lado | 557px a 1280 · 658px a 1440 · **1099px** a 1920 · 1733px a 2560 | ~2200px a 1920 |
 
-Con **700 de ancho base y 1400 en `_hd`** quedan cubiertas las tres variantes.
-En móvil el bloque colapsa a una columna y la imagen pasa a ~100vw, pero ahí
-el `_hd` de 1400 da de sobra incluso a DPR3.
+`sizes` del partial, por `width` (solo media queries y `calc()`; `min()`/`max()`
+dentro de `sizes` no tienen el mismo soporte en todos los navegadores):
+
+- `default`: `(width > 51.25em) 50vw, 100vw` (sobrestima: pide ~720px donde se pintan ~510)
+- `wide`: `(width > 92em) 775px, (width > 81em) calc(100vw - 43.5rem), (width > 51.25em) 50vw, 100vw`
+- `full`: `(width > 125em) calc(100vw - 52rem), (width > 86em) calc(92vw - 41.5rem), (width > 51.25em) 50vw, 100vw`
+
+Con **700 de ancho base y 1400 en `_hd`**: `default` queda cubierto también a
+DPR2. En `wide`, DPR1 siempre, y DPR2 se queda un ~10% corto en pantallas
+grandes (1400 para 1550): aceptable. **En `full`**, a 1920 con DPR2 harían falta
+~2200px. Si la foto tiene original de cámara (`D3A####`), conviene un `_hd` de
+2000-2200 generado desde el original; nunca ampliando el WebP. Hoy usa `full`
+solo `/nosotros/` (las dos fotos de equipo, `_hd` de 1440).
+En móvil el bloque colapsa a una columna y la imagen pasa a ~100vw; ahí el
+`_hd` de 1400 da de sobra incluso a DPR3.
 
 **El mismo cuidado con otros bloques:** el ancho del contenedor no es el ancho
 de la imagen cuando hay columnas o padding de por medio. En el slider, la
