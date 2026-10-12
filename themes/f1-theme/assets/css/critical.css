@@ -50,10 +50,10 @@
      las 1120 enteras (dos tarjetas de sedes, un formulario corto). */
   --container-narrow: 860px;
   --container-wide: 1440px;
-  /* Medida de lectura de una COLUMNA de texto (image-text, text-split): unos 66-70
+  /* Medida de lectura de una COLUMNA de texto (image-text, text-split): unos 70
      caracteres reales. En em, no en ch: con system-ui, 1ch (el ancho del "0") es
      ~0,63em y la letra media ~0,46-0,49em, asi que 72ch salen ~92 caracteres.
-     Medido: 32em = ~66 car. (Inter) / ~70 (Segoe UI, Windows). 30em dejaba el
+     Medido: 33.5em = ~66 car. (Inter) / ~75 (Segoe UI, Windows). 30em dejaba el
      titular de image-text en tres lineas y el texto muy por encima de la foto;
      desde 34em el bloque ya no baja de altura y solo se alargan las lineas.
      Al ir en em, la medida en caracteres es la misma con cualquier textSize. */

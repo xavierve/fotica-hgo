@@ -259,8 +259,22 @@
   margin-top: 0;
   margin-bottom: .45em
 }
+/* Rejilla de tarjetas (cards, equipo, testimonios) y galeria. REGLA PROPIA: hasta
+   oct 2026 compartia selector con .logo-grid, y al ajustar los logos (8rem de minimo,
+   align-items:start) cards y galeria heredaron esos valores sin que nadie lo
+   buscara: fichas de equipo estrechas y testimonios de alturas distintas.
+   - 15rem = los 240px de siempre con la letra por defecto, y crece con ella.
+   - .85em = el 1rem de antes con la calibracion x0,85 de los huecos interiores
+     (DESIGN_TOKENS 3.4).
+   - Sin align-items: el stretch por defecto iguala la altura de las tarjetas de una
+     fila, y el pie anclado con margin-top:auto (.card-link, .testimonial footer)
+     queda alineado. */
 .cards-grid,
-.gallery-grid,
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: .85em
+}
 /* brands-logos: cada logo en una caja de formato fijo 2:1 (como mucho 160x80,
    el mismo 160px del sizes del partial), con object-fit:contain. El archivo
    viene ya en ese lienzo (320x160, logo centrado; ver GUIA-IMAGENES), asi que
