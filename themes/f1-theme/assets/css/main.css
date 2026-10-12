@@ -728,6 +728,19 @@ address {
   .block-image-text.is-bottom .image-text-inner {
     align-items: end
   }
+  /* sticky: con el texto mas alto que la foto, la foto se queda fija bajo la
+     cabecera mientras dura el texto, en vez de flotar centrada con huecos arriba y
+     abajo. align-items:start es obligatorio: un item estirado a toda la fila ocupa
+     su celda entera y position:sticky no tiene recorrido. top: cabecera fija de
+     escritorio (~4.7rem) + aire; en rem para acompanar a la letra del usuario. Si el
+     texto es mas corto que la foto no hay recorrido y se ve como valign:top. */
+  .block-image-text.is-sticky .image-text-inner {
+    align-items: start
+  }
+  .block-image-text.is-sticky .image-text-media {
+    position: sticky;
+    top: 6.5rem
+  }
   .footer-grid {
     grid-template-columns: 1fr 1fr 1.35fr
   }

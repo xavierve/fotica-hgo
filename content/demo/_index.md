@@ -154,6 +154,13 @@ sections:
     image: "/images/100-equipo_fausto_completo.webp"
     imageAlt: "Demo"
 
+  - type: image-text
+    sticky: true
+    title: "2.13- sticky: true — la foto acompaña el scroll"
+    text: "Copy deliberadamente largo para que la columna de texto sea bastante más alta que la foto, que es cuando `sticky` se nota. Haz scroll despacio: la foto empieza alineada con este titular y se queda fija bajo la cabecera mientras dura el texto; al acabar el texto, se va con él. Sin `sticky` la foto quedaría centrada, con un hueco arriba y otro abajo. Implica alineación arriba, así que no se combina con `valign: center` ni `bottom` (el build falla). Solo en escritorio: por debajo de 821px el bloque se apila y no hay nada que fijar. Si el texto fuera más corto que la foto no habría recorrido y se vería igual que `valign: top`. Úsalo en bloques de texto largo, como los de Nosotros; en copys cortos no aporta nada."
+    image: "/images/100-equipo_fausto_completo.webp"
+    imageAlt: "Demo"
+
   # ============ COUNTER — con y sin fondo ============
   - type: counter
     text: "3.1- counter · sin fondo · animated: true"

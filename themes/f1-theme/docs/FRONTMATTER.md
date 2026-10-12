@@ -58,6 +58,7 @@ sections:
     imageAlt: ""
     reverse: false
     valign: top
+    sticky: false     # true: la foto acompaña el scroll (implica valign top; ver BLOCKS.md)
   - type: cards
     columns: 3
     title: ""

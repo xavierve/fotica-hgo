@@ -1,5 +1,17 @@
 # F1 Theme · Changelog
 
+## Sin versión — image-text: variante `sticky`
+
+- **`sticky: true`** (bloque) / **`sticky="true"`** (shortcode) → `is-sticky`. En escritorio la foto
+  empieza alineada con el titular y se queda fija bajo la cabecera (`top: 6.5rem`) mientras dura el
+  texto. Para copys largos: centrada, la foto dejaba huecos arriba y abajo; con `valign: top` solo,
+  todo el hueco quedaba debajo.
+- Implica `align-items: start` (un item estirado no puede fijarse): con `valign` center/bottom el
+  build falla con `errorf`. Sin efecto por debajo de 51.25em (bloque apilado).
+- Aplicado a los dos image-text de `/nosotros/` (alto del texto ÷ alto de la foto a 821px: 1,97 y
+  2,22, tras sacar la lista a `list-grid` y recortar el copy). Demo 2.13.
+- Docs: BLOCKS.md (Image Text), FRONTMATTER.md, comentario del shortcode.
+
 ## Sin versión — utilidad de prosa `list-grid`: lista en tarjetas
 
 - **Motivo:** en `/nosotros/`, la lista de cuatro compromisos dentro del segundo image-text dejaba

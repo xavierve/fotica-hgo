@@ -112,6 +112,7 @@ sections:
     imageAlt:
     reverse: true
     valign: top       # top | center (default) | bottom
+    sticky: true      # la foto acompaña el scroll (solo escritorio)
 ```
 
 Si `reverse: true`, añade `is-reverse`.
@@ -125,6 +126,14 @@ corto queda centrado contra el más alto) y **no emite clase** — escribir
 el build con `errorf`.
 
 No confundir con `align` de Campos Comunes, que es `text-align` (horizontal).
+
+`sticky: true` (shortcode: `sticky="true"`) añade `is-sticky`. En escritorio la foto empieza
+alineada con el titular y **se queda fija bajo la cabecera** mientras dura el texto; al acabar el
+texto se va con él. Para bloques de texto largo, donde la foto centrada dejaba huecos arriba y
+abajo (`/nosotros/`). Implica alineación arriba (`align-items: start`; un elemento estirado no
+puede fijarse), así que con `valign: center` o `bottom` el build falla con `errorf`;
+`valign: top` es redundante pero válido. `top: 6.5rem` (cabecera fija de escritorio + aire). Por
+debajo de 51.25em no hace nada: el bloque va apilado. Demo 2.13.
 
 **Ancho de las columnas (escritorio):** la columna de texto no pasa de la medida de
 lectura (`--measure-col`, 33.5em ≈ 70-74 caracteres). Hasta ahí las dos columnas son
