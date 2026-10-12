@@ -57,7 +57,7 @@
      titular de image-text en tres lineas y el texto muy por encima de la foto;
      desde 34em el bloque ya no baja de altura y solo se alargan las lineas.
      Al ir en em, la medida en caracteres es la misma con cualquier textSize. */
-  --measure-col: 32em;
+  --measure-col: 33.5em;
   --space-s: clamp(1rem, 2vw, 1.5rem);
   --space-m: clamp(2rem, 4vw, 3rem);
   --space-l: clamp(3rem, 7vw, 5rem);
