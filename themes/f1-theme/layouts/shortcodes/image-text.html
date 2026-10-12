@@ -34,6 +34,9 @@
     valign    — top | center | bottom. Alineación vertical de AMBAS columnas
                 cuando una es más alta que la otra. Default center (no emite
                 clase). Solo tiene efecto en escritorio (> 51.25em).
+    sticky    — "true" → la foto acompaña el scroll mientras dura el texto
+                (añade is-sticky; solo escritorio). Implica valign top: con
+                valign center/bottom el build falla.
     class, pad, textSize, align — mismos modificadores genéricos que cualquier block
 */ -}}
 
@@ -52,6 +55,7 @@
     "width"    (.Get "width")
     "reverse"  (eq (.Get "reverse") "true")
     "valign"   (.Get "valign")
+    "sticky"   (eq (.Get "sticky") "true")
     "class"    (.Get "class")
     "pad"      (.Get "pad")
     "textSize" (.Get "textSize")

@@ -12,6 +12,14 @@
   {{ end }}
   {{ if ne . "center" }}{{ $extra = $extra | append (printf "is-%s" .) }}{{ end }}
 {{ end }}
+{{/* sticky: la foto empieza alineada con el titular y acompana el scroll hasta
+     que acaba el texto (solo escritorio; main.css). Implica alineacion arriba: un
+     elemento estirado a toda la fila no puede fijarse. Por eso no se combina con
+     valign center/bottom: error explicito en vez de ignorarlo en silencio. */}}
+{{ if .sticky }}
+  {{ with .valign }}{{ if ne . "top" }}{{ errorf "image-text: sticky implica alineacion arriba; quita valign %q" . }}{{ end }}{{ end }}
+  {{ $extra = $extra | append "is-sticky" }}
+{{ end }}
 {{/* sizes: ancho REAL de la columna de imagen. El texto se queda en
      --measure-col (33.5em = 670px) en cuanto la mitad del espacio la supera, y
      la imagen se lleva el resto (main.css). Calculado contra el CSS y medido
