@@ -13,7 +13,7 @@
   HTML sin escapar (Goldmark unsafe=true en hugo.toml) — por eso admite
   incrustar <video>/<iframe> en un futuro sin tocar esta plantilla.
 
-  Parámetros wrapper: title, subtitle, class, variant, textSize, align, width, pad
+  Parámetros wrapper: eyebrow, title, subtitle, class, variant, textSize, align, width, pad
   Parámetros item: textSize, align, pad, margin, quote="true" (cita destacada:
   36ch, centrado, negrita, --fs-highlight — ver text-split-item.html)
 */ -}}
@@ -26,8 +26,7 @@
       "pad" (.Get "pad")
     )) }}">
   <div class="container">
-    {{ with .Get "title" }}<h2>{{ . }}</h2>{{ end }}
-    {{ with .Get "subtitle" }}<p class="section-subtitle">{{ . }}</p>{{ end }}
+    {{ partial "block-heading.html" (dict "eyebrow" (.Get "eyebrow") "title" (.Get "title") "subtitle" (.Get "subtitle")) }}
     <div class="text-split-inner">
       {{ .Inner }}
     </div>

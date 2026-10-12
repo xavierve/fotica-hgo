@@ -88,6 +88,8 @@ Todos los bloques de `sections` aceptan:
   alineación vertical no es un campo común: solo la declaran los bloques de dos
   columnas (`image-text`, vía `valign`; ver BLOCKS.md)
 - `class`: string opcional
+- `eyebrow`: antetítulo opcional sobre el H2, solo donde el título no define el bloque (ver
+  BLOCKS.md, «Cabecera de bloque»)
 
 ## Hero: layouts
 

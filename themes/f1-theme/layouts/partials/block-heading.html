@@ -1,0 +1,26 @@
+{{- /*
+  partials/block-heading.html — cabecera comun de bloque: eyebrow + H2 + subtitulo.
+
+  Entrada (dict): eyebrow, title, subtitle. Los tres opcionales.
+    {{ partial "block-heading.html" (dict "eyebrow" .eyebrow "title" .title "subtitle" .subtitle) }}
+
+  Antes cada bloque pintaba su <h2> y su .section-subtitle por su cuenta; ahora
+  todos (bloque y shortcode) pasan por aqui: un solo sitio para cambiar la
+  cabecera, y paridad bloque/shortcode por construccion.
+
+  - eyebrow: antetitulo que dice QUE ES la seccion cuando el H2 es evocador y no
+    lo dice («Opiniones de clientes» sobre «Nos conocemos de toda la vida…»).
+    No ponerlo en todas: si cada bloque lo lleva deja de orientar. Misma clase
+    .eyebrow que el hero y el cta (mayusculas por CSS: escribirlo en minusculas
+    de frase, que es lo que lee un lector de pantalla).
+  - Sin envoltorio a proposito: emite hermanos, igual que antes. Sin eyebrow el
+    HTML es identico al de siempre; las reglas de cabecera de main.css aceptan
+    el H2 como primer hijo o justo detras del eyebrow.
+  - Eyebrow sin title: is-solo. Es un parche, no un patron: la seccion se queda sin
+    encabezado en el indice del lector de pantalla. Si el antetitulo ya dice que es
+    el bloque, va como title. is-solo solo evita que, si pasa, quede pegado al
+    contenido (le da el hueco que dejaria el H2).
+*/ -}}
+{{- with .eyebrow }}<p class="eyebrow block-eyebrow{{ if not $.title }} is-solo{{ end }}">{{ . }}</p>{{ end -}}
+{{- with .title }}<h2>{{ . }}</h2>{{ end -}}
+{{- with .subtitle }}<p class="section-subtitle">{{ . }}</p>{{ end -}}

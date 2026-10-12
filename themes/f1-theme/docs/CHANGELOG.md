@@ -1,5 +1,22 @@
 # F1 Theme · Changelog
 
+## Sin versión — cabecera de bloque unificada (`block-heading.html`) y `eyebrow` en todos los bloques
+
+- **Nuevo `partials/block-heading.html`** (eyebrow + H2 + subtítulo). Lo usan `text`, `cards`,
+  `testimonials`, `team`, `text-split`, `brands-logos`, `locations`, `gallery`, `slider`,
+  `timeline`, `trustbar` e `image-text`, en bloque y en shortcode. Antes cada uno pintaba su
+  cabecera por su cuenta. `cta` y hero conservan la suya.
+- **`eyebrow`** como campo común: solo donde el H2 no define el bloque. Clase `.eyebrow` del hero
+  (+ `.block-eyebrow`), centrado como la cabecera; en image-text, alineado con la columna.
+- **Sin envoltorio:** sin eyebrow el HTML es idéntico al anterior (comprobado: 30 páginas + demo).
+  CSS: `.block .container>h2:first-child` → `h2:is(:first-child, .block-eyebrow + h2)`.
+- **Efecto colateral (deseado):** `gallery`, `slider`, `testimonials` y `timeline` ya muestran
+  `subtitle`; la galería de `/nosotros/` tenía uno que se ignoraba.
+- `/nosotros/`: eyebrows «Equipo de trabajo» y «Opiniones de clientes». «Nuestros compromisos»
+  pasa a `title`: sin H2, el eyebrow quedaba a 7px de las tarjetas y a 96px del borde de la banda.
+- Eyebrow sin `title` → clase `is-solo`, con el hueco inferior de un H2. Demo 11.1.
+- Docs: BLOCKS.md (Campos comunes y «Cabecera de bloque»), FRONTMATTER.md.
+
 ## Sin versión — image-text: variante `sticky`
 
 - **`sticky: true`** (bloque) / **`sticky="true"`** (shortcode) → `is-sticky`. En escritorio la foto

@@ -5,6 +5,7 @@
   Los datos salen de site.yaml, no de parametros. Ver blocks/locations.html.
 */ -}}
 {{ partial "blocks/locations.html" (dict
+    "eyebrow"    (.Get "eyebrow")
     "title"      (.Get "title")
     "subtitle"   (.Get "subtitle")
     "layout"     (.Get "layout")

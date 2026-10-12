@@ -21,8 +21,7 @@
   {{- with .Get "textColor" }}{{ $styles = $styles | append (printf "--section-text-color:%s" .) }}{{ end -}}
   {{- with $styles }} style="{{ delimit . ";" | safeCSS }}"{{ end }}>
   <div class="container">
-    {{ with .Get "title" }}<h2>{{ . }}</h2>{{ end }}
-    {{ with .Get "subtitle" }}<p class="section-subtitle">{{ . }}</p>{{ end }}
+    {{ partial "block-heading.html" (dict "eyebrow" (.Get "eyebrow") "title" (.Get "title") "subtitle" (.Get "subtitle")) }}
     <div class="prose">{{ .Inner | $.Page.RenderString (dict "display" "block") }}</div>
   </div>
 </section>

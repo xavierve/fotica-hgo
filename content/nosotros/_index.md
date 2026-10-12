@@ -36,6 +36,7 @@ sections:
   
   # ============ TEAM — grid individual, 7 personas reales ============
   - type: team
+    eyebrow: "Equipo de trabajo"
     title: "Cada rostro, una historia con Fausto"
     subtitle: "Óptico-optometristas, audioprotesista y el equipo de atención que hace que todo funcione cada día."
     items:
@@ -130,7 +131,7 @@ Esa continuidad de la que hablamos tiene nombre y cara. En Fausto no te atiende 
 Es la diferencia entre el protocolo de una franquicia y una relación real — y esa diferencia no se compra con publicidad. Se construye con el mismo equipo, año tras año.
 {{< /image-text >}}
 
-{{< text class="bg-color1" >}}
+{{< text class="bg-color1" title="Nuestros compromisos" >}}
 - **Te conocemos de verdad.** Sabemos qué gafas llevas, qué te costó adaptar la última vez y cuándo te toca la próxima revisión — no hace falta que nos lo recuerdes.
 - **Seguimos aquí después de la venta.** Si algo no te funciona, vuelves y lo resolvemos juntos, sin explicar tu caso desde cero.
 - **Decidimos aquí, pensando en ti.** No seguimos un guion escrito en una oficina central: cuando hace falta una solución distinta, la buscamos nosotros, en la tienda.
@@ -138,7 +139,7 @@ Es la diferencia entre el protocolo de una franquicia y una relación real — y
 {.list-grid role="list"}
 {{< /text >}}
 
-{{< testimonials title="Nos conocemos de toda la vida. Y eso se nota." >}}
+{{< testimonials eyebrow="Opiniones de clientes" title="Nos conocemos de toda la vida. Y eso se nota." >}}
 {{< testimonial-item name="Residente de Torre del Mar" rating="5" >}}
 Llevo años viniendo y aquí me conocen de verdad. No tengo que explicar nada: saben qué gafas llevo, cómo me fue la última vez, qué me funcionó. Eso no lo encuentras en cualquier sitio.
 {{< /testimonial-item >}}

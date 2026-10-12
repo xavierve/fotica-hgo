@@ -49,6 +49,33 @@ Todos los bloques aceptan:
 - `textSize`: `xs`, `s`, `m`, `l`, `xl` — ver "Talla de bloque vs talla de prosa" en FRONTMATTER.md
 - `align`: `left`, `center`, `right`
 - `class`: string opcional
+- `eyebrow`: antetítulo opcional sobre el H2 (shortcode: `eyebrow="…"`). Ver «Cabecera de bloque».
+
+## Cabecera de bloque (`eyebrow`, `title`, `subtitle`)
+
+Todos los bloques con título pintan su cabecera con `partials/block-heading.html`:
+`text`, `cards`, `testimonials`, `team`, `text-split`, `brands-logos`, `locations`, `gallery`,
+`slider`, `timeline`, `trustbar` e `image-text` (en este, dentro de la columna de texto y sin
+subtítulo). Bloque y shortcode pasan por el mismo partial: paridad por construcción. `cta` y
+el hero conservan su cabecera propia (ya tenían `eyebrow`).
+
+- **`eyebrow`, solo donde el H2 no define el bloque.** Si el titular es evocador («Nos
+  conocemos de toda la vida…»), el eyebrow dice qué es la sección («Opiniones de clientes»).
+  Con un H2 descriptivo («Preguntas frecuentes») sobra. En todas las secciones dejaría de
+  orientar.
+- **Si el antetítulo ya dice qué es el bloque, es el `title`, no un eyebrow** («Nuestros
+  compromisos» en `/nosotros/`). Un eyebrow sin H2 deja la sección sin encabezado (el lector de
+  pantalla no la encuentra navegando por títulos) y se ve huérfano. Si aun así va solo, el partial
+  le pone `is-solo` y el CSS le da el hueco hasta el contenido que dejaría el H2.
+- Se escribe en minúsculas de frase: las mayúsculas las pone el CSS (`.eyebrow`), y el lector de
+  pantalla lee el texto tal cual.
+- HTML: `<p class="eyebrow block-eyebrow">` antes del `<h2>`, sin envoltorio. **Sin eyebrow el
+  HTML es idéntico al anterior** (comprobado en las 30 páginas y la demo). El H2 sigue siendo
+  cabecera de bloque detrás del eyebrow: `h2:is(:first-child, .block-eyebrow + h2)`.
+- Color `--color-eyebrow` (dorado `--color-accent-text`, 4,9:1 sobre `bg-color1`), que pasa a
+  `-inverse` en fondos oscuros como en el hero.
+- Al unificar, `gallery`, `slider`, `testimonials` y `timeline` muestran también `subtitle` si se
+  pasa (antes lo ignoraban: la galería de `/nosotros/` tenía uno que no salía).
 
 **Bloques dentro del body (shortcodes).** Un bloque intercalado en el texto
 vive dentro de `.container.prose`, que ya pone el margen lateral. Sin fondo

@@ -22,8 +22,7 @@
 {{- $extra := slice (printf "locations-%s" (cond $compact "compact" "full")) -}}
 <section class="{{ partial "block-classes.html" (dict "name" "locations" "context" . "extra" $extra) }}">
   <div class="container">
-    {{ with .title }}<h2>{{ . }}</h2>{{ end }}
-    {{ with .subtitle }}<p class="section-subtitle">{{ . }}</p>{{ end }}
+    {{ partial "block-heading.html" (dict "eyebrow" .eyebrow "title" .title "subtitle" .subtitle) }}
     <div class="locations-grid">
       {{ range $locations }}
       {{- $loc := . -}}

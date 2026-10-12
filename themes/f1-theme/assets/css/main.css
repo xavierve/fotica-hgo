@@ -88,7 +88,7 @@
    un H2 gigante), pero solo la cabecera de bloque se centra y limita en ancho.
    image-text y cta quedan excluidos sin necesidad de :not() — su h2 vive dentro de
    un div intermedio (.image-text-copy / .cta-text), nunca hijo directo de .container. */
-:where(.block .container>h2:first-child),
+:where(.block .container>h2:is(:first-child, .block-eyebrow + h2)),
 .prose>:where(h2) {
   font-size: var(--fs-highlight);
   line-height: 1.2
@@ -102,10 +102,35 @@
   font-size: 1.15rem;
   line-height: 1.3
 }
-.block .container>h2:first-child {
+.block .container>h2:is(:first-child, .block-eyebrow + h2) {
   max-width: 60ch;
   margin-inline: auto;
   text-align: center
+}
+/* Eyebrow de bloque (partials/block-heading.html): antetitulo que dice QUE ES la
+   seccion cuando el H2 no lo dice. Misma .eyebrow del hero/cta (critical.css:
+   mayusculas, tracking, --color-eyebrow, que pasa a -inverse en fondos oscuros).
+   Centrado como la cabecera de bloque; pegado a su H2 (el H2 detras de un eyebrow
+   sigue siendo cabecera de bloque: ver :is(:first-child, .block-eyebrow + h2)).
+   En image-text va en la columna de texto, alineado con ella. */
+.block .container>.block-eyebrow {
+  margin: 0 auto .5em;
+  text-align: center
+}
+.block-eyebrow+h2 {
+  margin-top: 0
+}
+.image-text-copy>.block-eyebrow {
+  margin: 0 0 .5em
+}
+/* Eyebrow sin H2 (is-solo, lo pone block-heading.html): el hueco hasta el
+   contenido que deja el H2 (medido: 23px a 375, 30px a 1440). En rem, no con
+   --fs-highlight: esa variable va en em y aqui se resolveria con la letra pequena
+   del eyebrow. Sin esto quedaba a 7px del contenido y a 96px del borde del bloque.
+   Lo correcto es poner title: ver BLOCKS.md, «Cabecera de bloque». */
+.block .container>.block-eyebrow.is-solo,
+.image-text-copy>.block-eyebrow.is-solo {
+  margin-bottom: clamp(1.4rem, 2.1vw, 1.875rem)
 }
 .section-subtitle {
   font-size: 1.15rem;

@@ -38,7 +38,7 @@
 <section class="{{ partial "block-classes.html" (dict "name" "image-text" "context" . "extra" $extra) }}">
   <div class="container image-text-inner has-cols">
     <div class="image-text-copy">
-      {{ with .title }}<h2>{{ . }}</h2>{{ end }}
+      {{ partial "block-heading.html" (dict "eyebrow" .eyebrow "title" .title) }}
       {{ with .text }}<div class="prose">{{ partial "md-block.html" . }}</div>{{ end }}
     </div>
     {{ with .image }}<figure class="image-text-media">{{ partial "img-responsive.html" (dict "src" . "alt" $.imageAlt "sizes" $sizes) }}{{ with $.caption }}<figcaption class="image-text-caption">{{ . | markdownify }}</figcaption>{{ end }}</figure>{{ end }}

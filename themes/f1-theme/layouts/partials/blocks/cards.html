@@ -2,8 +2,7 @@
 {{ $columns := $.columns | default 3 }}
 <section class="{{ partial "block-classes.html" (dict "name" "cards" "context" $ "extra" (slice (printf "cards-columns-%v" $columns))) }}">
   <div class="container">
-    {{ with $.title }}<h2>{{ . }}</h2>{{ end }}
-    {{ with $.subtitle }}<p class="section-subtitle">{{ . }}</p>{{ end }}
+    {{ partial "block-heading.html" (dict "eyebrow" $.eyebrow "title" $.title "subtitle" $.subtitle) }}
     <div class="cards-grid">
       {{ range . }}
       {{ $card := . }}

@@ -1,6 +1,6 @@
 <section class="{{ partial "block-classes.html" (dict "name" "slider" "context" .) }}">
   <div class="container">
-    {{ with .title }}<h2>{{ . }}</h2>{{ end }}
+    {{ partial "block-heading.html" (dict "eyebrow" .eyebrow "title" .title "subtitle" .subtitle) }}
     <div class="slider-nav">
       <button type="button" class="slider-btn" data-slider-prev aria-label="{{ i18n "prev" }}">{{ partial "icons.html" "arrow-right" }}</button>
       <button type="button" class="slider-btn" data-slider-next aria-label="{{ i18n "next" }}">{{ partial "icons.html" "arrow-right" }}</button>

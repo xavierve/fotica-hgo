@@ -27,6 +27,7 @@
     caption   — leyenda bajo la imagen (figcaption). Admite markdown inline.
                 No debe repetir el alt: el alt describe la escena, la leyenda
                 aporta el dato (nombre, centro, credencial).
+    eyebrow   — antetítulo opcional sobre el título (ver partials/block-heading.html)
     title     — título opcional sobre el copy
     variant   — default | soft | featured | contrast
     width     — default | wide | full
@@ -46,6 +47,7 @@
 {{- end -}}
 
 {{- $ctx := dict
+    "eyebrow"  (.Get "eyebrow")
     "title"    (.Get "title")
     "text"     .Inner
     "image"    $image

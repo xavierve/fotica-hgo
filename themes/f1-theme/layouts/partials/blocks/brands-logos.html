@@ -14,8 +14,7 @@
 */ -}}
 <section class="{{ partial "block-classes.html" (dict "name" "brands-logos" "context" .) }}">
   <div class="container">
-    {{ with .title }}<h2>{{ . }}</h2>{{ end }}
-    {{ with .subtitle }}<p class="section-subtitle">{{ . }}</p>{{ end }}
+    {{ partial "block-heading.html" (dict "eyebrow" .eyebrow "title" .title "subtitle" .subtitle) }}
     <div class="logo-grid">
       {{ range .items }}{{ partial "brands-logos-item.html" . }}{{ end }}
     </div>

@@ -261,6 +261,7 @@ sections:
 
   # ============ TEXT — bloque de prosa libre en sections: ============
   - type: text
+    eyebrow: "11.0- eyebrow"
     title: "11.1- text · width: default"
     text: |
       ## Un H2 dentro del bloque

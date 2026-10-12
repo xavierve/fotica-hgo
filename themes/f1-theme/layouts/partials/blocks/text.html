@@ -28,8 +28,7 @@
   {{- with .textColor }}{{ $styles = $styles | append (printf "--section-text-color:%s" .) }}{{ end -}}
   {{- with $styles }} style="{{ delimit . ";" | safeCSS }}"{{ end }}>
   <div class="container">
-    {{ with .title }}<h2>{{ . }}</h2>{{ end }}
-    {{ with .subtitle }}<p class="section-subtitle">{{ . }}</p>{{ end }}
+    {{ partial "block-heading.html" (dict "eyebrow" .eyebrow "title" .title "subtitle" .subtitle) }}
     <div class="prose">{{ partial "md-block.html" .text }}</div>
   </div>
 </section>
