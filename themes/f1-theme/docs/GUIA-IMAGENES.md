@@ -60,7 +60,7 @@ archivo necesario. No son cifras redondas elegidas a ojo.
 |---|---|---|---|---|
 | Hero (stacked) | `(min-width:1440px) 1440px, 100vw` | hasta 1440px (banda con tope) | 2880px | — |
 | Cards / Equipo | `(min-width:1100px) 33vw, (min-width:600px) 50vw, 100vw` | ~370px desktop · ~400px móvil | ~740px | ~1200px |
-| image-text | por `width` (ver abajo; `blocks/image-text.html`) | 510px (`default`) · hasta 733px (`wide`) · hasta 1059px a 1920 (`full`) | ~1020-2120px | — |
+| image-text | por `width` (ver abajo; `blocks/image-text.html`) | 510px (`default`) · hasta 703px (`wide`) · hasta 1029px a 1920 (`full`) | ~1020-2120px | — |
 | Hero split (Home) | `(min-width:1440px) 620px, (width > 51.25em) 45vw, 100vw` | ~475px (columna `.9fr`) | ~950px | — |
 | Imagen del prose (`figure`) | `(width > 72em) 1120px, calc(100vw - 2rem)` | 343px (móvil 375) · 1120px (escritorio) | ~690px · 2240px | ~1075px |
 | Slider | `min(80vw, 420px)` | 388px (420 − 32 de padding) | ~776px | — |
@@ -69,26 +69,26 @@ archivo necesario. No son cifras redondas elegidas a ojo.
 
 **image-text no ocupa el ancho del contenedor, y desde oct 2026 tampoco la
 mitad exacta.** Son dos columnas con un `gap` de hasta 67px. La de texto se
-para en la medida de lectura (`--measure-col`, 640px con la letra de 20px) y
+para en la medida de lectura (`--measure-col`, 670px con la letra de 20px) y
 la imagen se lleva todo el ancho que sobre (DESIGN_TOKENS.md, 3.5). Hasta que
-la mitad del espacio llega a 640px, las dos columnas siguen siendo iguales.
+la mitad del espacio llega a 670px, las dos columnas siguen siendo iguales.
 Medido con Playwright (oct 2026):
 
 | `width` del bloque | Contenedor | Imagen | DPR2 necesita |
 |---|---|---|---|
-| `default` | 1120px | **~510px** (no cambia: el texto no llega a 640) | ~1020px |
-| `wide` | 1440px | 592px a 1280 · **701px** a 1440 · **733px** desde 1472 | ~1470px |
-| `full` | ventana − 4vw por lado, **tope 1920** | 557px a 1280 · 629px a 1440 · 765px a 1600 · **1059px** a 1920 · ~1055px desde ahí | ~2120px |
+| `default` | 1120px | **~510px** (no cambia: el texto no llega a 670) | ~1020px |
+| `wide` | 1440px | 592px a 1280 · 671px a 1440 · **703px** desde 1472 | ~1410px |
+| `full` | ventana − 4vw por lado, **tope 1920** | 557px a 1280 · 629px a 1440 · 735px a 1600 · **1029px** a 1920 · 1023px desde ahí | ~2120px |
 
 `sizes` del partial, por `width` (solo media queries y `calc()`; `min()`/`max()`
 dentro de `sizes` no tienen el mismo soporte en todos los navegadores):
 
 - `default`: `(width > 51.25em) 50vw, 100vw` (sobrestima: pide ~720px donde se pintan ~510)
-- `wide`: `(width > 92em) 735px, (width > 86em) calc(100vw - 46rem), (width > 51.25em) 50vw, 100vw`
-- `full`: `(width > 120em) 1060px, (width > 91.5em) calc(92vw - 44rem), (width > 51.25em) 50vw, 100vw`
+- `wide`: `(width > 92em) 705px, (width > 90em) calc(100vw - 48rem), (width > 51.25em) 50vw, 100vw`
+- `full`: `(width > 120em) 1030px, (width > 95.5em) calc(92vw - 46rem), (width > 51.25em) 50vw, 100vw`
 
 Medido de 1280 a 3440: el `sizes` da como mucho 3px más que el ancho pintado y nunca
-menos (entre 1380 y 1465, en `full`, sobrestima ~90px: el tramo 1:1 se describe con `50vw`).
+menos (entre ~1440 y ~1530, en `full`, sobrestima ~90px: el tramo 1:1 se describe con `50vw`).
 
 Con **700 de ancho base y 1400 en `_hd`**: `default` queda cubierto también a
 DPR2. En `wide`, DPR1 siempre, y DPR2 se queda un ~10% corto en pantallas

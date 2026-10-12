@@ -127,13 +127,13 @@ Muchas de las familias que vinieron con Fausto siguen viniendo hoy con sus hijos
 ## El equipo que te conoce — y te trata como persona antes que cliente
 Esa continuidad de la que hablamos tiene nombre y cara. En Fausto no te atiende un protocolo: te atiende alguien que lleva años mirando por tu vista y tu oído, y que se acuerda de ti sin necesidad de mirar la ficha.
 
+Es la diferencia entre el protocolo de una franquicia y una relación real — y esa diferencia no se compra con publicidad. Se construye con el mismo equipo, año tras año.
+{{< /image-text >}}
+
 - **Te conocemos de verdad.** Sabemos qué gafas llevas, qué te costó adaptar la última vez y cuándo te toca la próxima revisión — no hace falta que nos lo recuerdes.
 - **Seguimos aquí después de la venta.** Si algo no te funciona, vuelves y lo resolvemos juntos, sin explicar tu caso desde cero.
 - **Decidimos aquí, pensando en ti.** No seguimos un guion escrito en una oficina central: cuando hace falta una solución distinta, la buscamos nosotros, en la tienda.
 - **Te asesoramos con honestidad**, aunque eso signifique recomendarte la opción más sencilla en lugar de la más cara.
-
-Es la diferencia entre el protocolo de una franquicia y una relación real — y esa diferencia no se compra con publicidad. Se construye con el mismo equipo, año tras año.
-{{< /image-text >}}
 
 {{< testimonials title="Nos conocemos de toda la vida. Y eso se nota." >}}
 {{< testimonial-item name="Residente de Torre del Mar" rating="5" >}}

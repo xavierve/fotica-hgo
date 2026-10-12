@@ -1,5 +1,19 @@
 # F1 Theme · Changelog
 
+## Sin versión — `--measure-col` a 33.5em
+
+- **Cambio de Foco** (revisado en Windows): 32em → **33.5em** = 670px a 20px, ~74 caracteres
+  por línea en Segoe UI (64-71 con Inter).
+- **Medido:** el texto se para en 670px desde ~1440px (`wide`) y ~1530px (`full`). Imagen:
+  703px en `wide` desde 1472, 1029px en `full` a 1920 y 1023px por encima (tope de 120rem).
+- `sizes` de image-text recalculado para 670px (con 640 sobrestimaba 30-50px):
+  `wide` `(width > 92em) 705px, (width > 90em) calc(100vw - 48rem)`; `full`
+  `(width > 120em) 1030px, (width > 95.5em) calc(92vw - 46rem)`. Medido de 1280 a 2560: en el
+  tramo asimétrico, de +1 a +7px sobre el ancho real; en el de columnas iguales (`50vw`)
+  sobrestima como siempre, hasta ~90px en `full`. Nunca por debajo.
+- Cifras al día en critical.css, main.css, blocks/image-text.html, DESIGN_TOKENS.md 3.5,
+  GUIA-IMAGENES.md, BLOCKS.md, CLAUDE.md y demo 2.11.
+
 ## Sin versión — interlineado: body 1.5 y ratio decreciente por `textSize`
 
 - **Problema (revisión de Foco):** con el cuerpo a 20px, `line-height: 1.6` se veía suelto
