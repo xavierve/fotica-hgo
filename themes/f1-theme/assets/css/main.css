@@ -1466,8 +1466,9 @@ h2.fs-xs {
    bloque empezaba en x=32 y el de la prosa en x=16 (QA oct 2026). Sin fondo
    propio, el .container del bloque ocupa el ancho del padre, alineado con el
    texto; max-width (default/narrow) sigue limitando y centrando. CON fondo
-   (.has-surface) se conserva: alli ese margen es el aire entre el borde del
-   fondo y el texto. wide/full tienen su propio breakout. */
+   (.has-surface) se decide en «Fondo: banda o tarjeta»: la banda se alinea
+   igual (su color ya llega a la pantalla), la tarjeta conserva el margen.
+   wide/full tienen su propio breakout. */
 .prose .block:not(.has-surface, .block-width-wide, .block-width-full)>.container {
   width: 100%
 }
@@ -1479,7 +1480,7 @@ h2.fs-xs {
      del prose median lo que su ancho (default 1120, wide 1440) y se leian como una
      caja flotante. Aqui el color sale al viewport con un ::before que hereda el
      fondo del bloque (bg-colorN, bgColor, variantes: sin variable por paleta); el
-     contenido no se mueve. html{overflow-x:clip} (critical.css) recorta los 17px
+     contenido se alinea con la pagina (abajo). html{overflow-x:clip} (critical.css) recorta los 17px
      de barra de scroll que mete 100vw: sin scroll horizontal. Fuera: los bloques
      con foto (has-bg-image ya usa ::before para el velo) y card.
    - card: «pieza destacada de esta seccion». Dentro de la columna, con radio,
@@ -1495,6 +1496,14 @@ h2.fs-xs {
   inset: 0 calc(50% - 50vw);
   z-index: -1;
   background: inherit
+}
+/* Con la banda a sangre, el margen de 1rem del .container interno ya no es el
+   aire entre el color y el texto (el color llega a la pantalla): solo
+   desalineaba. En movil el texto de la banda empezaba en x=32 y el de la pagina
+   en x=16. Mismo arreglo que los bloques sin fondo (regla de arriba). wide/full
+   quedan fuera: tienen su propio breakout. La tarjeta conserva su margen. */
+.prose .block.has-surface:not(.has-bg-image, .surface-card, .block-width-wide, .block-width-full)>.container {
+  width: 100%
 }
 .block.has-surface.surface-card {
   --card-pad: clamp(1rem, 4vw, 2.5rem);

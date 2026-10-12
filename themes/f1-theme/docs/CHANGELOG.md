@@ -6,9 +6,14 @@
   bloques con fondo. `bleed` es el defecto y no añade clase; `card` → `surface-card`.
 - **`bleed` en el prose:** los shortcodes con fondo (text, text-split, cta, banner, brands-logos…)
   medían su ancho (a 1920: 400px de crema a cada lado en `default`) y se leían como una caja
-  flotante. Ahora el color llega al viewport con un `::before` (`background: inherit`); el contenido
-  no se mueve. Sin scroll horizontal a 375/1440/1920/2560. Las sections de página ya iban a sangre:
+  flotante. Ahora el color llega al viewport con un `::before` (`background: inherit`), y el contenido
+  se alinea con el de la página (punto siguiente). Sin scroll horizontal a 375/1440/1920/2560. Las sections de página ya iban a sangre:
   sin cambios. Excluye bloques con foto.
+- **La banda alinea su contenido con el de la página:** fuera el margen de 1rem del `.container`
+  interno (en una caja hacía de aire hasta el borde del color; a sangre solo desalineaba). Medido:
+  en móvil el texto de la banda pasa de x=32 a x=16, como el resto de la página; a 1440, de 176 a
+  160, el borde de la columna. El texto centrado (72ch) no se mueve. `card`, `wide` y `full`, igual
+  que antes.
 - **`card`:** radio, padding `--block-pad-compact` (48px a 1440, 28px a 375, simétrico: se anula el
   margin-top del primer hijo), margen propio y padding lateral `clamp(1rem, 4vw, 2.5rem)`. De página,
   ancho del bloque (default/wide/narrow). Sin sombra.

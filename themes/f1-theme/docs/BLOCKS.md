@@ -66,7 +66,8 @@ Un bloque con fondo de color (`class: bg-colorN`, `bgColor`, `variant` soft/feat
   del bloque (`default` 1120, `wide` 1440, `narrow` 860) con 16px de margen mínimo a los lados.
 - **Shortcodes en el prose:** antes medían su ancho y se leían como una caja flotante (cuadrada, ni
   banda ni tarjeta). Ahora `bleed` lleva el color al viewport con un `::before` que hereda el fondo
-  del bloque; el contenido no se mueve, y `html{overflow-x:clip}` evita el scroll horizontal.
+  del bloque, y `html{overflow-x:clip}` evita el scroll horizontal. El contenido se alinea con el
+  de la página (en móvil, x=16 dentro y fuera de la banda); la tarjeta conserva su margen interior.
   Medido sin scroll a 375, 1440, 1920 y 2560.
 - **Con foto** (`has-bg-image`: CTA, banner, counter con `bg`) no se aplica: siguen como estaban.
 - **No usar `card` con bloques que ya pintan tarjetas** (`list-grid`, `testimonials`, `faq`,
