@@ -1,5 +1,15 @@
 # F1 Theme · Changelog
 
+## Sin versión — FAQ: toda la tarjeta abre la pregunta
+
+- El padding pasa del `<details>` al `<summary>`. Antes solo la línea de texto abría la pregunta:
+  28px de alto en móvil, ~41% de la tarjeta (el resto parecía pulsable y no lo era). Ahora 59px y
+  96%, con la tarjeta cerrada del mismo tamaño. El foco de teclado rodea la tarjeta entera.
+- Abierta, la respuesta queda separada de la pregunta por el padding inferior del summary (antes
+  iba pegada, 0px): la tarjeta abierta crece ~17px.
+- Quitadas las reglas `.faq details` / `.faq summary`: ningún elemento lleva la clase `faq` (el
+  bloque emite `block-faq`), eran CSS muerto.
+
 ## Sin versión — cabecera de bloque unificada (`block-heading.html`) y `eyebrow` en todos los bloques
 
 - **Nuevo `partials/block-heading.html`** (eyebrow + H2 + subtítulo). Lo usan `text`, `cards`,

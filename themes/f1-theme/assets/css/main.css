@@ -513,17 +513,6 @@
   background: var(--bg-color1);
   text-align: center
 }
-.faq details {
-  background: var(--color-bg-over);
-  border: 1px solid rgba(0, 0, 0, .08);
-  border-radius: 12px;
-  padding: .85em;
-  margin: .65em 0
-}
-.faq summary {
-  cursor: pointer;
-  font-weight: 800
-}
 .site-footer {
   background: var(--color-dark);
   color: var(--color-text-inverse);
@@ -722,16 +711,25 @@ address {
 .block-cta {
   text-align: center
 }
+/* FAQ: toda la tarjeta es la zona tactil. El padding va en el <summary>, no en el
+   <details>: con el padding en el <details>, solo la linea de texto abria la
+   pregunta (28px de alto, ~40% de la tarjeta; el resto parecia pulsable y no lo
+   era). Cerrada, la tarjeta mide lo mismo que antes. La respuesta recupera el
+   padding lateral e inferior; el superior lo pone ya el summary. */
 .block-faq details {
   background: var(--color-bg-over);
   border: 1px solid rgba(0, 0, 0, .08);
   border-radius: 12px;
-  padding: .85em;
   margin: .65em 0
 }
 .block-faq summary {
   cursor: pointer;
-  font-weight: 800
+  font-weight: 600;
+  padding: .85em;
+  border-radius: 11px
+}
+.block-faq details>.prose {
+  padding: 0 .85em .85em
 }
 @media (width > 51.25em), (min-width: 51.3125em) { /* escritorio: > 820px */
   .image-text-inner {
