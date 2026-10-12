@@ -29,6 +29,46 @@
 .block .prose>p:only-child {
   margin-bottom: 0
 }
+/* list-grid: una lista del markdown convertida en tarjetas, para enumeraciones
+   cortas que son piezas sueltas (compromisos, ventajas) y no prosa. Se pone con
+   atributos de Goldmark en la linea siguiente a la lista:
+     - **Titulo.** Texto...
+     {.list-grid role="list"}
+   - role="list": Safari/VoiceOver deja de anunciar como lista un <ul> sin
+     vinetas (list-style:none). Con el role la lista conserva su semantica.
+   - El primer <strong> de cada item es el titulo de la tarjeta (display:block):
+     escribir el item como "**Titulo.** Texto", con la puntuacion DENTRO de la
+     negrita; si no, la coma o el punto abren linea.
+   - Una columna en movil, 2x2 desde escritorio. Rejilla fija y no auto-fit: con
+     cuatro items, auto-fit daba 3 + 1 huerfana a 821px.
+   - Pensado sobre un fondo de paleta ({{< text class="bg-color1" >}}): la tarjeta
+     usa --color-bg-over, el mismo blanco de .card. */
+.prose>ul.list-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: .85em;
+  max-width: none;
+  margin-inline: 0;
+  padding: 0;
+  list-style: none
+}
+@media (width > 51.25em), (min-width: 51.3125em) { /* escritorio: > 820px */
+  .prose>ul.list-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr))
+  }
+}
+.prose>ul.list-grid>li {
+  margin: 0;
+  padding: 1.05em;
+  background: var(--color-bg-over);
+  border: 1px solid rgba(0, 0, 0, .08);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .04)
+}
+.prose>ul.list-grid>li>strong:first-child {
+  display: block;
+  margin-bottom: .3em
+}
 /* El límite de lectura va en los elementos, no en el contenedor: así .prose mide lo mismo que cualquier .container de página (1120px), y un bloque/shortcode insertado entre párrafos no queda atrapado en 72ch — solo el TEXTO se recorta. */
 .prose>p,
 .prose>h2,
