@@ -90,6 +90,9 @@ Todos los bloques de `sections` aceptan:
 - `class`: string opcional
 - `eyebrow`: antetítulo opcional sobre el H2, solo donde el título no define el bloque (ver
   BLOCKS.md, «Cabecera de bloque»)
+- `surface`: `bleed` (defecto) | `card` — cómo se pinta un bloque **con fondo**: banda a sangre
+  o tarjeta dentro de la columna (ver BLOCKS.md, «Fondo: banda o tarjeta»). Shortcode:
+  `surface="card"`. Otro valor, o `card` con `width: full`, rompe el build.
 
 ## Hero: layouts
 

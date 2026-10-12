@@ -1472,6 +1472,56 @@ h2.fs-xs {
   width: 100%
 }
 
+/* === Fondo: banda o tarjeta (surface, block-classes.html) ===============
+   Un bloque con fondo de color dice una de dos cosas, nunca una intermedia:
+   - bleed (defecto): «empieza otra seccion». Banda de borde a borde, esquinas
+     rectas. Las sections de pagina (#main-content > .block) ya van a sangre; las
+     del prose median lo que su ancho (default 1120, wide 1440) y se leian como una
+     caja flotante. Aqui el color sale al viewport con un ::before que hereda el
+     fondo del bloque (bg-colorN, bgColor, variantes: sin variable por paleta); el
+     contenido no se mueve. html{overflow-x:clip} (critical.css) recorta los 17px
+     de barra de scroll que mete 100vw: sin scroll horizontal. Fuera: los bloques
+     con foto (has-bg-image ya usa ::before para el velo) y card.
+   - card: «pieza destacada de esta seccion». Dentro de la columna, con radio,
+     aire compacto y margen propio (no toca a sus vecinos). Sin sombra a proposito:
+     si alguien la usa con un bloque que ya pinta tarjetas, que pese lo menos. */
+.prose .block.has-surface:not(.has-bg-image, .surface-card) {
+  position: relative;
+  isolation: isolate
+}
+.prose .block.has-surface:not(.has-bg-image, .surface-card)::before {
+  content: "";
+  position: absolute;
+  inset: 0 calc(50% - 50vw);
+  z-index: -1;
+  background: inherit
+}
+.block.has-surface.surface-card {
+  --card-pad: clamp(1rem, 4vw, 2.5rem);
+  border-radius: var(--radius);
+  padding-block: var(--block-pad-compact)
+}
+.block.has-surface.surface-card>.container {
+  width: calc(100% - 2 * var(--card-pad))
+}
+/* Aire simetrico: el H2 de una section de pagina trae margin-top (~30px) que en
+   una banda se pierde entre 96px de padding, pero en la tarjeta (48px) la
+   descompensaba: 78px arriba, 48 abajo. */
+.block.has-surface.surface-card>.container>:first-child {
+  margin-top: 0
+}
+/* De pagina: deja de ir a sangre y se para en el ancho de su contenedor. */
+#main-content>.block.has-surface.surface-card {
+  width: min(calc(100% - 2rem), var(--container));
+  margin: var(--block-pad-compact) auto
+}
+#main-content>.block-width-wide.has-surface.surface-card {
+  width: min(calc(100% - 2rem), var(--container-wide))
+}
+#main-content>.block-width-narrow.has-surface.surface-card {
+  width: min(calc(100% - 2rem), var(--container-narrow))
+}
+
 /* === Ritmo vertical entre bloques de página ==============================
    .block lleva padding arriba y abajo, y el padding NO colapsa: dos bloques
    transparentes seguidos sumaban el doble de aire (96+96=192).

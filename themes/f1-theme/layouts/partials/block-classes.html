@@ -22,6 +22,23 @@
 {{ with $ctx.class }}
   {{ $classes = $classes | append . }}
 {{ end }}
+{{/* surface: COMO se pinta el fondo de un bloque con fondo (has-surface).
+       bleed (defecto) -> banda: en el prose, el color sale hasta los bordes del
+                          viewport y el contenido se queda en su ancho. Fuera del
+                          prose las sections ya van a sangre: no cambia nada.
+       card            -> pieza: dentro de la columna, con radio y aire compacto.
+     Sin clase para bleed: es lo de siempre, y el HTML no cambia. No usar card con
+     bloques que ya pintan tarjetas (list-grid, testimonials, faq): tarjeta dentro
+     de tarjeta. Ver BLOCKS.md, «Fondo: banda o tarjeta». */}}
+{{ with $ctx.surface }}
+  {{ if not (in (slice "bleed" "card") .) }}
+    {{ errorf "surface %q no valido en el bloque %s (bleed | card)" . $name }}
+  {{ end }}
+  {{ if and (eq . "card") (eq $ctx.width "full") }}
+    {{ errorf "surface card y width full se contradicen en el bloque %s (una tarjeta no va a sangre)" $name }}
+  {{ end }}
+  {{ if eq . "card" }}{{ $classes = $classes | append "surface-card" }}{{ end }}
+{{ end }}
 {{/* has-surface: el bloque pinta fondo propio, sea por parametro (bgColor/bg),
      por variante, por clase de paleta (bg-colorN) o por ser un tipo de bloque
      que siempre lleva banda. Gobierna el ritmo vertical: los bloques CON fondo

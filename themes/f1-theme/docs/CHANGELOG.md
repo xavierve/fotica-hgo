@@ -1,5 +1,22 @@
 # F1 Theme · Changelog
 
+## Sin versión — `surface`: banda a sangre o tarjeta
+
+- **Nuevo campo común `surface: bleed | card`** (bloque y shortcode, `block-classes.html`), para
+  bloques con fondo. `bleed` es el defecto y no añade clase; `card` → `surface-card`.
+- **`bleed` en el prose:** los shortcodes con fondo (text, text-split, cta, banner, brands-logos…)
+  medían su ancho (a 1920: 400px de crema a cada lado en `default`) y se leían como una caja
+  flotante. Ahora el color llega al viewport con un `::before` (`background: inherit`); el contenido
+  no se mueve. Sin scroll horizontal a 375/1440/1920/2560. Las sections de página ya iban a sangre:
+  sin cambios. Excluye bloques con foto.
+- **`card`:** radio, padding `--block-pad-compact` (48px a 1440, 28px a 375, simétrico: se anula el
+  margin-top del primer hijo), margen propio y padding lateral `clamp(1rem, 4vw, 2.5rem)`. De página,
+  ancho del bloque (default/wide/narrow). Sin sombra.
+- `errorf` con un valor desconocido o con `card` + `width: full`.
+- HTML idéntico en todas las páginas sin `surface` (el cambio de `bleed` es solo CSS).
+- Afecta hoy a `/nosotros/` (compromisos, text-split) y `/audicion/productos/audifonos/` (logos).
+- Demo p16 y 17.1–17.3. Docs: BLOCKS.md («Fondo: banda o tarjeta»), FRONTMATTER.md.
+
 ## Sin versión — hero overlay: tope de 1920px y sangrado con el color del borde
 
 - La foto del `overlay` deja de crecer a 1920px (`--hero-overlay-max`, `$overlayMax`). Medido en

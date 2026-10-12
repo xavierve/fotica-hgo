@@ -50,6 +50,31 @@ Todos los bloques aceptan:
 - `align`: `left`, `center`, `right`
 - `class`: string opcional
 - `eyebrow`: antetítulo opcional sobre el H2 (shortcode: `eyebrow="…"`). Ver «Cabecera de bloque».
+- `surface`: `bleed` (defecto) | `card`, para bloques con fondo. Ver «Fondo: banda o tarjeta».
+
+## Fondo: banda o tarjeta (`surface`)
+
+Un bloque con fondo de color (`class: bg-colorN`, `bgColor`, `variant` soft/featured/contrast,
+`counter`, `trustbar`) dice una de dos cosas, nunca una intermedia:
+
+| `surface` | Aspecto | Dice |
+|---|---|---|
+| `bleed` (defecto) | Color de borde a borde del viewport, esquinas rectas; el contenido, en su ancho | «Empieza otra sección» |
+| `card` | Dentro de la columna, radio `--radius`, padding `--block-pad-compact`, margen propio | «Pieza destacada de esta sección» |
+
+- **Sections de página:** ya iban a sangre; `bleed` no cambia nada. `card` las para en el ancho
+  del bloque (`default` 1120, `wide` 1440, `narrow` 860) con 16px de margen mínimo a los lados.
+- **Shortcodes en el prose:** antes medían su ancho y se leían como una caja flotante (cuadrada, ni
+  banda ni tarjeta). Ahora `bleed` lleva el color al viewport con un `::before` que hereda el fondo
+  del bloque; el contenido no se mueve, y `html{overflow-x:clip}` evita el scroll horizontal.
+  Medido sin scroll a 375, 1440, 1920 y 2560.
+- **Con foto** (`has-bg-image`: CTA, banner, counter con `bg`) no se aplica: siguen como estaban.
+- **No usar `card` con bloques que ya pintan tarjetas** (`list-grid`, `testimonials`, `faq`,
+  `cards`): tarjeta dentro de tarjeta, dos niveles de borde y radio. Esos van con `bleed`. Por eso
+  `card` no lleva sombra: si se usa mal, pesa lo menos posible.
+- No hay variante «caja» (cuadrada, sin sangrar): era la forma ambigua que esto quita.
+- `card` + `width: full` se contradicen y rompen el build (`errorf`), como un valor desconocido.
+- Demo: p16 (prose) y 17.x (sections).
 
 ## Cabecera de bloque (`eyebrow`, `title`, `subtitle`)
 

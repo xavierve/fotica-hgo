@@ -445,6 +445,25 @@ sections:
     layout: "compact"
     class: "bg-color2"
     align: "center"
+
+  # ============ SURFACE — banda o tarjeta (bloques con fondo) ============
+  - type: text
+    class: "bg-color1"
+    title: "17.1- text · class: bg-color1 · surface: bleed (defecto)"
+    text: "Banda: de borde a borde, esquinas rectas. Dice «empieza otra sección». Las sections de página ya iban a sangre: aquí no cambia nada."
+
+  - type: text
+    class: "bg-color1"
+    surface: card
+    title: "17.2- text · class: bg-color1 · surface: card"
+    text: "Tarjeta: dentro de la columna, con radio y aire compacto. Dice «esto es una pieza destacada». No usarla con bloques que ya pintan tarjetas (list-grid, testimonials, faq)."
+
+  - type: text
+    class: "bg-color2"
+    width: wide
+    surface: card
+    title: "17.3- text · class: bg-color2 · width: wide · surface: card"
+    text: "La tarjeta respeta el ancho del bloque: aquí, `wide`."
 ---
 
 ## P1- El prose: body markdown {.demo}
@@ -685,6 +704,20 @@ intercalada en el prose. El orden de los items es el orden visual:
 {{< brands-logos-item image="https://picsum.photos/seed/b6/320/160" imageAlt="Demo" >}}
 {{< brands-logos-item image="https://picsum.photos/seed/b7/320/160" imageAlt="Demo" >}}
 {{< /brands-logos >}}
+
+### p16- Fondo: banda o tarjeta (`surface`)
+
+Un bloque con fondo en el prose es, por defecto, una **banda**: el color sale hasta los bordes de la pantalla y el contenido se queda en su ancho.
+
+{{< text class="bg-color1" title="p16.1- surface: bleed (defecto)" >}}
+Mismo bloque, mismo fondo. Banda: «empieza otra sección».
+{{< /text >}}
+
+Con `surface="card"` es una **tarjeta** dentro de la columna: «pieza destacada de esta sección».
+
+{{< text class="bg-color1" surface="card" title="p16.2- surface: card" >}}
+Mismo bloque, mismo fondo. Tarjeta: con radio, aire compacto y margen propio.
+{{< /text >}}
 
 ### p15- Shortcode {{</* obf */>}} (dato ofuscado en línea)
 

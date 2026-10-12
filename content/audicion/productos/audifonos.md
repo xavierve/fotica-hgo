@@ -97,7 +97,7 @@ Discreto de verdad es que ni en un susurro al oído se note. Eso es lo que busca
 ## La marca de audífonos que mejor funcione contigo.
 trabajamos con todas las marcas, por lo que podemos ofrecerte y **adaptarte el audífono que mejor resuelva tu necesidad auditiva.**
 
-{{< brands-logos title="Marcas con las que trabajamos" subtitle="Somos nosotros los que nos adaptamos a ti." class="bg-color1" >}}
+{{< brands-logos  surface="card" title="Marcas con las que trabajamos" subtitle="Somos nosotros los que nos adaptamos a ti." class="bg-color1" >}}
 {{< brands-logos-item image="/images/logos/interton.svg" imageAlt="Interton" >}}
 {{< brands-logos-item image="/images/logos/beltone.svg" imageAlt="Beltone" >}}
 {{< brands-logos-item image="/images/logos/phonak.svg" imageAlt="Phonak" >}}
