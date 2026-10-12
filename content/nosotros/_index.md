@@ -116,11 +116,11 @@ sections:
 ## Desde 1982 en Torre del Mar. Y aquí seguimos.
 
 {{< image-text image="/images/100-equipo_fausto_completo.webp" imageAlt="Equipo completo de Ópticas Fausto en el centro de Torre del Mar" width="full" >}}
-En 1982, Fausto abrió las puertas del primer Centro Óptico Auditivo en Torre del Mar. No venía con un manual de franquicia ni con una central que le dijera cómo hacer las cosas: venía con vocación, con conocimiento y con la intención de quedarse. Y se quedó.
+Abrimos siendo la primera óptica de Torre del Mar. Con vocación, con conocimiento y con arraigo.
 
 Hoy, cuatro décadas después, sus hijas **Leonor y Anabel** llevan los dos centros — y Juan, hijo de Leonor, ya representa la **tercera generación** de la familia en la profesión. Tres generaciones. El mismo pueblo. El mismo compromiso.
 
-Muchas de las familias que vinieron con Fausto siguen viniendo hoy con sus hijos y sus nietos. Esa continuidad no se compra con publicidad: se construye visita a visita, año tras año, siendo el sitio al que merece la pena volver.
+También son generaciones de clientes que siguen confiándonos su vista y oído, por la reputación que se sigue haciendo en cada visita.
 {{< /image-text >}}
 
 {{< image-text image="/images/100-equipo_fausto_completo_informal.webp" imageAlt="Equipo completo de Ópticas Fausto en el centro Duque de Torre del Mar" width="full" reverse="true" >}}
