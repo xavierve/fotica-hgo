@@ -1,5 +1,16 @@
 # F1 Theme · Changelog
 
+## Sin versión — hero overlay: tope de 1920px y sangrado con el color del borde
+
+- La foto del `overlay` deja de crecer a 1920px (`--hero-overlay-max`, `$overlayMax`). Medido en
+  `/audicion/productos/audifonos/` (foto de 1671px): la ampliación queda en 1,15× desde 1920
+  (antes 1,53× a 2560 y 2,06× a 3440, con el recorte vertical bajando al 39% y al 29% del alto).
+- Laterales: color medio de cada borde (franja de 24px del 50% central de la altura, reducida a
+  1×1), calculado en el build por `partials/hero-bleed.html`; la foto se funde hacia él con
+  `mask-image` (6% por lado) solo por encima de 1920. `hero.bleed` lo fija a mano.
+- `sizes` del overlay: `(min-width:1920px) 1920px, 100vw`.
+- Docs: FRONTMATTER.md (Hero), DESIGN_TOKENS.md.
+
 ## Sin versión — FAQ: toda la tarjeta abre la pregunta
 
 - El padding pasa del `<details>` al `<summary>`. Antes solo la línea de texto abría la pregunta:

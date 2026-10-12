@@ -1,0 +1,32 @@
+{{- /*
+  partials/hero-bleed.html — color de sangrado del hero overlay en monitores anchos.
+
+  Por encima de --hero-overlay-max (1920px) la foto del overlay deja de crecer: a
+  sangre, una foto de ~1440px nativos acababa ampliada 2x a 3440 y recortada al
+  29% de su alto (el «zoom»). El hueco a cada lado se pinta con el color del borde
+  de la foto, y la foto se funde hacia el (mask-image en critical.css).
+
+  El color se calcula en el build: franja de 24px de cada borde, del 50% central
+  de la altura (lo que se ve con object-fit:cover a 1920: ~53% en audifonos),
+  reducida a 1x1 = color medio. Medio y no dominante: con bordes mezclados
+  (cielo + pelo) el dominante salta a la vista junto a la minoria; el medio se
+  funde. No sigue hero.imagePosition (el recorte desplazado mueve la franja
+  visible): si un caso lo necesita, se anade hero.bleed a mano.
+
+  Entrada: ruta publica (string), ej "/images/foo.webp". Devuelve el style
+  "--hero-bleed-l:#…;--hero-bleed-r:#…", o "" si el archivo no es local o no es
+  una imagen que Hugo procese. FromString porque las fotos viven en static/, no
+  en assets/ (resources.Get no las ve); el resultado se cachea en resources/_gen.
+*/ -}}
+{{- $out := "" -}}
+{{- $src := . -}}
+{{- $ext := lower (path.Ext $src) -}}
+{{- $file := printf "static%s" $src -}}
+{{- if and (in (slice ".webp" ".jpg" ".jpeg" ".png") $ext) (not (strings.HasPrefix $src "http")) (os.FileExists $file) -}}
+  {{- $img := resources.FromString (printf "hero-bleed%s" $src) (os.ReadFile $file) -}}
+  {{- $h := math.Max 1 (int (div $img.Height 2)) | int -}}
+  {{- $l := index (($img.Crop (printf "24x%d Left" $h)).Resize "1x1").Colors 0 -}}
+  {{- $r := index (($img.Crop (printf "24x%d Right" $h)).Resize "1x1").Colors 0 -}}
+  {{- $out = printf "--hero-bleed-l:%s;--hero-bleed-r:%s" $l $r -}}
+{{- end -}}
+{{- return $out -}}

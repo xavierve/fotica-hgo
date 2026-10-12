@@ -71,6 +71,7 @@
   --hero-band-h: 40vh;
   --hero-width: var(--container-wide);
   --hero-band-max: 1440px; /* mantener sincronizado con $bandMax en hero-config.html */
+  --hero-overlay-max: 1920px; /* tope de la foto del overlay; = $overlayMax en hero-config.html */
 }
 @supports (height: 1svh) {
   :root {
@@ -498,6 +499,26 @@ main .btn {
   inset: 0;
   z-index: -1;
   margin: 0;
+  /* Sangrado: la figura ocupa todo el ancho; la foto, hasta --hero-overlay-max.
+     A cada lado, el color medio de ese borde (hero-bleed.html, inline en el
+     <section>). Sin las variables, transparente: se ve el fondo de la seccion. */
+  background: linear-gradient(90deg, var(--hero-bleed-l, transparent) 50%, var(--hero-bleed-r, transparent) 50%);
+}
+
+/* La foto deja de crecer a 1920: a sangre, en un 3440 se ampliaba 2x y se
+   recortaba al 29% de su alto. > (no >=) y en px: el tope es del archivo, no
+   de la letra. El fundido (6% por lado, ~115px) quita la costura con el color
+   de sangrado; por debajo del tope no hay mascara (no hay costura). */
+.hero-bg>picture,
+.hero-bg>img {
+  max-width: var(--hero-overlay-max);
+  margin-inline: auto;
+}
+@media (width > 1920px) {
+  .hero-bg img {
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  }
 }
 
 /* overlay apilado en movil (params.hero.mobileOverlay = false -> clase

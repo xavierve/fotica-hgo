@@ -41,8 +41,9 @@
   que markup y preload nunca diverjan. Tanto en stacked como en split la banda
   tiene tope de ancho (--hero-band-max en critical.css): por encima de ese
   ancho la foto ya no crece, asi que el navegador no debe pedir un archivo
-  mayor. $bandMax y el token CSS van a la vez. overlay va a sangre y sin tope:
-  100vw (en movil apilado, la banda tambien mide 100vw).
+  mayor. $bandMax y el token CSS van a la vez. overlay va a sangre hasta
+  $overlayMax (--hero-overlay-max, 1920px) y ahi se para: 100vw por debajo (en
+  movil apilado, la banda tambien mide 100vw), 1920px por encima.
 */ -}}
 {{- $h := .Params.hero | default dict -}}
 {{- $site := site.Params.hero | default dict -}}
@@ -58,6 +59,8 @@
 {{- if $src -}}{{- $mobile = partial "img-mobile.html" $src -}}{{- end -}}
 {{- $bandMax := 1440 -}}{{- /* = --hero-band-max */ -}}
 {{- $sizes := "100vw" -}}
+{{- $overlayMax := 1920 -}}{{- /* = --hero-overlay-max */ -}}
+{{- if eq $layout "overlay" -}}{{- $sizes = printf "(min-width:%dpx) %dpx, 100vw" $overlayMax $overlayMax -}}{{- end -}}
 {{- if eq $layout "stacked" -}}{{- $sizes = printf "(min-width:%dpx) %dpx, 100vw" $bandMax $bandMax -}}{{- end -}}
 {{- /* split: la figura es la 2a columna del grid (minmax(280px,.9fr) de
        1.1fr+.9fr), dentro de una banda con tope $bandMax y gap de 4rem.

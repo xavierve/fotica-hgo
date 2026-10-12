@@ -146,10 +146,11 @@ Parámetros propios del hero:
 - `imagePosition`: `object-position` de la foto, ej. `"center 30%"`, `"top"`. Cada foto tiene su punto de interés; por defecto `center`. Vale en `stacked` y `overlay`, y se aplica también al `_m` (es el mismo `<img>`) (en `overlay` sustituye a la antigua clase `bg-top`, que ya no afecta al hero).
 - `imageAlt`: alt de la foto. Si se omite queda `alt=""` (decorativa). En `overlay` también se emite: antes, con `background-image`, se perdía.
 - `scrim`: (`overlay`) `false` desactiva el degradado direccional, que va activo por defecto.
+- `bleed`: (`overlay`) color de sangrado, ej. `"#2b3a4a"`, igual a ambos lados. Si se omite, se calcula en el build: color medio de cada borde de la foto (`partials/hero-bleed.html`). Solo hace falta si el automático desentona (p. ej. con un `imagePosition` que desplaza mucho el recorte).
 - `bgColor` / `textColor`: en `stacked` sustituyen el color del bloque de texto (por defecto `bg-color2`); en `overlay` tiñen el velo, y con `mobileOverlay = false` son el fondo del bloque de texto en móvil.
 - `class`: clases extra en el `<section>`. `panel` y `overlay-strong` son de `overlay`.
 
-En `stacked` la banda tiene un ancho máximo de 1440px (`--hero-band-max`): en pantallas más anchas la foto no se amplía y los laterales toman el color del bloque de texto. `overlay` no lleva tope: es una excepción a sangre (`sizes="100vw"`). `stacked` y `split` comparten el ancho `--hero-width` (= `--container-wide`, 1440px) en vez del `--container` de 1120px: en dos columnas, 1120 deja el texto en ~580px y la foto en ~480px.
+En `stacked` la banda tiene un ancho máximo de 1440px (`--hero-band-max`): en pantallas más anchas la foto no se amplía y los laterales toman el color del bloque de texto. `overlay` va a sangre hasta 1920px (`--hero-overlay-max`; `sizes="(min-width:1920px) 1920px, 100vw"`). Por encima la foto no crece: los laterales toman el color medio de cada borde de la foto y la foto se funde hacia él (6% por lado). Antes, sin tope, a 3440 la foto se ampliaba 2× y se recortaba al 29% de su alto. `stacked` y `split` comparten el ancho `--hero-width` (= `--container-wide`, 1440px) en vez del `--container` de 1120px: en dos columnas, 1120 deja el texto en ~580px y la foto en ~480px.
 
 ### Variantes de imagen: `_hd` y `_m`
 

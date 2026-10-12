@@ -213,6 +213,7 @@ En `:root` (`critical.css`). Los usan el hero `stacked` y el `overlay` apilado e
 | `--hero-band-h` | `40vh`, y `40svh` si el navegador lo soporta | Alto de la banda de foto en móvil. No son los 70svh de banner/CTA (ver 3.1): header + breadcrumb ya ocupan ~120px y con 50svh el H1 de 4 líneas de un 359×640 quedaba en el filo del pliegue. En desktop manda `aspect-ratio: 3/1` (mín. 18rem, máx. 60svh). |
 | `--hero-width` | `var(--container-wide)` | Ancho del contenido del bloque de texto en `stacked`. Un solo sitio para cambiarlo a `var(--container)`. |
 | `--hero-band-max` | `1440px` | Ancho máximo de la banda de foto en `stacked` (el ancho nativo de las fotos del hero). Por encima la banda no crece y los laterales son el color del bloque (`bg-color2`). Va a la par con `$bandMax` en `hero-config.html`, que fija el `sizes`. |
+| `--hero-overlay-max` | `1920px` | Tope de la foto del hero `overlay`. Por encima, sangrado con el color medio de cada borde (`--hero-bleed-l/-r`, inline desde `hero-bleed.html`) y fundido de la foto con `mask-image` (6% por lado). Va a la par con `$overlayMax` en `hero-config.html`. Media query en px (`width > 1920px`): el tope es del archivo, no de la letra. |
 
 **Por qué el tope de ancho.** Sin él la foto se amplía (×1.33 a 1920px, ×1.78 a 2560px) y además se recorta más: a 2560px solo se veía el 33% del alto frente al 44% a 1440px. Con el tope, el recorte es siempre el de 1440 y el borde de la foto coincide con el del H1.
 

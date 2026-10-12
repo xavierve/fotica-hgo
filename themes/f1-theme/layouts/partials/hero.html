@@ -53,10 +53,15 @@
 {{ if not $cfg.mobileOverlay }}{{ $extra = $extra | append "is-stacked-mobile" }}{{ end }}
 {{ if and (ne .scrim false) (not (in (.class | default "") "scrim")) }}{{ $extra = $extra | append "scrim" }}{{ end }}
 {{ if .bgColor }}{{ $extra = $extra | append "has-bg-color" }}{{ end }}
+{{/* Sangrado por encima de 1920px: color medio de cada borde, calculado en build
+     (hero-bleed.html). hero.bleed: "#hex" lo fija a mano, igual a ambos lados. */}}
+{{ $bleed := "" }}
+{{ with .bleed }}{{ $bleed = printf "--hero-bleed-l:%s;--hero-bleed-r:%s" . . }}{{ else }}{{ $bleed = partial "hero-bleed.html" $cfg.src }}{{ end }}
 <section class="hero {{ delimit $extra " " }}{{ with .class }} {{ . }}{{ end }}"
   {{- $styles := slice -}}
   {{- with .bgColor }}{{ $styles = $styles | append (printf "--section-bg-color:%s" .) }}{{ end -}}
   {{- with .textColor }}{{ $styles = $styles | append (printf "--section-text-color:%s" .) }}{{ end -}}
+  {{- with $bleed }}{{ $styles = $styles | append . }}{{ end -}}
   {{- with $styles }} style="{{ delimit . ";" | safeCSS }}"{{ end }}>
   <figure class="hero-bg">
     {{ partial "img-responsive.html" (dict "src" $cfg.src "alt" (.imageAlt | default "") "sizes" $cfg.sizes "loading" "eager" "fetchpriority" "high" "style" $pos) }}
