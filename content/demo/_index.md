@@ -495,6 +495,16 @@ p2.1- Con el shortcode `figure`: `srcset` con el `_hd` (base 800 + `_hd` 1469), 
 
 {{< figure src="/images/321-audifonos_tipos.webp" alt="Gama de tipos de audífonos, de retroauricular a intracanal" caption="p2.1- Leyenda con **markdown** en línea" >}}
 
+{{< text class="bg-color1" title="p2.2- Lista en tarjetas: {.list-grid}" >}}
+Una lista normal del markdown con `{.list-grid role="list"}` en la línea siguiente. El primer **negrita** de cada item es el título de la tarjeta: la puntuación va dentro (`**Título.** Texto`). Una columna en móvil, 2×2 en escritorio.
+
+- **Primera pieza.** Texto corto de apoyo, una o dos líneas.
+- **Segunda pieza.** Las tarjetas de una fila miden lo mismo aunque el texto no.
+- **Tercera pieza.** Sigue siendo un `<ul>` para el lector de pantalla.
+- **Cuarta pieza.** Con cuatro items, rejilla fija 2×2: nunca 3 + 1.
+{.list-grid role="list"}
+{{< /text >}}
+
 ### p3- Shortcode {{</* spacer */>}}
 
 Espaciado puntual entre dos párrafos. Debajo va un `spacer size="l"`:

@@ -470,6 +470,31 @@ en un `.md`, que sale sin `srcset`, sin dimensiones y con el estilo en línea.
 - Solo existe como shortcode: en `sections:` las imágenes van dentro de su bloque.
 - Demo: p2.1.
 
+## Utilidad de prosa `list-grid` (lista en tarjetas)
+
+Una lista del markdown que son piezas sueltas (compromisos, ventajas), no prosa, se puede
+mostrar como tarjetas con atributos de Goldmark en la línea siguiente a la lista:
+
+```markdown
+{{< text class="bg-color1" title="…" >}}
+- **Título.** Texto de apoyo.
+- **Otro título.** Más texto.
+{.list-grid role="list"}
+{{< /text >}}
+```
+
+- **Sigue siendo un `<ul>`**. `role="list"` hace falta: sin viñetas, Safari/VoiceOver deja de
+  anunciarlo como lista.
+- **El primer `<strong>` de cada item es el título de la tarjeta.** La puntuación va dentro de
+  la negrita (`**Título.** Texto`); con `**Título**, texto` la coma abre línea.
+- Una columna en móvil, **2×2 fijo** desde escritorio (con cuatro items, una rejilla automática
+  daba 3 + 1 huérfana a 821px). Pensado para 2, 4 o 6 items.
+- La tarjeta usa `--color-bg-over` (el blanco de `.card`): va sobre un fondo de paleta, p. ej.
+  `{{< text class="bg-color1" >}}`.
+- Es una clase de prosa, no un bloque: no tiene `type:` en `sections:`. En el campo `text` de
+  un bloque `text` funciona igual (es markdown).
+- Uso: `/nosotros/` (los cuatro compromisos). Demo p2.2.
+
 ## Shortcode `obf` (dato ofuscado en línea)
 
 `{{< obf text="52582059B" >}}` · `{{< obf text="..." fallback="escríbenos y te lo facilitamos" >}}`.

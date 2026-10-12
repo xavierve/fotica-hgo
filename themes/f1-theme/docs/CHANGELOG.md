@@ -1,5 +1,16 @@
 # F1 Theme · Changelog
 
+## Sin versión — utilidad de prosa `list-grid`: lista en tarjetas
+
+- **Motivo:** en `/nosotros/`, la lista de cuatro compromisos dentro del segundo image-text dejaba
+  el texto a 4,7 veces el alto de la foto a 821px. Sacada a su propio bloque baja a 2,2, igual que
+  la home, y las cuatro piezas se leen de un vistazo.
+- **`{.list-grid role="list"}`** sobre una lista del markdown (atributos de Goldmark): tarjetas con
+  `--color-bg-over`, una columna en móvil y 2×2 fijo desde escritorio. El primer `<strong>` de cada
+  item hace de título. Sin shortcode nuevo; pensado dentro de `{{< text class="bg-color1" >}}`.
+- `role="list"`: Safari/VoiceOver no anuncia como lista un `<ul>` sin viñetas.
+- Docs: BLOCKS.md («Utilidad de prosa `list-grid`»). Demo p2.2.
+
 ## Sin versión — `--measure-col` a 33.5em
 
 - **Cambio de Foco** (revisado en Windows): 32em → **33.5em** = 670px a 20px, ~74 caracteres
