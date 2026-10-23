@@ -236,7 +236,7 @@
       {{- $questions = $questions | append (dict
             "@type" "Question"
             "name" .question
-            "acceptedAnswer" (dict "@type" "Answer" "text" (.answer | markdownify | plainify))
+            "acceptedAnswer" (dict "@type" "Answer" "text" (partial "contact-tokens.html" .answer | markdownify | plainify))
       ) -}}
     {{- end -}}
     {{- $graph = $graph | append (dict "@type" "FAQPage" "mainEntity" $questions) -}}

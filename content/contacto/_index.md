@@ -2,12 +2,12 @@
 # 4.0 — Contacto
 title: "Contacto: dos centros en Torre del Mar | Ópticas Fausto"
 linkTitle: "Contacto"
-description: "Llámanos, escríbenos por WhatsApp o ven sin cita a cualquiera de nuestros dos centros en Torre del Mar. Horario: 10:00–13:30 y 17:30–21:00. Atención en inglés y alemán."
+description: "Llámanos, escríbenos por WhatsApp o ven sin cita a nuestros dos centros de Torre del Mar: óptica y centro auditivo. Atendemos también en inglés y alemán."
 page_id: "4.0"
 
 og:
   title: "Estamos a una llamada, un mensaje o una visita — Ópticas Fausto"
-  description: "Dos centros en Torre del Mar, horario de 10:00–13:30 y 17:30–21:00. Atención también en inglés y alemán."
+  description: "Dos centros en Torre del Mar: óptica y centro auditivo. Atendemos también en inglés y alemán."
   image: "/images/og/0-inicio.jpg"
   type: "website"
 
@@ -27,11 +27,11 @@ sections:
       - question: "¿Necesito cita previa?"
         answer: "No es imprescindible: puedes venir directamente. Para revisiones (visuales o auditivas) recomendamos pedirla y así evitar esperas, especialmente en temporada alta."
       - question: "¿Cuál de los dos centros me queda mejor?"
-        answer: "Para la vista (revisiones, gafas, lentillas), cualquiera de los dos: elige el que te pille más a mano. Para la audición (revisiones auditivas, audífonos y su mantenimiento), ven al Centro Fausto Andalucía, en Av. Andalucía 84, que es donde está el centro auditivo. Los dos están en el centro de Torre del Mar, a unos 300 metros el uno del otro."
+        answer: "Para la vista (revisiones, gafas, lentillas), cualquiera de los dos: elige el que te pille más a mano. Para la audición (revisiones auditivas, audífonos y su mantenimiento), ven al Centro Fausto Andalucía, en Av. Andalucía 84, que es donde está el centro auditivo. Los dos están en el centro de Torre del Mar, a dos minutos a pie el uno del otro."
       - question: "¿Cómo aparco cerca?"
         answer: "Ambos centros están en zona céntrica con aparcamiento en calles cercanas y zonas reguladas. Si vienes de fuera y tienes dudas, llámanos y te orientamos."
       - question: "¿Atendéis por WhatsApp?"
-        answer: "Sí — para dudas rápidas, citas o consultas es la vía más cómoda: +34 717 77 00 90. Te respondemos dentro del horario de tienda."
+        answer: "Sí — para dudas rápidas, citas o consultas es la vía más cómoda: {whatsapp}. Te respondemos dentro del horario de tienda."
 
   - type: cta
     preset: contact

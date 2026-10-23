@@ -18,16 +18,15 @@
   <div class="hero-text">
     {{ with .subtitle }}<p class="hero-subtitle">{{ . | markdownify }}</p>{{ end }}
     {{ if eq .preset "contact" }}
-    {{ $contact := (hugo.Data.site | default dict).contact | default dict }}
-    {{ $wa := replace ($contact.whatsapp | default "") "+" "" }}
     <div class="cta-row">
-      <a class="btn btn-fill" href="{{ printf "tel:%s" $contact.phone | safeURL }}">{{ partial "icons.html" "phone" }}{{ .labelCall | default (i18n "call") }}</a>
-      <a class="btn btn-outline" href="https://wa.me/{{ $wa }}">{{ partial "icons.html" "whatsapp" }}{{ .labelWhatsapp | default (i18n "whatsapp") }}</a>
+      {{- range $i, $b := partial "contact-buttons.html" . }}
+      <a class="btn {{ if $i }}btn-outline{{ else }}btn-fill{{ end }}" href="{{ partial "button-url.html" $b.url | safeURL }}">{{ partial "icons.html" $b.icon }}{{ $b.text }}</a>
+      {{- end }}
     </div>
     {{ else if or .primaryCTA .secondaryCTA }}
     <div class="cta-row">
-      {{ with .primaryCTA }}<a class="btn btn-fill" href="{{ .url | safeURL }}">{{ with .icon }}{{ partial "icons.html" . }}{{ end }}{{ .text }}</a>{{ end }}
-      {{ with .secondaryCTA }}<a class="btn btn-outline" href="{{ .url | safeURL }}">{{ with .icon }}{{ partial "icons.html" . }}{{ end }}{{ .text }}</a>{{ end }}
+      {{ with .primaryCTA }}<a class="btn btn-fill" href="{{ partial "button-url.html" .url | safeURL }}">{{ with .icon }}{{ partial "icons.html" . }}{{ end }}{{ .text }}</a>{{ end }}
+      {{ with .secondaryCTA }}<a class="btn btn-outline" href="{{ partial "button-url.html" .url | safeURL }}">{{ with .icon }}{{ partial "icons.html" . }}{{ end }}{{ .text }}</a>{{ end }}
     </div>
     {{ end }}
   </div>

@@ -1,0 +1,14 @@
+{{- /*
+  partials/contact-buttons.html — preset contact: el par Llamar + WhatsApp.
+
+  Definicion UNICA del preset; la usan blocks/cta.html (y con el, el shortcode
+  cta) y hero-copy.html. Cada boton apunta a un canal por su nombre, exactamente
+  como un boton escrito a mano (url: phone / url: whatsapp); el preset solo
+  anade etiquetas (i18n, o labelCall/labelWhatsapp del bloque) e iconos.
+
+  Entrada: el dict del bloque o del hero. Devuelve slice de {text, url, icon}.
+*/ -}}
+{{- return slice
+      (dict "text" (.labelCall | default (i18n "call")) "url" "phone" "icon" "phone")
+      (dict "text" (.labelWhatsapp | default (i18n "whatsapp")) "url" "whatsapp" "icon" "whatsapp")
+-}}

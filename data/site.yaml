@@ -30,11 +30,21 @@ business:
     - { name: "Audición", url: "/audicion/" }
 
 # ─── CONTACTO ────────────────────────────────────────────────────────────────
-# El móvil es el único número con WhatsApp. Los fijos NO tienen WhatsApp.
+# CANALES. Cambiar un número aquí → cambia en todo el sitio. Ningún .md lleva un
+# número escrito a mano: botones con url: phone y textos con {phone}.
+#   phone     LLAMADAS: cabecera, barra fija, botones Llamar, {phone}. Hoy, el
+#             fijo de Andalucía. Los fijos NO tienen WhatsApp.
+#   whatsapp  el móvil, único número con WhatsApp: botones WhatsApp, icono del
+#             footer, {whatsapp}.
+# Canal nuevo (p. ej. un teléfono propio de audición): una clave que empiece por
+# phone o whatsapp + su Label, y ya se puede usar (url: phoneAudicion, {phoneAudicion}):
+#   phoneAudicion: "+34…"
+#   phoneAudicionLabel: "…"
 contact:
-  phone: "+34717770090"
-  phoneLabel: "717 77 00 90"
+  phone: "+34952540964"
+  phoneLabel: "952 54 09 64"
   whatsapp: "+34717770090"
+  whatsappLabel: "717 77 00 90"
   # Direccion de contacto CODIFICADA: base64 de la cadena invertida. Este repo es
   # publico, y una direccion en claro aqui se recolecta igual que en una pagina.
   # La decodifica partials/email-addr.html; para pintarla se usa email-link.html.
@@ -117,14 +127,15 @@ navigation:
 #               como name. Si se cambia el nombre en Google, se cambia aquí (y viceversa).
 # id            ancla de la sede en /contacto/ (/contacto/#andalucia). Es la URL que va en
 #               el campo "sitio web" de cada perfil de Google: no cambiarlo sin cambiar el perfil.
-# phone         fijo de la sede = teléfono PRINCIPAL de su perfil de Google. El móvil/WhatsApp
-#               compartido (contact.phone) va como teléfono ADICIONAL en ambos perfiles.
+# phone         fijo de la sede = teléfono PRINCIPAL de su perfil de Google. El móvil
+#               (contact.whatsapp) va como teléfono ADICIONAL en ambos perfiles.
+# whatsapp      opcional. Sin él, el footer pone junto al fijo el WhatsApp común.
 # offerCatalogs si una sede no ofrece todo lo de business.offerCatalogs, lista aquí solo lo
 #               suyo (Duque: solo Visión). Sin la clave, hereda los de business.
 locations:
   - id: "andalucia"
     name: "Centro Fausto Andalucía"
-    schemaName: "Ópticas Fausto · Centro Auditivo"
+    schemaName: "Ópticas Fausto - Centro Auditivo"   # guion simple: Google desaconseja "·" y "&"
     address: "Av. Andalucía, 84 B"
     location: "Torre del Mar"
     phone: "+34952540964"

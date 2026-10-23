@@ -1,0 +1,22 @@
+{{- /*
+  partials/button-url.html — href de un boton (cta, shortcode cta, hero).
+
+  Entrada: el valor de su url.
+    phone, whatsapp, phoneAudicion…   -> canal de site.yaml (contact-link.html):
+                                         empieza por phone o whatsapp, solo
+                                         letras y cifras
+    /vision/, https://…, tel:…, #…    -> tal cual
+  Sin ambiguedad: una URL lleva barra, dos puntos, almohadilla o punto; un nombre
+  de canal no. Un canal que no existe en site.yaml rompe el build.
+  En url el canal va a secas (url: phone). Las llaves ({phone}) son para el texto
+  (contact-tokens.html), donde hay que separar el canal de las palabras de
+  alrededor; en url dan error con el aviso de como escribirlo.
+*/ -}}
+{{- $hint := "en url el canal va sin llaves (url: phone); las llaves son para el texto" -}}
+{{- if reflect.IsMap . -}}{{ errorf "url de boton con llaves: %s" $hint }}{{- end -}}
+{{- $u := . | default "" | string -}}
+{{- if hasPrefix $u "{" -}}{{ errorf "url de boton %q: %s" $u $hint }}{{- end -}}
+{{- if findRE `^(phone|whatsapp)[A-Za-z0-9]*$` $u -}}
+  {{- $u = (partial "contact-link.html" $u).url -}}
+{{- end -}}
+{{- return $u -}}

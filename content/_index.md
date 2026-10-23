@@ -76,7 +76,7 @@ sections:
       url: "/vision/"
     button2:
       text: "Pedir cita"
-      url: "tel:+34952540964"
+      url: phone
   - type: cta
     title: "¿Notas que oyes peor en conversaciones?"
     subtitle: "Si subes más la televisión, te cuesta seguir una charla o pides que te repitan las cosas, podemos ayudarte con un estudio auditivo y un asesoramiento claro, sin compromiso."
@@ -86,7 +86,7 @@ sections:
       url: "/audicion/"
     button2:
       text: "Llamar ahora"
-      url: "tel:+34952540964"
+      url: phone
   - type: locations
     title: "Dos centros en Torre del Mar para estar siempre cerca"
     subtitle: "Contamos con dos centros en Torre del Mar, pensados para atender tanto a residentes como a visitantes. También atendemos en inglés y alemán para turistas o personas extranjeras que necesiten ayuda con gafas, lentillas o audífonos durante su estancia."

@@ -1,0 +1,31 @@
+{{- /*
+  partials/contact-link.html — un canal de contacto de data/site.yaml.
+
+  Entrada: el nombre del canal, que es su clave en contact: "phone", "whatsapp" o
+  cualquier otra que empiece por phone/whatsapp ("phoneAudicion", "whatsapp2"…).
+  Devuelve dict {url, label, kind}:
+    phone*     -> url tel:<numero>               kind "phone"
+    whatsapp*  -> url https://wa.me/<sin "+">    kind "whatsapp"
+    label      -> contact.<nombre>Label o, sin el, el numero
+  Un canal que no existe en site.yaml rompe el build: un enlace roto no se ve
+  hasta que un cliente lo pulsa.
+
+  Lo usan button-url.html (botones) y contact-tokens.html (textos).
+*/ -}}
+{{- $name := . | string -}}
+{{- if not (or (hasPrefix $name "phone") (hasPrefix $name "whatsapp")) -}}
+  {{- errorf "canal de contacto %q: el nombre tiene que empezar por phone o whatsapp" $name -}}
+{{- end -}}
+{{- $c := (hugo.Data.site | default dict).contact | default dict -}}
+{{- $num := index $c $name | default "" | string -}}
+{{- if not $num -}}
+  {{- errorf "canal de contacto %q: falta contact.%s en data/site.yaml" $name $name -}}
+{{- end -}}
+{{- $kind := "phone" -}}
+{{- $url := printf "tel:%s" $num -}}
+{{- if hasPrefix $name "whatsapp" -}}
+  {{- $kind = "whatsapp" -}}
+  {{- $url = printf "https://wa.me/%s" (replace $num "+" "") -}}
+{{- end -}}
+{{- $label := index $c (printf "%sLabel" $name) | default $num -}}
+{{- return dict "url" $url "label" $label "kind" $kind -}}

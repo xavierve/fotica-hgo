@@ -1,0 +1,23 @@
+{{- /*
+  partials/contact-tokens.html — canales de contacto dentro de un texto markdown.
+
+    {phone}          -> [<phoneLabel>](tel:<phone>)
+    {whatsapp}       -> [<whatsappLabel>](https://wa.me/<whatsapp>)
+    {phoneAudicion}  -> cualquier canal phone* o whatsapp* de site.yaml (contact-link.html)
+
+  Se sustituyen ANTES de renderizar el markdown, asi que salen como enlace. Solo
+  se tocan llaves con nombre phone* o whatsapp*: los atributos de Goldmark
+  ({.clase}) y cualquier otra llave quedan intactos.
+  Lo aplican md-block.html (prosa de bloques de sections: faq, text, image-text,
+  text-split, banner) y schema.html (respuestas del FAQPage, que despues pasan
+  por plainify y quedan como texto: "717 77 00 90").
+  NO llega a title/subtitle (markdownify inline), ni a description/og del front
+  matter, ni al body del .md ni de los shortcodes.
+  En la url de un boton el canal va a secas (url: phone): ver button-url.html.
+*/ -}}
+{{- $s := . | default "" | string -}}
+{{- range findRESubmatch `\{((?:phone|whatsapp)[A-Za-z0-9]*)\}` $s -}}
+  {{- $l := partial "contact-link.html" (index . 1) -}}
+  {{- $s = replace $s (index . 0) (printf "[%s](%s)" $l.label $l.url) -}}
+{{- end -}}
+{{- return $s -}}

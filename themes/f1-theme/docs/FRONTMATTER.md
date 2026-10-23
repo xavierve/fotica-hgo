@@ -40,7 +40,7 @@ hero:
   bgColor: ""
   primaryCTA:
     text: ""
-    url: ""
+    url: ""             # o un canal de site.yaml, a secas: phone, whatsapp (BLOCKS.md)
   secondaryCTA:
     text: ""
     url: ""

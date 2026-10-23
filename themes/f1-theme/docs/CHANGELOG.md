@@ -1,5 +1,30 @@
 # F1 Theme · Changelog
 
+## Sin versión — teléfonos y WhatsApp solo desde `site.yaml`
+
+- **Canales de contacto por nombre:** `url: phone` / `url: whatsapp` en `cta` (todos sus
+  modos, shortcode incluido) y en `primaryCTA`/`secondaryCTA` del hero; `{phone}` /
+  `{whatsapp}` en la prosa de bloques (`md-block.html`) y en el `FAQPage`. Vale cualquier
+  clave `phone…`/`whatsapp…` de `contact` (canal nuevo sin tocar el tema). Partials nuevos
+  `contact-link.html` (resuelve un canal), `button-url.html` y `contact-tokens.html`. Canal
+  inexistente, o llaves en una `url`, → `errorf`.
+- `preset: contact` se queda como atajo, ahora definido una sola vez
+  (`partials/contact-buttons.html`) con `url: phone` / `url: whatsapp`; antes cta.html y
+  hero-copy.html montaban cada uno su par de botones con su `tel:`/`wa.me`.
+- **`contact.whatsappLabel`**: el bloque `locations` (`showCommon`) lo usa para «Móvil /
+  WhatsApp»; antes pintaba `phoneLabel`, que solo cuadraba mientras llamada y WhatsApp eran
+  el mismo número.
+- **Footer:** icono de WhatsApp (solo icono, `aria-label` con número, zona táctil de 44px) en la
+  línea del fijo de cada sede: el de la sede o, sin él, el común. Sustituye al « · WhatsApp» en
+  texto, que con sedes nunca salía.
+- Fausto: `contact.phone` pasa al fijo de Andalucía (WhatsApp sigue en el móvil); fuera los
+  dos `tel:` escritos a mano de la home y el móvil escrito en la FAQ de `/contacto/`;
+  description/og de `/contacto/` sin horario (no puede leer `site.yaml`); nombre de Google de
+  Andalucía con guion simple.
+- Demo: FAQ (14) con `{phone}`/`{whatsapp}`, CTA 15.13 con `url: phone`, shortcode p5.3 con
+  `b1url="phone"`.
+- Docs: BLOCKS.md («Teléfonos y WhatsApp: siempre desde `site.yaml`», CTA), FRONTMATTER.md.
+
 ## Sin versión — sedes: anclas y schema alineado con Google Business
 
 - **Anclas por sede:** cada `.location-card` lleva `id` = `locations[].id`

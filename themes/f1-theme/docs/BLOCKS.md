@@ -346,8 +346,9 @@ sections:
     bgColor:                # color de fondo plano puntual, o tinte del overlay si hay bg
                               # (para la paleta, usar class: "bg-color1".."bg-color4")
     textColor:                # color de texto puntual a juego con bgColor
-    preset: contact             # botones Llamar + WhatsApp desde data/site.yaml
+    preset: contact             # atajo: par Llamar (url: phone) + WhatsApp (url: whatsapp)
     buttons:                     # alternativa a preset: lista de botones {text, url, icon}
+                                 # url admite un canal de site.yaml: url: phone
       - text:
         url:
         icon:
@@ -523,6 +524,45 @@ sections:
 ```
 
 Cuando existe un bloque `type: faq`, `schema.html` genera automáticamente `FAQPage`.
+
+## Teléfonos y WhatsApp: siempre desde `site.yaml`
+
+Ningún `.md` lleva un número escrito a mano. Se nombra el canal, que es su clave
+en `contact`:
+
+| Dónde | Escribe | Sale |
+|---|---|---|
+| Botones (`cta`: `buttons`, `button1`/`button2`; shortcode `cta`: `b1url`…; hero: `primaryCTA`/`secondaryCTA`) | `url: phone` | `href="tel:+34…"` |
+| Prosa de bloques de `sections` (`faq`, `text`, `image-text`, `text-split`, `banner`) | `… llámanos al {phone} …` | enlace con `phoneLabel` |
+| `FAQPage` del schema | (la misma respuesta) | texto: `952 54 09 64` |
+
+En `url` el canal va a secas; en el texto, entre llaves, para separarlo de las
+palabras de alrededor. Sin ambigüedad en `url`: una URL lleva `/`, `:`, `#` o punto, y
+un nombre de canal no. `url: "{phone}"` da error con el aviso de cómo escribirlo.
+
+- **Canales:** `phone` (llamadas) y `whatsapp`, y cualquier clave que empiece por
+  `phone` o `whatsapp` con su `…Label`: un `phoneAudicion` nuevo ya funciona como
+  `{phoneAudicion}` sin tocar el tema. `phone*` → `tel:`, `whatsapp*` → `wa.me/`.
+  Un canal inexistente rompe el build. Lo resuelve `partials/contact-link.html`.
+- Cualquier otra `url` (`/vision/`, `https://…`) se usa tal cual.
+- `preset: contact` es el atajo de las ~50 páginas con el par Llamar + WhatsApp: dos
+  botones con `url: phone` y `url: whatsapp`, etiquetas `i18n` (o `labelCall`/
+  `labelWhatsapp`) e iconos. Definido una sola vez, en `partials/contact-buttons.html`,
+  para `cta` (bloque y shortcode) y hero.
+- Las llaves **no** funcionan en `title`/`subtitle`, en `description`/`og` ni en el body
+  del `.md` o de los shortcodes: ahí, no poner números.
+- Demo: FAQ (14), CTA 15.13 y shortcode p5.3.
+- Footer: junto al fijo de cada sede, icono de WhatsApp (el de la sede si tiene
+  `locations[].whatsapp`; si no, el común), con `aria-label` «WhatsApp 717 77 00 90».
+
+```yaml
+# data/site.yaml
+contact:
+  phone: "+34952540964"        # llamadas
+  phoneLabel: "952 54 09 64"
+  whatsapp: "+34717770090"     # WhatsApp
+  whatsappLabel: "717 77 00 90"
+```
 
 ## Shortcode `figure` (imagen suelta en el prose)
 

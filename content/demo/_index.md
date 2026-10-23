@@ -338,6 +338,8 @@ sections:
         answer: "Sí — **negritas**, *cursivas* y [enlaces](/contacto/)."
       - question: "¿Y salen en el schema FAQPage?"
         answer: "En esta página no (`includeFAQ: false` para no ensuciar el schema con contenido demo). En páginas reales, sí, automáticamente."
+      - question: "¿Y teléfonos? (en la respuesta: marcadores phone y whatsapp entre llaves)"
+        answer: "Llámanos al {phone} o escríbenos por WhatsApp al {whatsapp}. Salen como enlace con los datos de data/site.yaml (contact.phone / contact.whatsapp y sus Label): si cambia un número, cambia aquí sin tocar el .md."
 
   # ============ cta — todas las variaciones ============
   - type: cta
@@ -412,6 +414,13 @@ sections:
     bgColor: "#4a2f6b"
     textSize: l
     preset: contact
+  - type: cta
+    title: "15.13- cta · buttons con canales de site.yaml: url: phone / url: whatsapp"
+    subtitle: "El canal va por su nombre, sin llaves ni número: el número sale de contact.phone / contact.whatsapp. Cualquier otra url (/contacto/) se usa tal cual. Es lo mismo que hace preset: contact, con textos e iconos propios."
+    buttons:
+      - { text: "Llamar al centro", url: phone, icon: "phone" }
+      - { text: "Escríbenos", url: whatsapp, icon: "whatsapp" }
+      - { text: "Cómo llegar", url: "/contacto/", icon: "location" }
 
   # ============ LOCATIONS — sedes desde data/site.yaml, NO por parámetro ============
   # Los datos (nombre, dirección, teléfono, mapUrl, image) salen de site.yaml →
@@ -561,6 +570,8 @@ Sin parámetros de botones → preset contact automático:
 #### [H4] CTA Con fondo y botones personalizados:
 
 {{< cta title="p5.2- CTA con bg + bgColor y botones propios" bg="https://picsum.photos/seed/ctas/1600/500" bgColor="var(--bg-color2)" b1text="Ver Visión" b1url="/vision/" b1icon="arrow-down" b2text="Ver Audición" b2url="/audicion/" b2icon="hearing" >}}
+
+{{< cta title="p5.3- CTA con un canal de site.yaml en un botón propio" subtitle="b1url con el nombre del canal (phone): el número sale de contact.phone, como en las sections." b1text="Llamar" b1url="phone" b1icon="phone" b2text="Ver Audición" b2url="/audicion/" b2icon="hearing" >}}
 
 ### Padding de los CTA intermedios — comparativa en contexto
 

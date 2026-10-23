@@ -6,8 +6,10 @@
                        junto al archivo) y _hd, via img-bg-style.html
     bgColor         -> color de fondo plano puntual, o tinte del overlay si hay imagen (para la paleta, usar class: "bg-color1".."bg-color4")
     textColor       -> color de texto puntual a juego con bgColor
-    preset: contact -> par de botones Llamar + WhatsApp desde data/site.yaml
-    buttons: [...]  -> lista de botones {text, url, icon}
+    preset: contact -> atajo: par Llamar + WhatsApp (partials/contact-buttons.html)
+    buttons: [...]  -> lista de botones {text, url, icon}; url admite un canal
+                       de site.yaml por su nombre: url: phone (partials/
+                       button-url.html), tambien en button1/button2
     microcopy       -> linea pequena bajo los botones
     variant/class/textSize/align/width -> modificadores estandar de bloque
 */ -}}
@@ -19,15 +21,9 @@
 {{ with .layout }}{{ $extra = $extra | append (printf "cta-layout-%s" .) }}{{ end }}
 
 {{/* Botones: preset contact | lista buttons | button1/button2 (compat) */}}
-{{ $siteData := hugo.Data.site | default dict }}
-{{ $contact := $siteData.contact | default dict }}
 {{ $buttons := slice }}
 {{ if eq .preset "contact" }}
-  {{ $wa := replace ($contact.whatsapp | default "") "+" "" }}
-  {{ $buttons = slice
-      (dict "text" (.labelCall | default (i18n "call")) "url" (printf "tel:%s" $contact.phone) "icon" "phone")
-      (dict "text" (.labelWhatsapp | default (i18n "whatsapp")) "url" (printf "https://wa.me/%s" $wa) "icon" "whatsapp")
-  }}
+  {{ $buttons = partial "contact-buttons.html" . }}
 {{ else if .buttons }}
   {{ $buttons = .buttons }}
 {{ else }}
@@ -51,7 +47,7 @@
     <div class="cta-actions">
       <div class="cta-row">
         {{ range $i, $b := . }}
-        <a class="btn {{ if gt $i 0 }}btn-outline{{ else }}btn-fill{{ end }}" href="{{ $b.url | safeURL }}">{{ with $b.icon }}{{ partial "icons.html" . }}{{ end }}{{ $b.text }}</a>
+        <a class="btn {{ if gt $i 0 }}btn-outline{{ else }}btn-fill{{ end }}" href="{{ partial "button-url.html" $b.url | safeURL }}">{{ with $b.icon }}{{ partial "icons.html" . }}{{ end }}{{ $b.text }}</a>
         {{ end }}
       </div>
       {{ with $.microcopy }}<p class="cta-microcopy">{{ . }}</p>{{ end }}

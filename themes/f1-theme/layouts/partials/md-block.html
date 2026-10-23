@@ -20,5 +20,6 @@
   `page` es el Page que se esta renderizando; los bloques reciben un dict sin
   .Page, de ahi que no se pueda usar `.Page.RenderString`.
 */ -}}
-{{- $s := . | default "" | string -}}
+{{- /* Canales {phone} / {whatsapp}… -> enlaces con datos de site.yaml */ -}}
+{{- $s := partial "contact-tokens.html" . -}}
 {{- return (page.RenderString (dict "display" "block") $s) -}}
