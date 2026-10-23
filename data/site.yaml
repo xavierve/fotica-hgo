@@ -109,9 +109,22 @@ navigation:
 # ─── SEDES ───────────────────────────────────────────────────────────────────
 # hoursSpec se hereda de contact.hoursSpec en schema.html (mismos horarios ambas sedes).
 # Si en el futuro una sede tuviera horario distinto, añadir hoursSpec aquí para sobreescribir.
+#
+# DOS NOMBRES POR SEDE:
+#   name        etiqueta de la web ("Centro Fausto Andalucía"): tarjetas, footer, barra
+#               fija. Sirve para orientar al cliente; va al schema como alternateName.
+#   schemaName  nombre EXACTO del perfil de Google Business de esa sede. Va al schema
+#               como name. Si se cambia el nombre en Google, se cambia aquí (y viceversa).
+# id            ancla de la sede en /contacto/ (/contacto/#andalucia). Es la URL que va en
+#               el campo "sitio web" de cada perfil de Google: no cambiarlo sin cambiar el perfil.
+# phone         fijo de la sede = teléfono PRINCIPAL de su perfil de Google. El móvil/WhatsApp
+#               compartido (contact.phone) va como teléfono ADICIONAL en ambos perfiles.
+# offerCatalogs si una sede no ofrece todo lo de business.offerCatalogs, lista aquí solo lo
+#               suyo (Duque: solo Visión). Sin la clave, hereda los de business.
 locations:
   - id: "andalucia"
     name: "Centro Fausto Andalucía"
+    schemaName: "Ópticas Fausto · Centro Auditivo"
     address: "Av. Andalucía, 84 B"
     location: "Torre del Mar"
     phone: "+34952540964"
@@ -121,6 +134,7 @@ locations:
     imageAlt: "Fachada y ubicación de Fausto Andalucía en Google Maps"
   - id: "duque"
     name: "Centro Fausto Duque"
+    schemaName: "Ópticas Fausto"
     address: "Av. Duque de Ahumada, 1C"
     location: "Torre del Mar"
     phone: "+34952547090"
@@ -128,6 +142,8 @@ locations:
     mapUrl: "https://maps.google.com/?cid=12933472947538996195"   # Duque
     image: "/images/400-fausto_duque_mapa.webp"
     imageAlt: "Fachada y ubicación de Fausto Duque en Google Maps"
+    offerCatalogs:              # solo óptica: sin el catálogo de Audición
+      - { name: "Visión", url: "/vision/" }
 
 # ─── SOCIAL ──────────────────────────────────────────────────────────────────
 social:

@@ -43,11 +43,16 @@
 {{- if $sameAs }}{{ $org = merge $org (dict "sameAs" $sameAs) }}{{ end -}}
 {{- $graph = $graph | append $org -}}
 
-{{/* ---------- 2. Local (business.locationType) por cada sede ---------- */}}
-{{- $catalogs := slice -}}
-{{- range $siteData.business.offerCatalogs }}{{ $catalogs = $catalogs | append (dict "@type" "OfferCatalog" "name" .name "url" (absURL .url)) }}{{ end -}}
+{{/* ---------- 2. Local (business.locationType) por cada sede ----------
+     name: locations[].schemaName (nombre exacto del perfil de Google Business) o,
+     sin él, locations[].name. Si difieren, name de la web va como alternateName.
+     url: ancla de la sede en /contacto/ (mismo id que pinta blocks/locations.html).
+     hasOfferCatalog: locations[].offerCatalogs o, sin él, business.offerCatalogs. */}}
 {{- range $loc := $locations -}}
-  {{- $locId := printf "%s#optician-%s" $base ($loc.id | default (anchorize $loc.name)) -}}
+  {{- $anchor := $loc.id | default (anchorize $loc.name) -}}
+  {{- $locId := printf "%s#optician-%s" $base $anchor -}}
+  {{- $catalogs := slice -}}
+  {{- range ($loc.offerCatalogs | default $siteData.business.offerCatalogs) }}{{ $catalogs = $catalogs | append (dict "@type" "OfferCatalog" "name" .name "url" (absURL .url)) }}{{ end -}}
   {{- $address := dict
         "@type" "PostalAddress"
         "streetAddress" ($loc.streetAddress | default $loc.address)
@@ -59,10 +64,12 @@
   {{- $optician := dict
         "@type" ($siteData.business.locationType | default "LocalBusiness")
         "@id" $locId
-        "name" $loc.name
+        "name" ($loc.schemaName | default $loc.name)
+        "url" (printf "%s#%s" ("/contacto/" | absURL) $anchor)
         "address" $address
         "parentOrganization" (dict "@id" $orgId)
         -}}
+  {{- if and $loc.schemaName (ne $loc.schemaName $loc.name) }}{{ $optician = merge $optician (dict "alternateName" $loc.name) }}{{ end -}}
   {{- if $catalogs }}{{ $optician = merge $optician (dict "hasOfferCatalog" $catalogs) }}{{ end -}}
   {{- with $loc.phone }}{{ $optician = merge $optician (dict "telephone" .) }}{{ end -}}
   {{- with $loc.mapUrl }}{{ $optician = merge $optician (dict "hasMap" .) }}{{ end -}}

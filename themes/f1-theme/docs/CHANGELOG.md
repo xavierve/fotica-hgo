@@ -1,5 +1,18 @@
 # F1 Theme · Changelog
 
+## Sin versión — sedes: anclas y schema alineado con Google Business
+
+- **Anclas por sede:** cada `.location-card` lleva `id` = `locations[].id`
+  (`/contacto/#andalucia`, `#duque`). Destino del campo «sitio web» de cada perfil de Google.
+- **`html { scroll-padding-top: 6rem }`** (critical.css): ningún ancla queda bajo la cabecera
+  sticky. Arregla también `/aviso-legal/#privacidad`.
+- **schema.html, nodo de sede:** `name` sale de `locations[].schemaName` (nombre exacto del perfil
+  de Google) con `name` como `alternateName`; nuevo `url` con el ancla de la sede;
+  `hasOfferCatalog` por sede (`locations[].offerCatalogs`, si no `business.offerCatalogs`).
+  Antes las dos sedes declaraban Audición, y Duque es solo óptica.
+- Fausto: FAQ de `/contacto/` corregida («los dos ofrecen los mismos servicios» era falso).
+- Docs: BLOCKS.md (Locations).
+
 ## Sin versión — `surface`: banda a sangre o tarjeta
 
 - **Nuevo campo común `surface: bleed | card`** (bloque y shortcode, `block-classes.html`), para

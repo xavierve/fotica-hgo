@@ -91,6 +91,11 @@ select {
 }
 html {
   overflow-x: clip;
+  /* Cualquier ancla (/contacto/#andalucia, /aviso-legal/#privacidad) queda por
+     debajo de la cabecera sticky en vez de tapada por ella. ~ alto de la cabecera
+     de escritorio (4.7rem, ver .image-text-media en main.css) + aire. En rem:
+     la cabecera crece con la letra del usuario. */
+  scroll-padding-top: 6rem;
 }
 
 body {

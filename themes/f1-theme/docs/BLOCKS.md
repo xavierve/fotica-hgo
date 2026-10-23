@@ -464,6 +464,19 @@ De cada sede usa `name`, `address`, `location`, `phone`, `phoneLabel` y
 `mapUrl`; en `layout: full` añade además `image` e `imageAlt`. La dirección
 enlaza a `mapUrl` y el teléfono a `tel:`, con iconos `location` y `phone`.
 
+Cada tarjeta lleva `id` = `locations[].id`, de modo que `/contacto/#andalucia`
+lleva a esa sede (la cabecera sticky no la tapa: `scroll-padding-top` en `html`).
+Es la URL para el campo «sitio web» de cada perfil de Google Business. Un solo
+bloque `locations` por página, para no repetir ids.
+
+Claves de `locations[]` que no pinta el bloque pero lee `schema.html`:
+
+| Clave | Uso |
+|---|---|
+| `schemaName` | Nombre exacto del perfil de Google Business → `name` del schema. Sin él, `name`. Si difiere de `name`, este va como `alternateName`. |
+| `offerCatalogs` | Catálogos de la sede → `hasOfferCatalog`. Sin él, hereda `business.offerCatalogs`. Para sedes que no ofrecen todo. |
+| `hoursSpec` | Horario propio; sin él, hereda `contact.hoursSpec`. |
+
 Equivalente en body markdown:
 
 ```

@@ -71,7 +71,7 @@ Sin subcarpetas para `hero/` `gallery` (solo `og/` y `cards/`) — el prefijo de
 **Media:**
 | # | Tarea |
 |---|---|
-| C7 | `.htaccess` Hostinger (Apache, `Redirect 301`): dominio viejo → nuevo, 4 subdominios landing, mapeo de URLs WordPress a partir del sitemap del sitio viejo recuperado de Wayback Machine. **Ahora mismo en 302 a propósito**, a la espera de lanzar el sitio nuevo; al lanzar se pasan a 301 <br> foco says: creo que la estructura era opticafausto.com/servicios/vision/ opticafausto.com/servicios/audicion/ opticafausto.com/productos/vision/ opticafausto.com/productos/audicion/ |
+| C7 | ✅ `.htaccess` Hostinger (Apache, `Redirect 301`): dominio viejo → nuevo, 4 subdominios landing, mapeo de URLs WordPress a partir del sitemap del sitio viejo recuperado de Wayback Machine. **Hecho** |
 | C8 | ✅ Verificar 404 en Hostinger: `ErrorDocument 404 /404.html` en el `.htaccess` para que devuelva HTTP 404 real (sin eso Apache lo sirve con 200 y Google lo trata como soft 404) + `noindex` al `<head>` **Hecho:** `ErrorDocument` en `static/.htaccess`, comprobado en el servidor; `noindex` en el `<head>` desde `partials/seo.html` (`.Kind` 404). |
 | C9 | ✅ Tipografía con `clamp()` (en `rem`, oct 2026) y espaciados: `rem` para el ritmo entre bandas, `em` para el interior de los bloques (DESIGN_TOKENS.md, 3.4) |
 | C10 | ✅ Indicador de scroll en heros + botón volver-arriba global (coordinar con sticky footer) **Hecho el volver-arriba. El indicador de scroll se descartó** tras medir que el hero no cabe en casi ninguna landing. |
@@ -96,10 +96,12 @@ Sin subcarpetas para `hero/` `gallery` (solo `og/` y `cards/`) — el prefijo de
 | D2 | Validación schema en validator.schema.org (WebPage, Service, Product, FAQPage) | Claude Code | — |
 | D3 | Verificar 0 hrefs a rutas inexistentes en `/public/` | Claude Code | — |
 | D4 | Prueba en móvil iOS y Android (Chrome + Safari): CTA clickable, texto ≥18px, sin modales | Cliente | Tras D0 |
-| D5 | Google Search Console: añadir propiedad, verificar, enviar sitemap | Cliente | — |
-| D6 | Google Business Profile: actualizar URL + horarios en ambos perfiles. **Unificar el nombre de cada centro**: las fichas se llaman "Óptica Fausto" (Av. Andalucía) y "Ópticas Fausto" (Duque), y la web "Centro Fausto Andalucía" / "Centro Fausto Duque": tres nombres para el mismo negocio. El cliente decide el oficial de cada centro y se aplica igual en las fichas, en la web (`site.yaml` → `locations[].name`, que también alimenta el schema) y en los directorios (D7). Según las directrices de Google, el nombre de la ficha debe coincidir con el del rótulo; no añadir la calle si no forma parte del nombre real. Enlaces de la web a las fichas por CID: Avenida `9248588007090896676`, Duque `12933472947538996195` (si una ficha se recrea o se fusiona, cambia y hay que actualizar `mapUrl`) | Cliente | Horarios ya confirmados; nombre pendiente |
+| D5 | Google Search Console: añadir propiedad, verificar, enviar sitemap | Cliente | ✅ 23/10 |
+| D6.1 | Google Business Profile: actualizar URL  | Cliente | ✅ 23/10 |
+| D6.2 | Google Business Profile: horarios en ambos perfiles. | Cliente | ✅ 23/10 |
+| D6.3 | Google Business Profile: horarios en ambos perfiles. **Ver SEO nombre de cada centro**: las fichas se llaman "Óptica Fausto" (Av. Andalucía) y "Ópticas Fausto" (Duque), y la web "Centro Fausto Andalucía" / "Centro Fausto Duque": tres nombres para el mismo negocio. El cliente decide el oficial de cada centro y se aplica igual en las fichas, en la web (`site.yaml` → `locations[].name`, que también alimenta el schema) y en los directorios (D7). Según las directrices de Google, el nombre de la ficha debe coincidir con el del rótulo; no añadir la calle si no forma parte del nombre real. Enlaces de la web a las fichas por CID: Avenida `9248588007090896676`, Duque `12933472947538996195` (si una ficha se recrea o se fusiona, cambia y hay que actualizar `mapUrl`) | Cliente | Horarios ya confirmados; nombre pendiente |
 | D7 | Auditoría NAP: citaciones en directorios locales apuntan al dominio correcto, **con el mismo nombre, dirección y teléfono que las fichas (D6)** | Cliente | Depende del nombre de D6 |
-| D8 | Activar redirect 301 opticafausto.com → opticasfausto.com | Cliente | — |
+| D8 | Activar redirect 301 opticafausto.com → opticasfausto.com | Cliente | ✅ 23/10 |
 
 ### FASE E — Post-lanzamiento (Fase 2, cuando se active SEM/Meta Ads)
 
@@ -132,3 +134,8 @@ Redirects (C7) + GBP (D6) + NAP (D7) ──────────→ DEPLOY
 **Cliente:** revisión del sitio. modificar textos. cambio fotos. **ALTA** definir estructura para cerrar el Redirect 301.
 
 **Claude Proyecto:** D0 revisión visual con skill frontend en cuanto estén B1 + C1 + C4. CSS cover-fit de cards/team ya entregado, no bloquea D0.
+
+**Revision Page Title:** SEO y longitud. Revisión sufijos
+
+**Ajusta de imágenes Hero:** ver los recortes desktop y _m
+**:** 

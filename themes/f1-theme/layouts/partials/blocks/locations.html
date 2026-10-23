@@ -14,6 +14,10 @@
 
   Cada sede usa de site.yaml: name, address, location, phone, phoneLabel,
   mapUrl y -- solo en layout full -- image + imageAlt.
+
+  Cada tarjeta lleva id = locations[].id, para enlazar a una sede concreta
+  (/contacto/#andalucia): lo usan los perfiles de Google Business y el url de
+  cada sede en schema.html. Usar el bloque una sola vez por pagina (ids unicos).
 */ -}}
 {{- $siteData := hugo.Data.site -}}
 {{- $locations := $siteData.locations | default slice -}}
@@ -26,7 +30,7 @@
     <div class="locations-grid">
       {{ range $locations }}
       {{- $loc := . -}}
-      <article class="location-card">
+      <article class="location-card"{{ with $loc.id }} id="{{ . }}"{{ end }}>
         {{ if and (not $compact) $loc.image }}
         <a class="location-media" href="{{ $loc.mapUrl | safeURL }}">
           {{ partial "img-responsive.html" (dict "src" $loc.image "alt" ($loc.imageAlt | default (printf "Ubicación de %s en el mapa" $loc.name)) "sizes" "(width > 51.25em) 50vw, 100vw") }}

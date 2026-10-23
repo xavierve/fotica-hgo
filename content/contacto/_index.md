@@ -27,7 +27,7 @@ sections:
       - question: "¿Necesito cita previa?"
         answer: "No es imprescindible: puedes venir directamente. Para revisiones (visuales o auditivas) recomendamos pedirla y así evitar esperas, especialmente en temporada alta."
       - question: "¿Cuál de los dos centros me queda mejor?"
-        answer: "Los dos ofrecen los mismos servicios y el mismo equipo humano de siempre: elige el que te pille más a mano. Ambos están en el centro de Torre del Mar, a pocos minutos a pie el uno del otro."
+        answer: "Para la vista (revisiones, gafas, lentillas), cualquiera de los dos: elige el que te pille más a mano. Para la audición (revisiones auditivas, audífonos y su mantenimiento), ven al Centro Fausto Andalucía, en Av. Andalucía 84, que es donde está el centro auditivo. Los dos están en el centro de Torre del Mar, a unos 300 metros el uno del otro."
       - question: "¿Cómo aparco cerca?"
         answer: "Ambos centros están en zona céntrica con aparcamiento en calles cercanas y zonas reguladas. Si vienes de fuera y tienes dudas, llámanos y te orientamos."
       - question: "¿Atendéis por WhatsApp?"
