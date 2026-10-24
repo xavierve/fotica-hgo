@@ -568,11 +568,15 @@
    aria-label), con la zona tactil minima de 2.75rem (44px) de .social-links.
    .footer-phone es una fila flex centrada: con vertical-align el icono, en una
    caja de 44px, se alineaba con la linea base y quedaba por debajo del numero.
-   El margen negativo se come la mitad del margin-right (.5rem) del enlace del
-   telefono: el glifo queda a ~.75rem del numero (con el aire de la caja) sin
-   encoger la zona tactil (el margen no es zona pulsable). Con -.5rem quedaba
-   pegado (~.5rem); con 0, demasiado suelto. Gana a .footer-grid address a (inline-grid de
-   dos columnas) y a .site-footer a por especificidad. */
+   Separacion clara a proposito: es otra accion y OTRO numero (el movil comun, no
+   el fijo de la sede); pegado parecia "este mismo numero por WhatsApp". Hueco
+   visible ~33px = margin-right del telefono (.5rem, de .site-footer a) + este
+   margin-left + el aire de la caja tactil. En el icono y no como gap de la fila:
+   sin icono no queda margen suelto.
+   Color: el verde oficial de WhatsApp, fijo (es de la marca WhatsApp, no del
+   cliente); ~8:1 sobre --color-dark, muy por encima del 3:1 de WCAG para iconos.
+   Gana a .footer-grid address a (inline-grid de dos columnas) y a .site-footer a
+   por especificidad. */
 .footer-grid address .footer-phone {
   display: inline-flex;
   align-items: center
@@ -583,7 +587,8 @@
   justify-content: center;
   min-width: 2.75rem;
   min-height: 2.75rem;
-  margin: 0 0 0 -.25rem
+  margin: 0 0 0 1rem;
+  color: #25d366
 }
 .footer-grid address .footer-wa .icon {
   width: 1.4em;
