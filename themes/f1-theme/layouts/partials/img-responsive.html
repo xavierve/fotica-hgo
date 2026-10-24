@@ -20,15 +20,26 @@
     style         -> style="" opcional (ej. object-position del hero)
     noMobile      -> true desactiva la deteccion de "_m" (para quien ya envuelva
                      el <img> en su propio <picture>)
+
+  width/height: los del archivo, leidos en el build (images.Config). No fijan el
+  tamano en pantalla (img { height: auto } en critical.css, y cada bloque pone
+  su width): solo dan al navegador la proporcion ANTES de que llegue la imagen,
+  para reservar su hueco. Sin ellos, una imagen lazy empieza en 0x0 y al cargar
+  empuja el contenido (CLS); Chrome lo marca en Issues. El <source> de la "_m"
+  lleva los suyos, porque el recorte movil tiene otra proporcion. Imagen externa
+  o inexistente: sin dimensiones, como antes.
 */ -}}
 {{- $set := partial "img-srcset.html" .src -}}
+{{- $dim := partial "img-dims.html" .src -}}
 {{- $m := "" -}}
 {{- if not .noMobile -}}{{- $m = partial "img-mobile.html" .src -}}{{- end -}}
 {{- if $m -}}
 {{- $mset := partial "img-srcset.html" $m -}}
-<picture><source media="(width <= 51.25em), (max-width: 51.25em)" srcset="{{ if $mset.hasHd }}{{ $mset.srcset }}{{ else }}{{ $m }}{{ end }}"{{ if $mset.hasHd }} sizes="100vw"{{ end }}>
+{{- $mdim := partial "img-dims.html" $m -}}
+<picture><source media="(width <= 51.25em), (max-width: 51.25em)" srcset="{{ if $mset.hasHd }}{{ $mset.srcset }}{{ else }}{{ $m }}{{ end }}"{{ if $mset.hasHd }} sizes="100vw"{{ end }}{{ with $mdim.w }} width="{{ . }}" height="{{ $mdim.h }}"{{ end }}>
 {{- end -}}
 <img src="{{ .src }}"
+  {{- with $dim.w }} width="{{ . }}" height="{{ $dim.h }}"{{ end }}
   {{- if $set.hasHd }}
   srcset="{{ $set.srcset }}"
   sizes="{{ .sizes | default (printf "%dpx" $set.w) }}"

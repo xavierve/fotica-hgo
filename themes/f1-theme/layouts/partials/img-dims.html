@@ -1,0 +1,18 @@
+{{- /*
+  partials/img-dims.html — ancho y alto reales de una imagen local.
+
+  Entrada: ruta publica ("/images/foo.webp"). Devuelve dict {w, h}; los dos a 0
+  si la imagen es externa (http…), no existe en static/ o no es un mapa de bits
+  que images.Config sepa leer (un SVG le da "unknown format"): nunca rompe el build.
+  Lo usa img-responsive.html para los atributos width/height.
+*/ -}}
+{{- $w := 0 -}}
+{{- $h := 0 -}}
+{{- $src := . | default "" | string -}}
+{{- $raster := in (slice ".webp" ".jpg" ".jpeg" ".png" ".gif") (lower (path.Ext $src)) -}}
+{{- if and $raster (not (hasPrefix $src "http")) (os.FileExists (printf "static%s" $src)) -}}
+  {{- $c := images.Config (printf "static%s" $src) -}}
+  {{- $w = $c.Width -}}
+  {{- $h = $c.Height -}}
+{{- end -}}
+{{- return (dict "w" $w "h" $h) -}}
