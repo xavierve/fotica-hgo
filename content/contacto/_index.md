@@ -29,7 +29,7 @@ sections:
       - question: "¿Cuál de los dos centros me queda mejor?"
         answer: "Para la vista (revisiones, gafas, lentillas), cualquiera de los dos: elige el que te pille más a mano. Para la audición (revisiones auditivas, audífonos y su mantenimiento), ven al Centro Fausto Andalucía, en Av. Andalucía 84, que es donde está el centro auditivo. Los dos están en el centro de Torre del Mar, a dos minutos a pie el uno del otro."
       - question: "¿Cómo aparco cerca?"
-        answer: "Ambos centros están en zona céntrica con aparcamiento en calles cercanas y zonas reguladas. Si vienes de fuera y tienes dudas, llámanos y te orientamos."
+        answer: "Puedes aparcar en el parking privado y se te descontará la primera hora. Si vienes de fuera y tienes dudas, llámanos para más detalles al {phone}."
       - question: "¿Atendéis por WhatsApp?"
         answer: "Sí — para dudas rápidas, citas o consultas es la vía más cómoda: {whatsapp}. Te respondemos dentro del horario de tienda."
 

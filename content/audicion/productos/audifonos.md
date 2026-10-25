@@ -98,11 +98,14 @@ Discreto de verdad es que ni en un susurro al oído se note. Eso es lo que busca
 trabajamos con todas las marcas, por lo que podemos ofrecerte y **adaptarte el audífono que mejor resuelva tu necesidad auditiva.**
 
 {{< brands-logos  surface="card" title="Marcas con las que trabajamos" subtitle="Somos nosotros los que nos adaptamos a ti." class="bg-color1" >}}
-{{< brands-logos-item image="/images/logos/interton.svg" imageAlt="Interton" >}}
-{{< brands-logos-item image="/images/logos/beltone.svg" imageAlt="Beltone" >}}
-{{< brands-logos-item image="/images/logos/phonak.svg" imageAlt="Phonak" >}}
-{{< brands-logos-item image="/images/logos/widex.svg" imageAlt="Widex" >}}
-{{< brands-logos-item image="/images/logos/wsa.svg" imageAlt="WS Audiology" >}}
+{{< brands-logos-item image="/images/logos/interton_gn.min.svg" imageAlt="Interton GN" >}}
+{{< brands-logos-item image="/images/logos/resound_gn.min.svg" imageAlt="resound GN" >}}
+{{< brands-logos-item image="/images/logos/beltone.min.svg" imageAlt="Beltone" >}}
+{{< brands-logos-item image="/images/logos/oticon.min.svg" imageAlt="oticon" >}}
+{{< brands-logos-item image="/images/logos/signia_wsa.min.svg" imageAlt="Signia WSA" >}}
+{{< brands-logos-item image="/images/logos/phonak.min.svg" imageAlt="Phonak" >}}
+{{< brands-logos-item image="/images/logos/bernafon.min.svg" imageAlt="bernafon" >}}
+{{< brands-logos-item image="/images/logos/unitron.min.svg" imageAlt="Unitron" >}}
 {{< /brands-logos >}}
 
 {{< cta title="Pide tu estudio auditivo" microcopy="Prueba gratuita en casa · Todos los presupuestos" >}}
