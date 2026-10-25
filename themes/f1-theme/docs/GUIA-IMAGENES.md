@@ -43,10 +43,27 @@
 > 1.3.1. La fila anterior decía 768×420 con 3:2, que no cuadraba: 768×420 es
 > 1.83:1.
 
+> **Hero `stacked`: recorte exportado 3:1 (opcional).** En escritorio la banda
+> es siempre 3:1 (1440×480 como máximo) y de un archivo 3:2 solo enseña la
+> mitad de la altura. Si el sujeto no sobrevive a ese recorte ni ajustando
+> `hero.imagePosition` (cabezas y manos en la misma foto, p. ej.), entregar la
+> base ya recortada a **1440×480** (o al ancho nativo si es mayor, sin ampliar) y
+> el `_m` en 3:2 con la foto entera. Entonces el `_m` es **obligatorio**: sin él,
+> el móvil recortaría los lados de la franja 3:1. Solo vale para páginas en
+> `stacked`; si la página pasa a `overlay` o `split`, volver a la base 3:2. El OG
+> se saca de la foto 3:2, no de la franja. Ejemplo: `300-audicion_hero`.
+
 > El prefijo `100-` agrupa cosas distintas: solo las `100-equipo_<nombre>` son
 > fichas de equipo. `100-equipo_fausto_completo` es el hero de la home y las
 > `100-instalaciones_*` son galería — esas siguen las medidas de su propio
 > tipo, no las de equipo.
+
+> **Galería: base y `_hd` en la misma proporción.** La ampliación usa `srcset`
+> (base + `_hd`) y el navegador elige por pantalla: la base de 1200 cubre un
+> monitor 1x (se pinta a 1100 px como mucho) y el `_hd` de 2400, uno 2x. Como
+> cualquiera de los dos puede acabar en la ampliación, si sus proporciones
+> difieren el encuadre cambia según la pantalla. Además, si la misma foto es el
+> hero de la página, el navegador reutiliza el `_hd` que ya descargó para el hero.
 
 ---
 
@@ -66,6 +83,7 @@ archivo necesario. No son cifras redondas elegidas a ojo.
 | Slider | `min(80vw, 420px)` | 388px (420 − 32 de padding) | ~776px | — |
 | Logos | `160px` | 160px | 320px | — |
 | Avatar testimonio | `56px` | 56px | 112px | — |
+| Galería, ampliación (lightbox) | `min(92vw, 1100px)` (lo pone `main.js`) | hasta 1100px de ancho y 82vh de alto | 2200px | — |
 
 **image-text no ocupa el ancho del contenedor, y desde oct 2026 tampoco la
 mitad exacta.** Son dos columnas con un `gap` de hasta 67px. La de texto se
