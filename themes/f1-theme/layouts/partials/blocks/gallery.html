@@ -1,20 +1,17 @@
-{{- /* El lightbox recibe, ademas de la ruta base, la variante _hd cuando
-       existe: sin esto el <dialog> ampliaba la version pequena mientras la
-       rejilla podia estar sirviendo la _hd en pantallas de alta densidad — la
-       foto "grande" salia con menos resolucion que su propia miniatura.
-       El nombre se resuelve aqui, en la plantilla, y no en JS: la comprobacion
+{{- /* El lightbox recibe, ademas de la ruta base, el srcset con la variante _hd
+       cuando existe (img-srcset.html, con los anchos REALES de los dos archivos):
+       el navegador elige segun la pantalla, como en la rejilla. Antes recibia
+       siempre la _hd, y un monitor 1x bajaba 500 KB para pintar a lo sumo
+       1100 px; y al reves, sin _hd ampliaba la base mientras la rejilla podia
+       servir la _hd en pantallas de alta densidad. Con srcset no pasa ninguna
+       de las dos. Se resuelve aqui, en la plantilla, y no en JS: la comprobacion
        de existencia del archivo solo se puede hacer en build. */ -}}
 {{- $lb := slice -}}
 {{- range .items -}}
-  {{- $hd := "" -}}
-  {{- $ext := path.Ext .image -}}
-  {{- if and $ext (not (strings.HasPrefix .image "http")) -}}
-    {{- $cand := replace .image $ext (printf "_hd%s" $ext) 1 -}}
-    {{- if os.FileExists (printf "static%s" $cand) }}{{ $hd = $cand }}{{ end -}}
-  {{- end -}}
+  {{- $set := partial "img-srcset.html" .image -}}
   {{- $lb = $lb | append (dict
         "image" .image
-        "imageHd" $hd
+        "srcset" $set.srcset
         "imageAlt" (.imageAlt | default "")
         "legend" (.legend | default "")) -}}
 {{- end -}}

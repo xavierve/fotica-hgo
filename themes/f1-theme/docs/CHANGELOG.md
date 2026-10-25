@@ -1,5 +1,13 @@
 # F1 Theme · Changelog
 
+## Sin versión — lightbox de la galería con `srcset`
+
+- La ampliación elegía siempre la `_hd` (`imageHd || image`): un monitor 1x bajaba 506 KB
+  para pintar como mucho 1100 px, cuando la base (153 KB) bastaba. Ahora `gallery.html`
+  pasa en el JSON el `srcset` de `img-srcset.html` (base + `_hd`, anchos reales) y
+  `mostrar()` lo pone con `sizes="min(92vw, 1100px)"`, igual que la rejilla: 1x → base,
+  2x → `_hd`. Sin `_hd` no hay `srcset` y se ve la base. El JSON pasa de `imageHd` a `srcset`.
+
 ## Sin versión — teléfonos y WhatsApp solo desde `site.yaml`
 
 - **Canales de contacto por nombre:** `url: phone` / `url: whatsapp` en `cta` (todos sus

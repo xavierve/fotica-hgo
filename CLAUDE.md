@@ -131,8 +131,9 @@ Medidas, proporciones y criterios: `themes/f1-theme/docs/GUIA-IMAGENES.md`.
 **Hecho (16 sep):**
 - **Galería** — los 4 `100-instalaciones_*` optimizados, con `_hd` a 2400×1800
   en tres de ellos. La vertical de 1386×1592 quedó reencuadrada a 957×888.
-  En paralelo se corrigió el lightbox: `gallery.html` resuelve la variante `_hd`
-  en build y la pasa en el JSON, y `mostrar()` usa `imageHd || image`. Antes la
+  En paralelo se corrigió el lightbox: `gallery.html` calcula en build el `srcset`
+  (base + `_hd`, anchos reales, `img-srcset.html`) y lo pasa en el JSON, y `mostrar()` lo
+  pone en el `<img>` del `<dialog>` para que el navegador elija por pantalla. Antes la
   ampliación servía la versión pequeña mientras la rejilla podía estar sirviendo
   la `_hd` — la foto grande salía con menos resolución que su miniatura.
 

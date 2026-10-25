@@ -16,7 +16,7 @@ seo:
 og:
   title: "Más de 44 años mirando por ti — Ópticas Fausto"
   description: "Tres generaciones de la familia Fausto en Torre del Mar desde 1982. Conoce al equipo y los dos centros."
-  image: "/images/og/100-equipo_fausto_completo.jpg"
+  image: "/images/og/100-nosotros.jpg"
   type: "website"
 
 schema:
@@ -27,7 +27,7 @@ hero:
   title: "Más de 44 años mirando por ti"
   subtitle: "A tu servicio en Torre del Mar desde 1982. Tres generaciones de la misma familia, el mismo compromiso: conocerte de verdad y seguir aquí cuando vuelvas."
   preset: contact
-  image: "/images/100-instalaciones_fausto_duque_fachada.webp"
+  image: "/images/100-nosotros_hero.webp"
   imageAlt: "Fachada de Ópticas Fausto en la avenida Duque de Ahumada, con el rótulo verde y el escaparate de monturas"
   imagePosition: "center top"   # fachada vertical: ancla arriba para no cortar el rotulo
 

@@ -158,8 +158,18 @@ aislar('galeria (lightbox)', function () {
 
     function mostrar(n) {
       i = (n + items.length) % items.length;
-      // imageHd si la plantilla la encontro; si no, la base
-      img.src = items[i].imageHd || items[i].image;
+      // srcset (base + _hd, anchos reales) si la plantilla encontro la _hd: el
+      // navegador elige por pantalla. sizes = el ancho maximo que pinta el CSS
+      // (.gallery-lightbox img: min(92vw, 1100px)); si se cambia alli, cambiarlo aqui.
+      // sizes y srcset van ANTES de src para que el navegador elija una sola vez.
+      if (items[i].srcset) {
+        img.sizes = 'min(92vw, 1100px)';
+        img.srcset = items[i].srcset;
+      } else {
+        img.removeAttribute('srcset');
+        img.removeAttribute('sizes');
+      }
+      img.src = items[i].image;
       img.alt = items[i].imageAlt || '';
       cap.textContent = items[i].legend || '';
     }
