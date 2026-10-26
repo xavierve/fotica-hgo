@@ -16,6 +16,7 @@
 | Uso | Clave front matter | Base | `_hd` (2x) | Proporción | Formato |
 |---|---|---|---|---|---|
 | **Hero** (los tres layouts) | `hero.image` | 1440×960 | `_hd` 1920×1280 *(solo cámara)* | 3:2 | WebP |
+| **Hero `stacked` recortado** *(opcional, ver nota)* | `hero.image` | 1440×480 | — | 3:1 | WebP |
 | **Hero móvil** | *(sin clave: `_m` por convención)* | 768×512 | `_m_hd` 1536×1024 | 3:2 | WebP |
 | **OG / Social** | `og.image` | 1200×630 | — | 1.91:1 | **JPG** |
 | **Cards** | `card.image` | **800×600** | 1600×1200 | **4:3** | WebP |
@@ -43,7 +44,7 @@
 > 1.3.1. La fila anterior decía 768×420 con 3:2, que no cuadraba: 768×420 es
 > 1.83:1.
 
-> **Hero `stacked`: recorte exportado 3:1 (opcional).** En escritorio la banda
+> **Hero `stacked`: recorte exportado 3:1 (opcional; fila «Hero `stacked` recortado»).** En escritorio la banda
 > es siempre 3:1 (1440×480 como máximo) y de un archivo 3:2 solo enseña la
 > mitad de la altura. Si el sujeto no sobrevive a ese recorte ni ajustando
 > `hero.imagePosition` (cabezas y manos en la misma foto, p. ej.), entregar la
