@@ -86,6 +86,7 @@ Sin subcarpetas para `hero/` `gallery` (solo `og/` y `cards/`) — el prefijo de
 | C15 | Anillo de foco sobre fondos con foto (`.has-bg-image`): **sin medir**. La medida de C14 fue sobre fondos planos; sobre foto depende de la imagen. Medir con Playwright en los CTA, banners y counters que llevan foto. |
 | C16 | Contraste de la forma de `.btn-fill` sobre dorado (`bg-color4`): verde sobre dorado, 2,44:1. **Asumido:** el texto del botón se lee (blanco sobre verde, 5,58:1) y WCAG 1.4.11 no exige contraste del borde cuando la etiqueta identifica el control. Si se quiere el mismo tratamiento que el outline, cambiar solo ese caso. |
 | C17 | Residuos de QA **asumidos**: (a) el correo se parte en dos líneas a 320px en `/contacto/` (preferible a desbordar); (b) a letra de 24px (150%) y 320px una palabra larga de un H1 se parte a mitad de palabra: sin `hyphens` en titulares, por decisión. |
+| C18 | Regla «una foto de hero no se reutiliza como fondo» (GUIA-IMAGENES, «Fondos»): (a) ✅ el banner de `/vision/servicios/control-miopia/` usaba `213-miopia_hero.webp`, que no es hero de ninguna página (el de esa página es `213-optometria_D3A0075`) pero lo parecía por el nombre; **hecho:** pasa a `213-miopia_banner.webp`. `213-miopia_hero.webp` queda sin uso; borrarlo cuando el nuevo esté publicado. (b) La demo usa `314-mantenimiento_audifonos_hero` como fondo de un CTA para enseñar el `_m`: si se reencuadra su `_m` a 3:2 para el hero, cambiar la foto del ejemplo. |
 
 ### FASE D — Revisión visual y pre-lanzamiento
 

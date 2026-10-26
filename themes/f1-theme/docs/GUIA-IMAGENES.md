@@ -26,6 +26,9 @@
 | **Imagen suelta en el prose** | shortcode `figure` | **800 ancho** | hasta 2240 *(el original, sin ampliar)* | libre | WebP |
 | **Slider** | `slider.items[].image` | **780 ancho** | — | libre | WebP |
 | **Logos de marca** | `items[].image` (bloque `brands-logos`) | **320×160** | 640×320 | **2:1** | **SVG** o WebP con transparencia |
+| **Fondo** de banner / CTA / counter, escritorio (`default`, `wide`) | `bg` | 1440×480 | 2880×960 *(solo si hay original)* | 3:1 | WebP |
+| **Fondo**, `width: full` | `bg` | 1920×640 | — | 3:1 | WebP |
+| **Fondo móvil** | *(sin clave: `_m` por convención)* | 800×1000 | `_m_hd` 1600×2000 | 4:5 | WebP |
 
 > **Logos de marca.** Todos en el mismo lienzo 2:1 (320×160), fondo
 > transparente, logo centrado y dentro de una zona segura de ~80% del ancho y
@@ -53,6 +56,22 @@
 > el móvil recortaría los lados de la franja 3:1. Solo vale para páginas en
 > `stacked`; si la página pasa a `overlay` o `split`, volver a la base 3:2. El OG
 > se saca de la foto 3:2, no de la franja. Ejemplo: `300-audicion_hero`.
+
+> **Fondos (`bg` de banner, CTA y counter).** La foto va con `cover` y el texto
+> encima, con velo. Escritorio: franja de 420px de alto (hasta ~490 en `panel`;
+> counter, ~360), de 2,5:1 (`default` a 1100) a 4,6:1 (`full` a 1920); con un 3:1
+> se pierde poco en ambos extremos: sujeto dentro del 65% central en vertical
+> y del 80% en horizontal. Móvil: caja de `70svh`, vertical (0,66:1 a 360-390px)
+> y casi cuadrada en tablet (1:1 a 820); el 4:5 pierde como mucho un 20% por
+> lado. El tema elige 1x/2x con `image-set` (densidad, no ancho), así que la base
+> tiene que cubrir la caja más grande a 1x. Medido con Playwright, oct 2026.
+>
+> **Regla: una foto de hero NO se reutiliza como fondo, ni al revés.** El `_m` es
+> el mismo sufijo para los dos usos y piden proporciones opuestas (hero 3:2
+> apaisado, fondo 4:5 vertical): el `_m` que sirve a uno estropea al otro. Si
+> hace falta la misma escena en los dos sitios, se exporta dos veces con nombres
+> distintos (`foto_hero.webp` y `foto_banner.webp`, cada uno con su `_m`). El nombre
+> dice el uso: un archivo `_hero` que solo se usa de fondo confunde.
 
 > El prefijo `100-` agrupa cosas distintas: solo las `100-equipo_<nombre>` son
 > fichas de equipo. `100-equipo_fausto_completo` es el hero de la home y las

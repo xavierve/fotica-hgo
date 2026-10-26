@@ -174,8 +174,9 @@ Medidas, proporciones y criterios: `themes/f1-theme/docs/GUIA-IMAGENES.md`.
 - **Arte móvil (`_m`)** — recortes en **3:2** (768×512), solo donde el
   encuadre de escritorio no funcione (caras cortadas, sujeto descentrado). Los
   que hay hoy son verticales de 843×1264, de antes de que existiera la banda, y
-  hay que reencuadrarlos. Ojo: el `_m` de una foto también lo usa un `cta` o
-  `banner` con esa misma foto de fondo. **Qué imágenes lo necesitan es juicio
+  hay que reencuadrarlos. Una foto de hero no se reutiliza como fondo de
+  `banner`/`cta`/`counter` ni al revés (GUIA-IMAGENES, «Fondos»): los dos usan el
+  sufijo `_m` y piden proporciones opuestas; cada uso, su archivo. **Qué imágenes lo necesitan es juicio
   visual, no automatizable.**
 
 **Cambios de theme que faltan para aprovechar todo esto:**
