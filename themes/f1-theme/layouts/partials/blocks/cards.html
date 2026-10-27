@@ -1,9 +1,10 @@
 {{ with .cards }}
 {{ $columns := $.columns | default 3 }}
-<section class="{{ partial "block-classes.html" (dict "name" "cards" "context" $ "extra" (slice (printf "cards-columns-%v" $columns))) }}">
+{{- if and $.cols $.columns }}{{ errorf "cards: usa `columns` (fijo 2|3|4) o `cols` (maximo, auto-fit), no los dos; pagina %s" page.Path }}{{ end -}}
+<section class="{{ partial "block-classes.html" (dict "name" "cards" "context" $ "extra" (cond (not $.cols) (slice (printf "cards-columns-%v" $columns)) slice)) }}">
   <div class="container">
     {{ partial "block-heading.html" (dict "eyebrow" $.eyebrow "title" $.title "subtitle" $.subtitle) }}
-    <div class="cards-grid">
+    {{ $cols := partial "grid-cols.html" $.cols }}<div class="cards-grid{{ if $cols }} has-max-cols{{ end }}"{{ with $cols }} style="--cols:{{ . }}"{{ end }}>
       {{ range . }}
       {{ $card := . }}
       <article class="card">

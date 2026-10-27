@@ -11,7 +11,7 @@
   {{- with $.textColor }}{{ $styles = $styles | append (printf "--section-text-color:%s" .) }}{{ end -}}
   {{- with $styles }} style="{{ delimit . ";" | safeCSS }}"{{ end }}>
   <div class="container">
-    <div class="counter-grid">
+    {{ $cols := partial "grid-cols.html" $.cols }}<div class="counter-grid{{ if $cols }} has-max-cols{{ end }}"{{ with $cols }} style="--cols:{{ . }}"{{ end }}>
       {{ range . }}
       <div class="counter-item"{{ with .plusOne }} data-plus-one="{{ . }}"{{ end }}>
         <strong>{{ .number }}</strong>

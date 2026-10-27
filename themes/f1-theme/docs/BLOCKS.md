@@ -51,6 +51,33 @@ Todos los bloques aceptan:
 - `class`: string opcional
 - `eyebrow`: antetítulo opcional sobre el H2 (shortcode: `eyebrow="…"`). Ver «Cabecera de bloque».
 - `surface`: `bleed` (defecto) | `card`, para bloques con fondo. Ver «Fondo: banda o tarjeta».
+- `cols`: solo en los bloques con rejilla auto-fit (`cards`, `team`, `testimonials`, `gallery`,
+  `brands-logos`, `counter`). Ver «Columnas máximas (`cols`)».
+
+## Columnas máximas (`cols`)
+
+Las rejillas se reparten solas: caben tantas columnas como permita el ancho. Con 8 logos eso
+da 6+2 en un escritorio; con `cols: 4`, 4+4.
+
+```yaml
+- type: brands-logos
+  cols: 4          # máximo 4 columnas
+```
+
+- **Sin `cols`** (o `cols: auto`): comportamiento de siempre. El HTML no cambia.
+- **`cols: N`** (entero 1–12): **máximo** N columnas. Sigue siendo auto-fit hacia abajo: en
+  pantallas estrechas caben menos y baja solo (nunca fuerza N columnas apretadas). Es un techo,
+  no un número fijo: con menos elementos que N se reparten como siempre.
+- Cualquier otro valor (`0`, `13`, `abc`) → el build falla con la ruta de la página.
+- Aplica a los bloques `cards`, `team`, `testimonials`, `gallery`, `brands-logos`, `counter`
+  y a los shortcodes `cards`, `testimonials`, `brands-logos` (`cols="4"`).
+- `counter`: en móvil (≤ 820 px) sigue siendo una columna, con o sin `cols`.
+- `testimonials`: por defecto son 3 columnas fijas en escritorio; `cols: 2` baja el techo a 2.
+- **`cards` ya tiene `columns`** (2|3|4, número *fijo* de columnas en escritorio). No se
+  mezclan: usar `columns` y `cols` a la vez falla el build. `cols` es el techo flexible;
+  `columns` el reparto fijo clásico.
+- Limitación asumida: a anchos intermedios el máximo no garantiza el reparto bonito (8 logos
+  con `cols: 4` son 3+3+2 en torno a 600 px, porque no caben 4). Es el auto-fit.
 
 ## Fondo: banda o tarjeta (`surface`)
 
@@ -333,7 +360,8 @@ sections:
         linkText:
 ```
 
-`columns` acepta `2`, `3` o `4` y genera `cards-columns-{columns}`.
+`columns` acepta `2`, `3` o `4` y genera `cards-columns-{columns}`. Alternativa: `cols: N` (techo
+flexible, ver «Columnas máximas»); no se usan los dos a la vez.
 
 ## CTA
 

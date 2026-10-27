@@ -60,7 +60,7 @@ sections:
     valign: top
     sticky: false     # true: la foto acompaña el scroll (implica valign top; ver BLOCKS.md)
   - type: cards
-    columns: 3
+    columns: 3          # fijo 2|3|4; alternativa: cols: N (máximo, auto-fit). Ver BLOCKS.md «Columnas máximas»
     title: ""
     subtitle: ""
     cards: []

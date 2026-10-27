@@ -12,7 +12,7 @@
   contenido-por-testimonio): el "array" son las llamadas anidadas a
   testimonial-item, en el orden en que las escribas.
 
-  Parámetros: eyebrow, title, subtitle, class, variant, textSize, align, width, pad
+  Parámetros: eyebrow, title, subtitle, cols, class, variant, textSize, align, width, pad
 */ -}}
 <section class="{{ partial "block-classes.html" (dict "name" "testimonials" "context" (dict
       "variant" (.Get "variant")
@@ -25,7 +25,7 @@
     )) }}">
   <div class="container">
     {{ partial "block-heading.html" (dict "eyebrow" (.Get "eyebrow") "title" (.Get "title") "subtitle" (.Get "subtitle")) }}
-    <div class="cards-grid">
+    {{ $cols := partial "grid-cols.html" (.Get "cols") }}<div class="cards-grid{{ if $cols }} has-max-cols{{ end }}"{{ with $cols }} style="--cols:{{ . }}"{{ end }}>
       {{ .Inner }}
     </div>
   </div>

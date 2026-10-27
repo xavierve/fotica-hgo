@@ -8,7 +8,7 @@
     card.weight / weight         → orden
   Delega el render en blocks/cards.html → paridad total con sections.
 
-  Parámetros: section (obligatorio), eyebrow, title, subtitle, columns, linkText,
+  Parámetros: section (obligatorio), eyebrow, title, subtitle, columns, cols, linkText,
               variant, class, textSize, align
 */ -}}
 {{- $sectionPath := .Get "section" -}}
@@ -32,7 +32,8 @@
         "eyebrow" (.Get "eyebrow")
         "title" (.Get "title")
         "subtitle" (.Get "subtitle")
-        "columns" (.Get "columns" | default 3)
+        "columns" (.Get "columns")
+        "cols" (.Get "cols")
         "linkText" (.Get "linkText" | default (i18n "readMore"))
         "variant" (.Get "variant")
         "class" (.Get "class")

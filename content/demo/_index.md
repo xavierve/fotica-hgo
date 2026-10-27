@@ -171,6 +171,14 @@ sections:
       - { number: "2", label: "centros en Torre del Mar" }
       - { number: "1982", label: "año de apertura" }
   - type: counter
+    text: "3.1b- counter · cols: 2 (2+2 en escritorio; en móvil sigue siendo 1 columna)"
+    cols: 2
+    items:
+      - { number: "44", label: "años de experiencia" }
+      - { number: "27.000", label: "clientes atendidos" }
+      - { number: "2", label: "centros en Torre del Mar" }
+      - { number: "1982", label: "año de apertura" }
+  - type: counter
     text: "3.2- counter · bg + bgColor (overlay tintado)"
     bg: "https://picsum.photos/seed/counter/1600/500"
     bgColor: "var(--bg-color3)"
@@ -189,6 +197,16 @@ sections:
       - { title: "Card A", description: "Con imagen, título, descripción y enlace.", image: "https://picsum.photos/seed/c1/480/320", imageAlt: "Demo", link: "/vision/" }
       - { title: "Card B", description: "Segunda card del grid.", image: "https://picsum.photos/seed/c2/480/320", imageAlt: "Demo", link: "/audicion/" }
       - { title: "Card C", description: "Tercera card del grid.", image: "https://picsum.photos/seed/c3/480/320", imageAlt: "Demo", link: "/nosotros/" }
+
+  - type: cards
+    title: "4.0- cards · cols: 4 (máximo 4, auto-fit; alternativa a columns)"
+    cols: 4
+    linkText: "Ver más"
+    cards:
+      - { title: "Card A", description: "Sin columns: usa cols.", image: "https://picsum.photos/seed/c1/480/320", imageAlt: "Demo", link: "/vision/" }
+      - { title: "Card B", description: "Segunda.", image: "https://picsum.photos/seed/c2/480/320", imageAlt: "Demo", link: "/audicion/" }
+      - { title: "Card C", description: "Tercera.", image: "https://picsum.photos/seed/c3/480/320", imageAlt: "Demo", link: "/nosotros/" }
+      - { title: "Card D", description: "Cuarta.", image: "https://picsum.photos/seed/c4/480/320", imageAlt: "Demo", link: "/vision/" }
 
   - type: cards
     title: "4.1- cards · textSize: xl — el interior escala"
@@ -223,6 +241,15 @@ sections:
       - { image: "https://picsum.photos/seed/g3/600/400", imageAlt: "Demo", legend: "Otra leyenda" }
       - { image: "https://picsum.photos/seed/g4/600/400", imageAlt: "Demo" }
 
+  - type: gallery
+    title: "6.1- gallery · cols: 2 (máximo 2 columnas)"
+    cols: 2
+    items:
+      - { image: "https://picsum.photos/seed/g1/600/400", imageAlt: "Demo" }
+      - { image: "https://picsum.photos/seed/g2/600/400", imageAlt: "Demo" }
+      - { image: "https://picsum.photos/seed/g3/600/400", imageAlt: "Demo" }
+      - { image: "https://picsum.photos/seed/g4/600/400", imageAlt: "Demo" }
+
   # ============ TEAM ============
   - type: team
     title: "7- team"
@@ -231,6 +258,15 @@ sections:
       - { image: "https://picsum.photos/seed/t1/400/400", imageAlt: "Demo", name: "Nombre Uno", role: "Óptico-optometrista" }
       - { image: "https://picsum.photos/seed/t2/400/400", imageAlt: "Demo", name: "Nombre Dos", role: "Audioprotesista" }
       - { image: "https://picsum.photos/seed/t3/400/400", imageAlt: "Demo", name: "Nombre Tres", role: "Atención al cliente" }
+
+  - type: team
+    title: "7.1- team · cols: 2"
+    cols: 2
+    items:
+      - { image: "https://picsum.photos/seed/t1/400/400", imageAlt: "Demo", name: "Nombre Uno", role: "Óptico-optometrista" }
+      - { image: "https://picsum.photos/seed/t2/400/400", imageAlt: "Demo", name: "Nombre Dos", role: "Audioprotesista" }
+      - { image: "https://picsum.photos/seed/t3/400/400", imageAlt: "Demo", name: "Nombre Tres", role: "Atención al cliente" }
+      - { image: "https://picsum.photos/seed/t4/400/400", imageAlt: "Demo", name: "Nombre Cuatro", role: "Recepción" }
 
   # ============ TIMELINE ============
   - type: timeline
@@ -251,6 +287,19 @@ sections:
       - { image: "https://picsum.photos/seed/b5/200/200", imageAlt: "Demo", text: "Archivo cuadrado: contain, no se deforma" }
       - { image: "/images/logos/interton.svg", imageAlt: "Audífonos ", text: "xxxxx" }
 
+  - type: brands-logos
+    title: "9.1- brands-logos · cols: 4 (8 logos → 4+4 en vez de 6+2)"
+    cols: 4
+    items:
+      - { image: "https://picsum.photos/seed/c1/320/160", imageAlt: "Demo", text: "Marca 1" }
+      - { image: "https://picsum.photos/seed/c2/320/160", imageAlt: "Demo", text: "Marca 2" }
+      - { image: "https://picsum.photos/seed/c3/320/160", imageAlt: "Demo", text: "Marca 3" }
+      - { image: "https://picsum.photos/seed/c4/320/160", imageAlt: "Demo", text: "Marca 4" }
+      - { image: "https://picsum.photos/seed/c5/320/160", imageAlt: "Demo", text: "Marca 5" }
+      - { image: "https://picsum.photos/seed/c6/320/160", imageAlt: "Demo", text: "Marca 6" }
+      - { image: "https://picsum.photos/seed/c7/320/160", imageAlt: "Demo", text: "Marca 7" }
+      - { image: "https://picsum.photos/seed/c8/320/160", imageAlt: "Demo", text: "Marca 8" }
+
   # ============ TESTIMONIALS ============
   - type: testimonials
     title: "10- testimonials (text, name, rating, image opcional)"
@@ -258,6 +307,15 @@ sections:
       - { text: "Con rating e imagen.", name: "Cliente A", rating: 5, image: "https://picsum.photos/seed/p1/80/80" }
       - { text: "Solo texto y nombre.", name: "Cliente B" }
       - { text: "Con rating, sin imagen.", name: "Cliente C", rating: 4 }
+
+  - type: testimonials
+    title: "10.1- testimonials · cols: 2 (máximo 2 columnas; sin cols son 3 en escritorio)"
+    cols: 2
+    items:
+      - { text: "Primera cita.", name: "Cliente A", rating: 5 }
+      - { text: "Segunda cita.", name: "Cliente B", rating: 4 }
+      - { text: "Tercera cita.", name: "Cliente C" }
+      - { text: "Cuarta cita.", name: "Cliente D", rating: 5 }
 
   # ============ TEXT — bloque de prosa libre en sections: ============
   - type: text
@@ -669,6 +727,8 @@ Las cards siguientes **no están escritas aquí**: se autodescubren de `/vision/
 
 {{< cards section="/vision/servicios" columns="3" title="cards automáticas de una sección" >}}
 
+{{< cards section="/vision/servicios" cols="2" title="p11.1- cards automáticas con cols=2" >}}
+
 ### p12- Shortcode {{</* locations */>}}
 
 Las sedes **no se escriben aquí**: salen de `data/site.yaml` → `locations[]`, la
@@ -708,6 +768,17 @@ intercalada en el prose. El orden de los items es el orden visual:
 {{< brands-logos-item image="https://picsum.photos/seed/b2/320/160" imageAlt="Demo" text="Marca B" >}}
 {{< brands-logos-item image="https://picsum.photos/seed/b3/320/160" imageAlt="Demo" >}}
 {{< brands-logos-item image="https://picsum.photos/seed/b4/320/160" imageAlt="Demo" >}}
+{{< /brands-logos >}}
+
+{{< brands-logos cols="4" title="p14.3- brands-logos con cols=4 (8 logos → 4+4)" >}}
+{{< brands-logos-item image="https://picsum.photos/seed/c1/320/160" imageAlt="Demo" >}}
+{{< brands-logos-item image="https://picsum.photos/seed/c2/320/160" imageAlt="Demo" >}}
+{{< brands-logos-item image="https://picsum.photos/seed/c3/320/160" imageAlt="Demo" >}}
+{{< brands-logos-item image="https://picsum.photos/seed/c4/320/160" imageAlt="Demo" >}}
+{{< brands-logos-item image="https://picsum.photos/seed/c5/320/160" imageAlt="Demo" >}}
+{{< brands-logos-item image="https://picsum.photos/seed/c6/320/160" imageAlt="Demo" >}}
+{{< brands-logos-item image="https://picsum.photos/seed/c7/320/160" imageAlt="Demo" >}}
+{{< brands-logos-item image="https://picsum.photos/seed/c8/320/160" imageAlt="Demo" >}}
 {{< /brands-logos >}}
 
 {{< brands-logos class="bg-color1" align="center" title="p14.2- Con class: bg-color1 y align: center" >}}

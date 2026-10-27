@@ -194,6 +194,8 @@
 .counter-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  --col-min: 150px;
+  --col-gap: .85em;
   gap: .85em;
   text-align: center
 }
@@ -338,6 +340,8 @@
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  --col-min: 15rem;
+  --col-gap: .85em;
   gap: .85em
 }
 /* brands-logos: cada logo en una caja de formato fijo 2:1 (como mucho 160x80,
@@ -349,6 +353,8 @@
 .logo-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+  --col-min: 8rem;
+  --col-gap: 1.25em;
   gap: clamp(1.25em, 4vw, 2.1em) 1.25em;
   align-items: start
 }
@@ -475,6 +481,7 @@
 @media (width > 51.25em), (min-width: 51.3125em) { /* escritorio: > 820px */
   .block-testimonials .cards-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    --col-gap: clamp(.85em, 2.5vw, 1.45em);
     gap: clamp(.85em, 2.5vw, 1.45em)
   }
 }
@@ -1236,6 +1243,26 @@ h2.fs-xs {
 }
 .slider-btn[data-slider-prev] .icon {
   transform: rotate(180deg)
+}
+
+/* `cols: N` en bloques con rejilla auto-fit (cards, team, testimonials, gallery,
+   brands-logos, counter): N es el MAXIMO de columnas. Cada columna mide como
+   minimo lo mayor entre su minimo de siempre (--col-min) y el reparto exacto en
+   N (100% menos los N-1 huecos, entre N): hasta N caben, mas no; y en pantallas
+   estrechas manda --col-min y baja solo, como el auto-fit de siempre. Sin cols
+   no hay .has-max-cols ni --cols: nada de esto se aplica. (0,2,0) y despues de la
+   regla de escritorio de testimonios para ganarle. */
+.cards-grid.has-max-cols,
+.gallery-grid.has-max-cols,
+.logo-grid.has-max-cols,
+.counter-grid.has-max-cols {
+  grid-template-columns: repeat(auto-fit, minmax(max(var(--col-min), calc((100% - (var(--cols) - 1) * var(--col-gap)) / var(--cols))), 1fr))
+}
+/* Contador en movil: una sola columna aunque haya cols (ver arriba). */
+@media (width <= 51.25em), (max-width: 51.25em) {
+  .counter-grid.has-max-cols {
+    grid-template-columns: 1fr
+  }
 }
 
 /* === Gallery: retícula uniforme === */

@@ -1,5 +1,19 @@
 # F1 Theme · Changelog
 
+## Sin versión — `cols`: máximo de columnas en las rejillas
+
+- Parámetro opcional `cols` (1–12) en `cards`, `team`, `testimonials`, `gallery`,
+  `brands-logos` y `counter` (bloques) y en los shortcodes `cards`, `testimonials` y
+  `brands-logos`. Es un **techo**: sigue siendo auto-fit hacia abajo. Caso de uso: 8 logos en
+  4+4 en lugar de 6+2. Sin `cols` (o `auto`) el HTML y la geometría no cambian.
+- Partial nuevo `grid-cols.html` (valida; valor no válido → `errorf` con la ruta de la
+  página). La rejilla recibe `class="… has-max-cols"` y `style="--cols:N"`. CSS: cada rejilla
+  declara `--col-min` / `--col-gap` (mismos valores de siempre) y `.has-max-cols` calcula
+  `max(--col-min, reparto exacto en N)`. (`has-cols` ya existía en cta/image-text.)
+- `cards`: `cols` y `columns` son excluyentes (`columns` = fijo 2|3|4; `cols` = techo). El
+  shortcode `cards` ya no rellena `columns` con 3: lo hace el partial.
+- `counter` conserva su columna única en móvil. Demo: 4.0, 6.1, 7.1, 9.1, 10.1, 3.1b, p11.1, p14.3.
+
 ## Sin versión — lightbox de la galería con `srcset`
 
 - La ampliación elegía siempre la `_hd` (`imageHd || image`): un monitor 1x bajaba 506 KB

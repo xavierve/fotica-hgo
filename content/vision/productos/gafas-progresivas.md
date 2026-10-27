@@ -57,7 +57,7 @@ sections:
     labelCall: "Llamar ahora"
 ---
 
-{{< banner >}}**2×1 EN LENTES PROGRESIVAS** — *y te explicamos exactamente qué calidad llevan las dos.*{{< /banner >}}
+{{< banner class="bg-color1" >}}**2×1 EN LENTES PROGRESIVAS** — *y te explicamos exactamente qué calidad llevan las dos.*{{< /banner >}}
 
 ## Qué es una lente progresiva (y por qué ha jubilado a las bifocales)
 
@@ -77,7 +77,7 @@ La diferencia entre una progresiva básica y una de gama alta no es la marca del
 
 *La diferencia entre gamas no es solo el nombre del estuche: se nota en cuánto puedes ver con nitidez sin mover la cabeza. Por eso te decimos la gama exacta antes de que decidas, no después.*
 
-{{< cta title="Pide tu presupuesto de progresivas" microcopy="Adaptación garantizada · Certificado del fabricante en cada lente" >}}
+{{< cta class="bg-color1" title="Pide tu presupuesto de progresivas" microcopy="Adaptación garantizada · Certificado del fabricante en cada lente" >}}
 
 ## La progresiva es la lente que más asesoramiento necesita. Y el asesoramiento es lo nuestro.
 

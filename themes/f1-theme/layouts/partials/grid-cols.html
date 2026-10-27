@@ -1,0 +1,23 @@
+{{- /*
+  grid-cols.html — valida el parametro `cols` de las rejillas auto-fit y devuelve
+  el entero (1-12) o 0 si no aplica.
+
+  Entrada: el valor de `cols` (o nil). Semantica:
+    - sin cols / "auto" -> 0 : comportamiento de siempre, el HTML no cambia.
+    - 1..12             -> MAXIMO de columnas. Sigue siendo auto-fit hacia abajo
+                           (en pantallas estrechas caben menos y baja solo).
+    - cualquier otra cosa -> el build falla con la ruta de la pagina.
+  Uso en el parcial/shortcode de cada bloque:
+    {{ $cols := partial "grid-cols.html" .cols }}
+    <div class="logo-grid{{ if $cols }} has-max-cols{{ end }}"{{ with $cols }} style="--cols:{{ . }}"{{ end }}>
+  (`has-max-cols`, no `has-cols`: esa clase ya existe en .container de cta/image-text.)
+*/ -}}
+{{- $n := 0 -}}
+{{- $s := lower (printf "%v" .) -}}
+{{- if and (ne $s "<nil>") (ne $s "") (ne $s "auto") -}}
+  {{- if findRE `^\d{1,2}$` $s }}{{ $n = int $s }}{{ end -}}
+  {{- if or (lt $n 1) (gt $n 12) -}}
+    {{- errorf "cols: valor %q no valido en %s; usa un entero 1-12 o \"auto\"" $s (page.Path | default "(pagina)") -}}
+  {{- end -}}
+{{- end -}}
+{{- return $n -}}

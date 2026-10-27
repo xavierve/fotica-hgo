@@ -8,13 +8,13 @@ weight: 20
 
 card:
   description: "Paso a paso, con prueba gratuita en tu día a día antes de decidir. Adultos y niños."
-  image: "/images/cards/312-audifonos.webp"
+  image: "/images/cards/312-adaptacion_audifonos.webp"
   imageAlt: "Adaptación de audífonos en Ópticas Fausto"
 
 og:
   title: "Volver a conectar con quienes más quieres — Adaptación de audífonos"
   description: "Pruebas el audífono en tu vida real — en casa, en la calle, en una conversación — y solo entonces decides. Sin compromiso, en Torre del Mar."
-  image: "/images/og/312-audifonos.jpg"
+  image: "/images/og/312-adaptacion_audifonos.jpg"
   type: "article"
 
 schema:
@@ -26,7 +26,7 @@ hero:
   title: "Volver a conectar con quienes más quieres"
   subtitle: "Decidir dar el paso hacia un audífono no siempre es fácil. Por eso en Fausto lo hemos organizado para que **la decisión la tome tu vida diaria, no un comercial**: lo usas, lo pruebas en casa, en la calle, en una conversación real — y solo entonces decides. Sin ningún compromiso."
   preset: contact
-  image: "/images/312-audifonos_hero.webp"
+  image: "/images/312-adaptacion_audifonos_hero.webp"
   imageAlt: "Un audioprotesista muestra los resultados en pantalla a una paciente, con varios modelos de audífono expuestos sobre la mesa"
 
 sections:
@@ -64,7 +64,7 @@ Volver a reírte sin pedir que te repitan el chiste — de eso trata todo lo que
 4. **Ajuste personalizado** — afinamos el audífono según lo que nos cuentes tras la prueba: qué oíste bien, qué te molestó, qué faltó.
 5. **Seguimiento continuado** — revisiones periódicas para que siga funcionando como esperas, **incluso años después de la compra**. → [Mantenimiento](/audicion/servicios/mantenimiento-audifonos/) · [Rehabilitación auditiva](/audicion/servicios/rehabilitacion-auditiva/)
 
-{{< image-text image="/images/312-adaptacion_audifonos_hero_D3A0077.webp" imageAlt="Óptico de Ópticas Fausto explicando el resultado de una audiometría a una clienta" reverse="true" >}}
+{{< image-text image="/images/312-adaptacion_audifonos_D3A0077.webp" imageAlt="Óptico de Ópticas Fausto explicando el resultado de una audiometría a una clienta" reverse="true" >}}
 Te enseñamos tu propio audiograma y te lo explicamos con calma — decides con datos delante, no a ciegas.
 {{< /image-text >}}
 
