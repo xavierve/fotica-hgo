@@ -145,7 +145,8 @@ sobre 1120px: ~475px, no los ~500 que daría un 45vw teórico.
 
 **Ojo con las cards: el caso exigente es móvil, no desktop.** En desktop van a
 3 columnas (~350px cada una), pero en móvil ocupan una sola columna a casi
-todo el ancho: en un iPhone de 430px con DPR3 son ~1200px. Por eso el `_hd` de
+todo el ancho: en un iPhone de 430px con DPR3 son ~1200px. (Entre ~510 y 820px
+van a 2 columnas desde que `cards` usa `colsMax: 3`; ver BLOCKS.md.) Por eso el `_hd` de
 cards es 1600 y no 700 — lo justifica el teléfono, no el monitor.
 
 **Imagen suelta en el prose (`figure`): base 800 para el móvil.** Ocupa el

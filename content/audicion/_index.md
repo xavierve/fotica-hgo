@@ -51,14 +51,11 @@ sections:
 
 Disponemos del equipo y la experiencia necesarios para evaluar tu pérdida auditiva y recomendarte la solución que mejor se adapte a ti. Un diagnóstico a tiempo es la diferencia entre seguir esforzándote por entender a los demás y volver a disfrutar de cada conversación sin esfuerzo.
 
-{{< cards section="/audicion/servicios" columns="3" >}}
+{{< cards section="/audicion/servicios" eyebrow="SERVICIOS" >}}
 
-{{< image-text image="/images/300-audicion-bailar-feria.webp" imageAlt="Familia disfrutando de la Feria de Málaga, tres generaciones bailando juntas" >}}
-Volver a oír bien no es solo entender mejor una conversación — es no perderte ni un compás cuando la música suena y toca la familia entera.
-{{< /image-text >}}
 
 ## El audífono adecuado es el que funciona en tu vida, no en el catálogo
 
 Disponemos de una amplia gama de audífonos, desde el más sencillo hasta el más avanzado tecnológicamente. Analizamos tu caso y buscamos la solución óptima a nivel funcional y estético — y queremos que **la pruebes en tu día a día antes de decidir**, sin ningún compromiso.
 
-{{< cards section="/audicion/productos" columns="3" >}}
+{{< cards section="/audicion/productos"  eyebrow="PRODUCTOS" >}}

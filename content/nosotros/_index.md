@@ -93,6 +93,7 @@ sections:
   - type: gallery
     title: "Dos centros en Torre del Mar, un mismo equipo"
     subtitle: "Mismo trato, mismo compromiso, distinta esquina del pueblo."
+    colsMax: 2
     items:
       - image: "/images/100-instalaciones_fausto_andalucia_fachada.webp"
         imageAlt: "Fachada de Centro Fausto Andalucía, Torre del Mar"

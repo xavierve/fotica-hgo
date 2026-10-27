@@ -1,5 +1,5 @@
 {{- /*
-  {{< cards section="/vision/servicios" title="..." columns="3" >}}
+  {{< cards section="/vision/servicios" title="..." colsMax="3" >}}
   Genera automáticamente las cards de las páginas hijas de una sección,
   leyendo del front matter de cada hija:
     card.image / card.imageAlt   → imagen de la card
@@ -8,7 +8,7 @@
     card.weight / weight         → orden
   Delega el render en blocks/cards.html → paridad total con sections.
 
-  Parámetros: section (obligatorio), eyebrow, title, subtitle, columns, cols, linkText,
+  Parámetros: section (obligatorio), eyebrow, title, subtitle, colsMax (def. 3), colsMin, linkText,
               variant, class, textSize, align
 */ -}}
 {{- $sectionPath := .Get "section" -}}
@@ -32,6 +32,8 @@
         "eyebrow" (.Get "eyebrow")
         "title" (.Get "title")
         "subtitle" (.Get "subtitle")
+        "colsMax" (.Get "colsMax")
+        "colsMin" (.Get "colsMin")
         "columns" (.Get "columns")
         "cols" (.Get "cols")
         "linkText" (.Get "linkText" | default (i18n "readMore"))

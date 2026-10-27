@@ -1,10 +1,11 @@
 {{ with .cards }}
-{{ $columns := $.columns | default 3 }}
-{{- if and $.cols $.columns }}{{ errorf "cards: usa `columns` (fijo 2|3|4) o `cols` (maximo, auto-fit), no los dos; pagina %s" page.Path }}{{ end -}}
-<section class="{{ partial "block-classes.html" (dict "name" "cards" "context" $ "extra" (cond (not $.cols) (slice (printf "cards-columns-%v" $columns)) slice)) }}">
+{{- /* colsMax por defecto 3: en escritorio (contenedor de 1120px) caben 4 de
+       15rem, y las cards de texto se leen mejor en 3. `columns` y `cols` ya no
+       existen: grid-cols.html hace fallar el build si aparecen. */ -}}
+<section class="{{ partial "block-classes.html" (dict "name" "cards" "context" $) }}">
   <div class="container">
     {{ partial "block-heading.html" (dict "eyebrow" $.eyebrow "title" $.title "subtitle" $.subtitle) }}
-    {{ $cols := partial "grid-cols.html" $.cols }}<div class="cards-grid{{ if $cols }} has-max-cols{{ end }}"{{ with $cols }} style="--cols:{{ . }}"{{ end }}>
+    {{ $g := partial "grid-cols.html" (dict "colsMax" $.colsMax "colsMin" $.colsMin "cols" $.cols "columns" $.columns "default" 3 "orphan" true) }}<div class="cards-grid{{ $g.class }}"{{ with $g.style }} style="{{ . | safeCSS }}"{{ end }}>
       {{ range . }}
       {{ $card := . }}
       <article class="card">

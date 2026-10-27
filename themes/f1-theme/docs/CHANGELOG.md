@@ -1,5 +1,32 @@
 # F1 Theme · Changelog
 
+## Sin versión — `colsMax`/`colsMin`: columnas acotadas en las rejillas (rompe compatibilidad)
+
+- **Rompe:** `cols` desaparece (→ `colsMax`) y `columns` de `cards` (bloque y shortcode)
+  también (→ `colsMax`; `columns=3` → `colsMax=3`). Usarlos hace fallar el build con el mensaje
+  de migración.
+- `colsMax` (1–12): máximo de columnas, auto-fit hacia abajo. `colsMin` (1–4, por defecto 1):
+  mínimo garantizado aunque la columna apriete por debajo de su ancho natural. `colsMin` mayor
+  que `colsMax`, o valores fuera de rango → `errorf` con la ruta. En los seis bloques con
+  rejilla y en los shortcodes `cards`, `testimonials` y `brands-logos`.
+- CSS: una sola regla sobre `.has-cols-range` (antes `.has-max-cols`): mínimo de pista
+  `max(reparto(colsMax), min(--col-min, reparto(colsMin)))`, con `--cols-max` / `--cols-min`
+  inline solo si se dan. El contador en móvil sigue en una columna salvo con `colsMin`
+  (`.has-cols-min`); su `--col-gap` móvil pasa a 1.05em, como su gap.
+- **`cards` trae `colsMax: 3` por defecto.** En escritorio sigue en 3 columnas (antes,
+  `columns: 3`). Cambio visible: de ~510 a 820px las cards van en 2 columnas (3 desde ~770px)
+  en lugar de la columna única forzada; en móvil vertical, una. Desaparecen las clases
+  `cards-columns-N` y sus reglas.
+- Huérfano centrado con consultas de contenedor (sustituye a las reglas `nth-child` de
+  `cards-columns-2|3`, que solo actuaban en escritorio): `.cards-grid.cols-max-2|3|4` (cards,
+  team y testimonials con `colsMax` 2–4 y sin `colsMin`) es contenedor `rejilla-cards`, y el
+  último elemento solo en su fila se centra con 2, 3 o 4 columnas. Ver BLOCKS.md.
+- Sin parámetros, `team`, `testimonials`, `gallery`, `brands-logos` y `counter` dan el mismo HTML y
+  la misma geometría que antes (medido en 11 anchos).
+- Contenido migrado: `vision/_index.md` y `audicion/_index.md` pierden `columns="3"` (es el valor
+  por defecto, no hace falta `colsMax="3"`). Demo: `cols`/`columns` → `colsMax`; nuevos 3.1c
+  (contador con `colsMin: 2`), 4.0b y 4.0c (huérfano), 6.2 (galería con `colsMin: 2`).
+
 ## Sin versión — `cols`: máximo de columnas en las rejillas
 
 - Parámetro opcional `cols` (1–12) en `cards`, `team`, `testimonials`, `gallery`,

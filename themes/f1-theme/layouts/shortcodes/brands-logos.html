@@ -10,7 +10,7 @@
   CSS nuevo. Como en testimonials, el "array" son las llamadas anidadas a
   brands-logos-item, en el orden en que las escribas.
 
-  Parámetros: eyebrow, title, subtitle, cols, class, variant, textSize, align, width, pad
+  Parámetros: eyebrow, title, subtitle, colsMax, colsMin, class, variant, textSize, align, width, pad
 */ -}}
 <section class="{{ partial "block-classes.html" (dict "name" "brands-logos" "context" (dict
       "variant" (.Get "variant")
@@ -23,7 +23,7 @@
     )) }}">
   <div class="container">
     {{ partial "block-heading.html" (dict "eyebrow" (.Get "eyebrow") "title" (.Get "title") "subtitle" (.Get "subtitle")) }}
-    {{ $cols := partial "grid-cols.html" (.Get "cols") }}<div class="logo-grid{{ if $cols }} has-max-cols{{ end }}"{{ with $cols }} style="--cols:{{ . }}"{{ end }}>
+    {{ $g := partial "grid-cols.html" (dict "colsMax" (.Get "colsMax") "colsMin" (.Get "colsMin") "cols" (.Get "cols") "columns" (.Get "columns")) }}<div class="logo-grid{{ $g.class }}"{{ with $g.style }} style="{{ . | safeCSS }}"{{ end }}>
       {{ .Inner }}
     </div>
   </div>

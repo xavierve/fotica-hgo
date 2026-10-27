@@ -1,23 +1,80 @@
 {{- /*
-  grid-cols.html — valida el parametro `cols` de las rejillas auto-fit y devuelve
-  el entero (1-12) o 0 si no aplica.
+  grid-cols.html — valida `colsMax` / `colsMin` de las rejillas auto-fit y
+  devuelve lo que hay que pintar en el div de la rejilla.
 
-  Entrada: el valor de `cols` (o nil). Semantica:
-    - sin cols / "auto" -> 0 : comportamiento de siempre, el HTML no cambia.
-    - 1..12             -> MAXIMO de columnas. Sigue siendo auto-fit hacia abajo
-                           (en pantallas estrechas caben menos y baja solo).
-    - cualquier otra cosa -> el build falla con la ruta de la pagina.
-  Uso en el parcial/shortcode de cada bloque:
-    {{ $cols := partial "grid-cols.html" .cols }}
-    <div class="logo-grid{{ if $cols }} has-max-cols{{ end }}"{{ with $cols }} style="--cols:{{ . }}"{{ end }}>
-  (`has-max-cols`, no `has-cols`: esa clase ya existe en .container de cta/image-text.)
+  Entrada (dict):
+    colsMax  valor de colsMax (o nil / "")
+    colsMin  valor de colsMin (o nil / "")
+    cols     valor del parametro retirado `cols` (solo para avisar)
+    columns  valor del parametro retirado `columns` (solo para avisar)
+    default  colsMax por defecto si no se da (0 = sin tope; cards usa 3)
+    orphan   true en las rejillas .cards-grid: anade cols-max-N para centrar
+             el ultimo elemento suelto (ver main.css, «huerfano»)
+
+  Semantica:
+    - colsMax: entero 1-12, MAXIMO de columnas. Sigue siendo auto-fit hacia
+      abajo: en pantallas estrechas caben menos y baja solo.
+    - colsMin: entero 1-4, MINIMO de columnas garantizado aunque cada columna
+      quede por debajo de su ancho minimo natural (aprieta). 1 = por defecto,
+      no pinta nada.
+    - "auto" o vacio = sin fijar. Cualquier otro valor, colsMin > colsMax, o
+      usar `cols` / `columns` -> el build falla con la ruta de la pagina.
+
+  Salida (dict):
+    class  " has-cols-range[ has-cols-min][ cols-max-N]" o "" si no hay nada
+    style  "--cols-max:N;--cols-min:M" (solo lo dado) o ""
+  Sin nada fijado (y sin default) class y style son "": el HTML no cambia.
+
+  Uso:
+    {{ $g := partial "grid-cols.html" (dict "colsMax" .colsMax "colsMin" .colsMin "cols" .cols "columns" .columns) }}
+    <div class="logo-grid{{ $g.class }}"{{ with $g.style }} style="{{ . | safeCSS }}"{{ end }}>
+  (`has-cols-range`, no `has-cols`: esa clase ya existe en .container de cta/image-text.)
 */ -}}
-{{- $n := 0 -}}
-{{- $s := lower (printf "%v" .) -}}
+{{- $where := page.Path | default "(pagina)" -}}
+{{- with .cols -}}
+  {{- errorf "cols ya no existe: usa colsMax (cols=%v → colsMax=%v); pagina %s" . . $where -}}
+{{- end -}}
+{{- with .columns -}}
+  {{- errorf "columns ya no existe: usa colsMax (columns=3 → colsMax=3); pagina %s" $where -}}
+{{- end -}}
+
+{{- /* colsMax */ -}}
+{{- $max := 0 -}}
+{{- $s := lower (printf "%v" .colsMax) -}}
 {{- if and (ne $s "<nil>") (ne $s "") (ne $s "auto") -}}
-  {{- if findRE `^\d{1,2}$` $s }}{{ $n = int $s }}{{ end -}}
-  {{- if or (lt $n 1) (gt $n 12) -}}
-    {{- errorf "cols: valor %q no valido en %s; usa un entero 1-12 o \"auto\"" $s (page.Path | default "(pagina)") -}}
+  {{- if findRE `^\d{1,2}$` $s }}{{ $max = int $s }}{{ end -}}
+  {{- if or (lt $max 1) (gt $max 12) -}}
+    {{- errorf "colsMax: valor %q no valido en %s; usa un entero 1-12 o \"auto\"" $s $where -}}
+    {{- $max = 0 -}}
   {{- end -}}
 {{- end -}}
-{{- return $n -}}
+{{- if and (eq $max 0) .default }}{{ $max = int .default }}{{ end -}}
+
+{{- /* colsMin */ -}}
+{{- $min := 0 -}}
+{{- $s = lower (printf "%v" .colsMin) -}}
+{{- if and (ne $s "<nil>") (ne $s "") (ne $s "auto") -}}
+  {{- if findRE `^\d$` $s }}{{ $min = int $s }}{{ end -}}
+  {{- if or (lt $min 1) (gt $min 4) -}}
+    {{- errorf "colsMin: valor %q no valido en %s; usa un entero 1-4 o \"auto\"" $s $where -}}
+    {{- $min = 0 -}}
+  {{- end -}}
+{{- end -}}
+{{- if and $max (gt $min $max) -}}
+  {{- errorf "colsMin (%d) mayor que colsMax (%d) en %s%s" $min $max $where (cond (and .default (not .colsMax)) (printf "; colsMax %d es el valor por defecto de este bloque" (int .default)) "") -}}
+{{- end -}}
+{{- if eq $min 1 }}{{ $min = 0 }}{{ end -}}
+
+{{- $class := "" -}}
+{{- $style := slice -}}
+{{- if or $max $min -}}
+  {{- $class = " has-cols-range" -}}
+  {{- with $max }}{{ $style = $style | append (printf "--cols-max:%d" .) }}{{ end -}}
+  {{- with $min }}{{ $class = printf "%s has-cols-min" $class }}{{ $style = $style | append (printf "--cols-min:%d" .) }}{{ end -}}
+  {{- /* Centrado del huerfano: solo si el numero de columnas es deducible por
+         ancho (colsMax 2-4 y sin colsMin, que lo cambiaria). */ -}}
+  {{- if and .orphan (ge $max 2) (le $max 4) (not $min) -}}
+    {{- $class = printf "%s cols-max-%d" $class $max -}}
+  {{- end -}}
+{{- end -}}
+{{- return (dict "class" $class "style" (delimit $style ";")) -}}

@@ -35,14 +35,11 @@ sections:
 
 Un examen visual completo es mucho más que «leer letras en una pared». Es el primer paso para detectar a tiempo cualquier problema antes de que afecte a tu día a día: dolores de cabeza, fatiga al leer, dificultad para concentrarte o, simplemente, ver mal sin saber por qué.
 
-{{< cards section="/vision/servicios" columns="3"  width="wide">}}
+{{< cards section="/vision/servicios" eyebrow="SERVICIOS" >}}
 
-{{< image-text image="/images/200-vision_es_vida.webp" imageAlt="Abuela leyendo un cuento a su nieta en un patio andaluz" >}}
-Ver bien no es solo leer una letra pequeña — es no perderte ni un dibujo del cuento que le lees a quien más quieres.
-{{< /image-text >}}
 
 ## El producto adecuado, no el más caro
 
 Te asesoramos sobre los productos más adecuados para tu problema de visión, sin presión y con seguimiento real después de la compra. Si la mejor solución para ti es la más sencilla, eso es lo que te recomendaremos.
 
-{{< cards section="/vision/productos" columns="3"  width="wide">}}
+{{< cards section="/vision/productos" width="default" eyebrow="PRODUCTOS" >}}

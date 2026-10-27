@@ -1,7 +1,7 @@
 <section class="{{ partial "block-classes.html" (dict "name" "testimonials" "context" .) }}">
   <div class="container">
     {{ partial "block-heading.html" (dict "eyebrow" .eyebrow "title" .title "subtitle" .subtitle) }}
-    {{ $cols := partial "grid-cols.html" .cols }}<div class="cards-grid{{ if $cols }} has-max-cols{{ end }}"{{ with $cols }} style="--cols:{{ . }}"{{ end }}>
+    {{ $g := partial "grid-cols.html" (dict "colsMax" .colsMax "colsMin" .colsMin "cols" .cols "columns" .columns "orphan" true) }}<div class="cards-grid{{ $g.class }}"{{ with $g.style }} style="{{ . | safeCSS }}"{{ end }}>
       {{ range .items }}{{ $item := . }}<blockquote class="testimonial"><p>“{{ $item.text }}”</p><footer>{{ with $item.image }}{{ partial "img-responsive.html" (dict "src" . "alt" $item.name "sizes" "56px") }}{{ end }}<strong>{{ $item.name }}</strong>{{ with $item.rating }}<span>{{ . }}/5</span>{{ end }}</footer></blockquote>{{ end }}
     </div>
   </div>

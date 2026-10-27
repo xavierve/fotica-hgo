@@ -15,7 +15,7 @@
 <section class="{{ partial "block-classes.html" (dict "name" "brands-logos" "context" .) }}">
   <div class="container">
     {{ partial "block-heading.html" (dict "eyebrow" .eyebrow "title" .title "subtitle" .subtitle) }}
-    {{ $cols := partial "grid-cols.html" .cols }}<div class="logo-grid{{ if $cols }} has-max-cols{{ end }}"{{ with $cols }} style="--cols:{{ . }}"{{ end }}>
+    {{ $g := partial "grid-cols.html" (dict "colsMax" .colsMax "colsMin" .colsMin "cols" .cols "columns" .columns) }}<div class="logo-grid{{ $g.class }}"{{ with $g.style }} style="{{ . | safeCSS }}"{{ end }}>
       {{ range .items }}{{ partial "brands-logos-item.html" . }}{{ end }}
     </div>
   </div>

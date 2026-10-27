@@ -213,6 +213,7 @@
 @media (width <= 51.25em), (max-width: 51.25em) { /* movil: <= 820px */
   .counter-grid {
     grid-template-columns: 1fr;
+    --col-gap: 1.05em;
     gap: 1.05em
   }
   .counter-item strong {
@@ -740,11 +741,6 @@ address {
 .block-image-text.is-reverse .image-text-copy {
   order: 0
 }
-.block-cards.cards-columns-2 .cards-grid,
-.block-cards.cards-columns-3 .cards-grid,
-.block-cards.cards-columns-4 .cards-grid {
-  grid-template-columns: 1fr
-}
 .block-cta {
   text-align: center
 }
@@ -803,15 +799,6 @@ address {
   }
   .footer-grid {
     grid-template-columns: 1fr 1fr 1.35fr
-  }
-  .block-cards.cards-columns-2 .cards-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr))
-  }
-  .block-cards.cards-columns-3 .cards-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr))
-  }
-  .block-cards.cards-columns-4 .cards-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr))
   }
   .block-image-text.is-reverse .image-text-copy {
     order: 2
@@ -1193,19 +1180,6 @@ h2.fs-xs {
   margin-left: calc(50% - (min(var(--container-wide, 1320px), 100vw) / 2));
 }
 
-/* Última fila incompleta con un solo elemento (p.ej. 7 cards en 3 columnas = 3+3+1):
-   se centra en vez de quedar pegado a la izquierda con hueco vacío al lado.
-   Cubre resto=1 en columns 2 y 3 (el caso habitual en este proyecto). */
-@media (width > 51.25em), (min-width: 51.3125em) { /* escritorio: > 820px */
-  .block-cards.cards-columns-3 .cards-grid> :last-child:nth-child(3n+1) {
-    grid-column: 2;
-  }
-  .block-cards.cards-columns-2 .cards-grid> :last-child:nth-child(2n+1) {
-    grid-column: 1/-1;
-    max-width: calc(50% - .5rem);
-    margin-inline: auto;
-  }
-}
 .card-link .icon {
   width: .9em;
   height: .9em;
@@ -1245,23 +1219,143 @@ h2.fs-xs {
   transform: rotate(180deg)
 }
 
-/* `cols: N` en bloques con rejilla auto-fit (cards, team, testimonials, gallery,
-   brands-logos, counter): N es el MAXIMO de columnas. Cada columna mide como
-   minimo lo mayor entre su minimo de siempre (--col-min) y el reparto exacto en
-   N (100% menos los N-1 huecos, entre N): hasta N caben, mas no; y en pantallas
-   estrechas manda --col-min y baja solo, como el auto-fit de siempre. Sin cols
-   no hay .has-max-cols ni --cols: nada de esto se aplica. (0,2,0) y despues de la
-   regla de escritorio de testimonios para ganarle. */
-.cards-grid.has-max-cols,
-.gallery-grid.has-max-cols,
-.logo-grid.has-max-cols,
-.counter-grid.has-max-cols {
-  grid-template-columns: repeat(auto-fit, minmax(max(var(--col-min), calc((100% - (var(--cols) - 1) * var(--col-gap)) / var(--cols))), 1fr))
+/* === Columnas: colsMax y colsMin (grid-cols.html) =========================
+   Rejillas auto-fit (cards, team, testimonials, gallery, brands-logos, counter).
+   El partial pinta .has-cols-range y, solo con lo que se haya dado,
+   style="--cols-max:N;--cols-min:M". Sin nada fijado no hay clase ni variables y
+   nada de esto se aplica (cards trae colsMax 3 por defecto).
+   reparto(N) = ancho exacto de una columna si caben N: (100% - (N-1) huecos) / N.
+   Minimo de pista = max(reparto(colsMax), min(--col-min, reparto(colsMin))):
+   - reparto(colsMax): con ese minimo caben colsMax y no mas (tope).
+   - min(--col-min, reparto(colsMin)): el minimo natural de siempre, salvo que no
+     quepan colsMin; entonces manda el reparto en colsMin (aprieta).
+   Resultado: columnas = natural (las que caben a --col-min) acotado a
+   [colsMin, colsMax]. Sin --cols-max, --cols-max-track queda invalido (var sin
+   valor ni fallback) y var(--cols-max-track, 0px) da 0: sin tope. Sin
+   --cols-min, el fallback 1 da reparto(1) = 100%: min(--col-min, 100%), el
+   minimo natural sin desbordar. --col-gap tiene que valer lo mismo que el gap
+   de columna de cada rejilla (se declara junto a el en cada una).
+   (0,2,0) y despues de la regla de escritorio de testimonios para ganarle. */
+.cards-grid.has-cols-range,
+.gallery-grid.has-cols-range,
+.logo-grid.has-cols-range,
+.counter-grid.has-cols-range {
+  --cols-max-track: calc((100% - (var(--cols-max) - 1) * var(--col-gap)) / var(--cols-max));
+  --cols-min-track: calc((100% - (var(--cols-min, 1) - 1) * var(--col-gap)) / var(--cols-min, 1));
+  grid-template-columns: repeat(auto-fit, minmax(max(var(--cols-max-track, 0px), min(var(--col-min), var(--cols-min-track))), 1fr))
 }
-/* Contador en movil: una sola columna aunque haya cols (ver arriba). */
+/* Contador en movil: una sola columna aunque haya colsMax (ver .counter-grid).
+   Con colsMin explicito (.has-cols-min) esta regla no aplica y manda la de
+   arriba, con su minimo de columnas: colsMin es una peticion expresa de no
+   apilar los numeros. (0,3,0) gana a la de rango; sin :not, colsMin perderia. */
 @media (width <= 51.25em), (max-width: 51.25em) {
-  .counter-grid.has-max-cols {
+  .counter-grid.has-cols-range:not(.has-cols-min) {
     grid-template-columns: 1fr
+  }
+}
+
+/* Huerfano: ultimo elemento solo en la ultima fila (4 cards en 3 columnas =
+   3+1), centrado en vez de pegado a la izquierda con hueco al lado.
+   - Solo en .cards-grid (cards, team, testimonials): tarjetas de igual peso,
+     donde una suelta a la izquierda parece un fallo. En galeria, logos y
+     contador no: son rejillas de miniaturas o datos, donde el orden de lectura
+     izquierda-derecha manda y el hueco no se lee como error.
+   - Con auto-fit el CSS no sabe cuantas columnas hay, asi que se deduce del
+     ancho de la rejilla con consultas de contenedor. Hace falta conocer el tope:
+     el partial pinta cols-max-2|3|4 (colsMax 2-4, sin colsMin; cards lleva
+     cols-max-3 por defecto). Team y testimonials sin colsMax no llevan la clase
+     y no cambian.
+   - Contenedor = la propia rejilla: su ancho lo fija el bloque (elemento de
+     bloque en flujo normal), no su contenido; ver la nota de container-type mas
+     arriba (.cards-grid > *). Solo con cols-max-N, para no tocar el resto.
+   - Umbrales: N columnas caben si ancho >= N*15rem + (N-1)*hueco. Cards y team
+     (hueco .85em fijo) usan el umbral exacto. Testimonios en escritorio llega a
+     1.45em (clamp), asi que para ellos se usa el peor caso de cada lado: desde N*15rem + (N-1)*1.45em hasta
+     (N+1)*15rem + N*.85em hay seguro N columnas. En la franja dudosa
+     (hasta (N-1)*.6em, unos 11-33px) no se centra: queda a la izquierda, nunca
+     mal colocado. Las em de la condicion son las de la rejilla (el contenedor
+     consultado), las mismas que las de su gap.
+   - nth-child(Nn+N+1): N+1, 2N+1... Excluye el 1: un elemento unico no es
+     huerfano (y forzarlo a la columna 2 dejaria la 1 vacia).
+   - N=2 y N=4: se ocupa un tramo de 2 pistas y se centra con el ancho de una:
+     (100% del tramo - un hueco) / 2. N=3: basta la columna 2. */
+.cards-grid.cols-max-2,
+.cards-grid.cols-max-3,
+.cards-grid.cols-max-4 {
+  container: rejilla-cards / inline-size
+}
+/* Cards y equipo: hueco fijo .85em, umbrales exactos (los mismos que usa el
+   auto-fit: N columnas si ancho >= N*15rem + (N-1)*.85em). Sin franja ciega. */
+@container rejilla-cards (width >= calc(30rem + .85em)) {
+  .block-cards .cards-grid.cols-max-2 > :last-child:nth-child(2n+3),
+  .block-team .cards-grid.cols-max-2 > :last-child:nth-child(2n+3) {
+    grid-column: 1 / span 2;
+    justify-self: center;
+    width: calc((100% - var(--col-gap)) / 2)
+  }
+}
+@container rejilla-cards (calc(30rem + .85em) <= width < calc(45rem + 1.7em)) {
+  .block-cards .cards-grid.cols-max-3 > :last-child:nth-child(2n+3),
+  .block-team .cards-grid.cols-max-3 > :last-child:nth-child(2n+3),
+  .block-cards .cards-grid.cols-max-4 > :last-child:nth-child(2n+3),
+  .block-team .cards-grid.cols-max-4 > :last-child:nth-child(2n+3) {
+    grid-column: 1 / span 2;
+    justify-self: center;
+    width: calc((100% - var(--col-gap)) / 2)
+  }
+}
+@container rejilla-cards (width >= calc(45rem + 1.7em)) {
+  .block-cards .cards-grid.cols-max-3 > :last-child:nth-child(3n+4),
+  .block-team .cards-grid.cols-max-3 > :last-child:nth-child(3n+4) {
+    grid-column: 2
+  }
+}
+@container rejilla-cards (calc(45rem + 1.7em) <= width < calc(60rem + 2.55em)) {
+  .block-cards .cards-grid.cols-max-4 > :last-child:nth-child(3n+4),
+  .block-team .cards-grid.cols-max-4 > :last-child:nth-child(3n+4) {
+    grid-column: 2
+  }
+}
+@container rejilla-cards (width >= calc(60rem + 2.55em)) {
+  .block-cards .cards-grid.cols-max-4 > :last-child:nth-child(4n+5),
+  .block-team .cards-grid.cols-max-4 > :last-child:nth-child(4n+5) {
+    grid-column: 2 / span 2;
+    justify-self: center;
+    width: calc((100% - var(--col-gap)) / 2)
+  }
+}
+/* Testimonios: su hueco de escritorio varia (clamp hasta 1.45em), asi que
+   umbrales de peor caso: franja ciega de unos 10-35px sin centrar. */
+@container rejilla-cards (width >= calc(30rem + 1.45em)) {
+  .block-testimonials .cards-grid.cols-max-2 > :last-child:nth-child(2n+3) {
+    grid-column: 1 / span 2;
+    justify-self: center;
+    width: calc((100% - var(--col-gap)) / 2)
+  }
+}
+@container rejilla-cards (calc(30rem + 1.45em) <= width < calc(45rem + 1.7em)) {
+  .block-testimonials .cards-grid.cols-max-3 > :last-child:nth-child(2n+3),
+  .block-testimonials .cards-grid.cols-max-4 > :last-child:nth-child(2n+3) {
+    grid-column: 1 / span 2;
+    justify-self: center;
+    width: calc((100% - var(--col-gap)) / 2)
+  }
+}
+@container rejilla-cards (width >= calc(45rem + 2.9em)) {
+  .block-testimonials .cards-grid.cols-max-3 > :last-child:nth-child(3n+4) {
+    grid-column: 2
+  }
+}
+@container rejilla-cards (calc(45rem + 2.9em) <= width < calc(60rem + 2.55em)) {
+  .block-testimonials .cards-grid.cols-max-4 > :last-child:nth-child(3n+4) {
+    grid-column: 2
+  }
+}
+@container rejilla-cards (width >= calc(60rem + 4.35em)) {
+  .block-testimonials .cards-grid.cols-max-4 > :last-child:nth-child(4n+5) {
+    grid-column: 2 / span 2;
+    justify-self: center;
+    width: calc((100% - var(--col-gap)) / 2)
   }
 }
 

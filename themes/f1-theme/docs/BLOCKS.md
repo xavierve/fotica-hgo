@@ -51,33 +51,64 @@ Todos los bloques aceptan:
 - `class`: string opcional
 - `eyebrow`: antetítulo opcional sobre el H2 (shortcode: `eyebrow="…"`). Ver «Cabecera de bloque».
 - `surface`: `bleed` (defecto) | `card`, para bloques con fondo. Ver «Fondo: banda o tarjeta».
-- `cols`: solo en los bloques con rejilla auto-fit (`cards`, `team`, `testimonials`, `gallery`,
-  `brands-logos`, `counter`). Ver «Columnas máximas (`cols`)».
+- `colsMax` / `colsMin`: solo en los bloques con rejilla auto-fit (`cards`, `team`,
+  `testimonials`, `gallery`, `brands-logos`, `counter`). Ver «Columnas: `colsMax` y `colsMin`».
 
-## Columnas máximas (`cols`)
+## Columnas: `colsMax` y `colsMin`
 
-Las rejillas se reparten solas: caben tantas columnas como permita el ancho. Con 8 logos eso
-da 6+2 en un escritorio; con `cols: 4`, 4+4.
+Las rejillas se reparten solas (auto-fit): caben tantas columnas como permita el ancho, cada una
+con un ancho mínimo natural (`--col-min`: 15rem en cards/team/testimonials/galería, 8rem en
+logos, 150px en el contador). Dos parámetros acotan ese reparto:
 
 ```yaml
 - type: brands-logos
-  cols: 4          # máximo 4 columnas
+  colsMax: 4       # como mucho 4 columnas (8 logos: 4+4 en vez de 6+2)
+- type: gallery
+  colsMin: 2       # al menos 2 columnas, también en móvil
 ```
 
-- **Sin `cols`** (o `cols: auto`): comportamiento de siempre. El HTML no cambia.
-- **`cols: N`** (entero 1–12): **máximo** N columnas. Sigue siendo auto-fit hacia abajo: en
-  pantallas estrechas caben menos y baja solo (nunca fuerza N columnas apretadas). Es un techo,
-  no un número fijo: con menos elementos que N se reparten como siempre.
-- Cualquier otro valor (`0`, `13`, `abc`) → el build falla con la ruta de la página.
-- Aplica a los bloques `cards`, `team`, `testimonials`, `gallery`, `brands-logos`, `counter`
-  y a los shortcodes `cards`, `testimonials`, `brands-logos` (`cols="4"`).
-- `counter`: en móvil (≤ 820 px) sigue siendo una columna, con o sin `cols`.
-- `testimonials`: por defecto son 3 columnas fijas en escritorio; `cols: 2` baja el techo a 2.
-- **`cards` ya tiene `columns`** (2|3|4, número *fijo* de columnas en escritorio). No se
-  mezclan: usar `columns` y `cols` a la vez falla el build. `cols` es el techo flexible;
-  `columns` el reparto fijo clásico.
-- Limitación asumida: a anchos intermedios el máximo no garantiza el reparto bonito (8 logos
-  con `cols: 4` son 3+3+2 en torno a 600 px, porque no caben 4). Es el auto-fit.
+Shortcodes: `colsMax="4"` `colsMin="2"` (`cards`, `testimonials`, `brands-logos`).
+
+- **`colsMax`** (entero 1–12): **máximo** de columnas. Es un techo, no un número fijo: sigue
+  siendo auto-fit hacia abajo y en pantallas estrechas caben menos.
+- **`colsMin`** (entero 1–4, por defecto 1): **mínimo** garantizado, aunque cada columna quede por
+  debajo de su ancho natural (la rejilla aprieta). `colsMin: 1` es lo mismo que no ponerlo.
+- Resultado: columnas = las que caben a su ancho natural, acotadas a `[colsMin, colsMax]`.
+- **Valores por defecto:** sin nada, el HTML no cambia y cada rejilla se reparte como siempre,
+  **salvo `cards`, que trae `colsMax: 3`**: en escritorio (contenedor de 1120px) cabrían 4 cards de
+  15rem, y las de texto se leen mejor en 3. Entre ~510 y ~770px salen 2 columnas; en móvil
+  vertical (≤ 430px), una.
+- **Cuándo usar `colsMin`:** miniaturas, logos y cifras, que se entienden pequeñas (2 fotos por
+  fila en móvil, 2 cifras del contador). **No** en cards de texto: con un público de 45–75 años,
+  dos columnas de texto en un móvil son renglones de tres palabras.
+- **Validación:** `auto` o vacío = sin fijar. Cualquier otro valor (`0`, `13`, `abc`, `colsMin: 5`)
+  o `colsMin` mayor que `colsMax` (también el 3 por defecto de `cards`) → el build falla con la
+  ruta de la página.
+- **`counter`:** en móvil (≤ 820px) es una columna, con o sin `colsMax`. Si se da `colsMin`
+  (2–4), manda `colsMin`: `colsMin: 2` son dos cifras por fila también en móvil.
+- **`testimonials`:** por defecto son 3 columnas fijas en escritorio; `colsMax` las sustituye por el
+  reparto acotado (`colsMax: 2` baja el techo a 2).
+- **Huérfano centrado** (solo `cards`, `team` y `testimonials`): si la última fila tiene un único
+  elemento (4 cards en 3 columnas = 3+1; 3 cards en 2 columnas = 2+1), se centra en vez de
+  quedar pegado a la izquierda. Requiere `colsMax` 2, 3 o 4 (en `cards` ya lo trae: 3) y sin
+  `colsMin`: con eso el número de columnas se deduce del ancho de la rejilla con consultas de
+  contenedor. En galería, logos y contador no se aplica: son miniaturas o datos, donde el hueco
+  al final no se lee como un fallo.
+- **Limitaciones asumidas:**
+  - A anchos intermedios el máximo no garantiza el reparto bonito (8 logos con `colsMax: 4` son
+    3+3+2 en torno a 600px, porque no caben 4). Es el auto-fit.
+  - En `testimonials` el centrado del huérfano deja una franja de unos 10–35px por umbral en
+    la que no se centra: su hueco de escritorio varía (`clamp` hasta 1.45em) y los umbrales usan
+    el peor caso para no colocar nunca mal una cita. En `cards` y `team` (hueco fijo) los
+    umbrales son exactos: sin franja.
+- **Retirados:** `cols` (sustituido por `colsMax`) y, en `cards`, `columns` (2|3|4, columnas
+  fijas en escritorio y una sola por debajo de 821px). Usar cualquiera de los dos hace fallar el
+  build con el mensaje de migración (`columns=3` → `colsMax=3`).
+- **Implementación:** `partials/grid-cols.html` valida y devuelve clase y estilo. La rejilla
+  recibe `has-cols-range` (más `has-cols-min` si hay `colsMin`, y `cols-max-2|3|4` para el
+  huérfano) y `style="--cols-max:N;--cols-min:M"` solo con lo dado. CSS en `main.css`,
+  «Columnas: colsMax y colsMin». `has-cols-range` y no `has-cols`: esa clase ya existe en el
+  `.container` de cta/image-text.
 
 ## Fondo: banda o tarjeta (`surface`)
 
@@ -347,7 +378,7 @@ Bloque genérico para servicios, productos o listados editoriales.
 ```yaml
 sections:
   - type: cards
-    columns: 3
+    colsMax: 3            # por defecto 3; 1-12. colsMin: 1-4
     title:
     subtitle:
     linkText:
@@ -360,8 +391,9 @@ sections:
         linkText:
 ```
 
-`columns` acepta `2`, `3` o `4` y genera `cards-columns-{columns}`. Alternativa: `cols: N` (techo
-flexible, ver «Columnas máximas»); no se usan los dos a la vez.
+Por defecto como mucho 3 columnas (`colsMax: 3`), auto-fit hacia abajo, y el último elemento
+suelto de la última fila se centra. `columns` ya no existe (`columns: 3` → `colsMax: 3`, o nada,
+porque 3 es el valor por defecto). Ver «Columnas: `colsMax` y `colsMin`».
 
 ## CTA
 

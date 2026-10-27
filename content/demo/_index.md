@@ -171,8 +171,17 @@ sections:
       - { number: "2", label: "centros en Torre del Mar" }
       - { number: "1982", label: "año de apertura" }
   - type: counter
-    text: "3.1b- counter · cols: 2 (2+2 en escritorio; en móvil sigue siendo 1 columna)"
-    cols: 2
+    text: "3.1b- counter · colsMax: 2 (2+2 en escritorio; en móvil sigue siendo 1 columna)"
+    colsMax: 2
+    items:
+      - { number: "44", label: "años de experiencia" }
+      - { number: "27.000", label: "clientes atendidos" }
+      - { number: "2", label: "centros en Torre del Mar" }
+      - { number: "1982", label: "año de apertura" }
+  - type: counter
+    text: "3.1c- counter · colsMin: 2 (2+2 también en móvil: colsMin gana a la columna única)"
+    colsMax: 2
+    colsMin: 2
     items:
       - { number: "44", label: "años de experiencia" }
       - { number: "27.000", label: "clientes atendidos" }
@@ -189,9 +198,9 @@ sections:
 
   # ============ CARDS (items manuales; la versión automática va como shortcode en el prose) ============
   - type: cards
-    title: "4- cards · columns: 3 · items manuales"
+    title: "4- cards · colsMax: 3 · items manuales"
     subtitle: "El shortcode {{</* cards */>}} del prose las genera automáticamente desde una sección."
-    columns: 3
+    colsMax: 3
     linkText: "Ver más"
     cards:
       - { title: "Card A", description: "Con imagen, título, descripción y enlace.", image: "https://picsum.photos/seed/c1/480/320", imageAlt: "Demo", link: "/vision/" }
@@ -199,27 +208,44 @@ sections:
       - { title: "Card C", description: "Tercera card del grid.", image: "https://picsum.photos/seed/c3/480/320", imageAlt: "Demo", link: "/nosotros/" }
 
   - type: cards
-    title: "4.0- cards · cols: 4 (máximo 4, auto-fit; alternativa a columns)"
-    cols: 4
+    title: "4.0- cards · colsMax: 4 (máximo 4, auto-fit; sin colsMax el máximo es 3)"
+    colsMax: 4
     linkText: "Ver más"
     cards:
-      - { title: "Card A", description: "Sin columns: usa cols.", image: "https://picsum.photos/seed/c1/480/320", imageAlt: "Demo", link: "/vision/" }
+      - { title: "Card A", description: "colsMax sube el tope por defecto (3) a 4.", image: "https://picsum.photos/seed/c1/480/320", imageAlt: "Demo", link: "/vision/" }
       - { title: "Card B", description: "Segunda.", image: "https://picsum.photos/seed/c2/480/320", imageAlt: "Demo", link: "/audicion/" }
       - { title: "Card C", description: "Tercera.", image: "https://picsum.photos/seed/c3/480/320", imageAlt: "Demo", link: "/nosotros/" }
       - { title: "Card D", description: "Cuarta.", image: "https://picsum.photos/seed/c4/480/320", imageAlt: "Demo", link: "/vision/" }
 
   - type: cards
+    title: "4.0b- cards · huérfano centrado · 4 cards con el tope por defecto (3)"
+    subtitle: "En escritorio 3+1: la cuarta va centrada en la columna 2. Entre ~510 y 820px son 2+2, sin huérfano; en móvil, una columna."
+    cards:
+      - { title: "Card A", description: "Primera.", image: "https://picsum.photos/seed/c1/480/320", imageAlt: "Demo", link: "/vision/" }
+      - { title: "Card B", description: "Segunda.", image: "https://picsum.photos/seed/c2/480/320", imageAlt: "Demo", link: "/audicion/" }
+      - { title: "Card C", description: "Tercera.", image: "https://picsum.photos/seed/c3/480/320", imageAlt: "Demo", link: "/nosotros/" }
+      - { title: "Card D", description: "Cuarta: huérfana, centrada.", image: "https://picsum.photos/seed/c4/480/320", imageAlt: "Demo", link: "/vision/" }
+
+  - type: cards
+    title: "4.0c- cards · huérfano en tableta · 3 cards"
+    subtitle: "En escritorio 3 en fila. Entre ~510 y 820px son 2+1: la tercera va centrada con el ancho de una columna."
+    cards:
+      - { title: "Card A", description: "Primera.", image: "https://picsum.photos/seed/c1/480/320", imageAlt: "Demo", link: "/vision/" }
+      - { title: "Card B", description: "Segunda.", image: "https://picsum.photos/seed/c2/480/320", imageAlt: "Demo", link: "/audicion/" }
+      - { title: "Card C", description: "Tercera: huérfana en tableta.", image: "https://picsum.photos/seed/c3/480/320", imageAlt: "Demo", link: "/nosotros/" }
+
+  - type: cards
     title: "4.1- cards · textSize: xl — el interior escala"
     subtitle: "Hueco entre tarjetas y padding crecen con la letra del bloque; el aire entre bloques (rem) no cambia. Compara con 4.2."
     textSize: xl
-    columns: 2
+    colsMax: 2
     cards:
       - { title: "Card A", description: "Padding y huecos en em.", link: "/vision/" }
       - { title: "Card B", description: "Siguen a textSize.", link: "/audicion/" }
   - type: cards
     title: "4.2- cards · textSize: xs"
     textSize: xs
-    columns: 2
+    colsMax: 2
     cards:
       - { title: "Card A", description: "Mismo bloque, letra pequeña: interior más compacto.", link: "/vision/" }
       - { title: "Card B", description: "El aire entre bloques es el mismo.", link: "/audicion/" }
@@ -242,8 +268,17 @@ sections:
       - { image: "https://picsum.photos/seed/g4/600/400", imageAlt: "Demo" }
 
   - type: gallery
-    title: "6.1- gallery · cols: 2 (máximo 2 columnas)"
-    cols: 2
+    title: "6.1- gallery · colsMax: 2 (máximo 2 columnas)"
+    colsMax: 2
+    items:
+      - { image: "https://picsum.photos/seed/g1/600/400", imageAlt: "Demo" }
+      - { image: "https://picsum.photos/seed/g2/600/400", imageAlt: "Demo" }
+      - { image: "https://picsum.photos/seed/g3/600/400", imageAlt: "Demo" }
+      - { image: "https://picsum.photos/seed/g4/600/400", imageAlt: "Demo" }
+
+  - type: gallery
+    title: "6.2- gallery · colsMin: 2 (dos miniaturas por fila también en móvil)"
+    colsMin: 2
     items:
       - { image: "https://picsum.photos/seed/g1/600/400", imageAlt: "Demo" }
       - { image: "https://picsum.photos/seed/g2/600/400", imageAlt: "Demo" }
@@ -260,8 +295,8 @@ sections:
       - { image: "https://picsum.photos/seed/t3/400/400", imageAlt: "Demo", name: "Nombre Tres", role: "Atención al cliente" }
 
   - type: team
-    title: "7.1- team · cols: 2"
-    cols: 2
+    title: "7.1- team · colsMax: 2"
+    colsMax: 2
     items:
       - { image: "https://picsum.photos/seed/t1/400/400", imageAlt: "Demo", name: "Nombre Uno", role: "Óptico-optometrista" }
       - { image: "https://picsum.photos/seed/t2/400/400", imageAlt: "Demo", name: "Nombre Dos", role: "Audioprotesista" }
@@ -288,8 +323,8 @@ sections:
       - { image: "/images/logos/interton.svg", imageAlt: "Audífonos ", text: "xxxxx" }
 
   - type: brands-logos
-    title: "9.1- brands-logos · cols: 4 (8 logos → 4+4 en vez de 6+2)"
-    cols: 4
+    title: "9.1- brands-logos · colsMax: 4 (8 logos → 4+4 en vez de 6+2)"
+    colsMax: 4
     items:
       - { image: "https://picsum.photos/seed/c1/320/160", imageAlt: "Demo", text: "Marca 1" }
       - { image: "https://picsum.photos/seed/c2/320/160", imageAlt: "Demo", text: "Marca 2" }
@@ -309,8 +344,8 @@ sections:
       - { text: "Con rating, sin imagen.", name: "Cliente C", rating: 4 }
 
   - type: testimonials
-    title: "10.1- testimonials · cols: 2 (máximo 2 columnas; sin cols son 3 en escritorio)"
-    cols: 2
+    title: "10.1- testimonials · colsMax: 2 (máximo 2 columnas; sin colsMax son 3 en escritorio)"
+    colsMax: 2
     items:
       - { text: "Primera cita.", name: "Cliente A", rating: 5 }
       - { text: "Segunda cita.", name: "Cliente B", rating: 4 }
@@ -725,9 +760,9 @@ Segunda cita — mismo `.cards-grid` que usa el bloque de sections, mismo CSS.
 
 Las cards siguientes **no están escritas aquí**: se autodescubren de `/vision/servicios/` leyendo `linkTitle`, `card.description`, `card.image` y `weight` de cada página hija:
 
-{{< cards section="/vision/servicios" columns="3" title="cards automáticas de una sección" >}}
+{{< cards section="/vision/servicios" title="cards automáticas de una sección (colsMax 3 por defecto)" >}}
 
-{{< cards section="/vision/servicios" cols="2" title="p11.1- cards automáticas con cols=2" >}}
+{{< cards section="/vision/servicios" colsMax="2" title="p11.1- cards automáticas con colsMax=2" >}}
 
 ### p12- Shortcode {{</* locations */>}}
 
@@ -770,7 +805,7 @@ intercalada en el prose. El orden de los items es el orden visual:
 {{< brands-logos-item image="https://picsum.photos/seed/b4/320/160" imageAlt="Demo" >}}
 {{< /brands-logos >}}
 
-{{< brands-logos cols="4" title="p14.3- brands-logos con cols=4 (8 logos → 4+4)" >}}
+{{< brands-logos colsMax="4" title="p14.3- brands-logos con colsMax=4 (8 logos → 4+4)" >}}
 {{< brands-logos-item image="https://picsum.photos/seed/c1/320/160" imageAlt="Demo" >}}
 {{< brands-logos-item image="https://picsum.photos/seed/c2/320/160" imageAlt="Demo" >}}
 {{< brands-logos-item image="https://picsum.photos/seed/c3/320/160" imageAlt="Demo" >}}

@@ -18,7 +18,7 @@
 <section class="{{ partial "block-classes.html" (dict "name" "gallery" "context" .) }}">
   <div class="container">
     {{ partial "block-heading.html" (dict "eyebrow" .eyebrow "title" .title "subtitle" .subtitle) }}
-    {{ $cols := partial "grid-cols.html" .cols }}<div class="gallery-grid{{ if $cols }} has-max-cols{{ end }}"{{ with $cols }} style="--cols:{{ . }}"{{ end }}>
+    {{ $g := partial "grid-cols.html" (dict "colsMax" .colsMax "colsMin" .colsMin "cols" .cols "columns" .columns) }}<div class="gallery-grid{{ $g.class }}"{{ with $g.style }} style="{{ . | safeCSS }}"{{ end }}>
       {{ range $i, $item := .items }}<figure><button type="button" class="gallery-open" data-gallery-index="{{ $i }}" aria-label="{{ i18n "enlargeImage" }}{{ with $item.legend }}: {{ . }}{{ end }}">{{ partial "img-responsive.html" (dict "src" $item.image "alt" $item.imageAlt "sizes" "(min-width:1100px) 33vw, (min-width:600px) 50vw, 100vw") }}</button>{{ with $item.legend }}<figcaption>{{ . }}</figcaption>{{ end }}</figure>{{ end }}
     </div>
     <dialog class="gallery-lightbox">

@@ -115,7 +115,7 @@ guiones bajos.
 
 ```
 {{< banner text="..." >}}
-{{< cards section="/vision/servicios" columns="3" width="wide" >}}
+{{< cards section="/vision/servicios" colsMax="3" width="wide" >}}
 {{< cta title="..." subtitle="..." preset="contact" >}}
 {{< hours >}}                     ← horario desde site.yaml
 {{< icon "phone" >}}
