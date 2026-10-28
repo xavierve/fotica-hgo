@@ -123,6 +123,18 @@
 .image-text-copy>.block-eyebrow {
   margin: 0 0 .5em
 }
+/* Eyebrow en el prose: parrafo con {.eyebrow} justo encima de un ## (Goldmark
+   attributes). Alineado con el H2 (hereda de .prose>p el 72ch y el margen
+   izquierdo de escritorio) y pegado a el con el mismo .5em que el de bloque; el
+   hueco de arriba no cambia (el margen del grupo colapsa igual que el del H2). Es
+   lo correcto cuando el H2 y su entradilla viven en el prose y la rejilla va
+   debajo: no usar eyebrow= en el shortcode sin title (is-solo). */
+.prose>p.eyebrow {
+  margin-bottom: .5em
+}
+.prose>p.eyebrow+h2 {
+  margin-top: 0
+}
 /* Eyebrow sin H2 (is-solo, lo pone block-heading.html): el hueco hasta el
    contenido que deja el H2 (medido: 23px a 375, 30px a 1440). En rem, no con
    --fs-highlight: esa variable va en em y aqui se resolveria con la letra pequena

@@ -47,15 +47,21 @@ sections:
     labelCall: "Llamar ahora"
 ---
 
+Servicios
+{.eyebrow}
+
 ## Del diagnóstico al acompañamiento: todo el camino, con nosotros
 
 Disponemos del equipo y la experiencia necesarios para evaluar tu pérdida auditiva y recomendarte la solución que mejor se adapte a ti. Un diagnóstico a tiempo es la diferencia entre seguir esforzándote por entender a los demás y volver a disfrutar de cada conversación sin esfuerzo.
 
-{{< cards section="/audicion/servicios" eyebrow="SERVICIOS" >}}
+{{< cards section="/audicion/servicios" >}}
 
+
+Productos
+{.eyebrow}
 
 ## El audífono adecuado es el que funciona en tu vida, no en el catálogo
 
 Disponemos de una amplia gama de audífonos, desde el más sencillo hasta el más avanzado tecnológicamente. Analizamos tu caso y buscamos la solución óptima a nivel funcional y estético — y queremos que **la pruebes en tu día a día antes de decidir**, sin ningún compromiso.
 
-{{< cards section="/audicion/productos"  eyebrow="PRODUCTOS" >}}
+{{< cards section="/audicion/productos" >}}

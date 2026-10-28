@@ -31,15 +31,21 @@ sections:
     labelCall: "Llamar ahora"
 ---
 
+Servicios
+{.eyebrow}
+
 ## Déjanos ver cómo nos ves
 
 Un examen visual completo es mucho más que «leer letras en una pared». Es el primer paso para detectar a tiempo cualquier problema antes de que afecte a tu día a día: dolores de cabeza, fatiga al leer, dificultad para concentrarte o, simplemente, ver mal sin saber por qué.
 
-{{< cards section="/vision/servicios" eyebrow="SERVICIOS" >}}
+{{< cards section="/vision/servicios" >}}
 
+
+Productos
+{.eyebrow}
 
 ## El producto adecuado, no el más caro
 
 Te asesoramos sobre los productos más adecuados para tu problema de visión, sin presión y con seguimiento real después de la compra. Si la mejor solución para ti es la más sencilla, eso es lo que te recomendaremos.
 
-{{< cards section="/vision/productos" width="default" eyebrow="PRODUCTOS" >}}
+{{< cards section="/vision/productos" width="default" >}}

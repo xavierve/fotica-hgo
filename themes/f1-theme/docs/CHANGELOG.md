@@ -1,5 +1,13 @@
 # F1 Theme · Changelog
 
+## Sin versión — eyebrow en el prose
+
+- `.prose>p.eyebrow` (párrafo con `{.eyebrow}` encima de un `##`): alineado con el H2 y pegado a
+  él (`.5em` debajo, `margin-top: 0` en el H2). El hueco sobre el grupo no cambia (medido).
+- `/vision/` y `/audicion/`: los eyebrows «Servicios»/«Productos» salen del shortcode `cards`
+  (donde iban solos, `is-solo`, centrados y lejos de su H2) y pasan al prose, sobre el H2 de cada
+  sección, en minúsculas de frase.
+
 ## Sin versión — `colsMax`/`colsMin`: columnas acotadas en las rejillas (rompe compatibilidad)
 
 - **Rompe:** `cols` desaparece (→ `colsMax`) y `columns` de `cards` (bloque y shortcode)

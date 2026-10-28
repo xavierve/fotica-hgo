@@ -151,6 +151,19 @@ el hero conservan su cabecera propia (ya tenían `eyebrow`).
   compromisos» en `/nosotros/`). Un eyebrow sin H2 deja la sección sin encabezado (el lector de
   pantalla no la encuentra navegando por títulos) y se ve huérfano. Si aun así va solo, el partial
   le pone `is-solo` y el CSS le da el hueco hasta el contenido que dejaría el H2.
+- **Si el H2 y su entradilla están en el prose y la rejilla va debajo** (las páginas paraguas
+  `/vision/` y `/audicion/`), el eyebrow va en el prose, encima del `##`, no en el shortcode:
+
+  ```markdown
+  Servicios
+  {.eyebrow}
+
+  ## Déjanos ver cómo nos ves
+  ```
+
+  Queda alineado con el H2 y pegado a él (`.prose>p.eyebrow`, `.5em`, como el de bloque). Puesto
+  en el shortcode sin `title` salía `is-solo`: centrado, a ~120px del texto que presenta y en otro
+  eje que el H2.
 - Se escribe en minúsculas de frase: las mayúsculas las pone el CSS (`.eyebrow`), y el lector de
   pantalla lee el texto tal cual.
 - HTML: `<p class="eyebrow block-eyebrow">` antes del `<h2>`, sin envoltorio. **Sin eyebrow el
